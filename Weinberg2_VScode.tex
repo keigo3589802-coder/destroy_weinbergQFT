@@ -1,0 +1,86 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\usepackage{tensor}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+\newcommand{\mr}[1]{\mathrm{#1}}
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{subsection}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT2}}
+\author{坂井啓悟}
+\date{}
+\begin{document}
+
+\maketitle
+\setcounter{part}{6}
+\part{正準形式}
+\setcounter{section}{7}
+\subsection{正準変数}
+最初に，5章で構成した自由場は，量子演算子$q^n(\bm{x},t)$と正準共役演算子$p_n(\bm{x},t)$の系を自動的に与え，そしてそれらはよく知られた以下の正準交換関係(または反交換関係)を満たすことを示す．
+\begin{align*}
+\left[q^n(\bm{x},t),p_m(\bm{y},t)\right]_{\mp}=&i\delta^3(\bm{x}-\bm{y})\delta_{nm} \\
+\left[q^n(\bm{x},t),q_m(\bm{y},t)\right]_{\mp}=&0 \\
+\left[q^n(\bm{x},t),q_m(\bm{y},t)\right]_{\mp}=&0
+\end{align*}
+ここで添え字$\mp$は，二つの演算子によって生成・消滅させられる粒子のどちらかがボゾンならば交換子であり，両方ともフェルミオンならば反交換子を表す．例えば，5.2節でみたように，荷電自己共役なスピンゼロ粒子の実スカラー場$\phi(\bm{x})$は以下の交換関係に従う．
+\begin{align*}
+[\phi(x),\phi(y)]_-=\Delta (x-y)
+\end{align*}
+
+
+
+
+
+
+
+
+
+\end{document}
