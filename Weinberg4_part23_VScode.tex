@@ -1,0 +1,112 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{tensor}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+\newcommand{\mr}[1]{\mathrm{#1}}
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part23}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+
+\maketitle
+\setcounter{part}{22}
+\part{拡がりのある場の配位}
+\setcounter{section}{23}
+\setcounter{subsection}{0}
+\subsection{トポロジーの有用性}
+全ての可能な場の配位の空間は，様々な場のある汎関数$S$が有限だという条件によって自明でないトポロジーが与えられることがしばしば起こるらしい．(この「配位」という言葉は説明がされておらずかなり不明瞭だが，強いて言うなら，写像$\phi:x\to\phi(x)$の全てを集めた空間の元を配位と呼ぶ．)場の古典論では，この$S$はポテンシャルエネルギーだ．有限な摂動でポテンシャルエネルギーが無限大となる配位を生成することはできない．古典統計力学では$S$はハミルトニアンで，(ユークリッド時空で定式化された)場の量子論では$S$はユークリッド作用か，またはそれに比例する．\par
+二つの場の配位は，$S$が無限大の禁止された配位を経ずに一方を他方に連続的に変形できるならトポロジー的に同値だという．これは明らかに反射律・対称律・推移律を満たすので同値関係だ．よって全ての場の配位の集合を，それぞれが同じトポロジーの配位からなる同値類に分類できる．\par
+\textgt{(a)スカーミオン等}\par
+連続な大域的対称性の群$G$が部分群$H$へ自発的に破れるとき，それに伴う実ゴールドストンボゾン場$\pi_a$を考える．19章，特に19.6節で見たように，最低次はゴールドストン場の微分について二次の項となるのだった．したがって次元$d>2$のユークリッド空間でのこれらのゴールドストンボゾンのポテンシャルエネルギーは
+\begin{align*}
+S[\pi]=\int d^d x\left[\frac{1}{2} \sum_{ab}g_{ab}(\pi)\partial_i \pi_a \partial_i \pi_b +\cdots \right]
+\end{align*}
+の形をとる．ここで$g_{ab}$は正定値行列で，「$+\cdots$」はゴールドストン場$\pi$の微分について高次の可能な項を表す．あるいは，これは$d$次元ユークリッド時空でのゴールドストンボゾン場の作用(19.6.46)に負符号をつけたものだと見なすこともできる．(なぜ負符号か？ミンコフスキー内積は$(-,+,+,+)$の慣習をとっているから負であるから負符号がある必要があったが，今回のミンコフスキー内積は正であるから，負符号がいらない．)\par
+有限の$S$を持つ場の配位は$\partial_i \pi_a(\mathbf{x})$が無限遠$\mathbf{x}\to \infty$で$|\mathbf{x}|^{-d/2}$(ここで$|\mathbf{x}|\equiv \sqrt{x_i x_i}$)より速くゼロに近づかなければならない．なぜなら，$d^dx$が$|\mathbf{x}|^d$の振る舞いをするから，もし$\partial_i \pi_a(\mathbf{x})$がもし$|\mathbf{x}|\to \infty$で$|\mathbf{x}|^{-d/2}$よりも大きい振る舞いをするならば，$\partial_i \pi_a \partial_i \pi_b$は$|\mathbf{x}|^{-d}$より大きい振る舞いをし，積分全体は$\mathbf{x} \to \infty$で発散してしまうことになるからだ．よって，$\pi_a(\mathbf{x})$は$\mathbf{x}\to \infty$で漸近的に定数$\pi_{a\infty}$に近づき，この定数の差は$|\mathbf{x}|^{1-(d/2)}$より速くゼロに近づかなければならない．任意の点のゴールドストンボゾン場$\pi_a$は糖質空間つまり剰余類空間$G/H$を構成し，$G$変換により任意の場の値を別の値に変換できる．したがって大域的$G$変換により漸近的極限$\pi_{a\infty}$が特定の値，例えば$\pi_{a\infty}=0$を持つように調整することが常に可能だ．したがって場$\pi_a(\mathbf{x})$は，球面$r=\infty$を1点と見なした全$d$次元空間から全ての場の値の多様体$G/H$への写像$\pi_{a}:\mathbb{R}^d\cup \{\infty \}\to G/H$を表す．\par
+さて，無限遠の$(d-1)$次元球面を1点と見なした$d$次元ユークリッド空間$\mathbb{R}^d\cup \{\infty \}$は，どちらからも連続的に写像できるという意味でトポロジー的には$d$次元球面$S^d$(すなわち，$(d+1)$次元ユークリッド空間に埋め込まれた球面)に同相だ．(1点コンパクト化)\footnote{直感的には，$d=2$の場合を考えると分かりやすい．二次元平面$\mathbb{R}^2$の中心に3次元球面$S^2$を配置し，$S^2$の北極点ともう一つの点を指定すれば，その二点を通る直線と$\mathbb{R}^2$の交点は1対1対応がつく．無限遠点は指定する点を北極点とすれば良いので，$\mathbb{R}^2$上の無限遠$r=\infty$の$S^1$を北極点1点と見なした$\mathbb{R}^2\cup \{\infty\}$は完全に$S^2$と同相となる．}したがって$\mathbf{x}\to\infty$でゼロに近づく場$\pi(\mathbf{x})$は$S^d$から場の変数の多様体$G/H$へのトポロジー的に異なる写像に基づいて分類できる．ここで無限遠点はゼロへと写像される．そのような$S^d$の1点が$\mc{M}$のある固定点(今回はゼロ)に移されるトポロジー的に異なる写像$S^d\to \mc{M}$の分類の集合は$\pi_d(\mc{M})$，すなわち多様体$\mc{M}$の$d$次元ホモトピー群と呼ばれる．これらのホモトピー群(およびそれらの群の構造)は次節で説明する．多様体$\mc{M}$が線形空間$V\simeq \mathbb{R}^n$ならホモトピー群$\pi_d(\mc{M})$は($\mathbf{x}\to \infty$で定数に近づく任意の場の配位$\pi(\mathbf{x})$は，場があらゆる場所でその定数値をとる配位に連続的に変形できるという意味で)自明\footnote{$\mathbb{R}^n$における任意のループが1点に可縮なことを考えれば明らかだ}だが，ゴールドストンボゾン場の多様体$\mc{M}=G/H$はしばしば自明でないホモトピー群を持つ．量子色力学が関係する$SU(2)\otimes SU(2)$が$SU(2)$に破れる場合や$SU(3)\otimes SU(3)$が$SU(3)$に破れる場合には多様体$G/H$はそれぞれ$SU(2)$あるいは$SU(3)$に等しく，そのときのホモトピー$\pi_3(SU(2)),\pi_3(SU(3))$は自明ではない．$d=3$でポテンシャルエネルギーの極小点でのトポロジー的に自明でない場はスカーミオンと呼ばれる．陽子のようなバリオンはある意味で中間子のみの理論でのスカーミオンと見なすことができるらしい．\par
+汎関数(23.1.1)は，被積分関数に$\partial_i \pi_a$の高次ベキを含む項が含まれないとスカーミオンの停留点を持たない．デリックの定理により，そのような項が無ければどのようなトポロジー的に自明でない場の配位も$S$の連続値をとり，その連続値は$\pi$
+が特異性を持つ下限$S=0$にまで達する．\par
+デリックの定理は以下の通りだ．任意の場の配位$\pi_a(\mathbf{x})$について同じトポロジーを持った別の配位
+\begin{align*}
+\pi_a^R(\mathbf{x})\equiv \pi_a(\mathbf{x}/R)
+\end{align*}
+を導入することができることに留意する．ここで$R$は任意の実で正のスケール因子だ．すると(23.1.1)で明示した項について
+\begin{align*}
+S[\pi]&=\int d^dx R^{-d}\left[ \frac{1}{2}\sum_{ab}g_{ab}(\pi)R^{2}\partial_i \pi_a(\mathbf{x}/R)\partial_i \pi_b(\mathbf{x}/R) \right]\\
+&=R^{2-d}S[\pi^R] \\
+\therefore &\quad S[\pi^R]=R^{d-2}S[\pi]
+\end{align*}
+が成り立つ．$d>2$の場合，$R\to 0$で$R^{d-2}\to 0$であるから，$S[\pi^R]$の連続値は下限$S=0$まで拡がっている．しかし$S[\pi]>0$である．なぜなら$S[\pi]$は至るところの$\mathbf{x}$で$\pi(\mathbf{x})$が定数の場合にのみゼロだが，これは$\pi$がトポロジー的に自明でないと仮定したので不可能だからだ．($g_{ab}$は正定値だから，当然$S$は非負だ．)したがってこの下限$S=0$は$R=0$でだけ到達できるようになるが，$\pi^R$は非自明な配位にも拘わらず$S$がゼロなのだから特異性を持つようになってしまう．\par
+ゴールドストンボゾン場の配位は$S$に高次微分項を含めることで安定化させることができる．例えば$S[\pi]=T[\pi]+D[\pi]$，ただし
+\begin{align*}
+T[\pi]=&\int d^d x\left[\frac{1}{2} \sum_{ab}g_{ab}(\pi)\partial_i \pi_a \partial_i \pi_b +\cdots \right] \\
+D[\pi]=&\int d^dx f_{abcd}(\pi) \left[\partial_i \pi_a \partial_i \pi_b\right] \left[\partial_j \pi_c \partial_j\pi_d\right]\geq 0
+\end{align*}
+ととれば，前と同じように$T[\pi^R]=R^{d-2}T[\pi]$だが$D[\pi^R]=R^{d-4}D[\pi]$となるので，$2<d<4$ならば$S[\pi^R]=R^{d-2}T[\pi]+R^{d-4}D[\pi]$は有限の$R$で最小値をとる．特に物理的に興味深い$d=3$の場合にはそうだ．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[scale=1.5]
+\draw (0,2)[left]node{$S[\pi^R]$};
+\draw (4,0)[right]node{$R$};
+\draw[->] (-0.2,0) -- (4,0);
+\draw[->] (0,-0.2) -- (0,2.5);
+\draw [smooth,samples=100,domain=0.3:3] plot({\x},{\x+1/\x-1.5});
+\end{tikzpicture}
+\end{figure}
+スカーミオンの理論の問題点は，$D[\pi]$のような高次微分項を作用に含めなければならない，という点ではない．19章で何度も述べたように，そのような項はどんな有効場理論の作用でも予想される．問題は，他の無限個の高次微分項を排除する理論的根拠がないことだ．上で述べたような，異なる数の微分を持つ項の間によって安定する配位については，そのような無限個の項は一般に同じ程度の大きさになってしまい，その足し合わせは実質的に計算不可能だ．
+
+\end{document}

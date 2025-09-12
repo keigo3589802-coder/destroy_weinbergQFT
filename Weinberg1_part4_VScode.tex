@@ -1,0 +1,460 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{tensor}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+\usepackage{physics}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part4}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+\maketitle
+
+\setcounter{part}{3}
+\part{クラスター分解原理}
+\setcounter{section}{4}
+\setcounter{subsection}{0}
+\subsection{ボゾンとフェルミオン}
+
+物理的ヒルベルト空間$\mc{H}$は一粒子状態空間$\mc{H}_1$の対称・反対称化テンソル積空間
+\begin{align*}
+\mc{H}_N:=&\mathrm{Sym}_{\pm}\otimes^N \mc{H}_1
+\end{align*}
+を用いた直和
+\begin{align*}
+\mc{H}=\bigoplus_{N=0}^\infty \mc{H}_N
+\end{align*}
+で定義される．これは$0,1,2,\cdots$個の自由粒子を含んだ状態で張られる．自由粒子でもいいが，in状態でもout状態でもよい．明確にするために，ここでは自由粒子状態$\Phi_{\mathbf{p}_1 \sigma_1 n_1,\mathbf{p}_2 \sigma_2 n_2,\cdots}$を基底として採用した自由粒子状態空間で考えるが，ここでの結果はin状態でもout状態でも同様に当てはまる．通常通り$\sigma$はスピンの$z$成分(質量ゼロ粒子の場合はヘリシティ)，そして$n$は粒子の種類の添え字である．\par
+ここで，3章で飛ばしたこれらの状態の対称性を調べる．我々が知る限り，4次元時空では全ての粒子はボゾンかフェルミオンである．その差は，二つの\uwave{同一の}ボゾンの交換では状態は変化しないが，二つの\uwave{同一の}フェルミオンの交換では符号が変わることにある．すなわち
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p} \sigma n ;\cdots ; \mathbf{p}' \sigma' n ;\cdots} = \pm \Phi_{\cdots ;\mathbf{p}' \sigma' n ;\cdots ; \mathbf{p} \sigma n ;\cdots}
+\end{align*}
+で，$n$がボゾンかフェルミオンかによって，それぞれ上か下かの符号が選ばれる．ボゾンならば
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p} \sigma n ;\cdots ; \mathbf{p}' \sigma' n ;\cdots} = \Phi_{\cdots ;\mathbf{p}' \sigma' n ;\cdots ; \mathbf{p} \sigma n ;\cdots}
+\end{align*}
+であり，フェルミオンならば
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p} \sigma n ;\cdots ; \mathbf{p}' \sigma' n ;\cdots} = - \Phi_{\cdots ;\mathbf{p}' \sigma' n ;\cdots ; \mathbf{p} \sigma n ;\cdots}
+\end{align*}
+である．点々は，この状態にある他の粒子部分を表す．これら二つの場合はしばしばボーズ「統計」，およびフェルミ「統計」と呼ばれる．次章で，ボーズ統計とフェルミ統計はそれぞれ整数と半整数のスピンの粒子にのみ許されることを確認するが，この章ではこの情報は必要ない．この章ではそれほど厳密ではない議論で，全ての粒子はボゾンかフェルミオンでなければならないことを示し，多ボゾンと多フェルミオンの状態の規格化条件を設定する．
+
+\vskip\baselineskip
+
+まず，二つの粒子が運動量とスピンの組$(\mathbf{p},\sigma),(\mathbf{p}',\sigma')$をもち，同じ種類$n$に属するとする．状態ベクトル$\Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}$と$\Phi_{\cdots ;\mathbf{p}'\sigma' n;\cdots ;\mathbf{p}\sigma n ;\cdots}$は同じ物理的状態を表すことに注目する．もしそうでないなら，粒子は状態ベクトル内の添え字の順序で我々観測者から区別できることになり，最初にリストされた粒子$\mathbf({p}\sigma n)$は二番目の粒子$(\mathbf{p}'\sigma' n)$とは同一であると扱えなくなってしまう\footnote{「同種粒子」とは，互いに区別できない二粒子であるという定義であることを思い出す．}．二つの状態は物理的に区別できないから，同じ射線に属する．したがって，2.1節より$\alpha_n$を絶対値1の複素数として
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}=\alpha_n \Phi_{\cdots ;\mathbf{p}'\sigma' n;\cdots ;\mathbf{p}\sigma n ;\cdots}
+\end{align*}
+となる．これは同一粒子の定義の一部ともみなせる．\par
+位相因子$\alpha_n$は何に依存できるだろうか？($n$しか引数がないわけではない．)\uwave{もし}それが粒子の種類の指標$n$にのみ依存するなら，最も簡単である．(4.1.2)で2粒子を再び交換して，以下を得る．
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}=\alpha_n^2 \Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}
+\end{align*}
+したがって$\alpha_n^2=1,\alpha_n=\pm 1$となり，(4.1.1)の二つの場合のみが許される．
+
+\vskip\baselineskip
+
+
+$\alpha_n$は他に何に依存できるか？例えば，この状態にある他の粒子((4.1.1)と(4.1.2)では点々で示されている部分)の数と種類に依存するかもしれない．しかし，こうするとこの地球上での粒子の交換のもとでの状態ベクトルの対称性が，宇宙のどこかの粒子の存在に依存するという困ったことになってしまう．これは，この章で後ほど論じるクラスター分解原理によって排除されるべきものである．(簡単に言えば，遠く離れた場所の物理の影響を考える必要はないはずであるという原理．)\par
+さらに，位相$\alpha_n$は交換される二つの粒子のスピンに依存することもできない．これは，それらのスピンに依存する位相因子は回転群の表現になっていなければらないからである．つまり，$\alpha_n(\sigma,\sigma')$という依存性があると
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}=&\alpha_n(\sigma,\sigma') \Phi_{\cdots ;\mathbf{p}'\sigma' n;\cdots ;\mathbf{p}\sigma n ;\cdots} \\
+U(R)\Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}=&\alpha_n (\sigma,\sigma') U(R)\Phi_{\cdots ;\mathbf{p}'\sigma' n;\cdots ;\mathbf{p}\sigma n ;\cdots} \\
+\sum_{\bar{\sigma}\bar{\sigma}'}D(R)_{\bar{\sigma}\sigma}D(R)_{\bar{\sigma}'\sigma'}\Phi_{\cdots ;R\mathbf{p}\bar{\sigma} n;\cdots ;R\mathbf{p}'\bar{\sigma}' n ;\cdots}=&\alpha_n(\sigma,\sigma')\sum_{\bar{\sigma}\bar{\sigma}'}D(R)_{\bar{\sigma}\sigma}D(R)_{\bar{\sigma}'\sigma'} \Phi_{\cdots ;R\mathbf{p}'\bar{\sigma}' n;\cdots ;R\mathbf{p}\bar{\sigma} n ;\cdots} \\
+\sum_{\bar{\sigma}\bar{\sigma}'}D(R)_{\bar{\sigma}\sigma}D(R)_{\bar{\sigma}'\sigma'}\alpha_n(\bar{\sigma},\bar{\sigma}')\Phi_{\cdots ;R\mathbf{p}'\bar{\sigma}' n;\cdots ;R\mathbf{p}\bar{\sigma} n ;\cdots}=&\alpha_n(\sigma,\sigma')\sum_{\bar{\sigma}\bar{\sigma}'}D(R)_{\bar{\sigma}\sigma}D(R)_{\bar{\sigma}'\sigma'} \Phi_{\cdots ;R\mathbf{p}'\bar{\sigma}' n;\cdots ;R\mathbf{p}\bar{\sigma} n ;\cdots}
+\end{align*}
+(二行目から三行目にかけては，交換される二つの粒子以外の行列$D(R)$は両辺でキャンセルできることを使った．二つの$D(R)$は，両辺とも同じ粒子であるから同じ表現行列になっていることに注意．三行目から四行目では，左辺で再び粒子交換を行い位相因子を出した．)したがって基底の独立性より係数比較をし
+\begin{align*}
+D(R)_{\bar{\sigma}\sigma}D(R)_{\bar{\sigma}'\sigma'}\alpha_n(\bar{\sigma},\bar{\sigma}')=&\alpha_n(\sigma,\sigma')D(R)_{\bar{\sigma}\sigma}D(R)_{\bar{\sigma}'\sigma'} \\
+\alpha_n(\bar{\sigma},\bar{\sigma}')=&\alpha_n(\sigma,\sigma')
+\end{align*}
+を得る．$\sigma,\sigma',\bar{\sigma},\bar{\sigma}'$は任意であるから，これは$\sigma$に依存しない定数の位相因子しか許されない．そしてそれはやはり$\alpha_n=\pm 1$である．\par
+位相因子$\alpha_n$が交換される二つの粒子の運動量に依存する$\alpha_n(\mathbf{p}_1,\mathbf{p}_2)$ということも考えることはできる．
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}=&\alpha_n(\mathbf{p},\mathbf{p}') \Phi_{\cdots ;\mathbf{p}'\sigma' n;\cdots ;\mathbf{p}\sigma n ;\cdots}
+\end{align*}
+しかし
+\begin{align*}
+U(\Lambda)\Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}=&\alpha_n(\mathbf{p},\mathbf{p}') U(\Lambda)\Phi_{\cdots ;\mathbf{p}'\sigma' n;\cdots ;\mathbf{p}\sigma n ;\cdots}
+\end{align*}
+とすると，
+\begin{align*}
+&\sum_{\bar{\sigma}\bar{\sigma}'}D(W(\Lambda,p))_{\bar{\sigma}\sigma}D(W(\Lambda,p'))_{\bar{\sigma}'\sigma'}\Phi_{\cdots ;\Lambda \mathbf{p}\bar{\sigma} n;\cdots ;\Lambda \mathbf{p}'\bar{\sigma}' n ;\cdots} \\
+=&\alpha_n(\mathbf{p},\mathbf{p}')\sum_{\bar{\sigma}\bar{\sigma}'}D(W(\Lambda,p))_{\bar{\sigma}\sigma}D(W(\Lambda,p'))_{\bar{\sigma}'\sigma'} \Phi_{\cdots ;\Lambda\mathbf{p}'\bar{\sigma}' n;\cdots ;\Lambda \mathbf{p}\bar{\sigma} n ;\cdots}
+\end{align*}
+左辺の粒子を入れ替えて係数を比較すると
+\begin{align*}
+\alpha_n(\Lambda \mathbf{p},\Lambda \mathbf{p}')=\alpha_n(\mathbf{p},\mathbf{p}')
+\end{align*}
+を得る．つまりローレンツ不変である．このローレンツ不変性より$\alpha_n$はローレンツスカラー$p_1\cdot p_2 =p_1^\mu p_{2\mu}$のみにしか依存できない．これは粒子1と粒子2の入れ替えて対称$\alpha_n(\mathbf{p}_1,\mathbf{p}_2)=\alpha_n(\mathbf{p}_2,\mathbf{p}_1)$だから
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots}=&\alpha_n(\mathbf{p},\mathbf{p}')\alpha_n(\mathbf{p}',\mathbf{p}) \Phi_{\cdots ;\mathbf{p}\sigma n;\cdots ;\mathbf{p}'\sigma' n ;\cdots} \\
+\therefore \quad \alpha_n(\mathbf{p},\mathbf{p}')\alpha_n(\mathbf{p}',\mathbf{p})=&\alpha_n(\mathbf{p},\mathbf{p}')^2=1
+\end{align*}
+となり，やはり$\alpha_n^2=1$という結論は変わらない．\par
+上の議論で論理的に欠けているのは，状態$\Phi_{\mathbf{p}_1 \sigma_1 n_1 ;\mathbf{p}_2 \sigma_2 n_2 ;\cdots}$が粒子の運動量を$\mathbf{p}_1,\mathbf{p}_2,\cdots$に持ってくる際の運動量空間での\uwave{経路}に依存する位相因子を持っているかもしれないということである．この場合には，二つの粒子を二度交換すると状態が位相因子だけ変わり$\alpha_n^2 \neq 1$になることができる．9.7節でこれは二次元空間でのみ起こり得るが，3次元かそれ以上の空間次元では起こりえないことを示す\footnote{簡単に言えば，二次元では，ある点周りに0周する経路と1周する経路は連続的に変化させることができないから，(二次元運動量空間平面を思い浮かべて)点$\mathbf{p}_1$を点$\mathbf{p}_2$の上から反対側に移動させ，次に下から再び元の位置に戻ると，元の状態とは位相的(トポロジー的)に同じではなくなる．このような統計性に従う粒子はエニオンと呼ばれる．3次元以上では連続的に変形させて同じにできるから，これはありえない．}．
+
+\vskip\baselineskip
+
+異なる種類に属する粒子の交換についてはどうだろうか？これに対しては，状態ベクトルをすべての光子$n=\gamma$の運動量とヘリシティを最初に$(\mathbf{q}_1,\sigma_2,\gamma),(\mathbf{q}_2,\sigma_2,\gamma)$，次に全ての電子$n=e^-$の運動量とスピンの$z$成分をもってきて
+\begin{align*}
+\Phi_{\mathbf{p}_1\sigma_1 \gamma ;\mathbf{p}_2 \sigma_2 \gamma ;\cdots ;\mathbf{q}_1 \sigma_1' e^- ;\mathbf{q}_2 \sigma_2' e^-;\cdots}
+\end{align*}
+というように，素粒子の分類表にある全ての素粒子について順にたどっていくことに最初からしておけば，避けることはできる．そうする代わりに，粒子種類の添え字がどんな順序に現れてもよいとし，任意の順序の粒子の添え字の状態がある標準的な順序に添え字を並べた状態に位相因子をかけたものと等しいと\uwave{定義}することもできる．その場合の位相因子は，異なる種類の交換に対してはどのように依存していてもよい．アイソスピン不変性のように異なる種類の粒子を関連付ける対称性を扱うためには，(4.1.1)を一般化して，粒子が同じ種類に属するかどうかとは無関係に，必ず，任意のボゾン同士の交換あるいは任意のボゾンと任意のフェルミオンの交換のもとで状態ベクトルは対称
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p} \sigma n ;\cdots ; \mathbf{p}' \sigma' n' ;\cdots} = +\Phi_{\cdots ;\mathbf{p}' \sigma' n' ;\cdots ; \mathbf{p} \sigma n ;\cdots}
+\end{align*}
+で，任意のフェルミオン同士の交換のもとで反対称
+\begin{align*}
+\Phi_{\cdots ;\mathbf{p} \sigma n ;\cdots ; \mathbf{p}' \sigma' n' ;\cdots} = -\Phi_{\cdots ;\mathbf{p}' \sigma' n' ;\cdots ; \mathbf{p} \sigma n ;\cdots}
+\end{align*}
+ととるのが便利である\footnote{実際，同じ理由で，異なるヘリシティかスピン$z$成分をもつ同種粒子の交換のもとでの対称・反対称性を与えるのも，純粋に定義の問題である．最初から「ヘリシティ$+1$の光子の運動量を挙げ，次にヘリシティ$-1$の光子の運動量を挙げ，次にスピン$z$成分が$+1/2$の電子を…」と並べて
+\begin{align*}
+\Phi_{\mathbf{p}_1 ,+1, \gamma ;\mathbf{p}_2 ,+1 \gamma ;\cdots ;\mathbf{p}'_1 ,-1, \gamma ;\mathbf{p}'_2 ,-1 \gamma;\cdots;\mathbf{q}_1, +1/2, e^- ;\mathbf{q}_2 +1/2 e^-;\cdots;\mathbf{q}'_1, -1/2, e^- ;\mathbf{q}'_2 -1/2 e^-;\cdots}
+\end{align*}
+とすれば，そのような同種粒子だが異なるヘリシティ・スピン$z$成分をもつ粒子同士の交換も回避することができたからである．ヘリシティ・スピン$z$成分の異なる同種ボゾン・同種フェルミオンの交換のもとで状態ベクトルが対称または反対称ととるのは，回転対称性の利用を容易にするための慣習である．}．
+
+\vskip\baselineskip
+
+これらの状態の規格化は，この対称性条件に矛盾しないように決めなければならない．書き方を簡略化して，添え字$q$で1粒子の全ての量子数，つまり運動量$\mathbf{p}$とスピン$z$成分(質量ゼロならヘリシティ)$\sigma$，種類$n$を表すことにする．
+\begin{align*}
+q:=(\mathbf{p} \sigma n)
+\end{align*}
+このようにすると，$N$粒子状態は$\Phi_{q_1\cdots q_N}$と書ける．真空を$N=0$である状態$\Phi_0$と定める．$N=0$と$N=1$では対称性の問題は全く生じないので，簡単に
+\begin{align*}
+(\Phi_0,\Phi_0)=1
+\end{align*}
+と
+\begin{align*}
+(\Phi_{q'},\Phi_{q})=\delta(q'-q)
+\end{align*}
+で決められる．ここで$\delta(q'-q)$は，粒子の量子数$\sigma,n$についてのクロネッカーのデルタと運動量$\mathbf{p}$についてのデルタ関数の積である．
+\begin{align*}
+\delta(q'-q):=\delta^3(\mathbf{p}'-\mathbf{p})\delta_{\sigma'\sigma}\delta_{n'n}
+\end{align*}
+慣れるために$N=1$の場合を$q$ではなく添え字をあらわに書いておくと
+\begin{align*}
+(\Phi_{\mathbf{p}'\sigma'n'},\Phi_{\mathbf{p}\sigma n})=\delta^3(\mathbf{p}'-\mathbf{p})\delta_{\sigma'\sigma}\delta_{n'n}
+\end{align*}
+である．一方，$N=2$では$\Phi_{q_1'q_2'}$と$\Phi_{q_2'q_1'}$の状態は物理的に同じであるから，その添え字のもとで内積全体が対称あるいは反対称にならなければならない．
+\begin{align*}
+(\Phi_{q'_1q'_2},\Phi_{q_1q_2})=\delta(q_1'-q_1)\delta(q_2'-q_2)\pm \delta(q'_2-q_1)\delta(q_1'-q_2)
+\end{align*}
+としなければならない．符号$\pm$はもし両方の粒子ともにフェルミオンなら$-$であり，そうでなければ$+$をとる．これは明らかに上で述べた対称・反対称性の条件と矛盾しない．より一般には
+\begin{align*}
+(\Phi_{q'_1q'_2\cdots q'_M},\Phi_{q_1q_2\cdots q_N})=\delta_{NM} \sum_{\mc{P}} \mathrm{sgn}(\mc{P}) \prod_i \delta(q'_{\mc{P}i}-q_i)
+\end{align*}
+となる．この和は，整数$1,2,\cdots ,N$の全ての置換$\mc{P}$についてとる．(たとえば，(4.1.6)の最初の項では$\mc{P}$は恒等置換の項であり$\mc{P}1=1,\mc{P}2=2$となっている．第二項目では$\mc{P}1=2,\mc{P}2=1$である．)また，$\mathrm{sgn}(\mc{P})$は符号因子で，もし$\mc{P}$がフェルミオンの奇置換(フェルミオンの奇数個の置換)であれば，$\mathrm{sgn}(\mc{P})=-1$であり，その他の場合は$\mathrm{sgn}(\mc{P})=+1$をとるものとする．\par
+(4.1.7)が$q_i$の交換についても，また$q_j'$の交換についても望むべき対称性または反対称性を持っていることはすぐわかる．
+
+
+\newpage
+
+
+\subsection{生成・消滅演算子}
+生成・消滅演算子は前節で調べた規格化された多粒子状態にどのような効果を及ぼすかで定義される．生成演算子$a^\dagger(q)$(またはより詳細に書くと$a^\dagger(\mathbf{p} \sigma n)$)は，以下のように状態の粒子のリストの先頭に量子数$q$の粒子を加える演算子と定義する．
+\begin{align*}
+a^\dagger(q)\Phi_{q_1q_2\cdots q_N}:=\Phi_{qq_1q_2\cdots q_N}
+\end{align*}
+特に$N$粒子状態は真空に$N$個の生成演算子を施して得られる．
+\begin{align*}
+a^\dagger(q_1) a^\dagger(q_2)\cdots a^\dagger(q_N) \Phi_0=\Phi_{q_1q_2\cdots q_N}
+\end{align*}
+この演算子は$a^\dagger(q)$と書かれるのが普通だが，その共役演算子$a(q)$は$(4.1.7)$から計算される．今から証明するように$a(q)$はそれが作用する状態から粒子を一つ取り除くので，消滅演算子と呼ばれる．特に，粒子$q q_1 \cdots q_N$が全てボゾン，あるいは全てフェルミオンのとき
+\begin{align*}
+a(q)\Phi_{q_1 q_2 \cdots q_N}=\sum_{r=1}^N (\pm)^{r+1} \delta(q-q_r)\Phi_{q_1 \cdots q_{r-1} q_{r+1}\cdots q_N}
+\end{align*}
+となる．ここで符号$\pm $は，ボゾンのときに$+1$，フェルミオンのときに$-1$である．\par
+証明は以下のようにする．$a(q)\Phi_{q_1 q_2 \cdots q_N}$と任意の$\Phi_{q'_1 q'_2 \cdots q'_M}$という状態のスカラー積を計算する．(4.2.1)を使って，
+\begin{align*}
+\Bigl(\Phi_{q'_1 q'_2 \cdots q'_M},a(q)\Phi_{q_1 q_2 \cdots q_N}\Bigr)=&\Bigl(a^\dagger(q)\Phi_{q'_1 q'_2 \cdots q'_M},\Phi_{q_1 q_2 \cdots q_N}\Bigr) \\
+=&\Bigl(\Phi_{q q'_1 q'_2 \cdots q'_M},\Phi_{q_1 q_2 \cdots q_N}\Bigr)
+\end{align*}
+となる．ここで(4.1.7)を用いる．$1,2,\cdots ,N$の置換$\mc{P}$についての和は，置換されて最初にくる整数$r$，つまり$\mc{P}1=r$を満たす$r$と，その$r$を固定して残った整数$2,\cdots ,N$を$1,\cdots,r-1,r+1,\cdots N $とみなして$1,\cdots ,r-1,r+1,\cdots ,N$への置換写像$\bar{\mc{P}}$
+\begin{align*}
+\bar{\mc{P}}(i-1)=&\mc{P}i \quad (2\leq i \leq r) \\
+\bar{\mc{P}}i=&\mc{P}i \quad (r < i \leq N)
+\end{align*}
+(ただし$r=1$のとき常に$\bar{\mc{P}}i=\mc{P}i$で，$r=N$のとき常に$\bar{\mc{P}}i=\mc{P}(i-1)$とする)についての和
+\begin{align*}
+\sum_{\mc{P}}=\sum_{r=1}^N \sum_{\bar{\mc{P}}}
+\end{align*}
+で書ける．\footnote{例えば，$N=3$としたときの$\mc{P}$は
+\begin{align*}
+\mc{P}(1,2,3)=(1,2,3),(1,3,2),(2,1,3),(2,3,1),(3,1,2),(3,2,1)
+\end{align*}
+で与えられる．$\mc{P}1=r$として，最初の二つは$r=1$かつ写像$\bar{\mc{P}}(2,3)=\mc{P}(2,3)=(2,3),(3,2)$である，と分解できる．次の二つは$r=2$とし$\bar{\mc{P}}(1,3)=\mc{P}(2,3)=(1,3),(3,1)$で，最後の二つは$r=3$で$\bar{\mc{P}}(1,2)=\mc{P}(2,3)=(1,2),(2,1)$で分解できる．置換$\mc{P}$についての和はこれらそれぞれの場合の和で分解できる．それぞれが奇置換か偶置換かは，$r-1$回置換と$\bar{\mc{P}}$の奇置換か偶置換かの和で一致するので$\mathrm{sign}(\mc{P})=(\pm)^{r-1}\mathrm{sign}(\bar{\mc{P}})$がなりたつ．}さらに符号因子は
+\begin{align*}
+\mathrm{sgn}(\mc{P})=(\pm)^{r-1}\mathrm{sgn}(\bar{\mc{P}})
+\end{align*}
+となる．ここで上の符号はボゾン，下の符号はフェルミオンの場合である．したがって，(4.1.7)を用いて
+\begin{align*}
+&\Bigl(\Phi_{q'_1 q'_2 \cdots q'_M},a(q)\Phi_{q_1 q_2 \cdots q_N}\Bigr) \\
+=&\Bigl(\Phi_{q q'_1 q'_2 \cdots q'_M},\Phi_{q_1 q_2 \cdots q_N}\Bigr) \\
+=&\delta_{N,M+1}\sum_{\mc{P}}\mathrm{sgn}(\mc{P}) \delta(q-q_{\mc{P}1})\prod_{i=2}^{N}\delta(q'_i -q_{\mc{P}i}) \\
+=&\delta_{N,M+1}\sum_{\mc{P}}\mathrm{sgn}(\mc{P}) \delta(q-q_{\mc{P}1})\prod_{i=2}^{r}\delta(q'_i -q_{\mc{P}i}) \prod_{i=r+1}^{N}\delta(q'_i -q_{\mc{P}i}) \\
+=&\delta_{N,M+1}\sum_{\mc{P}}\mathrm{sgn}(\mc{P}) \delta(q-q_{\mc{P}1})\prod_{i=1}^{r-1}\delta(q'_i -q_{\mc{P}(i+1)}) \prod_{i=r+1}^{N}\delta(q'_i -q_{\mc{P}i}) \\
+=&\delta_{N,M+1}\sum_{r=1}^N (\pm)^{r-1} \sum_{\bar{\mc{P}}}\mathrm{sgn}(\bar{\mc{P}}) \delta(q-q_r)\prod_{i=1}^{r-1}\delta(q'_i -q_{\bar{\mc{P}}i}) \prod_{i=r+1}^{N}\delta(q'_i -q_{\bar{\mc{P}}i}) \\
+=&\delta_{N,M+1}\sum_{r=1}^N (\pm)^{r-1} \delta(q-q_r)\delta_{N-1,M}\sum_{\bar{\mc{P}}}\mathrm{sgn}(\bar{\mc{P}})\prod_{i=1}^{r-1}\delta(q'_i -q_{\bar{\mc{P}}i}) \prod_{i=r+1}^{N}\delta(q'_i -q_{\bar{\mc{P}}i}) \\
+=&\sum_{r=1}^N (\pm)^{r-1} \delta(q-q_r) \Bigl(\Phi_{q'_1 q'_2 \cdots q'_M},\Phi_{q_1 \cdots q_{r-1}q_{r+1} q_N}\Bigr)
+\end{align*}
+を得る．任意の状態$\Phi_{q'_1 q'_2 \cdots q'_M}$について同じ行列要素を持つので
+\begin{align*}
+a(q)\Phi_{q_1 q_2 \cdots q_N}=\sum_{r=1}^N (\pm)^{r+1} \delta(q-q_r)\Phi_{q_1 \cdots q_{r-1} q_{r+1}\cdots q_N}
+\end{align*}
+を得る．これで証明が完了した．具体的に$N=2,3$で展開してみると
+\begin{align*}
+a(q)\Phi_{q_1 q_2}=&\delta(q-q_1)\Phi_{q_2} \pm \delta(q-q_2) \Phi_{q_1} \\
+a(q)\Phi_{q_1q_2q_3}=&\delta(q-q_1)\Phi_{q_2q_3} \pm \delta(q-q_2) \Phi_{q_1q_3}+\delta(q-q_3)\Phi_{q_1 q_2}
+\end{align*}
+となる．特に，$N=0$の場合，ボゾンとフェルミオンの両方について$a(q)$が真空を消すことが分かる．
+\begin{align*}
+a(q)\Phi_0=0
+\end{align*}
+(実際，$a(q)\Phi_0$は任意の状態に対して直交
+\begin{align*}
+(\Phi_{q_1 q_2 \cdots q_N},a(q)\Phi_0)=(\Phi_{qq_1 q_2 \cdots q_N},\Phi_0)=0
+\end{align*}
+するから，そのような状態はゼロ状態でしかない．)
+ボゾンとフェルミオンを両方含んだ混合状態についての消滅演算子の公式も与えておこう．このために，$q=(\mathbf{p}\sigma n)$についての次数を
+\begin{align*}
+\pi(q)=\left\{
+\begin{array}{ll}
+1 \quad & q がフェルミオン\\
+0 & q がボゾン
+\end{array}
+\right.
+\end{align*}
+で定める．これにより符号関数が
+\begin{align*}
+\mathrm{sgn}(\mc{P};q_1\cdots q_N)=\prod_{\substack{1\leq i <j \leq N \\ \mc{P}i >\mc{P}j}}(-1)^{\pi(q_i)\pi(q_j)}
+\end{align*}
+で決まる．($i,j$の組について，置換後に順番が入れ替わったものについては$-1$倍をするということ．)これを用いると，$\mc{P}$と上で定義した$\bar{\mc{P}}$の符号関数の間に
+\begin{align*}
+\mathrm{sgn}(\mc{P};q_1\cdots q_N)=\left(\prod_{k=1}^{r-1} (-1)^{\pi(q_r)\pi(q_k)}\right) \mathrm{sgn}(\bar{\mc{P}};q_1\cdots q_{r-1}q_{r+1}\cdots q_N)
+\end{align*}
+の関係があるとわかる．(直感的には，固定された$q_r$を一番左に出すために$r-1$個のラベルをすり抜けるが，その際に生じる符号は$q_k$がフェルミ的であるときだけ$-1$倍されるということ．)この関係によって上の式変形を再び辿ると
+\begin{align*}
+&\Bigl(\Phi_{q'_1 q'_2 \cdots q'_M},a(q)\Phi_{q_1 q_2 \cdots q_N}\Bigr)\\
+=&\Bigl(\Phi_{q q'_1 q'_2 \cdots q'_M},\Phi_{q_1 q_2 \cdots q_N}\Bigr) \\
+=&\delta_{N,M+1}\sum_{\mc{P}}\mathrm{sgn}(\mc{P}) \delta(q-q_{\mc{P}1})\prod_{i=2}^{N}\delta(q'_i -q_{\mc{P}i}) \\
+=&\delta_{N,M+1}\sum_{\mc{P}}\mathrm{sgn}(\mc{P}) \delta(q-q_{\mc{P}1})\prod_{i=2}^{r}\delta(q'_i -q_{\mc{P}i}) \prod_{i=r+1}^{N}\delta(q'_i -q_{\mc{P}i}) \\
+=&\delta_{N,M+1}\sum_{\mc{P}}\mathrm{sgn}(\mc{P}) \delta(q-q_{\mc{P}1})\prod_{i=1}^{r-1}\delta(q'_i -q_{\mc{P}(i+1)}) \prod_{i=r+1}^{N}\delta(q'_i -q_{\mc{P}i}) \\
+=&\delta_{N,M+1}\sum_{r=1}^N \left(\prod_{k=1}^{r-1} (-1)^{\pi(q_r)\pi(q_k)}\right) \sum_{\bar{\mc{P}}}\mathrm{sgn}(\bar{\mc{P}}) \delta(q-q_r)\prod_{i=1}^{r-1}\delta(q'_i -q_{\bar{\mc{P}}i}) \prod_{i=r+1}^{N}\delta(q'_i -q_{\bar{\mc{P}}i}) \\
+=&\delta_{N,M+1}\sum_{r=1}^N \left(\prod_{k=1}^{r-1} (-1)^{\pi(q_r)\pi(q_k)}\right) \delta(q-q_r)\delta_{N-1,M}\sum_{\bar{\mc{P}}}\mathrm{sgn}(\bar{\mc{P}})\prod_{i=1}^{r-1}\delta(q'_i -q_{\bar{\mc{P}}i}) \prod_{i=r+1}^{N}\delta(q'_i -q_{\bar{\mc{P}}i}) \\
+=&\sum_{r=1}^N \left(\prod_{k=1}^{r-1} (-1)^{\pi(q_r)\pi(q_k)}\right) \delta(q-q_r) \Bigl(\Phi_{q'_1 q'_2 \cdots q'_M},\Phi_{q_1 \cdots q_{r-1}q_{r+1} q_N}\Bigr) \\
+=&\sum_{r=1}^N \left(\prod_{k=1}^{r-1} (-1)^{\pi(q)\pi(q_k)}\right) \delta(q-q_r) \Bigl(\Phi_{q'_1 q'_2 \cdots q'_M},\Phi_{q_1 \cdots q_{r-1}q_{r+1} q_N}\Bigr)
+\end{align*}
+よって
+\begin{align*}
+a(q)\Phi_{q_1 q_2 \cdots q_N}=\sum_{r=1}^N \left(\prod_{k=1}^{r-1} (-1)^{\pi(q)\pi(q_k)}\right) \delta(q-q_r)\Phi_{q_1 \cdots q_{r-1}q_{r+1} q_N}
+\end{align*}
+で与えられる．全てフェルミオン的な場合，すなわち全て$\pi(q_i)=1$ならば実際にこれは(4.2.3)に帰着する．
+
+
+\vskip\baselineskip
+
+
+ここで定義したことから，生成・消滅演算子は重要な交換関係か反交換関係を満たすことを示せる．演算子$a(q')$を(4.2.1)に働かせ，(4.2.3)を使うと
+\begin{align*}
+a(q')a^\dagger(q) \Phi_{q_1 \cdots q_N}=&a(q')\Phi_{q q_1 \cdots q_N} \\
+=&\delta(q'-q)\Phi_{q_1\cdots q_N} +\sum_{r=1}^N (\pm)^{r+2} \delta(q'-q_r)\Phi_{qq_1 \cdots q_{r-1} q_{r+1}\cdots q_N}
+\end{align*}
+を得る．(第二項目の符号は，$q_r$が$\Phi_{qq_1\cdots q_N}$の第(r+1)個目にあることから$(\pm)^{(r+1)+1}=(\pm)^{r+2}$である．)一方，演算子$a^\dagger(q)$を(4.2.3)に働かせると
+\begin{align*}
+a^\dagger(q)a(q')\Phi_{q_1 \cdots q_N}=&a^\dagger(q)\sum_{r=1}^N (\pm)^{r+1} \delta(q'-q_r)\Phi_{q_1 \cdots q_{r-1} q_{r+1}\cdots q_N} \\
+=&\sum_{r=1}^N (\pm)^{r+1} \delta(q'-q_r)\Phi_{q q_1 \cdots q_{r-1} q_{r+1}\cdots q_N} \\
+\mp a^\dagger(q)a(q')\Phi_{q_1 \cdots q_N}=&-\sum_{r=1}^N (\pm)^{r+2} \delta(q'-q_r)\Phi_{q q_1 \cdots q_{r-1} q_{r+1}\cdots q_N}
+\end{align*}
+この二つを加えると
+\begin{align*}
+[a(q')a^\dagger (q) \mp a^\dagger(q)a(q')]\Phi_{q_1 \cdots q_N}=\delta(q'-q)\Phi_{q_1 \cdots q_N}
+\end{align*}
+となる．これは任意の(ボゾンのみかフェルミオンのみの)$\Phi_{q_1 \cdots q_N}$でなりたち，さらに(4.2.3)はボゾンとフェルミオンの両方を含む状態でもなりたつことが示せる．実際
+\begin{align*}
+a(q')a^\dagger(q) \Phi_{q_1 \cdots q_N}=&a(q')\Phi_{q q_1 \cdots q_N} \\
+=&\delta(q'-q)\Phi_{q_1\cdots q_N} +\sum_{r=1}^N \left((-1)^{\pi(q')\pi(q)}\prod_{k=1}^{r-1} (-1)^{\pi(q')\pi(q_k)}\right) \delta(q'-q_r)\Phi_{qq_1 \cdots q_{r-1} q_{r+1}\cdots q_N}
+\end{align*}
+と
+\begin{align*}
+a^\dagger(q)a(q')\Phi_{q_1 \cdots q_N}=&a^\dagger(q)\sum_{r=1}^N \left(\prod_{k=1}^{r-1} (-1)^{\pi(q')\pi(q_k)}\right) \delta(q'-q_r)\Phi_{q_1 \cdots q_{r-1} q_{r+1}\cdots q_N} \\
+=&\sum_{r=1}^N \left(\prod_{k=1}^{r-1} (-1)^{\pi(q')\pi(q_k)}\right) \delta(q'-q_r)\Phi_{q q_1 \cdots q_{r-1} q_{r+1}\cdots q_N} \\
+-(-1)^{\pi(q')\pi(q)} a^\dagger(q)a(q')\Phi_{q_1 \cdots q_N}=&-\sum_{r=1}^N \left((-1)^{\pi(q')\pi(q)}\prod_{k=1}^{r-1} (-1)^{\pi(q')\pi(q_k)}\right) \delta(q'-q_r)\Phi_{q q_1 \cdots q_{r-1} q_{r+1}\cdots q_N}
+\end{align*}
+よって，
+\begin{align*}
+\left[a(q')a^\dagger(q) -(-1)^{\pi(q')\pi(q)} a^\dagger(q)a(q')\right]\Phi_{q_1 \cdots q_N}=\delta(q'-q)\Phi_{q_1 \cdots q_N}
+\end{align*}
+これから，以下の演算子の関係式が得られる．
+\begin{align*}
+a(q')a^\dagger(q) \mp a^\dagger(q)a(q')=\delta(q'-q)
+\end{align*}
+これに加えて，(4.2.2)からすぐに
+\begin{align*}
+&a^\dagger(q') a^\dagger(q)\Phi_{q_1\cdots q_N}=\Phi_{q'qq_1\cdots q_N} =\pm \Phi_{qq'q_1\cdots q_N}= \pm a^\dagger(q) a^\dagger(q')\Phi_{q_1\cdots q_N} \\
+\therefore \quad &a^\dagger(q') a^\dagger(q)\mp a(q) a^\dagger(q')=0
+\end{align*}
+が得られる．この共役からさらに
+\begin{align*}
+a(q')a(q)\mp a(q)a(q')=0
+\end{align*}
+も得られる．ここで，いつものように，上下の符号はそれぞれボゾンとフェルミオンに対応している．二つの異なった種類の粒子の生成・消滅演算子は，($\delta_{n'n}=0$なので)少なくとも一方の粒子がボゾンならば可換
+\begin{align*}
+&a(\mathbf{p}'\sigma'n')a^\dagger(\mathbf{p}\sigma n)=a^\dagger(\mathbf{p}\sigma n)a(\mathbf{p}'\sigma' n') \\
+&a^\dagger(\mathbf{p}'\sigma' n')a^\dagger(\mathbf{p}\sigma n)=a^\dagger(\mathbf{p}\sigma n)a^\dagger(\mathbf{p}'\sigma' n'),\quad a(\mathbf{p}'\sigma' n')a(\mathbf{p}\sigma n)=a(\mathbf{p}\sigma n)a(\mathbf{p}'\sigma' n')
+\end{align*}
+で，両方の粒子ともフェルミオンならば反可換
+\begin{align*}
+&a(\mathbf{p}'\sigma'n')a^\dagger(\mathbf{p}\sigma n)=-a^\dagger(\mathbf{p}\sigma n)a(\mathbf{p}'\sigma' n') \\
+&a^\dagger(\mathbf{p}'\sigma' n')a^\dagger(\mathbf{p}\sigma n)=-a^\dagger(\mathbf{p}\sigma n)a^\dagger(\mathbf{p}'\sigma' n'),\quad a(\mathbf{p}'\sigma' n')a(\mathbf{p}\sigma n)=-a(\mathbf{p}\sigma n)a(\mathbf{p}'\sigma' n')
+\end{align*}
+である．\par
+
+
+\vskip\baselineskip
+
+
+どんな演算子$\mc{O}$も，生成・消滅演算子の積の和で書くことができる．つまり
+\begin{align*}
+\int dq =\sum_{\sigma ,n}\int d^3\mathbf{p}
+\end{align*}
+として
+\begin{align*}
+\mc{O}=\sum_{N=0}^\infty \sum_{M=0}^\infty \int dq'_1 \cdots dq'_N dq_1 \cdots dq_M a^\dagger(q'_1) \cdots a^\dagger(q'_N)a(q_M)\cdots a(q_1) C_{NM}(q_1'\cdots q_N' q_1 \cdots q_M)
+\end{align*}
+として，この演算子の表現の行列要素がどのような値をもつように係数$C_{NM}$を選ぶことができる．これは数学的帰納法により証明する．\par
+(4.2.8)で与えられる演算子$\mc{O}$で係数$C_{NM}$をうまく選ぶことにより，どのような演算子$\mc{O}'$にも近づくことができることを示す．まず最初に，$C_{00}$を適切に選ぶことにより$(\Phi_0,\mc{O}\Phi_0)$にどのような値を与えることができるのは自明である．これは(4.2.4)と(4.2.8)から
+\begin{align*}
+(\Phi_0,\mc{O}\Phi_0)=C_{00}
+\end{align*}
+となることがわかるから，$(\Phi_0,\mc{O}'\Phi_0)$が運動量に対して定数となることを用いると，その定数を$C_{00}$として選ぶことができる．$N=1,M=0$と$N=0,M=1$では
+\begin{align*}
+(\Phi_{q'_1},\mc{O} \Phi_0)=C_{10}(q'_1) ,\quad (\Phi_0,\mc{O} \Phi_{q_1})=C_{01}(q_1)
+\end{align*}
+となるから，これも同様である．$N=1,M=1$の場合，
+\begin{align*}
+(\Phi_{q'_1},\mc{O} \Phi_{q_1})=C_{11}(q'_1,q_1) +\delta(q'_1-q_1)C_{00}
+\end{align*}
+となるが，$C_{00}$が上ですでに与えられていても，$C_{11}$をうまく選べばこの行列要素にどんな値でも与えることができる．同様のことが，ある任意の自然数$L,M$を固定し，$N<L,M\leq K$(あるいは$N\leq L,M<K$)を満たす$N$粒子状態と$M$粒子状態で挟んだ$\mc{O}$の行列要素についても成立するとする．つまり，これらの行列要素
+\begin{align*}
+(\Phi_{q'_1\cdots q'_N},\mc{O} \Phi_{q_1\cdots q_M})=C_{NM}(q_1'\cdots q'_N q_1\cdots q_M)+\cdots
+\end{align*}
+が，対応する係数$C_{NM}$を適切に選ぶことによりある望まれる値をとるようになっているとする．このとき，それが任意の$L$粒子状態と$K$粒子状態で挟んだ$\mc{O}$の行列要素について成立することを見るには，(4.2.8)より
+\begin{align*}
+\Bigl(\Phi_{q_1'\cdots q_L'} ,\mc{O} \Phi_{q_1\cdots q_K} \Bigr)=&L! K! C_{LK}(q_1'\cdots q_L' q_1 \cdots q_K) \\
+&+[C_{NM} を含む項 ,ただし N <L ,M \leq K(あるいは N \leq L , M<K)]
+\end{align*}
+となることを用いる．($L!K!$は，(4.1.7)から$q_1\cdots q_K$の置換に関する項と$q_1'\cdots q'_L$の置換に関する項からくる．)$N<L,M\leq K$(あるいは$N\leq L,M<K$)の$C_{NM}$にどのような値が与えられていても，明らかに$C_{LK}$を選んでこの行列要素にどのような望む値も与えることができる．したがってこれで証明が完了した．\par
+演算子を必ずしも(4.2.8)の形で，全ての生成演算子を消滅演算子の左に書く(正規順序積)必要はない．しかし，ある演算子が生成・消滅演算子のバラバラの積で含んでいたら，交換関係か反交換系を繰り返し使って，(4.2.5)のデルタ関数から出る新たな項を拾いながら，常に生成演算子を消滅演算子の左に持っていくことができる．よって(4.2.8)は演算子の一般的な形を提供する．\par
+例えば，以下の式を満たす任意の可算的演算子$F$(例えば運動量演算子や電荷)を考える．
+\begin{align*}
+F \Phi_{q_1\cdots q_N}=(f(q_1)+\cdots f(q_N))\Phi_{q_1\cdots q_N}
+\end{align*}
+このような演算子は，$N=M=1$の項だけを使って，
+\begin{align*}
+F=\int dq a^\dagger (q) a(q)f(q)
+\end{align*}
+として(4.2.8)の形で書ける．特に，自由粒子のハミルトニアンは常に
+\begin{align*}
+H_0=\int dq a^\dagger a(q) E(q)
+\end{align*}
+と書ける．ここで$E(q)$は以下の1粒子のエネルギーである．
+\begin{align*}
+E(\mathbf{p},\sigma,n)=\sqrt{\mathbf{p}^2+m_n^2}
+\end{align*}
+このように，任意の演算子は生成消滅演算子(さらに，5章で導入するそれぞれの場)の積で書けることは重要である．これを用いることで，7章でネーターの定理により得られる電荷と，2章で導入したヒルベルト空間に作用する対称性電荷が同一のものであることがわかる．
+
+\vskip\baselineskip
+
+生成・消滅演算子の種々の対称性に関する変換性も知る必要がある．まず，非斉次固有順時ローレンツ変換を考える．(3.1.1)より，$N$粒子状態がローレンツ変換性
+\begin{align*}
+U_0(\Lambda,\alpha)\Phi_{\mathbf{p}_1 \sigma_1 n_1 ; \mathbf{p}_2 \sigma_2 n_2 ; \cdots }=&e^{-i(\Lambda p_1)\cdot \alpha} e^{-i(\Lambda p_2)\cdot \alpha} \cdots \sqrt{\frac{(\Lambda p_1)^0(\Lambda p_2)^0\cdots }{p^0_1p_2^0\cdots}} \\
+&\times \sum_{\sigma_1,\sigma_2\cdots }D^{(j_1)}_{\sigma'_1\sigma_1}\Bigl(W(\Lambda,p_1)\Bigr)D^{(j_2)}_{\sigma'_2\sigma_2}\Bigl(W(\Lambda,p_2)\Bigr)\cdots \Psi_{\mathbf{p}_{1\Lambda},\sigma_1',n_1;\mathbf{p}_{2\Lambda},\sigma'_2,n_2;\cdots }
+\end{align*}
+をもつことを思い出す．ここで，三元運動量$\mathbf{p}_{\Lambda}$は$(\mathbf{p}_\Lambda)^i=(\Lambda p)^i$で与えられる．$D^{(j)}_{\bar{\sigma}\sigma}(W)$は2.5節で与えた，3次元回転群のスピン$j$ユニタリー表現行列．$W(\Lambda,p)$は質量$m$の静止質量を4元運動量$p^\mu$にする基準ブースト$L(p)$(2.5.24)を用いて
+\begin{align*}
+W(\Lambda,p):=L^{-1}(\Lambda p)\Lambda L(p)
+\end{align*}
+で定義される．(もちろん$m,j$は粒子の種類$n$に依存する．これは全て$m\neq 0$の場合であり，質量ゼロの粒子については5.9節で扱う．)これらの状態は(4.2.2)のように
+\begin{align*}
+\Phi_{\mathbf{p}_1 \sigma_1 n_1 ; \mathbf{p}_2 \sigma_2 n_2 ; \cdots }=a^\dagger(\mathbf{p}_1 \sigma_1 n_1)a^\dagger(\mathbf{p}_2 \sigma_2 n_2)\cdots \Phi_0
+\end{align*}
+と表せる．ここで$\Phi_0$は
+\begin{align*}
+U_0(\Lambda,\alpha)\Phi_0=\Phi_0
+\end{align*}
+を満たすローレンツ不変な真空状態である\footnote{2章で述べたように，もし非自明な変換をするならそれは無限次元表現に属さなければならないので，真空は自明な変換をしなければならない．}．状態(4.2.2)が正しく変換するためには，生成演算子が以下の変換則を満たすことが必要かつ十分である．
+\begin{align*}
+U_0(\Lambda,\alpha) a^\dagger (\mathbf{p}\sigma n)U^{-1}(\Lambda,\alpha)=e^{-i(\Lambda p)\cdot \alpha} \sqrt{\frac{(\Lambda p)^0}{p^0}} \sum_{\bar{\sigma}}D^{(j)}_{\bar{\sigma}\sigma} \Bigl(W(\Lambda,p)\Bigr)a^\dagger (\mathbf{p}_{\Lambda} \bar{\sigma} n)
+\end{align*}
+(十分性は明らか．必要性は一粒子状態の変換性(2.5.11)を生成演算子を用いて書き換えると
+\begin{align*}
+&U_0(\Lambda,\alpha)\Phi_{\mathbf{p}\sigma n}=U_0(\Lambda,\alpha)a^\dagger(\mathbf{p}\sigma n) U^{-1}_0(\Lambda,\alpha)\Phi_0 \\
+=&e^{-i(\Lambda p)\cdot \alpha} \sqrt{\frac{(\Lambda p)^0}{p^0}} \sum_{\bar{\sigma}}D^{(j)}_{\bar{\sigma}\sigma} \Bigl(W(\Lambda,p)\Bigr)a^\dagger (\mathbf{p}_{\Lambda} \bar{\sigma} n) \Phi_0
+\end{align*}
+となるが，(4.2.4)により消滅演算子を加えるだけの不定性が残る．しかし多粒子状態の変換性に矛盾が起きるので，結局この形しか許されない．)\par
+同様に，自由粒子状態に荷電共役・空間反転・時間反転を引き起こす演算子$\mathsf{C},\mathsf{P},\mathsf{T}$は(2.6.15)(2.6.18)より生成演算子を
+\begin{align*}
+\mathsf{C} a^\dagger(\mathbf{p}\sigma n)\mathsf{C}^{-1} =&\xi_n a^\dagger(\mathbf{p}\sigma n^c) \\
+\mathsf{P} a^\dagger(\mathbf{p}\sigma n) \mathsf{P}^{-1} =&\eta_n a^\dagger(-\mathbf{p}\sigma n) \\
+\mathsf{T}a^\dagger(\mathbf{p}\sigma n) \mathsf{T}^{-1} =&\zeta_n(-1)^{j-\sigma} a^\dagger(-\mathbf{p}-\sigma n)
+\end{align*}
+と変換する．
+
+
+
+
+\end{document}

@@ -1,0 +1,2023 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+\usepackage{tensor}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+\newcommand{\mr}[1]{\mathrm{#1}}
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part26}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+
+\maketitle
+
+\setcounter{part}{25}
+\part{超対称場の理論}
+\setcounter{section}{26}
+\setcounter{subsection}{0}
+\subsection{場の超対称多重項の直接的構成}
+場の超対称多重項の直接的な構成法を見るために，25.5節で述べた最も単純な超対称多重項($j=0$から作られる潰れたもの)に属する任意の質量の粒子を消滅させる場を考えよう．この多重項は2つのスピン・ゼロ粒子と1つのスピン$1/2$粒子からなっているのだった．(25.5.15)でスピン・ゼロの1粒子状態$\ket{0,0}$は超対称性の生成子$\mr{Q}_a$で消滅させられるが，$\mr{Q}_{a}^*$では消滅させられないことを見たのだった．したがって，この粒子を真空$\ket{v}$(この真空は全ての超対称性の生成子で消滅させられるとする)から作るスカラー場$\phi(x)$は$\mr{Q}_a$と可換だが$\mr{Q}_a^*$とは可換ではないと思われる．すなわち
+\begin{align*}
+\mr{Q}_a \phi(x)\ket{v}\propto & \mr{Q}_{a} \ket{0,0}=0,\quad \phi(x)\mr{Q}_a \ket{v}=0 \\
+\therefore \quad  [\mr{Q}_{a}, \phi(x)]=&0 \\
+\mr{Q}_a^* \phi(x) \ket{v}\propto& \mr{Q}_{a}^* \ket{0,0} \neq 0 ,\quad \phi(x)\mr{Q}_a^* \ket{v}=0 \\
+\therefore \quad -i\sum_b e_{ab}[\mr{Q}^*_a ,\phi(x)] \equiv &\zeta_a (x) \neq 0
+\end{align*}
+が成立している．ここで反対称な$2\times 2$行列$e_{ab}$を導入したが，これは斉次ローレンツ群のもとで$(1/2,0)$表現として変換されるのが$\sum_b e_{ab} \mr{Q}_{b}^*$だからだ．これにより$\zeta_a(x)$も斉次ローレンツ群の$(1/2,0)$表現に属する\uwave{フェルミオン的な}2成分スピノル場だとわかる．\par
+(26.1.1)(26.1.2)と反交換関係(25.2.31)から以下が分かる．
+\begin{align*}
+\left\{\mr{Q}_b ,\zeta_a\right\}=&-i\sum_c e_{ac} \{ \mr{Q}_b ,[\mr{Q}_{c}^* ,\phi] \} \\
+=&+i\sum_c e_{ac}[\phi,\{\mr{Q}_b ,\mr{Q}_c^*\}]-i \sum_c e_{ac}\{\mr{Q}_{c}^*,[\phi,\mr{Q}_b]\} \quad \because ヤコビ恒等式 \\
+=&-i\sum_c e_{ac}[\{\mr{Q}_b ,\mr{Q}_c^*\},\phi] \quad \because (26.1.1) \\
+=& -2i\sum_c e_{ac}[ (\sigma_\mu P^\mu)_{bc},\phi] \quad \because (25.2.31) \\
+=& 2i(\sigma_\mu e )_{ba}[P^\mu ,\phi]
+\end{align*}
+したがって(10.1.1)より
+\begin{align*}
+\left\{\mr{Q}_b ,\zeta_a(x)\right\}=-2(\sigma^\mu e )_{ba}\partial_\mu \phi(x)
+\end{align*}
+となる．一方(26.1.2)と反交換関係(25.2.32)から
+\begin{align*}
+-i\sum_c e_{ac} \left\{\mr{Q}^*_b , \zeta_c \right\}=& -\sum_{cd} e_{ac} e_{cd}\left\{\mr{Q}_b^* ,[\mr{Q}_{d}^*,\phi] \right\} \\
+=&\left\{\mr{Q}_b^* ,[\mr{Q}_{a}^*,\phi] \right\} \\
+=&-\left\{\mr{Q}_a^* ,[\mr{Q}_{b}^*,\phi] \right\}+\left[\phi ,\{\mr{Q}_{b}^*,\mr{Q}_{a}^*\} \right] \quad \because ヤコビ恒等式 \\
+=&-\left\{\mr{Q}_a^* ,[\mr{Q}_{b}^*,\phi] \right\} \quad \because (25.2.32) \\
+=&+i\sum_c e_{bc} \left\{\mr{Q}^*_a , \zeta_c \right\} \quad (最初の計算を逆にするだけ)
+\end{align*}
+だから，$\sum_c e_{ac}\{\mr{Q}_b^*,\zeta_c \}$は$a,b$に関して反対称であり，これより反対称$2\times 2$行列$e_{ab}$に比例することが分かる．
+\begin{align*}
+i \sum_c e_{ac}\{\mr{Q}_b^*,\zeta_c \}=&2e_{ab}\mc{F}\\
+\therefore \quad i\{\mr{Q}^*_b ,\zeta_a(x)\}=&2\delta_{ab} \mc{F}(x)
+\end{align*}
+また，ローレンツ不変性から係数$\mc{F}(x)$はスカラー場だとわかる．\par
+ここで更に，超対称性生成子と$\mc{F}(x)$の交換子も計算する必要がある．(26.1.4)(26.1.2)(25.2.32)を使うと
+\begin{align*}
+\delta_{ab} \left[\mr{Q}^*_c ,\mc{F}\right]=&\frac{1}{2}i \left[\mr{Q}^*_{c} ,\{\mr{Q}^*_b ,\zeta_a \}\right] \\
+=&-\frac{1}{2}i \left[\zeta_a, \{\mr{Q}_c^*,\mr{Q}_b^*\}\right]-\frac{1}{2}i \left[\mr{Q}_b^*,\{\zeta_a ,\mr{Q}_c^*\}\right] \quad \because ヤコビ恒等式\\
+=&-\frac{1}{2}i \left[\mr{Q}_b^*,\{\zeta_a ,\mr{Q}_c^*\}\right] \\
+=&-\delta_{ac}[\mr{Q}_{b}^*,\mc{F}]
+\end{align*}
+を得る．$a=b\neq c$とおけば，この交換子がゼロになることがわかる．
+\begin{align*}
+[\mr{Q}_{c}^*,\mc{F}(x)]=0
+\end{align*}
+最後に(26.1.4)(25.2.31)(26.1.3)を使うと
+\begin{align*}
+\delta_{ab}[\mr{Q}_c ,\mc{F}]=&\frac{1}{2}i\left[\mr{Q}_c ,\left\{\mr{Q}^*_{b},\zeta_a\right\}\right] \\
+=&-\frac{1}{2}i\left[\zeta_a ,\left\{\mr{Q}_{c},\mr{Q}^*_{b}\right\}\right]-\frac{1}{2}i\left[\mr{Q}_b^* ,\left\{\zeta_a, \mr{Q}_{c}\right\}\right] \quad \because ヤコビ恒等式 \\
+=&-i(\sigma_\mu )_{cb}\left[\zeta_a ,P^\mu\right] +i(\sigma^\mu e)_{ca}[\mr{Q}_{b}^* ,\partial_\mu \phi] \quad \because (25.2.31)(26.1.3) \\
+=&-(\sigma^\mu )_{cb} \partial_\mu \zeta_a+i(\sigma^\mu e)_{ca}\partial_\mu [\mr{Q}_{b}^* , \phi] \\
+=&-(\sigma^\mu )_{cb} \partial_\mu \zeta_a+\sum_d e_{bd} (\sigma^\mu e)_{ca}\partial_\mu \zeta_d \quad \because(26.1.2)
+\end{align*}
+となる．両辺に$\delta_{ab}$と縮約させて
+\begin{align*}
+2[\mr{Q}_c ,\mc{F}]=&-\sum_a (\sigma^\mu )_{ca} \partial_\mu \zeta_a+\sum_d (\sigma^\mu e e)_{cd}\partial_\mu \zeta_d \\
+=&-2\sum_a (\sigma^\mu )_{ca} \partial_\mu \zeta_a \\
+\therefore \quad [\mr{Q}_c ,\mc{F}(x)]=&-\sum_a (\sigma^\mu )_{ca} \partial_\mu \zeta_a(x)
+\end{align*}
+となる．式(26.1.1)～(26.1.6)は，場$\phi(x),\zeta_a(x),\mc{F}(x)$が超対称代数の完全な表現をなすことを意味する．
+\begin{align*}
+[\mr{Q}_{a}, \phi(x)]=&0 \\
+\left\{\mr{Q}_b ,\zeta_a(x)\right\}=&-2(\sigma^\mu e )_{ba}\partial_\mu \phi(x) \\
+[\mr{Q}_c ,\mc{F}(x)]=&-\sum_a (\sigma^\mu )_{ca} \partial_\mu \zeta_a(x) \\
+[\mr{Q}_{a}^*, \phi(x)]=&-i\sum_b e_{ab}\zeta_b(x) \\
+\{\mr{Q}^*_b ,\zeta_a(x)\}=&-2i\delta_{ab} \mc{F}(x) \\
+[\mr{Q}_{c}^*,\mc{F}(x)]=0
+\end{align*}
+これらの場はエルミートではないので，それらの複素共役は別の超対称多重項を与える．
+\begin{align*}
+[\mr{Q}^*_{a}, \phi^*(x)]=&0 \\
+\left\{\mr{Q}^*_b ,\zeta_a^*(x)\right\}=&2(e \sigma^\mu )_{ab}\partial_\mu \phi^*(x) \\
+[\mr{Q}^*_c ,\mc{F}^*(x)]=&\sum_a (\sigma^\mu )_{ac} \partial_\mu \zeta_a^*(x) \\
+[\mr{Q}_{a}, \phi^*(x)]=&-i\sum_b e_{ab}\zeta_b^*(x) \\
+\{\mr{Q}_b ,\zeta_a^*(x)\}=&2i\delta_{ab} \mc{F}^*(x) \\
+[\mr{Q}_{c},\mc{F}^*(x)]=0
+\end{align*}
+これらの交換・反交換関係は，(超対称性生成子を文字通り超対称性変換の生成子として)超対称性変換のもとでの変換則として表すことができる．この超対称性変換は，任意のボゾン場またはフェルミオン場の演算子$\mc{O}(x)$を微小量
+\begin{align*}
+\delta \mc{O}(x)\equiv \left[\sum_a (\epsilon_a^* \mr{Q}_a +\epsilon_a \mr{Q}^*_a),\mc{O}(x)\right]
+\end{align*}
+だけずらす．ここで$\epsilon_a$は微小な\uwave{フェルミオン的}c数スピノルだ．よって$\epsilon_a ,\epsilon^*_a$は$\mr{Q}_a,\mr{Q}_{a}^*$と反可換だから，$\epsilon^*_a \mr{Q}_{a}+\epsilon_a \mr{Q}^*_a$という量は
+\begin{align*}
+\left(\epsilon^*_a \mr{Q}_{a}+\epsilon_a \mr{Q}^*_a\right)^*=&\mr{Q}_a^*\epsilon_a +\mr{Q}_a \epsilon_a^* \quad \because(25.1.19)\\
+=&-(\epsilon^*_a \mr{Q}_{a}+\epsilon_a \mr{Q}^*_a)
+\end{align*}
+だから反エルミートとなる．したがって
+\begin{align*}
+\left(\delta\mc{O}\right)^*=&\left[\sum_a (\epsilon_a^* \mr{Q}_a +\epsilon_a \mr{Q}^*_a),\mc{O}\right]^* \\
+=&-\left[\sum_a (\epsilon_a^* \mr{Q}_a +\epsilon_a \mr{Q}^*_a)^*,\mc{O}^*\right] \\
+=&\left[\sum_a (\epsilon_a^* \mr{Q}_a +\epsilon_a \mr{Q}^*_a),\mc{O}^*\right]=\delta (\mc{O}^*)
+\end{align*}
+となる．エルミートと超対称性変換は可換となってくれて嬉しい．この定義により
+\begin{align*}
+\delta \phi(x)=&\left[\sum_a (\epsilon_a^* \mr{Q}_a +\epsilon_a \mr{Q}^*_a),\phi(x)\right] \\
+=&\sum_a\Bigl(\epsilon_a^* [\mr{Q}_a,\phi(x)] +\epsilon_a [\mr{Q}^*_a,\phi(x)]\Bigr) \\
+=&-i\sum_{ab}\epsilon_a e_{ab} \zeta_b(x) \\
+\delta \zeta_a (x)=&\left[\sum_b (\epsilon_b^* \mr{Q}_b +\epsilon_b \mr{Q}^*_b),\zeta_a(x)\right] \\
+=&\sum_b\Bigl(\epsilon_b^* \{\mr{Q}_b,\zeta_a(x)\} +\epsilon_b \{\mr{Q}^*_b,\zeta_a(x)\}\Bigr) \\
+=&-2\sum_b \epsilon^*_b (\sigma_\mu e)_{ba}\partial^\mu \phi(x)-2i\epsilon_a \mc{F}(x) \\
+=&-2\sum_b (\sigma_\mu e)^T_{ab} \epsilon^*_b \partial^\mu \phi(x)-2i\epsilon_a \mc{F}(x) \\
+=&+2\sum_b (e\sigma_\mu^T)_{ab} \epsilon^*_b \partial^\mu \phi(x)-2i\epsilon_a \mc{F}(x) \\
+\delta\mc{F}(x) =&\left[\sum_a (\epsilon_a^* \mr{Q}_a +\epsilon_a \mr{Q}^*_a),\mc{F}(x)\right] \\
+=&\sum_a\Bigl(\epsilon_a^* [\mr{Q}_a,\mc{F}(x)] +\epsilon_a [\mr{Q}^*_a,\mc{F}(x)]\Bigr) \\
+=&-\sum_{ab}\epsilon_b^* (\sigma_\mu)_{ba}\partial^\mu \zeta_a(x)
+\end{align*}
+となる．\par
+これは微小なマヨラナ4成分スピノル変換パラメータ
+\begin{align*}
+\alpha \equiv -i \left(
+\begin{matrix}
+\epsilon \\
+e\epsilon^*
+\end{matrix}
+\right)
+\end{align*}
+を導入するとこれは実際にマヨラナ性
+\begin{align*}
+\alpha^*=+i\left(
+\begin{matrix}
+\epsilon^* \\
+e\epsilon
+\end{matrix}
+\right)=+i\left(
+\begin{matrix}
+0 & -e \\
+e & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\epsilon \\
+e\epsilon^*
+\end{matrix}
+\right)=-\beta \epsilon \gamma_5 \alpha
+\end{align*}
+を満たしていて，
+\begin{align*}
+\bar{\alpha}Q=+i(\epsilon^{*T} ,-\epsilon^T e)\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+e\mr{Q}^* \\
+\mr{Q}
+\end{matrix}
+\right) =i\sum_a (\epsilon_a^* \mr{Q}_a +\epsilon_a \mr{Q}^*_a)
+\end{align*}
+となるから
+\begin{align*}
+i\delta \mc{O}(x) \equiv [\bar{\alpha} Q ,\mc{O}(x)]
+\end{align*}
+と4成分ディラック記法で書くことができる．\par
+変換則(26.1.14)～(26.1.16)とそれらの複素共役は，実のボゾン場$A,B,F,G$と4成分マヨラナ・スピノル場を導入すると便利な共変形で書くことができる．これらの実ボゾン場は
+\begin{align*}
+\frac{A+iB}{\sqrt{2}} \equiv \phi,\quad \frac{F-iG}{\sqrt{2}}\equiv \mc{F} \\
+A=\frac{\phi +\phi^*}{\sqrt{2}},\quad B=-i\frac{\phi -\phi^*}{\sqrt{2}} \\
+F=\frac{\mc{F} +\mc{F}^*}{\sqrt{2}},\quad G=i\frac{\mc{F} -\mc{F}^*}{\sqrt{2}}
+\end{align*}
+で定義され(つまり$\phi,\mc{F}$はエルミートでなかったから，その実部と虚部を別々に実場として定義する)，マヨラナ・スピノル場は
+\begin{align*}
+\psi \equiv \frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+ \zeta \\
+ -e\zeta^*
+\end{matrix}
+\right)
+\end{align*}
+で定義される．$4\times 4$ディラック行列と$2\times 2$行列$\sigma_\mu$の関係
+\begin{align*}
+\gamma_\mu =\left(
+\begin{matrix}
+0 & -ie \sigma^T_\mu e \\
+i\sigma_\mu & 0
+\end{matrix}
+\right)
+\end{align*}
+を思い出そう．(これは(25.2.36)の導出のときに一応使った性質．まぁ確かめるにしても$\mu=0\sim3$でそれぞれ確かめればすぐわかる．$\gamma^\mu$ではなく下付きなので$\mu=0$のときだけマイナスつきなので注意．)エルミート場の変換則
+\begin{align*}
+\delta \phi^*(x)=&+i\sum_{ab}e_{ab} \zeta_b^*(x)\epsilon_a^* \\
+=&-i\sum_{ab}\epsilon_a^*e_{ab}\zeta_b^*(x) \\
+\delta \zeta_a^* (x)=&+2\sum_b (e\sigma_\mu^T)_{ab}^* \epsilon_b \partial^\mu \phi^*(x)+2i\epsilon^*_a \mc{F}^*(x) \\
+=&+2\sum_b (e \sigma_\mu)_{ab}\epsilon_b\partial^\mu \phi^*(x)+2i\epsilon^*_a \mc{F}^*(x) \\
+\delta\mc{F}^*(x) =&-\sum_{ab}(\sigma^\mu)^*_{ba}\partial_\mu \zeta_a^*(x)\epsilon_b \\
+=&+\sum_{ab}\epsilon_b (\sigma^\mu)^T_{ba}\partial_\mu \zeta_a^*(x)
+\end{align*}
+と
+\begin{align*}
+\gamma^\mu \alpha =&-i\left(
+\begin{matrix}
+0 & -ie \sigma^T_\mu e \\
+i\sigma_\mu & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\epsilon \\
+e\epsilon^*
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+e\sigma_\mu^T\epsilon^* \\
+\sigma_\mu\epsilon
+\end{matrix}
+\right) \\
+\bar{\alpha}\gamma^\mu =&+i(\epsilon^{*T},-\epsilon^T e)\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+0 & -ie \sigma^T_\mu e \\
+i\sigma_\mu & 0
+\end{matrix}
+\right) =\left(-\epsilon^{*T} \sigma_\mu ,+\epsilon^T\sigma^T_\mu e \right)
+\end{align*}
+も使って，それぞれの変換則が
+\begin{align*}
+\delta A=&\frac{1}{\sqrt{2}}\delta \phi + \frac{1}{\sqrt{2}}\delta\phi^* \\
+=&-i\frac{1}{\sqrt{2}}\sum_{ab} \epsilon_a e_{ab}\zeta_b -i \frac{1}{\sqrt{2}}\sum_{ab}\epsilon^*_a e_{ab} \zeta_b^* \\
+=& +i(\epsilon^{*T} ,-\epsilon^T e)\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+\zeta \\
+-e\zeta^*
+\end{matrix}
+\right) \\
+=&\bar{\alpha}\psi \\
+\delta B=&-i \frac{1}{\sqrt{2}}\delta \phi+i\frac{1}{\sqrt{2}}\delta \phi^* \\
+=&-\frac{1}{\sqrt{2}}\sum_{ab} \epsilon_a e_{ab}\zeta_b + \frac{1}{\sqrt{2}}\sum_{ab}\epsilon^*_a e_{ab} \zeta_b^* \\
+=& (-i)i(\epsilon^{*T} ,-\epsilon^T e)\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right)\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+\zeta \\
+-e\zeta^*
+\end{matrix}
+\right) \\
+=&-i \bar{\alpha}\gamma_5 \psi \\
+\delta \psi=&\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+\delta \zeta \\
+ -e\delta\zeta^*
+\end{matrix}
+\right) \\
+=&\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+ +2 e\sigma_\mu^T\epsilon^* \partial^\mu \phi -2i\epsilon \mc{F} \\
+ +2\sigma_\mu \epsilon \partial^\mu \phi^*-2ie\epsilon^* \mc{F}^*
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+ + e \sigma_\mu^T\epsilon^* \partial^\mu A  \\
+ +\sigma_\mu \epsilon \partial^\mu A
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+ + ie \sigma_\mu^T\epsilon^* \partial^\mu B  \\
+ -i\sigma_\mu \epsilon \partial^\mu B
+\end{matrix}
+\right) \\
+&+\left(
+\begin{matrix}
+-i\epsilon F \\
+-ie\epsilon^* F
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+-\epsilon G \\
++e\epsilon^* G
+\end{matrix}
+\right) \\
+=&\partial^\mu \gamma_\mu\alpha +\partial^\mu B \gamma_5 \gamma_\mu \alpha +F \alpha -iG\gamma_5 \alpha \\
+=&\partial_\mu(A+i\gamma_5 B)\gamma^\mu \alpha +(F-i\gamma_5 G)\alpha \\
+\delta F=& \frac{1}{\sqrt{2}}\delta \mc{F}+\frac{1}{\sqrt{2}}\delta \mc{F}^* \\
+=&-\frac{1}{\sqrt{2}}\sum_{ab}\epsilon^*_a (\sigma_\mu)_{ab}\partial^\mu \zeta_a +\frac{1}{\sqrt{2}}\sum_{ab}\epsilon_a(\sigma_\mu)^T_{ab}\partial^\mu \zeta^*_b \\
+=&\left( -\epsilon^{*T} \sigma_\mu ,+\epsilon^T\sigma^T_\mu e \right) \frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+ \partial^\mu \zeta \\
+ -e\partial^\mu \zeta^*
+\end{matrix}
+\right) \\
+=&\bar{\alpha}\gamma^\mu \partial_\mu \psi \\
+\delta G=&i\frac{1}{\sqrt{2}}\delta \mc{F}-\frac{1}{\sqrt{2}}\delta \mc{F}^* \\
+=&-i\frac{1}{\sqrt{2}}\sum_{ab}\epsilon^*_a (\sigma_\mu)_{ab}\partial^\mu \zeta_a -i\frac{1}{\sqrt{2}}\sum_{ab}\epsilon_a(\sigma_\mu)^T_{ab}\partial^\mu \zeta^*_b \\
+=&i\left( -\epsilon^{*T} \sigma_\mu ,+\epsilon^T\sigma^T_\mu e \right) \left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right)\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+ \partial^\mu \zeta \\
+ -e\partial^\mu \zeta^*
+\end{matrix}
+\right) \\
+=&i\bar{\alpha} \gamma^\mu \gamma_5 \partial_\mu \psi \\
+=&-i\bar{\alpha} \gamma_5 \gamma^\mu \partial_\mu \psi
+\end{align*}
+となる．前に示した通り，この変換は作用
+\begin{align*}
+I=&\int d^4x \Bigl\{-\frac{1}{2}\partial_\mu A \partial^\mu A-\frac{1}{2}\partial _\mu B \partial^\mu B -\frac{1}{2}\bar{\psi}\gamma^\mu \partial_\mu \psi \\
+&+\frac{1}{2}(F^2+G^2)+m[FA+GB-\frac{1}{2}\bar{\psi}\psi] \\
+&+g\left[ F(A^2-B^2)+2GAB-\bar{\psi}(A+i\gamma_5 B)\psi \right]\Bigr\}
+\end{align*}
+を不変に保つことがわかる．以下の三つの節では，さらに一般的な超対称作用を導くのに便利な手法を調べる．\par
+フェルミオン場$\psi(x)$が自由場のディラック方程式$(\gamma^\mu \partial_\mu +m)\psi=0$を満たす場合には，これらの変換則から
+\begin{align*}
+\delta(F+mA)=\bar{\alpha} (\gamma^\mu \partial_\mu +m)\psi=0 ,\quad \delta(G+mB)=-i\bar{\alpha} \gamma_5 (\gamma^\mu \partial_\mu +m)\psi=0
+\end{align*}
+となって$F+mA,G+mB$が不変となり，したがって$\mr{Q}_a,\mr{Q}_a^*$と可換であり，そのようなものは(25.2.31)からまた$P_\mu$とも可換であることが分かる．これが$F=-mA,G=-mB$を示すわけではないが，しかし交換・反交換関係(26.1.1)～(26.1.6)も変換則(26.1.21)も変えずに，場$F,G$からそれぞれ定数$F+mA,B+mG$を差し引いて再定義することができ，新しい場$F,G$が$F=-mA,G=-mB$で与えられ，したがって$\mc{F}=-m\phi^*$となるようにすることが可能となる．これは相互作用がある場合には正しい操作にならないが，相互作用がある場合にも$\mc{F}(x),F(x),G(x)$は通常，補助場(微分がラグランジアンにない場)であり，(26.1.22)の作用の場合のように超対称多重項の他の場を使って表すことが可能となる．
+
+\newpage
+
+\subsection{一般的な補助場}
+前の節で述べたような直接的な手法で場の超対称多重項を構成するのは労力がえぐい．サラムとストラスディーによって発明された超対称多重項の場を単一の超場にまとめる理論形式を使うと労力が非常に節約できる．\par
+4元運動量演算子$P_\mu$が通常の時空座標$x^\mu$の並進の生成子として定義されたのと全く同じように，4元超対称性生成子$(\mr{Q}_a,\mr{Q}^*_a)$は4つのフェルミオン的c数の\uwave{超空間}座標の並進の生成子とみなすことができる．これらの超空間座標はお互いに反可換で，フェルミオン場と反可換，しかし$x^\mu$および全てのボゾン場と可換だとする．ローレンツ不変なラグランジアン密度を構成するのが目的なので，25.2節の4成分ディラック形式を採用すると便利だ．超対称性生成子は4成分マヨラナ・スピノル$\mr{Q}_a$にまとめられるので，それに対応して超空間座標は別の4成分マヨラナ・スピノル$\theta_\alpha$にまとめられる．(運動量演算子は$\partial/\partial x^\mu$に比例しており$[P^\mu,P^\nu]=0$だったが，)超対称性生成子の反交換子はゼロとはならないので，超座標の並進演算子$\partial/\partial \theta_\alpha$に単に比例するとはとれない．その代わりに，サムラとストラスディーは，もし超対称性生成子$Q$とボゾン的またはフェルミオン的な超場$S(x,\theta)$(4次元座標と超空間座標に依存する場)との交換子または反交換子が
+\begin{align*}
+[Q,S\}=i\mc{Q}S
+\end{align*}
+ただし，$\mc{Q}$は超空間の微分演算子
+\begin{align*}
+\mc{Q}\equiv -\frac{\partial }{\partial \bar{\theta}}+\gamma^\mu \theta \frac{\partial}{\partial x^\mu}
+\end{align*}
+だとすると，超対称代数が満たされることを発見した．(ここでいつもの通り$\bar{\theta}=\theta^\dagger \beta$．フェルミオン的c数変数についての微分は全て左微分，つまりある変数について微分する際にはその変数を項の最も左に動かして計算
+\begin{align*}
+\frac{\partial}{\partial \theta}\theta' \theta =-\frac{\partial}{\partial \theta} \theta \theta'=-\theta'
+\end{align*}
+するものとする．)$\epsilon$を(26.A.3)で与えられる$4\times 4$行列として，マヨラナ・スピノルについては(25.2節で散々使ったように)$\bar{\theta}=\theta^T \gamma_5 \epsilon$なので，(26.2.2)をより明確に書き出すと
+\begin{align*}
+\bar{\theta}_{\alpha}=&\theta_\gamma (\gamma_5 \epsilon)_{\gamma\alpha}\\
+ \therefore \quad \theta_\alpha=&-\bar{\theta}_\gamma (\gamma_5\epsilon)_{\gamma\alpha} \\
+\frac{\partial}{\partial \bar{\theta}_\alpha}=&\frac{\partial}{\partial \theta_\gamma}
+\frac{\partial}{\partial \bar{\theta}_\alpha}=\frac{\partial \theta_\beta}{\partial \bar{\theta}_\alpha}\frac{\partial}{\partial \theta_\beta} =-(\gamma_5\epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\beta} \\
+\mc{Q}_\alpha =&-\frac{\partial}{\partial \bar{\theta}_\alpha} +\gamma^\gamma_{\alpha\beta} \theta_\beta \frac{\partial}{\partial x^\mu} \\
+=&\sum_\beta (\gamma_5\epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\beta}+\sum_\beta \gamma^\mu_{\alpha\beta} \theta_\beta \frac{\partial}{\partial x^\mu}
+\end{align*}
+と書ける．また$\bar{Q}_\alpha=Q_\gamma(\gamma_5 \epsilon)_{\gamma\alpha}$なのだったから
+\begin{align*}
+[\bar{Q}_\alpha,S\}=&i\bar{\mc{Q}}_\alpha S \\
+=&[Q_\gamma,S\}(\gamma_5 \epsilon)_{\gamma\alpha}=i\mc{Q}_\gamma S (\gamma_5 \epsilon)_{\gamma\alpha} \\
+\therefore \quad \bar{\mc{Q}}_\gamma=&\sum_{\alpha}\mc{Q}_\alpha(\gamma_5 \epsilon)_{\alpha\gamma} \\
+=&\sum_{\alpha\beta} (\gamma_5\epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\beta}（\gamma_5 \epsilon)_{\alpha\gamma}+\sum_{\alpha\beta} \gamma^\mu_{\alpha\beta} \theta_\beta (\gamma_5 \epsilon)_{\alpha\gamma} \frac{\partial}{\partial x^\mu} \\
+=&\sum_\beta ((\gamma_5 \epsilon)^T\gamma_5\epsilon)_{\gamma\beta}\frac{\partial}{\partial \theta_\beta}+\sum_\beta ((\gamma_5 \epsilon)^T \gamma^\mu)_{\gamma\beta} \theta_\beta \frac{\partial}{\partial x^\mu} \\
+=&-\sum_\beta (\epsilon \gamma_5 \gamma_5\epsilon)_{\gamma\beta}\frac{\partial}{\partial \theta_\beta}-\sum_\beta (\epsilon \gamma_5 \gamma^\mu)_{\gamma\beta} \theta_\beta \frac{\partial}{\partial x^\mu} \\
+=&\frac{\partial}{\partial \theta_\gamma}-\sum_\beta (\gamma_5 \epsilon \gamma^\mu)_{\gamma\beta} \theta_\beta \frac{\partial}{\partial x^\mu}
+\end{align*}
+と書ける．さらにこれらの交換関係は
+\begin{align*}
+\{\mc{Q}_\alpha ,\bar{\mc{Q}}_\beta\}=&\left\{(\gamma_5\epsilon)_{\alpha\gamma}\frac{\partial}{\partial \theta_\gamma}+ \gamma^\mu_{\alpha\gamma} \theta_\gamma \frac{\partial}{\partial x^\mu}, \frac{\partial}{\partial \theta_\beta}- (\gamma_5 \epsilon \gamma^\nu)_{\beta\delta} \theta_\delta \frac{\partial}{\partial x^\nu}\right\} \\
+=&(\gamma_5 \epsilon)_{\alpha\gamma}\left\{\frac{\partial}{\partial \theta_\gamma},\frac{\partial}{\partial \theta_\beta}\right\}+\gamma^\mu_{\alpha\gamma}\frac{\partial}{\partial x^\mu}\left\{\theta_\gamma ,\frac{\partial}{\partial \theta_\beta }\right\} \\
+&-(\gamma_5 \epsilon)_{\alpha\gamma}(\gamma_5 \epsilon \gamma^\nu)_{\beta\delta}\frac{\partial}{\partial x^\nu}\left\{\frac{\partial}{\partial \theta_\gamma},\theta_{\delta}\right\} -\gamma^\mu_{\alpha\gamma}(\gamma_5 \epsilon \gamma^\nu)_{\beta\delta}\frac{\partial^2}{\partial x^\mu x^\nu}\left\{\theta_\gamma ,\theta_\delta \right\}\\
+=&\gamma^\mu_{\alpha\beta}\frac{\partial}{\partial x^\mu}-(\gamma_5 \epsilon)_{\alpha\gamma}(\gamma_5 \epsilon \gamma^\mu)_{\beta\gamma}\frac{\partial}{\partial x^\mu} \\
+=&\gamma^\mu_{\alpha\beta}\frac{\partial}{\partial x^\mu}-[(-\epsilon\gamma_5 )(\gamma^\mu)^T(\gamma_5 \epsilon )]_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+=&\gamma^\mu_{\alpha\beta}\frac{\partial}{\partial x^\mu}+\gamma^\mu_{\alpha\beta}\frac{\partial}{\partial x^\mu} \quad  \because (5.4.35)\gamma_\mu^T=-\mc{C}\gamma_\mu \mc{C}^{-1},\mc{C}=-\epsilon \gamma_5 \\
+=&2\gamma^\mu_{\alpha\beta}\frac{\partial}{\partial x^\mu}
+\end{align*}
+となる．ここで
+\begin{align*}
+\left\{\frac{\partial}{\partial \theta_\alpha},\frac{\partial}{\partial \theta_\beta}\right\}=&\frac{\partial}{\partial \theta_\alpha}\frac{\partial}{\partial \theta_\beta} +\frac{\partial}{\partial \theta_\beta}\frac{\partial}{\partial \theta_\alpha}=\frac{\partial}{\partial \theta_\alpha}\frac{\partial}{\partial \theta_\beta}-\frac{\partial}{\partial \theta_\alpha}\frac{\partial}{\partial \theta_\beta}=0 \\
+\left\{\frac{\partial}{\partial \theta_\alpha},\theta_{\beta}\right\}=& \frac{\partial}{\partial \theta_\alpha}\theta_\beta+\theta_\beta\frac{\partial}{\partial \theta_\alpha}=\delta_{\alpha\beta}-\theta_\beta\frac{\partial}{\partial \theta_\alpha}+\theta_\beta\frac{\partial}{\partial \theta_\alpha}=\delta_{\alpha\beta} \\
+\{\theta_\alpha ,\theta_\beta\}=&\theta_\alpha \theta_\beta +\theta_\beta \theta_\alpha =0
+\end{align*}
+となることを使った．(26.2.6)(26.2.1)およびヤコビ恒等式(25.1.5)から
+\begin{align*}
+\left[\left\{Q_\alpha ,\bar{Q}_\beta \right\},S\right]=&-\left[\left[S,Q_{\alpha}\right\},\bar{Q}_\beta\right\}+(-1)^{\eta_S}\left[\left[\bar{Q}_\beta ,S\right\},Q_\alpha\right\} \\
+=&+(-1)^{\eta_S}\left[\left[Q_{\alpha},S\right\},\bar{Q}_\beta\right\}+(-1)^{\eta_S}\left[\left[\bar{Q}_\beta ,S\right\},Q_\alpha\right\} \quad \because (25.1.6) \\
+=&(-1)^{\eta_S}i\left[\mc{Q}_\alpha S,\bar{Q}_\beta\right\}+(-1)^{\eta_S}i\left[\bar{\mc{Q}}_\beta S,Q_\alpha\right\} \\
+=&-i\left[\bar{Q}_\beta ,\mc{Q}_\alpha S\right\}-i\left[Q_\alpha,\bar{\mc{Q}}_\beta S\right\} \\
+=&\bar{\mc{Q}}_\beta (\mc{Q}_\alpha S)+ \mc{Q}_\alpha (\bar{\mc{Q}}_\beta S) \\
+=&\left\{ \mc{Q}_\alpha ,\bar{\mc{Q}}_\beta \right\} S \\
+=&2\gamma^\mu_{\alpha\beta}\partial_\mu S =-2i \gamma^\mu_{\alpha\beta}[P_\mu, S] \quad \because (10.1.1)
+\end{align*}
+となり，これは実際に反交換関係(25.2.36)と一致する．
+
+\vskip\baselineskip
+
+
+交換・反交換関係(26.2.1)を微小超対称性変換のもとでの変換則して表すと，より都合がよいことが多い．前に述べた通り，(5.1.6)よりスカラー場の時空並進が$\phi(x+a)=U(a)\phi(x)U^{-1}(a)=e^{-ia^\mu P_\mu}\phi(x)e^{+ia^\mu P_\mu}$であることの類推として$Q_\alpha$を$\theta_\alpha$の並進演算子として表すと，スカラー超場$S(x,\theta)$に対して
+\begin{align*}
+S(x+\delta x ,\theta+ \delta \theta)=&e^{-i\bar{\epsilon} Q -ia^\mu P_\mu}S(x,\theta)e^{+i\bar{\epsilon} Q+ia^\mu P_\mu } \\
+=&e^{-i\bar{\epsilon} Q -ia^\mu P_\mu}e^{-i\bar{\theta}Q-ix^\mu P_\mu}S(0,0)e^{+i\bar{\theta} Q+ix^\mu P_\mu}e^{+i\bar{\epsilon} Q+ia^\mu P_\mu }
+\end{align*}
+と書く．BCH公式
+\begin{align*}
+e^{A} e^B=\exp\left( A+B +\frac{1}{2}[A,B]+\cdots \right)
+\end{align*}
+より
+\begin{align*}
+&\exp(i\bar{\theta} Q+ix^\mu P_\mu)\exp( i\bar{\epsilon} Q+ia^\mu P_\mu)  \\
+=&\exp\left(i (\bar{\theta}+\bar{\epsilon})Q+i(x^\mu+a^\mu)P_\mu-\frac{1}{2}[\bar{\theta}Q+x^\mu P_\mu ,\bar{\epsilon}Q+a^\mu P_\mu]\right) \\
+=&\exp\left(i (\bar{\theta}+\bar{\epsilon})Q+i(x^\mu+a^\mu)P_\mu- \frac{1}{2}[\bar{\theta}_\alpha Q_\alpha,\bar{\epsilon}_\beta Q_\beta]\right) \\
+=&\exp\left(i (\bar{\theta}+\bar{\epsilon})Q+i(x^\mu+a^\mu)P_\mu- \frac{1}{2}[ \bar{Q}_\alpha \theta_\alpha,\bar{\epsilon}_\beta Q_\beta]\right) \\
+=&\exp\left(i (\bar{\theta}+\bar{\epsilon})Q+i(x^\mu+a^\mu)P_\mu- \frac{1}{2}\theta_\alpha \bar{\epsilon}_\beta\{ \bar{Q}_\alpha, Q_\beta\}\right) \\
+=&\exp\left(i (\bar{\theta}+\bar{\epsilon})Q+i(x^\mu+a^\mu)P_\mu+ \frac{1}{2}\theta_\alpha(2i\gamma^\mu P_\mu)_{\beta\alpha} \bar{\epsilon}_\beta \right) \\
+=&\exp\left(i (\bar{\theta}+\bar{\epsilon})Q+i(x^\mu+a^\mu-\bar{\epsilon}\gamma^\mu \theta)P_\mu \right)
+\end{align*}
+途中で
+\begin{align*}
+\theta_\alpha \bar{Q}_\alpha=\theta_\alpha Q_\beta (\gamma_5 \epsilon )_{\beta\alpha}=-\theta_\alpha(\gamma_5 \epsilon)Q_{\beta}=-\bar{\theta}_\alpha Q_\alpha=Q_\alpha \bar{\theta}_\alpha
+\end{align*}
+を用いた．したがって$\delta x^\mu=a^\mu-\bar{\epsilon}\gamma^\mu \theta ,\delta \theta=\epsilon$がわかる．並進$a$をゼロにとれば，$e^{-i\bar{\alpha}Q}$による微小な並進は，$[P^\mu,\phi]=i\partial^\mu \phi$から類推して$[Q_\alpha,S\}=i\mc{Q}_\alpha S$という微分演算子を導入し
+\begin{align*}
+S(x+\delta x,\theta+\delta \epsilon)=&e^{-i\bar{\alpha}Q}S(x,\theta )e^{i\bar{\alpha}Q}=S(x,\theta)-i\bar{\alpha}_\beta[Q_\beta,S(x,\theta)\}=S(x,\theta)+\bar{\alpha}\mc{Q}S \\
+=&S(x^\mu-\bar{\alpha}\gamma^\mu \theta,\theta+\alpha) \\
+\therefore \quad \delta S=&S(x+\delta x,\theta+\delta \epsilon)-S(x,\theta)= \bar{\alpha}\mc{Q}S \\
+=& \delta \theta_\alpha \frac{\partial S}{\partial \theta_\alpha} +\delta x^\mu \frac{\partial S}{\partial x^\mu} \\
+=&\alpha_\beta \frac{\partial S}{\partial \theta_\beta} -(\bar{\alpha}\gamma^\mu \theta) \frac{\partial S}{\partial x^\mu} \\
+=&\bar{\alpha} \frac{\partial S}{\partial \bar{\theta}} -(\bar{\alpha}\gamma^\mu \theta) \frac{\partial S}{\partial x^\mu} \quad \because \frac{\partial }{\partial \bar{\theta}_\alpha}=-(\gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial \theta_\gamma} より \bar{\alpha}\frac{\partial }{\partial \bar{\theta}}=\alpha \frac{\partial }{\partial \theta}
+\end{align*}
+だけ変化させることがわかる．(符号が完全に逆だが大丈夫か？まぁ直接的な問題はないと今のところ思う．わざわざ全部符号を直すのも面倒なので，以下では教科書に合わせることとする．)ここでは$\partial / \partial \bar{\theta}$は任意の表式の左から働くことを思い出す．特に$M$が$1,\gamma_5 \gamma_\mu ,\gamma_5$の任意の1次結合で$\bar{\theta}M\theta$がゼロにならないとき，
+\begin{align*}
+\bar{\theta''} M \theta'=&-\theta''_\alpha(\gamma_5 \epsilon)_{\alpha\beta} M_{\beta\gamma} (\gamma_5 \epsilon)^T_{\gamma\delta} \bar{\theta'}_{\delta} \\
+=&+\bar{\theta'}_\delta [(\gamma_5 \epsilon) M (\gamma_5 \epsilon)^T]^T \theta''_\alpha \\
+=&\bar{\theta'}_\delta [\mc{C} M \mc{C}^{-1}]^T_{\delta\alpha} \theta''_\alpha \\
+=&\bar{\theta'}M\theta'' \quad \because (5.4.35)～(5.4.39)
+\end{align*}
+だから
+\begin{align*}
+\frac{\partial}{\partial \bar{\theta}}(\bar{\theta}M\theta)=&\left[\frac{\partial}{\partial \bar{\theta'}}(\bar{\theta'}M\theta'')+\frac{\partial}{\partial \bar{\theta''}}(\bar{\theta'}M\theta'')\right]_{\theta'=\theta''=\theta} \\
+=&\left[\frac{\partial}{\partial \bar{\theta'}}(\bar{\theta'}M\theta'')+\frac{\partial}{\partial \bar{\theta''}}(\bar{\theta''}M\theta')\right]_{\theta'=\theta''=\theta} \\
+=&2M\theta
+\end{align*}
+となる．ここで積の微分が
+\begin{align*}
+\frac{d}{dx}f(x)g(x)=\left[\frac{\partial}{\partial x}f(x)g(y)+\frac{\partial}{\partial y}f(x)g(y)\right]_{x=y}
+\end{align*}
+と書けることを用いた．\par
+
+\vskip\baselineskip
+
+$\theta$の成分は反可換なので，積において同じ成分が二つあれば，その積はゼロになる．($\theta=(\theta_1,\theta_2,\theta_3,\theta_4)$なので$\theta_1\theta_2\neq 0$だが$\theta_2\theta_2=0$という感じ．)しかし$\theta$には4つの成分しかないので，$\theta$の任意の4次の項で終わるベキ級数となる．(5次以上だと必ず成分の被りがでる．)さらに，この章の補遺の(26.A.10)で示してあるように，2つの$\theta$の積は$(\bar{\theta}\theta),(\bar{\theta}\gamma_\mu \gamma_5 \theta),(\bar{\theta}\gamma_5 \theta)$の一次結合に比例する．また3つの積は(26.A.13)で示してあるように，$(\bar{\theta}\gamma_5 \theta)\theta$に比例し，4つの積は(26.A.15)で示してあるように$(\bar{\theta}\gamma_5 \theta)^2$に比例する．したがって，$x^\mu$と$\theta$の最も一般的な関数は以下のように表すことができる．
+\begin{align*}
+S(x,\theta)=&C(x)-i\left(\bar{\theta}\gamma_5 \omega(x)\right)-\frac{i}{2}\left(\bar{\theta}\gamma_5 \theta \right)M(x)-\frac{1}{2}\left(\bar{\theta}\theta \right)N(x) \\
+&+\frac{i}{2}\left(\bar{\theta}\gamma_5 \gamma_\mu \theta \right)V^\mu(x)-i\left(\bar{\theta}\gamma_5 \theta\right)\left( \bar{\theta} \left[\lambda(x)+\frac{1}{2}\Slash{\partial} \omega(x)\right] \right) \\
+&-\frac{1}{4}\left( \bar{\theta}\gamma_5 \theta \right)^2 \left( D(x)+\frac{1}{2}\Box C(x) \right)
+\end{align*}
+($\frac{1}{2}\Slash{\partial}\omega$と$\frac{1}{2}\Box C(x)$の項は，後で便利なようにそれぞれ$\lambda(x),D(x)$の項から分離してあるらしい．(26.216)(26.2.17)参照)もし$S(x,\theta)$がスカラー場ならば，$C(x),M(x),N(x),D(x)$はスカラー(もしくは擬スカラー)場，$\omega(x),\lambda(x)$は4成分スピノル場，$V^\mu(x)$はベクトル場となる．また，この章の補遺で与えるマヨナラ場の双線形積の実条件の性質(26.A.21)を使うと，もし$S(x,\theta)$が実ならば，$C(x),M(x),N(x),V^\mu(x),D(x)$は全て実となり，また$\omega(x),\lambda(x)$は位相が$s^*=-\beta \epsilon \gamma_5 s$に従うマヨラナ・スピノルとなる．以下ではしばしば，これら$C\sim D$の場はそれぞれ超場$S$の成分場と呼ぶ．\par
+次に，(26.2.10)の成分場の超対称性変換則を求めなければならない．
+\begin{align*}
+\delta S =\left(-\bar{\alpha}\frac{\partial}{\partial \bar{\theta}}+(\bar{\alpha}\gamma^\mu \theta) \frac{\partial}{\partial x^\mu}\right)S(x,\theta)
+\end{align*}
+$S(x,\theta)$を展開していくと，まず1項目は
+\begin{align*}
+&\left(-\bar{\alpha}\frac{\partial}{\partial \bar{\theta}}+(\bar{\alpha}\gamma^\mu \theta) \frac{\partial}{\partial x^\mu}\right)C \\
+&= (\bar{\alpha}\gamma^\mu \theta)\frac{\partial C}{\partial x^\mu}
+\end{align*}
+第2項目は
+\begin{align*}
+&\left(-\bar{\alpha}\frac{\partial}{\partial \bar{\theta}}+(\bar{\alpha}\gamma^\mu \theta) \frac{\partial}{\partial x^\mu}\right)[-i(\bar{\theta}\gamma_5 \omega)] \\
+&=+i(\bar{\alpha}\gamma_5 \omega )-i(\bar{\alpha}\gamma^\mu \theta) \left(\bar{\theta}\gamma_5 \frac{\partial \omega }{\partial x^\mu}\right)
+\end{align*}
+第3項目は
+\begin{align*}
+&\left(-\bar{\alpha}\frac{\partial}{\partial \bar{\theta}}+(\bar{\alpha}\gamma^\mu \theta) \frac{\partial}{\partial x^\mu}\right)\left[-\frac{i}{2}\left(\bar{\theta}\gamma_5 \theta \right)M\right] \\
+=&+i(\bar{\alpha}\gamma_5 \theta)M-\frac{i}{2}(\bar{\alpha}\gamma^\mu \theta )(\bar{\theta}\gamma_5 \theta)\frac{\partial M}{\partial x^\mu}
+\end{align*}
+第4項目は
+\begin{align*}
+&\left(-\bar{\alpha}\frac{\partial}{\partial \bar{\theta}}+(\bar{\alpha}\gamma^\mu \theta) \frac{\partial}{\partial x^\mu}\right)\left[-\frac{1}{2}\left(\bar{\theta}\theta \right)N  \right] \\
+&=+(\bar{\alpha}\theta)N-\frac{1}{2}(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\theta)\frac{\partial N}{\partial x^\mu}
+\end{align*}
+第5項目は
+\begin{align*}
+&\left(-\bar{\alpha}\frac{\partial}{\partial \bar{\theta}}+(\bar{\alpha}\gamma^\mu \theta) \frac{\partial}{\partial x^\mu}\right)\left[+\frac{i}{2}\left(\bar{\theta}\gamma_5 \gamma_\nu \theta \right)V^\nu(x)\right] \\
+=&-i(\bar{\alpha}\gamma_5 \gamma_\nu \theta )V^\nu+\frac{i}{2}(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\gamma_5 \gamma_\nu \theta)\frac{\partial V^\nu}{\partial x^\mu}
+\end{align*}
+第6項目は
+\begin{align*}
+&\left(-\bar{\alpha}\frac{\partial}{\partial \bar{\theta}}+(\bar{\alpha}\gamma^\mu \theta) \frac{\partial}{\partial x^\mu}\right)\left[ -i\left(\bar{\theta}\gamma_5 \theta\right)\left( \bar{\theta} \left[\lambda+\frac{1}{2}\Slash{\partial} \omega \right] \right) \right] \\
+=&+2i(\bar{\alpha} \gamma_5 \theta)\left(\bar{\theta}\left[\left(\lambda +\frac{1}{2}\Slash{\partial}\omega\right)\right]\right)+i(\bar{\theta}\gamma_5 \theta )\left(\bar{\alpha}\left[\left(\lambda +\frac{1}{2}\Slash{\partial}\omega\right)\right]\right) \\
+&-i(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\partial_\mu \left[\left(\lambda +\frac{1}{2}\Slash{\partial}\omega\right)\right]\right)
+\end{align*}
+第7項目は
+\begin{align*}
+&\left(-\bar{\alpha}\frac{\partial}{\partial \bar{\theta}}+(\bar{\alpha}\gamma^\mu \theta) \frac{\partial}{\partial x^\mu}\right)\left[-\frac{1}{4}\left( \bar{\theta}\gamma_5 \theta \right)^2 \left( D+\frac{1}{2}\Box C \right)\right] \\
+=&+\frac{1}{2}(\bar{\alpha}\gamma_5 \theta )(\bar{\theta}\gamma_5 \theta)\left[ D+\frac{1}{2}\Box C \right]+\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\gamma_5 \theta )\left[ D+\frac{1}{2}\Box C \right] \\
+&-\frac{1}{4}(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\gamma_5 \theta)^2 \partial_\mu \left[ D+\frac{1}{2}\Box C \right] \\
+=&+(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\gamma_5 \theta )\left[ D+\frac{1}{2}\Box C \right] 
+\end{align*}
+最後は$\theta$について5次の項は必ずゼロになることを使った．これをまとめれば
+\begin{align*}
+\delta S=& (\bar{\alpha}\gamma^\mu \theta)\frac{\partial C}{\partial x^\mu} \\
+&+i(\bar{\alpha}\gamma_5 \omega )-i(\bar{\alpha}\gamma^\mu \theta) \left(\bar{\theta}\gamma_5 \frac{\partial \omega }{\partial x^\mu}\right) \\
+&+i(\bar{\alpha}\gamma_5 \theta)M-\frac{i}{2}(\bar{\alpha}\gamma^\mu \theta )(\bar{\theta}\gamma_5 \theta)\frac{\partial M}{\partial x^\mu} \\
+&+(\bar{\alpha}\theta)N-\frac{1}{2}(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\theta)\frac{\partial N}{\partial x^\mu} \\
+&-i(\bar{\alpha}\gamma_5 \gamma_\nu \theta )V^\nu+\frac{i}{2}(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\gamma_5 \gamma_\nu \theta)\frac{\partial V^\nu}{\partial x^\mu}  \\
+&+2i(\bar{\alpha} \gamma_5 \theta)\left(\bar{\theta}\left[\left(\lambda +\frac{1}{2}\Slash{\partial}\omega\right)\right]\right)+i(\bar{\theta}\gamma_5 \theta )\left(\bar{\alpha}\left[\left(\lambda +\frac{1}{2}\Slash{\partial}\omega\right)\right]\right) \\
+&-i(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\partial_\mu \left[\left(\lambda +\frac{1}{2}\Slash{\partial}\omega\right)\right]\right) \\
+&+(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\gamma_5 \theta )\left[ D+\frac{1}{2}\Box C \right] 
+\end{align*}
+となる．各項を(26.2.10)のように標準的な形にまとめることで変換則がわかる．まず(26.A.9)から
+\begin{align*}
+&(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta} \gamma_5 \partial_\mu \omega)=(\bar{\alpha}\gamma^\mu)_{\alpha}\theta_\alpha \bar{\theta}_\beta ( \gamma_5 \partial_\mu \omega)_{\beta} \\
+=&-\frac{1}{4}(\bar{\alpha}\gamma^\mu)_{\alpha}\delta_{\alpha\beta}(\bar{\theta}\theta) ( \gamma_5 \partial_\mu \omega)_{\beta}+\frac{1}{4}(\bar{\alpha}\gamma^\mu)_{\alpha} (\gamma_5\gamma_\nu)_{\alpha\beta}(\bar{\theta}\gamma_5 \gamma^\nu \theta) ( \gamma_5 \partial_\mu \omega)_{\beta} \\
+&-\frac{1}{4}(\bar{\alpha}\gamma^\mu)_{\alpha} (\gamma_5)_{\alpha\beta} (\bar{\theta}\gamma_5 \theta) ( \gamma_5 \partial_\mu \omega)_{\beta} \\
+=&-\frac{1}{4}(\bar{\theta}\theta)(\bar{\alpha}\gamma^\mu \gamma_5 \partial_\mu \omega)+\frac{1}{4} (\bar{\theta}\gamma_5 \gamma^\nu \theta)(\bar{\alpha}\gamma^\mu \gamma_5 \gamma_\nu \gamma_5 \partial_\mu \omega)-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\gamma^\mu \gamma_5 \gamma_5 \partial_\mu \omega) \\
+=&-\frac{1}{4}(\bar{\theta}\theta)(\bar{\alpha} \Slash{\partial} \gamma_5 \omega)-\frac{1}{4} (\bar{\theta}\gamma_5 \gamma^\nu \theta)(\bar{\alpha} \Slash{\partial}\gamma_\nu \omega)-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\Slash{\partial} \omega)
+\end{align*}
+がわかる．これは第3項目に使える．また(26.A.16)から
+\begin{align*}
+&(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\theta)=(\bar{\alpha}\gamma^\mu)_{\alpha}\theta_\alpha (\bar{\theta}\theta) \\
+=&-(\bar{\alpha}\gamma^\mu)_{\alpha}(\gamma_5 \theta)_\alpha (\bar{\theta}\gamma_5 \theta) \\
+=&-(\bar{\alpha}\gamma^\mu \gamma_5 \theta) (\bar{\theta}\gamma_5\theta)
+\end{align*}
+となる．これは第7項目に使える．(26.A.17)は
+\begin{align*}
+&(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\gamma_5 \gamma_\nu \theta)=(\bar{\alpha}\gamma^\mu)_\alpha  \theta_\alpha(\bar{\theta}\gamma_5 \gamma_\nu \theta) \\
+=&-(\bar{\alpha}\gamma^\mu)_\alpha (\gamma_\nu \theta)_\alpha(\bar{\theta}\gamma_5 \theta) \\
+=&-(\bar{\alpha}\gamma^\mu \gamma_\nu \theta)(\bar{\theta}\gamma_5 \theta)
+\end{align*}
+となる．これは第9項目に使える．(26.A.9)から
+\begin{align*}
+&(\bar{\alpha}\gamma_5 \theta )\left(\bar{\theta}\left[\lambda +\frac{1}{2}\Slash{\partial}\omega\right]\right) =(\bar{\alpha}\gamma_5)_\alpha \theta_\alpha \bar{\theta}_\beta \left[\lambda +\frac{1}{2}\Slash{\partial}\omega\right]_\beta \\
+=&-\frac{1}{4}(\bar{\alpha}\gamma_5)_\alpha \delta_{\alpha\beta}(\bar{\theta}\theta)\left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]_\beta+\frac{1}{4}(\bar{\alpha}\gamma_5)_\alpha (\gamma_5 \gamma_\mu)_{\alpha\beta}(\bar{\theta}\gamma_5 \gamma^\mu\theta) \left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]_\beta \\
+&-\frac{1}{4}(\bar{\alpha}\gamma_5)_\alpha (\gamma_5)_{\alpha\beta}(\bar{\theta}\gamma_5 \theta)\left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]_\beta \\
+=&-\frac{1}{4}(\bar{\theta}\theta) \left(\bar{\alpha}\gamma_5 \left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]\right)+\frac{1}{4}(\bar{\theta}\gamma_5 \gamma^\mu\theta) \left(\bar{\alpha}\gamma_\mu \left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]\right)-\frac{1}{4}(\bar{\theta}\gamma_5 \theta) \left(\bar{\alpha}\left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]\right)
+\end{align*}
+となる．これは第10項目に使える．(26.A.19)から
+\begin{align*}
+&(\bar{\alpha}\gamma^\mu \theta)(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\partial_\mu \left[\lambda+\frac{1}{2}\Slash{\partial}\omega \right]\right)=(\bar{\alpha}\gamma^\mu )_\alpha (\bar{\theta}\gamma_5 \theta)\theta_\alpha \bar{\theta}_\beta \left(\partial_\mu \left[\lambda+\frac{1}{2}\Slash{\partial}\omega \right]\right)_\beta \\
+=&-\frac{1}{4}(\bar{\alpha}\gamma^\mu )_\alpha (\gamma_5)_{\alpha\beta}(\bar{\theta}\gamma_5 \theta)^2 \left(\partial_\mu \left[\lambda+\frac{1}{2}\Slash{\partial}\omega \right]\right)_\beta \\
+=&-\frac{1}{4}\left(\bar{\alpha}\gamma^\mu \gamma_5 \partial_\mu \left[\lambda+\frac{1}{2}\Slash{\partial}\omega \right]\right)(\bar{\theta}\gamma_5 \theta)^2 \\
+=&-\frac{1}{4}\left(\bar{\alpha} \Slash{\partial}\gamma_5 \left[\lambda+\frac{1}{2}\Slash{\partial}\omega \right]\right)(\bar{\theta}\gamma_5 \theta)^2 
+\end{align*}
+となる．これは第12項目に使える．これらを使っていくと
+\begin{align*}
+\delta S=& (\bar{\alpha}\gamma^\mu \theta)\frac{\partial C}{\partial x^\mu} \\
+&+i(\bar{\alpha}\gamma_5 \omega )
++i\frac{1}{4}(\bar{\theta}\theta)(\bar{\alpha} \Slash{\partial} \gamma_5 \omega)+i\frac{1}{4} (\bar{\theta}\gamma_5 \gamma^\nu \theta)(\bar{\alpha} \Slash{\partial}\gamma_\nu \omega)+i\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\Slash{\partial} \omega) \\
+&+i(\bar{\alpha}\gamma_5 \theta)M-\frac{i}{2}(\bar{\alpha}\gamma^\mu \theta )(\bar{\theta}\gamma_5 \theta)\frac{\partial M}{\partial x^\mu} \\
+&+(\bar{\alpha}\theta)N+\frac{1}{2}(\bar{\alpha}\gamma^\mu \gamma_5 \theta) (\bar{\theta}\gamma_5\theta)\frac{\partial N}{\partial x^\mu} \\
+&-i(\bar{\alpha}\gamma_5 \gamma_\nu \theta )V^\nu-\frac{i}{2}(\bar{\alpha}\gamma^\mu \gamma_\nu \theta)(\bar{\theta}\gamma_5 \theta) \frac{\partial V^\nu}{\partial x^\mu}  \\
+&-\frac{i}{2}(\bar{\theta}\theta) \left(\bar{\alpha}\gamma_5 \left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]\right)+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma^\mu\theta) \left(\bar{\alpha}\gamma_\mu \left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]\right)-\frac{i}{2}(\bar{\theta}\gamma_5 \theta) \left(\bar{\alpha}\left[\lambda+\frac{1}{2}\Slash{\partial}\omega\right]\right) \\
+&+i(\bar{\theta}\gamma_5 \theta )\left(\bar{\alpha}\left[\left(\lambda +\frac{1}{2}\Slash{\partial}\omega\right)\right]\right) \\
+&+i\frac{1}{4}\left(\bar{\alpha} \Slash{\partial}\gamma_5 \left[\lambda+\frac{1}{2}\Slash{\partial}\omega \right]\right)(\bar{\theta}\gamma_5 \theta)^2  +(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\gamma_5 \theta )\left[ D+\frac{1}{2}\Box C \right]
+\end{align*}
+$\theta$の因子が増える順序に項を並び替えてまとめると，$\theta$のゼロ次は2項目のみ，$\theta$の項は1,6,7,10項目，$(\bar{\theta}\theta)$の項は3,12項目，$(\bar{\theta}\gamma_5 \theta)$の項は5,14,15項目，$(\bar{\theta}\gamma_5 \gamma^\mu \theta)$の項は4,13項目，$(\bar{\theta}\gamma_5 \theta)\theta$の項は7,9,11,17項目，$(\bar{\theta}\gamma_5 \theta)^2$の項は16項目なので，
+\begin{align*}
+\delta S=& i(\bar{\alpha}\gamma_5 \omega ) \\
+&+(\bar{\alpha}(\Slash{\partial}C+i\gamma_5 M +N -i\gamma_5 \Slash{V} )\theta) \\
+&-\frac{1}{2}i(\bar{\theta}\theta)(\bar{\alpha} \gamma_5 [\lambda+\Slash{\partial}\omega])+\frac{i}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}[\lambda+\Slash{\partial}\omega]) \\
+&+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\bar{\alpha}\gamma^\mu \lambda)+\frac{i}{4}(\bar{\theta}\gamma_5 \gamma^\mu\theta)(\bar{\alpha} \gamma_\mu\Slash{\partial} \omega)+\frac{i}{4}(\bar{\theta}\gamma_5 \gamma^\mu\theta)(\bar{\alpha}\Slash{\partial}\gamma_\mu \omega) \\
+&+\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\left[-i\Slash{\partial} M-\gamma_5 \Slash{\partial}N -i\Slash{\partial}\Slash{V}+\gamma_5(D+\Box C)\right]\theta) \\
+&-\frac{i}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(\bar{\alpha} \gamma_5 \left[\Slash{\partial}\lambda+\frac{1}{2}\Slash{\partial}\Slash{\partial}\omega \right]\right) \\
+=& i(\bar{\alpha}\gamma_5 \omega ) \\
+&+(\bar{\alpha}(\Slash{\partial}C+i\gamma_5 M +N -i\gamma_5 \Slash{V} )\theta) \\
+&-\frac{1}{2}i(\bar{\theta}\theta)(\bar{\alpha} \gamma_5 [\lambda+\Slash{\partial}\omega])+\frac{i}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}[\lambda+\Slash{\partial}\omega]) \\
+&+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\bar{\alpha}\gamma^\mu \lambda)+\frac{i}{4}(\bar{\theta}\gamma_5 \gamma^\mu\theta)(\bar{\alpha} \partial_\mu \omega) \\
+&+\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}\left[-i\Slash{\partial} M-\gamma_5 \Slash{\partial}N -i\Slash{\partial}\Slash{V}+\gamma_5(D+\Box C)\right]\theta) \\
+&-\frac{i}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(\bar{\alpha} \gamma_5 \left[\Slash{\partial}\lambda+\frac{1}{2}\Box \omega \right]\right)
+\end{align*}
+となる．(二つ目の式は6,7項目で$\gamma_\mu \Slash{\partial}=-\Slash{\partial}\gamma_\mu+2\partial_\mu$を用いてまとめ，最後の項で$\Slash{\partial}\Slash{\partial}=\Box$を用いて変更した．)これは対称性(26.A.7)を用いると2項目と7項目の$\bar{\alpha},\theta$をひっくり返して$\bar{\theta},\alpha$にできる．ここでそれらの間にある$\gamma_\mu$について一次の項と$[\gamma_\mu ,\gamma_\nu]$の項の符号が反転する．$\Slash{\partial}\Slash{V}=\frac{1}{2}\partial_\mu V_\nu[\gamma_\mu,\gamma_\nu]+\partial_\mu V^\mu$が反転して$-\frac{1}{2}\partial_\mu V_\nu[\gamma_\mu,\gamma_\nu]+\partial_\mu V^\mu=\partial_\mu \Slash{V}\gamma^\nu$になることに注意すれば
+\begin{align*}
+\delta S =&i(\bar{\alpha}\gamma_5 \omega ) \\
+&+(\bar{\theta}(-\Slash{\partial}C+i\gamma_5 M +N -i\gamma_5 \Slash{V} )\alpha) \\
+&-\frac{1}{2}i(\bar{\theta}\theta)(\bar{\alpha} \gamma_5 [\lambda+\Slash{\partial}\omega])+\frac{i}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\alpha}[\lambda+\Slash{\partial}\omega]) \\
+&+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\bar{\alpha}\gamma^\mu \lambda)+\frac{i}{4}(\bar{\theta}\gamma_5 \gamma^\mu\theta)(\bar{\alpha} \partial_\mu \omega) \\
+&+\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\left[+i\Slash{\partial} M-\gamma_5 \Slash{\partial}N -i\partial_\mu \Slash{V}\gamma^\mu+\gamma_5(D+\Box C)\right]\alpha) \\
+&-\frac{i}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(\bar{\alpha} \gamma_5 \left[\Slash{\partial}\lambda+\frac{1}{2}\Box \omega \right]\right) 
+\end{align*}
+とも書ける．これを(26.2.10)の展開の$\theta$の2次までの項と見比べると，以下の変換則が対応していることがわかる．
+\begin{align*}
+\delta C=&i(\bar{\alpha} \gamma_5 \omega) \\
+\delta \omega=&(-i\gamma_5 \Slash{\partial}C- M +i\gamma_5 N + \Slash{V} )\alpha \\
+\delta M=&-(\bar{\alpha}[\lambda+\Slash{\partial}\omega]) \\
+\delta N=&i(\bar{\alpha}\gamma_5[\lambda+\Slash{\partial}\omega]) \\
+\delta V_\mu=& (\bar{\alpha}\gamma_\mu \lambda)+(\bar{\alpha}\partial_\mu \omega)
+\end{align*}
+$\theta$について3次，4次の項からは
+\begin{align*}
+\delta \left[\lambda+\frac{1}{2}\Slash{\partial} \omega\right]=&\frac{1}{2}\left[-\Slash{\partial}M-i\gamma_5 \Slash{\partial}N+\partial_\mu \Slash{V}\gamma^\mu +i \gamma_5 \left(D+\frac{1}{2}\Box C\right)\right]\alpha \\
+\delta \left[D+\frac{1}{2}\Box C\right]=&i\left(\bar{\alpha}\gamma_5 \left[\Slash{\partial}\lambda +\frac{1}{2}\Box \omega\right]\right)
+\end{align*}
+を得る．最後の二つの変換則と$C,\omega$の変換則を使うと複雑な部分がキャンセルして
+\begin{align*}
+\delta \left[\lambda+\frac{1}{2}\Slash{\partial} \omega\right]=&\delta \lambda +\frac{1}{2}\Slash{\partial} \delta \omega \\
+=&\delta\lambda +\frac{1}{2}\left[+i\gamma_5 \Slash{\partial}\Slash{\partial}C- \Slash{\partial}M -i\gamma_5 \Slash{\partial} N + \Slash{\partial}\Slash{V} \right]\alpha \\
+=&\delta \lambda +\frac{1}{2}\left[+i\gamma_5 \Box C-\Slash{\partial}M-i\gamma_5 \Slash{\partial}N+\gamma^\mu \partial_\mu \Slash{V}\right] \\
+\therefore \quad \delta \lambda=&\left(\frac{1}{2}\left[\partial_\mu \Slash{V},\gamma^\mu\right]+i\gamma_5 D\right)\alpha \\
+\delta \left[D+\frac{1}{2}\Box C\right]=&\delta D+ \frac{1}{2}\Box \delta C \\
+=& \delta D +\frac{1}{2}i\bar{\alpha}\gamma_5 \Box \omega \\
+\therefore \quad \delta D=&i(\bar{\alpha}\gamma_5 \Slash{\partial}\lambda)
+\end{align*}
+を得る．(26.2.10)の展開で$\frac{1}{2}\Slash{\partial}\omega$と$\frac{1}{2}\Box C$の項を$\lambda,D$から分離しておいたのは，この単純な変換則を得るためだった．(これらの場は超場ではないので，単純にそれぞれの場に$\bar{\alpha}\mc{Q}$を作用させて得られるわけではない．)
+
+
+
+\vskip\baselineskip
+
+超場形式を使うのは，超対称多重項を他の超対称多重項から作る仕事を簡単にするためだ．二つの超場$S_1$と$S_2$がともに変換則(26.2.8)を満たすとする．このとき，それらの積$S\equiv S_1 S_2$は
+\begin{align*}
+\delta S=&\left[\bar{\alpha}Q,S_1 S_2\right] \\
+=&\left[\bar{\alpha}Q,S_1\right]S_2 +S_1 \left[\bar{\alpha}Q,S_2\right] \\
+=&(\bar{\alpha} \mc{Q} S_1)S_2 +S_1 \bar{\alpha}\mc{Q} S_2 \\
+=&\left(\bar{\alpha}\mc{Q} \right)S
+\end{align*}
+を満たすから，やはり超場となっている．二つの(26.2.10)を積にして，$\theta$について4次までを残せば
+\begin{align*}
+S=&S_1 S_2 \\
+=&C_1C_2-i(\bar{\theta}\gamma_5 \omega_1C_2) -i(\bar{\theta}\gamma_5 C_1 \omega_2)-\frac{i}{2}(\bar{\theta}\gamma_5 \theta )M_1 C_2 -\frac{i}{2}(\bar{\theta}\gamma_5 \theta)C_1 M_2 \\
+&-\frac{1}{2}(\bar{\theta}\theta)N_1 C_2 -\frac{1}{2}(\bar{\theta}\theta)C_1 N_2 \\
+&-(\bar{\theta}\gamma_5 \omega_1)(\bar{\theta}\gamma_5 \omega_2) +\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)C_1 V^\mu_2+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)V^\mu_1 C_2 \\
+&- i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta} \left[C_1 \lambda_2+ \frac{1}{2}C_1 \Slash{\partial}\omega_2\right]\right) -i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\left[ \lambda_1 C_2+\frac{1}{2}(\Slash{\partial} \omega_1)C_2  \right]\right) \\
+&-\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 M_1\omega_2)-\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 M_2 \omega_1) +\frac{i}{2}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 N_1 \omega_2)+\frac{i}{2}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \omega_1 N_2) \\
+&+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\theta} \gamma_5 \omega_2 V^\mu_1)+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\theta}\gamma_5 \omega_1 V^\mu_2) \\
+&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta )(\bar{\theta}\gamma_5 \theta)M_1 M_2 +\frac{1}{4}(\bar{\theta} \theta )(\bar{\theta} \theta)N_1 N_2 -\frac{1}{4}(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\theta}\gamma_5 \gamma_\nu \theta) V^\mu_1 V^\nu_2 \\
+&+\frac{i}{4}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \theta)M_1 N_2+\frac{i}{4}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \theta)N_1 M_2 \\
+&+\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)V^\mu_1 M_2 +\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)M_1 V^\mu_2 \\
+&-\frac{i}{4}(\bar{\theta} \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)V^\mu_1 N_2-\frac{i}{4}(\bar{\theta} \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)N_1 V^\mu_2 \\
+&-(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta} \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right)(\bar{\theta}\gamma_5 \omega_2)-(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta} \left[\lambda_2 +\frac{1}{2}\Slash{\partial}\omega_2 \right]\right)(\bar{\theta}\gamma_5 \omega_1) \\
+&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(C_1 D_2+\frac{1}{2}C_1 \Box C_2\right)-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(D_1C_2+\frac{1}{2} (\Box C_1) C_2\right)
+\end{align*}
+となる．これを再び(26.2.10)と見比べてどのような積に対応しているかを調べる．発狂しそうなくらい項が多いが，一つずつ見ていく．まず$\theta$についてゼロ次の項と1次の項からは単に
+\begin{align*}
+C=&C_1 C_2 \\
+\omega=& \omega_1 C_2 +C_1 \omega_2
+\end{align*}
+がわかる．$\theta$について2次の項は
+\begin{align*}
+&-\frac{i}{2}(\bar{\theta}\gamma_5 \theta )M_1 C_2 -\frac{i}{2}(\bar{\theta}\gamma_5 \theta)C_1 M_2 \\
+&-\frac{1}{2}(\bar{\theta}\theta)N_1 C_2 -\frac{1}{2}(\bar{\theta}\theta)C_1 N_2 \\
+&-(\bar{\theta}\gamma_5 \omega_1)(\bar{\theta}\gamma_5 \omega_2) +\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)C_1 V^\mu_2+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)V^\mu_1 C_2 \\
+=&-\frac{i}{2}(\bar{\theta}\gamma_5 \theta)(C_1 M_2 +M_1 C_2 ) -\frac{1}{2}(\bar{\theta}\theta)(C_1 N_2 +N_1 C_2) \\
+ &+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)(C_1 V_2^\mu +V_1^\mu C_2) \\
+ &-(\bar{\omega}_1\gamma_5 \theta )(\bar{\theta}\gamma_5 \omega_2)
+\end{align*}
+この最後の項を変形すると
+\begin{align*}
+ &-(\bar{\omega}_1\gamma_5)_\alpha \theta_\alpha \bar{\theta}_\beta(\gamma_5 \omega_2)_\beta \\
+ =&+\frac{1}{4}(\bar{\omega}_1\gamma_5)_\alpha\delta_{\alpha\beta}(\bar{\theta}\theta)(\gamma_5 \omega_2)_\beta-\frac{1}{4}(\bar{\omega}_1\gamma_5)_\alpha (\gamma_5 \gamma_\mu)_{\alpha\beta}(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\gamma_5 \omega_2)_\beta +\frac{1}{4}(\bar{\omega}_1\gamma_5)_\alpha (\gamma_5)_{\alpha\beta}(\bar{\theta}\gamma_5 \theta)(\gamma_5 \omega_2)_\beta\\
+=&+\frac{1}{4}(\bar{\theta}\theta)(\bar{\omega}_1 \omega_2)+\frac{1}{4}(\bar{\theta}\gamma_5 \gamma_\mu\theta)(\bar{\omega}_1\gamma_5 \gamma^\mu \omega_2)+\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\omega}_1\gamma_5\omega_2)
+\end{align*}
+となるから
+\begin{align*}
+&-\frac{i}{2}(\bar{\theta}\gamma_5 \theta)\left(C_1 M_2 +M_1 C_2 +\frac{i}{2}(\bar{\omega}_1 \gamma_5 \omega_2)\right) -\frac{1}{2}(\bar{\theta}\theta)\left(C_1 N_2 +N_1 C_2-\frac{1}{2}(\bar{\omega}_1 \omega_2)\right) \\
+ &+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)\left(C_1 V_2^\mu +V_1^\mu C_2-\frac{i}{2}(\bar{\omega}_1 \gamma_5 \gamma^\mu \omega_2)\right)
+\end{align*}
+よって
+\begin{align*}
+M=&C_1 M_2 +M_1 C_2 +\frac{i}{2}(\bar{\omega}_1 \gamma_5 \omega_2) \\
+N=&C_1 N_2 +N_1 C_2 -\frac{1}{2}(\bar{\omega}_1\omega_2) \\
+V^\mu=& C_1 V_2^\mu +V_1^\mu C_2-\frac{i}{2}(\bar{\omega}_1 \gamma_5 \gamma^\mu \omega_2)
+\end{align*}
+がわかる．$\theta$について3次の項は
+\begin{align*}
+&- i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta} \left[C_1 \lambda_2+ \frac{1}{2}C_1 \Slash{\partial}\omega_2\right]\right) -i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\left[ \lambda_1 C_2+\frac{1}{2}(\Slash{\partial} \omega_1)C_2  \right]\right) \\
+&-\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 M_1\omega_2)-\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 M_2 \omega_1) +\frac{i}{2}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 N_1 \omega_2)+\frac{i}{2}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \omega_1 N_2) \\
+&+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\theta} \gamma_5 \omega_2 V^\mu_1)+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\theta}\gamma_5 \omega_1 V^\mu_2) \\
+=&-i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\left[C_1 \lambda_2 +\lambda_1 C_2 -\frac{i}{2}\gamma_5 M_1 \omega_2-\frac{i}{2}\gamma_5 \omega_1M_2 +\frac{1}{2}C_1 \Slash{\partial}\omega_2 +\frac{1}{2}(\Slash{\partial}\omega_1)C_2 \right]\right) \\
+&-\frac{i}{2}(\bar{\theta}\gamma_5\theta)(\bar{\theta} N_1 \omega_2)-\frac{i}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta} \omega_1 N_2) \\
+&-\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 \gamma_\mu \omega_2 V^\mu_1)-\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 \gamma_\mu \omega_1 V^\mu_2) \\
+=&-i(\bar{\theta}\gamma_5 \theta)\biggl(\bar{\theta}\biggl[C_1 \lambda_2 +\lambda_1 C_2 -\frac{i}{2}\gamma_5 \gamma_\mu \omega_2 V^\mu_1 -\frac{i}{2}\gamma_5 \gamma_\mu \omega_1 V^\mu_2 \\
+&+\frac{1}{2}(N_1-\gamma_5 M_1) \omega_2+\frac{1}{2}(N_2-\gamma_5 M_2)\omega_1 +\frac{1}{2}C_1 \Slash{\partial}\omega_2 +\frac{1}{2}(\Slash{\partial}\omega_1)C_2 \biggr]\biggr) \\
+=&-i(\bar{\theta}\gamma_5 \theta)\biggl(\bar{\theta}\biggl[C_1 \lambda_2 +\lambda_1 C_2 +\frac{i}{2}\Slash{V}_1\gamma_5 \omega_2 +\frac{i}{2}\Slash{V}_2\gamma_5 \omega_1 \\
+&+\frac{1}{2}(N_1-\gamma_5 M_1) \omega_2+\frac{1}{2}(N_2-\gamma_5 M_2)\omega_1 -\frac{1}{2}\gamma^\mu \omega_1 \partial_\mu C_2 -\frac{1}{2}\gamma^\mu \omega_2 \partial_\mu C_1\\
+&+\frac{1}{2}\Slash{\partial}(C_1\omega_2 +\omega_1 C_2) \biggr]\biggr)
+\end{align*}
+ここで(26.A.16)(26.A.17)から
+\begin{align*}
+(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \omega)=&(\bar{\theta}\theta)(\bar{\omega}\gamma_5 \theta)=-(\bar{\theta}\gamma_5 \theta)(\bar{\omega} \theta)=-(\bar{\theta}\gamma_5 \theta)(\bar{\theta} \omega) \\
+(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\theta} \gamma_5 \omega_2)=&(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\omega} \gamma_5 \theta)=-(\bar{\theta}\gamma_5 \theta)(\bar{\omega}\gamma_5 \gamma_\mu \theta)=-(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 \gamma_\mu \omega)
+\end{align*}
+となることを用いた．これより
+\begin{align*}
+\lambda=& C_1 \lambda_2 +\lambda_1 C_2 -\frac{1}{2}\gamma^\mu \omega_1 \partial_\mu C_2 -\frac{1}{2}\gamma^\mu \omega_2 \partial_\mu C_1 \\
+&+\frac{1}{2}i \Slash{V}_1 \gamma_5 \omega_2 +\frac{1}{2}i \Slash{V}_2 \gamma_5 \omega_1 \\
+&+\frac{1}{2}(N_1-i\gamma_5 M_1)\omega_2 +\frac{1}{2}(N_2 -i\gamma_5 M_2) \omega_1
+\end{align*}
+がわかる．$\theta$についての4次の項は
+\begin{align*}
+&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta )(\bar{\theta}\gamma_5 \theta)M_1 M_2 +\frac{1}{4}(\bar{\theta} \theta )(\bar{\theta} \theta)N_1 N_2 -\frac{1}{4}(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\theta}\gamma_5 \gamma_\nu \theta) V^\mu_1 V^\nu_2 \\
+&+\frac{i}{4}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \theta)M_1 N_2+\frac{i}{4}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \theta)N_1 M_2 \\
+&+\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)V^\mu_1 M_2 +\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)M_1 V^\mu_2 \\
+&-\frac{i}{4}(\bar{\theta} \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)V^\mu_1 N_2-\frac{i}{4}(\bar{\theta} \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)N_1 V^\mu_2 \\
+&-(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta} \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right)(\bar{\theta}\gamma_5 \omega_2)-(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta} \left[\lambda_2 +\frac{1}{2}\Slash{\partial}\omega_2 \right]\right)(\bar{\theta}\gamma_5 \omega_1) \\
+&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(C_1 D_2+\frac{1}{2}C_1 \Box C_2\right)-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(D_1C_2+\frac{1}{2} (\Box C_1) C_2\right) \\
+=&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2\left(C_1 D_2 +D_1 C_2 + M_1 M_2 +N_1 N_2 -V_1^\mu V_{2\mu} +\frac{1}{2}C_1 \Box C_2 +\frac{1}{2}C_2\Box C_1 \right) \\
+&-(\bar{\theta}\gamma_5 \theta)(\bar{\omega}_2\gamma_5 \theta) \left(\bar{\theta} \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right)-(\bar{\theta}\gamma_5 \theta)(\bar{\omega}_1\gamma_5 \theta)\left(\bar{\theta} \left[\lambda_2 +\frac{1}{2}\Slash{\partial}\omega_2 \right]\right)
+\end{align*}
+となる．ここで(26.A.16)(26.A.17)(26.A.19)から
+\begin{align*}
+(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\theta)=&-(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \theta) \quad \therefore (\bar{\theta}\gamma_5 \theta)(\bar{\theta}\theta)=0 \\
+(\bar{\theta}\gamma_5 \theta )(\bar{\theta}\gamma_5 \gamma_\mu \theta)=&-(\bar{\theta}\gamma_5 \gamma_\mu \theta)(\bar{\theta}\gamma_5 \theta) \quad \therefore (\bar{\theta}\gamma_5 \theta )(\bar{\theta}\gamma_5 \gamma_\mu \theta)=0 \\
+(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)=&-(\bar{\theta}\gamma_\mu \theta)(\bar{\theta}\gamma_5 \theta)=0 \quad \because (26.A.8)
+\end{align*}
+なので2,3,4行目が全てゼロとなることを用いた．さらにこの公式より
+\begin{align*}
+&-(\bar{\theta}\gamma_5 \theta)(\bar{\omega}_2\gamma_5 \theta) \left(\bar{\theta} \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right) \\
+=&-(\bar{\theta}\gamma_5 \theta)(\bar{\omega}_2 \gamma_5)_\alpha \theta_\alpha \bar{\theta}_\beta \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]_\beta \\
+=&+\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\theta)\left(\bar{\omega}_2 \gamma_5 \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right)-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)\left(\bar{\omega}_1\gamma_5 \gamma^\mu \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right) \\
+& +\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(\bar{\omega}_1\gamma_5 \gamma_5 \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right) \\
+=& +\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(\bar{\omega}_1 \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right)
+\end{align*}
+となる．以上より$\theta$の4次の項は
+\begin{align*}
+&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2\biggl(C_1 D_2 +D_1 C_2 + M_1 M_2 +N_1 N_2 -V_1^\mu V_{2\mu} +\frac{1}{2}C_1 \Box C_2 +\frac{1}{2}C_2\Box C_1 \\
+&-\left(\bar{\omega}_1\left[\lambda_2 +\frac{1}{2}\Slash{\partial}\omega_2\right]\right)-\left(\bar{\omega}_2 \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right)\biggr) \\
+=&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2\biggl(C_1 D_2 +D_1 C_2 + M_1 M_2 +N_1 N_2 -V_1^\mu V_{2\mu} -\partial_\mu C_1 \partial^\mu C_2 \\
+&-\left(\bar{\omega}_1\left[\lambda_2 +\frac{1}{2}\Slash{\partial}\omega_2\right]\right)-\left(\bar{\omega}_2 \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right)+\frac{1}{2}\Box(C_1 C_2)\biggr)
+\end{align*}
+となり，よって
+\begin{align*}
+D=&-\partial_\mu C_1 \partial^\mu C_2 +C_1 D_2+D_1 C_2+M_1 M_2 +N_1 N_2 \\
+&-\left(\bar{\omega}_1\left[\lambda_2 +\frac{1}{2}\Slash{\partial}\omega_2\right]\right)-\left(\bar{\omega}_2 \left[\lambda_1 +\frac{1}{2}\Slash{\partial}\omega_1\right]\right)-V_{1\mu}V^{\mu}_2
+\end{align*}
+となる．これで全て求まった！\par
+超場の1次結合は当然超場となり，超場の時空微分と複素共役も超場となっていることは自明だ．しかし，超場に$\theta$のある関数をかけたり，それを$\theta$で微分すると，一般には超場にはならない．例えば，$\theta$自身は明らかに超場ではない．なぜなら$\theta$はフェルミオン的c数であるために$Q$と可換であるが，微分$\mc{Q}$ではゼロとはならず，
+\begin{align*}
+[ Q_\alpha ,\theta]=&0 ,\quad \mc{Q}_\alpha \theta_\beta=(\gamma_5 \epsilon)_{\alpha\beta}\neq 0 \\
+\therefore \quad \delta \theta_\beta \neq& (\bar{\alpha}\mc{Q})\theta_\beta
+\end{align*}
+となり超場の変換則を満たさないからだ．しかし，超場を$\theta$で微分して因子$\theta$をかけることで別の超場を得る方法は存在する！それを以下で見よう．\par
+以下で定義される超空間の微分演算子$\mc{D}_\alpha$を考える．
+\begin{align*}
+\mc{D} \equiv -\frac{\partial}{\partial \bar{\theta}}-\gamma^\mu \theta \frac{\partial}{\partial x^\mu}
+\end{align*}
+より陽に書くと(26.2.3)と同様
+\begin{align*}
+\mc{D}_\alpha= \sum_\gamma (\gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial \theta_\gamma}-\sum_\gamma \gamma^\mu_{\alpha\gamma} \theta_\gamma \frac{\partial}{\partial x^\mu}
+\end{align*}
+となる．$\mc{D}$と$\mc{Q}$の定義の間の唯一の違いは，時空の微分を含む第二項目の符号の違いだ．この符号の違いにより，$\mc{D}_\beta$と$\mc{Q}_\alpha$の反交換子は
+\begin{align*}
+\{\mc{Q}_\alpha,\mc{D}_\beta \}=&\left\{(\gamma_5\epsilon)_{\alpha\gamma}\frac{\partial}{\partial \theta_\gamma}+ \gamma^\mu_{\alpha\gamma} \theta_\gamma \frac{\partial}{\partial x^\mu}, (\gamma_5\epsilon)_{\beta\delta}\frac{\partial}{\partial \theta_\delta}- \gamma^\nu_{\beta\delta} \theta_\delta \frac{\partial}{\partial x^\nu}\right\} \\
+=&(\gamma_5 \epsilon)_{\alpha\gamma}(\gamma_5 \epsilon)_{\beta\delta}\left\{\frac{\partial}{\partial \theta_\gamma},\frac{\partial}{\partial \theta_\delta}\right\}+\gamma^\mu_{\alpha\gamma}(\gamma_5 \epsilon)_{\beta\delta}\frac{\partial}{\partial x^\mu}\left\{\theta_\gamma ,\frac{\partial}{\partial \theta_\delta }\right\} \\
+&-(\gamma_5 \epsilon)_{\alpha\gamma}(\gamma^\nu)_{\beta\delta}\frac{\partial}{\partial x^\nu}\left\{\frac{\partial}{\partial \theta_\gamma},\theta_{\delta}\right\} -\gamma^\mu_{\alpha\gamma}\gamma^\nu_{\beta\delta}\frac{\partial^2}{\partial x^\mu x^\nu}\left\{\theta_\gamma ,\theta_\delta \right\}\\
+=&\gamma^\mu_{\alpha\gamma}(\gamma_5 \epsilon)^T_{\beta\gamma}\frac{\partial}{\partial x^\mu}-(\gamma_5 \epsilon)_{\alpha\gamma}\gamma^\mu_{\beta\gamma}\frac{\partial}{\partial x^\mu} \\
+=&(\gamma^\mu (-\epsilon\gamma_5))_{\alpha\beta}\frac{\partial}{\partial x^\mu}+[(-\epsilon\gamma_5 )(\gamma^\mu)^T]_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+=&(\gamma^\mu (-\epsilon \gamma_5))_{\alpha\beta}\frac{\partial}{\partial x^\mu}+(\gamma^\mu\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \quad  \because (5.4.35)\gamma_\mu^T=-\mc{C}\gamma_\mu \mc{C}^{-1},\mc{C}=-\epsilon \gamma_5 \\
+=&0
+\end{align*}
+となり消える．$\alpha$はフェルミオン的なパラメータだから，$(\bar{\alpha}\mc{Q})$は$\mc{D}_\beta$と可換$[(\bar{\alpha}\mc{Q},\mc{D}_\beta)]=0$となる．よってもし$S(x,\theta)$が超場ならば$\delta S=-i[\bar{\alpha}Q,S]=(\bar{\alpha}\mc{Q})S$を満たしていたのを思い出すと
+\begin{align*}
+[(\bar{\alpha}Q),\mc{D}_\beta S]=&\mc{D}_\beta [(\bar{\alpha}Q),S] =\mc{D}_\beta \left(i\bar{\alpha}\mc{Q} S\right)=i(\bar{\alpha}\mc{Q})\mc{D}_\beta S \\
+\delta (\mc{D}_\beta S)\equiv &-i[(\bar{\alpha}Q),\mc{D}_\beta S]=(\bar{\alpha}\mc{Q})\mc{D}_\beta S
+\end{align*}
+となり，$\mc{D}_\beta S$も超場の変換則を満たし，超場となることがわかる．したがって，超場$S$の任意の多項式の関数と，その超微分$\mc{D}_\beta S,\mc{D}_\beta \mc{D}_\gamma S$等もまた超場だ！\par
+二つの超微分から時空微分を作ることが可能となる．実際
+\begin{align*}
+\{\mc{D}_\alpha ,\bar{\mc{D}}_\beta\}=&\left\{(\gamma_5\epsilon)_{\alpha\gamma}\frac{\partial}{\partial \theta_\gamma}- \gamma^\mu_{\alpha\gamma} \theta_\gamma \frac{\partial}{\partial x^\mu}, \frac{\partial}{\partial \theta_\beta}+ (\gamma_5 \epsilon \gamma^\nu)_{\beta\delta} \theta_\delta \frac{\partial}{\partial x^\nu}\right\} \\
+=&(\gamma_5 \epsilon)_{\alpha\gamma}\left\{\frac{\partial}{\partial \theta_\gamma},\frac{\partial}{\partial \theta_\beta}\right\}-\gamma^\mu_{\alpha\gamma}\frac{\partial}{\partial x^\mu}\left\{\theta_\gamma ,\frac{\partial}{\partial \theta_\beta }\right\} \\
+&+(\gamma_5 \epsilon)_{\alpha\gamma}(\gamma_5 \epsilon \gamma^\nu)_{\beta\delta}\frac{\partial}{\partial x^\nu}\left\{\frac{\partial}{\partial \theta_\gamma},\theta_{\delta}\right\} -\gamma^\mu_{\alpha\gamma}(\gamma_5 \epsilon \gamma^\nu)_{\beta\delta}\frac{\partial^2}{\partial x^\mu x^\nu}\left\{\theta_\gamma ,\theta_\delta \right\}\\
+=&-\gamma^\mu_{\alpha\beta}\frac{\partial}{\partial x^\mu}+(\gamma_5 \epsilon)_{\alpha\gamma}(\gamma_5 \epsilon \gamma^\mu)_{\beta\gamma}\frac{\partial}{\partial x^\mu} \\
+=&-2\gamma^\mu_{\alpha\beta}\frac{\partial}{\partial x^\mu}
+\end{align*}
+となる．(途中から(26.2.5)の途中計算の符号を変えただけだと気付けばすぐ終わる)よってある超場から別の超場を作る際には，超場の時空微分を入れることも可能となる．
+\begin{align*}
+-\frac{1}{2}\left[\{\mc{D}_\alpha,\bar{\mc{D}}_\gamma \}\gamma^\nu_{\gamma\beta}+\gamma^\nu_{\alpha\gamma}\{\mc{D}_\gamma,\bar{\mc{D}}_\beta\}\right]=&(\gamma^\mu\gamma^\nu)_{\alpha\beta}\frac{\partial}{\partial x^\mu}+(\gamma^\nu \gamma^\mu)_{\alpha\beta}\frac{\partial}{\partial x^\mu}\\
+=&\frac{\partial}{\partial x^\nu}
+\end{align*}
+左辺が超微分から構成されており$\bar{\alpha}\mc{Q}$と可換だから，当然右辺も$\bar{\alpha}\mc{Q}$と可換となる．(まあシンプルに，(26.2.3)を見れば$\mc{Q}$と$\partial/\partial x^\mu$は可換なことはすぐわかるので，時空微分した超場もまた超場になることは一目瞭然かな．時空微分も超微分の線形結合として書けるということの方が大事かも．)
+
+\vskip\baselineskip
+
+超場から超対称性作用を構築する方法を考察しよう．超対称ラグランジアン密度なるものは\uwave{存在しない}！なぜなら，(26.2.6)の反交換関係から，もし任意の$\alpha$に対して$\delta \mc{L}=0$なら
+\begin{align*}
+0=&\delta \mc{L}=-i[\bar{\alpha}Q,\mc{L}]=(\bar{\alpha}\mc{Q})\mc{L} \quad \therefore \mc{Q}_\alpha \mc{L}=0\\
+0=&\{\mc{Q}_\alpha ,\bar{\mc{Q}}_\beta\}\mc{L}=2\gamma^\mu_{\alpha\beta} \frac{\partial}{\partial x^\mu}\mc{L} \\
+0=&\frac{1}{2}\left[\{\mc{Q}_\alpha ,\bar{\mc{Q}}_\gamma\}\gamma^\nu_{\gamma\beta}+\gamma^\nu_{\alpha\gamma}\{\mc{Q}_\gamma,\bar{\mc{Q}}_\beta\}\right]=\frac{\partial}{\partial x^\nu}\mc{L}
+\end{align*}
+となり，$\mc{L}$は定数でなくてはならないからだ．たとえ\uwave{ラグランジアン密度が}超対称でなくても，もし$\delta \mc{L}(x)$がなんらかの全微分ならば$\delta \int \mc{L} d^4x $に寄与はなく，\uwave{作用は}超対称となる．一般にラグランジアン密度$\mc{L}$は，基本的な超場とそれらの超微分(時空微分含め)とから構成されたある超場となり，よって(26.2.10)のように$C,\omega,M,N,V^\mu,\lambda,D$成分に展開することができる．各成分の変換則(26.2.11)～(26.2.17)から，ある一般的な超場に何も特別な条件が課されていなければ，変分が何かしらの微分になっているような超場の成分は$D$成分だけであることがわかる．(他を何かしらの微分だけの項にするためには，$D=0$とか$\lambda=0$などの条件が必要．この話は次の節で．)また，任意の超場の$D$成分がスカラーであるためには，その超場自身がスカラーである必要がある．したがって，ラグランジアン密度(スカラー)を構成する個々の超場に何も特別な条件が課されていなければ，超対称作用はスカラー超場$\Lambda$の$D$項の積分でなければならない．
+\begin{align*}
+I=\int d^4 x [\Lambda]_D
+\end{align*}
+これならば確かに変分は必ず微分形にしかならない．しかし実際には，この類の作用は，それを構成する超場$\Lambda$に特別な条件が課されないと物理的に妥当なものとならない．ある一般的な超場$S(x,\theta)$について，$S$と$S^*$について双線形で，成分場について3階以上の微分を含まない超対称な運動を持つ作用$I_0$の唯一の形は以下となる．
+\begin{align*}
+I_0 \propto \int d^4x \Bigl[S^*S \Bigr]_D
+\end{align*}
+(26.2.25)を用いれば，$S^*S$は$D$成分
+\begin{align*}
+\Bigl[S^* S\Bigr]_D=&-\partial_\mu C^* \partial^\mu C-\frac{1}{2}\left(\bar{\omega}\gamma^\mu \partial_\mu \omega\right) +\frac{1}{2}\left(\left(\partial_\mu \bar{\omega}\right)\gamma^\mu \omega\right) \\
+&+C^*D +D^* C -(\bar{\omega}\lambda)-(\bar{\lambda}\omega) \\
+&+M^* M +N^*N-V^*_\mu V^\mu
+\end{align*}
+を持つことがわかる．(作用全体を実にするために$\omega,\lambda$はマヨラナ・スピノルであることは仮定した．しかし$C$が実場だと第一項目を運動項とみなした時に係数$1/2$がついていないことが不自然だから，$C,D,M,N,V^\mu$はそれぞれ複素場とした．作用全体が実であることにこれらが実である必要はない．)$C$か$\omega$について2次の項は質量ゼロの場のラグランジアンの運動項として期待できるように見える．((7.5.34)などを参照．複素スカラー場は係数$1/2$なし．)末尾3項に特に問題はない．しかし，$D$と$\lambda$を含む項は1次の項しかないため，経路積分を評価すると発散してしまい，それを防ぐためには$C,\omega$をゼロに拘束する必要があるという困難が出る．幸運にも，次の節で見るように，拘束された超場を使って物理的に意味のある作用を構成することが可能となる！それらの拘束された超場を導入すると，超場の関数の$D$成分となっていない超対称項を作用に含めることも可能となる！
+
+\vskip\baselineskip
+
+パリティが保存されるなら，超場の成分場の空間反転性は超対称性によって関係づけられる．この関係を調べるには，パリティ演算子$\mathsf{P}$を(26.2.1)の交換・反交換子に施して，超対称性生成子の変換則(25.3.12)を使えば
+\begin{align*}
+\mathsf{P}^{-1}\left[Q,S(x,\theta)\right\}\mathsf{P}=&\left[\mathsf{P}^{-1} Q \mathsf{P},\mathsf{P}^{-1} S(x,\theta)\mathsf{P}\right\} \\
+=&i\beta \left[ Q, \mathsf{P}^{-1}S(x,\theta)\mathsf{P}\right\} \quad \because (25.3.12) \\
+=&i\mc{Q}\mathsf{P}^{-1}S(x,\theta)\mathsf{P} ,\quad \mc{Q}=-\frac{\partial}{\partial \bar{\theta}}+\gamma^\mu \theta \frac{\partial}{\partial x^\mu}
+\end{align*}
+となる．これのスカラー超場スカラー超場についての解は
+\begin{align*}
+\mathsf{P}^{-1}S(x,\theta)\mathsf{P} =\eta S(\Lambda_Px,-i\beta \theta)
+\end{align*}
+である．ここで$\eta$はある位相(超場の内部パリティ)で，$\Lambda_P x\equiv (-\mathbf{x},+x^0)$だ．実際これを代入して左辺を計算すると
+\begin{align*}
+\frac{\partial}{\partial \theta_\gamma}=&\frac{\partial (-i\beta \theta)_\delta}{\partial \theta_\gamma}\frac{\partial}{\partial (-i\beta \theta)_\delta}=-i\beta_{\delta\gamma}\frac{\partial}{\partial (-i\beta \theta)_\delta} \\
+\frac{\partial}{\partial (-i\beta \theta)_\gamma}=&i\beta_{\gamma\delta}\frac{\partial}{\partial \theta_\delta} \\
+\frac{\partial}{\partial (\Lambda_P x)^\mu}=&\tensor{\mc{P}}{_\mu^\nu}\frac{\partial}{\partial x^\nu} ,\quad \mc{P}=\mathrm{diag}(-1,-1,-1,+1)\\
+i\beta_{\alpha\beta} \left[Q_\beta,\eta S(\Lambda_P x,-i\beta \theta)\right\}=&i\eta \beta _{\alpha\beta}i\left((\gamma_5 \epsilon)_{\beta\gamma}\frac{\partial}{\partial (-i\beta \theta)_\gamma}+\gamma^\mu_{\beta\gamma}(-i\beta \theta)_{\gamma}\frac{\partial}{\partial (\Lambda_P x)^\mu}\right) S(\Lambda_P x,-i\beta \theta)\\
+=&-\eta \left(i(\beta\gamma_5 \epsilon \beta)_{\alpha\beta}\frac{\partial}{\partial \theta_\beta}-i(\beta\gamma^\mu\beta \theta)_{\alpha}\tensor{\mc{P}}{_\mu^\nu}\frac{\partial}{\partial x^\nu}\right)S(\Lambda_P x,-i\beta \theta) \\
+=&-\eta \left(-i(\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\beta}-i(\gamma^\mu \theta)_{\alpha}\frac{\partial}{\partial x^\mu}\right)S(\Lambda_P x,-i\beta \theta) \\
+=&i\eta \left((\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\beta}+(\gamma^\mu \theta)_{\alpha}\frac{\partial}{\partial x^\mu}\right)S(\Lambda_P x,-i\beta \theta) \\
+=&i\eta \mc{Q}_{\alpha}S(\Lambda_P x,-i\beta \theta)
+\end{align*}
+となり解であることが分かる．最初の等号では，同じ生成子でも引数によって(例えば運動量演算子では$[P_\mu,\phi(y) ]=i\partial \phi(y)/\partial y^\mu$のように)微分や変数が対応して変化することに注意する．最後から3つ目の等号では(5.4.35)と$\beta=i\gamma^0,\mc{C}=-\epsilon \gamma_5$より$\beta (\epsilon\gamma_5 )\beta=-\epsilon\gamma_5$となること(直接行列計算したほうが正直早い)と，$\mu=0$のときだけ$\gamma^\mu$は$\beta$と交換しそれ以外は反交換することから$\beta \gamma^\mu\beta=\tensor{\mc{P}}{^\mu_\nu}\gamma^\nu$を用いた．(26.2.35)に(26.2.10)の展開を適用すると
+\begin{align*}
+(-i\beta\theta)^\dagger \beta=&+i\theta^\dagger=i\bar{\theta}\beta \\
+S(\Lambda_P x,-i\beta\theta)=&C(\Lambda_P x)-i(\bar{\theta}i\beta \gamma_5 \omega(\Lambda_P x))-\frac{i}{2}(\bar{\theta}i\beta \gamma_5(-i\beta)\theta )M(\Lambda_P x)-\frac{1}{2}(\bar{\theta}i\beta (-i\beta)\theta)N(\Lambda_P x) \\
+&+\frac{i}{2}(\bar{\theta}i\beta \gamma_5 \gamma_\mu (-i\beta)\theta)V^\mu(\Lambda_Px)-i(\bar{\theta}i\beta \gamma_5 (-i\beta)\theta)\left(\bar{\theta}i\beta \left[\lambda(\Lambda_P x)+\frac{1}{2}\gamma^\mu \left(\frac{\partial \omega}{\partial x^\mu}\right)(\Lambda_Px)\right]\right) \\
+&-\frac{1}{4}(\bar{\theta}i\beta\gamma_5 (-i\beta)\theta)^2\left(D(\Lambda_Px)+\frac{1}{2}\left(\eta^{\mu\nu}\frac{\partial^2 C}{\partial x^\mu \partial x^\nu}\right)(\Lambda_Px)\right) \\
+=&C(\Lambda_P x)-i(\bar{\theta} \gamma_5 \left[-i\beta \omega(\Lambda_P x)\right])-\frac{i}{2}(\bar{\theta}\gamma_5 \theta )\left[-M(\Lambda_P x)\right]-\frac{1}{2}(\bar{\theta}\theta)N(\Lambda_P x) \\
+&+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\nu \theta)\left[-\tensor{\mc{P}}{^\nu_\mu}V^\mu(\Lambda_Px)\right]-i(\bar{\theta} \gamma_5 \theta)\left(\bar{\theta} \left[-i\beta\lambda(\Lambda_P x)-\frac{1}{2}i\beta \gamma^\mu \tensor{\mc{P}}{_\mu^\nu}\frac{\partial}{\partial x^\nu}\omega(\Lambda_Px)\right]\right) \\
+&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2\left(D(\Lambda_Px)+\frac{1}{2}\eta^{\mu\nu}\frac{\partial^2}{\partial x^\mu \partial x^\nu} C(\Lambda_Px)\right) \\
+=&C(\Lambda_P x)-i(\bar{\theta} \gamma_5 \left[-i\beta \omega(\Lambda_P x)\right])-\frac{i}{2}(\bar{\theta}\gamma_5 \theta )\left[-M(\Lambda_P x)\right]-\frac{1}{2}(\bar{\theta}\theta)N(\Lambda_P x) \\
+&+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\nu \theta)\left[-\tensor{\mc{P}}{^\nu_\mu}V^\mu(\Lambda_Px)\right]-i(\bar{\theta} \gamma_5 \theta)\left(\bar{\theta} \left[-i\beta\lambda(\Lambda_P x)+\frac{1}{2}\gamma^\mu \frac{\partial}{\partial x^\mu}\left[-i\beta \omega(\Lambda_Px)\right]\right]\right) \\
+&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2\left(D(\Lambda_Px)+\frac{1}{2}\eta^{\mu\nu}\frac{\partial^2}{\partial x^\mu \partial x^\nu} C(\Lambda_Px)\right)
+\end{align*}
+となる．(微分の項では$(df/dx)(y(x))\neq (d/dx)f(y(x))$であることに注意．)よって成分場の空間反転性は
+\begin{align*}
+\mathsf{P}^{-1}C(x)\mathsf{P}=&\eta C(\Lambda_P x) \\
+\mathsf{P}^{-1}\omega(x)\mathsf{P}=&-i\eta \beta \omega(\Lambda_P x) \\
+\mathsf{P}^{-1}M(x) \mathsf{P} =&-\eta M(\Lambda_P x) \\
+\mathsf{P}^{-1}N(x)\mathsf{P}=&\eta N(\Lambda_Px) \\
+\mathsf{P}^{-1}V^\mu(x) \mathsf{P}=&-\eta \tensor{(\Lambda_P)}{^\mu_\nu}V^\nu(\Lambda_Px) \\
+\mathsf{P}^{-1}\lambda(x) \mathsf{P}=&-i\eta \beta \lambda(\Lambda_Px) \\
+\mathsf{P}^{-1} D(x)\mathsf{P} =&\eta D(\Lambda_Px)
+\end{align*}
+となっていることがわかる．このパリティ変換則を見れば，実際に$C,N$はスカラー場であり，$M$は擬スカラー場，$V^\mu$は擬ベクトル場，$\omega,\lambda$は4成分スピノル場であることがわかる．
+
+\vskip\baselineskip
+
+一般の実スカラー超場$S$は4つの実スカラー(擬スカラー)場$C,M,N,D$と，1つの4元実擬ベクトル場$V_\mu$を持ち，合計8個の独立なボゾン場の成分を持つ．比較しておくと，フェルミオン場も$\omega$と$\lambda$という二つの4成分マヨラナ・スピノル場があり，合計8個の独立な場の成分がある．独立なボゾン場とフェルミオン場の成分の数が等しくなっている！これはこの節で述べた拘束されない一般の超場のみならず，次の節で論じるカイラル超場や他の拘束された超場のように超対称な拘束条件を課して得られる一般の超場について成立する性質だ！\par
+これを一般的に見るために，$N_B$個の線形独立な実ボゾン場演算子$b_n(x)$と$N_F$個の線形独立なフェルミオン場演算子$f_k(x)$がなす超対称性代数の表現があるとしよう．これらの場の非自明な場の方程式のみを満たし，ゼロでない係数での$b_n$や$f_k$のどのような線形結合も斉次線形な場の方程式(自由Dirac方程式や自由Maxwell方程式のような$L(\partial)\phi=0$という形)を満たすことができないと仮定する．(つまり他の場との相互作用項や自己相互作用項があって，ラグランジアンから導かれる場の方程式は全て他の場や自己場の2次以上の項を含んでいたりして$\Box \phi=-\lambda \phi^3,(\Slash{\partial}+m)\psi=-ie\Slash{A}$のような非斉次方程式になっているとする．そしてどのような線形結合をしても上のような単純な形の微分方程式にはならないとする．)
+\begin{align*}
+Q(u)\equiv \Bigl(\bar{u} Q\Bigr)=\Bigl(\bar{Q}u\Bigr)
+\end{align*}
+ここで$u$はある通常の数値マヨラナ・スピノル(反可換c数では\uwave{ない}，ディラック場の係数スピノルのようなもの)だ．(拡張超対称性では$Q_\alpha$の代わりに$Q_{r\alpha}$のどれか，例えば$Q_{1\alpha}$を使えばよい．)$b_n$と$f_k$が超対称性代数の表現になるには，ある行列微分演算子$q(\partial),p(\partial)$を用いて
+\begin{align*}
+\left[Q(u),b_n\right]=&i\sum_k q_{nk}(\partial) f_k \\
+\left\{Q(u),f_k \right\}=&\sum_n p_{kn}(\partial)b_n
+\end{align*}
+という形になっていなければならない．例えば上の式の左辺はフェルミオン的だから左辺もフェルミオン的な形になっていなければならず，下の式も左辺はボゾン的になっているから右辺もそうでなくてはならないからこの形になる．係数$i$は便宜上だと思う．また，さらに$Q(u)$との交換子，反交換子をとると
+\begin{align*}
+\left[\{Q(u)\}^2,b_n\right]=&Q(u)\left[Q(u),b_n\right]+\left[Q(u),b_n\right]Q(u) \\
+=&i\sum_k q_{nk}(\partial)\{Q(u),f_k\} \\
+=&i\sum_{m}\Bigl(q(\partial)p(\partial)\Bigr)_{nm} b_m \\
+\left[\{Q(u)\}^2,f_k\right]=&Q(u)\left\{Q(u),f_k\right\}-\left\{Q(u),f_k\right\}Q(u) \\
+=&\sum_n p_{kn}(\partial)\left[Q(u),b_n\right] \\
+=&i\sum_{l} \Bigl(p(\partial)q(\partial)\Bigr)_{kl}f_l
+\end{align*}
+を得る．さらに(25.2.36)の反交換関係から
+\begin{align*}
+\{Q(u)\}^2=&\frac{1}{2}\{Q(u)\}^2+\frac{1}{2}\{Q(u)\}^2 \\
+=&\frac{1}{2}\bar{u}_\alpha Q_\alpha \bar{Q}_\beta u_\beta +\frac{1}{2}\bar{Q}_\beta u_\beta \bar{u}\beta Q_\beta \\
+=&\frac{1}{2}\bar{u}_\alpha \{Q_\alpha,\bar{Q}_\beta \}u_\beta=-iP_\mu \bar{u}_\alpha \gamma^\mu_{\alpha\beta}u_\beta \\
+=&-iP_\mu (\bar{u}\gamma^\mu u)
+\end{align*}
+(拡張超対称性の場合は(25.2.38)の反交換関係を使うが，$Q(u)$の定義でひとつの$r$を決めてしまっているので$r=s$であり，$Z_{rr}=0=Z^*_{rr}$から余計な項は消えて，全く同じ計算で同様の結果になる．)よって
+\begin{align*}
+(\bar{u}\gamma^\mu u)\partial_\mu b_n=&i\sum_m \Bigl(q(\partial)p(\partial)\Bigr)_{nm} b_m \\
+(\bar{u}\gamma^\mu u)\partial_\mu f_k=&i\sum_l \Bigl(p(\partial)q(\partial)\Bigr)_{kl} f_l
+\end{align*}
+と書ける．以下で，正方行列$q(\partial)p(\partial)$と$p(\partial)q(\partial)$は両方とも正則であることがわかる．正則行列は固有値0の固有ベクトルを持たない行列であったのだから，任意のゼロでない係数$c_n(\partial),d_k(\partial)$について，$\sum_n c_n(\partial)(q(\partial)p(\partial))_{nm}=0$か$\sum_k d_k (\partial)(p(\partial)q(\partial))_{kl}=0$と仮定して矛盾を導けばいい．実際こう仮定すれば，上の関係式から
+\begin{align*}
+(\bar{u}\gamma^\mu u)\partial_\mu \sum_n c_n(\partial) b_n =0
+\end{align*}
+または
+\begin{align*}
+(\bar{u}\gamma^\mu u)\partial_\mu \sum_k d_k(\partial) f_k =0
+\end{align*}
+が導かれる．これは斉次線形な場の方程式だ．よって線形結合によって斉次線形な場の方程式を満たすようにはできないという仮定と矛盾が起き，証明完了．ここからは線形代数を使う．$N_B\times N_F$行列$q$と$N_F\times N_B$行列$p$の積$qp$($N_B\times N_B$正方行列)が正則であるならば，$\mathrm{rank}(qp)=N_B$であり，
+\begin{align*}
+\mathrm{rank}(qp)=N_B \leq \mathrm{rank}(p) \leq N_F
+\end{align*}
+となり$N_B \leq N_F$が得られる．($n\times m$行列$A$のrankは$m$以下かつ$n$以下となることを使った．)一方$N_F\times N_F$正方行列$pq$も正則であることから
+\begin{align*}
+\mathrm{rank}(pq)=N_F\leq \mathrm{rank}(q)\leq N_B
+\end{align*}
+もわかる．したがって$N_B=N_F$が結論される．(このままではフェルミオン場の成分の独立な数がボゾン場の数と同じとはまだ言えない．ボゾン場は実だと仮定したが，フェルミオン場は実場ではありえず，それぞれのフェルミオン場の複素共役が独立ならば合計のフェルミオン場の成分の数は$2N_F$となり$N_B$より多くなってしまう．)さて，このとき$p,q$はともに正方行列となり，二つの正方行列が正則であることから$p,q$が共に正則行列である．よって(26.2.38)の複素共役から
+\begin{align*}
+[Q(u),b^*_n]=&i\sum_k q_{nk}^*(\partial )f_k^* \\
+=[Q(u),b_n]=&i\sum_k q_{nk}(\partial)f_k \quad \because b_n は実場 b^*_n=b_n\\
+\therefore \quad f^*=q^{*-1}q f 
+\end{align*}
+がわかる．したがって複素共役$f^*$は全て$f$とは独立ではありえず，独立なフェルミオン場の数は$2N_F$ではなく$N_F$であり，独立なボゾン場の数$N_B$に等しい！これが証明したかったことだ．
+
+
+
+\newpage
+
+
+
+\subsection{カイラル線形超場}
+前の節では，一般の超場には$D$と$\lambda$成分があるために，そのような超場を使って物理的に満足できるラグランジアン密度を構成することが困難になることを見た．そこで
+\begin{align*}
+\lambda=D=0
+\end{align*}
+となる超場を考えたらどうなるだろうか？このような条件は超対称性変換で保存されるだろうか？(26.2.17)(26.2.16)に従うと，$D=0$という条件は，もし$\lambda=0$ならば不変だ．さらに$\lambda=0$条件は，もし
+\begin{align*}
+[\partial_\mu \Slash{V},\gamma^\nu]=\partial_\mu V_\nu \gamma^\nu \gamma^\mu -\partial_\mu V_\nu \gamma^\mu \gamma^\nu =(\partial_\mu V_\nu-\partial_\nu V_\mu)\gamma^\mu\gamma^\nu=0
+\end{align*}
+となるとき，つまり$\partial_\mu V_\nu-\partial_\nu V_\mu=0$という条件も課したときにのみ不変となる．これは$V_\mu$が
+\begin{align*}
+V_\mu(x)=\partial_\mu Z(x)
+\end{align*}
+と純ゲージであることを意味する．$\lambda=0$と共に(26.2.15)を使うと，この条件が超対称性変換で
+\begin{align*}
+\delta V_\mu =(\bar{\alpha}\partial_\mu \omega)=\partial_\mu(\bar{\alpha} \omega)
+\end{align*}
+となり，$V_\mu$の変分も微分で書けるから，純ゲージ条件も保たれていることがわかる．こうして，(26.3.1)と(26.3.2)の拘束条件を満たす縮小された超場が得られる．この超場の成分場は(26.2.11)～(26.2.15)から，以下の変換則を満たす．
+\begin{align*}
+\delta C=&i(\bar{\alpha}\gamma_5 \omega) \\
+\delta \omega=& \left(-i\gamma_5 \Slash{\partial} C-M+i\gamma_5 N+\Slash{\partial}Z\right)\alpha \\
+\delta M=& -(\bar{\alpha}\Slash{\partial}\omega) \\
+\delta N=& i(\bar{\alpha}\gamma_5 \Slash{\partial}\omega) \\
+\delta Z =& (\bar{\alpha}\omega)
+\end{align*}
+これを(26.1.21)と比較してみよう．するとこれは26.1節で直接的な方法で構成した超対称多重項と同じになっていることがわかる．
+\begin{align*}
+\delta A=&\bar{\alpha}\psi \\
+\delta B=&-i \bar{\alpha}\gamma_5 \psi \\
+\delta \psi =&(\Slash{\partial}A+i\gamma_5 \Slash{\partial}B+F-i\gamma_5 G)\alpha \\
+\delta F=&\bar{\alpha}\gamma^\mu \partial_\mu \psi \\
+\delta G=&-i\bar{\alpha} \gamma_5 \gamma^\mu \partial_\mu \psi
+\end{align*}
+対応関係は以下の通りだ．
+\begin{align*}
+C=A,\quad \omega=-i\gamma_5 \psi,\quad M=G,\quad N=-F,\quad Z=B
+\end{align*}
+(ここで$C=-B,\omega=\psi,M=-F,N=-G,Z=A$と採っても対応が付くし，こっちの方が綺麗だと思うかもしれない．このようにとったのは，すぐに見るようにスカラー超場ではこれが通常の，$A,F$がスカラーで$B,G$が擬スカラーだという通常の決まりと矛盾しないからだ．)(26.3.1)と(26.3.2)の条件を満たす超場は\textbf{カイラル}であるという．超場の一般的な形(26.2.10)にカイラル条件(26.3.1)(26.3.2)と対応(26.3.8)を使うと，一般のカイラル超場の形が
+\begin{align*}
+X(x,\theta)=&A(x)-\Bigl(\bar{\theta}\psi(x)\Bigr)+\frac{1}{2}\Bigl(\bar{\theta}\theta\Bigr)F(x)-\frac{i}{2}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)G(x)\\
+&+\frac{i}{2}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu B(x)+\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}\gamma_5 \Slash{\partial}\psi(x)\Bigr) \\
+&-\frac{1}{8}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box A(x)
+\end{align*}
+となることがわかる．\par
+(26.3.9)のカイラル超場はさらに以下のように分解することができる．
+\begin{align*}
+X(x,\theta)=\frac{1}{\sqrt{2}}\left[\Phi(x,\theta)+\tilde{\Phi}(x,\theta)\right]
+\end{align*}
+ここで
+\begin{align*}
+\Phi(x,\theta)=&\phi(x)-\sqrt{2}\Bigl(\bar{\theta}\psi_L(x)\Bigr)+\mc{F}(x)\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right) \\
+&+\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu \phi(x)-\frac{1}{\sqrt{2}}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}\Slash{\partial}\psi_L(x)\Bigr) \\
+&-\frac{1}{8}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box \phi(x) \\
+\tilde{\Phi}(x,\theta)=&\tilde{\phi}(x)-\sqrt{2}\Bigl(\bar{\theta}\psi_R(x)\Bigr)+\tilde{\mc{F}}(x)\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right) \\
+&-\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu \tilde{\phi}(x)+\frac{1}{\sqrt{2}}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}\Slash{\partial}\psi_R(x)\Bigr) \\
+&-\frac{1}{8}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box \tilde{\phi}(x)
+\end{align*}
+であり，成分場は
+\begin{align*}
+&\phi\equiv \frac{A+iB}{\sqrt{2}},\quad \psi_L\equiv \left(\frac{1+\gamma_5}{2}\right)\psi ,\quad \mc{F}\equiv \frac{F-iG}{\sqrt{2}} \\
+&\tilde{\phi}\equiv \frac{A-iB}{\sqrt{2}},\quad \psi_R\equiv \left(\frac{1-\gamma_5}{2}\right)\psi ,\quad \tilde{\mc{F}}\equiv \frac{F+iG}{\sqrt{2}}
+\end{align*}
+で定義される．実際にこれらは
+\begin{align*}
+&\frac{1}{\sqrt{2}}\left[\Phi+\tilde{\Phi}\right] \\
+=&\frac{1}{\sqrt{2}}(\phi+\tilde{\phi})-\Bigl(\bar{\theta}(\psi_L+\psi_R)\Bigr)+\frac{1}{\sqrt{2}}(\mc{F}+\tilde{\mc{F}})\frac{1}{2}\Bigl(\bar{\theta}\theta\Bigr)+\frac{1}{\sqrt{2}}(\mc{F}-\tilde{\mc{F}})\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr) \\
+&+\frac{1}{2\sqrt{2}}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu (\phi-\tilde{\phi})-\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}\Slash{\partial}(\psi_L-\psi_R)\Bigr) \\
+&-\frac{1}{8\sqrt{2}}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box (\phi+\tilde{\phi}) \\
+=&A-\Bigl(\bar{\theta}\psi\Bigr)+\frac{1}{2}\Bigl(\bar{\theta}\theta\Bigr)F-\frac{i}{2}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)G \\
+&+\frac{i}{2}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu B-\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}\Slash{\partial}\gamma_5 \psi\Bigr)  \\
+&-\frac{1}{8}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box \phi \\
+=&A-\Bigl(\bar{\theta}\psi\Bigr)+\frac{1}{2}\Bigl(\bar{\theta}\theta\Bigr)F-\frac{i}{2}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)G \\
+&+\frac{i}{2}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu B+\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}\gamma_5\Slash{\partial} \psi\Bigr)  \\
+&-\frac{1}{8}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box \phi \\
+=&X
+\end{align*}
+となって，分解が正しくできていることが確認できる．$\Phi$か$\tilde{\Phi}$の成分場は
+\begin{align*}
+\delta \psi_L=& \left(\frac{1+\gamma_5}{2}\right)\delta \psi \\
+=&\left(\frac{1+\gamma_5}{2}\right)(\Slash{\partial}A+i\gamma_5 \Slash{\partial}B+F-i\gamma_5 G)\alpha \\
+=&(\Slash{\partial}A+i\Slash{\partial}B)\left(\frac{1-\gamma_5}{2}\right)\alpha+(F-i G)\left(\frac{1+\gamma_5}{2}\right)\alpha \quad \because \gamma_5 \left(\frac{1\pm \gamma_5}{2}\right)=\pm\left(\frac{1\pm\gamma_5}{2}\right) \\
+=&\sqrt{2} \partial_\mu \phi \gamma^\mu \alpha_R+ \sqrt{2}\mc{F} \alpha_L \\
+\delta \mc{F}=&\frac{1}{\sqrt{2}}\delta F -\frac{i}{\sqrt{2}}\delta G \\
+=&\frac{1}{\sqrt{2}}\bar{\alpha} \gamma^\mu \partial_\mu \psi -\frac{1}{\sqrt{2}}\bar{\alpha}\gamma_5 \gamma^\mu \partial_\mu \psi \\
+=&\sqrt{2}\bar{\alpha}\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\partial_\mu \psi \\
+=&\sqrt{2}\Bigl(\overline{\alpha_L} \Slash{\partial}\psi_L\Bigr) \quad \because \overline{\alpha_L}\gamma^\mu=\alpha^\dagger \left(\frac{1+\gamma_5}{2}\right)\beta\gamma^\mu=\bar{\alpha}\left(\frac{1-\gamma_5}{2}\right)\gamma^\mu =\bar{\alpha}\gamma^\mu\left(\frac{1+\gamma_5}{2}\right) \\
+\delta \phi=& \frac{1}{\sqrt{2}}\delta A+\frac{i}{\sqrt{2}}\delta B \\
+=&\frac{1}{\sqrt{2}}\bar{\alpha}\psi+\frac{1}{\sqrt{2}}\bar{\alpha}\gamma_5 \psi \\
+=&\sqrt{2}\bar{\alpha} \left(\frac{1+\gamma_5}{2}\right)\psi \\
+=&\sqrt{2}\Bigl(\overline{\alpha_R}\psi_L\Bigr) \\
+\delta \psi_R=&  \left(\frac{1-\gamma_5}{2}\right)\delta \psi \\
+=&\left(\frac{1-\gamma_5}{2}\right)(\Slash{\partial}A+i\gamma_5 \Slash{\partial}B+F-i\gamma_5 G)\alpha \\
+=&(\Slash{\partial}A-i\Slash{\partial}B)\left(\frac{1+\gamma_5}{2}\right)\alpha+(F+i G)\left(\frac{1-\gamma_5}{2}\right)\alpha \quad \because \gamma_5 \left(\frac{1\pm \gamma_5}{2}\right)=\pm\left(\frac{1\pm\gamma_5}{2}\right) \\
+=&\sqrt{2} \partial_\mu \tilde{\phi} \gamma^\mu \alpha_L+ \sqrt{2}\tilde{\mc{F}} \alpha_R \\
+\delta \tilde{\mc{F}}=&\frac{1}{\sqrt{2}}\delta F +\frac{i}{\sqrt{2}}\delta G \\
+=&\frac{1}{\sqrt{2}}\bar{\alpha} \gamma^\mu \partial_\mu \psi +\frac{1}{\sqrt{2}}\bar{\alpha}\gamma_5 \gamma^\mu \partial_\mu \psi \\
+=&\sqrt{2}\bar{\alpha}\gamma^\mu \left(\frac{1-\gamma_5}{2}\right)\partial_\mu \psi \\
+=&\sqrt{2}\Bigl(\overline{\alpha_R} \Slash{\partial}\psi_R\Bigr) \\
+\delta \tilde{\phi}=& \frac{1}{\sqrt{2}}\delta A-\frac{i}{\sqrt{2}}\delta B \\
+=&\frac{1}{\sqrt{2}}\bar{\alpha}\psi-\frac{1}{\sqrt{2}}\bar{\alpha}\gamma_5 \psi \\
+=&\sqrt{2}\bar{\alpha} \left(\frac{1-\gamma_5}{2}\right)\psi \\
+=&\sqrt{2}\Bigl(\overline{\alpha_L}\psi_R\Bigr) 
+\end{align*}
+となり，超対称性代数の完全な表現を与える．ここでいつものように
+\begin{align*}
+\alpha_L=\left(\frac{1+\gamma_5}{2}\right)\alpha ,\quad \alpha_R=\left(\frac{1-\gamma_5}{2}\right)\alpha
+\end{align*}
+である．(26.3.11)の$\Phi$，もしくは(26.3.12)の$\tilde{\Phi}$の形の超場は，それぞれ\textbf{左カイラル}，もしくは\textbf{右カイラル}と呼ばれる．カイラル超場$X(x,\theta)$が実という特別な場合には，その左カイラル部分$\Phi$と右カイラル部分$\tilde{\Phi}$は互いに複素共役であり，$\tilde{\phi}=\phi^*,\tilde{\mc{F}}=\mc{F}^*$となっていて，$\psi$はマヨラナ場となる．しかし，もし$X(x,\theta)$が実であることを要求しなければ，一般には$\Phi$と$\tilde{\Phi}$には関係はない．この二つのうち一方がゼロとなることさえ可能となる．\par
+超場$\Phi$の成分場には，$\phi$と$\mc{F}$の二つの複素ボゾン成分，あるいは4つの独立な実ボゾン成分$A,B,F,G$，それと4成分を持つ1つのマヨラナ・フェルミオン場$\psi$が含まれる．これは前の節の最後に導いた，超対称性代数の表現をなす場の組は同じ数だけの独立なボゾン成分とフェルミオン成分をもつという一般的な結果の別の例となっている． \par
+(ここで少し$\overline{\alpha_L}$や$\overline{\alpha_R}$についての注意．$\bar{\alpha} \frac{1+\gamma_5}{2}=\overline{\alpha_R},\bar{\alpha}\frac{1-\gamma_5}{2}=\overline{\alpha_L}$は正しいが，$\alpha_L,\alpha_R$を勝手にマヨラナフェルミオンとみなした$\overline{\alpha_L}=\alpha^T_L \epsilon\gamma_5$などの関係式は正しくない．正しい関係式は
+\begin{align*}
+\overline{\alpha_L}=\alpha_R^T \epsilon \gamma_5,\quad \overline{\alpha_R}=\alpha^T_L \epsilon\gamma_5
+\end{align*}
+だ．これはマヨラナフェルミオンの関係式$\bar{\alpha}=\alpha^T \epsilon\gamma_5$の両辺右側から$(1\pm \gamma_5)/2$を作用させて$\gamma_5\epsilon=\epsilon \gamma_5$と交換できることを使えばすぐわかる．4成分フェルミオンの上2成分だけあるいは下2成分だけを抜き出す$(1\pm\gamma_5)/2$によって，$\alpha_L,\alpha_R$はもはやマヨラナフェルミオンの性質が満たされなくなるからだ．)
+
+\vskip\baselineskip
+
+なぜ「左カイラル」とか「右カイラル」と言うのか，を以下でみる．(26.A.5)(26.A.17)(26.A.18)を使って，(26.3.11)(26.3.12)を書きなおすと
+\begin{align*}
+x^\mu_+=&x^\mu+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta) \\
+\phi(x)=&\phi(x_+)-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \phi(x_+)+\frac{1}{8}(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\bar{\theta}\gamma_5 \gamma^\nu \theta) \partial_\mu \partial_\nu \phi(x_+) \\
+=&\phi(x_+)-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \phi(x_+)-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \Box \phi(x_+) \quad \because (26.A.18)\\
+\psi(x)=&\psi(x_+)-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \psi(x_+) +\mc{O}(\theta^4) \\
+\mc{F}(x)=&\mc{F}(x_+)-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu\mc{F}(x_+)+\mc{O}(\theta^4)
+\end{align*}
+を用いて
+\begin{align*}
+\Phi(x,\theta)=&\phi(x)+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu\phi(x)-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \Box \phi(x) \\
+&-\sqrt{2}(\bar{\theta}\psi_L(x))-\frac{1}{\sqrt{2}}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\Slash{\partial}\psi_L(x)) \\
+&+\mc{F}(x)\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right) \\
+=&\phi(x_+)-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \phi(x_+)-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \Box \phi(x_+) \\
+&+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \phi(x_+)-\frac{1}{4}(\bar{\theta}\gamma_5\gamma^\mu \theta)(\bar{\theta}\gamma_5\gamma^\nu \theta) \partial_\nu\partial_\mu \phi(x_+) \\
+&-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \Box \phi(x_+) \\
+&-\sqrt{2}(\bar{\theta}\psi_L(x_+))+\frac{1}{\sqrt{2}}(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\bar{\theta}\partial_\mu \psi_L(x_+)) \\
+&-\frac{1}{\sqrt{2}}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma^\mu \partial_\mu \psi_L(x_+)) \\
+&+\mc{F}(x_+)\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right) -\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right) \partial_\mu\mc{F}(x_+) \\
+=&\phi(x_+)-\sqrt{2}(\bar{\theta}\psi_L(x_+))+\mc{F}(x_+)\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right) \\
+=&\phi(x_+)-\sqrt{2}(\theta^T_L\epsilon \psi_L(x_+))+\mc{F}(x_+)\left(\theta^T_L \epsilon \theta_L\right)
+\end{align*}
+最初の等号では上の展開を代入し，$\theta$について4次以上の項は消えることを用いた．次の等号では，$\phi$についての項はマヨラナスピノルの性質(26.A.18)によりほとんどがキャンセルし，$\psi$についての項は(26.A.17)(26.A.7)より$(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\bar{\theta} \partial_\mu \psi_L)=+(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma^\mu \partial_\mu \psi_L)$となることを用いて，$\mc{F}$についての項では(26.2.25)で用いた性質
+\begin{align*}
+(\bar{\theta}\gamma_5 \theta )(\bar{\theta}\gamma_5 \gamma_\mu \theta)=&0 \\
+(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)=&-(\bar{\theta}\gamma_\mu \theta)(\bar{\theta}\gamma_5 \theta)=0 
+\end{align*}
+を使って最後の項がゼロとなることを用いた．最後の等号ではマヨラナスピノルの性質$\bar{\theta}=\theta^T\epsilon\gamma_5$と$\gamma_5 \theta_L=+\theta_L$を用いた．かなりきれいになるなぁ．$\tilde{\Phi}$についても同様に書き換えていく．
+\begin{align*}
+x^\mu_-=&x^\mu-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta) \\
+\tilde{\phi}(x)=&\tilde{\phi}(x_-)+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \tilde{\phi}(x_-)+\frac{1}{8}(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\bar{\theta}\gamma_5 \gamma^\nu \theta) \partial_\mu \partial_\nu \tilde{\phi}(x_-) \\
+=&\tilde{\phi}(x_-)+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \tilde{\phi}(x_-)-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \Box \tilde{\phi}(x_-) \\
+\psi(x)=&\psi(x_-)+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \psi(x_-) +\cdots \\
+\mc{F}(x)=&\mc{F}(x_-)+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu\mc{F}(x_-)+\cdots 
+\end{align*}
+を用いて
+\begin{align*}
+\tilde{\Phi}(x,\theta)=&\tilde{\phi}(x)-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu\tilde{\phi}(x)-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \Box \tilde{\phi}(x) \\
+&-\sqrt{2}(\bar{\theta}\psi_R(x))+\frac{1}{\sqrt{2}}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\Slash{\partial}\psi_R(x)) \\
+&+\tilde{\mc{F}}(x)\left(\bar{\theta}\left(\frac{1-\gamma_5}{2}\right)\theta\right) \\
+=&\phi(x_-)+\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \tilde{\phi}(x_-)-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \Box \tilde{\phi}(x_-) \\
+&-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\partial_\mu \tilde{\phi}(x_-)-\frac{1}{4}(\bar{\theta}\gamma_5\gamma^\mu \theta)(\bar{\theta}\gamma_5\gamma^\nu \theta) \partial_\nu\partial_\mu \tilde{\phi}(x_-) \\
+&-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \Box \tilde{\phi}(x_+) \\
+&-\sqrt{2}(\bar{\theta}\psi_R(x_-))-\frac{1}{\sqrt{2}}(\bar{\theta}\gamma_5 \gamma^\mu \theta)(\bar{\theta}\partial_\mu \psi_R(x_-)) \\
+&+\frac{1}{\sqrt{2}}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma^\mu \partial_\mu \psi_R(x_-)) \\
+&+\tilde{\mc{F}}(x_-)\left(\bar{\theta}\left(\frac{1-\gamma_5}{2}\right)\theta\right) -\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)\left(\bar{\theta}\left(\frac{1-\gamma_5}{2}\right)\theta\right) \partial_\mu\tilde{\mc{F}}(x_-) \\
+=&\tilde{\phi}(x_-)-\sqrt{2}(\bar{\theta}\psi_R(x_-))+\tilde{\mc{F}}(x_-)\left(\bar{\theta}\left(\frac{1-\gamma_5}{2}\right)\theta\right) \\
+=&\tilde{\phi}(x_-)+\sqrt{2}(\theta^T_R\epsilon \psi_R(x_-))-\tilde{\mc{F}}(x_-)\left(\theta^T_R \epsilon \theta_R\right)
+\end{align*}
+となる．きれいだねぇ．一般的な形から特に条件を設けずに変形できたから，$\theta_L$と$x^\mu_+$のみに依存し$\theta_R$には依存しない超場は必ず(26.3.21)の形にならなければならず，$\theta_R$と$x^\mu_-$にのみ依存し$\theta_L$に依存しない超場は(26.3.22)の形にならなければならない！\par
+超微分の右巻き部分と左巻き部分を
+\begin{align*}
+\mc{D}_{R\alpha} \equiv& \left[\left(\frac{1-\gamma_5}{2}\right) \mc{D}\right]_{\alpha} \\
+=&\left(\frac{1-\gamma_5}{2}\right)_{\alpha\beta} (\gamma_5 \epsilon)_{\beta\gamma}\frac{\partial}{\partial \theta_\gamma}-\left(\frac{1-\gamma_5}{2}\right)_{\alpha\beta}\gamma^\mu_{\beta\gamma}\theta_\gamma\frac{\partial}{\partial x^\mu} \\
+=&-\epsilon_{\alpha \beta}\left(\frac{1-\gamma_5}{2}\right)_{\beta\gamma} \frac{\partial}{\partial \theta_\gamma}-\gamma^\mu_{\alpha\beta} \left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}\theta_\gamma \frac{\partial}{\partial x^\mu} \quad \because \epsilon\gamma_5 =\gamma_5 \epsilon \\
+=&-\sum_\beta \epsilon_{\alpha\beta}\frac{\partial}{\partial \theta_{R\beta}}-(\gamma^\mu \theta_L)_\alpha \frac{\partial}{\partial x^\mu} \\
+\mc{D}_{L\alpha}\equiv &\left[\left(\frac{1+\gamma_5}{2}\right) \mc{D}\right]_{\alpha} \\
+=&\left(\frac{1+\gamma_5}{2}\right)_{\alpha\beta} (\gamma_5 \epsilon)_{\beta\gamma}\frac{\partial}{\partial \theta_\gamma}-\left(\frac{1+\gamma_5}{2}\right)_{\alpha\beta}\gamma^\mu_{\beta\gamma}\theta_\gamma\frac{\partial}{\partial x^\mu} \\
+=&+\epsilon_{\alpha \beta}\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma} \frac{\partial}{\partial \theta_\gamma}-\gamma^\mu_{\alpha\beta} \left(\frac{1-\gamma_5}{2}\right)_{\beta\gamma}\theta_\gamma \frac{\partial}{\partial x^\mu} \\
+=&+\sum_\beta \epsilon_{\alpha\beta}\frac{\partial}{\partial \theta_{L\beta}}-(\gamma^\mu \theta_R)_\alpha \frac{\partial}{\partial x^\mu}
+\end{align*}
+と書く．これを用いると，まず$x^\mu_+,x^\mu_-$の書き換えをして
+\begin{align*}
+x^\mu_\pm=&x^\mu\pm\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta) \\
+=&x^\mu \pm \frac{1}{2}(\theta^T \epsilon \gamma^\mu \theta) \\
+=&x^\mu \pm \frac{1}{2}((\theta_L+\theta_R)^T \epsilon \gamma^\mu (\theta_L+\theta_R)) \\
+=&x^\mu \pm \frac{1}{2}(\theta^T_L \epsilon \gamma^\mu \theta_R)\pm \frac{1}{2}(\theta^T_R \epsilon \gamma^\mu \theta_L) \quad \because (\theta^T_L \epsilon \gamma^\mu \theta_L) =(\theta^T_R \epsilon \gamma^\mu \theta_R)=0\\
+=&x^\mu\pm (\theta^T_R \epsilon \gamma^\mu \theta_L)=x^\mu\pm (\theta^T_L \epsilon \gamma^\mu \theta_R)
+\end{align*}
+最後の行への変形は(26.A.7)より
+\begin{align*}
+(\theta^T_L \epsilon \gamma^\mu \theta_R)=&\left(\theta^T \left(\frac{1+\gamma_5}{2}\right) \epsilon \gamma_\mu \left(\frac{1-\gamma_5}{2}\right) \theta \right)=\left(\theta^T \epsilon \gamma_\mu \left(\frac{1-\gamma_5}{2}\right) \theta \right) \\
+=&\left(\bar{\theta}\gamma_5 \gamma^\mu \left(\frac{1-\gamma_5}{2}\right) \theta \right)=\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)+\frac{1}{2}(\bar{\theta}\gamma^\mu \theta) \\
+=&\frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta) \quad \because (26.A.7)\\
+=&\left(\bar{\theta}\gamma_5 \gamma^\mu \left(\frac{1+\gamma_5}{2}\right) \theta \right)=(\theta^T_R \epsilon \gamma^\mu \theta_L)
+\end{align*}
+を用いた．これを用いると
+\begin{align*}
+\mc{D}_{R\alpha} x^\mu_+=&-\sum_\beta \epsilon_{\alpha\beta}\frac{\partial}{\partial \theta_{R\beta}} (\theta^T_R \epsilon \gamma^\mu \theta_L)-(\gamma^\nu \theta_L)_\alpha \frac{\partial}{\partial x^\nu} x^\mu\\
+=&+(\gamma^\mu \theta_L)_{\alpha}-(\gamma^\mu\theta_L)_\alpha \\
+=&0 \\
+\mc{D}_{L\alpha}x^\mu_- =&+\sum_\beta \epsilon_{\alpha\beta}\frac{\partial}{\partial \theta_{L\beta}} (-\theta^T_L \epsilon \gamma^\mu \theta_R) -(\gamma^\nu \theta_R)_\alpha \frac{\partial}{\partial x^\nu}x^\mu \\
+=&+(\gamma^\mu \theta_R)_{\alpha}-(\gamma^\mu \theta_R)_{\alpha} \\
+=&0
+\end{align*}
+となる．さらに当然$\mc{D}_{R\alpha}\theta_{L\beta}=0,\mc{D}_{L\alpha} \theta_{R\beta}=0$だ．右カイラル超場$\Phi(x,\theta)$の表式(26.3.21)を見れば，これは$x^\mu_+,\theta_L$にのみ依存しており，したがって$\mc{D}_{R\alpha}$によって必ずゼロとなる．
+\begin{align*}
+\mc{D}_{R\alpha}\Phi=0
+\end{align*}
+同様に$\tilde{\Phi}(x,\theta)$は$x^\mu_-,\theta_R$にのみ依存しており，したがって$\mc{D}_{L\alpha}$によって必ずゼロとなる．
+\begin{align*}
+\mc{D}_{L\alpha}\tilde{\Phi}=0
+\end{align*}
+すぐ前に述べた通り，$\theta_L,x^\mu_+$にのみ依存し$\theta_R$には依存しない超場は必ず(26.3.21)の形になり，$\theta_R,x^\mu$にのみ依存し$\theta_L$には(26.3.22)の形になるのだったから，この議論から逆にもし超場$\Phi$が$\mc{D}_{R}\Phi=0$を満たすならばそれは左カイラルであり，もし$\mc{D}_{L}\Phi=0$を満たすならばそれは右カイラルである！右カイラル超微分によってゼロになるような超場は左カイラルなのであり，左カイラル超微分によってゼロになるような超場が右カイラルなのである．さらに，超場$\Phi_n$が全て$\mc{D}_R\Phi_n=0$を満たすか，もしくは$\mc{D}_L\Phi_n=0$を満たすとき，それらの任意の関数$f(\Phi)$は$\mc{D}_Rf(\Phi)=0$もしくは$\mc{D}_Lf(\Phi)=0$を満たす．したがって，左カイラル超場から作られる関数は再び左カイラル，そして右カイラル超場から作られる関数も再び右カイラルだ．しかし左カイラル超場と右カイラル超場\uwave{両方}から作られる関数は一般にはカイラルですらない．\par
+以上の話をまとめると，左カイラル超場(もしくは右カイラル超場)の任意の関数で，その複素共役や時空微分を含まないものは再び左(もしくは右)カイラル超場だ，となる．左カイラル超場の複素共役は右カイラル超場で，右カイラル超場の複素共役は左カイラル超場となることも示すことができる．これは関係式(26.3.24)を複素共役し，超微分はマヨラナであるから
+\begin{align*}
+\bar{\mc{D}}_{L}=&\mc{D}^T_R \epsilon \gamma_5 =\epsilon \mc{D}_{R} \quad \therefore \mc{D}_{L\alpha}^*=(\beta \epsilon)_{\alpha\beta} \mc{D}_{R\beta}\\
+\bar{\mc{D}}_{R}=&\mc{D}^T_L \epsilon \gamma_5 =-\epsilon \mc{D}_{L} \quad \therefore \mc{D}_{R\alpha}^*=-(\beta \epsilon)_{\alpha\beta} \mc{D}_{L\beta}
+\end{align*}
+を用いれば，
+\begin{align*}
+0=&\left(\mc{D}_{R\alpha} \Phi\right)^*=-(\beta\epsilon)_{\alpha\beta}\mc{D}_{L\beta} \Phi^* \quad \therefore \mc{D}_{L\alpha} \Phi^*=0 \\
+0=&\left(\mc{D}_{L\alpha} \tilde{\Phi}\right)^*=(\beta\epsilon)_{\alpha\beta}\mc{D}_{R\beta} \tilde{\Phi}^* \quad \therefore \mc{D}_{R\alpha} \tilde{\Phi}^*=0
+\end{align*}
+がわかるからだ．また，左カイラル超場の超微分されたものは左カイラル超場にはならない．
+左カイラル超場の表現(26.3.21)を使うと，容易にそれらの積の性質を調べることができる．たとえば，もし$\Phi_1$と$\Phi_2$が二つの左カイラル超場ならば，それらの積$\Phi=\Phi_1\Phi_2$は再び左カイラル超場で
+\begin{align*}
+\Phi=&\left[\phi_1-\sqrt{2}(\theta^T_L \epsilon \psi_{1L})+\mc{F}_1\left(\theta_L^T \epsilon \theta_L\right)\right] \left[\phi_2-\sqrt{2}(\theta^T_L \epsilon \psi_{2L})+\mc{F}_2\left(\theta_L^T \epsilon \theta_L\right)\right] \\
+=&\phi_1\phi_2 -\sqrt{2}(\theta^T_L\epsilon \left[\phi_1 \psi_{2L}+\phi_2 \psi_{1L}\right])+2(\theta^T_L \epsilon \psi_{1L})(\theta^T_L\epsilon \psi_{2L}) \\
+&+(\phi_1 \mc{F}_2+\mc{F}_1 \phi_2)\left(\theta_L^T\epsilon \theta_L\right) -\sqrt{2}\mc{F}_1(\theta^T_L \epsilon \psi_{2L})\left(\theta_L^T\epsilon \theta_L\right)-\sqrt{2}\mc{F}_2 (\theta^T_L \epsilon \psi_{1L})\left(\theta_L^T\epsilon \theta_L\right) \\
++&\mc{F}_1 \mc{F}_2 \left(\theta_L^T\epsilon \theta_L\right)^2 \\
+=&\phi_1\phi_2 -\sqrt{2}(\theta^T_L\epsilon \left[\phi_1 \psi_{2L}+\phi_2 \psi_{1L}\right])+2(\theta^T_L \epsilon \psi_{1L})(\theta^T_L\epsilon \psi_{2L}) \\
+&+(\phi_1 \mc{F}_2+\mc{F}_1 \phi_2)\left(\theta_L^T\epsilon \theta_L\right) \\
+=&\phi_1\phi_2 -\sqrt{2}(\theta^T_L\epsilon \left[\phi_1 \psi_{2L}+\phi_2 \psi_{1L}\right]) \\
+&+(\phi_1 \mc{F}_2+\mc{F}_1 \phi_2-(\psi_{1L}^T \epsilon \psi_{2L}))\left(\theta_L^T\epsilon \theta_L\right) 
+\end{align*}
+ここで$\theta_L$について3次以上の項は必ず消えること(p146参照)を用いて，さらに(26.A.11)から
+\begin{align*}
+(\theta^T_L \epsilon \psi_{1L})(\theta^T_L\epsilon \psi_{2L}) =&(\theta^T \epsilon \psi_{1L})(\theta^T\epsilon \psi_{2L}) \\
+=&-\theta_{\alpha} \theta_{\beta}\left(\epsilon \psi_{1L}\right)_\alpha \left(\epsilon \psi_{2L}\right)_\beta \quad (フェルミオン入れ替えでマイナス) \\
+=&-\frac{1}{4}\left(\epsilon \gamma_5 \right)_{\alpha\beta}(\theta^T \epsilon \gamma_5 \theta)\left(\epsilon \psi_{1L}\right)_\alpha \left(\epsilon \psi_{2L}\right)_\beta -\frac{1}{4} (\gamma_\mu \epsilon)_{\alpha\beta}(\theta^T\epsilon \gamma^\mu \theta)\left(\epsilon \psi_{1L}\right)_\alpha \left(\epsilon \psi_{2L}\right)_\beta \\
+&-\frac{1}{4}\epsilon_{\alpha\beta}(\theta^T \epsilon \theta)\left(\epsilon \psi_{1L}\right)_\alpha \left(\epsilon \psi_{2L}\right)_\beta \\
+=&-\frac{1}{4}(\psi_{1L}^T\epsilon^T \epsilon \gamma_5 \epsilon \psi_{2L})(\theta^T \epsilon \gamma_5 \theta) -\frac{1}{4}(\psi^T_{1L} \epsilon^T \gamma_\mu \epsilon \epsilon \psi_{2L})(\theta^T \epsilon \gamma^\mu \theta) \\
+&-\frac{1}{4}(\psi_{1L}\epsilon^T \epsilon \epsilon \psi_{2L})(\theta^T \epsilon \theta) \\
+=&-\frac{1}{4}(\psi_{1L}^T \epsilon \psi_{2L})(\theta^T \epsilon \gamma_5 \theta) -\frac{1}{4}(\psi^T_{1L} \epsilon \gamma_\mu \psi_{2L})(\theta^T \epsilon \gamma^\mu \theta) \\
+&-\frac{1}{4}(\psi_{1L} \epsilon \psi_{2L})(\theta^T \epsilon \theta) \\
+=&-\frac{1}{2}(\psi_{1L}^T \epsilon \psi_{2L})\left(\theta^T \epsilon \left(\frac{1+\gamma_5}{2}\right) \theta\right) \quad \because (\psi^T_{1L} \epsilon \gamma_\mu \psi_{2L})=0 \\
+=&-\frac{1}{2}(\psi_{1L}^T \epsilon \psi_{2L})\left(\theta^T_L \epsilon \theta_L\right)
+\end{align*}
+であることを用いた．これにより成分場が
+\begin{align*}
+\phi=&\phi_1 \phi_2 \\
+\psi_L=& \phi_1 \psi_{2L} +\phi_2 \psi_{1L} \\
+\mc{F}=& \phi_1 \mc{F}_2 +\phi_2 \mc{F}_1 -(\psi_{1L}^T \epsilon \psi_{2L})
+\end{align*}
+となっていることがわかる．
+
+\vskip\baselineskip
+
+
+理論にカイラル超場があると，超対称作用を構成するのにより広い可能性が開ける．(26.3.16)の変換則を調べてみると，超対称性変換は左カイラル超場の$\mc{F}$項を微分だけ変化させることがわかる．したがって，任意の左カイラル超場の$\mc{F}$項の時空積分は超対称だ！よって超対称な作用を右カイラル超場の$\mc{F}$項だけ抜き出すことによって構成できる．さらに前の議論と同様に，別の一般的な超場の$D$項も付け加えることができる．これより，超対称作用を
+\begin{align*}
+I=\int d^4x \Bigl[f \Bigr]_{\mc{F}}+\int d^4x \Bigl[f \Bigr]_{\mc{F}}^* +\frac{1}{2}\int d^4 x \Bigl[K \Bigr]_{D}
+\end{align*}
+と構成することができる．ここで$f$は基本超場から作られる任意の左カイラル超場で，$K$は基本超場から作られる一般的な実超場だ．(基本超場が左カイラルだからといってそこから作られる一般的な超場が左カイラルとなるわけではない．その話を以下でする．)第二項目は全体が実になるようにしている．\par
+$f,K$は何に依存できるだろうか？関数$f$は，基本的な左カイラル超場$\Phi_n$にのみ依存し，それらの右カイラルな複素共役$\Psi_{n}^*$には依存しなければ，左カイラルなのだった．一方，カイラル超場の超微分はカイラルではない．実際，$\Psi$を左カイラル超場として
+\begin{align*}
+\{\mc{D}_\alpha ,\mc{D}_\beta\}=&+2(\gamma^\mu\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \quad \because (26.2.30),\bar{\mc{D}}=\mc{D}^T(\gamma_5 \epsilon)\\
+\mc{D}_{R\beta}\left(\mc{D}_{\alpha}\Psi\right)=&\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}\mc{D}_{\gamma}\left(\mc{D}_{\alpha}\Psi\right) \\
+&=-\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}\mc{D}_{\alpha}\left(\mc{D}_{\gamma}\Psi\right)+2\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}(\gamma^\mu \gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial x^\mu} \Psi \\
+=&-\mc{D}_{\alpha}\left(\mc{D}_{R\beta}\Psi\right)+2\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}(\gamma^\mu \gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial x^\mu}\Psi \\
+=&+2(\gamma^\mu \epsilon)_{\alpha\beta}\frac{\partial}{\partial x^\mu}\Psi \neq 0
+\end{align*}
+となり，左カイラル超場としての条件式を満たさない．同様に右カイラル超場の超微分は右カイラルとならない．したがって$\Phi_n$の超微分を自由に$f$に含めることはできない．しかし，左カイラルではない超場$S$(たとえば左カイラル超場の複素共役を含んでいる場合)に右超微分の対を作用させると，左カイラル超場を得る．これは
+\begin{align*}
+\{\mc{D}_{R\alpha} ,\mc{D}_{R\beta}\}=&+2\left(\left(\frac{1+\gamma_5}{2}\right)\gamma^\mu\gamma_5 \epsilon\left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+=&+2\left(\gamma^\mu\gamma_5 \epsilon\left(\frac{1-\gamma_5}{2}\right)\left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+=&0
+\end{align*}
+となり，右超微分同士は通常のフェルミオン的c数のように反可換であり，よってp146下の議論と同様に，そのような三つの積は必ずゼロとなるから
+\begin{align*}
+\mc{D}_{R\alpha}\left(\mc{D}_{R\beta}\mc{D}_{R\gamma}S\right)=0
+\end{align*}
+となり，実際に$\mc{D}_{R\beta}\mc{D}_{R\gamma}S$は左カイラル超場の条件を満たしている．しかし，このようにして2階の右超微分で構成された任意の関数$f$の$\mc{F}$項は，ある他の複合超場の$D$項と同等の寄与を作用に与えることが以下でわかる．$\mc{D}_R$は反可換だから，p147の議論が同様に行えて$\mc{D}_{R\alpha}\mc{D}_{R\beta}=\frac{1}{4}[\epsilon(1-\gamma_5)]_{\alpha\beta}(\mc{D}^T_{R}\epsilon \mc{D}_{R})$とできる．よって一般の超場$S$に$\mc{D}_R$を二つ作用させてできる最も一般の左カイラル超場は$(\mc{D}_R^T \epsilon \mc{D}_R)S$を使って表すことができる．$f$が依存する基本的左カイラル超場がこの形ならば，個々の$\mc{D}_R$が超ポテンシャルの他の全ての超場を消去するために
+\begin{align*}
+f=&f\Bigl(\Phi_n ,(\mc{D}_R\epsilon \mc{D}_R )S\Bigr) \\
+=&(\mc{D}_R^T \epsilon \mc{D}_R)h(\Phi_n,S)
+\end{align*}
+と書くことができる．ここで$h$はある他の超場で，もちろん左カイラルとは全く限らない一般的な形をしている．例えば$f=\Phi_n [(\mc{D}_R^T \epsilon \mc{D}_R)S_1]+\Phi_m \Phi_k [(\mc{D}_R^T \epsilon \mc{D}_R)S_2]$の形をしているとすると，$\mc{D}_R \Phi_n=0$だから$\mc{D}_R^T \epsilon \mc{D}_R$で括りだすことができて$f=(\mc{D}_R^T \epsilon \mc{D}_R)(\Phi_n S_1+\Phi_m \Phi_k S_2)$と書くことができる．$h=\Phi_n S_1+\Phi_m \Phi_k S_2$とおけば，これは左カイラルでもない一般的超場で$f=(\mc{D}_R^T \epsilon \mc{D}_R)h$と書ける．(仮定より全ての項は$(\mc{D}^T_{R}\epsilon \mc{D}_R)S$から作られる関数になっている必要がある．もしそうでなければ，例えば$f=\Phi_n [(\mc{D}_R^T \epsilon \mc{D}_R)S]+\Phi_m$は全体で左カイラル超場だが上のように書けない．この関数の第二項目は$(\mc{D}_R^T \epsilon \mc{D}_R)S$から作られるものではなく，基本左カイラル超場のみから作られるものだから，今回の話の適用外だ．)さて
+\begin{align*}
+\frac{\partial}{\partial \theta_{R\alpha}}\theta_{R\beta}=&\left(\frac{1-\gamma_5}{2}\right)_{\alpha\gamma}\frac{\partial}{\partial \theta_\gamma} \left(\frac{1-\gamma_5}{2}\right)_{\beta\delta}\theta_{\delta} \\
+=&\left(\frac{1-\gamma_5}{2}\right)_{\alpha\beta} \\
+\mc{D}_{R\alpha} (\theta_{R}^T \epsilon \theta_R)=&-\epsilon_{\alpha \beta}\frac{\partial}{\partial \theta_{R\beta}}(\theta_{R\gamma} \epsilon_{\gamma\delta} \theta_{R\delta}) \\
+=&-\epsilon_{\alpha\beta}\left(\frac{1-\gamma_5}{2}\right)_{\beta\gamma}\epsilon_{\gamma\delta}\theta_{R\delta} + \epsilon_{\alpha\beta}\theta_{R\gamma}\epsilon_{\gamma\delta}\left(\frac{1-\gamma_5}{2}\right)_{\beta\delta} \\
+=&2\theta_{R\alpha} \\
+(\mc{D}_R^T \epsilon \mc{D}_R) (\theta^T_R \epsilon \theta_R)=&(\mc{D}_R^T \epsilon)_\alpha \mc{D}_{R\alpha} (\theta_{R}^T \epsilon \theta_R) \\
+=&2(\mc{D}_R^T \epsilon \theta_R)  \\
+=&2\left(-\epsilon_{\alpha\beta}\frac{\partial}{\partial \theta_{R\beta}}\epsilon_{\alpha\gamma}\theta_{R\gamma} \right) =2\left(-\epsilon_{\alpha\beta}\epsilon_{\alpha\gamma}\left(\frac{1-\gamma_5}{2}\right)_{\beta\gamma}\right)\\
+=&-2\left(\frac{1-\gamma_5}{2}\right)_{\alpha\alpha} \\
+=&-4
+\end{align*}
+だから，作用に寄与しない時空微分($\mc{D}$の第二項目からくる)を除いて，$(\mc{D}_R^T \epsilon \mc{D}_R)h$は$h$の$-\frac{1}{4}(\theta^T_R \epsilon \theta_R)$の係数を抜き出すことに対応していることがわかる．($h$の中のこれより$\theta_R$について低い次数の項は2階$\theta_R$微分により消えるか，時空微分の項になってしまう．これより高次の項は，以下で存在しないことがわかる．)さらに，
+\begin{align*}
+\mc{F}(x_+)=&\Bigl[f\Bigr]_{\mc{F}}=\Bigl[\cdots +\mc{F}(x_+)(\theta_L^T \epsilon \theta_L )\Bigr]_{\mc{F}} \\
+=&\Bigl[(\mc{D}_R^T \epsilon \mc{D}_R)h\Bigr]_{\mc{F}}
+\end{align*}
+を見れば，$h$の$-\frac{1}{4}(\theta^T_L \epsilon \theta_L)(\theta_R^T \epsilon \theta_R)$の係数が$\mc{F}(x_+)$になっていることがわかる．実際逆算してみれば
+\begin{align*}
+h=&\cdots -\frac{1}{4}\mc{F}(x_+)(\theta^T_L \epsilon \theta_L)(\theta_R^T \epsilon \theta_R) \\
+(\mc{D}_R^T \epsilon \mc{D}_R)h=&\mc{F}(x_+) (\theta^T_L \epsilon \theta_L) \quad \because \mc{D}_R x_+=\mc{D}_R \theta_L=0
+\end{align*}
+となることがわかる．ここで
+\begin{align*}
+-\frac{1}{4}(\theta^T_L \epsilon \theta_L)(\theta_R^T \epsilon \theta_R)=&+\frac{1}{4}\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta \right)\left(\bar{\theta}\left(\frac{1-\gamma_5}{2}\right)\theta\right) \\
+=&\frac{1}{16}\left[(\bar{\theta}\theta)^2-(\bar{\theta}\gamma_5 \theta)^2\right] \\
+=&-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 \quad \because (26.A.18)
+\end{align*}
+であるから，$\mc{F}$は$h$の$-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2$の係数であり，$D$項は$-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2$の係数であるのだったから，
+\begin{align*}
+D=&\Bigl[h\Bigr]_{D}=\Bigl[\cdots -\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 D\Bigr]_{D} =\Bigl[\cdots -\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2 2D\Bigr]_{D} \\
+\therefore \quad \mc{F}=&2\Bigl[h\Bigr]_D
+\end{align*}
+となることがわかる．($D$項は$\theta$について最大次数の項なのだった．だから上の議論で$(\theta_R^T \epsilon \theta_R)$以上の項は考える必要がない．これより高次の項は5次以上に対応し，ゼロとなる．)以上をまとめれば
+\begin{align*}
+\int d^4x \Bigl[(\mc{D}_R^T \epsilon \mc{D}_R)h\Bigr]_{\mc{F}}=2\int d^4 x \Bigl[h\Bigr]_D
+\end{align*}
+がわかる！これが欲しかった結果だ．したがって$\mc{D}_{R\beta}\mc{D}_{R\gamma}S$の形の左カイラル超場に依存する項は新しく$f$に含める必要がない．そのような項はどれも，全ての可能な$D$項のリストに既に含まれているからだ．$f$が基本的な左カイラル超場のみの関数で表されて，それらの超微分や時空微分を含まないとき，そのような$f$は超ポテンシャルと呼ばれる．
+
+\vskip\baselineskip
+
+一方，関数$K$は一般に左カイラル超場$\Phi_n$とそれらの右カイラル複素共役$\Phi_n^*$の両方，さらにそれらの超微分と時空微分の実スカラー関数であり，ケーラー・ポテンシャルと呼ばれる．(どんな右カイラル超場も，ある左カイラル超場の複素共役で関係しているのだった．実際右カイラル超場$\tilde{\Phi}$の複素共役$\tilde{\Phi}^*$は左カイラルになるから，左カイラル超場を$\Phi\equiv \tilde{\Phi}^*$とおけば$\Phi^*=\tilde{\Phi}$と書ける．よって$K$が左カイラル超場とそれらの複素共役のみに依存しているとしても一般性は失われない．)しかし，そのような全ての$K$が異なる作用を与えるわけではない．例えば，カイラル超場は$D$項を持たないので，二つの$K,K'$がカイラル超場だけ異なるときは$[K]_D=[K']_D$となって同じ作用として寄与する．\par
+$K$の形を超空間の部分積分だけ変化させて，作用を同じに保つことも可能だ．任意の超場の超微分$\mc{D}_\alpha S$の$D$項は
+\begin{align*}
+\int d^4x \left[\mc{D}_\alpha S\right]=0
+\end{align*}
+となって作用に寄与しない．これを見るには，
+\begin{align*}
+\mc{D}_\alpha S=\sum_\beta (\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial S}{\partial \theta_\beta}-(\gamma^\mu \theta)_{\alpha} \frac{\partial S}{\partial x^\mu}
+\end{align*}
+を思い出す．$S$は$\theta$について高々4次の多項式だから，$\mc{D}_\alpha S$の第一項目は$\theta$について高々3次の多項式となり，$D$項に対応する項が存在しない．第二項目はまた時空微分だから，その$D$項も時空微分の形となる．したがって$\mc{D}_\alpha S$の第一項目と第二項目も(26.3.32)の積分に寄与せず，上の式が確かめられる．また，超微分は分配則に従って働くので，(26.3.32)より，超空間で部分積分できる．つまり，任意の二つのボゾン的超場$S_1$と$S_2$について
+\begin{align*}
+\int d^4x \left[S_1 \mc{D}_\alpha S_2 \right]_D=& \int d^4x \left[\mc{D}_{\alpha}(S_1S_2)\right]_D -\int d^4x \left[S_2 \mc{D}_\alpha S_1 \right]_D \\
+=&-\int d^4x \left[S_2 \mc{D}_\alpha S_1 \right]_D \quad \because (26.3.32)
+\end{align*}
+が成立する．26.4節と26.8節では，$f,K$が基本超場のみに依存してそれらの超微分や通常の微分には依存しない場合を考察する．
+
+\vskip\baselineskip
+
+
+前の節では，パリティが保存する理論において，一般のスカラー超場への時空反転演算子$\mathsf{P}$の効果は，その引数を$x^\mu \to \tensor{(\Lambda_P )}{^\mu_\nu}x^\nu,\theta \to -i\beta \theta$へと変換し，また超場に位相$\eta$をかけて(26.2.35)となることを見た．これらの変換のもとでは(26.3.21)(26.3.22)の引数$x^\mu_{\pm}$は
+\begin{align*}
+x^\mu_\pm=&x^\mu \pm \frac{1}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta) \\
+\to & (\Lambda_P x)^\mu \pm \frac{1}{2}(\bar{\theta} (-i\beta) \gamma_5 \gamma^\mu i\beta\theta) \\
+=&(\Lambda_P x)^\mu \pm \tensor{(\Lambda_P)}{^\mu_\nu}\frac{1}{2}(\bar{\theta} \gamma_5 \gamma^\nu \theta) \quad \because \beta \gamma^\mu \beta =\tensor{(\Lambda_P)}{^\mu_\nu} \gamma^\nu \\
+=&(\Lambda_P x_\mp)^\mu
+\end{align*}
+となり，また
+\begin{align*}
+\theta_L=\left(\frac{1+\gamma_5}{2}\right) \theta \to \left(\frac{1+\gamma_5}{2}\right)(-i\beta \theta) =-i\beta \left(\frac{1-\gamma_5}{2}\right)\theta =-i\beta \theta_R \\
+\theta_R=\left(\frac{1-\gamma_5}{2}\right)\theta \to \left(\frac{1-\gamma_5}{2}\right)(-i\beta \theta) =-i\beta \left(\frac{1+\gamma_5}{2}\right)\theta =-i\beta \theta_L
+\end{align*}
+と変換される．したがって，時空反転により左カイラル超場は右カイラル超場に，またその逆に右カイラル超場は左カイラル超場に変換される．(左カイラル超場は$x_+,\theta_L$依存であったが，この変換で$x_-,\theta_R$依存になるから．)よって$X(x,\theta)$をスカラー超場とすると，前節の議論により
+\begin{align*}
+\mathsf{P}^{-1} X(x,\theta)\mathsf{P}=&\mathsf{P}^{-1}\Phi(x,\theta)\mathsf{P}+\mathsf{P}^{-1} \tilde{\Phi}(x,\theta)\mathsf{P} \\
+=\eta X(\Lambda_P x,-i\beta \theta)=&\eta \Phi(\Lambda_P x,-i\beta \theta)+\eta\tilde{\Phi}(\Lambda_P x,-i\beta \theta) \\
+\therefore \quad \mathsf{P}^{-1}\Phi(x,\theta)\mathsf{P}=&\eta\tilde{\Phi}(\Lambda_P x,-i\beta\theta) \\
+\mathsf{P}^{-1}\tilde{\Phi}(x,\theta)\mathsf{P}=&\eta\Phi(\Lambda_P x,-i\beta\theta)
+\end{align*}
+となる．(この対応でなければ，左カイラルの反転が右カイラルであるようにならない．)4.2節の(4.2.14)より，左カイラル超場$\Phi$に含まれる成分場が生成・消滅する粒子は，空間反転された右カイラル超場$\mathsf{P}^{-1}\Phi\mathsf{P}$に含まれる成分場によっても生成・消滅されなければならない．そのような右カイラル・スカラー超場は複素共役$\Phi^*$だけだ．よって$\mathsf{P}^{-1}\Phi\mathsf{P}\propto \tilde{\Phi}$は$\Phi^*(\Lambda_P x,-i\beta \theta)$に比例しなければならない．よって$\tilde{\Phi}$と$\Phi^*$は比例しており，その比例係数を$\alpha$とおき$\tilde{\Phi}=\alpha\Phi^*$とすると
+\begin{align*}
+\mathsf{P}^{-1}\Phi(x,\theta) \mathsf{P}=&\eta \tilde{\Phi}(\Lambda_P x,-i\beta\theta)=\eta\alpha \Phi^*(\Lambda_P x,-i\beta\theta) \\
+=\alpha^*\mathsf{P}^{-1}\tilde{\Phi}^*(x,\theta) \mathsf{P}=&\alpha^*\eta^* \Phi^*(\Lambda_P x,-i\beta\theta) \\
+\therefore \quad \alpha\eta=\alpha^*\eta^*
+\end{align*}
+となり，$\alpha\eta$は実数であることがわかる．さらに
+\begin{align*}
+\mathsf{P}^{-1} \tilde{\Phi}(x,\theta)\mathsf{P} =&\alpha \mathsf{P}^{-1} \Phi^*(x,\theta)\mathsf{P}= \alpha \eta^* \tilde{\Phi}^*(\Lambda_P x,-i\beta\theta) \\
+=\eta \Phi(\Lambda_P,-i\beta\theta)=&\frac{\eta}{\alpha^*} \tilde{\Phi}^*(\Lambda_Px,-i\beta\theta) \\
+\therefore \quad \alpha \alpha^*\eta^* =&\eta
+\end{align*}
+ということもわかる．後者の条件と$|\eta|=1$を使うと$\alpha$も位相因子であることがわかり，$\Phi$の位相を適切に選ぶと
+\begin{align*}
+\mathsf{P}^{-1}\Phi(x,\theta)\mathsf{P}=&\Phi^*(\Lambda_P x,-i\beta\theta)
+\end{align*}
+とできる．($\alpha\eta=e^{i\theta}$とすれば，$\Phi'\equiv e^{-i\theta/2}\Phi$として位相因子が$\mathsf{P}^{-1}\Phi(x,\theta) \mathsf{P}=\eta\alpha \Phi^*(\Lambda_P x,-i\beta\theta)$の両辺で消えるようにできる．)成分場で書くと，この変換則は
+\begin{align*}
+\Phi^*(\Lambda_P x,-i\beta \theta)=&\phi^*(\Lambda_P x_-)-\sqrt{2}\left[(-i\beta \theta_R)^T \epsilon \psi_L(\Lambda_P x_-)\right]^*+\mc{F}^*(\Lambda_P x_-)((-i\beta \theta_R)^T \epsilon (-i\beta \theta_R))^* \\
+=&\phi^*(\Lambda_P x_-)-\sqrt{2}\left[-i\theta_R^T \beta \epsilon \psi_L(\Lambda_P x_-)\right]^*-\mc{F}^*(\Lambda_P x_-)(\theta_R^T \beta \epsilon \beta \theta_R)^* \\
+=&\phi^*(\Lambda_P x_-)-\sqrt{2}\left[-i\theta_R^\dagger \beta \epsilon \psi_L^*(\Lambda_P x_-)\right]+\mc{F}^*(\Lambda_P x_-)(\theta_R^\dagger \beta \epsilon \beta \theta_R^*) \quad \because (25.1.20) \\
+=&\phi^*(\Lambda_P x_-)-\sqrt{2}\left[-i\overline{\theta_R} \epsilon \psi_L^*(\Lambda_P x_-)\right]+\mc{F}^*(\Lambda_P x_-)(\overline{\theta_R} \epsilon \beta \theta_R^*) \\
+=&\phi^*(\Lambda_P x_-)-\sqrt{2}\left[-i\theta_L^T \epsilon \epsilon \psi_L^*(\Lambda_P x_-)\right]-\mc{F}^*(\Lambda_P x_-)(\theta_L^T \epsilon \theta_L) \quad \because \overline{\theta_R}=\theta^T_L \epsilon \gamma_5\\
+=&\phi^*(\Lambda_P x_-)-\sqrt{2}\left[\theta_L^T\epsilon(-i\epsilon \psi_L^*(\Lambda_P x_-))\right]-\mc{F}^*(\Lambda_P x_-)(\theta_L^T \epsilon \theta_L)
+\end{align*}
+から
+\begin{align*}
+\mathsf{P}^{-1} \phi(x)\mathsf{P}=&\phi^*(\Lambda_P x) \\
+\mathsf{P}^{-1} \psi_L(x)\mathsf{P}=& -i\epsilon \gamma_5 \psi_L^*(\Lambda_P x) \\
+\mathsf{P}^{-1} \mc{F}(x)\mathsf{P}=& \mc{F}^*(\Lambda_P x)
+\end{align*}
+となる．($\psi_L$についての変換則は誤植)\par
+
+
+\vskip\baselineskip
+
+
+他の種類の対称性も可能で，これは$R$対称性と呼ばれる．この対称性は26.5節で述べる超対称性が自発的に破れる模型のいくつかで重要となり，27.6節で非くりこみ定理を証明する際にも使われるらしい．25.2節で触れたように，$N=1$の単純超対称性の理論では，$R$対称性は$U(1)$変換(25.2.33)のもとでの不変性だ．この変換のもとでは，(25.2節で$\mr{Q}_a$と呼んだ)超対称性生成子右巻き成分はゼロではない量子数，例えば$+1$を持ち，さらにその場合にはその共役，つまり超対称性演算子の左巻き成分($\mr{Q}_a^*$)は反対の量子数$-1$を持つ．($\mr{Q}_a$は(0,1/2)表現なので右巻き成分だ．本文は誤植．)
+\begin{align*}
+[R,\mr{Q}_a]=&-(+1)\mr{Q}_a ,\quad e^{-iR\varphi}\mr{Q}_a e^{+iR\varphi}=e^{i\varphi}\mr{Q}_a\\
+[R,\mr{Q}^*_a]=&-(-1)\mr{Q}_a^* ,\quad e^{-iR\varphi}\mr{Q}_a^* e^{+iR\varphi}=e^{-i\varphi}\mr{Q}_a^*
+\end{align*}
+(26.2.2)から超空間座標$\theta$は$R$対称性変換のもとで非自明な変換性を持つことがわかる．具体的には，(25.2.34)より
+\begin{align*}
+\left[R,Q\right]=&\left(
+\begin{matrix}
++e\mr{Q}^* \\
+-\mr{Q}
+\end{matrix}
+\right) \\
+\therefore \quad \left[R,\left(\frac{1+\gamma_5}{2}\right)Q\right]=&+\left(\frac{1+\gamma_5}{2}\right)Q ,\quad \left[R,\left(\frac{1-\gamma_5}{2}\right)Q\right]=-\left(\frac{1-\gamma_5}{2}\right)Q \\
+\left[R,Q_L\right]=&+Q_L ,\quad \left[R,Q_R\right]=-Q_R \\
+e^{-iR\varphi}Q_Le^{iR\varphi}=& e^{-i\varphi} Q_L ,\quad e^{-iR\varphi}Q_Re^{iR\varphi}= e^{+i\varphi} Q_R
+\end{align*}
+だから，(26.2.1)より
+\begin{align*}
+[Q_L, S \}=&i\mc{Q}_L S , \quad [Q_R, S \}=i\mc{Q}_R S \\
+e^{-iR\varphi} [Q_L, S \} e^{iR\varphi}=& \left[ e^{-iR\varphi} Q_L e^{iR\varphi} ,e^{-iR\varphi}Se^{iR\varphi} \right\} \\
+=&e^{-i\varphi} \left[Q_L, e^{-iR\varphi}Se^{iR\varphi} \right\} \\
+=ie^{-iR\varphi}\mc{Q}_L S e^{iR\varphi}=&ie^{-iR\varphi} \mc{Q}_L e^{iR\varphi} \Bigl[e^{-iR\varphi}Se^{iR\varphi}\Bigr] 
+\end{align*}
+ここで
+\begin{align*}
+\mc{Q}_{L\alpha}=+\epsilon_{\alpha\beta}\frac{\partial}{\partial \theta_{L\beta}}+(\gamma^\mu \theta_R)_\alpha \frac{\partial}{\partial x^\mu}
+\end{align*}
+だ．($\mc{D}$と$\mc{Q}$は第二項目の符号だけが違うので，(26.3.26)からすぐわかる．)$e^{-iR\varphi}S(x,\theta)e^{iR\varphi}=S'(x,\theta)$とすると，($S'(x,\theta')$としてもいいが，$\theta'$は$\theta$の関数となるから$S''(x,\theta)=S'(x,\theta'(\theta))$と再定義できるのでこれでいい)
+\begin{align*}
+\left[Q_{L\alpha}, e^{-iR\varphi}S(x,\theta)e^{iR\varphi} \right\}=\left[Q_{L\alpha}, S'(x,\theta) \right\}=i\mc{Q}_{L\alpha} S'(x,\theta)
+\end{align*}
+となる．よって
+\begin{align*}
+e^{-iR\varphi}\mc{Q}_L e^{iR\varphi}=&e^{-i\varphi} \mc{Q}_L \\
+e^{-iR\varphi}\mc{Q}_{L\alpha} e^{iR\varphi}=&+\epsilon_{\alpha\beta}\left[e^{-iR\varphi}\frac{\partial}{\partial \theta_{L\beta}}e^{iR\varphi}\right]+(\gamma^\mu \left[e^{-iR\varphi}\theta_Re^{iR\varphi}\right])_{\alpha}\frac{\partial}{\partial x^\mu} \\
+=&e^{-i\varphi}\left(+\epsilon_{\alpha\beta}\frac{\partial}{\partial \theta_{L\beta}}+(\gamma^\mu \theta_R)_\alpha \frac{\partial}{\partial x^\mu}\right) \\
+\therefore \quad e^{-iR\varphi}\frac{\partial}{\partial \theta_{L\beta}}e^{iR\varphi}=&e^{-i\varphi}\frac{\partial}{\partial \theta_{L\beta}} ,\quad e^{-iR\varphi}\theta_Re^{iR\varphi}=e^{-i\varphi}\theta_R
+\end{align*}
+ここから
+\begin{align*}
+e^{-iR\varphi}\frac{\partial}{\partial \theta_{L\alpha}} \theta_{L\beta}e^{iR\varphi}=&\left(\frac{1+\gamma_5}{2}\right)_{\alpha\beta} \\
+=&e^{-i\varphi}\frac{\partial}{\partial \theta_{L\alpha}}e^{-iR\varphi}\theta_{L\beta} e^{iR\varphi} \\
+\therefore \quad e^{-iR\varphi}\theta_{L} e^{iR\varphi}=&e^{+i\varphi} \theta_{L}
+\end{align*}
+が得られる．よって$\theta_L$は$R$対称性変換のもとで量子数$+1$を持ち，$\theta_R$は$R$量子数$-1$を持つことがわかる．\par
+さらに，超場全体がある特定の$R$量子数を持つこともできる．もしカラル超場$\Phi(x,\theta)$が$R$量子数$R_{\Phi}$を持てば，
+\begin{align*}
+&e^{-iR \varphi}\Phi(x,\theta)e^{iR\varphi}=e^{iR_{\Phi}\varphi}\Phi(x,\theta) \\
+=&e^{-iR \varphi}\phi(x_+)e^{iR\varphi}-e^{+i\varphi}\sqrt{2}\left(\theta^T_L \epsilon \left[e^{-iR \varphi}\psi_L(x_+)e^{iR\varphi}\right]\right)+e^{+2i\varphi}\left[e^{-iR \varphi}\mc{F}(x_+)e^{iR\varphi}\right](\theta^T_L \epsilon \theta_L) \\
+\therefore \quad & e^{-iR \varphi}\phi e^{iR\varphi}=e^{iR_\Phi\varphi} \phi \\
+&e^{-iR \varphi}\psi_Le^{iR\varphi}=e^{i(R_\Phi-1)\varphi} \psi_L \\
+&e^{-iR \varphi}\mc{F}e^{iR\varphi}=e^{i(R_\Phi-2)\varphi}\mc{F}
+\end{align*}
+と変換され，スカラー成分$\phi$は同じ$R$量子数$R_\Phi$を持ち，左スピノル成分は$\psi_L$は$R_\psi=R_\Phi-1$，補助場$\mc{F}$は$R_{\mc{F}}=R_{\Phi}-2$を持つ．特に，超ポテンシャル項$\int d^4x [f]_\mc{F}$が$R$対称性を保存するならば，($R_\mc{F}=0$となるように)超ポテンシャル$f$自身は$R_f=+2$を持たなければならない．したがって，もし$f$が一つの左カイラル超場$\Phi$のみに依存する$f=f(\Phi)$ならば，$\Phi^{2/R_\Phi}$に比例していなければならない．実際
+\begin{align*}
+e^{-iR\varphi} \Phi^{2/R_\Phi}e^{iR\varphi}=(e^{iR_\Phi\varphi})^{2/R_\Phi}\Phi^{2/R_\Phi}=e^{2i\varphi}\Phi^{2/R_\Phi}
+\end{align*}
+となって$R_f=2$であり，これ以外の作り方ではそのようにできない．言い換えると，もし$f(\Phi)$が$\Phi^2$に比例する純粋な質量項ならば，$R_\Phi=+1$となる基準超場を選ばなければならないし，もし$f(\Phi)$が$\Phi^3$に比例する純粋な相互作用項ならば$R_\Phi=2/3$となる基準超場を選ばなければならない．一方，(26.2.10)を調べると
+\begin{align*}
+(\bar{\theta}\gamma_5\theta)^2\propto& (\theta^T_L \epsilon\theta_L)(\theta^T_R \epsilon \theta_R) \\
+e^{-iR\varphi}(\bar{\theta}\gamma_5\theta)^2 e^{iR\varphi} \propto& e^{-iR\varphi}(\theta^T_L \epsilon\theta_L)(\theta^T_R \epsilon \theta_R) e^{iR\varphi} =(\theta^T_L \epsilon\theta_L)(\theta^T_R \epsilon \theta_R) \\
+e^{-iR\varphi}S(x,\theta) e^{iR\varphi}=&e^{iR_\Phi\varphi}S(x,\theta) \\
+=&\cdots -\frac{1}{4}e^{-iR\varphi}(\bar{\theta}\gamma_5\theta)^2 D(x) e^{iR\varphi} \\
+=&\cdots -\frac{1}{4} (\bar{\theta}\gamma_5\theta)^2e^{-iR\varphi}D(x) e^{iR\varphi} \\
+\therefore \quad e^{-iR\varphi}D(x) e^{iR\varphi}=e^{iR_\Phi \varphi}D(x)
+\end{align*}
+となって，$D$はその超場と同じ$R$量子数を持つことがわかる．よって作用の$\int d^4x [K]_D$項が$R$対称性を保存するならば，$K$が$R=0$でありすれば良い．$K$が$\Phi$のみに依存する場合，$\Phi$がどのような$R$量子数を持とうとも$K$の各項が$\Phi$の因子と$\Phi^*$の因子を同じ数だけ持つようになっていればよく，逆にそのときのみ許される．\par
+もちろん，作用が$R$不変性を持たなければならない一般的な理由はないし，それが自発的に破れてはいけない理由もない．
+
+\vskip\baselineskip
+
+今回は(26.3.1)(26.3.2)で超場を拘束したが，他の方法もある．それを使えば場の別種の超対称性多重項が得られる．そのうち，比較的知られているものの一つは，\textbf{線形}の超場だ．この種の超場を定義する条件を調べるためには，ある一般の超場$S$から
+\begin{align*}
+S'\equiv \frac{1}{4}(\bar{\mc{D}}\mc{D})S
+\end{align*}
+とカイラル超場を作ることができることに着目する．これは
+\begin{align*}
+\frac{1}{4}(\bar{\mc{D}}\mc{D})S=&\frac{1}{4}(\overline{\mc{D}_R}\mc{D}_L)S+\frac{1}{4}(\overline{\mc{D}_L}\mc{D}_R)S \\
+=&\frac{1}{4}(\mc{D}_L^T \epsilon \mc{D}_L)S+\frac{1}{4}(\mc{D}^T_R \epsilon \mc{D}_R)S
+\end{align*}
+と書けて，第一項目はp98の議論により右カイラルで，第二項目は同様に左カイラルであるから，全体として(26.3.10)の形になっており，$S'$はカイラル超場だ．さて
+\begin{align*}
+(\bar{\mc{D}}\mc{D})=&\left[ \frac{\partial}{\partial \theta_\alpha}+(\gamma_5 \epsilon \gamma^\mu)_{\alpha\beta}\theta_\beta \frac{\partial}{\partial x^\mu} \right]\left[(\gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial \theta_\gamma}-\gamma^\nu_{\alpha\gamma}\theta_\gamma \frac{\partial}{\partial x^\nu}\right] \\
+=&(\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\alpha} \frac{\partial}{\partial \theta_\beta}-\gamma^\mu_{\alpha\beta}\frac{\partial}{\partial \theta_\alpha}\left(\theta_\beta \frac{\partial}{\partial x^\mu}\right) \\
+&+(\gamma_5 \epsilon \gamma^\mu)_{\alpha\beta}\theta_\beta (\gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial \theta_\gamma} \frac{\partial}{\partial x^\mu}-(\gamma_5 \epsilon \gamma^\mu)_{\alpha\beta}\theta_\beta \gamma^\nu_{\alpha\gamma}\theta_\gamma \frac{\partial}{\partial x^\mu}\frac{\partial}{\partial x^\nu} \\
+=&(\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\alpha} \frac{\partial}{\partial \theta_\beta}-\gamma^\mu_{\alpha\alpha} \frac{\partial}{\partial x^\mu} +\gamma^\mu_{\alpha\beta}\theta_\beta \frac{\partial}{\partial \theta_\alpha}\frac{\partial}{\partial x^\mu}\\
+&-(\gamma_5 \epsilon \gamma_5 \epsilon \gamma^\mu)_{\gamma\beta}\theta_\beta \frac{\partial}{\partial \theta_\gamma} \frac{\partial}{\partial x^\mu}-((\gamma^\nu)^T\gamma_5 \epsilon \gamma^\mu)_{\gamma\beta}\theta_\beta \theta_\gamma \frac{\partial}{\partial x^\mu}\frac{\partial}{\partial x^\nu} \\
+=&(\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\alpha} \frac{\partial}{\partial \theta_\beta}+\gamma^\mu_{\alpha\beta}\theta_\beta \frac{\partial}{\partial \theta_\alpha}\frac{\partial}{\partial x^\mu} \quad \because \mr{tr}\gamma^\mu=0\\
+&+\gamma^\mu_{\gamma\beta}\theta_\beta \frac{\partial}{\partial \theta_\gamma} \frac{\partial}{\partial x^\mu}+(\epsilon \gamma_5 \gamma^\nu \gamma^\mu)_{\gamma\beta}\theta_\beta \theta_\gamma \frac{\partial}{\partial x^\mu}\frac{\partial}{\partial x^\nu} \quad \because (\gamma^\mu)^T=(-\epsilon \gamma_5)\gamma^\mu (-\epsilon \gamma_5 )\\
+=&(\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial \theta_\alpha} \frac{\partial}{\partial \theta_\beta}+2(\gamma^\mu)^T_{\alpha\beta}\theta_\alpha \frac{\partial}{\partial \theta_\beta}\frac{\partial}{\partial x^\mu} +(\epsilon \gamma_5)_{\gamma\beta}\theta_\beta \theta_\gamma \frac{\partial}{\partial x^\mu}\frac{\partial}{\partial x_\mu} \\
+=&-\frac{\partial}{\partial \theta_\alpha} \frac{\partial}{\partial \bar{\theta}_\alpha}+2\theta_\alpha (\epsilon \gamma_5 )_{\alpha\gamma}\gamma^\mu_{\gamma\delta} (\epsilon \gamma_5)_{\delta \beta}\frac{\partial}{\partial \theta_\beta}\frac{\partial}{\partial x^\mu} -(\bar{\theta} \theta) \Box \\
+=&-\frac{\partial}{\partial \theta_\alpha} \frac{\partial}{\partial \bar{\theta}_\alpha}-2\bar{\theta}_\alpha \gamma^\mu_{\alpha\beta} \frac{\partial}{\partial \bar{\theta}_\beta}\frac{\partial}{\partial x^\mu} -(\bar{\theta} \theta) \Box \\
+\therefore \quad \frac{1}{4}(\bar{\mc{D}}\mc{D})=&-\frac{1}{4}\frac{\partial}{\partial \theta_\alpha} \frac{\partial}{\partial \bar{\theta}_\alpha}-\frac{1}{2}\bar{\theta}_\alpha \gamma^\mu_{\alpha\beta} \frac{\partial}{\partial \bar{\theta}_\beta}\frac{\partial}{\partial x^\mu} -\frac{1}{4}(\bar{\theta} \theta) \Box 
+\end{align*}
+これを(26.2.10)に作用させる．各項で見てみると，(26.2.9)とその類似式
+\begin{align*}
+\frac{\partial}{\partial \theta_\alpha}(\bar{\theta}M\theta)=&-2(\bar{\theta}M)_\alpha \\
+\frac{\partial}{\partial \bar{\theta}_\alpha}(\bar{\theta}M\theta)=&2(M\theta)_\alpha
+\end{align*}
+と，$\theta$について3次の項以降の微分ではフェルミオン的な微分とフェルミオン的変数の入れ替えでマイナスが出ることに気を付けて，
+\begin{align*}
+\frac{1}{4}(\bar{\mc{D}}\mc{D})C=&-\frac{1}{4}(\bar{\theta}\theta)\Box C \\
+\frac{1}{4}(\bar{\mc{D}}\mc{D})\left[-i(\bar{\theta}\gamma_5 \omega)\right]=&+\frac{i}{2}\left(\bar{\theta}\gamma^\mu \gamma_5 \frac{\partial \omega}{\partial x^\mu}\right)+\frac{i}{4}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \Box \omega) \\
+=&+\frac{i}{2}\left(\bar{\theta}\gamma^\mu \gamma_5 \frac{\partial \omega}{\partial x^\mu}\right)-\frac{i}{4}(\bar{\theta}\gamma_5\theta)(\bar{\theta} \Box \omega) \quad \because (26.A.16)\\
+=&-\frac{i}{2}\left(\bar{\theta}\gamma_5 \Slash{\partial}\omega\right)-\frac{i}{2}(\bar{\theta}\gamma_5\theta)\left(\bar{\theta} \frac{1}{2}\Slash{\partial}\Slash{\partial} \omega\right) \\
+\frac{1}{4}(\bar{\mc{D}}\mc{D})\left[-\frac{i}{2}\left(\bar{\theta}\gamma_5 \theta\right)M\right]=&+\frac{i}{4}(\gamma_5)_{\alpha\alpha}M+\frac{i}{2}(\bar{\theta}\gamma^\mu \gamma_5 \theta)\frac{\partial M}{\partial x^\mu}+\frac{i}{8}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \theta)\Box M \\
+=&-\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)\partial^\mu M \quad \because \mr{tr}\gamma_5=0,(26.A.16) \\
+\frac{1}{4}(\bar{\mc{D}}\mc{D})\left[-\frac{1}{2}(\bar{\theta}\theta)N\right]=&+\frac{1}{4}\delta_{\alpha\alpha}N+\frac{1}{2}(\bar{\theta}\gamma^\mu \theta)\frac{\partial N}{\partial x^\mu}+\frac{1}{8}(\bar{\theta}\theta)^2 \Box N \\
+=&N-\frac{1}{8}(\bar{\theta}\gamma_5 \theta)^2\Box N \quad \because (26.A.8)\\
+\frac{1}{4}(\bar{\mc{D}}\mc{D})\left[+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma^\mu \theta)V^\mu\right]=&-\frac{i}{4}(\gamma_5 \gamma_\mu )_{\alpha\alpha}V^\mu -\frac{i}{2}(\bar{\theta}\gamma^\nu \gamma_5 \gamma_\mu \theta)\frac{\partial V^\mu}{\partial x^\nu}-\frac{i}{8}(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)\Box V^\mu \\
+=&+\frac{i}{2}(\bar{\theta}\gamma^\nu \gamma^\mu \gamma_5 \theta)\partial_\nu V_\mu \\
+=&+\frac{i}{2}(\bar{\theta} \gamma_5 \theta)\partial_\mu V^\mu \\
+\frac{1}{4}(\bar{\mc{D}}\mc{D})\left[-i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\lambda\right)\right]=&+\frac{i}{2}(\gamma_5)_{\alpha\alpha}(\bar{\theta}\lambda)-\frac{i}{2}(\bar{\theta}\gamma_5 \lambda)+\frac{i}{2}(\gamma_5 \theta)_\alpha \bar{\lambda}_\alpha \\
+&+i(\bar{\theta}\gamma^\mu\gamma_5 \theta)\left(\bar{\theta}\frac{\partial \lambda}{\partial x^\mu}\right)+\frac{i}{2}(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\gamma^\mu \frac{\partial \lambda}{\partial x^\mu}\right) \\
+=&-i(\bar{\theta}\gamma_5 \lambda)-\frac{i}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma^\mu \partial_\mu \lambda) \quad \because (26.A.17),(26.A.8)\\
+=&-i(\bar{\theta}\gamma_5 \lambda)-i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\frac{1}{2}\Slash{\partial} \lambda\right) \\
+\frac{1}{4}(\bar{\mc{D}}\mc{D})\left[-i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\frac{1}{2}\Slash{\partial}\omega\right)\right]=&+\frac{i}{2}(\gamma_5)_{\alpha\alpha}\left(\bar{\theta}\frac{1}{2}\Slash{\partial}\omega\right)-\frac{i}{2}\left(\bar{\theta}\gamma_5 \frac{1}{2}\Slash{\partial}\omega\right)-\frac{i}{2}(\gamma_5 \theta)_\alpha \left(\frac{1}{2}\partial_\mu \bar{\omega}\gamma^\mu \right)_\alpha \\
+&+i(\bar{\theta}\gamma^\mu \gamma_5\theta)\left(\bar{\theta}\partial_\mu\frac{1}{2} \Slash{\partial}\omega\right)+\frac{i}{2}(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta} \gamma^\mu \partial_\mu \frac{1}{2}\Slash{\partial}\omega\right) \\
+=&-\frac{i}{2}\left(\bar{\theta}\gamma_5 \Slash{\partial}\omega\right)-\frac{i}{2}(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\frac{1}{2}\Slash{\partial}\Slash{\partial}\omega\right) \\
+\frac{1}{4}(\bar{\mc{D}}\mc{D})\left[-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 D\right]=&-\frac{1}{4}\frac{\partial}{\partial \theta_\alpha}\left[-(\bar{\theta}\gamma_5 \theta)(\gamma_5 \theta)_\alpha D\right]+\frac{1}{2}(\bar{\theta}\gamma_5 \theta)(\bar{\theta}\gamma^\mu \gamma_5 \theta)D \\
+=&-\frac{1}{2}(\bar{\theta}\gamma_5 \gamma_5 \theta)D +\frac{1}{4}(\bar{\theta}\gamma_5 \theta)(\gamma_5)_{\alpha\alpha}D \\
+=&-\frac{1}{2}(\bar{\theta}\theta)D \\
+\frac{1}{4}(\bar{\mc{D}}\mc{D})\left[-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 \frac{1}{2}\Box C\right]=&-\frac{1}{4}(\bar{\theta}\theta)\Box C
+\end{align*}
+ここで
+\begin{align*}
+(\bar{\theta}\gamma_5 \theta )(\bar{\theta}\gamma_5 \gamma_\mu \theta)=&0 \\
+(\bar{\theta}\theta)(\bar{\theta}\gamma_5 \gamma_\mu \theta)=&-(\bar{\theta}\gamma_\mu \theta)(\bar{\theta}\gamma_5 \theta)=0 
+\end{align*}
+であることを用いた．さらに$V^\mu$の項では
+\begin{align*}
+\gamma^\mu \gamma^\nu \gamma_5 =&\eta^{\mu\nu}\gamma_5+\frac{1}{2}[\gamma^\mu,\gamma^\nu]\gamma_5 \\
+=&\eta^{\mu\nu}\gamma_5 +\frac{1}{2}i\epsilon^{\mu\nu\rho\sigma}[\gamma_\rho,\gamma_\sigma]
+\end{align*}
+となることと(26.A.8)を用いた．二行目から三行目は$\mu=0,\nu=1$として$\epsilon^{0123}=+1$と$\gamma_5=-i\gamma^0\gamma^1 \gamma^2 \gamma^3$を用いればすぐ確かめられる．$\Slash{\partial}\omega$の項では
+\begin{align*}
+(\bar{\theta}\gamma^\mu \gamma_5 \theta)\left(\bar{\theta} \gamma^\nu \frac{1}{2}\partial_\mu\partial_\nu \omega\right)=&(\bar{\theta}\gamma_5 \gamma^\mu \theta)\left(\frac{1}{2}\partial_\mu\partial_\nu \bar{\omega} \gamma^\nu \theta\right) \quad \because (26.A.7)\\
+=&-(\bar{\theta}\gamma_5 \theta)\left(\frac{1}{2}\partial_\mu\partial_\nu \bar{\omega}\gamma^\mu \gamma^\nu \theta\right) \quad \because (26.A.17) \\
+=&-(\bar{\theta}\gamma_5 \theta)\left(\frac{1}{2}\Box \bar{\omega} \theta\right)=-(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\frac{1}{2}\Box \omega\right) \\
+=&-(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\frac{1}{2}\Slash{\partial}\Slash{\partial}\omega\right) 
+\end{align*}
+を用いた．これらの項を全て足し合わせると
+\begin{align*}
+S'=&\frac{1}{4}(\bar{\mc{D}}\mc{D})S \\
+=&N-i(\bar{\theta}\gamma_5 [\lambda+\Slash{\partial}\omega])-\frac{i}{2}(\bar{\theta}\gamma_5\theta)[-\partial_\mu V^\mu]-\frac{1}{2}(\bar{\theta}\theta)[D+\Box C] \\
+&+\frac{i}{2}(\bar{\theta}\gamma_5 \gamma_\mu \theta)[-\partial^\mu M]-i(\bar{\theta}\gamma_5 \theta)\left(\bar{\theta}\left[+\frac{1}{2}\Slash{\partial}(\lambda+\Slash{\partial}\omega)\right]\right) \\
+&-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2 \left(+\frac{1}{2}\Box N\right)
+\end{align*}
+となる．よって$S'$の成分は$S$の成分を用いて
+\begin{align*}
+C'=&N \\
+\omega'=&\lambda+\Slash{\partial}\omega \\
+M'=& -\partial_\mu V^\mu \\
+N'=& D+\Box C \\
+V'_\mu =&-\partial_\mu M \\
+\lambda'=&D'=0
+\end{align*}
+となる．もし，このように定義された超場$S'$がゼロ，つまり
+\begin{align*}
+(\bar{\mc{D}}\mc{D})S=0
+\end{align*}
+であるならば，多重項$S$は\textbf{線形}だという．これは$S'$の成分場が全てゼロであることに対応するから，
+\begin{align*}
+N=M=\partial_\mu V^\mu=0,\quad \lambda=-\Slash{\partial}\omega ,\quad D=-\Box C
+\end{align*}
+となる．これにより$C$と，条件$\partial_\mu V^\mu=0$を満たす$V_\mu$の独立な3成分(条件が一つだから一つは独立でない)のあわせて4つのボゾン場と，マヨラナ4スピノル$\omega$の4つの独立なフェルミオンが残る．再び前節の最後に示したように，実際にボゾンとフェルミオンが同数あることがわかる．26.6節では，その$V_\mu$が対称性変換に伴う保存カレントであるようなカレント超場は線形超場であることを見る．
+
+
+\newpage
+
+\subsection{カイラル超場のくりこみ可能な理論}
+さて，スカラー・カイラル超場の一般的なくりこみ可能な理論の詳細を調べる．これにより超対称性の帰結について見通しが得られ，ここで得る理論は28章で論じる超対称標準模型の一部を構成するらしい．\par
+12.2節で述べた通り，くりこみ可能な理論のラグランジアン密度は($\hbar=c=1$としてエネルギーか運動量の次数で)次元が4以下の演算子のみを含むことができるのだった．(26.2.6)を見れば，二つの$\mc{Q}_\alpha$で次元1の時空微分となるのだから，$\mc{Q}_\alpha$は次元$+1/2$を持ち，
+\begin{align*}
+\frac{1}{2}=d(\mc{Q}_\alpha)=d\left((\gamma_5\epsilon)\frac{\partial}{\partial \theta_\gamma}+\gamma^\mu_{\alpha\gamma}\theta_\gamma \frac{\partial}{\partial x^\mu}\right)
+\end{align*}
+および$\partial /\partial \theta_\alpha$は次元$+1/2$を持つことがわかる．これにより$\mc{D}_\alpha$は次元$+1/2$，$\theta_\alpha$は次元$-1/2$を持つこともわかる．
+\begin{align*}
+d(\mc{D}_\alpha)=&d\left(\frac{\partial}{\partial \theta_\alpha}\right)=\frac{1}{2} \\
+d(\theta_\alpha)=&-\frac{1}{2}
+\end{align*}
+さて，超場$S$の$\mc{F}$項と$D$項はそれぞれ$\theta$の因子を2つと4つ持つ項の係数なのだった．したがって，その超場が次元$d(S)$を持つならば，その$\mc{F}$項と$D$項は
+\begin{align*}
+d(S)=&d(\cdots +\mc{F}^S(\theta_L^T \epsilon \theta_L))=d(\mc{F}^S)-\frac{1}{2}\times 2=d(\mc{F}^S)-1 \quad \therefore d(\mc{F}^S)=d(S)+1 \\
+d(S)=&d\left(\cdots -\frac{1}{4}(\bar{\theta}\gamma_5 \theta)D^S\right)=d(D^S)-\frac{1}{2}\times 4 =d(D^S)-2 \quad \therefore d(D^S)=d(S)+2
+\end{align*}
+から$d(\mc{F}^S)=d(S)+1$と$d(D^S)=d(S)+2$を持つ．これにより，くりこみ可能な理論を構成するためには$d(\mc{F}^f)=4=d(D^K)$となるように，(26.3.30)の関数$f$と$K$はそれぞれ，
+\begin{align*}
+4=&d(\mc{F}^f)=d(f)+1 \quad \therefore d(f)=3 \\
+4=&d(D^K)=d(K)+2 \quad \therefore d(K)=2
+\end{align*}
+であるから，演算子次元が高々$3$と$2$の項からなることがわかる．\par
+(26.2.10)より$\Phi_n=\phi+\cdots $で，基本的なスカラー超場$\Phi_n$の次元は基本的スカラー場の次元($+1$)と同じとなる必要があるから次元$+1$だ．
+\begin{align*}
+d(\Phi_n)=+1
+\end{align*}
+したがって演算子次元3以下である左カイラルな関数$f$の項はどれも，$\Phi_n$やその微分$\partial/\partial x^\mu$，もしくはスピノル超微分$\mc{D}_\alpha$の対の因子を高々3つしか含むことができない．
+\begin{align*}
+f=\{\partial_\mu \partial_\nu \Phi_n,\quad \partial_\mu \mc{D}_\alpha \Phi_n ,\quad \Phi_n\mc{D}_\alpha \Phi_m,\quad \mc{D}_\alpha \mc{D}_\beta \Phi_n ,\quad \Phi_n \Phi_m \Phi_k ,\quad \cdots \}
+\end{align*}
+さらに前の節で論じたように，超微分から構成される$f$のどんな左カイラル項も$K$の項で置き換えることができるので，$f$において超微分は落とすことができる．(26.2.30)から，時空微分は超微分を使って表されることがわかるから，それらも同様の議論から省略することができる．(いずれにせよローレンツ不変性を考えれば時空微分一つだけの項はスカラー超場$\Phi_n$とスピノル超微分$\mc{D}_\alpha$ではローレンツ添え字を縮約できず，排除される．二つの時空微分の項はローレンツ不変性を満たすが，くりこみ可能な理論では次元が3以下だから，そこに$\Phi_n$の因子をひとつ追加することしかできず，$\partial_\mu \partial^\mu \Phi_n$の形となり，結局積分の中に入れると全微分であるから作用に寄与することができない．)したがって，$f(\Phi)$は$\Phi_n$について高々3次の多項式であり，時空微分も超微分も含まないことが結論される！
+\begin{align*}
+f(\Phi)=\sum_{nml}g_{nml}\Phi_n \Phi_m \Phi_l
+\end{align*}
+関数$f$は全体が左カイラルである必要があるから，右カイラル的な因子となる$\Phi^*_n$は含めることができない．\par
+$K$についても同様の次元解析をしてやる．くりこみ可能な理論では$K$は高々次元2なのだったから，$\Phi_n$の因子1つに時空微分かスピノル超微分$\mc{D}_\alpha$がかかったものになっているか，$\Phi_n\Phi_m$か$\Phi_n \Phi^*_m$の形になっているという候補が考えられる．
+\begin{align*}
+K=\{\partial_\mu \Phi_n,\quad \mc{D}_\alpha \Phi_n , \quad \mc{D}_\alpha \Phi_m^*, \quad \Phi_n \Phi_m, \quad \Phi_n \Phi_m^* , \quad \Phi_n^* \Phi_m^* \cdots \}
+\end{align*}
+しかし先程と同様にローレンツ不変性から1つだけの時空微分はありえず，スピノル超微分に関しては(26.3.32)から作用に寄与しない．したがってくりこみ可能な理論においては$K$は$\Phi_n$と$\Phi^*_n$の高々の高々2次の関数であり，微分を含まないことがわかる．
+\begin{align*}
+K=\{\Phi_n \Phi_m ,\quad \Phi_n \Phi_m^* , \quad \Phi_n^* \Phi_m^*\}
+\end{align*}
+さらに，$\Phi_n$のみか$\Phi_n^*$のみを含む$K(\Phi,\Phi^*)$の項は，必ず左カイラルか右カイラル超場となり，定義(26.3.1)からカイラル超場は$D$項を持たない．よって$\Phi_n$と$\Phi^*_n$の\uwave{両方}を含む$K(\Phi,\Phi^*)$の項のみが$[K(\Phi,\Phi^*)]_D$に寄与する．したがって考えるべき$K(\Phi,\Phi^*)$は以下の形でなければならない．
+\begin{align*}
+K(\Phi,\Phi^*)=\sum_{nm}g_{nm}\Phi^*_n \Phi_m
+\end{align*}
+ここで$g_{nm}$は，(全体が実となるように)エルミート行列をなす定数係数だ．
+
+\vskip\baselineskip
+
+さて，$f(\Phi)$の$\mc{F}$項と$K(\Phi,\Phi^*)$の$D$項を計算しなければならない．$K(\Phi,\Phi^*)$の$D$項を求めるために，二つの左カイラル超場の積$\Phi^*_n \Phi_m$の中の$\theta$について4次の項を求める必要がある．$\Phi_n,\Phi_m$は左カイラル超場だから条件(26.3.1)を満たしており，$D_n=\lambda_n=D_m =\lambda_m=0$であり，かつ$V_{n\mu}=\partial_\mu Z _n,V_{m\mu}=\partial_\mu Z_m$と書ける．したがって二つの超場の積(26.2.25)より
+\begin{align*}
+[\Phi^*_n\Phi_m]_D=&-\partial_\mu C^*_n \partial^\mu C_m +M_n^* M_m +N^*_n N_m \\
+&-\frac{1}{2}(\bar{\omega}_n \gamma^\mu \partial_\mu \omega_m)-\frac{1}{2}(\bar{\omega}_m \gamma^\mu \partial_\mu \omega_n)-\partial_\mu Z_n^* \partial^\mu Z_m
+\end{align*}
+さらに(26.3.8)の対応を代入する．(26.3.10)より，カイラル超場$X$が左カイラル超場$\Phi$であるためには$\tilde{\Phi}$がゼロ，つまり成分場(26.3.14)$\tilde{\phi},\psi_R,\tilde{\mc{F}}$が全てゼロとなり$\phi=A=iB,\sqrt{2}\psi_L=\psi,\mc{F}=F=iG$であることと対応している((26.3.13)を見て$\phi=\sqrt{2}A=i\sqrt{2}B,\psi_L=\psi,\mc{F}=\sqrt{2}F=i\sqrt{2}G$と思うかもしれないが，(26.3.10)で$X=\Phi$とするには分母の$\sqrt{2}$と打ち消しあうように(26.3.11)の各成分場を$\sqrt{2}$倍しなければならないことを考慮するとこの対応になる)から
+\begin{align*}
+[\Phi^*_n\Phi_m]_D=&-\partial_\mu A^*_n \partial^\mu A_m -\partial_\mu B_n^* \partial^\mu B_m +G_n^* G_m +F^*_n F_m \\
+&-\frac{1}{2}(\bar{\psi}_n \gamma^\mu \partial_\mu \psi_m)-\frac{1}{2}(\bar{\psi}_m \gamma^\mu \partial_\mu \psi_n) \\
+=&-2\partial_\mu \phi^*_n \partial^\mu \phi_m +2\mc{F}^*_n \mc{F}_m \\
+&-(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{mL})-(\overline{\psi_{mL}} \gamma^\mu \partial_\mu \psi_{nL}) \\
+=&-2\partial_\mu \phi^*_n \partial^\mu \phi_m +2\mc{F}^*_n \mc{F}_m \\
+&-(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{mL})+(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{mL})
+\end{align*}
+よって
+\begin{align*}
+\frac{1}{2}\Bigl[K(\Phi,\Phi^*)\Bigr]_D =&\sum_{nm}g_{nm}\Bigl[-\partial_\mu \phi^*_n \partial^\mu \phi_m +\mc{F}^*_n \mc{F}_m \\
+&-\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{mL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{mL})\Bigr]
+\end{align*}
+となる．(本文通り展開してもよいが，せっかく成分場の積を計算したのだから利用したいと思った．本文でやっていることは成分場の積を計算するときと全く同じ手順なので行間計算は省略する．)もし$\Phi_n$を新しい超場$\Phi'_m$の線形結合$\Phi_n=\sum_{m}N_{nm}\Phi'_m$で書いたならば，$K(\Phi,\Phi^*)$は新しい超場を使って
+\begin{align*}
+K(\Phi,\Phi^*)=&\sum_{nm}\Phi^*_n g_{nm} \Phi_m \\
+=&\sum_{nm}\Phi'^*_n (N^\dagger g N)_{nm}\Phi'_m=\sum_{nm}g'_{nm}\Phi'^*_n \Phi'_m
+\end{align*}
+と書けるから，これは$g_{nm}$を$g'_{nm}=(N^\dagger g N)_{nm}$で置き換えたのと同じ表式だ．スカラー場とスピノル場の運動項が量子交換・反交換関係と矛盾しない符号を持つためには，エルミート行列$g_{nm}$が正定値でなければならない．(これは，例えばスカラー場の運動項が$-A_{nm}\partial_\mu \phi^*_n \partial^\mu \phi_m$となるとする．$A$はエルミートだから$\phi_n$の再定義で対角化できる．$\pi_n=\partial \mc{L}/\partial (\partial_0 \phi^*_n)=\sum_mA_{nm}\partial_0\phi_m$が得られ，$A$が対角とすれば$\pi_n=a_n \partial_0 \phi_n$という形になる．$[\phi_n,\pi_m]=i\delta_{nm}\delta^3$を要請すると，各対角要素$a_n$は正の値にならなければならない．もし負だと2巻7章p14の脚注で述べている通り，生成消滅演算子で自由ハミルトニアンを展開したときに正のエネルギーが出てこない．フェルミオンについても同様)12.5節で示しているように，これは$g'_{nm}=\delta_{nm}$となるように$N$を選べることを意味する．プライムを落として書くと，項(26.4.2)はいまや
+\begin{align*}
+\frac{1}{2}\Bigl[K(\Phi,\Phi^*)\Bigr]_D =&\sum_n \Bigl[-\partial_\mu \phi^*_n \partial^\mu \phi_n +\mc{F}^*_n \mc{F}_n \\
+&-\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL})\Bigr]
+\end{align*}
+となる．この(26.4.3)の形を変えずに超場をユニタリー変換して再定義することはまだ可能だ．($K=\sum_n \Phi^*_n \Phi_n$という形になっているから，ユニタリー行列によって$\Phi'=N\Phi$と線形変換しても$K$は変わらない)この自由度は以下ですぐに必要になるらしい．\par
+(26.4.3)で$\phi_n$と$\psi_{nL}$を含む項は，通常のように規格化された複素スカラー場とマヨラナ・スピノル場のラグランジアンの正しい運動項になっている！質量項を調べた後に，このフェルミオン項をより馴染みのある形に書き換える．
+
+
+\vskip\baselineskip
+
+
+$f(\Phi)$の$\mc{F}$項を計算するには，(26.3.21)の超場の表現を使い，$\theta_L$について二次の項を拾い上げるのが一番便利だ．
+\begin{align*}
+&\Bigl[f(\Phi(x,\theta))\Bigr]_{\theta_L^2} \\
+&=\Bigl[f\left(\phi(x_+)-\sqrt{2}(\theta^T_L \epsilon \psi_L(x_+))+\mc{F}(x_+)(\theta^T_L \epsilon \theta_L)\right)\Bigr]_{\theta_L^2}\\
+=&\biggl[f(\phi(x_+))+\sum_n\frac{\partial f}{\partial \phi_n}(\phi(x_+))\left\{-\sqrt{2}(\theta_L^T \epsilon \psi_{nL}(x_+))+\mc{F}_n(x_+)(\theta_L^T \epsilon \theta_L)\right\} \\
+&+\frac{1}{2}\sum_{nm}\frac{\partial^2 f}{\partial \phi_n \partial \phi_m}(\phi(x_+))\left\{-\sqrt{2}(\theta_L^T \epsilon \psi_{nL}(x_+))+\mc{F}_n(x_+)(\theta_L^T \epsilon \theta_L)\right\}  \\
+&\qquad \qquad \qquad \qquad \qquad \times \left\{-\sqrt{2}(\theta_L^T \epsilon \psi_{mL}(x_+))+\mc{F}_m(x_+)(\theta_L^T \epsilon \theta_L)\right\}\biggr]_{\theta^2_L} \\
+=&\sum_{nm}(\theta_L^T \epsilon \psi_{nL}(x_+))(\theta^T_L \epsilon \psi_{mL}(x_+))\sum_{nm}\frac{\partial^2 f}{\partial \phi_n \partial \phi_m}(\phi(x_+)) +\sum_n \mc{F}(x_+)\frac{\partial f}{\partial \phi_n}(\phi(x_+)) \\
+=&\sum_{nm}(\theta_L^T \epsilon \psi_{nL}(x))(\theta^T_L \epsilon \psi_{mL}(x))\sum_{nm}\frac{\partial^2 f}{\partial \phi_n \partial \phi_m}(\phi(x)) +\sum_n \mc{F}(x_+)\frac{\partial f}{\partial \phi_n}(\phi(x)) 
+\end{align*}
+最後の等号では，$x_+$を$x$で置き換えた．$x$まわりで展開すると(26.3.23)より，さらに$\theta_L$の高次の項が出るが，$\theta_L$について3次以上の項はゼロとなることからこれが許される．右辺の第一項の$\theta$依存性は(26.A.11)を使って標準形にかける．
+\begin{align*}
+(\theta_L^T \epsilon \psi_{nL})(\theta^T_L \epsilon \psi_{mL})=&\left(\theta^T \epsilon \left(\frac{1+\gamma_5}{2}\right)\psi_{n}\right)\left(\theta^T \epsilon \left(\frac{1+\gamma_5}{2}\right)\psi_{m}\right) \\
+=&\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\psi_{n}\right)\left(\bar{\theta} \left(\frac{1+\gamma_5}{2}\right)\psi_{m}\right) \\
+=&\left(\bar{\psi}_n\left(\frac{1+\gamma_5}{2}\right)\theta\right)\left(\bar{\theta} \left(\frac{1+\gamma_5}{2}\right)\psi_{m}\right) \\
+=&-\frac{1}{4}\left(\bar{\psi}_n\left(\frac{1+\gamma_5}{2}\right)\left(\frac{1+\gamma_5}{2}\right)\psi_m\right)(\bar{\theta}\theta) \\
+&+\frac{1}{4}(\bar{\psi}_n \left(\frac{1+\gamma_5}{2}\right)\gamma_5 \gamma_\mu \left(\frac{1+\gamma_5}{2}\right)\psi_m)(\bar{\theta}\gamma_5 \gamma_\mu \theta) \\
+&-\frac{1}{4}\left(\bar{\psi}_n \left(\frac{1+\gamma_5}{2}\right)\gamma_5 \left(\frac{1+\gamma_5}{2}\right) \psi_{m}\right)(\bar{\theta}\gamma_5 \theta) \\
+=&-\frac{1}{4}(\bar{\psi}_{nL}\psi_{mL})[(\bar{\theta}(1+\gamma_5) \theta)]\\
+=&-\frac{1}{2}(\bar{\psi}_{nL}\psi_{mL})(\theta^T_L \epsilon \theta_L)
+\end{align*}
+となる．ここで$\bar{\psi}_{nL}$は$\overline{\psi_{nL}}$ではなく，$\bar{\psi}_n$の左巻き成分$\overline{\psi_{nR}}$のことだ．任意の左カイラル超場の$\mc{F}$項は$(\theta_L^T \epsilon \theta_L)$の係数だったのだから
+\begin{align*}
+\Bigl[f(\Phi)\Bigr]_{\mc{F}}=-\frac{1}{2}\sum_{nm}\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}(\bar{\psi}_{nL}\psi_{mL}) +\sum_n \mc{F}_n \frac{\partial f(\phi)}{\partial \phi_n}
+\end{align*}
+となる．完全なラグランジアン密度は(26.3.30)より，(26.4.3)(26.4.4)の項と(26.4.4)の複素共役の項の和で与えられる．
+\begin{align*}
+\mc{L}=&\sum_n \biggl[-\partial_\mu \phi^*\partial^\mu \phi_n +\mc{F}^*_n \mc{F}_n -\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL}) \biggr] \\
+&-\frac{1}{2}\sum_{nm}\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}(\bar{\psi}_{nL}\psi_{mL}) -\frac{1}{2}\sum_{nm}\left(\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}\right)^*(\bar{\psi}_{nL}\psi_{mL})^*  \\
+&+\sum_n \mc{F}_n \frac{\partial f(\phi)}{\partial \phi_n}  +\sum_n \mc{F}^*_n \left(\frac{\partial f(\phi)}{\partial \phi_n} \right)^*
+\end{align*}
+ここで$\psi_{nL}$についての二次の項は
+\begin{align*}
+(\bar{\psi}_{nL}\psi_{mL})=&(\overline{\psi_{nR}}\psi_{mL}) \\
+(\bar{\psi}_{nL}\psi_{mL})^*=&\left(\bar{\psi}_n\frac{1+\gamma_5}{2}\psi_{m}\right)^* \\
+=&\left(\bar{\psi}_n\frac{1-\gamma_5}{2}\psi_{m}\right) \quad \because (26.A.21) \\
+=&(\overline{\psi_{nL}}\psi_{mR})
+\end{align*}
+と書き換えられることに注意しておく．$\mc{F}_n$は作用に2次で入り時間微分を伴っていないから，これは補助場だ．さらにその係数は定数だから，$\mc{F}_n$をラグランジアン密度(26.4.5)が$\mc{F}_n,\mc{F}^*_n$について停留的になる値
+\begin{align*}
+\frac{\partial \mc{L}}{\partial \mc{F}_n} =&0 \\
+\therefore \quad \mc{F}_n =&-\left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^*
+\end{align*}
+にとることで，それらを消すことができる．これを(26.4.5)に代入して
+\begin{align*}
+\mc{L}=&\sum_n \biggl[-\partial_\mu \phi^*\partial^\mu \phi_n -\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL}) \biggr] \\
+&-\frac{1}{2}\sum_{nm}\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}(\bar{\psi}_{nL}\psi_{mL}) -\frac{1}{2}\sum_{nm}\left(\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}\right)^*(\bar{\psi}_{nL}\psi_{mL})^*  \\
+&-\sum_n \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{\partial f(\phi)}{\partial \phi_n}
+\end{align*}
+を得る．したがってスカラー場のポテンシャルは($\mc{L}=\mc{L}_0-V$なので)
+\begin{align*}
+V(\phi)=\sum_n \left|\frac{\partial f(\phi)}{\partial \phi_n }\right|^2
+\end{align*}
+となる．\par
+このように補助場を消去すると，残りの場$\psi_{nL}$と$\phi_n$についての超対称性変換(26.3.15)(26.3.17)
+\begin{align*}
+\delta \psi_{nL}=&\sqrt{2}\partial_\mu \phi_n \gamma^\mu \alpha_R -\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \alpha_L \\
+\delta \phi_n=&\sqrt{2} \left(\overline{\alpha_R}\psi_{nL}\right)
+\end{align*}
+のもとで，作用はもはや不変でなくなる．これは，表式(26.4.6)が$\mc{F}_n$について(26.3.16)で与えられる変換則$\delta \mc{F}_n=\sqrt{2} (\overline{\alpha_L}\Slash{\partial}\psi_{nL})$にもはや従わないからだ．実際(26.4.6)の左辺を変換してみると
+\begin{align*}
+\delta\left(-\frac{\partial f}{\partial \phi_n}(\phi)\right)^* =&-\sum_{m} \left(\frac{\partial^2 f}{\partial \phi_n \partial \phi_m}(\phi)\right)^*\delta \phi_m^* \\
+=&-\sqrt{2} \sum_m \left(\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}\right)^*(\overline{\alpha_L}\psi_{mR})  \\
+&\neq \sqrt{2} (\overline{\alpha_L}\Slash{\partial}\psi_{nL})
+\end{align*}
+となる．さらに，補助場を消去する前では(26.2.8)より
+\begin{align*}
+\delta_\beta (\delta_\alpha S)-\delta_\alpha (\delta_\beta S)=&\Bigl[-i(\bar{\beta}Q),\Bigl[-i(\bar{\alpha}Q),S\Bigr]\Bigr]-\Bigl[-i(\bar{\alpha}Q),\Bigl[-i(\bar{\beta}Q),S\Bigr]\Bigr] \\
+=&\Bigl[\Bigl[-i(\bar{\beta}Q),-i(\bar{\alpha}Q)\Bigr],S\Bigr] \quad \because ヤコビ恒等式\\
+=&-\Bigl[\bar{\beta}_\gamma\alpha_\delta \Bigl\{Q_{\gamma},\bar{Q}_{\delta}\Bigr\},S\Bigr]  \quad \because (\bar{\alpha}Q)=(\bar{Q}\alpha)\\
+=&+2i(\bar{\beta}\gamma^\mu \alpha)\Bigl[P_\mu ,S\Bigr] \\
+=&-2(\bar{\beta}\gamma^\mu \alpha)\partial_\mu S
+\end{align*}
+となることから，各成分場の超対称性変換(26.2.12)～(26.2.17)は$[\delta_\beta,\delta_\alpha]\chi=-2(\bar{\beta}\gamma^\mu \alpha)\partial_\mu \chi$となる．ここで添え字の$\alpha,\beta$は4成分スピノル添え字ではなく，パラメータが$\alpha,\beta$だということを表している．(実際(26.3.16)～(26.3.17)などで二回超対称性変換したものの交換子をとってみると簡単に具体例が確かめられる．)これは明らかに閉じた代数になっている．補助場を消去する前では，成分場の超対称性変換の交換子$[\delta_\beta ,\delta_\alpha]$は超対称反交換子$\{Q,\bar{Q}\}$で与えられる．しかし，補助場を消去した後は，$\phi_n$と$\psi_{nL}$の超対称性変換の交換子は超対称反交換関係で与えられず，閉じたリー超代数を構成しない．しかし，これは超対称性の反交換関係を満たす量子力学的演算子$Q_\alpha$の存在とは\uwave{矛盾しない}．(この「量子力学的演算子」とは7章で議論した，今まで議論してきた古典場の対称性変換(7.3.36)の古典的生成子ではなく，正準交換関係を課して正準量子化した量子場を変換する演算子(7.3.40)だ．つまり今までの$Q$とは違う．)これらの演算子は，$-i(\bar{\alpha}Q)$と\uwave{ハイゼンベルグ表示}での任意の量子場$\phi_n$または$\psi_{nL}$の交換子が，微小パラメータ$\alpha$の超対称性変換のもとでのその場の変化に等しい
+\begin{align*}
+\delta \chi=\left[-i(\bar{\alpha}Q),\chi\right]
+\end{align*}
+という意味で超対称性変換を生成する．例えば$\delta \psi_{nL}$についての対称性変換を考えてやると
+\begin{align*}
+\delta\psi_{nL\alpha}=&\sqrt{2}\partial_\nu \phi_n \gamma^\nu \alpha_R -\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \alpha_L \\
+=&\left[\sqrt{2}\partial_\nu \phi_n \gamma^\nu \frac{1-\gamma_5}{2} -\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{1+\gamma_5}{2}\right]\alpha \\
+=&i\left[-i\sqrt{2}\partial_\nu \phi_n \gamma^\nu \frac{1-\gamma_5}{2} +i\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{1+\gamma_5}{2}\right]\alpha \\
+=&i\mc{G}_{\alpha \beta} \alpha_\beta
+\end{align*}
+だからネーターカレントおよびネーターチャージは，$\psi_{nL},\phi$が場の方程式を満たすものと置くことによって
+\begin{align*}
+J^\mu_\alpha =&-i\left(\frac{\partial \mc{L}}{\partial (\partial_\mu \psi_{nL})}\right)_\beta \mc{G}_{\beta\alpha}\\
+=&\frac{i}{2}\overline{\psi_{nL}}\gamma^\mu \left[-i\sqrt{2}\partial_\nu \phi_n \gamma^\nu \frac{1-\gamma_5}{2} +i\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{1+\gamma_5}{2} \right] \\
+\Pi_{nL}=& \frac{\partial \mc{L}}{\partial (\partial_0 \psi_{nL})}=-\frac{1}{2}\overline{\psi_{nL}} \gamma^0 \\
+\bar{Q}_\alpha=&\int d^3x J^0_\alpha \\
+=&\int d^3x\frac{i}{2}\overline{\psi_{nL}}\gamma^0\left[-i\sqrt{2}\partial_\nu \phi_n \gamma^\nu \frac{1-\gamma_5}{2}+i\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{1+\gamma_5}{2} \right] \\
+=&-i\int d^3x\Pi_{nL\gamma} \left[-i\sqrt{2}\partial_\nu \phi_n \gamma^\nu \frac{1-\gamma_5}{2}+i\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{1+\gamma_5}{2} \right]_{\gamma\alpha}
+\end{align*}
+で与えられる．($Q$ではなく$\bar{Q}$なのは，$\delta\psi$が$\bar{\alpha}$ではなく$\alpha$の形で書いたことに合わせた．)逆に，このネーターチャージは，正準反交換関係を課して量子化した後で，量子場$\psi$の超対称性変換の生成子となっている．
+\begin{align*}
+\{\psi_{nL}(\mathbf{x},t),\Pi_{nL}(\mathbf{y},t)\}=&i\delta^3(\mathbf{x}-\mathbf{y})\mathbf{1} \\
+\{\bar{Q}_\alpha,\psi_{nL\beta}\}=&\left[-i\sqrt{2}\partial_\nu \phi_n \gamma^\nu \frac{1-\gamma_5}{2}+i\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{1+\gamma_5}{2} \right]_{\beta\alpha} \\
+[-i(\bar{\alpha}Q),\psi_{nL\beta}]=&[-i(\bar{Q}\alpha),\psi_{nL\beta}] \\
+=&+i \{\bar{Q}_\alpha,\psi_{nL\beta}\} \alpha_\alpha \\
+=&+i \left[-i\sqrt{2}\partial_\nu \phi_n \gamma^\nu \frac{1-\gamma_5}{2}+i\sqrt{2} \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{1+\gamma_5}{2} \right]\alpha \\
+=&i\mc{G}_{\beta\alpha}\alpha_{\alpha}=\delta \psi_{nL\beta}
+\end{align*}
+この$Q_\alpha$がここでいう量子力学的演算子だ！(本当は$\phi$についての項もカレントおよびチャージに追加してやらないと$[-i(\bar{\alpha}Q),\phi_n]=\delta \phi_n$が出せないが，面倒なので省略した．)構成より，ハイゼンベルグ表示の量子場$\psi_{nL},\phi_n$は場の方程式を満たす．この場合ならば，$\mc{F}_n$が(26.4.6)で
+\begin{align*}
+\mc{F}_n \equiv -\left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^*
+\end{align*}
+と与えられるとき，$-i(\bar{\alpha} Q)$という量子力学的演算子と$\mc{F}_n$の交換子は$\delta\mc{F}_n=\sqrt{2}(\overline{\alpha_L}\Slash{\partial}\psi_{nL})$で与えられる！これは，ハイゼンベルグ表示では量子場$\psi_{nL}$はラグランジアン(26.4.7)から導かれる場の方程式
+\begin{align*}
+&\partial_\mu \frac{\partial \mc{L}}{\partial (\partial_\mu \overline{\psi_{nL}})}=\frac{\partial \mc{L}}{\partial \overline{\psi_{nL}}} \\
+&\Slash{\partial} \psi_{nL}=-\sum_{n}\left(\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}\right)^* \psi_{mR}
+\end{align*}
+を満たし，
+\begin{align*}
+\delta \mc{F}_n \equiv& [-i(\bar{\alpha}Q),\mc{F}]=\left[-i(\bar{\alpha}Q),-\left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^*\right] \\
+=&-\sum_{m} \left(\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}\right)^*\delta \phi_m^* \\
+=&-\sqrt{2} \sum_m \left(\frac{\partial^2 f(\phi)}{\partial \phi_n \partial \phi_m}\right)^*(\overline{\alpha_L}\psi_{mR})  \\
+=& \sqrt{2} (\overline{\alpha_L}\Slash{\partial}\psi_{nL}) \quad \because 場の方程式
+\end{align*}
+となるからだ．同様に，量子場$\phi_n$と$\psi_{nL}$の超対称性変換は，場の方程式を考慮に入れると閉じたリー超代数を構成する．(わざわざ確かめなくても，場の方程式を入れたら既存の閉じた変換則(26.3.15)～(26.3.17)を再現することを考えれば，超対称性変換則は自明に閉じた代数$[\delta_\alpha ,\delta_\beta]=2(\bar{\beta}\gamma^\mu \alpha)\partial_\mu $となっていることが成り立つ．)このような代数はしばしば\textbf{殻上}(on-shell)だと言われる．つまり，条件$\delta I/\delta\chi=0$を満たす代数だということだ．15.9節のp56で指摘しているような，「代数は場の方程式が満たされているときにのみ閉じている」というものはこれのことを指している！
+
+\vskip\baselineskip
+
+
+スカラー場$\phi_n$のゼロ次の期待値$\phi_{n0}$は(26.4.7)の最後の項を最大(ポテンシャルを最低値にするものだから，負符号によって最大値になる)にするものでなければならない．ポテンシャルは絶対値の二乗の形となっており，この項は常に負かゼロだ．
+\begin{align*}
+V(\phi)=\sum_{n} \left|\frac{\partial f(\phi)}{\partial \phi_n}\right|^2\geq 0
+\end{align*}
+よって最大値は時空座標に依らない場の値$\phi_{n0}$で実現し，そのとき，この項はゼロとなっている．(真空の並進不変性より$\bra{0}\phi(x)\ket{0}=\bra{0}\phi(0)\ket{0}$なので真空期待値は時空非依存．)したがって
+\begin{align*}
+\left.\frac{\partial f(\phi)}{\partial \phi_n}\right|_{\phi=\phi_0}=0
+\end{align*}
+となる．(もちろんこれは，この方程式の解$\phi_{n0}$が存在するとしての話．)この式は，(26.4.7)の最後の項を最大化するだけではなく，超対称性が破れないための条件でもある．超対称性変換のもとで真空が不変であるためには，超対称性変換のもとでのどの場の変化分の真空期待値もゼロでなければならない．(19章参照．)ボゾン場の変化分はフェルミオン場であり，その真空期待値はローレンツ不変性によりもちろんゼロとなる．しかし(26.3.15)から$\delta\psi_{nL}$の真空期待値は補助場$\mc{F}_n$の真空期待値に比例することが分かる．($\partial_\mu \phi$は真空期待値の時間非依存性によりゼロ．)したがって，超対称性が破れていないならばこの項はゼロにならなければならない．(26.4.6)によれば，摂動論のゼロ次でこの条件は($\bra{0}\phi_n\ket{0}=\phi_{n0}$なので)
+\begin{align*}
+0=\bra{0}\mc{F}_n \ket{0}=-\bra{0}\left(\frac{\partial f(\phi)}{\partial \phi_n}\right)\ket{0}=-\left.\frac{\partial f(\phi)}{\partial \phi_n}\right|_{\phi=\phi_0}
+\end{align*}
+となり，(26.4.8)が満たされていることを意味する．27.6節で，もし(26.4.8)が満たされているならば，超対称性は摂動論の全次数で破れていないことを見る．\par
+左カイラル超場$\Phi$が一つだけの場合については，代数の基本的定理(任意$n$次複素多項式$P(z)=a_0+\cdots +a_nz^n(a_n\neq 0)$は複素数平面$\mathbb{C}$上で$n$個の根を持つ)から，多項式$\partial f(\phi)/\partial \phi$は常にゼロ点を複素空間のどこかに最低1つは持つ．これは超場が二つ以上ある場合には必ずしも正しくない．もし(26.4.8)に解$\phi_{n0}$があると\uwave{仮定}すると
+\begin{align*}
+\phi_n(x)=\phi_{n0}+\varphi_{n}(x)
+\end{align*}
+として$\varphi_n$のベキ展開をすることで理論にある物理的自由度を調べることができる．この理論の粒子の質量は，$\varphi$と$\psi$について2次の項を調べることで計算できる．このために対称複素行列
+\begin{align*}
+\mc{M}_{nm}\equiv \left.\frac{\partial^2 f(\phi)}{\partial\phi_n \phi_m}\right|_{\phi=\phi_0}
+\end{align*}
+を使って
+\begin{align*}
+\frac{\partial f}{\partial \phi_n}(\phi_0+\varphi)=&\left.\frac{\partial f(\phi)}{\partial \phi_n}\right|_{\phi=\phi_0}+\sum_m \left.\frac{\partial^2 f(\phi)}{\partial\phi_n \phi_m}\right|_{\phi=\phi_0}\varphi_m+\mc{O}(\varphi^2) \\
+=&\sum_m \mc{M}_{nm}\varphi_m+\mc{O}(\varphi^2) \quad \because (26.4.8)\\
+\frac{\partial^2 f}{\partial\phi_n \phi_m}(\phi_{0}+\varphi )=&\left.\frac{\partial^2 f(\phi)}{\partial\phi_n \phi_m}\right|_{\phi=\phi_0}+\mc{O}(\varphi) \\
+=&\mc{M}_{nm}+\mc{O}(\varphi)
+\end{align*}
+であることを用いると
+\begin{align*}
+\mc{L}_0=&\sum_n \biggl[-\partial_\mu \varphi^*\partial^\mu \varphi_n -\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL}) \biggr] \\
+&-\frac{1}{2}\sum_{nm}\mc{M}_{nm}(\bar{\psi}_{nL}\psi_{mL}) -\frac{1}{2}\sum_{nm}\mc{M}^*_{nm}(\bar{\psi}_{nL}\psi_{mL})^*  \\
+&-\sum_{nml} \mc{M}^*_{nm}\varphi_m^* M_{nl}\varphi_l \\
+=&\sum_n \biggl[-\partial_\mu \varphi^*\partial^\mu \varphi_n -\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL}) \biggr] \\
+&-\frac{1}{2}\sum_{nm}\mc{M}_{nm}(\bar{\psi}_{nL}\psi_{mL}) -\frac{1}{2}\sum_{nm}\mc{M}^*_{nm}(\bar{\psi}_{nL}\psi_{mL})^*  \\
+&-\sum_{nm} (\mc{M}^\dagger \mc{M})_{mn}\varphi_m^* \varphi_n
+\end{align*}
+となる．さて，もし場をユニタリー変換
+\begin{align*}
+\varphi_n=\sum_{m}\mc{U}_{nm}\varphi'_m , \quad \psi_{n}=\sum_{m} \mc{U}_{nm}\psi'_{m}
+\end{align*}
+で再定義すると，自由場のラグランジアン(26.4.10)は$\mc{M}$を
+\begin{align*}
+\mc{M}'=\mc{U}^T \mc{M}\mc{U}
+\end{align*}
+で置き換えたのと同じ形になる．\par
+以下で示すように，行列代数の定理により任意の複素対称行列$\mc{M}$について，(26.4.13)で定義される行列$\mc{M}'$が対角形になるようなユニタリ行列$\mc{U}$を見つけることが常に可能である．これを証明しよう．複素対称行列$\mc{M}(\mc{M}^T=\mc{M})$を用いて$H:=\mc{M}^\dagger \mc{M} (=\mc{M}^*\mc{M})$とおくと，これは定義上エルミート行列であるから，適当なユニタリ行列$V$を用いて
+\begin{align*}
+V^\dagger H V=D_H
+\end{align*}
+と対角化できる．ただし$D_H$は実かつ非負対角成分をもつ対角行列である．この対角化は恒等的に
+\begin{align*}
+D_H=&V^\dagger \mc{M}^\dagger \mc{M} V \\
+=&V^\dagger \mc{M}^\dagger V^* V^T \mc{M} V \\
+=&(V^\dagger \mc{M}^\dagger V^*)(V^T \mc{M} V) \\
+=&(V^* \mc{M} V)^\dagger(V^T \mc{M} V)
+\end{align*}
+と変形できるから，
+\begin{align*}
+N:=V^T \mc{M} V
+\end{align*}
+とおいてやると
+\begin{align*}
+D_H=N^\dagger N
+\end{align*}
+となる．明らかに$D_H=D_H^T$であり
+\begin{align*}
+D_H^*=D_H^\dagger=D_H
+\end{align*}
+となるから，$D_H$は実かつ非負な対角行列なので，素朴にルートをとることができ，それを$D_H^{1/2}$と表す．$N$は$N^T=(V^T \mc{M} V)^T=V^T \mc{M}^T V=N$となるから対称行列である．ここで$N=X+iY$のように実対称行列$X,Y$を導入して実部と虚部に分解すると
+\begin{align*}
+D_H=N^\dagger N =X^2+Y^2-i(XY-YX)
+\end{align*}
+と書ける．左辺が実対称行列であることから，$N$の実部$X$と虚部$Y$は可換$XY=YX$であることが導かれる．したがって，適当な実直交行列$W$が存在し，$X,Y$を同時対角化
+\begin{align*}
+W^T X W=D_X ,\quad W^T Y W=D_Y
+\end{align*}
+できる．以上より
+\begin{align*}
+W^T N W=& D_X +iD_Y\\
+=&\mathrm{diag}[x_1+iy_1,x_2+iy_2,\cdots, x_n+iy_n] \\
+=&\mathrm{diag}[r_1e^{i\theta_1},\cdots, r_n e^{i\theta_n}] \\
+=&\mathrm{diag}[e^{i\theta_1/2},\cdots e^{i\theta_n/2}]\mathrm{diag}[r_1,\cdots,r_n]\mathrm{diag}[e^{i\theta_1/2},\cdots e^{i\theta_n/2}] \\
+=&P D_N P
+\end{align*}
+となり，したがって$\mc{U}:=V W P^{-1}$とおけば
+\begin{align*}
+\mc{U}^T \mc{M} \mc{U}=&(V W P^{-1})^T\mc{M} (V W P^{-1}) \\
+=&P^{-1} W^T V^T \mc{M}V W P^{-1} \\
+=&P^{-1} W^T N W P^{-1} =D_N
+\end{align*}
+となり，対角化することができる．$r_i\geq 0$より，対角成分は実かつ半正定値である．さらに
+\begin{align*}
+\mc{U}^\dagger \mc{U}=&(V W P^{-1})^\dagger (V W P^{-1}) \\
+=&P W^\dagger V^\dagger V W P^{-1} \\
+=&P W^{-1} W P^{-1} \\
+=&I
+\end{align*}
+であるからユニタリ行列である．\par
+これを用いると，$\mc{M}'$の対角要素$m_n$は実で半正定値である．さらに
+\begin{align*}
+\mc{M}'^\dagger\mc{M}'=& \mc{U}^\dagger \mc{M}^\dagger (\mc{U}^T)^\dagger \mc{U}^T\mc{M} \mc{U} \\
+=&\mc{U}^\dagger \mc{M}^\dagger \mc{M} \mc{U} \\
+=&P W^\dagger V^\dagger \mc{M}^\dagger \mc{M} V W P^{-1} \\
+=&P W^\dagger N^\dagger N W P^{-1} \\
+=&P(W^T N W)^* (W^T N W) P^{-1} \\
+=&P (P^{-1} D_N P^{-1} )(P D_N P) P^{-1} \\
+=&D_N^2
+\end{align*}
+となり，かつ半正定値エルミート行列$\mc{M}^\dagger \mc{M}$をユニタリー行列で対角化したものであるから，その固有値($D_N^2$の対角成分$m_n^2$)は$\mc{M}^\dagger \mc{M}$の固有値である．場を(26.4.12)で再定義し，プライムを省略すると，ラグランジアンの二次の項は
+\begin{align*}
+\mc{L}_0 =&\sum_n \biggl[-\partial_\mu \varphi^*\partial^\mu \varphi_n -\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL}) \biggr] \\
+&-\frac{1}{2}\sum_{nm}(\mc{U}^T \mc{M}\mc{U})_{nm}(\bar{\psi}_{nL}\psi_{mL}) -\frac{1}{2}\sum_{nm}(\mc{U}^T\mc{M}\mc{U})^*_{nm}(\bar{\psi}_{nL}\psi_{mL})^*  \\
+&-\sum_{nm} (\mc{U}^\dagger \mc{M}^\dagger \mc{M} \mc{U})_{mn}\varphi_m^* \varphi_n \\
+=&\sum_n \biggl[-\partial_\mu \varphi^*\partial^\mu \varphi_n -\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL}) \biggr] \\
+&-\frac{1}{2}\sum_{n}m_n(\bar{\psi}_{nL}\psi_{nL}) -\frac{1}{2}\sum_{n}m_n(\bar{\psi}_{nL}\psi_{nL})^*  \\
+&-\sum_{n} m_n^2\varphi_n^* \varphi_n
+\end{align*}
+となる．フェルミオン質量項をより馴染みのある形にするには，左巻き成分が，$\psi_{nL}(x)$であるようなマヨラナ場$\psi_{n}(x)$を導入する．
+\begin{align*}
+\frac{1+\gamma_5}{2} \psi_n(x)=\psi_{nL}(x)
+\end{align*}
+すると
+\begin{align*}
+&-\frac{1}{2}\Bigl(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL}\Bigr) +\frac{1}{2} \Bigl(\partial_\mu (\overline{\psi_{nL}})\gamma^\mu \psi_{nL}\Bigr) \\
+=& -\frac{1}{2}\left(\overline{\psi_{n}} \gamma^\mu \partial_\mu \left(\frac{1+\gamma_5}{2}\right)\psi_{n}\right) +\frac{1}{2} \left(\partial_\mu (\overline{\psi_{n}})\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\psi_{n}\right) \\
+=&-\frac{1}{2}\left(\overline{\psi_{n}} \gamma^\mu \partial_\mu \left(\frac{1+\gamma_5}{2}\right)\psi_{n}\right) -\frac{1}{2} \left(\overline{\psi_{n}}\gamma^\mu \left(\frac{1-\gamma_5}{2}\right) \partial_\mu \psi_{n}\right) \quad \because (26.A.7)\\
+=&-\frac{1}{2}\Bigl(\overline{\psi_n}\gamma^\mu \partial_\mu \psi_n\Bigr)
+\end{align*}
+また実条件(26.A.21)から(前にも示しているけど)
+\begin{align*}
+\Bigl(\overline{\psi_{nL}} \psi_{nL}\Bigr)+\Bigl(\overline{\psi_{nL}} \psi_{nL}\Bigr)^*=&\left(\overline{\psi_{n}} \left(\frac{1+\gamma_5}{2}\right)\psi_{n}\right)+\left(\overline{\psi_{n}} \left(\frac{1+\gamma_5}{2}\right)\psi_{n}\right)^* \\
+=&\left(\overline{\psi_{n}} \left(\frac{1+\gamma_5}{2}\right)\psi_{n}\right)+\left(\overline{\psi_{n}} \left(\frac{1-\gamma_5}{2}\right)\psi_{n}\right) \\
+=&\Bigl(\overline{\psi_{n}} \psi_{n}\Bigr)
+\end{align*}
+となる．したがって完全な2次のラグランジアンは
+\begin{align*}
+\mc{L}_0=\sum_n\biggl[-\partial_\mu \varphi_n^* \partial^\mu \varphi_n - m_n^2 \varphi^*_n \varphi_n -\frac{1}{2}\Bigl(\overline{\psi_n}\gamma^\mu \partial_\mu \psi_n\Bigr) -\frac{m_n}{2}\Bigl(\overline{\psi_{n}} \psi_{n}\Bigr)\biggr]
+\end{align*}
+となる．フェルミオン項(第3,4項目)の因子$1/2$は，これらがマヨラナ・フェルミオン場であることから正しい．(実スカラー場のラグランジアンは複素スカラー場のラグランジアンに対して$1/2$の因子がついていたことを思い出す．マヨラナ場はスピノルでの実場のような扱いなので，これで正しい．)また，スカラー項(第1,2項目)は複素スカラー場なので$1/2$の因子はない．場$\varphi_n$が表すスピン・ゼロの粒子と$\psi_n$が表すスピン$1/2$の粒子は同じ質量$m_n$を持つことが分かる．これは理論の超対称性が破れていないことによって要請されている．
+
+\vskip\baselineskip
+
+ラグランジアン密度の相互作用項$\mc{L}'$は(26.4.7)の$\varphi_n$と$\psi_n$について3次以上の項で与えられる．くりこみ可能性より$V(\phi)=\sum_{n} \left|\frac{\partial f(\phi)}{\partial \phi_n}\right|^2$は場について4次以下である必要があり，したがって超ポテンシャル$f(\phi_0+\varphi)$は$\varphi$について3次多項式で，$\varphi_n=0$で停留し，$\varphi$は二次の項が$\frac{1}{2}\sum_n m_n \varphi^2_n$となるように定義されているから，超ポテンシャルを(定数項を除いて)以下のように書くことができる．
+\begin{align*}
+f(\phi_0 +\varphi)=\frac{1}{2}\sum_{n}m_n \varphi_n^2+ \frac{1}{6}\sum_{nm\ell}f_{nm\ell}\varphi_n \varphi_m \varphi_\ell
+\end{align*}
+上で行ったように，正しい質量項は
+\begin{align*}
+\frac{\partial f}{\partial \phi_n}(\phi_0+\varphi)=\frac{\partial f(\phi_0+\varphi)}{\partial \varphi_n}=m_n \varphi_n+\frac{1}{2}\sum_{m\ell} f_{nm\ell}\varphi_m \varphi_\ell \\
+\frac{\partial^2 f}{\partial \phi_n \partial \phi_m}(\phi_0+\varphi)=\frac{\partial^2 f(\phi_0+\varphi)}{\partial \varphi_n \partial \varphi_m}=m_n \delta_{nm}+\sum_{\ell}f_{nm\ell}\varphi_\ell
+\end{align*}
+の第一項目から生じる．これを(26.4.7)で使うと，ラグランジアンは
+\begin{align*}
+\mc{L}=&\sum_n \biggl[-\partial_\mu \phi^*\partial^\mu \phi_n -\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL}) \biggr] \\
+&-\frac{1}{2}\sum_{nm}\left[m_n \delta_{nm}+\sum_{\ell}f_{nm\ell}\varphi_\ell\right](\bar{\psi}_{nL}\psi_{mL}) -\frac{1}{2}\sum_{nm}\left[m_n \delta_{nm}+\sum_{\ell}f_{nm\ell}\varphi_\ell\right]^*(\bar{\psi}_{nL}\psi_{mL})^*  \\
+&-\sum_n \left[m_n \varphi_n+\frac{1}{2}\sum_{m\ell} f_{nm\ell}\varphi_m \varphi_\ell\right]^* \left[m_n \varphi_n+\frac{1}{2}\sum_{m\ell} f_{nm\ell}\varphi_m \varphi_\ell\right] \\
+=&\sum_n \biggl[-\partial_\mu \phi^*\partial^\mu \phi_n -\frac{1}{2}(\overline{\psi_{nL}} \gamma^\mu \partial_\mu \psi_{nL})+\frac{1}{2}(\partial_\mu (\overline{\psi_{nL}}) \gamma^\mu \psi_{nL}) -\frac{1}{2}m_n \left[(\bar{\psi}_{nL}\psi_{mL})+(\bar{\psi}_{nL}\psi_{mL})^*\right] \biggr] \\
+&-\frac{1}{2}\sum_{nm\ell}f_{nm\ell}\varphi_n(\bar{\psi}_{mL}\psi_{\ell L}) -\frac{1}{2}\sum_{nm\ell}f^*_{nm\ell}\varphi^*_n(\bar{\psi}_{mL}\psi_{\ell L})^*  \\
+&-\sum_n m_n^2 \varphi^*_n \varphi_n -\frac{1}{2}\sum_{nm\ell} m_n f_{nm\ell}\varphi_n^* \varphi_m \varphi_\ell -\frac{1}{2}\sum_{nm\ell} m_n f^*_{nm\ell}\varphi_n \varphi_m^* \varphi^*_\ell \\
+&-\frac{1}{4}\sum_{n m \ell m' \ell'} f_{nm\ell}f^*_{nm'\ell'}\varphi_m \varphi_\ell \varphi^*_{m'}\varphi^*_{\ell'} \\
+=&\sum_n \biggl[-\partial_\mu \phi^*\partial^\mu \phi_n -m_n^2 \varphi_n^* \varphi_n-\frac{1}{2}\Bigl(\overline{\psi_n}\gamma^\mu \partial_\mu \psi_n\Bigr) -\frac{m_n}{2} (\overline{\psi_n}\psi_n) \biggr] \\
+&-\frac{1}{2}\sum_{nm\ell}f_{nm\ell}\varphi_n(\bar{\psi}_{mL}\psi_{\ell L}) -\frac{1}{2}\sum_{nm\ell}f^*_{nm\ell}\varphi^*_n(\bar{\psi}_{mL}\psi_{\ell L})^*  \\
+&-\frac{1}{2}\sum_{nm\ell} m_n f_{nm\ell}\varphi_n^* \varphi_m \varphi_\ell -\frac{1}{2}\sum_{nm\ell} m_n f^*_{nm\ell}\varphi_n \varphi_m^* \varphi^*_\ell \\
+&-\frac{1}{4}\sum_{n m \ell m' \ell'} f_{nm\ell}f^*_{nm'\ell'}\varphi_m \varphi_\ell \varphi^*_{m'}\varphi^*_{\ell'} \\
+=&\sum_n \biggl[-\partial_\mu \phi^*\partial^\mu \phi_n -m_n^2 \varphi_n^* \varphi_n-\frac{1}{2}\Bigl(\overline{\psi_n}\gamma^\mu \partial_\mu \psi_n\Bigr) -\frac{m_n}{2} (\overline{\psi_n}\psi_n) \biggr] \\
+&-\frac{1}{2}\sum_{nm\ell}f_{nm\ell}\varphi_n\left(\overline{\psi_m}\left(\frac{1+\gamma_5}{2}\right)\psi_\ell\right) -\frac{1}{2}\sum_{nm\ell}f^*_{nm\ell}\varphi^*_n\left(\overline{\psi_m}\left(\frac{1-\gamma_5}{2}\right)\psi_\ell\right)  \\
+&-\frac{1}{2}\sum_{nm\ell} m_n f_{nm\ell}\varphi_n^* \varphi_m \varphi_\ell -\frac{1}{2}\sum_{nm\ell} m_n f^*_{nm\ell}\varphi_n \varphi_m^* \varphi^*_\ell \\
+&-\frac{1}{4}\sum_{n m \ell m' \ell'} f_{nm\ell}f^*_{nm'\ell'}\varphi_m \varphi_\ell \varphi^*_{m'}\varphi^*_{\ell'}
+\end{align*}
+となり，相互作用は
+\begin{align*}
+\mc{L}'=&-\frac{1}{2}\sum_{nm\ell}f_{nm\ell}\varphi_n\left(\overline{\psi_m}\left(\frac{1+\gamma_5}{2}\right)\psi_\ell\right) -\frac{1}{2}\sum_{nm\ell}f^*_{nm\ell}\varphi^*_n\left(\overline{\psi_m}\left(\frac{1-\gamma_5}{2}\right)\psi_\ell\right)  \\
+&-\frac{1}{2}\sum_{nm\ell} m_n f_{nm\ell}\varphi_n^* \varphi_m \varphi_\ell -\frac{1}{2}\sum_{nm\ell} m_n f^*_{nm\ell}\varphi_n \varphi_m^* \varphi^*_\ell \\
+&-\frac{1}{4}\sum_{n m \ell m' \ell'} f_{nm\ell}f^*_{nm'\ell'}\varphi_m \varphi_\ell \varphi^*_{m'}\varphi^*_{\ell'}
+\end{align*}
+であることがわかる．第一項目と第二項目を見れば，これは湯川相互作用の形をしている．質量$m_n$とスカラー・フェルミオンの「湯川」結合定数$f_{nm\ell}$がわかれば，スカラー場の全ての3次・4次の自己結合が決定される．
+
+\vskip\baselineskip
+
+例として，左カイラル超場が一つある場合を考えることにする．以前の結果との比較のために，(26.4.16)の一つだけの係数を
+\begin{align*}
+f:=2\sqrt{2} e^{i\alpha} \lambda
+\end{align*}
+と書く．ここで$\lambda$は実で，$\alpha$はある実位相である．また実スピンゼロの場の対$A(x),B(x)$を導入し，一つの複素スカラー場を
+\begin{align*}
+\varphi=: e^{-i\alpha} \left(\frac{A+iB}{\sqrt{2}}\right)
+\end{align*}
+と書く．すると(26.4.15)と(26.4.17)の和の全ラグランジアンは
+\begin{align*}
+-\partial_\mu \varphi^* \partial^\mu \varphi=&-\left(\frac{\partial_\mu A -i\partial_\mu B}{\sqrt{2}}\right)\left(\frac{\partial^\mu A +i\partial^\mu B}{\sqrt{2}}\right) \\
+=&-\frac{1}{2}\partial_\mu A \partial^\mu A -\frac{1}{2}\partial_\mu B \partial^\mu B \\
+-m^2 \varphi^* \varphi=&-m^2 \frac{1}{2}(A^2+B^2) \\
+-\frac{1}{2}f\varphi \left(\overline{\psi}\left(\frac{1+\gamma_5}{2}\right)\psi\right)=&-\frac{1}{4} (2\sqrt{2} e^{i\alpha}\lambda)e^{-i\alpha} \left(\frac{A+iB}{\sqrt{2}}\right)\left[(\bar{\psi}\psi)+(\bar{\psi}\gamma_5 \psi)\right] \\
+=&\frac{1}{2}\left[-\lambda A (\bar{\psi}\psi) -i\lambda B(\bar{\psi}\psi) -\lambda A(\bar{\psi}\gamma_5\psi) -i\lambda B(\bar{\psi}\gamma_5 \psi)\right] \\
+-\frac{1}{2}f^*\varphi^* \left(\overline{\psi}\left(\frac{1-\gamma_5}{2}\right)\psi\right)=&-\frac{1}{4} (2\sqrt{2} e^{-i\alpha}\lambda)e^{i\alpha} \left(\frac{A-iB}{\sqrt{2}}\right)\left[(\bar{\psi}\psi)-(\bar{\psi}\gamma_5 \psi)\right] \\
+=&\frac{1}{2}\left[-\lambda A (\bar{\psi}\psi) +i\lambda B(\bar{\psi}\psi) +\lambda A(\bar{\psi}\gamma_5\psi) -i\lambda B(\bar{\psi}\gamma_5 \psi)\right] \\
+-\frac{1}{2}m f \varphi^* \varphi \varphi =&-\frac{1}{2}m(2\sqrt{2}e^{i\alpha}\lambda) e^{i\alpha} \left(\frac{A-iB}{\sqrt{2}}\right)e^{-i\alpha} \left(\frac{A+iB}{\sqrt{2}}\right) e^{-i\alpha} \left(\frac{A+iB}{\sqrt{2}}\right) \\
+=&-\frac{1}{2}m\lambda (A^2+B^2)(A+iB) \\
+-\frac{1}{2}m f^* \varphi \varphi^* \varphi^* =&-\frac{1}{2}m(2\sqrt{2}e^{-i\alpha}\lambda) e^{-i\alpha} \left(\frac{A+iB}{\sqrt{2}}\right)e^{i\alpha} \left(\frac{A-iB}{\sqrt{2}}\right) e^{i\alpha} \left(\frac{A-iB}{\sqrt{2}}\right) \\
+=&-\frac{1}{2}m\lambda (A^2+B^2)(A-iB) \\
+-\frac{1}{4}ff^* \varphi \varphi \varphi^* \varphi^*=&-\frac{1}{4} 8\lambda^2 \frac{1}{4} (A^2+B^2)^2 \\
+=&-\frac{1}{2}\lambda^2 (A^2+B^2)^2
+\end{align*}
+であるから
+\begin{align*}
+\mc{L}=&-\frac{1}{2}\partial_\mu A \partial^\mu A-\frac{1}{2}\partial_\mu B \partial^\mu B -\frac{1}{2}m^2 (A^2+B^2) \\
+&-\frac{1}{2}\Bigl(\bar{\psi}\gamma^\mu \partial_\mu \psi\Bigr) -\frac{1}{2}m \Bigl(\bar{\psi}\psi\Bigr) \\
+&-\lambda A\Bigl(\bar{\psi}\psi\Bigr) -i\lambda B\Bigl(\bar{\psi}\gamma_5 \psi\Bigr) \\
+&-m\lambda A(A^2+B^2)-\frac{1}{2}\lambda^2 (A^2+B^2)^2
+\end{align*}
+となる．これはヴェス・ズミノによって発見されたラグランジアン(24.2.11)と同じになっている．この単純な場合には，このラグランジアンを導く際にパリティ保存を仮定しなかったにもかかわらず，このラグランジアンは空間反転変換
+\begin{align*}
+A(x)\to A(\Lambda_P x) ,\quad B(x)\to -B(\Lambda_P x) ,\quad \psi(x)\to i\beta \psi(\Lambda_P x)
+\end{align*}
+のもとで不変である．($A$はスカラーだが$B$は擬スカラーである．)パリティ保存が「偶発的」な対称性として現れるというのは様々なくりこみ可能なゲージ理論でよくある(12.5節と18.7節)が，スピンゼロの場を服ｘだ理論についてはそうではない．したがって，これは単一のスカラー超場$S$のくりこみ可能な理論において，超対称性の特別な場合だということができる．
+
+
+\newpage
+
+
+\subsection{樹木近似での自発的超対称性の破れ}
+前の節では，もし(26.4.8)に解があればカイラル超場のくりこみ可能な理論では(少なくとも樹木近似で)超対称性が破れていないことをみた．これは
+\begin{align*}
+\left.\frac{\partial f(\phi)}{\partial \phi_n}\right|_{\phi=\phi_0}=0
+\end{align*}
+となっている通り，超ポテンシャル$f(\phi)$が停留するような場の値$\phi_0$が実際にあるかどうかという問題である．この方程式には，$n$で添え字づけられている方程式の数と同じだけ独立変数$\phi_n$があるから，$f$が自由なものであれば，一般的には(26.5.1)には解があると期待される．したがって，これらの理論で超対称性が自発的に破れるためには(解$\phi_0$が存在しないためには)，超ポテンシャルの形に制限を加える必要がある．
+
+\vskip\baselineskip
+
+超ポテンシャルをどのように選択すると超対称性が破れるかを見るために，オラファテによる，よくある種の超対称性模型の一般化を考察する．超ポテンシャルが左カイラル超場$Y_i$の組の一次結合で，その係数は二組目の左カイラル超場$X_n$の関数$f_i(X)$だとする．($X_i$と$Y_n$の数は違ってもいい．)
+\begin{align*}
+f(X,Y)=\sum_i Y_i f_i(X)
+\end{align*}
+($f(\Phi)$の超場$\Phi$のスカラー成分$\phi$を用いて$f(\phi)$を書いていたことを思い出して)これらの超場$X_n,Y_i$のスカラー成分が$x_n,y_i$という値をとるときに，超対称性が破れない条件は
+\begin{align*}
+0=&\frac{\partial f(x,y)}{\partial y_i}=\frac{\partial}{\partial y_i}\sum_{j}y_j f_j(x) =f_i(x) \\
+0=&\frac{\partial f(x,y)}{\partial x_n}=\sum_i y_i \frac{\partial f_i(x)}{\partial x_n}
+\end{align*}
+となる．二番目の式は(26.5.4)は$y_i=0$ととることで常に解くことができる．これは(26.5.3)を解くことには全く影響しない．一方，超場$X_n$の数が超場$Y_i$の数より少なければ，一番目の式が$x_n$に課す条件は変数$x_n$の数より多いので，微細調整を行わないと解は存在しない．したがって超対称性は破れる．\par
+当初の仮定(26.5.2)そのものが微細調整を極端に行ったものだと思えるかもしれないが，実際には超ポテンシャルに適切な$R$対称性を課すことでこの形に制限することができる．26.3節で論じたように，$N=1$超体操性の理論では$R$対称性は$U(1)$対称性である．この対称性のもとでは超空間の座標$\theta$は自明でない変換性をもつ．(26.3節の最後で示したように，例えば$e^{-iR\varphi}\theta_L e^{iR \varphi}=e^{i\varphi}\theta_L$．)もし$\theta_L$が量子数$+1$を持つように$R$対称性を選ぶと，任意の超ポテンシャル$f$の$\mc{F}$項は，その超ポテンシャル$f$自身の量子数から2を引いた量子数をもつのだった．
+\begin{align*}
+e^{-iR\varphi}\mc{F} e^{iR\varphi}=e^{i(R_f-2)\varphi}\mc{F}
+\end{align*}
+そこで，$R$不変性から超ポテンシャル自身は$R=2$をもつ．したがって，$Y_i$と$X_n$の超場がそれぞれ，$R$量子数$+2$と$0$をもつような$R$不変性を要求すると，もはや構造(26.5.2)にのみ制約されることになる．
+
+\vskip\baselineskip
+
+この種の模型のスカラー場はポテンシャル
+\begin{align*}
+V(x,y)=&\sum_n \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{\partial f(\phi)}{\partial \phi_n} \\
+=&\sum_i\left(\frac{\partial f(x,y)}{\partial y_i }\right)^* \frac{\partial f(x,y)}{\partial y_i}+\sum_n \left(\frac{\partial f(x.y)}{\partial x_n }\right)^* \frac{\partial f(x,y)}{\partial x_n} \\
+=&\sum_i |f_i(x)|^2+\sum_n \left|y_i \frac{\partial f_i(x)}{\partial x_n}\right|^2 \quad \because (26.5.3)(26.5.4)
+\end{align*}
+を持つ．ポテンシャルは常に第1項目を最小(停留)にするような$x_n$を選ぶことにより，$V(x,y)$は$x$に関して最小になる．一方，$x_n$がどのような値をとっても，$y_i=0$ととることにより$V(x,y)$は$y$に関して最小になる．\par
+超対称性が自発的に破れるかどうかに依らず，これらの模型は場の空間のなかでポテンシャルの最小値が平坦となる方向が常に存在するという特別な性質をもつ．(26.5.5)の第一項目を最小にする$x_n$の値$x_{n0}$がなんであろうと，$y_i=0$だけでなくとも，ベクトル
+\begin{align*}
+(v^n)_i=\left.\frac{\partial f_i(x)}{\partial x_n}\right|_{x=x_0}
+\end{align*}
+に直交する方向の任意のベクトル$\mathbf{y}=\{y_i\}$についても第2項目はゼロになる．
+\begin{align*}
+0=&\mathbf{y}\cdot \mathbf{v}^n=\sum_i y_i \frac{\partial f_i(x)}{\partial x_n} \\
+V(x_0,y)=&\sum_i|f_i(x_0)|^2
+\end{align*}
+もし超場$X_n$が$N_X$個，超場$Y_i$が$N_Y$個あって$N_Y > N_X$(つまり先程述べた，解を持たないための条件)ならば，自由度が足りないから$\mathbf{v}^n$は$N_Y$次元ベクトル$\mathbf{y}$の属する全体のベクトル空間を張ることができず，この直交する方向は最低でも$N_Y-N_X$個ある\footnote{$N_Y=3$の3次元ベクトルで考えれば，$N_X=1$ならば$v^1$に直交するベクトルに対して2つの独立なベクトルが存在する．$N_X=2$ならば$v^1,v^2$に直交するベクトルは最低でも1ある．(最低でも，というのは，もしかしたら$v^1,v^2$が一致していれば直交するベクトルは2つになるかもしれないからである．)}．この平らな方向のどれかにゼロでない$y_i=y_{0i}\neq 0$があれば，(ポテンシャルは最低になるのに，スカラー場$y_i$の真空期待値がゼロでないから)ラグランジアン密度の$R$対称性は自発的に破れる．
+
+
+
+\end{document}

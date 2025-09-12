@@ -1,0 +1,2361 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+\usepackage{tensor}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+\newcommand{\mr}[1]{\mathrm{#1}}
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part25}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+
+\maketitle
+\setcounter{part}{24}
+\part{超対称代数}
+\setcounter{section}{25}
+\subsection{次数付きリー代数と次数付きパラメータ}
+2.2節で，任意の連続対称性変換を，交換関係$[t_a,t_b]=i\sum_c C^c_{ab}t_c$を満たす線形独立な対称性生成子$t_a$のリー代数で表現する方法を見た．全く同様に超対称性は
+\begin{align*}
+t_a t_b -(-1)^{\eta_a \eta_b}t_b t_a= i\sum_c C^c_{ab}t_c
+\end{align*}
+の形の交換関係および反交換関係で表される\textbf{次数付き}リー代数を構成する対称性生成子$t_a$で表現される！ここで$\eta_a$は各々の$a$について$+1$か$0$のどちらかの値をとり，これを生成子$t_a$の次数と呼ばれている．また$C^c_{ab}$は構造定数の数値の組だ．$\eta_a=1$の生成子$t_a$はフェルミオン的と呼ばれ，そうでない生成子は$\eta_a=0$でボゾン的と呼ばれる．(25.1.1)はボゾン的演算子同士，およびボゾン的な演算子とフェルミオン的演算子の間では交換関係を与える
+\begin{align*}
+[t_a,t_b]=t_a t_b -t_b t_a= i\sum_c C^c_{ab}t_c
+\end{align*}
+が，フェルミオン的演算子同士の間では反交換関係
+\begin{align*}
+\{t_a,t_b \}=t_a t_b +t_b t_a= i\sum_c C^c_{ab}t_c
+\end{align*}
+を与える．\par
+(25.1.1)より構造定数は
+\begin{align*}
+t_bt_a-(-1)^{\eta_a \eta_b}t_at_b =& i\sum_c C^c_{ba}t_c \\
+=&-(-1)^{\eta_a \eta_b}\Bigl(t_a t_b -(-1)^{\eta_a \eta_b}t_b t_a\Bigr)= -(-1)^{\eta_a \eta_b} i\sum_c C^c_{ab}t_c \\
+\quad \therefore C^c_{ba}=&-(-1)^{\eta_a \eta_{b}}C^c_{ab}
+\end{align*}
+の条件を満たす必要がある．それから，場の演算子の汎関数として構成された任意の演算子について，2個のボゾン的演算子または2個のフェルミオン的演算子の積はボゾン的であり，1個のボゾン的演算子と1個のフェルミオン的演算子の積はフェルミオン的である．よって$t_a,t_b$が共にボゾン的あるいはフェルミオン的ならば左辺の$t_c$はボゾン的でなければらなず，そうでなければ$t_c$はフェルミオン的でなければならない．これを表すと
+\begin{align*}
+\eta_c\equiv \eta_a+\eta_b \pmod 2 でなければ C^c_{ab}=0
+\end{align*}
+が成り立つ．また，このようにして構成された任意の演算子について，ボゾン的またはフェルミオン的演算子のエルミート共役は，それぞれボゾン的またはフェルミオン的だ．演算子$\{ t_a\}$がエルミート演算子なら，構造定数は
+\begin{align*}
+&\Bigl(t_a t_b -(-1)^{\eta_a \eta_b}t_b t_a\Bigr)^\dagger= -i\sum_c {C^{c}_{ab}}^*t_c^\dagger = -i\sum_c {C^{c}_{ab}}^*t_c \\
+&=t_b^\dagger t_a^\dagger -(-1)^{\eta_a \eta_b}t_a^\dagger t_b^\dagger=t_b t_a -(-1)^{\eta_a \eta_b}t_a t_b=i\sum_c C^c_{ba}t_c \\
+\therefore \quad & {C^{c}_{ab}}^*=-C^c_{ba}
+\end{align*}
+を満たす．\par
+構造定数はまた，超ヤコビ恒等式
+\begin{align*}
+(-1)^{\eta_c \eta_a}\left[ \left[t_a,t_b\right\},t_c \right\}+(-1)^{\eta_a \eta_b}\left[ \left[t_b,t_c\right\},t_a \right\}+(-1)^{\eta_b \eta_c}\left[ \left[t_c,t_a\right\},t_b \right\}=0
+\end{align*}
+から導かれる非線型条件を満たす．ここで「$[\cdots\}$」は拡張された次数付きの交換子
+\begin{align*}
+\left[ \mc{O},\mc{O}' \right\} \equiv& \mc{O}\mc{O}'-(-1)^{\eta(\mc{O})\eta(\mc{O}')}\mc{O}'\mc{O} \\
+=&(-1)^{\eta(\mc{O})\eta(\mc{O}')}\left[ \mc{O}' ,\mc{O} \right\}
+\end{align*}
+を表す．ここで生成子の任意の積$\mc{O}=t_a t_b t_c \cdots $の次数は$\eta(\mc{O})=\eta_a +\eta_b +\eta_c+\cdots \pmod 2$で与えられると理解する．\par
+(25.1.5)を証明するには，左辺の$t_a t_b t_c$と$t_a t_c t_b$の係数がゼロになることを見れば十分．なぜなら，そうすれば(25.1.5)の左辺の循環置換$abc\to bca \to cab$の下での対称性から，生成子の他の全ての積($t_b t_c t_a, t_c t_b t_a$など)もゼロになることが保証されるからだ．(25.1.5)の$t_a t_b t_c$の係数は第一項目
+\begin{align*}
+\left[ \left[t_a,t_b\right\},t_c \right\}=&\left[ t_at_b ,t_c \right\}+\cdots=t_a t_b t_c +\cdots 
+\end{align*}
+と第二項目
+\begin{align*}
+\left[ \left[t_b,t_c\right\},t_a \right\}=\left[ t_b t_c ,t_a \right\}+\cdots =-(-1)^{\eta_a(\eta_b+ \eta_c)}t_a t_b t_c +\cdots
+\end{align*}
+から生じるので
+\begin{align*}
+(-1)^{\eta_c \eta_a}+(-1)^{\eta_a \eta_b} \left[-(-1)^{\eta_a (\eta_b+\eta_c)}\right]=&(-1)^{\eta_c \eta_a}-(-1)^{\eta_c \eta_a+2(\eta_a\eta_b)} \\
+=&(-1)^{\eta_c \eta_a}-(-1)^{\eta_c \eta_a}=0
+\end{align*}
+となる．$t_a t_c t_b$の係数は，第二項目
+\begin{align*}
+\left[ \left[t_b,t_c\right\},t_a \right\}=&-(-1)^{\eta_b \eta_c}\left[ t_c t_b ,t_a \right\}+\cdots \\
+=&+(-1)^{\eta_b \eta_c}(-1)^{\eta_a(\eta_b+\eta_c)}t_a t_c t_b +\cdots
+\end{align*}
+と第三項目
+\begin{align*}
+\left[ \left[t_c,t_a\right\},t_b \right\}=-(-1)^{\eta_c \eta_a}\left[t_a t_c, t_b\right\}+\cdots =-(-1)^{\eta_c \eta_a}t_a t_c t_b +\cdots
+\end{align*}
+より生じるので
+\begin{align*}
+&(-1)^{\eta_a \eta_b}(-1)^{\eta_b \eta_c}(-1)^{\eta_a(\eta_b+\eta_c)}+(-1)^{\eta_b \eta_c}\left[-(-1)^{\eta_c \eta_a}\right] \\
+=&(-1)^{\eta_b\eta_c +\eta_a \eta_c+2(\eta_a \eta_b)}-(-1)^{\eta_b \eta_c +\eta_c \eta_a} \\
+=&0
+\end{align*}
+となる．これで証明が終了した．\par
+(25.1.1)を(25.1.5)に代入すると，条件式
+\begin{align*}
+&\left[ \left[t_a,t_b\right\},t_c \right\}=i\sum_d C^d_{ab}\left[t_d , t_c \right\}=-\sum_d C^d_{ab}C^e_{dc} \\
+\therefore \quad &\sum_d (-1)^{\eta_c \eta_a} C^d_{ab}C^e_{dc}+\sum_d (-1)^{\eta_a \eta_b} C^d_{bc}C^e_{da}+\sum_d (-1)^{\eta_b \eta_c} C^d_{ca}C^e_{bc}=0
+\end{align*}
+を得る．全ての生成子がボゾン的な場合($\eta_a=\eta_b=\eta_c=0$)には，(25.1.5)は通常のヤコビ恒等式であり，(25.1.7)は構造定数に対する通常の非線型条件(2.2.22)になる．
+
+
+
+\vskip\baselineskip
+
+
+次数付きパラメータに依存する変換を考える．次数付き$c$数パラメータの組は，通常の数とグラスマン数パラメータ(9.5節で扱ったもの)とを含む「数」と考えることができる．この数は数論の結合則と分配則を満たすが，単純な交換則の代わりに
+\begin{align*}
+\alpha^a \beta^b=(-1)^{\eta_a \eta_b}\beta^b \alpha^a
+\end{align*}
+の関係を満たす．ここで記号$\alpha^a,\beta^a,\cdots$は$a$番目のパラメータの異なる値を区別するために使う．これはベクトル代数で$v^a$と$u^a$を使って，ある実ベクトルの異なる値の$a$成分を表すのと同じだ．ここで$a$番目の次数付きパラメータは$\eta_a$を持ち，これも$\alpha^a$がフェルミオン的かボゾン的かに応じて，それぞれ$+1$または$0$の値をとる．すなわち，これらのパラメータはどちらかがボゾン的なら交換
+\begin{align*}
+\alpha^a \beta^b=\beta^b \alpha^a
+\end{align*}
+し，両方がフェルミオン的な場合反交換
+\begin{align*}
+\alpha^a \beta^b=-\beta^b \alpha^a
+\end{align*}
+する．次数付きパラメータの組の積$\alpha^a \beta^b \gamma^c$は次数$\eta_a+\eta_b +\eta_c +\cdots \pmod 2$を持つ．つまり，そのような積は，フェルミオン的パラメータを奇数個含んでいればフェルミオン的で，それ以外の場合はボゾン的となる．この次数を使えば，次数付きパラメータの積が(25.1.8)のような交換則または反交換則を満たすことは容易にわかる．
+\begin{align*}
+\mc{O}=&\alpha^a \beta^b \gamma^c \cdots ,\quad \eta(\mc{O})=\eta_a +\eta_b +\eta_c +\cdots \pmod 2\\
+\mc{O}'=&\alpha'^d \beta'^e \gamma'^f \cdots ,\quad \eta(\mc{O}')=\eta_d +\eta_e +\eta_f +\cdots \pmod 2\\
+\mc{O}\mc{O}'=&(-1)^{\eta(\mc{O})\eta(\mc{O}')}\mc{O}'\mc{O}
+\end{align*}
+(証明は簡単．$\alpha^a$を一番右に動かすと$(-1)^{\eta_a(\eta_d+\eta_e+\cdots)}$が現れ，次に$\beta^b$を左に持っていって$\alpha_a$の左に移動させると$(-1)^{\eta_b(\eta_d+\eta_e+\cdots)}$が現れ…というのを繰り返して符号を全て足し合わせると$(-1)^{(\eta_a+\eta_b+\cdots)(\eta_d+\eta_e+\cdots )}=(-1)^{\eta(\mc{O})\eta(\mc{O}')}$となる．)\par
+次数付きパラメータ$\{\alpha^a\}$の形式的ベキ級数
+\begin{align*}
+T(\alpha)=1+\sum_a \alpha^a t_a +\sum_{ab}\alpha^a \alpha^b t_{ab}+\cdots 
+\end{align*}
+で与えられる連続的な変換$T(\alpha)$を考える．(2.2節の$U(T(\theta))$と似たものだが，ここでの$T$は2.2節での$U$だ．群ではなく演算子．)ここで$t_a ,t_{ab}$などは$\alpha$に依らない係数演算子の組で，いまのところ(25.1.1)のような代数関係は全く仮定しない．パラメータ$\alpha^a$が(25.1.8)を満たすから，$t_{ab}$は
+\begin{align*}
+t_{ab}=(-1)^{\eta_a \eta_b}t_{ba}
+\end{align*}
+のような対称または反対称条件を満たす必要がある．また，変換$T(\alpha)$全体はボゾン的で，どの次数付きパラメータの任意の値$\alpha^a$とも交換すると仮定するのが便利だ．その場合，各項は$\alpha$と交換する必要があり，よって条件
+\begin{align*}
+\alpha^a \left(\sum_b\alpha^b t_b \right)=& \left(\sum_b\alpha^b t_b\right) \alpha^a \\
+\therefore \quad \alpha^a t_b=&(-1)^{\eta_a \eta_b}t_b \alpha^a
+\end{align*}
+と
+\begin{align*}
+\alpha^a \left(\sum_{bc}\alpha^b \alpha^c t_{bc}\right)=& \left(\sum_{bc}\alpha^b \alpha^c t_{bc}\right)\alpha^a \\
+\therefore \quad \alpha^a t_{bc}=&(-1)^{\eta_a (\eta_b+\eta_c)}t_{bc}\alpha^a
+\end{align*}
+を満たす．すなわち，$t_b$と$t_{bc}$はそれ自身があたかも次数付きパラメータであるかのように，次数付きパラメータと次数$\eta_b$および$\eta_b+\eta_c\pmod 2$で交換または反交換する．\par
+それ以外に，これらの演算子の満たすべき条件は，$T(\alpha)$が半群(単位元と逆元のない群)を作る，すなわち，次数付きパラメータの異なる値$\alpha$と$\beta$を持つ演算子の積はそれ自身が$T$演算子だという要請だ．
+\begin{align*}
+T(\alpha)T(\beta)=T(f(\alpha,\beta))
+\end{align*}
+ここで$f^c(\alpha,\beta)$はそれ自身次数付きパラメータの形式的ベキ級数だ．$T(\beta)=T(0)T(\beta)=T(f(0,\beta))$および$T(\alpha)=T(\alpha)T(0)=T(f(\alpha,0))$より
+\begin{align*}
+f^c(0,\beta)=\beta^c ,\quad f^c(\alpha,0)=\alpha^c
+\end{align*}
+でなければならない．したがって$f(\alpha,\beta)$のベキ級数展開は
+\begin{align*}
+f^c(\alpha,\beta)=\alpha^c+\beta^c+\sum_{ab}f^c_{ab}\alpha^a \beta^b+\cdots
+\end{align*}
+の形をしている必要がある．ここで$f^c_{ab}$は通常の(ボゾン的な)定数の組で，「…」は次数付きパラメータ$\alpha,\beta$の3次以上の項を表す．$f^c(\alpha,\beta)$が次数付きパラメータであるためには，(25.1.15)の各項は同じ次数を持つ必要がある．つまり左辺$f^c(\alpha,\beta)$がボゾン的またはフェルミオン的であるならば，右辺全体もそうでなくてはならない．よって
+\begin{align*}
+\eta_c=\eta_a+\eta_b \pmod 2 でなければ f^c_{ab}=0
+\end{align*}
+となる．ベキ級数(25.1.9)と(25.1.15)を積の法則(25.1.13)に代入すると
+\begin{align*}
+\mathrm{LHS}=&\left[1+\sum_a \alpha^a t_a +\sum_{ab}\alpha^a \alpha^b t_{ab}+\cdots \right] \left[1+\sum_a \beta^a t_a +\sum_{ab}\beta^a \beta^b t_{ab}+\cdots\right] \\
+=&1+\sum_a \left(\alpha^a+\beta^a \right)t_a+\sum_{ab}\left(\alpha^a \alpha^b +\beta^a \beta^b \right)t_{ab}+\sum_{bc}\alpha^b t_b \beta^c t_c+\cdots \\
+=&1+\sum_a \left(\alpha^a+\beta^a \right)t_a+\sum_{ab}\left(\alpha^a \alpha^b +\beta^a \beta^b \right)t_{ab}+\sum_{bc}\alpha^b\beta^c (-1)^{\eta_b \eta_c}t_b  t_c+\cdots \\
+=\mathrm{RHS}=&1+\sum_a f^a(\alpha,\beta) t_a +\sum_{ab}f^a(\alpha,\beta) f^b(\alpha,\beta) t_{ab}+\cdots \\
+=&1+\sum_a\left[\alpha^a+\beta^a+\sum_{bc}f^a_{bc}\alpha^b \beta^c+\cdots \right] t_a  \\
+&+\sum_{cd}\left[\alpha^c+\beta^c+\sum_{ab}f^c_{ab}\alpha^a \beta^b+\cdots \right]\left[\alpha^d+\beta^d+\sum_{ab}f^d_{ab}\alpha^a \beta^b+\cdots \right] t_{cd}+\cdots \\
+=&1+\sum_a (\alpha^a+\beta^a)t_a+\sum_{ab}\left(\alpha^a\alpha^b +\beta^a \beta^b\right)t_{ab}+\sum_{bc}\alpha^b \beta^c \left(\sum_af^a_{bc}t_a+t_{bc}\right)+\sum_{bc}\beta^b \alpha^c t_{bc}+\cdots \\
+=&1+\sum_a (\alpha^a+\beta^a)t_a+\sum_{ab}\left(\alpha^a\alpha^b +\beta^a \beta^b\right)t_{ab}+\sum_{bc}\alpha^b \beta^c \left(\sum_a f^a_{bc}t_a+t_{bc}+(-1)^{\eta_b\eta_c}t_{cb}\right)+\cdots
+\end{align*}
+が得られる．$1,\alpha^a,\beta^a,\alpha^a\alpha^b,\beta^a\beta^b$の係数は自動的に両辺が一致しているが，$\alpha^a\beta^b$の係数が等しいためには自明でない関係式
+\begin{align*}
+(-1)^{\eta_a \eta_b}t_a  t_b=&\sum_c f^c_{ab}t_c+t_{ab}+(-1)^{\eta_a\eta_b}t_{ba} \\
+=&\sum_c f^c_{ab}t_c+2t_{ab} \quad \because(25.1.10)
+\end{align*}
+が得られる．これにより生成子$t_a$と群合成関数$f^a(\alpha,\beta)$の$f^c_{ab}$を知ってれば，演算子$t_{ab}$を知ることができる．これをさらに高次についても同様のことを繰り返せば，生成子$t_a$と群合成関数$f^a(\alpha,\beta)$を知っていれば，これにより関数(25.1.9)全体を計算することが可能となる！(この結論は2.2節と同じ．)ただし，これが可能であるためには，$t_a$は以下の条件を満たす必要がある．(25.1.10)を使うと，(25.1.17)および同じ方程式で$a,b$を入れ替えたものの差または和から
+\begin{align*}
+t_{ab}=&\frac{1}{2}(-1)^{\eta_a \eta_b}t_a  t_b-\frac{1}{2}\sum_c f^c_{ab}t_c \\
+=(-1)^{\eta_a\eta_b}t_{ba}=&\frac{1}{2}t_b  t_a-\frac{1}{2}\sum_c (-1)^{\eta_b\eta_a} f^c_{ba}t_c \\
+\therefore \quad \left[t_a,t_b \right\}=&t_a  t_b-(-1)^{\eta_a\eta_b}t_b  t_a=\sum_c \left((-1)^{\eta_a \eta_b} f^c_{ab} - f^c_{ba}\right)t_c \equiv i\sum_{c}C^c_{ab}t_c
+\end{align*}
+となりリー超対称代数(25.1.1)が得られる．その構造定数は
+\begin{align*}
+iC^c_{ab}=(-1)^{\eta_a \eta_b} f^c_{ab} - f^c_{ba}
+\end{align*}
+で与えられる．(25.1.3)も(25.1.16)とこの定義から直ちに得られる．
+
+\vskip\baselineskip
+
+反交換するc数$\alpha$の複素共役$\alpha^*$は，$\alpha$と任意の演算子$\mc{O}$との積のエルミート共役が
+\begin{align*}
+(\alpha \mc{O})^*=\mc{O}^* \alpha^*
+\end{align*}
+となるように定義する．したがって複素共役のもとでのc数の積の振る舞いは，エルミート共役のもとでの演算子のふるまいと同じく
+\begin{align*}
+(\alpha\beta)^*=\beta^* \alpha^*
+\end{align*}
+となり，$\alpha^*$は$\alpha$と同じ次数を持つ．(まぁこの性質は24.2節で超対称性を確かめるために既に用いたんだけど．)
+
+
+
+\newpage
+
+
+\subsection{超対称代数}
+$S$行列と可換な対称性生成子の一般的な次数付きリー代数を考える．$Q$を任意のフェルミオン的な対称性生成子とすると，当然$U^{-1}(\Lambda)Q U(\Lambda)$もそうなる．(3.3節の議論より$S$演算子と$U(\Lambda)$は可換だったことを思い出そう．)ここで$U(\Lambda)$は任意の斉次ローレンツ変換$\tensor{\Lambda}{^\mu_\nu}$に対応する量子力学的演算子だ．したがって$U^{-1}(\Lambda)QU(\Lambda)$はフェルミオン的な対称性生成子の完全系の線形結合であり，よって，この生成子の完全系は斉次ローレンツ群の表現になっていなければならない．したがって，個々の生成子は，それが属する斉次ローレンツ群の既約表現に従って分類できる．\par
+5.6節で説明したように，任意の演算子の組が持つ斉次ローレンツ群の表現は，
+\begin{align*}
+\mathbf{A}\equiv \frac{1}{2}\left(\mathbf{J}+i\mathbf{K}\right) ,\quad \mathbf{B}\equiv \frac{1}{2}\left(\mathbf{J}-i\mathbf{K}\right)
+\end{align*}
+で定義される生成子$\mathbf{A,B}$の交換関係を与えることで特定できる．ここで$\mathbf{J,K}$はそれぞれ回転とブーストのエルミート生成子だ．これらは交換関係
+\begin{align*}
+[A_i,A_j]=i\sum_k \epsilon_{ijk}A_k ,\quad [B_i,B_j ]=i\sum_k \epsilon_{ijk} B_k ,\quad [A_i ,B_j]=0
+\end{align*}
+を満たす．ここで$i,j,k$は$1,2,3$の値をとり，$\epsilon_{ijk}$は完全反対称で$\epsilon_{123}=+1$だ．$\mathbf{A,B}$はともに$SU(2)$代数を構成するから，斉次ローレンツ群の表現は2個の独立な$SU(2)$スピンをもつ状態のように，2個の整数または半整数$A,B$で指定され，その表現の要素は$-A\leq a \leq +A, -B\leq b \leq +B$を間隔1おきに値をとる2個の添え字$a,b$で指定される．より詳しく言えば，斉次ローレンツ群の$(A,B)$表現を形成する$(2A+1)(2B+1)$個の演算子$Q^{AB}_{ab}$は交換関係
+\begin{align*}
+U^{-1}(\Lambda)Q^{AB}_{ab}U(\Lambda)=&e^{-\frac{i}{2}\omega_{\mu\nu}J^{\mu\nu}}Q^{AB}_{ab}e^{\frac{i}{2}\omega_{\mu\nu}J^{\mu\nu}} \\
+=&e^{-i\theta_i J_i+i\omega_i K_i}Q^{AB}_{ab}e^{i \theta_i J_i -i\omega_i K_i} \\
+=&e^{-i\alpha_i A_i -i\beta_i B_i}Q^{AB}_{ab}e^{i\alpha_i A_i +i\beta_i B_i} \quad (\alpha_i=\theta_i+i\omega_i ,\beta_i=\theta-i\omega_i )\\
+=&Q^{AB}_{ab}-i\alpha_i[A_i,Q^{AB}_{ab}]-i\beta_i [B_i ,Q^{AB}_{ab}]+\cdots \quad \because \mathrm{BCH}公式 \\
+=\sum_{a'b'}D^{A0}_{aa'}(\Lambda)D^{0B}_{bb'}(\Lambda)Q^{AB}_{a'b'}=&Q^{AB}_{ab}+i\alpha_i \sum_{a'}(J^{(A)}_i)_{aa'}Q^{AB}_{a'b}+i\beta_i\sum_{b'}(J^{(B)}_i)_{bb'}Q^{AB}_{ab'}+\cdots  \quad \because (5.7.16)\\
+\therefore \quad [\mathbf{A},Q^{AB}_{ab}]=&-\sum_{a'}\mathbf{J}^{(A)}_{aa'}Q^{AB}_{a'b},\quad [\mathbf{B},Q^{AB}_{ab}]=-\sum_{b'}\mathbf{J}^{(B)}_{bb'}Q^{AB}_{ab'}
+\end{align*}
+を満たす．ここで$\mathbf{J}^{(j)}_{\sigma\sigma'}$は角運動量$j$のスピン3元ベクトル行列で(5.6.16)(5.6.17)
+\begin{align*}
+\left(J_1^{(j)}\pm iJ^{(j)}_2\right)_{\sigma'\sigma}=&\delta_{\sigma', \sigma\pm 1}\sqrt{(j\mp \sigma)(j\pm \sigma+1)} \\
+\left(J^{(j)}_3\right)_{\sigma'\sigma}=&\delta_{\sigma'\sigma}\sigma
+\end{align*}
+である．(25.2.4)から(5.7.5)
+\begin{align*}
+-\left(\mathbf{J}^{(j)}\right)^*_{\sigma'\sigma}=(-1)^{\sigma'-\sigma}\left(\mathbf{J}^{(j)}\right)_{-\sigma',-\sigma}
+\end{align*}
+を得る．実際
+\begin{align*}
+\left(J_1^{(j)}\right)_{\sigma'\sigma}=&\frac{1}{2}\left(\delta_{\sigma',\sigma+ 1}\sqrt{(j- \sigma)(j+ \sigma+1)}+\delta_{\sigma',\sigma-1}\sqrt{(j+ \sigma)(j- \sigma+1)}\right) \\
+=&\frac{1}{2}\left( \delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}+\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)}\right) \\
+=&\frac{1}{2}\Bigl( (-1)^{\sigma'-(\sigma-1)}\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)} \quad \because \sigma'=\sigma-1\\
+&+(-1)^{(\sigma'-(\sigma+1))}\delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}\Bigr) \quad \because \sigma'=\sigma+1 \\
+ &=-(-1)^{\sigma'-\sigma}\left(J_1^{(j)}\right)_{-\sigma',-\sigma}^* \\
+ \left(J_2^{(j)}\right)_{\sigma'\sigma}=&\frac{1}{2i}\left(\delta_{\sigma',\sigma+ 1}\sqrt{(j- \sigma)(j+ \sigma+1)}-\delta_{\sigma',\sigma-1}\sqrt{(j+ \sigma)(j- \sigma+1)}\right) \\
+=&\frac{1}{2i}\left( \delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}-\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)}\right) \\
+=&\frac{1}{2i}\Bigl( -(-1)^{\sigma'-(\sigma-1)}\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)} \quad \because \sigma'=\sigma-1\\
+&+(-1)^{(\sigma'-(\sigma+1))}\delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}\Bigr) \\
+=&(-1)^{\sigma'-\sigma}\frac{1}{2i}\Bigl( \delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)} \\
+&-\delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}\Bigr) \quad \because \sigma'=\sigma+1 \\
+=&-(-1)^{\sigma'-\sigma}\left(J_2^{(j)}\right)_{-\sigma',-\sigma}^* \\
+\left(J_3^{(j)}\right)_{\sigma'\sigma}=&\delta_{\sigma'\sigma}\sigma \\
+=&-(-\sigma)\delta_{-\sigma',-\sigma}=-(-1)^{\sigma'-\sigma}(-\sigma)\delta_{-\sigma',-\sigma} \\
+=&-(-1)^{\sigma'-\sigma}\left(J_3^{(j)}\right)_{-\sigma',-\sigma}^*
+\end{align*}
+となる．これにより，$Q^j_\sigma$が回転群のスピン$j$表現に従って変換する場
+\begin{align*}
+\delta Q^j_\sigma=i\theta_i \sum_{\sigma'}\left(J^{(j)}_i\right)_{\sigma\sigma'}Q^{j}_{\sigma'}
+\end{align*}
+ならば，$(-1)^{j-\sigma}Q^{j*}_{-\sigma}$もそうである．
+\begin{align*}
+\delta \left[(-1)^{j-\sigma}Q^{*j}_{-\sigma}\right]=&(-1)^{j-\sigma}(-i)\theta_i \sum_{\sigma'}\left(J^{(j)}_i\right)^*_{-\sigma,\sigma'}Q^{*j}_{\sigma'} \\
+=&i(-1)^{j-\sigma}\theta_i \sum_{\sigma'}(-1)^{\sigma'-(-\sigma)}\left(J^{(j)}_i\right)_{\sigma,-\sigma'}Q^{*j}_{\sigma'} \\
+=&i(-1)^{j-\sigma}\theta_i \sum_{\sigma'}(-1)^{-\sigma'-(-\sigma)}\left(J^{(j)}_i\right)_{\sigma,\sigma'}Q^{*j}_{-\sigma'} \\
+=&i\theta_i \sum_{\sigma'}\left(J^{(j)}_i\right)_{\sigma,\sigma'}\left[(-1)^{j-\sigma'}Q^{*j}_{-\sigma'}\right]
+\end{align*}
+(ここで三個目の等号では，$\sigma'$は$-j$から$j$までの和であるから，$\sigma'\to -\sigma'$と変えても和の範囲に影響がないことを用いた．)また，さらに(25.2.1)より$\mathbf{A}^*=\mathbf{B}$がわかる．これを用いると，斉次ローレンツ群の$(A,B)$表現に従って変換する演算子$Q^{AB}_{ab}$のエルミート共役の変換性が
+\begin{align*}
+U^{-1}(\Lambda)\left(Q^{AB}_{ab}\right)^\dagger U(\Lambda)=&\left(U^{-1}(\Lambda)Q^{AB}_{ab}U(\Lambda)\right)^\dagger \\
+=&\left(e^{-\frac{i}{2}\omega_{\mu\nu}J^{\mu\nu}}Q^{AB}_{ab}e^{\frac{i}{2}\omega_{\mu\nu}J^{\mu\nu}}\right)^\dagger \\
+=&\left(e^{-i\alpha_i A_i -i\beta_i B_i}Q^{AB}_{ab}e^{i\alpha_i A_i +i\beta_i B_i}\right)^\dagger \\
+=&\left(Q^{AB}_{ab}-i\alpha_i[A_i,Q^{AB}_{ab}]-i\beta_i [B_i ,Q^{AB}_{ab}]+\cdots \quad\right)^\dagger \because \mathrm{BCH}公式 \\
+=&\left(Q^{AB}_{ab}\right)^\dagger+i\beta_i\left([A_i,Q^{AB}_{ab}]\right)^\dagger+i\alpha_i \left([B_i ,Q^{AB}_{ab}]\right)^\dagger+\cdots \quad \because \alpha^*_i=\beta_i \\
+=&\left(Q^{AB}_{ab}\right)^\dagger-i\beta_i[B_i,\left(Q^{AB}_{ab}\right)^\dagger]-i\alpha_i [A_i ,\left(Q^{AB}_{ab}\right)^\dagger]+\cdots \\
+=&\left(Q^{AB}_{ab}\right)^\dagger-i\beta_i \sum_{a'}\left(J^{(A)}_i\right)^*_{aa'}\left(Q^{AB}_{a'b}\right)^\dagger-i\alpha_i\sum_{b'}\left(J^{(B)}_i\right)^*_{bb'}\left(Q^{AB}_{ab'}\right)^\dagger+\cdots  \\
+\therefore \quad [\mathbf{A},\left(Q^{AB}_{ab}\right)^\dagger]=&+\sum_{b'}\left(\mathbf{J}^{(B)}\right)^*_{bb'}\left(Q^{AB}_{ab'}\right)^\dagger,\quad [\mathbf{B},\left(Q^{AB}_{ab}\right)]=+\sum_{a'}\left(\mathbf{J}^{(A)}\right)^*_{aa'}\left(Q^{AB}_{a'b}\right)^\dagger
+\end{align*}
+となる．一方$(B,A)$表現に従って変換する演算子$\bar{Q}^{BA}_{ba}$からは
+\begin{align*}
+[\mathbf{A},(-1)^{A-a}(-1)^{B-b}\bar{Q}^{BA}_{-b,-a}]=&-(-1)^{A-a}(-1)^{B-b}\sum_{b'}\mathbf{J}^{(B)}_{-b,b'}\bar{Q}^{BA}_{b',-a} \\
+=&+(-1)^{A-a}(-1)^{B-b}\sum_{b'}(-1)^{b'+b}\left(\mathbf{J}^{(B)}\right)^*_{b,-b'}\bar{Q}^{BA}_{b',-a} \\
+=&+(-1)^{A-a}(-1)^{B-b}\sum_{a'}(-1)^{-b'+b}\left(\mathbf{J}^{(B)}\right)^*_{b,b'}\bar{Q}^{BA}_{-b',-a} \\
+=&+\sum_{a'}\left(\mathbf{J}^{(B)}\right)^*_{b,b'}\left[(-1)^{A-a}(-1)^{B-b'}\bar{Q}^{BA}_{-b',-a}\right] \\
+[\mathbf{B},(-1)^{A-a}(-1)^{B-b}\bar{Q}^{BA}_{-b,-a}]=&-(-1)^{A-a}(-1)^{B-b}\sum_{a'}\mathbf{J}^{(A)}_{-a,a'}\bar{Q}^{BA}_{-b,a'} \\
+=&+(-1)^{A-a}(-1)^{B-b}\sum_{a'}(-1)^{a'+a}\left(\mathbf{J}^{(A)}\right)^*_{a,-a'}\bar{Q}^{BA}_{-b,a'} \\
+=&+(-1)^{A-a}(-1)^{B-b}\sum_{a'}(-1)^{-a'+a}\left(\mathbf{J}^{(A)}\right)^*_{a,a'}\bar{Q}^{BA}_{-b,-a'} \\
+=&+\sum_{a'}\left(\mathbf{J}^{(A)}\right)^*_{a,a'}\left[(-1)^{A-a'}(-1)^{B-b}\bar{Q}^{BA}_{-b,-a'}\right]
+\end{align*}
+という変換性を示す．したがって相似変換によって関係
+\begin{align*}
+\left(Q^{AB}_{ab}\right)^\dagger=(-1)^{A-a}(-1)^{B-b}\bar{Q}^{BA}_{-b,-a}
+\end{align*}
+がわかる．(ここから下では演算子のエルミート共役をダガーではなくアスタリスクで示すこともある．演算子に数値行列の係数がかかっていても，全体のエルミート共役をとったときに，行列の1要素についてエルミートをとっていれば係数はただの複素共役されるだけで行列のエルミート共役はされないことに注意すること！)
+
+\vskip\baselineskip
+
+これから証明するハーグ・ロプザンスキー・ゾーニウスの定理によれば，まず，「(1)フェルミオン的な対称性の演算子は$(0,1/2)$表現と$(1/2,0)$表現のみに属することができる」．既にみたように，$(1/2,0)$演算子あるいは$(0,1/2)$表現演算子のエルミート共役はそれぞれ
+\begin{align*}
+\left(Q^{\frac{1}{2}0}_{\frac{1}{2}0}\right)^\dagger=&\bar{Q}^{0\frac{1}{2}}_{0,-\frac{1}{2}},\quad \left(Q^{\frac{1}{2}0}_{-\frac{1}{2}0}\right)^\dagger=-\bar{Q}^{0\frac{1}{2}}_{0,\frac{1}{2}} \\
+\therefore \quad \left(Q^{\frac{1}{2}0}_{a 0}\right)^\dagger=&i\sum_{b}(\sigma_2)_{ab}\bar{Q}^{0\frac{1}{2}}_{0,b} \quad ,\mathrm{where} \quad \sigma_2=\left(
+\begin{matrix}
+0 &-i \\
+i & 0
+\end{matrix}
+\right) \\
+\left(Q^{0\frac{1}{2}}_{0\frac{1}{2}}\right)^\dagger=&\bar{Q}^{\frac{1}{2}0}_{-\frac{1}{2}0},\quad \left(Q^{0\frac{1}{2}}_{0,-\frac{1}{2}}\right)^\dagger=-\bar{Q}^{\frac{1}{2}0}_{\frac{1}{2}0} \\
+\therefore \quad \left(Q^{0\frac{1}{2}}_{0a}\right)^\dagger=&i\sum_{b}(\sigma_2)_{ab}\bar{Q}^{\frac{1}{2}0}_{b0}
+\end{align*}
+で$(0,1/2)$演算子あるいは$(1/2,0)$演算子の線形結合である．よってフェルミオン的な対称性演算子の完全系は，$(0,1/2)$生成子$\mr{Q}_{ar}\equiv \left(\mr{Q}_r\right)^{0\frac{1}{2}}_{0a}$とその$(1/2,0)$エルミート共役$\mr{Q}_{ar}^*$に分けることが可能だ．ここで$a$は値$\pm 1/2$をとるスピノル添え字で，$r$は同じローレンツ変換性を持つ異なる2成分生成子を区別するのに使う．さらにこの定理によれば，「(2)フェルミオン的生成子は反交換関係
+\begin{align*}
+\left\{\mr{Q}_{ar},\mr{Q}_{bs}^*\right\}=&2\delta_{rs}\sigma^\mu_{ab}P_\mu \\
+\left\{\mr{Q}_{ar},\mr{Q}_{bs} \right\}=&e_{ab}Z_{rs}
+\end{align*}
+を満たすように定義できる」．ここで$P_\mu$は四元運動量，$Z_{rs}=-Z_{sr}$はボゾン的な対称性生成子，$\sigma_\mu$と$e$は以下の$2\times 2$行列だ(行と列は$+1/2,-1/2$の添え字をもつ．)
+\begin{align*}
+\sigma_1=&\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right),\quad \sigma_2=\left(
+\begin{matrix}
+0 & -i \\
+i & 0
+\end{matrix}
+\right) ,\quad \sigma_3=\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right), \quad \sigma_0=\left(
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right) \\
+e=&\left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0
+\end{matrix}
+\right)
+\end{align*}
+($e=i\sigma_2$なのを知っておくと便利かも．)最後に，フェルミオン的演算子はエネルギーおよび運動量と交換する．
+\begin{align*}
+[P_\mu,\mr{Q}_{ar}]=[P_\mu,\mr{Q}_{ar}^*]=0
+\end{align*}
+また，$Z_{rs}$と$Z^*_{rs}$は自分自身や$\mr{Q}$らと交換する
+\begin{align*}
+0=&[Z_{rs},\mr{Q}_{at}]=[Z_{rs},\mr{Q}_{at}^*]=[Z_{rs},Z_{tu}]=[Z_{rs},Z_{tu}^*] \\
+=&[Z_{rs}^*,\mr{Q}_{at}]=[Z_{rs}^*,\mr{Q}_{at}^*]=[Z_{rs}^*,Z_{tu}^*] \\
+=&[Z_{rs},P_\mu]=[Z_{rs}^*,P_\mu]
+\end{align*}
+の意味で，この代数の中心電荷だ．
+
+\vskip\baselineskip
+
+これらの結果を証明するために，斉次ローレンツ群のある$(A,B)$既約表現に属し，したがって$-A$から$+A$までと$-B$から$B$まで間隔1おきに値をとる添え字$a$と$b$を用いて$Q^{AB}_{ab}$と表されるような，ゼロでないフェルミオン的対称性生成子を考える．エルミート共役は$(B,A)$表現に属する演算子と(25.2.6)で関係がついているので，これらの演算子の反交換子は
+\begin{align*}
+&\left\{Q^{AB}_{ab},\bar{Q}^{BA}_{-b',-a'}\right\}=(-1)^{A-a'}(-1)^{B-b'}\left\{Q^{AB}_{ab},Q^{AB*}_{a'b'}\right\} \\
+=&\left(\sum^{A+B}_{C=|A-B|} \sum^{C}_{c=-C} C_{AB}(C,c;a,-b')\right)\left(\sum^{B+A}_{D=|B-A|}\sum^D_{d=-D}C_{AB}(D,d;b,-a')\right)X^{CD}_{cd} \\
+\therefore \quad &\left\{Q^{AB}_{ab},Q^{AB*}_{a'b'}\right\} \\
+=&(-1)^{A-a'}(-1)^{B-b'} \sum^{A+B}_{C=|A-B|} \sum^{C}_{c=-C}\sum^{B+A}_{D=|B-A|}\sum^D_{d=-D}C_{AB}(C,c;a,-b')C_{AB}(D,d;b,-a')X^{CD}_{cd}
+\end{align*}
+の形をとらなければならない．($(A,B)$表現と$(B,A)$表現の積であるから，通常のスピンの合成と同様の考えで，$A+B \geq C \geq |A-B| , B+A\geq D \geq |B-A|$の範囲をとる$(C,D)$表現が現れる．$X^{CD}_{cd}$の$c,d$は$C\geq c \geq -C,D\geq d \geq -D$の範囲となる．$(A,B)$と$(B,A)$の前者を合成した$C$によってクレブシュゴルダン係数$C_{AB}(C,c;a,-b')$が現れ，後者を合成した$D$によって$C_{AB}(D,d;b,-a')$が現れる．)クレブシュゴルダン係数のユニタリー性
+\begin{align*}
+\sum_{J=|A-B|}^{A+B}\sum_{M=-J}^J C_{AB}(J,M;a,b)C_{AB}(J,M;a',b')=&\delta_{aa'}\delta_{bb'} \\
+\sum_{a=-A}^A \sum_{b=-B}^B C_{AB}(J,M;a,b)C_{AB}(J',M';a,b)=&\delta_{JJ'}\delta_{MM'}
+\end{align*}
+を用いると$X^{CD}_{cd}$について書けて
+\begin{align*}
+X^{CD}_{cd}=\sum^{A}_{a=-A} \sum^{B}_{b=-B}\sum^{A}_{a'=-A}\sum^B_{b'=-B} (-1)^{A-a'}(-1)^{B-b'} C_{AB}(C,c;a,-b')C_{AB}(D,d;b,-a')\left\{Q^{AB}_{ab},Q^{AB*}_{a'b'}\right\}
+\end{align*}
+となる．これらの演算子$X^{CD}_{cd}$すべてが必ずゼロである必要はない．もし全てがゼロの場合は$Q^{AB}_{ab}=0$であることが得られてしまうことを以下でみる．\par
+しかし，クレブシュゴルダン係数$C_{AB}(j\sigma;ab)$が$j=\sigma=A+B,C_{AB}(A+B,A+B;a,b)$のときにゼロでないのは$a=A,b=B$のときだけ(量子力学のとき学んだように$\sigma=a+b$という条件を満たさなければ$C_{AB}(j\sigma;ab)=0$なのだった．$-A\leq a \leq +A,-B\leq b \leq +B$なので，これを満たすのは$a=A,b=B$しかない)で，同様に$j=-\sigma=A+B,C_{AB}(A+B,-(A+B);a,b)$のときにゼロでないのは$a=-A,b=-B$のときだけだ．そしてその場合のクレブシュゴルダン係数の値はともに1だ．\par
+全ての(25.2.13)で$C=D=c=-d=A+B$ととれば，$a=A,-b'=B,b=-B,-a'=-A$の項のみが生き残り
+\begin{align*}
+X^{A+B,A+B}_{A+B,-A-B}=&\sum^{A}_{a=-A} \sum^{B}_{b=-B}\sum^{A}_{a'=-A}\sum^B_{b'=-B} (-1)^{A-a'}(-1)^{B-b'} \\
+&\quad \times C_{AB}(A+B,A+B;a,-b')C_{AB}(A+B,-(A+B);b,-a')\left\{Q^{AB}_{ab},\bar{Q}^{AB*}_{a'b'}\right\} \\
+=&(-1)^{2B}\left\{Q^{AB}_{A,-B},Q^{AB*}_{A,-B}\right\}
+\end{align*}
+となる．これがゼロとなるためには$Q^{AB}_{A,-B}=0$でなければならない．($A\neq 0$で$AA^\dagger+A^\dagger A=0$となるものは存在しない．)これに下降演算子$A_1-iA_2$や上昇演算子$B_1+iB_2$を作用させていけば
+\begin{align*}
+0=\left[A_1-iA_2,Q^{AB}_{A,-B}\right]=&-\sum_{a'}\left(J_1^{(A)}+iJ_2^{(A)}\right)_{Aa'}Q^{AB}_{a',-B} \\
+=&-\sqrt{2}Q^{AB}_{A-1,-B} \quad \therefore Q^{AB}_{A-1,-B}=0 \\
+0=\left[B_1+iB_2,Q^{AB}_{A,-B}\right]=&-\sum_{a'}\left(J_1^{(B)}+iJ_2^{(B)}\right)_{-B,b'}Q^{AB}_{A,b'} \\
+=&-\sqrt{2}Q^{AB}_{A,-B+1} \quad \therefore Q^{AB}_{A,-B+1}=0
+\end{align*}
+という操作を繰り返して，全ての$Q^{AB}_{ab}$がゼロであることを得る．したがって対偶をとれば，何らかのゼロでない$(A,B)$表現のフェルミオン的生成子$Q^{AB}_{ab}\neq 0$が存在すれば，それらとそれらの共役生成子による反交換子$\left\{Q^{AB}_{ab},Q^{AB*}_{a'b'}\right\}$は，少なくとも$(A+B,A+B)$表現に属するゼロでない\uwave{ボゾン的}な対称性生成子$X^{A+B,A+B}_{cd}$を含まなければならない．(フェルミオン的な生成子二つの積から作ったので，これはボゾン的だ．)\par
+さて，コールマン・マンデューラの定理より，ボゾン的な対称性生成子$X$は，$(1/2,1/2)$の並進生成子$P^\mu$と$(1,0)\oplus (0,1)$の固有ローレンツ変換の生成子$J_{\mu\nu}$，そして多分$(0,0)$の様々な内部対称性生成子$T_A$からのみ構成されるのだった．(これらの演算子の変換性は5.5節で述べた．)これらのみをフェルミオン的な生成子から作り出すためには，それは$A+B \leq 1/2$を満たす表現$(A,B)$に属する場合だけが可能だ！これらの演算子はボゾンをフェルミオンに変え，またその逆も引き起こすので，$(0,0)$表現のスカラーではありえない．(整数スピンの場に作用して半整数スピンの場になるには，場の演算子と生成子との積で半整数スピンだけスピンの合成が起きていなければならない．これはスピン0演算子にはできない．)よって残されたのは$(1/2,0)$表現と$(0,1/2)$表現だけだ！これがハーグ・ロプザンスキー・ゾーニウスの定理の主張(1)だ．\par
+線形独立な$(0,1/2)$表現のフェルミオン的生成子を$\mr{Q}_{ar}\equiv \left(\mr{Q}^{0\frac{1}{2}}_{0a}\right)_r$と表示すると，反交換子$\left\{\mr{Q}_{ar},\mr{Q}_{bs}^*\right\}$は表現$(0,1/2)\times (1/2,0)=(1/2,1/2)$に属するので，唯一の$(1/2,1/2)$のボゾン的対称性生成子である4元運動量ベクトル$P_\mu$に比例しなければならない．以下でみるように，ローレンツ不変性を用いるとこの関係式の形は
+\begin{align*}
+\left\{\mr{Q}_{ar},\mr{Q}_{bs}^*\right\}=2N_{rs}\sigma^\mu_{ab}P_\mu
+\end{align*}
+でなければならない．ここで$N_{rs}$は数値行列だ．\par
+このことを見るために，2.7節で述べたローレンツ群(正確にはその被覆群)と2次元ユニモジュラ複素行列$\lambda$の群$SL(2,\mathbb{C})$との同型性を使う．ローレンツ変換$\tensor{\Lambda}{^\mu_\nu}$が$(0,1/2)$のフェルミオン的生成子$\mr{Q}_{ar}$に及ぼす効果は
+\begin{align*}
+U^{-1}(\Lambda)\mr{Q}_{ar}U(\Lambda)=\sum_b \lambda_{ab}\mr{Q}_{br}
+\end{align*}
+となる．ここで$\Lambda$は(2.7.40)
+\begin{align*}
+\lambda \sigma_\mu \lambda^\dagger =\tensor{\Lambda}{^\nu_\mu}\sigma_\nu
+\end{align*}
+で定義されるローレンツ変換だ．(25.2.16)が実際に$(0,1/2)$演算子について成り立っていることを確認するためには，微小ローレンツ変換$\tensor{\Lambda}{^\mu_\nu}=\delta^\mu_\nu+\tensor{\omega}{^\mu_\nu}$(ただし$\omega_{\mu\nu}=-\omega_{\nu\mu}$)に対して
+\begin{align*}
+\lambda=1+\frac{1}{2}\left[\frac{1}{2}i\epsilon_{ijk}\omega_{ij}+\omega_{k0}\right]\sigma_k
+\end{align*}
+ととればいい．($-\lambda$も同じローレンツ変換を再現するから，ひとつの$\Lambda$に対して$\lambda$の選び方は二種類ある(2価)．しかしローレンツ変換が恒等変換のとき$\omega=0$，(2.5.16)の左辺は$U=1$となるから，矛盾が起きないように$\omega\to 0$で$\lambda\to 1$となるように選ぶ必要がある．したがって選び方は一つしかない．)このとき$\lambda$は
+\begin{align*}
+\lambda=&\left(
+\begin{matrix}
+1+\left[\frac{1}{2}i\epsilon_{ij3}\omega_{ij}+\omega_{30}\right] & \frac{1}{2}\left[\frac{1}{2}i\epsilon_{ij1}\omega_{ij}+\omega_{10}\right]-\frac{i}{2}\left[\frac{1}{2}i\epsilon_{ij2}\omega_{ij}+\omega_{20}\right] \\
+ \frac{1}{2}\left[\frac{1}{2}i\epsilon_{ij1}\omega_{ij}+\omega_{10}\right]+\frac{i}{2}\left[\frac{1}{2}i\epsilon_{ij2}\omega_{ij}+\omega_{20}\right] & 1-\left[\frac{1}{2}i\epsilon_{ij3}\omega_{ij}+\omega_{30}\right]
+\end{matrix}
+\right) \\
+\det \lambda =&1+\mc{O}(\omega^2)
+\end{align*}
+となって，$SL(2,\mathbb{C})$の元であることがわかる．また
+\begin{align*}
+\lambda \sigma_\mu \lambda^\dagger=&\left(1+\frac{1}{2}\left[\frac{1}{2}i\epsilon_{ijk}\omega_{ij}+\omega_{k0}\right]\sigma_k \right)\sigma_\mu \left(1+\frac{1}{2}\left[-\frac{1}{2}i\epsilon_{ijk}\omega_{ij}+\omega_{k0}\right]\sigma_k\right) \\
+=&\sigma_\mu +\frac{1}{4}i\epsilon_{ijk}\omega_{ij}(\sigma_k \sigma_\mu-\sigma_\mu \sigma_k)+\frac{1}{2}\omega_{k0}(\sigma_\mu \sigma_k+\sigma_k \sigma_\mu) \\
+&+\mc{O}(\omega^2)
+\end{align*}
+$\mu=0$のとき$\sigma_0=I$だから第二項目がゼロになり
+\begin{align*}
+\lambda \sigma_0 \lambda^\dagger=&\sigma_\mu +\omega_{k0}\sigma_k+\mc{O}(\omega^2) \\
+=&\sigma_\mu +\tensor{\omega}{^k_0}\sigma_k+\tensor{\omega}{^0_0}\sigma_0+\mc{O}(\omega^2) \\
+=&\sigma^0+\tensor{\omega}{^\nu_0}\sigma_\nu
+\end{align*}
+$\mu=1,2,3$のとき$[\sigma_i,\sigma_j]=2i\epsilon_{ijk}\sigma_k,\{\sigma_i,\sigma_j\}=2\delta_{ij}I$より
+\begin{align*}
+\lambda \sigma_l \lambda^\dagger=&\sigma_l -\frac{1}{2}\epsilon_{ijk}\omega_{ij}\epsilon_{klm}\sigma_m+\omega_{k0}\delta_{kl} \\
+=&\sigma_l -\frac{1}{2}\omega_{ij}(\delta_{il}\delta_{jm}-\delta_{im}\delta_{lj})\sigma_m+\omega_{l0} \\
+=&\sigma_l -\frac{1}{2}\omega_{lj}\sigma_j- \frac{1}{2}\omega_{il}\sigma_i-\omega_{0l} \\
+=&\sigma_l+\tensor{\omega}{^i_l}\sigma_i+\tensor{\omega}{^0_l}\sigma_0 \\
+=&\sigma_l+\tensor{\omega}{^\nu_l}\sigma_\nu
+\end{align*}
+よって(25.2.17)$\lambda \sigma_\mu \lambda^\dagger =\tensor{\Lambda}{^\nu_\mu}\sigma_\nu$が確かめられた．また$J_i=\frac{1}{2}\epsilon_{ijk}J^{jk},K_{i}=J_{i0}$を用いると
+\begin{align*}
+U(\Lambda)=1+\frac{1}{2}i\omega_{\mu\nu}J^{\mu\nu}=1+\frac{1}{2}i\epsilon_{ijk}\omega_{ij}J_k -i\omega_{i0}K_i
+\end{align*}
+となるから，(25.2.16)を満たす演算子$\mr{Q}_{ar}$は
+\begin{align*}
+U^{-1}(\Lambda)\mr{Q}_{ar}U(\Lambda)=&\left[1-\frac{1}{2}i\epsilon_{ijk}\omega_{ij}J_k +i\omega_{i0}K_i \right]\mr{Q}_{ar}\left[1+\frac{1}{2}i\epsilon_{ijk}\omega_{ij}J_k -i\omega_{i0}K_i \right] \\
+=&\mr{Q}_{ar}-\frac{1}{2}i\epsilon_{ijk}\omega_{ij}\left[J_i,\mr{Q}_{ar}\right]-i\omega_{i0}\left[K_i,\mr{Q}_{ar}\right] \\
+=\sum_b \lambda_{ab}\mr{Q}_{br}=&\sum_b \left[\delta_{ab}+\frac{1}{2}\left[\frac{1}{2}i\epsilon_{ijk}\omega_{ij}+\omega_{k0}\right](\sigma_k)_{ab}\right]\mr{Q}_{br} \\
+=&\mr{Q}_{ar}+\frac{1}{4}i\epsilon_{ijk}\omega_{ij}\sum_b (\sigma_k)_{ab}\mr{Q}_{br}+\omega_{k0}\sum_b (\sigma_k)_{ab}\mr{Q}_{br}
+\end{align*}
+$\omega_{ij},\omega_{i0}$の係数比較をすれば
+\begin{align*}
+\left[\mathbf{J},\mr{Q}_{ar}\right]=-\frac{1}{2}\sum_b \bm{\sigma}_{ab}\mr{Q}_{br},\quad \left[\mathbf{K},\mr{Q}_{ar}\right]=-\frac{1}{2}i\sum_b \bm{\sigma}_{ab}\mr{Q}_{br}
+\end{align*}
+(25.2.1)より
+\begin{align*}
+\left[\mathbf{B},\mr{Q}_{ar}\right]=-\frac{1}{2}\sum_b \bm{\sigma}_{ab}\mr{Q}_{br} ,\quad \left[\mathbf{A},\mr{Q}_{ar}\right]=0
+\end{align*}
+が得られる．つまりこれは(25.2.16)を満たす演算子$\mr{Q}_{ar}$は$(0,1/2)$表現に属していることを示している！$\sigma_\mu$は$2\times 2$行列の完全系をなす(つまり，任意の$2\times 2$行列$A$を$A=s^\mu \sigma_\mu$の形で書くことができる)から，行列成分$a,b$の$2\times 2$演算子行列である反交換子$\{\mr{Q}_{ar},\mr{Q}_{bs}^*\}$を$N^\mu_{rs}(\sigma^\mu)_{ab}$の形で書くことができる．ここで$N^\mu$は演算子行列である．(25.2.16)と(25.2.17)より，
+\begin{align*}
+U^{-1}(\Lambda)\{\mr{Q}_{ar},\mr{Q}_{bs}^*\}U(\Lambda)=&U^{-1}(\Lambda)\left[\mr{Q}_{ar}\mr{Q}_{bs}^*+\mr{Q}_{bs}^* \mr{Q}_{ar}\right]U(\Lambda) \\
+=&U^{-1}(\Lambda)\mr{Q}_{ar}U(\Lambda)U^{-1}(\Lambda)\mr{Q}_{bs}^* U(\Lambda) \\
+&+U^{-1}(\Lambda)\mr{Q}_{bs}^*U(\Lambda) U^{-1}(\Lambda)\mr{Q}_{ar}U(\Lambda) \\
+=&\sum_{cd}\left(\lambda_{ac}\mr{Q}_{cr}\lambda^*_{bd}\mr{Q}^*_{ds}+\lambda^*_{bd}\mr{Q}^*_{ds}\lambda_{ac}\mr{Q}_{cr}\right) \\
+=&\sum_{cd}\lambda_{ac}\left(\mr{Q}_{cr}\mr{Q}^*_{ds}+\mr{Q}^*_{ds}\mr{Q}_{cr}\right)\lambda^\dagger_{db} \\
+=&\sum_{cd}\lambda_{ac}\left\{\mr{Q}_{cr},\mr{Q}^*_{ds}\right\}\lambda^\dagger_{db} \\
+=&\sum_{cd}\lambda_{ac}N^\mu_{rs}(\sigma_\mu)_{cd}\lambda^\dagger_{db} \\
+=&N^\mu_{rs}(\lambda \sigma_\mu \lambda^\dagger)_{ab} \\
+=&N^\mu_{rs}\tensor{\Lambda}{^\nu_\mu}(\sigma_\nu)_{ab} \\
+=&(\tensor{\Lambda}{^\nu_\mu}N^\mu_{rs})(\sigma_\nu)_{ab} \\
+=U^{-1}(\Lambda)N^\mu_{rs}(\sigma_\nu)_{ab} U(\Lambda)=&\left[U^{-1}(\Lambda)N^\mu_{rs} U(\Lambda)\right](\sigma_\nu)_{ab}
+\end{align*}
+$\sigma_\mu$はそれぞれ線形独立なので$U^{-1}(\Lambda)N^\mu_{rs}\sigma_\nu U(\Lambda)=\tensor{\Lambda}{^\nu_\mu}N^\mu_{rs}$となる．よってこれらの演算子は4元ベクトルである．したがってコールマン・マンデューラ定理によって，唯一のボゾン的な対称性生成子の4元ベクトルである$P^\mu$に比例しなければならない！そこで$N^\mu_{rs}=2P^\mu N_{rs}$とおくと，(25.2.15)
+\begin{align*}
+\{\mr{Q}_{ar},\mr{Q}_{bs}^*\}=2N_{rs}P_\mu \sigma^\mu_{ab}
+\end{align*}
+が得られる．\par
+次に$\mr{Q}_{ar}$に線形変換を施して，それらの反交換子を(25.2.7)の形にする．そのためには，まず行列$N_{rs}$がエルミートかつ正定値であることを確かめておく必要がある．エルミート性は(25.2.15)のエルミート共役をとれば
+\begin{align*}
+\left(\{\mr{Q}_{ar},\mr{Q}_{bs}^*\}\right)^\dagger =&\left(\mr{Q}_{ar}\mr{Q}_{bs}^*+\mr{Q}_{bs}^*\mr{Q}_{ar}\right)^\dagger \\
+=&\mr{Q}_{bs}\mr{Q}_{ar}^*+\mr{Q}_{ar}^*\mr{Q}_{bs} \\
+=&\{\mr{Q}_{bs},\mr{Q}_{ar}^*\}=2N_{sr}P_\mu \sigma^\mu_{ba} \\
+=&2\left(N^{*\dagger}\right)_{rs}P_\mu \left((\sigma^\mu)^{*\dagger}\right)_{ab} \\
+=&2\left(N^{*\dagger}\right)_{rs}P_\mu \left(\sigma^{\mu*}\right)_{ab} \\
+=\left(2N_{rs}P_\mu \sigma^\mu_{ab}\right)^\dagger=&2N^*_{rs}P_\mu (\sigma^{\mu*})_{ab} \\
+\therefore \quad N^\dagger =N
+\end{align*}
+(要素$a,b,r,s$の成分についてエルミートをとっているので，ただの数値行列の成分である$N_{rs},\sigma_{ab}$はエルミートではなく複素共役であることに注意)これで$N_{rs}$がエルミート行列であることがわかった．正定値であることを見るには，$\mr{Q}_{ar}(r=1,2,\cdots)$が線形独立なようにとっていることに気付けばよい．演算子$A,B$が線形独立であるとは，任意の線形結合$\alpha A+\beta B$が作用しても$(\alpha A+\beta B)\ket{\Psi}=0$とならない$\ket{\Psi}$が(少なくとも一つ)存在することをいう(通常の線形独立性は，二つのベクトルが線形結合でゼロにならないことを指すが，演算子は状態に作用させないと議論ができないため．)よって任意のゼロでない線形結合($d_{a},c_r \neq 0,(a=1/2,-1/2,r=1,2,\cdots)$)
+\begin{align*}
+&\mr{Q}\equiv \sum_{ar}d_a c_r \mr{Q}_{ar}=d_{\frac{1}{2}}\sum_{r} c_r \mr{Q}_{\frac{1}{2},r}+d_{-\frac{1}{2}}\sum_{r}c_{r}\mr{Q}_{-\frac{1}{2},r}
+\end{align*}
+に対して，$\mr{Q}$でゼロにならない状態$\ket{\Psi}$が存在しなければならない．(25.2.15)の期待値をこの状態についてとると
+\begin{align*}
+&\sum_{ab,rs}d_{a}d_b^* c_r c_s^* \bra{\Psi}2N_{rs}P_\mu \sigma^\mu_{ab}\ket{\Psi}=2\bra{\Psi}\sum_{ab}P_\mu d_a (\sigma^\mu)_{ab}d^*_b\ket{\Psi}\sum_{rs}c_{s}N_{rs}c^*_s  \\
+=&\sum_{ab,rs}d_{a}d_b^* c_r c_s^* \bra{\Psi}\{\mr{Q}_{ar},\mr{Q}_{bs}^*\}\ket{\Psi} \\
+=&\sum_{ab,rs}d_{a}d_b^* c_r c_s^* \bra{\Psi}\left(\mr{Q}_{ar}\mr{Q}_{bs}^*+\mr{Q}_{bs}^*\mr{Q}_{ar}\right)\ket{\Psi} \\
+=&\bra{\Psi}\left(\mr{Q}\mr{Q}^*+\mr{Q}^* \mr{Q}\right)\ket{\Psi}=\braket{\mr{Q}^* \Psi | Q^*\Psi}+\braket{\mr{Q} \Psi |Q\Psi} > 0 \\
+=&\bra{\Psi}\left\{\mr{Q},\mr{Q}^* \right\}\ket{\Psi}
+\end{align*}
+となる．これにより，ゼロでない任意の$c_r$に対して二次形式$\sum_{rs}c_r N_{rs}c_s^*$がゼロでないことがわかる．よって$N_{rs}$は正定値か負定値だ．演算子$\sum_{ab}P^\mu d_a (\sigma_\mu)_{ab}d^*_b$は，$-P^\mu P_\mu \geq 0,P^0>0$を満たす物理的な状態$\ket{\Psi}$に対しては必ず正になる．実際
+\begin{align*}
+\sum_{ab}P^\mu d_a (\sigma_\mu)_{ab}d^*_b=P^0|d|^2+\sum_i P^i(d^\dagger \sigma_i d)^*
+\end{align*}
+と書ける．$P^0 >0$より第一項目は常に正である．よって第一項目と第二項目の大小関係を見てやればよい．ここでコーシー・シュワルツの不等式より
+\begin{align*}
+\left|\sum_i P^i(d^\dagger \sigma_i d)\right|\leq \sqrt{\sum_i (P^i)^2 } \sqrt{\sum_i (d^\dagger \sigma_i d)^2}
+\end{align*}
+であり，
+\begin{align*}
+d^\dagger \sigma_1 d=&(d_1^*, d_2^*)\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+d_1 \\
+d_2
+\end{matrix}
+\right)=2\mr{Re}(d_1^*d_2) \\
+d^\dagger \sigma_2 d=&(d_1^*, d_2^*)\left(
+\begin{matrix}
+0 & -i \\
+i & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+d_1 \\
+d_2
+\end{matrix}
+\right)=2\mr{Im}(d_1^* d_2) \\
+d^\dagger \sigma_3 d=&(d_1^*, d_2^*)\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+d_1 \\
+d_2
+\end{matrix}
+\right)=|d_1|^2-|d_2|^2 \\
+\sum_i (d^\dagger \sigma_i d)^2=&4(\mr{Re}(d_1^*d_2))^2+4(\mr{Im}(d^*_1d_2))^2+(|d_1|^2-|d_2|^2)^2 \\
+=&4|d_1^*d_2|^2+(|d_1|^2-|d_2|^2)^2 \quad \because |z|^2=(\mr{Re}z)^2+(\mr{Im}z)^2 \\
+=&4|d_1|^2|d_2|^2+(|d_1|^2-|d_2|^2)^2 \\
+=&(|d_1|^2+|d_2|^2)^2=(|d|^2)^2 \\
+\therefore \quad \sqrt{\sum_i (d^\dagger \sigma_i d)^2}=&|d|^2
+\end{align*}
+となる．また$-P^2\geq0$より$P^0 \geq \sqrt{\sum_i (P^i)^2}$であるから，第二項目の絶対値は必ず第一項目より小さいことがわかる．したがって$\sum_{ab}P^\mu d_a (\sigma_\mu)_{ab}d^*_b$は必ず正だ．以上より行列$N_{rs}$は正定値でなければならない．\par
+行列$N_{rs}$がエルミートかつ正定値であることから，$N^{1/2}_{rs}$が存在して，その逆行列$N^{-1/2}_{rs}$も存在する．こうして，新しいフェルミオン的演算子を
+\begin{align*}
+\mr{Q}'_{ar} \equiv \sum_s N^{-1/2}_{rs}\mr{Q}_{as}
+\end{align*}
+と定めれば，この生成子についての反交換子が
+\begin{align*}
+\{\mr{Q}'_{ar},\mr{Q}'^*_{bs}\}=&\sum_{r's'}N^{-1/2}_{rr'}N^{-1/2*}_{ss'}\{\mr{Q}'_{ar},\mr{Q}'^*_{bs}\} \\
+=&\sum_{r's'}N^{-1/2}_{rr'}N^{-1/2\dagger}_{s's}2N_{r's'}P_\mu \sigma^\mu_{ab} \\
+=&2\sum_{r's'}N^{-1/2}_{rr'}N_{r's'}N^{-1/2}_{s's} P_\mu \sigma^\mu_{ab} \quad \because Nはエルミート \\
+=&2\delta_{rs}P_\mu \sigma^\mu_{ab}
+\end{align*}
+となる．今後は，フェルミオン的生成子がこのように定義されていると仮定し，プライムを落とす．したがって(25.2.7)
+\begin{align*}
+\{\mr{Q}_{ar},\mr{Q}^*_{bs}\}=2\delta_{rs}\sigma^\mu_{ab} P_\mu
+\end{align*}
+がなりたっているものとする．\par
+
+\vskip\baselineskip
+
+次に，$\mr{Q}_{ar}$が運動量4元ベクトル$P_\mu$と交換することを示す必要がある．$P_\mu$のような$(1/2,1/2)$表現の演算子と，$\mr{Q}$のような$(0,1/2)$表現の演算子との交換子は$(1/2,1)$あるいは$(1/2,0)$表現の演算子だけが可能になる．しかしコールマン・マンデューラの定理より$(1/2,1)$の対称性生成子は存在しないので，$P_\mu$と$\mr{Q}$の交換子は$(1/2,0)$対称性生成子である$\mr{Q}^*$に比例することだけが可能だ．ローレンツ不変性の要求から
+\begin{align*}
+[\mc{M}_{ab},\mr{Q}_{cr}]=\sum_{s}e_{ac}K_{rs}\mr{Q}^*_{bs}
+\end{align*}
+ここで$K_{rs}$は数値行列で，$\mc{M}$は演算子の行列
+\begin{align*}
+\mc{M}\equiv \sigma_{\mu} P^\mu
+\end{align*}
+だ．(4元ベクトルを$(1/2,1/2)$表現にするために(2.7.36)でこのような形にする必要があるのだった．)行列$e_{ac}$は2個のスピン$1/2$を結合してゼロ・スピンを作るクレブシュ・ゴルダン係数(に$\sqrt{2}$をかけて簡潔にしたもの)
+\begin{align*}
+\ket{0,0}=&\frac{1}{\sqrt{2}}\Ket{\frac{1}{2},\frac{1}{2}}\Ket{\frac{1}{2},-\frac{1}{2}}-\frac{1}{2}\Ket{\frac{1}{2},-\frac{1}{2}}\Ket{\frac{1}{2},\frac{1}{2}} \\
+=&\sum_{m_1 ,m_2}C_{\frac{1}{2}\frac{1}{2}}(0,0;m_1,m_2)\Ket{\frac{1}{2},m_1}\Ket{\frac{1}{2},m_2} \\
+e_{\frac{1}{2},\frac{1}{2}}=&\sqrt{2}C_{\frac{1}{2}\frac{1}{2}}(0,0;\frac{1}{2},\frac{1}{2})=0 \\
+e_{\frac{1}{2},-\frac{1}{2}}=&\sqrt{2}C_{\frac{1}{2}\frac{1}{2}}(0,0;\frac{1}{2},-\frac{1}{2})=1 \\
+e_{-\frac{1}{2},\frac{1}{2}}=&\sqrt{2}C_{\frac{1}{2}\frac{1}{2}}(0,0;-\frac{1}{2},\frac{1}{2})=-1 \\
+e_{-\frac{1}{2},-\frac{1}{2}}=&\sqrt{2}C_{\frac{1}{2}\frac{1}{2}}(0,0;-\frac{1}{2},-\frac{1}{2})=0 \\
+\therefore \quad e=&\left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0 \\
+\end{matrix}
+\right)
+\end{align*}
+だ．これは$(1/2,1/2)$の後ろの$1/2$と$(0,1/2)$の後ろの$1/2$を合成してゼロスピン状態$(1/2,0)$を作っているため必要なものだ．この表式を用いると，まず
+\begin{align*}
+(\mc{M}^\dagger)_{ab}=&(\sigma_\mu)_{ab}^*P^\mu=(\sigma_\mu^T)_{ab}P^\mu \\
+=&(\sigma_{\mu})_{ba}P^\mu=\mc{M}_{ba} \\
+\left([\mc{M}_{ab},\mr{Q}_{cr}]\right)^\dagger =&-[\mc{M}_{ba},\mr{Q}^*_{cr}] \\
+=&\left(\sum_{s}e_{ac}K_{rs}\mr{Q}^*_{bs}\right)^\dagger=\sum_{s}e_{ac}K^*_{rs}\mr{Q}_{bs}=\sum_{s}e_{ac}(K^\dagger)_{sr}\mr{Q}_{bs} \\
+\therefore \quad [\mc{M}_{ab},\mr{Q}^*_{cr}]=&-\sum_{s}e_{bc}\mr{Q}_{as}(K^\dagger)_{sr}
+\end{align*}
+が得られるから
+\begin{align*}
+\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\left\{\mr{Q}_{\frac{1}{2}r},\mr{Q}^*_{\frac{1}{2}s} \right\} \right]=&\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\left(\mr{Q}_{\frac{1}{2}r}\mr{Q}^*_{\frac{1}{2}s}+\mr{Q}^*_{\frac{1}{2}s} \mr{Q}_{\frac{1}{2}r} \right) \right] \\
+=&\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}_{\frac{1}{2}r} \right]\mr{Q}^*_{\frac{1}{2}s}+\mr{Q}_{\frac{1}{2}r}\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}^*_{\frac{1}{2}s} \right] \\
+&+\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}^*_{\frac{1}{2}s} \right]\mr{Q}_{\frac{1}{2}r} +\mr{Q}^*_{\frac{1}{2}s} \left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}_{\frac{1}{2}r} \right] \\
+=&\sum_{r'}e_{-\frac{1}{2}\frac{1}{2}}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'}\mr{Q}^*_{\frac{1}{2}s}-\mr{Q}_{\frac{1}{2}r}\sum_{s'}e_{-\frac{1}{2}\frac{1}{2}}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's} \\
+&-\sum_{s'}e_{-\frac{1}{2}\frac{1}{2}}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}\mr{Q}_{\frac{1}{2}r}+\mr{Q}^*_{\frac{1}{2}s} \sum_{s}e_{-\frac{1}{2}\frac{1}{2}}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} \\
+=&-\sum_{r'}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'}\mr{Q}^*_{\frac{1}{2}s}+\mr{Q}_{\frac{1}{2}r}\sum_{s'}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's} \\
+&+\sum_{s'}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}\mr{Q}_{\frac{1}{2}r}-\mr{Q}^*_{\frac{1}{2}s} \sum_{r'}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'}
+\end{align*}
+さらに
+\begin{align*}
+&\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}}.\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\left\{\mr{Q}_{\frac{1}{2}r},\mr{Q}^*_{\frac{1}{2}s} \right\} \right]\right] \\
+=&-\sum_{r'}K_{rr'}\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}^*_{-\frac{1}{2}r'}\right]\mr{Q}^*_{\frac{1}{2}s}-\sum_{r'}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'}\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}^*_{\frac{1}{2}s}\right] \\
+&+\sum_{s'}\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}_{\frac{1}{2}r}\right] \mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}+\sum_{s'}\mr{Q}_{\frac{1}{2}r} \left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}_{-\frac{1}{2}s'}\right](K^\dagger)_{s's} \\
+&+\sum_{s'}\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}_{-\frac{1}{2}s'}\right](K^\dagger)_{s's}\mr{Q}_{\frac{1}{2}r}+\sum_{s'}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}_{\frac{1}{2}r}\right] \\
+&-\sum_{r'}\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}^*_{\frac{1}{2}s}\right]  K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'}-\sum_{r'}\mr{Q}^*_{\frac{1}{2}s}  K_{rr'}\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\mr{Q}^*_{-\frac{1}{2}r'}\right] \\
+=&\sum_{r'r''}K_{rr'}e_{-\frac{1}{2}-\frac{1}{2}}\mr{Q}_{-\frac{1}{2}r''}(K^\dagger)_{r''r'}\mr{Q}^*_{\frac{1}{2}s}+\sum_{r's'}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} e_{-\frac{1}{2}\frac{1}{2}}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's} \\
+&+\sum_{s'r'}e_{-\frac{1}{2}\frac{1}{2}}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} \mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}+\sum_{s's''}\mr{Q}_{\frac{1}{2}r} e_{-\frac{1}{2}-\frac{1}{2}}K_{s's''}\mr{Q}_{-\frac{1}{2}s''}(K^\dagger)_{s's} \\
+&+\sum_{s's''}e_{-\frac{1}{2}-\frac{1}{2}}K_{s's''}\mr{Q}_{-\frac{1}{2}s''}^*(K^\dagger)_{s's}\mr{Q}_{\frac{1}{2}r}+\sum_{s'r'}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}e_{-\frac{1}{2}\frac{1}{2}}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} \\
+&+\sum_{r's'}e_{-\frac{1}{2}\frac{1}{2}}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}  K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'}+\sum_{r'r''}\mr{Q}^*_{\frac{1}{2}s}  K_{rr'}e_{-\frac{1}{2}-\frac{1}{2}}\mr{Q}_{-\frac{1}{2}r''}(K^\dagger)_{r''r'} \\
+=&-\sum_{r's'}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} \mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}-\sum_{s'r'}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} \mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's} \\
+&-\sum_{s'r'}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'}-\sum_{r's'}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}  K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} \\
+=&-2\sum_{r's'}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} \mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}-2\sum_{s'r'}\mr{Q}_{-\frac{1}{2}s'}(K^\dagger)_{s's}K_{rr'}\mr{Q}^*_{-\frac{1}{2}r'} \\
+=&-2\sum_{r's'}K_{rr'}\left\{\mr{Q}^*_{-\frac{1}{2}r'}, \mr{Q}_{-\frac{1}{2}s'}\right\}(K^\dagger)_{s's} \\
+=&-4\sum_{r's'}K_{rr'}\delta_{r's'}(\sigma_\mu)_{-\frac{1}{2}-\frac{1}{2}}P^\mu(K^\dagger)_{s's} \\
+=&-4\sum_{r's'}(\sigma_\mu)_{-\frac{1}{2}-\frac{1}{2}}P^\mu(KK^\dagger)_{rs} \\
+=&-4(\mc{M})_{-\frac{1}{2}-\frac{1}{2}}(KK^\dagger)_{rs}
+\end{align*}
+が得られる．(25.2.7)を使うと，左辺$\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}}.\left[\mc{M}_{-\frac{1}{2},-\frac{1}{2}},\left\{\mr{Q}_{\frac{1}{2}r},\mr{Q}^*_{\frac{1}{2}s} \right\} \right]\right]$は多重交換子$[P_\mu,[P_\nu,P_\lambda]]$の線形結合となり，それはゼロとなる．しかし$(\mc{M})_{-1/2,-1/2}$は一般の運動量についてゼロでないので，$KK^\dagger=0$でなければならない．よって$K=0$が得られる．これと(25.2.18)から$[P_\mu,\mr{Q}_{ar}]=0$が得られる．これを複素共役すれば$[P_\mu,\mr{Q}^*_{ar}]=0$も得られる．こうして(25.2.10)の証明が完了した．
+
+\vskip\baselineskip
+
+これで，2個の$\mr{Q}$の反交換子について論じることができる．2個の$(0,1/2)$対称性生成子の反交換関係は，$(0,1)$と$(0,0)$の対称性生成子の線形結合でなければならない．再びコールマン・マンデューラ定理より，唯一の$(0,1)$対称性生成子は固有斉次ローレンツ変換の生成子$J_{\nu\lambda}$の線形結合だ．(生成子$B_i=J_i-iK_i$がそのまま$(0,1)$表現の演算子．実際わかりやすく$V_i=B_i$としたら
+\begin{align*}
+[A_i,V_j]=0,\quad [B_i,V_j]=i\epsilon_{ijk}V_k
+\end{align*}
+を満たす．これは$A$に対してはスピンゼロで$B$に対してはスピン1表現になっている．線形結合をもっとあらわに書けば$B_i=\frac{1}{2}\epsilon_{ijk}J^{jk}-iJ_{i0}$．)しかし$\mr{Q}$は$P_\mu$と交換することを見たので，それらの反交換子$\{\mr{Q},\mr{Q}\}$も$P_\mu$と交換しなければならない．一方(2.4.13)より$J_{\nu\lambda}$の線形結合は$P_\mu$と交換しない．このことから，$(0,0)$演算子だけが候補として残されており，それは$P_\mu$と$J_{\mu\nu}$の両方と交換する内部対称性生成子だ．よってローレンツ不変性より，$\mr{Q}$同士の反交換関係は(25.2.8)
+\begin{align*}
+\left\{\mr{Q}_{ar},\mr{Q}_{bs} \right\}=e_{ab}Z_{rs}
+\end{align*}
+の形をとる．(ここでスピンゼロ状態を作るためにクレブシュ・ゴルダン係数$e$が再び入っている)内部対称性生成子$Z_{rs}$は$r,s$について反対称だ．
+\begin{align*}
+Z_{rs}=-Z_{sr}
+\end{align*}
+なぜなら(25.2.8)の全体の表現は$r,a$を$s,b$と入れ替えたとき対称でなければならず，行列$e_{ab}$は$a,b$について反対称だからだ．
+\begin{align*}
+\left\{\mr{Q}_{bs},\mr{Q}_{ar} \right\}=&e_{ba}Z_{sr}=-e_{ab}Z_{sr} \\
+=\left\{\mr{Q}_{ar},\mr{Q}_{bs} \right\}=&e_{ab}Z_{rs}
+\end{align*}
+これで(25.2.8)の証明も完了した．
+
+\vskip\baselineskip
+
+今や残されているのは(25.2.11)，つまり$Z$が中心電荷だということを示すことだけだ．(25.2.8)と(25.2.10)からただちに
+\begin{align*}
+e_{ab} [P_\mu,Z_{rs}]=&[P_\mu ,\left\{\mr{Q}_{ar},\mr{Q}_{bs} \right\}]=0 \\
+\therefore \quad [P_\mu,Z_{rs}]=&0
+\end{align*}
+がわかる．次に2個の$\mr{Q}$と1個の$\mr{Q}^*$を含む一般化されたヤコビ恒等式(25.1.5)
+\begin{align*}
+0=\left[\left\{\mr{Q}_{ar},\mr{Q}_{bs}\right\},\mr{Q}^*_{ct}\right]+\left[\left\{\mr{Q}_{bs},\mr{Q}^*_{ct}\right\},\mr{Q}^*_{ar}\right]+\left[\left\{\mr{Q}_{ct}^*,\mr{Q}_{ar}\right\},\mr{Q}_{bs}\right]
+\end{align*}
+を考える($\eta(\mr{Q})=\eta(\mr{Q}^*)=1$で，フェルミオン同士の交換子のみ反交換子になることに留意)．(25.2.7)と(25.2.10)から，第二項と第三項がゼロになることがわかる．第一項目に(25.2.8)を使えば
+\begin{align*}
+[Z_{rs},\mr{Q}^*_{ct}]=0
+\end{align*}
+が得られる．最後に，1個の$Z$と1個の$\mr{Q}$と1個の$\mr{Q}^*$を含む一般化されたヤコビ恒等式(25.1.5)を考える．
+\begin{align*}
+0=-\left[Z_{rs},\left\{\mr{Q}_{at},\mr{Q}_{bu}^* \right\}\right]+\left\{\mr{Q}^*_{bu},\left[Z_{rs},\mr{Q}_{at}\right]\right\}-\left\{\mr{Q}_{at},\left[\mr{Q}^*_{bu},Z_{rs}\right]\right\}
+\end{align*}
+第一項目と第三項目はそれぞれ(25.2.21)と(25.2.22)を使えばゼロになる．よって第二項目だけが残り
+\begin{align*}
+\left\{\mr{Q}^*_{bu},\left[Z_{rs},\mr{Q}_{at}\right]\right\}=0
+\end{align*}
+となる．さて，$[Z_{rs},\mr{Q}_{at}]$は$(0,0)$と$(0,1/2)$の積で構成されているから当然$(0,1/2)$対称性生成子であり，よって$\mr{Q}$の線形結合で
+\begin{align*}
+[Z_{rs},\mr{Q}_{at}]=\sum_{u}M_{rstu}\mr{Q}_{au}
+\end{align*}
+と書ける($\mr{Q}_{ar}$の$r=1,2,\cdots $は線形独立にとったのだから，線形結合$\sum_{u}A_{u}\mr{Q}_{au}$で$(0,1/2)$の演算子が書ける．残りの添え字$rst$で係数が決まる)．すると(25.2.23)から
+\begin{align*}
+0=&\left\{\mr{Q}^*_{bu},\left[Z_{rs},\mr{Q}_{at}\right]\right\} \\
+=&\sum_{u}M_{rstu'}\left\{\mr{Q}^*_{bu},\mr{Q}_{au'}\right\}=\sum_{u}M_{rstu'}\left\{\mr{Q}_{au'},\mr{Q}^*_{bu}\right\} \\
+=&\sum_{u}M_{rstu'}2\delta_{u'u}\sigma^\mu_{ab}P_\mu \\
+=&2M_{rstu}\sigma^\mu_{ab}P_\mu \\
+\therefore \quad &\sigma^\mu_{ab}P_\mu M_{rstu}=0
+\end{align*}
+が全ての$a,b,r,s,t,u$についてなりたつ．一般の運動量について$\sigma^\mu_{ab}P_\mu$はゼロでないから，$M_{rstu}=0$が結論され，したがって
+\begin{align*}
+[Z_{rs},\mr{Q}_{at}]=0
+\end{align*}
+を得る．反交換関係(25.2.8)とその共役式を交換関係(25.2.22)(25.2.25)およびそれらの共役式と合わせると
+\begin{align*}
+e_{ab} [Z_{tu},Z_{rs}]=&[Z_{tu} ,\left\{\mr{Q}_{ar},\mr{Q}_{bs} \right\}]=0 \\
+\therefore \quad [Z_{rs},Z_{tu}]=&0 ,\quad [Z^*_{rs},Z^*_{tu}]=0 \\
+e_{ab} [Z_{tu},Z_{rs}^*]=&[Z_{tu} ,\left\{\mr{Q}^*_{ar},\mr{Q}^*_{bs} \right\}]=0 \\
+\therefore \quad [Z_{rs},Z^*_{tu}]=&0
+\end{align*}
+が得られる．これで(25.2.11)の証明が完了し，それを含めたハーグ・ロプザンスキー・ゾーニウスの定理の証明が完了した．
+
+\vskip\baselineskip
+
+もちろん，内部対称性生成子$Z_{rs}$が超対称代数の中心電荷だという事実は，他の\uwave{可換}と非可換な内部対称性が存在する可能性を排除するものではない．(もし$Z_{rs}$が例えば$SU(2)$の生成子ならば，他の$SU(2)$生成子とは可換でないからそれらは存在してはいけない．しかし$Z_{rs}$が$U(1)$であるならば可換代数だからそれらの可能性も残るということだ．これを以下でみる．)\par
+$T_A$がボゾン的内部対称性のリー代数の完全系を張るとする(よって当然$Z_{rs}$も含む)．すると$T_A$は$(0,0)$なので$[T_A,\mr{Q}_{ar}]$は$(0,1/2)$の対称性生成子であり，よって$\mr{Q}_{as}(s=1,2,\cdots)$の線形結合でなければらない．
+\begin{align*}
+[T_A,\mr{Q}_{ar}]=-\sum_{s}(t_A)_{rs}\mr{Q}_{as}
+\end{align*}
+ここで行列$t_A$は展開係数だが，2個の$T$と1個の$\mr{Q}$についてのヤコビ恒等式から
+\begin{align*}
+0=&\left[T_{A},\left[T_{B},\mr{Q}_{ar}\right]\right]+\left[T_{B},\left[\mr{Q}_{ar},T_A\right]\right]+\left[\mr{Q}_{ar},\left[T_{A},T_{B}\right]\right] \\
+=&-\sum_{s}(t_B)_{rs}\left[T_{A},\mr{Q}_{as}\right]+\sum_s (t_A)_{rs}\left[T_{B},\mr{Q}_{as}\right]+i\sum_{C}C_{AB}^C\left[\mr{Q}_{ar},T_{C}\right] \\
+=&\sum_{st}(t_B)_{rs}(t_A)_{st}\mr{Q}_{at}+\sum_{st} (t_A)_{rs}(t_B)_{st}\mr{Q}_{at}+i\sum_{t}\sum_{C}C_{AB}^C(t_C)_{rt}\mr{Q}_{at} \\
+=&\sum_{t}\left[t_{B}t_{A}-t_A t_B+i\sum_C C^C_{AB} t_C\right]_{rt}\mr{Q}_{at}
+\end{align*}
+よって$\mr{Q}_{ar}$の線形独立性より
+\begin{align*}
+[t_A , t_B]=i\sum_C C^{C}_{AB}t_C
+\end{align*}
+が得られる．ここで係数$C^C_{AB}$は内部対称性代数
+\begin{align*}
+[T_A , T_B]=i\sum_C C^{C}_{AB}T_C
+\end{align*}
+の構造定数だ．よって$t_A$行列は内部対称性代数の表現になっていることがわかる．このとき$Z_{rs}$は，$\mr{Q},\mr{Q}^*,P_\mu,Z,Z^*$で構成される超対称代数の中心電荷(25.2.11)であるだけでなく，加えて全ての$T_A$を含むもっと大きな対称性の超対称代数の中心電荷であることが以下でわかる．\par
+(25.2.27)と(25.2.8)より
+\begin{align*}
+[T_A,\left\{\mr{Q}_{ar},\mr{Q}_{bs}\right\}]=&e_{ab}[T_A,Z_{rs}] \\
+=\left\{\left[T_{A} , \mr{Q}_{ar}\right],\mr{Q}_{bs}\right\}+\left\{ \mr{Q}_{ar},\left[T_{A},\mr{Q}_{bs}\right]\right\}=&-\sum_{r'}(t_A)_{rr'}\left\{\mr{Q}_{ar'},\mr{Q}_{bs}\right\} - \sum_{s'} (t_A)_{ss'}\left\{ \mr{Q}_{ar},\mr{Q}_{ss'}\right\} \\
+=&-\sum_{r'}(t_A)_{rr'}e_{ab}Z_{r's}-\sum_{s'}(t_A)_{ss'}e_{ab}Z_{rs'} \\
+\therefore \quad [T_A,Z_{rs}]=&-\sum_{r'}(t_A)_{rr'}Z_{r's}-\sum_{s'}(t_A)_{ss'}Z_{rs'}
+\end{align*}
+となる．よって$Z_{rs}$はボゾン的対称性代数$T_A$全体の\uwave{不変}可換部分代数を形作ることに気付ける．(対称性変換$Z_{rs}\to e^{-i\alpha_A T_A} Z_{rs} e^{i\alpha_A T_A}$で再び$Z_{rs}$の線形結合で書けるから不変部分空間であり，かつ$Z_{rs}$は自分と交換(25.2.11)するので可換部分代数である)しかしコールマン・マンデューラの定理を証明する際(p23の下から4行目)，ボゾン的な内部対称性生成子は高々，コンパクトな半単純リー代数といくつかの$U(1)$代数の直和の直和と同型になっていることがわかったのだった．よって今回の$T_A$で張られているリー代数もそうだ．そのようなリー代数の唯一の不変可換部分代数は$U(1)$生成子で張られる．(半単純とは，中心がゼロであることなのだった．よって可換な不変部分代数は残りの$U(1)$代数しかない．)よって$Z_{rs}$は$U(1)$生成子でなければならない．したがって全ての$T_A$と交換しなければならない．\par
+たとえ$Z$が全ての対称性生成子と交換するとしても，それは単なる数ではない．それは量子演算子であり，その値は状態毎に異なってよい．(例えば$U(1)_{em}$対称性生成子$Q$のように．)実際，$Z$は全ての超対称性生成子によって消される超対称性の真空状態では明らかに値ゼロをとらなければならないが，一般にはゼロである必要はないらしい．27.9節で$Z$を計算する方法をみるらしい．
+
+\vskip\baselineskip
+
+中心電荷がない場合は，超対称代数(25.2.7)(25.2.8)は
+\begin{align*}
+\left\{\mr{Q}_{ar},\mr{Q}_{bs}^*\right\}=2\delta_{rs}\sigma^\mu_{ab}P_{\mu} ,\quad \left\{\mr{Q}_{ar},\mr{Q}_{bs}\right\}=0
+\end{align*}
+となる．このとき，$V_{rs}$を$N\times N$のユニタリー行列(必ずユニモジュラ(行列式が$\pm 1$)である必要はない)として
+\begin{align*}
+\mr{Q}_{ar} \to \mr{Q}'_{ar}=\sum_{s}V_{rs}\mr{Q}_{as}
+\end{align*}
+と定義される内部対称性の群$U(N)$の下で不変だ．実際
+\begin{align*}
+\mr{Q}^*_{ar}\to \mr{Q}'^*_{ar}=&\sum_{s} V^*_{rs}\mr{Q}_{as}^* \\
+=&\sum_{s} \mr{Q}_{as}^*V^\dagger_{sr}=\sum_{s} \mr{Q}_{as}^*V^{-1}_{sr} \\
+\left\{\mr{Q}'_{ar},\mr{Q}'^*_{bs}\right\}=&\sum_{r's'}V_{rr'}\left\{\mr{Q}_{ar},\mr{Q}_{bs}^*\right\} V^{-1}_{s's} \\
+=&\sum_{r's'}V_{rr'}2\delta_{r's'}\sigma^\mu_{ab}P_{\mu}V^{-1}_{s's} \\
+=&2\delta_{r's'}\sigma^\mu_{ab}P_{\mu} \\
+\left\{\mr{Q}'_{ar},\mr{Q}'_{bs}\right\}=&\sum_{r's'}V_{rr'}V_{ss'}\left\{\mr{Q}_{ar},\mr{Q}_{bs}\right\}=0
+\end{align*}
+となるからだ．これは\textbf{R対称性}と呼ばれている．この対称性は，(古典)作用の良い対称性であるかもしれないし，そうでないかもしれない．もし前者ならば，それは量子的にアノマリーによって破れているかもしれないし，自発的に破れているかもしれないし，あるいは自然界の良い対称性になっているかもしれない．
+
+\vskip\baselineskip
+
+$r,s$等が$N > 1$個の値をとる超対称性の代数は$\bm{N}$\textbf{次の拡張超対称性}と呼ばれる．$N=1$で$\mr{Q}$が1個だけ存在する場合は，条件$Z_{rs}=-Z_{sr}$より$Z$はゼロであり，より簡単な形の反交換関係
+\begin{align*}
+\left\{\mr{Q}_{a},\mr{Q}_{b}^*\right\}=&2\sigma^\mu_{ab}P_{\mu} \\
+\left\{\mr{Q}_{ar},\mr{Q}_{bs}\right\}=&0
+\end{align*}
+が得られる．これは\textbf{単純超対称性}あるいは$N=1$超対称性と呼ばれる．この場合のR対称性変換は$U(1)$，つまり位相変換
+\begin{align*}
+\mr{Q}_a \to \exp(i\varphi )\mr{Q}_a
+\end{align*}
+となり，$\varphi$は実位相だ．
+
+\vskip\baselineskip
+
+ハーグ・ロプザンスキー・ゾーニウスの定理を証明する前に示したこととして，$(0,1/2)$演算子$\mr{Q}_{ar}$を用いて作った
+\begin{align*}
+\left(Q^{0\frac{1}{2}}_{0a}\right)^\dagger=&i\sum_{b}(\sigma_2)_{ab}\bar{Q}^{\frac{1}{2}0}_{b0} \\
+\therefore \quad \bar{Q}^{\frac{1}{2}0}_{b0}=&-i\sum_b\left(\sigma_{2}\right)_{ab}\mr{Q}_{br}^*
+\end{align*}
+は$(1/2,0)$表現になるのだった．よって$e=i\sigma_2$を用いると，$e_{ab}\mr{Q}_{br}^*$が$(1/2,0)$として振舞ってくれる．よってそれらを組み合わせて
+\begin{align*}
+Q_r \equiv \left(
+\begin{matrix}
+e\mr{Q}^*_r \\
+\mr{Q}_r
+\end{matrix}
+\right)
+\end{align*}
+あるいはもっと陽に
+\begin{align*}
+Q_{1r}=\mr{Q}^*_{-\frac{1}{2}r},\quad Q_{2r}=-\mr{Q}^*_{\frac{1}{2}r},\quad Q_{3r}=\mr{Q}_{\frac{1}{2}r},\quad Q_{4r}=\mr{Q}_{-\frac{1}{2}r}
+\end{align*}
+を満たす4成分マヨナラ・スピノル生成子$Q_{\alpha r}$を作るほうが便利となることがある．これは実際(5.5.48)と同じ形の(マイナスだけ違うが)
+\begin{align*}
+Q_{r}=-\beta \epsilon \gamma_5 Q_{r}^*
+\end{align*}
+を満たす意味でマヨラナ・スピノルだ．ここで$\beta,\epsilon,\gamma_5$は$4\times 4$行列だが，5章で見た通り$2\times 2$ブロック行列
+\begin{align*}
+\beta=\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right), \quad \epsilon=\left(
+\begin{matrix}
+e & 0 \\
+0 & e
+\end{matrix}
+\right), \quad \gamma_5 =\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right)
+\end{align*}
+と書ける行列だ．実際左辺を計算してみると
+\begin{align*}
+-\beta \epsilon \gamma_5 Q_{r}^*=-\left(
+\begin{matrix}
+0 & -e \\
+e & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+e\mr{Q}_r \\
+\mr{Q}_r^*
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+e\mr{Q}^*_r \\
+\mr{Q}_r
+\end{matrix}
+\right)=Q_{r}
+\end{align*}
+となっている．(マヨラナ・スピノルについては26章の補遺で概説されている．5章のときとは若干マヨラナ条件が違い，$\mc{C}=- \epsilon \gamma_5$に注意．)(25.2.34)の形は斉次ローレンツ群の4成分ディラック表示に対する通常の記法(5.4節)に従って選んである．その表示では(5.4.4)にしたがって回転とブーストの生成子は(5.4.19)と(5.4.20)の通りで($K_=J_{i0}=-J^{i0}$になっていることに注意！)
+\begin{align*}
+\mc{J}_i=\frac{1}{2}\left[
+\begin{matrix}
+\sigma_i & 0 \\
+0 & \sigma_i
+\end{matrix}
+\right], \quad \mc{K}_i=-\frac{i}{2}\left[
+\begin{matrix}
+\sigma_i & 0 \\
+0 & -\sigma_i
+\end{matrix}
+\right]
+\end{align*}
+と表される．(25.2.1)より
+\begin{align*}
+\mc{A}_i=&\frac{1}{2}(\mc{J}_i+ i\mc{K}_i)=\frac{1}{2}\left[
+\begin{matrix}
+\sigma_i & 0 \\
+0 & 0
+\end{matrix}
+\right] \\
+\mc{B}_i=&\frac{1}{2}(\mc{J}_i- i\mc{K}_i)=\frac{1}{2}\left[
+\begin{matrix}
+0 & 0 \\
+0 & \sigma_i
+\end{matrix}
+\right]
+\end{align*}
+これは演算子$\mathbf{A},\mathbf{B}$がそれぞれディラックスピノルの上の2成分と下の2成分にのみに作用することを示している．
+\begin{align*}
+[A_i,Q_r]=\left(
+\begin{matrix}
+[A_i ,e\mr{Q}_r^*] \\
+[A_i , \mr{Q}_r]
+\end{matrix}
+\right)=&\left(
+\begin{matrix}
+-\frac{1}{2}\sum_b (\bm{\sigma}_i)_{ab}(e\mr{Q}_r^*)_{br} \\
+0
+\end{matrix}
+\right) \\
+=&-\frac{1}{2}\left(
+\begin{matrix}
+\sigma_i & 0 \\
+0 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+e\mr{Q}^*_r \\
+\mr{Q}_r
+\end{matrix}
+\right) \\
+&=-\mc{A}_iQ_{r} \\
+[A_i,Q_{\alpha r}]=&-\sum_\beta (\mc{A}_i)_{\alpha\beta}Q_{\beta r} \\
+[B_i ,Q_r]=\left(
+\begin{matrix}
+[B_i ,e\mr{Q}_r^*] \\
+[B_i , \mr{Q}_r]
+\end{matrix}
+\right)=&\left(
+\begin{matrix}
+0 \\
+-\frac{1}{2}\sum_b (\bm{\sigma}_i)_{ab}\mr{Q}_r
+\end{matrix}
+\right) \\
+=&-\frac{1}{2}\left(
+\begin{matrix}
+0 & 0 \\
+0 & \sigma_i
+\end{matrix}
+\right)\left(
+\begin{matrix}
+e\mr{Q}^*_r \\
+\mr{Q}_r
+\end{matrix}
+\right) \\
+&=-\mc{B}_iQ_{r} \\
+[B_i,Q_{\alpha r}]=&-\sum_\beta (\mc{B}_i)_{\alpha\beta}Q_{\beta r}
+\end{align*}
+これが$(0,1/2)$演算子$\mr{Q}_{ar}$を(25.2.34)の上2成分ではなく下2成分として扱う理由だ．\par
+この4成分表記では，単純超対称性の場合の基本的な反交換関係(25.2.31)(25.2.32)は
+\begin{align*}
+\left\{\mr{Q},\mr{Q}^*\right\}=&\mr{Q}\otimes \mr{Q}^\dagger+(\mr{Q}^*\otimes \mr{Q}^T)^T =2\sigma_\mu P^\mu \\
+\left\{\mr{Q},\mr{Q}\right\}=&\mr{Q}\otimes \mr{Q}^T+(\mr{Q} \otimes \mr{Q}^T)^T=0 \\
+\left\{\mr{Q}^*,\mr{Q}^*\right\}=&\mr{Q}^*\otimes \mr{Q}^\dagger+(\mr{Q}^* \otimes \mr{Q}^\dagger)^T=0
+\end{align*}
+となるので
+\begin{align*}
+Q=&\left(
+\begin{matrix}
+e\mr{Q}^* \\
+\mr{Q}
+\end{matrix}
+\right),\quad \bar{Q}=Q^\dagger\beta =(\mr{Q}^T e^T,\mr{Q}^\dagger) \beta =(\mr{Q}^\dagger,\mr{Q}^T e^T ) \\
+\left\{Q,\bar{Q}\right\}=&Q\otimes \bar{Q}+(\bar{Q}^T \otimes  Q^T)^T \\
+=&\left(
+\begin{matrix}
+e\mr{Q}^* \\
+\mr{Q}
+\end{matrix}
+\right)\otimes (\mr{Q}^\dagger,\mr{Q}^T e^T)+ \left( \left(
+\begin{matrix}
+\mr{Q}^* \\
+e\mr{Q}
+\end{matrix}
+\right)\otimes \left( \mr{Q}^\dagger e^T ,\mr{Q}^T \right)\right)^T \\
+=&\left(
+\begin{matrix}
+e\mr{Q}^*\otimes \mr{Q}^\dagger & e\mr{Q}^*\otimes \mr{Q}^Te^T \\
+\mr{Q}\otimes \mr{Q}^\dagger & \mr{Q}\otimes \mr{Q}^T e^T
+\end{matrix}
+\right)+\left(\left(
+\begin{matrix}
+\mr{Q}^* \otimes \mr{Q}^\dagger e^T & \mr{Q}^* \otimes \mr{Q}^T \\
+e\mr{Q} \otimes \mr{Q}^\dagger e^T & e \mr{Q} \otimes \mr{Q}^T
+\end{matrix}
+\right)\right)^T \\
+=&\left(
+\begin{matrix}
+e\mr{Q}^* \otimes \mr{Q}^\dagger & e\mr{Q}^* \otimes \mr{Q}^Te^T \\
+\mr{Q}\otimes \mr{Q}^\dagger & \mr{Q}\otimes \mr{Q}^T e^T
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+(\mr{Q}^* \otimes \mr{Q}^\dagger e^T)^T & (e\mr{Q} \otimes \mr{Q}^\dagger e^T)^T\\
+ (\mr{Q}^*\otimes \mr{Q}^T)^T & (e \mr{Q}\otimes \mr{Q}^T)^T
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+e\mr{Q}^* \otimes \mr{Q}^\dagger & e\mr{Q}^* \otimes \mr{Q}^Te^T \\
+\mr{Q}\otimes \mr{Q}^\dagger & \mr{Q}\otimes \mr{Q}^T e^T
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+e(\mr{Q}^* \otimes \mr{Q}^\dagger )^T & e(\mr{Q} \otimes \mr{Q}^\dagger )^Te^T\\
+ (\mr{Q}^*\otimes \mr{Q}^T)^T & (\mr{Q}\otimes \mr{Q}^T)^Te^T
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+e\left[\mr{Q}^* \otimes \mr{Q}^\dagger +(\mr{Q}^* \otimes \mr{Q}^\dagger)^T \right] & e\left[\mr{Q}^* \otimes \mr{Q}^T +(\mr{Q} \otimes \mr{Q}^\dagger )^T \right]e^T \\
+\mr{Q}\otimes \mr{Q}^\dagger+ (\mr{Q}^*\otimes \mr{Q}^T)^T & \left[\mr{Q}\otimes \mr{Q}^T+ (\mr{Q}\otimes \mr{Q}^T)^T\right] e^T
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+0 & e \left[2\sigma_\mu P^\mu \right]^T e^T \\
+2 \sigma_\mu P^\mu & 0
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+0 & -e \left[2\sigma_\mu P^\mu \right]^T e \\
+2 \sigma_\mu P^\mu & 0
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+0 & -e \left[2\sigma_0 P^0 \right]^T e \\
+2 \sigma_0 P^0 & 0
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+0 & -e \left[2\sigma_i P^i \right]^T e \\
+2 \sigma_i P^i & 0
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+0 & 2\sigma_0 P^0 \\
+2 \sigma_0 P^0 & 0
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+0 & -2\sigma_i P^i \\
+2 \sigma_i P^i & 0
+\end{matrix}
+\right) \\
+ &\quad \because e=i\sigma_2, \quad \sigma_2 (\sigma_i)^T \sigma_2 =-\sigma_i(i=1,2,3),\quad \sigma_2 \sigma_0 \sigma_2=\sigma_0 \\
+=&+2i\gamma^0 P^0-2i\gamma^i P^i \\
+=&-2iP_\mu \gamma^\mu
+\end{align*}
+とまとめられる．ここでディラック行列が5.4節で定義した
+\begin{align*}
+\gamma^0 =-i\beta =-i\left(
+\begin{matrix}
+0 & \sigma_0 \\
+\sigma_0 & 0
+\end{matrix}
+\right),\quad \gamma^i=-i\left(
+\begin{matrix}
+0 & \sigma_i \\
+-\sigma_i & 0
+\end{matrix}
+\right)
+\end{align*}
+を用いた．(反交換関係を行列表示にするのが若干苦戦した．原因は第二項目に現れる転置．これは，例えば$2$成分ベクトル$f=(f_1,f_2)^T,g=(g_1,g_2)^T$のテンソル積を使うと
+\begin{align*}
+\{f_a, g_b\}=&f_a g_b +g_b f_a
+\end{align*}
+が行列表記で
+\begin{align*}
+\{f,g\}=\left(
+\begin{matrix}
+f_1 g_1 +g_1 f_1 & f_1 g_2 + g_2 f_1 \\
+f_2 g_1 +g_1 f_2 & f_2 g_2 + g_2 f_2 
+\end{matrix}
+\right)&=\left(
+\begin{matrix}
+f_1 g_1 & f_1 g_2 \\
+f_2 g_1 & f_2 g_2 
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+g_1 f_1 &  g_2 f_1 \\
+g_1 f_2 &  g_2 f_2 
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+f_1 g_1 & f_1 g_2 \\
+f_2 g_1 & f_2 g_2 
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+g_1 f_1 &  g_1 f_2 \\
+g_2 f_1 &  g_2 f_2 
+\end{matrix}
+\right)^T \\
+=&\left(
+\begin{matrix}
+f_1 \\
+f_2 
+\end{matrix}
+\right)\otimes (g_1 ,g_2 )+ \left[\left(
+\begin{matrix}
+g_1 \\
+g_2
+\end{matrix}
+\right)\otimes (f_1 , f_2)\right]^T \\
+=&f\otimes g^T +[g\otimes f^T]^T
+\end{align*}
+となることからくる．特に今回の場合は$\bar{Q}$が列ベクトルでなく行ベクトルなので，第二項目のテンソル積に使うためには転置をかけた$\bar{Q}^T$を使う必要があった．)拡張超対称性の場合には中心電荷の存在によりこの式は変更され，
+\begin{align*}
+\left\{\mr{Q}_r,\mr{Q}_s^*\right\}=&\mr{Q}_r\otimes \mr{Q}_s^\dagger+(\mr{Q}_s^*\otimes \mr{Q}_r^T)^T =2\sigma_\mu P^\mu\delta_{rs} \\
+\left\{\mr{Q}_r,\mr{Q}_s\right\}=&\mr{Q}_r\otimes \mr{Q}_s^T+(\mr{Q}_s \otimes \mr{Q}_r^T)^T=e Z_{rs} \\
+\left\{\mr{Q}_r^*,\mr{Q}_s^*\right\}=&\mr{Q}_r^*\otimes \mr{Q}_s^\dagger+(\mr{Q}_s^* \otimes \mr{Q}_r^\dagger)^T=e Z_{rs}^*=-eZ_{sr}^*
+\end{align*}
+を用いて(同様の計算を繰り返す)
+\begin{align*}
+\left\{Q_r,\bar{Q}_s\right\}=&\left(
+\begin{matrix}
+e\left[\mr{Q}_r^* \otimes \mr{Q}_s^\dagger +(\mr{Q}_s^* \otimes \mr{Q}_r^\dagger)^T \right] & e\left[\mr{Q}_r^* \otimes \mr{Q}_s^T +(\mr{Q}_s \otimes \mr{Q}_r^\dagger )^T \right]e^T \\
+\mr{Q}_r\otimes \mr{Q}_s^\dagger+ (\mr{Q}_s^*\otimes \mr{Q}_r^T)^T & \left[\mr{Q}_r\otimes \mr{Q}_s^T+ (\mr{Q}_s\otimes \mr{Q}_r^T)^T\right] e^T
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+Z_{sr}^* & -e(2\sigma_\mu P^\mu \delta_{rs})^T e \\
+2\sigma_\mu P^\mu & Z_{rs}
+\end{matrix}
+\right) \\
+=&-2i\gamma^\mu P_\mu \delta_{rs}+\left(
+\begin{matrix}
+Z_{sr}^* &0 \\
+0 & Z_{rs}
+\end{matrix}
+\right) \\
+=&-2i\gamma^\mu P_\mu \delta_{rs}+\left(\frac{1+\gamma_5}{2}\right)Z_{sr}^*+\left(\frac{1-\gamma_5}{2}\right)Z_{rs}
+\end{align*}
+となる．ここでディラック行列
+\begin{align*}
+\gamma_5=\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right)
+\end{align*}
+を用いた．\par
+ここで与えた4次元時空の場合の解析は，32章で一般の$D$次元時空の場合について繰り返されるらしい．
+
+\vskip\baselineskip
+
+共形対称代数(24.B.34)(24.B.35)の下で不変な，質量ゼロ粒子の理論では，さらに2つのボゾン的対称性生成子$D,K_\mu$が存在し，それが超対称性の反交換関係の右辺に現れることができる．これらの新しい生成子はそれぞれ$Z_{rs}$および$P_\mu$と同様にスカラー$(0,0)$と4元ベクトル$(1/2,1/2)$のローレンツ変換性
+\begin{align*}
+[\mathbf{A},D]=&[\mathbf{B},D]=0 \\
+[A_i,(\sigma_\mu K^\mu)_{ab}]=&+\frac{1}{2}\sum_{a'}(\sigma_i)^*_{aa'}(\sigma_\mu K^\mu)_{a'b},\quad [B_i,(\sigma_\mu K^\mu)_{ab}]=-\frac{1}{2}\sum_{b'}(\sigma_i)_{bb'}(\sigma_\mu K^\mu)_{ab'}
+\end{align*}
+をもつ．($K^\mu$の変換性は$P^\mu$と同じなのが(25.B.34)の5つ目と(25.B.35)の2つ目を見比べればすぐわかる．$A_i$との交換関係で$-\sigma^*_\mu/2$が出てくる理由は九後ゲージ1章などを見ればわかりやすいかも．)よってp43の議論を繰り返して，フェルミオン的生成子はこの場合も，ローレンツ代数の基本スピノル表現$(1/2,0)$およびそのエルミート共役である$(0,1/2)$表現に属さなければならない．\par
+すべての演算子をそれぞれディラトン生成子$D$との交換子に応じて分類しておくのが便利らしい．演算子$X$が
+\begin{align*}
+[X,D]=iaX
+\end{align*}
+のとき，次元$a$をもつという．(24.B.34)からわかる通り，ボゾン的対称性生成子$J^{\mu\nu},P^\mu,K^\mu,D$は
+\begin{align*}
+[J^{\mu\nu},D]=0,\quad [P^\mu,D]=iP^\mu,\quad [K^\mu,D]=-iK^\mu,\quad[D,D]=0
+\end{align*}
+よりそれぞれ次元$0,+1,-1,0$をもつ．(なぜ次元というかというと，$D=-ix^\mu \partial_\mu$(オイラー作用素)と書くから，それぞれ$m,n$個の$x^\rho,\partial_\sigma$の積は$[\partial_\mu,x^\nu]=\delta^{\mu}_\nu$より
+\begin{align*}
+\left[x^{\rho_1}\cdots x^{\rho_m}\frac{\partial}{\partial x^{\sigma_1}}\cdots \frac{\partial}{\partial x^{\sigma_n}},D\right]=&-i\left[x^{\rho_1}\cdots x^{\rho_m}\frac{\partial}{\partial x^{\sigma_1}}\cdots \frac{\partial}{\partial x^{\sigma_n}},x^\mu \frac{\partial}{\partial x^\mu}\right] \\
+=&-ix^{\rho_1}\cdots x^{\rho_m}\left[\frac{\partial}{\partial x^{\sigma_1}}\cdots \frac{\partial}{\partial x^{\sigma_n}},x^\mu \frac{\partial}{\partial x^\mu}\right] \\
+&-i\left[x^{\rho_1}\cdots x^{\rho_m},x^\mu \frac{\partial}{\partial x^\mu}\right]\frac{\partial}{\partial x^{\sigma_1}}\cdots \frac{\partial}{\partial x^{\sigma_n}} \\
+=&-ix^{\rho_1}\cdots x^{\rho_m}\left[\frac{\partial}{\partial x^{\sigma_1}}\cdots \frac{\partial}{\partial x^{\sigma_n}},x^\mu \right] \frac{\partial}{\partial x^\mu} \\
+&-ix^\mu\left[x^{\rho_1}\cdots x^{\rho_m},\frac{\partial}{\partial x^\mu}\right]\frac{\partial}{\partial x^{\sigma_1}}\cdots \frac{\partial}{\partial x^{\sigma_n}} \\
+=&i(n-m)x^{\rho_1}\cdots x^{\rho_m}\frac{\partial}{\partial x^{\sigma_1}}\cdots \frac{\partial}{\partial x^{\sigma_n}}
+\end{align*}
+となり，次元は$n-m$であることがわかる．$x^\mu$の数だけ次元が下がり，$\partial_\mu$の数だけ次元が上がっている．運動量$P^\mu$は微分演算子で書けば$-i\partial^\mu$だったのを思い出せば，実際に次元が+1になっていることも理解できる．他も同様．)任意の内部対称性のリー群の生成子は次元0をもつ．次元$a$のフェルミオン的生成子
+\begin{align*}
+[\mr{Q},D]=ia\mr{Q}
+\end{align*}
+とその共役生成子との反交換子は
+\begin{align*}
+\left[\mr{Q}^*,D\right]=ia\mr{Q}^* \\
+[\left\{\mr{Q},\mr{Q}^*\right\},D]=&\left\{[\mr{Q},D],\mr{Q}^*\right\}+\left\{\mr{Q},[D,\mr{Q}^*]\right\} \\
+=&i(2a)\{\mr{Q},\mr{Q}^*\}
+\end{align*}
+次元$2a$で，かつp45の議論より正定値の$(1/2,1/2)$表現に属するボゾン的対称性生成子であることがわかる．そのようなボゾン的対称性生成子は$P_\mu$と$K_\mu$の線形結合だから，$2a=\pm 1$より唯一のフェルミオン的対称性生成子は次元$+1/2$と$-1/2$をもつことがわかる．そこで次元$+1/2$のフェルミオン的対称性生成子$\mr{Q}_{ar}$とその共役生成子$\mr{Q}_{ar}^*$を考えることができて，今までの議論を同様に進めることができて，合わせて4成分マヨラナ・スピノル$Q_{r\alpha}$を形成し
+\begin{align*}
+\{Q_{r\alpha},\bar{Q}_{s\beta}\}=&-2iP_\mu (\gamma^\mu)_{\alpha\beta}\delta_{rs} \\
+[P_\mu,Q_{r\alpha}]=&0 \\
+[D,Q_{r\alpha}]=&-\frac{1}{2}iQ_{r\alpha}
+\end{align*}
+を満たすようにできる．一つ目の式は(25.2.38)に対応する．ただし，ここでは中心電荷$Z_{rs}$は存在しない．なぜなら反交換子$\{\mr{Q}_{ar},\mr{Q}_{bs}\}$は次元$+1$を持つが，中心電荷は内部対称性生成子であるから次元0となり(25.2.8)のように現れることができない．二つ目の式は(25.2.10)に対応する．三つ目の式は$Q_{r\alpha}$の次元が$+1/2$であることからくる．\par
+$K_\mu$と$Q_{r\alpha}$との交換子は，次元が$1/2-1=-1/2$となり，$(0,1/2)$表現に属するフェルミオン的生成子だから，(次元$+1/2$の$Q_{r\alpha}$とは別の)次元$-1/2$のフェルミオン的対称性生成子$Q^\#_{r\alpha}$の線形結合になる．ローレンツ不変性から
+\begin{align*}
+[K^\mu,Q_{r\alpha}]=i(\gamma^\mu)_{\alpha\beta}Q^\#_{r\beta}
+\end{align*}
+と書いてよい．右辺の係数因子と位相は$Q^\#_{r\alpha}$の定義に吸収させることで自由に選べる．このように選ぶことで
+\begin{align*}
+\left([K^\mu,Q_{r}]\right)^*=&-[K^\mu,Q^*_{r}] \\
+=&+\beta \epsilon \gamma_5 [K^\mu,Q_{r}] \quad \because Q_r のマヨラナ性 \\
+=&+i\beta \epsilon \gamma_5\gamma^\mu Q_{r}^\# \\
+=&+i(\gamma^\mu)^* \beta \epsilon \gamma_5 Q_{r}^\# \quad \because \mc{C}=-\epsilon \gamma_5 と(5.4.40)\\
+=(i\gamma^\mu Q^\#_{r})^*=&-i(\gamma^\mu)^*(Q^\#_{r})^* \\
+\therefore (Q^\#_{r})^*=-\beta \epsilon \gamma_5 Q_{r}^\#
+\end{align*}
+と$Q^\#_{r\alpha}$がマヨラナ性を示すようにできる．$Q^\#_{r\alpha}$は次元$-1/2$だから，
+\begin{align*}
+[D,Q^\#_{r\alpha}]=+\frac{1}{2}iQ^\#_{r\alpha}
+\end{align*}
+となる．(25.2.43)と$P^\nu$との交換子をとり，$K^\mu,P^\nu$の交換子(24.B.34)を使うと
+\begin{align*}
+[P^\nu,[K^\mu,Q_{r\alpha}]]=&[[P^\nu,K^\mu],Q_{r\alpha}]+[K^\mu,[P^\nu,Q_{r\alpha}]] \\
+=&2i\eta^{\mu\nu}[D,Q_{r\alpha}]+2i[J^{\nu\mu},Q_{r\alpha}] \quad\ \because(24.B.34) \\
+=&\eta^{\mu\nu}Q_{r\alpha}+2i(\mc{J}^{\mu\nu})_{\alpha\beta}Q_{r\beta} \quad \because [J^{\nu\mu},Q_{r\alpha}]=-(\mc{J}^{\mu\nu})_{\alpha\beta}Q_{r\beta} \\
+=&\eta^{\mu\nu}Q_{r\alpha}+\frac{1}{2}[\gamma^\mu,\gamma^\nu]_{\alpha\beta}Q_{r\beta} \\
+=&\eta^{\mu\nu}Q_{r\alpha}+\frac{1}{2}(\gamma^\mu \gamma^\nu-\gamma^\nu \gamma^\mu)_{\alpha\beta}Q_{r\beta} \\
+=&\eta^{\mu\nu}Q_{r\alpha}+\frac{1}{2}(2\gamma^\mu \gamma^\nu-2\eta^{\mu\nu}1)_{\alpha\beta}Q_{r\beta} \quad \because \{\gamma^\mu,\gamma^\nu\}=2\eta^{\mu\nu}\\
+=&(\gamma^\mu)_{\alpha\beta}(\gamma^\nu)_{\beta\gamma}Q_{r\gamma} \\
+=i(\gamma^\mu)_{\alpha\beta}[P^\nu,Q^\#_{r\beta}] \\
+\therefore \quad [P^\nu,Q^\#_{r\alpha}]=&-i(\gamma^\nu)_{\alpha\beta}Q_{r\beta}
+\end{align*}
+が得られる．これと(25.2.43)を見比べると，$Q\leftrightarrow Q^\# ,P^\mu \leftrightarrow K^\mu$で対応していることがわかる．\par
+さらに反交換関係(25.2.40)と$K_\mu$との交換子をとると
+\begin{align*}
+[K^\mu,\bar{Q}_{r}]=&[K^\mu,Q_{r}^\dagger]\beta \\
+=&+i(Q^\#_r)^\dagger (\gamma^\mu)^\dagger \beta \\
+=&-i(Q^\#_r)^\dagger \beta \gamma^\mu \quad \because (5.4.30)\\
+=& -i\bar{Q}^\#_r \gamma^\mu
+\end{align*}
+を用いて
+\begin{align*}
+[K^\nu,\{Q_{r\alpha},\bar{Q}_{s\beta}\}]=&\{[K^\nu,Q_{r\alpha}],\bar{Q}_{s\beta}\}+\{Q_{r\alpha},[K^\nu,\bar{Q}_{s\beta}]\} \\
+=&i(\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}_{s\beta}\}-i\{Q_{r\alpha},\bar{Q}^\#_{s\beta'}\}(\gamma^\nu)_{\beta'\beta} \\
+=-2i(\gamma^\mu)_{\alpha\beta}[K^\nu,P_\mu]\delta_{rs}=&-4(\gamma^\mu)_{\alpha\beta}\delta^{\nu}_{\mu}D\delta_{rs}-4(\gamma^\mu)_{\alpha\beta}\tensor{J}{_\mu^\nu}\delta_{rs} \\
+=&-4(\gamma^\nu)_{\alpha\beta}D\delta_{rs}-4(\gamma^\mu)_{\alpha\beta}\tensor{J}{_\mu^\nu}\delta_{rs}
+\end{align*}
+両辺に$\gamma^\mu$をかけて，その後縮約することで
+\begin{align*}
+i(\gamma^\mu \gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}_{s\beta}\}-i(\gamma^\mu)_{\alpha\alpha'}\{Q_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma^\nu)_{\beta'\beta} =&-4(\gamma^\mu\gamma^\nu)_{\alpha\beta}\delta_{rs}D-4(\gamma^\mu\gamma^\rho)_{\alpha\beta}\tensor{J}{_\rho^\nu}\delta_{rs} \\
+4i\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}-i(\gamma^\mu)_{\alpha\alpha'}\{Q_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta}=&-16\delta_{\alpha\beta}\delta_{rs}D-4(\gamma^\mu\gamma^\rho)_{\alpha\beta}\tensor{J}{_\rho_\mu}\delta_{rs} \\
+=&-16\delta_{\alpha\beta}\delta_{rs}D+2(\gamma^\mu\gamma^\rho-\gamma^\rho \gamma^\mu)_{\alpha\beta}\tensor{J}{_\mu_\rho}\delta_{rs}  \\
+=&-16\delta_{\alpha\beta}\delta_{rs}D+8i(\mc{J}^{\mu\rho})_{\alpha\beta}\tensor{J}{_\mu_\rho}\delta_{rs}
+\end{align*}
+整理して
+\begin{align*}
+\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}=4i\delta_{\alpha\beta}\delta_{rs}D+2(\mc{J}^{\mu\rho})_{\alpha\beta}\tensor{J}{_\mu_\rho}\delta_{rs}+\frac{1}{4}(\gamma^\mu)_{\alpha\alpha'}\{Q_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta}
+\end{align*}
+という形になる．第三項目を処理する．ローレンツ不変性とディラック行列の線形独立性を用いると
+\begin{align*}
+\{Q_{r\alpha'},\bar{Q}^\#_{s\beta'}\}=&A_S \delta_{\alpha\beta}+A_P (\gamma_5)_{\alpha\beta} +A^\mu_{V}(\gamma_\mu)_{\alpha\beta} +A^\mu_A (\gamma_\mu \gamma_5)_{\alpha\beta} +A^{\mu\nu}_T [\gamma^\mu,\gamma^\nu]_{\alpha\beta} \\
+=&A_S \delta_{\alpha\beta}+A_P (\gamma_5)_{\alpha\beta}+A^{\mu\nu}_T [\gamma^\mu,\gamma^\nu]_{\alpha\beta}
+\end{align*}
+と書ける．ここで$A_S,A_P,A^\mu_V,A^\mu_A ,A^{\mu\nu}_T$はそれぞれスカラー，擬スカラー，ベクトル，擬ベクトル，テンソルに対応したボゾン的対称性生成子だ．これらの生成子は次元が0である必要があり，そのようなベクトル・擬ベクトル演算子は存在しないのだったから$A_V^\mu,A_P^\mu=0$となっている．両側から$\gamma^\mu$をかけてみれば(ガンマ行列の公式を用いて)
+\begin{align*}
+\gamma^\mu A_{S}1 \gamma_\mu=&4A_S \\
+\gamma^\mu A_P \gamma_5 \gamma_\mu =&-4A_P\gamma_5 \\
+\gamma^\mu [\gamma^\rho ,\gamma^\sigma]\gamma_\mu=&\gamma^\mu \gamma^\rho \gamma^\sigma \gamma_\mu -\gamma^\mu \gamma^\sigma \gamma^\rho \gamma_\mu \\
+=&4g^{\rho\sigma}-4g^{\sigma\rho}=0
+\end{align*}
+となり，
+\begin{align*}
+\frac{1}{4}(\gamma^\mu)_{\alpha\alpha'}\{Q_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta}=&A^S_{rs}\delta_{\alpha\beta}-A^P_{rs}(\gamma_5)_{\alpha\beta} \\
+=&O^S_{rs}\delta_{\alpha\beta}+O^P_{rs}(\gamma_5)_{\alpha\beta}
+\end{align*}
+という形に書くことができる．よって
+\begin{align*}
+\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}=4i\delta_{\alpha\beta}\delta_{rs}D+2(\mc{J}^{\rho\sigma})_{\alpha\beta}\tensor{J}{_\rho_\sigma}\delta_{rs}+O^S_{rs}\delta_{\alpha\beta}+O^P_{rs}(\gamma_5)_{\alpha\beta}
+\end{align*}
+という形になる．ここで$O^S,O^P$に関する条件を抽出するために，$Q_r,Q^\#_r$のマヨラナ性と$\mc{C}^T=\mc{C}^{-1}=-\mc{C}$を用いて
+\begin{align*}
+\{Q_{r\alpha},\bar{Q}^\#_{s\beta}\}=&\{Q_{r\alpha},Q^{\#*}_{s\beta'}\}\beta_{\beta'\beta} \\
+=&\{Q_{r\alpha},Q^{\#}_{s\beta''}\}(-\beta \epsilon\gamma_5)^T_{\beta''\beta'}\beta_{\beta'\beta} \\
+=&\{Q_{r\alpha},Q^{\#}_{s\beta'}\}(+\epsilon\gamma_5)_{\beta'\beta} \\
+=&-\{Q_{r\alpha},Q^{\#}_{s\beta'}\}\mc{C}_{\beta'\beta} \\
+=&-\{Q^\#_{s\beta'},Q_{r\alpha}\}\mc{C}_{\beta'\beta} \\
+=&+(\{Q^\#_{s\beta'},Q_{r\alpha''}\}\mc{C}_{\alpha''\alpha'}\mc{C}_{\alpha'\alpha})\mc{C}_{\beta'\beta} \\
+=&-\mc{C}_{\alpha\alpha'}(\{Q^\#_{s\beta'},Q_{r\alpha''}\}\mc{C}_{\alpha''\alpha'})\mc{C}_{\beta'\beta} \\
+=&+\mc{C}_{\alpha\alpha'}\{Q^\#_{s\beta'},\bar{Q}_{r\alpha'}\}\mc{C}_{\beta'\beta}
+\end{align*}
+最後の等号は，最初の4行の計算を$Q_r,Q_r^\#$を入れ替えて同じ計算をして導ける．これを用いて
+\begin{align*}
+&\frac{1}{4}(\gamma^\mu)_{\alpha\alpha'}\{Q_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta}=O^S_{rs}\delta_{\alpha\beta}+O^P_{rs}(\gamma_5)_{\alpha\beta} \\
+=&\frac{1}{4}(\gamma^\mu \mc{C})_{\alpha\alpha'}\{Q^\#_{s\beta'},\bar{Q}_{r\alpha'}\}(\mc{C}\gamma_\mu)_{\beta'\beta} \\
+=&\frac{1}{4}(\gamma^\mu \mc{C})_{\alpha\alpha'}\left[4i\delta_{\beta'\alpha'}\delta_{sr}D+2(\mc{J}^{\rho\sigma})_{\beta'\alpha'}\tensor{J}{_\rho_\sigma}\delta_{sr}+O^S_{sr}\delta_{\beta'\alpha'}+O^P_{sr}(\gamma_5)_{\beta'\alpha'} \right](\mc{C}\gamma_\mu)_{\beta'\beta} \\
+=&-4i\delta_{\alpha\beta}\delta_{rs}D+2(\gamma^\mu \mc{C} (\mc{J}^{\rho\sigma})^T\mc{C}\gamma_\mu)_{\alpha\beta}J_{\rho\sigma}\delta_{rs}-O^S_{sr}\delta_{\alpha\beta}+O^P_{sr}(\gamma_5)_{\alpha\beta} \\
+=&-4i\delta_{\alpha\beta}\delta_{rs}D-O^S_{sr}\delta_{\alpha\beta}+O^P_{sr}(\gamma_5)_{\alpha\beta} \\
+\therefore \quad &(O^S_{rs}+O^S_{sr}+4i\delta_{rs}D)\delta_{\alpha\beta}+(O^P_{rs}-O^P_{sr})(\gamma_5)_{\alpha\beta}=0 \\
+& O^S_{rs}+O^S_{sr}+4i\delta_{rs}D=0 ,\quad O^P_{rs}=O^P_{sr}
+\end{align*}
+ここで
+\begin{align*}
+\gamma^\mu \mc{C} (\mc{J}^{\rho\sigma})^T\mc{C}\gamma_\mu =&\gamma^\mu \mc{J}^{\rho\sigma} \gamma_\mu \quad \because (5.4.37) \\
+=&0
+\end{align*}
+となることを用いた．$r=s$とおくと全ての$r$で
+\begin{align*}
+2O^S_{rr}+4iD=0 \\
+O^S_{rr}=-2iD
+\end{align*}
+が得られる．よって対角成分を差し引いて，対角成分がゼロの新しい生成子を$O^S_{rs}=O'^S_{rs}-2iD\delta_{rs}$と定められる．これを用いると上の条件から$O'^S_{rs}=-O'^S_{sr}$が得られ，また
+\begin{align*}
+\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}=&4i\delta_{\alpha\beta}\delta_{rs}D+2(\mc{J}^{\rho\sigma})_{\alpha\beta}\tensor{J}{_\rho_\sigma}\delta_{rs}+O^S_{rs}\delta_{\alpha\beta}+O^P_{rs}(\gamma_5)_{\alpha\beta} \\
+=&2i\delta_{\alpha\beta}\delta_{rs}D+2(\mc{J}^{\rho\sigma})_{\alpha\beta}\tensor{J}{_\rho_\sigma}\delta_{rs}+O'^S_{rs}\delta_{\alpha\beta}+O^P_{rs}(\gamma_5)_{\alpha\beta}
+\end{align*}
+が得られる．プライムを落とせば
+\begin{align*}
+\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}=2i\delta_{\alpha\beta}\delta_{rs}D+2(\mc{J}^{\rho\sigma})_{\alpha\beta}\tensor{J}{_\rho_\sigma}\delta_{rs}+O^S_{rs}\delta_{\alpha\beta}+O^P_{rs}(\gamma_5)_{\alpha\beta}
+\end{align*}
+が求まる．ここで以上より，$O^S_{rs},O^P_{rs}$は次数0のローレンツ不変な生成子であり
+\begin{align*}
+O^S_{rs}=-O^S_{sr},\quad O^P_{rs}=+O^P_{sr}
+\end{align*}
+を満たす．\par
+(25.2.43)と$K_\nu$の交換子をとり，$[K_\nu,K_\mu]=0$を使うと
+\begin{align*}
+[K^\nu,[K^\mu,Q_{r\alpha}]]=&[[K^\nu,K^\mu],Q_{r\alpha}]+[K^\mu,[K^\nu,Q_{r\alpha}]] \\
+=&[K^\mu,[K^\nu,Q_{r\alpha}]]=i(\gamma^\nu)_{\alpha\beta}[K^\mu,Q^\#_{r\beta}] \\
+=i(\gamma^\mu)_{\alpha\beta}[K^\nu,Q^\#_{r\beta}]
+\end{align*}
+となり，$(\gamma^\mu)_{\alpha\beta}[K^\nu,Q^\#_{r\beta}]$は$\mu,\nu$について対称であることがわかる．代数計算により
+\begin{align*}
+4[K^\nu,Q^\#_r]=&\gamma_\mu \gamma^\mu[K^\nu,Q^\#_r] \\
+=&\gamma_\mu \gamma^\nu[K^\mu,Q^\#_r] \\
+=&2\delta_\mu^\nu[K^\mu,Q^\#_r]-\gamma^\nu \gamma_\mu [K^\mu,Q^\#_r] \\
+=&2[K^\nu,Q^\#_r]-\gamma^\nu \gamma_\mu [K^\mu,Q^\#_r] \\
+\therefore \quad  [K^\nu,Q^\#_r]=&-\frac{1}{2}\gamma^\nu \gamma_\mu [K^\mu,Q^\#_r] \\
+=&+\frac{1}{4}\gamma^\nu \gamma_\mu(\gamma^\mu \gamma_\rho [K^\rho,Q^\#_r]) \\
+=&+\gamma^\nu \gamma_\rho [K^\rho,Q^\#_r]=-2 [K^\nu,Q^\#_r] \\
+\therefore \quad [K^\mu,Q^\#_{r\alpha}]=&0
+\end{align*}
+が得られる．(左辺は次元$-3/2$となっており，そのような対称性生成子が存在しないことを表している．)\par
+(25.2.46)(を使うと$O^S,O^P$との交換子を考える必要があるので代わりに
+\begin{align*}
+\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}=4i\delta_{\alpha\beta}\delta_{rs}D+2(\mc{J}^{\mu\rho})_{\alpha\beta}\tensor{J}{_\mu_\rho}\delta_{rs}+\frac{1}{4}(\gamma^\mu)_{\alpha\alpha'}\{Q_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta}
+\end{align*}
+を使う)と$K_\nu$の交換子から
+\begin{align*}
+&[K^\nu,\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}]=\{[K^\nu,Q^\#_{r\alpha}],\bar{Q}_{s\beta}\}+\{Q^\#_{r\alpha},[K^\nu,\bar{Q}_{s\beta}]\} =-i\{Q^\#_{r\alpha},\bar{Q}^\#_{s\beta'}\}(\gamma^\nu)_{\beta'\beta} \\
+=&4i\delta_{\alpha\beta}\delta_{rs}[K^\nu,D]+2(\mc{J}_{\rho\sigma})_{\alpha\beta}\delta_{rs}[K^\nu,J^{\rho\sigma}] +i\frac{1}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta} \\
+=&4\delta_{\alpha\beta}\delta_{rs}K^\nu-2i(\mc{J}_{\rho\sigma})_{\alpha\beta}\delta_{rs}\eta^{\nu\rho}K^\sigma+2i(\mc{J}_{\rho\sigma})_{\alpha\beta}\delta_{rs}\eta^{\nu\sigma}K^\rho +i\frac{1}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta} \\
+=&4\delta_{\alpha\beta}\delta_{rs}K^\nu-2i(\mc{J}^{\nu\sigma})_{\alpha\beta}\delta_{rs}K_\sigma+2i(\mc{J}^{\rho\nu})_{\alpha\beta}\delta_{rs}K_\rho+i\frac{1}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta} \\
+=&4\delta_{\alpha\beta}\delta_{rs}K^\nu-4i(\mc{J}^{\nu\sigma})_{\alpha\beta}\delta_{rs}K_\sigma +i\frac{1}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta} \\
+=&4\delta_{\alpha\beta}\delta_{rs}K^\nu-(\gamma^\nu \gamma^\sigma-\gamma^\sigma \gamma^\nu)_{\alpha\beta}\delta_{rs}K_\sigma +i\frac{1}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta} \\
+=&4\delta_{\alpha\beta}\delta_{rs}K^\nu-(-2\gamma^\sigma \gamma^\nu+2\eta^{\nu\sigma}1)_{\alpha\beta}\delta_{rs}K_\sigma+i\frac{1}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta} \\
+=&2\delta_{\alpha\beta}\delta_{rs}K^\nu+2(\gamma^\mu \gamma^\nu)_{\alpha\beta} \delta_{rs}K_\mu+i\frac{1}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta}
+\end{align*}
+よって
+\begin{align*}
+-i\{Q^\#_{r\alpha},\bar{Q}^\#_{s\beta'}\}(\gamma^\nu)_{\beta'\beta} =&2\delta_{\alpha\beta}\delta_{rs}K^\nu+2(\gamma^\mu \gamma^\nu)_{\alpha\beta} \delta_{rs}K_\mu+i\frac{1}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu)_{\beta'\beta} \\
+-4i\{Q^\#_{r\alpha},\bar{Q}^\#_{s\beta}\}=&2(\gamma^\nu)_{\alpha\beta}\delta_{rs}K_\nu +8(\gamma^\mu)_{\alpha\beta}\delta_{rs}K_\mu +\frac{i}{4}(\gamma^\mu\gamma^\nu)_{\alpha\alpha'}\{Q^\#_{r\alpha'},\bar{Q}^\#_{s\beta'}\}(\gamma_\mu\gamma_\nu)_{\beta'\beta}
+\end{align*}
+ここで，$\{Q^\#_{r\alpha},\bar{Q}^\#_{s\beta}\}$は次元-1のボゾン的対称性生成子だから，ローレンツ不変性より$(\gamma^\mu)_{\alpha\beta}K_\mu$に比例していなければならない．上の式を満たすためには
+\begin{align*}
+\{Q^\#_{r\alpha},\bar{Q}^\#_{s\beta}\}=+2i(\gamma^\mu)_{\alpha\beta}\delta_{rs}K_\mu
+\end{align*}
+となる．\par
+最後に，(25.2.46)と$Q_{t\gamma}$との交換子から，まず右辺が
+\begin{align*}
+[Q_{t\gamma},\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}]=&[\{Q_{t\gamma},Q^\#_{r\alpha}\},\bar{Q}_{s\beta}]+[\{Q_{t\gamma},\bar{Q}_{s\beta}\},Q^\#_{r\alpha}] \\
+=&[\{Q^\#_{r\alpha},\bar{Q}_{t\gamma'}\},\bar{Q}_{s\beta}]\mc{C}_{\gamma' \gamma}+[\{Q_{t\gamma},\bar{Q}_{s\beta}\},Q^\#_{r\alpha}] \\
+=&2i\mc{C}_{\alpha\gamma}\delta_{rt}[D,\bar{Q}_{s\beta}]+2(\mc{J}^{\rho\sigma}\mc{C})_{\alpha\gamma}\delta_{rt}[J_{\rho\sigma},\bar{Q}_{s\beta}]+[O^S_{rt}, \bar{Q}_{s\beta}]\mc{C}_{\alpha\gamma}+[O^P_{rt},\bar{Q}_{s\beta}](\gamma_5 \mc{C})_{\alpha\gamma} \\
+&-2i(\gamma^\mu)_{\gamma\beta}\delta_{ts}[P_\mu,Q^\#_{r\alpha}] \\
+=&+\mc{C}_{\alpha\gamma}\delta_{rt}\bar{Q}_{s\beta}+2(\mc{J}^{\rho\sigma}\mc{C})_{\alpha\gamma}\delta_{rt}(\mc{J}_{\rho\sigma})_{\beta'\beta}\bar{Q}_{s\beta'}+[O^S_{rt}, \bar{Q}_{s\beta}]\mc{C}_{\alpha\gamma}+[O^P_{rt},\bar{Q}_{s\beta}](\gamma_5 \mc{C})_{\alpha\gamma} \\
+&-2(\gamma^\mu)_{\gamma\beta}(\gamma_{\mu})_{\alpha\alpha'}Q_{r\alpha'}\delta_{ts}
+\end{align*}
+となり(ここで$[J^{\rho\sigma},\bar{Q}_{r\alpha}]=+\bar{Q}_{r\beta}(\mc{J}^{\rho\sigma})_{\beta\alpha}$を用いた)，左辺は
+\begin{align*}
+[Q_{t\gamma},\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}]=&2i\delta_{\alpha\beta}\delta_{rs}[Q_{t\gamma},D]+2(\mc{J}^{\rho\sigma})_{\alpha\beta}\delta_{rs}[Q_{t\gamma},J_{\rho\sigma}]+[Q_{t\gamma},O^S_{rs}]\delta_{\alpha\beta}+[Q_{t\gamma},O^P_{rs}](\gamma_5)_{\alpha\beta} \\
+=&-\delta_{\alpha\beta}\delta_{rs}Q_{t\gamma}+2(\mc{J}^{\rho\sigma})_{\alpha\beta}\delta_{rs}(\mc{J}_{\rho\sigma})_{\gamma\gamma'}Q_{t\gamma'}+[Q_{t\gamma},O^S_{rs}]\delta_{\alpha\beta}+[Q_{t\gamma},O^P_{rs}](\gamma_5)_{\alpha\beta}
+\end{align*}
+$\alpha,\gamma$を縮約して
+\begin{align*}
+\mathrm{tr}{\mc{C}}=&\mathrm{tr}\gamma_5=0 \\
+\mathrm{tr}{(\mc{J}^{\rho\sigma}\mc{C})}=&\frac{1}{4}\mr{tr}(\gamma^\rho \gamma^\sigma \gamma^2 \gamma^0)-\frac{1}{4}\mr{tr}(\gamma^\sigma \gamma^\rho \gamma^2 \gamma^0) \\
+&=2(\eta^{\rho 0}\eta^{\sigma 2}-\eta^{\rho 2}\eta^{\sigma 0}) \\
+\mr{tr}(\gamma_5 \mc{C})=&i\mr{tr}(\gamma_5 \gamma^2 \gamma^0)=0 \\
+(\gamma^\mu)^T \gamma_\mu=&\mc{C}\gamma^\mu \mc{C} \gamma_\mu \\
+=&-\gamma^2 \gamma^0 \gamma^\mu \gamma^2 \gamma^0 \gamma_\mu \\
+=&-4\gamma^2 \gamma^0 (4\eta^{20})=0 \\
+(\mc{J}^{\rho\sigma})^T \mc{J}_{\rho\sigma}=&\mc{C} \mc{J}^{\rho\sigma} \mc{C} \mc{J}_{\rho\sigma} \\
+=&-\gamma^2 \gamma^0 \mc{J}^{\rho\sigma} \gamma^2 \gamma^0 \mc{J}_{\rho\sigma} \\
+=&\frac{1}{16}\gamma^2 \gamma^0 (\gamma^\rho \gamma^\sigma -\gamma^\sigma \gamma^\rho )\gamma^2 \gamma^0 (\gamma_\rho \gamma_\sigma -\gamma_\sigma \gamma_\rho) \\
+=&\frac{1}{8}\gamma^2 \gamma^0 (\gamma^\rho \gamma^\sigma \gamma^2 \gamma^0 \gamma_\rho \gamma_\sigma - \gamma^\rho \gamma^\sigma \gamma^2 \gamma^0 \gamma_\rho \gamma_\sigma) \\
+=&\frac{1}{8}\gamma^2 \gamma^0 (-2\gamma^\rho \gamma_\rho \gamma^0 \gamma^2 - 4 \gamma^\rho \eta^{20} \gamma_\rho) \\
+=&+1
+\end{align*}
+を用いると，まず右辺が
+\begin{align*}
+&+\mc{C}_{\alpha\alpha}\delta_{rt}\bar{Q}_{s\beta}+2(\mc{J}^{\rho\sigma}\mc{C})_{\alpha\alpha}\delta_{rt}(\mc{J}_{\rho\sigma})_{\beta'\beta}\bar{Q}_{s\beta'}+[O^S_{rt}, \bar{Q}_{s\beta}]\mc{C}_{\alpha\alpha}+[O^P_{rt},\bar{Q}_{s\beta}](\gamma_5 \mc{C})_{\alpha\alpha} \\
+=&4\eta^{\rho 0}\eta^{\sigma2}\delta_{rt}(\mc{J}_{\rho\sigma})_{\beta'\beta}\bar{Q}_{s\beta'}-4\eta^{\rho2}\eta^{\sigma0}\delta_{rt} (\mc{J}_{\rho\sigma})_{\beta'\beta}\bar{Q}_{s\beta'} \\
+&-2(\gamma^\mu)_{\alpha\beta}(\gamma_{\mu})_{\alpha\alpha'}Q_{r\alpha'}\delta_{ts} \\
+=&+4(\mc{J}^{02})_{\beta'\beta}\delta_{rt} \bar{Q}_{s\beta'}-4(\mc{J}^{20})_{\beta'\beta}\delta_{rt} \bar{Q}_{s\beta'} \\
+=&+8(\mc{J}^{02})_{\beta'\beta}\delta_{rt} \bar{Q}_{s\beta'} \\
+=&+4i(\gamma^2 \gamma^0)_{\beta'\beta}\delta_{rt}\bar{Q}_{s\beta'} \\
+=&+4\delta_{rt}\bar{Q}_{s\beta'}\mc{C}_{\beta'\beta}=+4\delta_{rt} Q_{s\beta} \quad \because \bar{Q}_{r\alpha}=-Q_{r\beta}\mc{C}_{\beta\alpha}
+\end{align*}
+左辺が
+\begin{align*}
+&-\delta_{\alpha\beta}\delta_{rs}Q_{t\alpha}+2(\mc{J}^{\rho\sigma})_{\alpha\beta}\delta_{rs}(\mc{J}_{\rho\sigma})_{\alpha\gamma'}Q_{t\gamma'}+[Q_{t\alpha},O^S_{rs}]\delta_{\alpha\beta}+[Q_{t\alpha},O^P_{rs}](\gamma_5)_{\alpha\beta} \\
+=&-\delta_{rs}Q_{t\beta}+2\delta_{rs} Q_{t\beta}+[Q_{t\beta},O^S_{rs}]+[(\gamma_5 Q)_{t\beta},O^P_{rs}] \\
+=&+\delta_{rs}Q_{t\beta}-[O^S_{rs},Q_{t\beta}]-[O^P_{rs},(\gamma_5 Q)_{t\beta}]
+\end{align*}
+よって
+\begin{align*}
+[O^S_{rs},Q_{t\alpha}]+[O^P_{rs},(\gamma_5 Q)_{t\alpha}]=-4\delta_{rt}Q_{s\alpha}+\delta_{rs}Q_{t\alpha}
+\end{align*}
+となる．$\alpha,\beta$を縮約すると
+\begin{align*}
+&+\mc{C}_{\alpha\gamma}\delta_{rt}\bar{Q}_{s\alpha}+2(\mc{J}^{\rho\sigma}\mc{C})_{\alpha\gamma}\delta_{rt}(\mc{J}_{\rho\sigma})_{\beta'\alpha}\bar{Q}_{s\beta'}+[O^S_{rt}, \bar{Q}_{s\alpha}]\mc{C}_{\alpha\gamma}+[O^P_{rt},\bar{Q}_{s\alpha}](\gamma_5 \mc{C})_{\alpha\gamma} \\
+&-2(\gamma^\mu)_{\gamma\alpha}(\gamma_{\mu})_{\alpha\alpha'}Q_{r\alpha'}\delta_{ts} \\
+=&+\delta_{rt}Q_{s\gamma}+2\delta_{rt}(\mc{J}^{\rho\sigma}\mc{J}_{\rho\sigma}\mc{C})_{\beta'\gamma}\bar{Q}_{s\beta'}+[O^S_{rt}, Q_{s\gamma}]+[O^P_{rt},(\gamma_5 Q)_{s\gamma}]-8\delta_{st}Q_{r\gamma}  \\
+=&\delta_{rt}Q_{s\gamma}+6\delta_{rt}Q_{s\gamma}+[O^S_{rt}, Q_{s\gamma}]+[O^P_{rt},(\gamma_5 Q)_{s\gamma}]-8\delta_{st}Q_{r\gamma} \\
+=&8\delta_{rt}Q_{s\gamma}-4\delta_{rs}Q_{t\gamma}-8\delta_{st}Q_{r\gamma}
+\end{align*}
+左辺は
+\begin{align*}
+&-\delta_{\alpha\alpha}\delta_{rs}Q_{t\gamma}+2(\mc{J}^{\rho\sigma})_{\alpha\alpha}\delta_{rs}(\mc{J}_{\rho\sigma})_{\gamma\gamma'}Q_{t\gamma'}+[Q_{t\gamma},O^S_{rs}]\delta_{\alpha\alpha}+[Q_{t\gamma},O^P_{rs}](\gamma_5)_{\alpha\alpha} \\
+=&-4\delta_{rs}Q_{t\gamma}+4[Q_{t\gamma},O^S_{rs}]
+\end{align*}
+よって
+\begin{align*}
+[O^S_{rs},Q_{t\alpha}]=&-2\delta_{rt}Q_{s\alpha}+2\delta_{st}Q_{r\alpha} \\
+[O^P_{rs},Q_{t\alpha}]=&\delta_{rs}(\gamma_5 Q)_{t\alpha}-2\delta_{rt}(\gamma_5 Q)_{s\alpha}-2\delta_{st}(\gamma_5 Q)_{r\alpha}
+\end{align*}
+がわかる．($\beta,\gamma$の縮約からはこれ以上の情報は得られない．)したがって
+\begin{align*}
+\left[O^S_{rs},\left(\frac{1+\gamma_5}{2} Q\right)_{t\alpha}\right]=&-2\delta_{rt}\left(\frac{1+\gamma_5}{2}Q\right)_{s\alpha}+2\delta_{st}\left(\frac{1+\gamma_5}{2}Q\right)_{r\alpha} \\
+=&-\left(2\delta_{rt}\delta_{su}-2\delta_{st}\delta_{ru}\right)\left(\frac{1+\gamma_5}{2}Q\right)_{u\alpha} \\
+\left[O^S_{rs},\left(\frac{1-\gamma_5}{2} Q\right)_{t\alpha}\right]=&-2\delta_{rt}\left(\frac{1+\gamma_5}{2}Q\right)_{s\alpha}+2\delta_{st}\left(\frac{1+\gamma_5}{2}Q\right)_{r\alpha} \\
+=&-\left(2\delta_{rt}\delta_{su}-2\delta_{st}\delta_{ru}\right)\left(\frac{1+\gamma_5}{2}Q\right)_{u\alpha}
+\end{align*}
+となる．この左辺の表現行列はエルミートでないから，新しく$O'^S_{rs}=iO^{S}_{rs}$で生成子を定めれば(プライムを落として)
+\begin{align*}
+\left[O^S_{rs},\left(\frac{1+\gamma_5}{2} Q\right)_{t\alpha}\right]=&-i\left(2\delta_{rt}\delta_{su}-2\delta_{st}\delta_{ru}\right)\left(\frac{1+\gamma_5}{2}Q\right)_{u\alpha} \\
+=&-(\mc{O}^S_{rs})_{tu}\left(\frac{1+\gamma_5}{2}Q\right)_{u\alpha} \\
+\left[O^S_{rs},\left(\frac{1-\gamma_5}{2} Q\right)_{t\alpha}\right]=&-(\mc{O}^S_{rs})_{tu}\left(\frac{1-\gamma_5}{2}Q\right)_{u\alpha} \\
+=&-(\mc{O}^S_{rs})_{tu}^\dagger \left(\frac{1-\gamma_5}{2}Q\right)_{u\alpha} \\
+(\mc{O}^S_{rs})_{tu} \equiv &i\left(2\delta_{rt}\delta_{su}-2\delta_{st}\delta_{ru}\right) 
+\end{align*}
+となる．このエルミートな表現行列$(\mc{O}^S_{rs})_{tu}$は，
+\begin{align*}
+(\mc{O}^S_{rs} \mc{O}^S_{xy})_{tv}=&(\mc{O}^S_{rs})_{tu}(\mc{O}^S_{xy})_{uv} \\
+=&-4(\delta_{rt}\delta_{su}-\delta_{st}\delta_{ru})(\delta_{xu}\delta_{yv}-\delta_{yu}\delta_{xv}) \\
+=&-4(\delta_{rt}\delta_{sx}\delta_{yv}+\delta_{st}\delta_{ry}\delta_{xv}-\delta_{rt}\delta_{sy}\delta_{xv}-\delta_{st}\delta_{rx}\delta_{yv}) \\
+(\mc{O}^S_{xy}\mc{O}^S_{rs})_{tv}=&-4(\delta_{xt}\delta_{yr}\delta_{sv}+\delta_{yt}\delta_{xs}\delta_{rv}-\delta_{xt}\delta_{ys}\delta_{rv}-\delta_{yt}\delta_{xr}\delta_{sv})  \\
+[\mc{O}^S_{rs},\mc{O}^S_{xy}]_{tv}=&(\mc{O}^S_{rs} \mc{O}^S_{xy})_{tv}-(\mc{O}^S_{xy}\mc{O}^S_{rs})_{tv} \\
+=&-2(\delta_{rw}\delta_{sx}\delta_{yz}+\delta_{sw}\delta_{ry}\delta_{xz}-\delta_{rw}\delta_{sy}\delta_{xz}-\delta_{sw}\delta_{rx}\delta_{yz})(2\delta_{wt}\delta_{zv}-2\delta_{zt}\delta_{wv}) \\
+=&i2(\delta_{rw}\delta_{sx}\delta_{yz}+\delta_{sw}\delta_{ry}\delta_{xz}-\delta_{rw}\delta_{sy}\delta_{xz}-\delta_{sw}\delta_{rx}\delta_{yz})(\mc{O}^S_{wz})_{tv} \\
+=&iC^{wz}_{rsxy}(\mc{O}^S_{wz})_{tv}
+\end{align*}
+と書けるから，閉じておりリー代数となっている．(25.2.28)の逆の手順から
+\begin{align*}
+[O^S_{rs},O^S_{xy}]=iC^{wz}_{rsxy}O^S_{wz}
+\end{align*}
+もわかる．以上より
+\begin{align*}
+e^{-i\alpha_{rs}O^S_{rs}} (P_L Q)_{t\alpha} e^{i\alpha_{rs} O_{rs}^S}=&(P_LQ)_{t\alpha}-i\alpha_{rs}[O^S_{rs},(P_LQ)_{t\alpha}] +\cdots \\
+=&(P_LQ)_{t\alpha}+i\alpha_{rs}(\mc{O}^S_{rs})_{tu} (P_LQ)_{u\alpha} \cdots \\
+=&\left[e^{i\alpha_{rs}(\mc{O}^S_{rs})}\right]_{tu}(P_LQ)_{u\alpha} \\
+e^{-i\alpha_{rs}O^S_{rs}} (P_R Q)_{t\alpha} e^{i\alpha_{rs} O_{rs}^S}=&(P_RQ)_{t\alpha}-i\alpha_{rs}[O^S_{rs},(P_RQ)_{t\alpha}] +\cdots \\
+=&(P_RQ)_{t\alpha}+i\alpha_{rs} (\mc{O}^S_{rs})_{tu}^\dagger (P_RQ)_{u\alpha} \cdots \\
+=&(P_RQ)_{t\alpha}-i\alpha_{rs} (P_RQ)_{u\alpha}(\mc{O}^S_{rs})_{ut}^\dagger \cdots \\
+=&(P_RQ)_{u\alpha}\left[e^{i\alpha_{rs}(\mc{O}^S_{rs})}\right]_{ut}^\dagger
+\end{align*}
+となり，$O^S_{rs}$はR対称性の$U(N)$の生成子であり，左手成分$P_LQ_r$と右手成分$P_R Q_r$はそれぞれ$\mathbf{N}$表現と$\bar{\mathbf{N}}$表現として変換されることがわかる．$O^P$についても同様で
+\begin{align*}
+\left[O^P_{rs},\left(\frac{1+\gamma_5}{2} Q\right)_{t\alpha}\right]=&\delta_{rs}\left(\frac{1+\gamma_5}{2} Q\right)_{t\alpha}-2\delta_{rt}\left(\frac{1+\gamma_5}{2} Q\right)_{s\alpha}-2\delta_{st}\left(\frac{1+\gamma_5}{2} Q\right)_{r\alpha} \\
+=&-\left(-\delta_{rs}\delta_{tu}+2\delta_{rt}\delta_{su}+2\delta_{st}\delta_{ru}\right)\left(\frac{1+\gamma_5}{2} Q\right)_{u\alpha} \\
+=&-(\mc{O}^P_{rs})_{tu}\left(\frac{1+\gamma_5}{2} Q\right)_{u\alpha} \\
+\left[O^P_{rs},\left(\frac{1-\gamma_5}{2} Q\right)_{t\alpha}\right]=&-\delta_{rs}\left(\frac{1-\gamma_5}{2} Q\right)_{t\alpha}+2\delta_{rt}\left(\frac{1-\gamma_5}{2} Q\right)_{s\alpha}+2\delta_{st}\left(\frac{1-\gamma_5}{2} Q\right)_{r\alpha} \\
+=&\left(-\delta_{rs}\delta_{tu}+2\delta_{rt}\delta_{su}+2\delta_{st}\delta_{ru}\right)\left(\frac{1-\gamma_5}{2} Q\right)_{r\alpha} \\
+=&+(\mc{O}^P_{rs})_{tu}\left(\frac{1-\gamma_5}{2} Q\right)_{u\alpha} \\
+=&+(\mc{O}^P_{rs})^\dagger_{tu}\left(\frac{1-\gamma_5}{2} Q\right)_{u\alpha}
+\end{align*}
+となる．(今回の行列$\mc{O}^P$はエルミートなので生成子の再定義は必要ない．)ここから
+\begin{align*}
+e^{-i\alpha_{rs}O^P_{rs}} (P_L Q)_{t\alpha} e^{i\alpha_{rs} O_{rs}^P}=&(P_LQ)_{t\alpha}-i\alpha_{rs}[O^P_{rs},(P_LQ)_{t\alpha}] +\cdots \\
+=&(P_LQ)_{t\alpha}+i\alpha_{rs}(\mc{O}^P_{rs})_{tu} (P_LQ)_{u\alpha} \cdots \\
+=&\left[e^{i\alpha_{rs}(\mc{O}^S_{rs})}\right]_{tu}(P_LQ)_{u\alpha} \\
+e^{-i\alpha_{rs}O^S_{rs}} (P_R Q)_{t\alpha} e^{i\alpha_{rs} O_{rs}^S}=&(P_RQ)_{t\alpha}-i\alpha_{rs}[O^S_{rs},(P_RQ)_{t\alpha}] +\cdots \\
+=&(P_RQ)_{t\alpha}-i\alpha_{rs} (\mc{O}^P_{rs})_{tu}^\dagger (P_RQ)_{u\alpha} \cdots \\
+=&(P_RQ)_{t\alpha}-i\alpha_{rs} (P_RQ)_{u\alpha}(\mc{O}^P_{rs})_{ut}^\dagger \cdots \\
+=&(P_RQ)_{u\alpha}\left[e^{i\alpha_{rs}(\mc{O}^S_{rs})}\right]_{ut}^\dagger
+\end{align*}
+となって，$O^P_{rs}$はR対称性の$U(N)$の生成子であり，左手成分$P_LQ_r$と右手成分$P_R Q_r$はそれぞれ$\mathbf{N}$表現と$\bar{\mathbf{N}}$表現として変換されることがわかる．(もっと言えば$O^S_{rs}$はトレースレスだからユニモジュラであり，$SU(N)$の生成子だ．$O^P_{rs}$による変換を見ると$\delta_{rs}$に比例する$U(1)$の項が存在するから，こちらは$U(N)$の生成子だ．)\par
+$P_\mu,K_\mu,D$は$U(N)$不変であることがわかるらしい．面倒だから示さないけど．これらの生成子同士およびほかの生成子との$U(N)$交換関係
+\begin{align*}
+&\left[P^\mu , D \right]=iP^\mu ,\quad \left[K^\mu, D\right]=-iK^\mu \\
+&\left[P^\mu, K^\nu \right]=2i\eta^{\mu\nu}D+2i J^{\mu\nu} ,\quad \left[K^\mu ,K^\nu\right]=0 \\
+&\left[ J^{\rho\sigma},K^\mu \right]=i\eta^{\mu\rho}K^\sigma -i\eta^{\mu\sigma}K^\rho ,\quad \left[J^{\rho\sigma},D\right]=0 \\
+&\left[J^{\mu\nu},J^{\rho\sigma}\right]=-i\eta^{\nu\rho}J^{\mu\sigma}+i\eta^{\mu\rho}J^{\nu\sigma}+i\eta^{\sigma\mu}J^{\rho\nu}-i\eta^{\sigma\nu}J^{\rho\mu} \\
+&\left[P^\mu,J^{\rho\sigma}\right]=-i\eta^{\nu\rho}P^\sigma +i \eta^{\nu\sigma}P^\rho \\
+&\left[P^\mu,P^\nu\right]=0 \\
+&\{Q_{r\alpha},\bar{Q}_{s\beta}\}=-2iP_\mu (\gamma^\mu)_{\alpha\beta}\delta_{rs} \\
+&[P_\mu,Q_{r\alpha}]=0 \\
+&[D,Q_{r\alpha}]=-\frac{1}{2}iQ_{r\alpha} \\
+&[K^\mu,Q_{r\alpha}]=i(\gamma^\mu)_{\alpha\beta}Q^\#_{r\beta} \\
+&[D,Q^\#_{r\alpha}]=+\frac{1}{2}iQ^\#_{r\alpha} \\
+&[P^\nu,Q^\#_{r\alpha}]=-i(\gamma^\nu)_{\alpha\beta}Q_{r\beta} \\
+&\{Q^\#_{r\alpha},\bar{Q}_{s\beta}\}=2i\delta_{\alpha\beta}\delta_{rs}D+2(\mc{J}^{\rho\sigma})_{\alpha\beta}\tensor{J}{_\rho_\sigma}\delta_{rs}-iO^S_{rs}\delta_{\alpha\beta}+O^P_{rs}(\gamma_5)_{\alpha\beta} \\
+&[K^\mu,Q^\#_{r\alpha}]=0 \\
+&[P_\mu,O^S_{rs}]=[P_\mu,O^P_{rs}]=[J_{\mu\nu},O^S_{rs}]=[J_{\mu\nu},O^P_{rs}] \\
+&=[K_\mu,,O^S_{rs}] =[K_\mu,O^P_{rs}]=[D,O^S_{rs}]=[D,O^P_{rs}]=0 \\
+&[O^S_{rs},Q_{t\alpha}]=-2\delta_{rt}Q_{s\alpha}+2\delta_{st}Q_{r\alpha} \\
+&[O^P_{rs},Q_{t\alpha}]=\delta_{rs}(\gamma_5 Q)_{t\alpha}-2\delta_{rt}(\gamma_5 Q)_{s\alpha}-2\delta_{st}(\gamma_5 Q)_{r\alpha}
+\end{align*}
+は全体で\textbf{超共形代数}を構成する．この代数と，通常の単純超対称性あるいは$N$次拡張超対称性との大きな違いの一つは，$U(N)$対称性が「作用の対称性であってもなくても構わない単なる外部自己同型」でなく，それが超共形代数の一部であり，したがって超対称性と共形不変性をもつ任意の作用にはこの$U(N)$対称性もなければならないというところだ．
+
+\newpage
+
+\subsection{超対称性生成子の空間反転性}
+パリティ保存則を満たす理論では，フェルミオン的生成子$\mr{Q}_{ar}$にパリティ演算子$\mathsf{P}$を作用させた結果$\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P}$は再びフェルミオン的対称性生成子でなければならない．$J_i ,K_i$は空間反転の元でそれぞれ偶(2.6.7)と奇(2.6.8)なのだったから，(25.2.1)から$A_i$にパリティ演算子を作用させると
+\begin{align*}
+\mathsf{P}^{-1}A_i \mathsf{P}=B_i
+\end{align*}
+になることがわかる．(25.2.3)に従って，$(0,1/2)$演算子としての$\mr{Q}_{ar}$は
+\begin{align*}
+[B_i,\mr{Q}_{ar}]=-\frac{1}{2}\sum_b \Bigl(\sigma_ i\Bigr)_{ab} \mr{Q}_{br} ,\quad [A_i ,\mr{Q}_{ar}]=0
+\end{align*}
+と変換される．パリティ演算子を両辺に作用させると
+\begin{align*}
+&\mathsf{P}^{-1}[B_i,\mr{Q}_{ar}]\mathsf{P}=-\frac{1}{2}\sum_b \Bigl(\sigma_ i\Bigr)_{ab} \mathsf{P}^{-1}\mr{Q}_{br}\mathsf{P} \\
+=&[\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P},\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P}] \\
+=&[A_i,\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P}] \\
+\therefore \quad & [A_i,\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P}]=-\frac{1}{2}\sum_b \Bigl(\sigma_ i\Bigr)_{ab} \mathsf{P}^{-1}\mr{Q}_{br}\mathsf{P}
+\end{align*}
+と
+\begin{align*}
+& \mathsf{P}^{-1}[A_i,\mr{Q}_{ar}]\mathsf{P}=0 \\
+\therefore \quad &[B_i,\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P}]=0
+\end{align*}
+が得られる．よって$\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P}$は$(1/2,0)$表現の対称性生成子として変換されることがわかり，そのような生成子は$e_{ab}\mr{Q}_{br}^*$の線形結合でなければならないのだった．よってローレンツ不変性よりこの関係は
+\begin{align*}
+\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P}=\sum_{bs}\mc{P}_{rs}e_{ab}\mr{Q}_{bs}^*
+\end{align*}
+の形をとる必要がある．ここで$\mc{P}$は数値行列．\par
+基本的な交換関係(25.2.7)を使えば，行列$\mc{P}$の性質についていくつかわかる．(25.3.4)とその共役式から
+\begin{align*}
+\mathsf{P}^{-1}\{\mr{Q}_{ar},\mr{Q}_{bs}^*\}\mathsf{P}=&\{\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P},\mathsf{P}^{-1}\mr{Q}_{bs}^*\mathsf{P}\} \\
+=&\sum_{cdtu}\mc{P}_{rt}e_{ac}\mc{P}_{su}^* e_{bd}\{\mr{Q}_{ct}^*,\mr{Q}_{du}\}
+\end{align*}
+さらに(25.2.7)を代入すると
+\begin{align*}
+\delta_{rs}\mathsf{P} \sigma^\mu_{ab}P_\mu \mathsf{P}=&\sum_{cdtu}\mc{P}_{rt}e_{ac}\mc{P}_{su}^* e_{bd} \delta_{tu} \sigma^\mu_{dc} P_\mu \\
+=&(\mc{P}\mc{P}^\dagger)_{rs} (e (\sigma^\mu)^T e^{-1})_{ab}P_\mu
+\end{align*}
+となる．ここで$e\sigma^T_i e^{-1} =-\sigma_i$と$e \sigma^T_0 e^{-1}=+\sigma_0$であり$\mathsf{P}^{-1} P_i \mathsf{P}=-P_i$と$\mathsf{P}^{-1} P^0 \mathsf{P}=+P^0$より，$\mc{P}$がユニタリー
+\begin{align*}
+\mc{P}\mc{P}^\dagger=1
+\end{align*}
+であることがわかる．\par
+行列$\mc{P}$にはある程度の任意性がある．(25.3.2)と(25.2.7)を満たす任意のフェルミオン的生成子$\mr{Q}_{ar}$の組についてユニタリー変換
+\begin{align*}
+\mr{Q}_{ar}'=\sum_{s}\mc{U}_{rs}\mr{Q}_{as} ,\quad \mc{U}^{\dagger}=\mc{U}^{-1}
+\end{align*}
+は再び(25.3.2)と(25.2.7)を満たし，
+\begin{align*}
+\{\mr{Q}'_{ar},\mr{Q}'^*_{bs} \}=&\sum_{r's'}\mc{U}_{rr'}\mc{U}_{ss'}^*\{\mr{Q}_{ar'},\mr{Q}_{bs'}^*\} \\
+=&\sum_{r's'}\mc{U}_{rr'}\mc{U}_{s's}^\dagger\delta_{r's'} \sigma^\mu_{ab}P_\mu \\
+=&(\mc{U}\mc{U}^\dagger)_{rs}\sigma^\mu_{ab}P_\mu=\delta_{rs}\sigma^\mu_{ab}P_\mu \\
+[B_i,\mr{Q}'_{ar}]=&\sum_{s}\mc{U}_{rs}[B_i,\mr{Q}_{as}] \\
+=&-\frac{1}{2}\sum_{sb}\Bigl(\sigma_i \Bigr)_{ab}\mc{U}_{rs} \mr{Q}_{bs} \\
+=&-\frac{1}{2}\sum_{b}\Bigl(\sigma_i \Bigr)_{ab}\mr{Q}'_{br} \\
+[A_i,\mr{Q}'_{ar}]=&0
+\end{align*}
+この時パリティ変換則(25.3.4)は
+\begin{align*}
+\mathsf{P}^{-1}\mr{Q}_{ar}'\mathsf{P}=\sum_{bs}\mc{P}'_{rs}e_{ab} \mr{Q}'^*_{bs} ,\quad \mc{P}'=\mc{U}\mc{P}\mc{U}^{-1*}=\mc{U}\mc{P}\mc{U}^T
+\end{align*}
+となるからだ．\par
+単純超対称性の場合には，$\mc{P}$は単に$1\times 1$の位相因子で，(25.3.4)は
+\begin{align*}
+\mathsf{P}^{-1} \mr{Q}_a \mathsf{P}=\mc{P} \sum_{b} e_{ab} \mr{Q}_{b}^*
+\end{align*}
+となる．これとその共役式を組み合わせると
+\begin{align*}
+\mathsf{P}^{-2} \mr{Q}_a \mathsf{P}^2 =&\mc{P} \sum_{b} e_{ab} \mathsf{P}^{-1}\mr{Q}_{b}^*\mathsf{P} \\
+=&|\mc{P}|^2 \sum_{bc} e_{ab} e_{bc}\mr{Q}_{c} \\
+=&-\mr{Q}_a
+\end{align*}
+が得られる．このことから，もし粒子の超対称多重項のボゾンが実数の固有パリティを持てば，このボゾン状態に$\mr{Q}_a$を作用させて得られるフェルミオンは\uwave{虚数}の固有パリティを持つという結果が得られる．
+\begin{align*}
+\mathsf{P} \ket{\psi}=+\ket{\psi} \\
+\mathsf{P}^2 \mr{Q}_a \ket{\psi}=- \ket{\psi}
+\end{align*}
+単純超対称性の場合に$\mc{U},\mc{P}$は単に位相因子だから，$\mc{U}$を適切に選べば(25.3.8)から位相因子$\mc{P}'$は任意の値に選ぶことができる．よって$\mc{P}'=i$とできて
+\begin{align*}
+\mc{P}'=\mc{U}\mc{P}\mc{U}=e^{i\phi }e^{i\theta}e^{i\phi }=e^{i(\theta+2\phi)}=e^{i\pi}=i \quad (\phi=(\pi -\theta)/2 と選ぶ )
+\end{align*}
+(25.3.7)が
+\begin{align*}
+\mathsf{P}^{-1}\mr{Q}_{ar}'\mathsf{P}=i\sum_{b}e_{ab}\mr{Q}_{b}^*
+\end{align*}
+と簡単な形にするのが便利だ．(25.2.34)で定義した4成分ディラックスピノル生成子$Q_{a}$を作れば空間反転の表現はより簡単になって
+\begin{align*}
+\mathsf{P}^{-1} Q \mathsf{P}=\left(
+\begin{matrix}
+\mathsf{P}^{-1} e\mr{Q}^* \mathsf{P} \\
+\mathsf{P}^{-1} \mr{Q} \mathsf{P}
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+i\mr{Q} \\
+ie\mr{Q}^*
+\end{matrix}
+\right)=i\beta Q
+\end{align*}
+という形になる．\par
+拡張超対称性の場合には，必ずしも$\mc{P}'$が対角になるように$\mc{U}$を選ぶことはできない．($\mc{U}\mc{P}\mc{U}^{\dagger}$ではなく$\mc{U}\mc{P}\mc{U}^{T}$だから)しかし，(2章補遺Cで証明した)行列代数の定理を用いると，$\mc{U}$を適切に選べば$\mc{P}'$がブロック対角で
+\begin{align*}
+\mc{P}'=\left(
+\begin{matrix}
+P_{1} & 0 & \cdots &           &      \\
+0 & P_2 & \cdots &            &       \\
+\vdots & \vdots &\ddots   &       \\
+          &           &             &P_i & \\
+           &         &             &    &\ddots 
+\end{matrix}
+\right)
+\end{align*}
+一般に対角ブロックのいくつかは$1\times 1$部分行列で$i$(または他の任意の位相因子)に等しくとることができ
+\begin{align*}
+P_i=e^{i\theta}
+\end{align*}
+対角ブロックの他の部分行列は$2\times 2$行列で
+\begin{align*}
+P_i=\left(
+\begin{matrix}
+0 & \exp(i\phi) \\
+\exp(-i\phi ) & 0
+\end{matrix}
+\right)
+\end{align*}
+の形を持つように採ることができる．ここで$\phi$は様々な位相だ．この$\mc{U}$の選択に対応して，(プライムを落として)2成分の$\mr{Q}$にはふたつの種類があることがわかる．$1\times 1$部分行列$P_r$からは
+\begin{align*}
+\mathsf{P}^{-1}\mr{Q}_{ar}\mathsf{P}=& i\sum_b e_{ab} \mr{Q}^*_{br} \\
+\mathsf{P}^{-2}\mr{Q}_{ar}\mathsf{P}^2=&- \mr{Q}_{ar}
+\end{align*}
+が出て，(25.3.11)と同じ形ができる($i$以外の位相になる場合は$\mr{Q}$の位相を調節してやればいい)．$2\times 2$部分行列$P_s$からは
+\begin{align*}
+\mathsf{P}^{-1}\left(
+\begin{matrix}
+\mr{Q}_{a1} \\
+\mr{Q}_{a2}
+\end{matrix}
+\right)\mathsf{P} =&\left(
+\begin{matrix}
+0 & \exp(i\phi_s) \\
+\exp(-i\phi_s) & 0
+\end{matrix}
+\right) \left(
+\begin{matrix}
+e_{ab}\mr{Q}^*_{b1} \\
+e_{ab}\mr{Q}^*_{b2}
+\end{matrix}
+\right) \\
+\therefore \quad \mathsf{P}^{-1} \mr{Q}_{as1}\mathsf{P}=&e^{i\phi_s}\sum_{b}e_{ab}\mr{Q}^*_{bs2} \\
+ \mathsf{P}^{-1} \mr{Q}_{as2}\mathsf{P}=&e^{-i\phi_s}\sum_{b}e_{ab}\mr{Q}^*_{bs1}
+\end{align*}
+という二つの$\mr{Q}$の対が現れる．特に
+\begin{align*}
+\mathsf{P}^{-2}\mr{Q}_{as1}\mathsf{P}^2=&-e^{2i\phi_s} \mr{Q}_{as1} \\
+\mathsf{P}^{-2}\mr{Q}_{as2}\mathsf{P}^2=&-e^{-2i\phi_s} \mr{Q}_{as2}
+\end{align*}
+となる．このことより，
+\begin{align*}
+\mathsf{P}^{-2}\left(A\mr{Q}_{as1}+B\mr{Q}_{as1}\right)\mathsf{P}^2=&-e^{2i\phi_s} A\mr{Q}_{as1}-e^{-2i\phi_s} B\mr{Q}_{as2} \\
+=&- (A\mr{Q}_{as1}+ B\mr{Q}_{as2} ) \quad(\phi_s=0 \pmod \pi)
+\end{align*}
+となって，$\phi_s=0 \pmod \pi$でない限り，2番目の種類の拡張超対称性生成子の線形結合から1番目の種類の超対称性生成子を構成するのは不可能だ．\par
+4成分スピノル(25.2.34)を用いると，パリティ演算子が1番目の種類の拡張対称性の生成子へ及ぼす効果は
+\begin{align*}
+\mathsf{P}^{-1} Q_r \mathsf{P}=i\beta Q_r
+\end{align*}
+と再び表され，2番目の種類の生成子については
+\begin{align*}
+\mathsf{P}^{-1} Q_{s1} \mathsf{P}=&\left(
+\begin{matrix}
+\mathsf{P}^{-1} e\mr{Q}^*_{s1} \mathsf{P} \\
+\mathsf{P}^{-1} \mr{Q}_{s1} \mathsf{P}
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+-e^{-i\phi_s}\mr{Q}_{s2} \\
+e^{i\phi_s}e\mr{Q}^*_{s2}
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right) \left(
+\begin{matrix}
+e^{i\phi_s}e\mr{Q}^*_{s2} \\
+e^{-i\phi_s}\mr{Q}_{s2}
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right) e^{i\gamma_5 \phi_2 }\left(
+\begin{matrix}
+e\mr{Q}^*_{s2} \\
+\mr{Q}_{s2}
+\end{matrix}
+\right) \\
+=&\beta \gamma_5 \exp(i\gamma_5 \phi_s )Q_{s2}
+\end{align*}
+(4つ目の式変形は，$Q_{s}$の上成分と下成分が，それぞれ$\gamma_5$が作用すると$\pm 1$になることを考えれば簡単に逆算する形で導ける．愚直に$\exp$を展開してもいいかもしれん)同様に
+\begin{align*}
+\mathsf{P}^{-1} Q_{s2} \mathsf{P}=\beta \gamma_5 \exp(-i\gamma_5 \phi_s )Q_{s1}
+\end{align*}
+となる．
+
+\newpage
+
+\subsection{質量ゼロ粒子の超対称多重項}
+超対称性により，基地の粒子には超対称代数の既約表現の「s粒子(Sparticle)」が伴っていることが要求される．それは，クォークとレプトンにともなうボゾンの「スクォーク」と「スレプトン」，そしてゲージ・ボゾンに伴う，フェルミオンの「ゲージーノ」だ．もし超対称性があり，破れていないのであれば，既知の粒子とその超対称性パートナーは同じ質量をもつのだから既に見つかっていなければならない．しかし見つかっていないので，超対称性は確実に破れており，s粒子の質量は電弱$SU(2)\times U(1)$群の自発的破れによって生じたクォーク，レプトン，ゲージボゾンの質量よりはるかに大きいことはほぼ確実だ．よって超対称多重項内の質量分裂と同じ程度の大きさだ．超対称性の破れとこれらの質量の分裂を無視できるくらいの大きなエネルギースケールの理論では，既知のクォーク，レプトン，ゲージボゾンだけでなくその超対称パートナーを質量ゼロとして取り扱うことができる可能性が極めて高い．したがって，質量ゼロ粒子の超対称多重項超対称には特に興味が持たれる．
+
+\vskip\baselineskip
+
+ある超対称多重項に属する質量ゼロ粒子を1個だけ含むヘリシティ$\lambda$の状態$\ket{p,\lambda}$を考える．同じ超対称多重項の残りの状態は，演算子$\mr{Q}_{ar}$および(または)$\mr{Q}^*_{ar}$をこの状態に作用させて得られる．$\mr{Q}_{ar}$および$\mr{Q}_{ar}^*$は$P_\mu$と交換するのだったから，これらすべての状態は同じ4元運動量の値をもつ．
+\begin{align*}
+P_\mu \ket{p,\lambda}=&p_\mu \ket{p,\lambda} \\
+P_\mu \mr{Q}_{ar}\ket{p,\lambda}=&p_\mu \mr{Q}_{ar}\ket{p,\lambda},\quad P_\mu \mr{Q}^*_{ar}\ket{p,\lambda}=p_\mu \mr{Q}^*_{ar}\ket{p,\lambda}
+\end{align*}
+これらの状態の4元運動量が(質量ゼロなので)$p^1=p^2=0,p^3=p^0=E$となるローレンツ系で考える．4元運動量をこのように選ぶと
+\begin{align*}
+\sigma_\mu p^\mu =E(\sigma_0 +\sigma_3)=2E \left(
+\begin{matrix}
+1 & 0 \\
+0 & 0
+\end{matrix}
+\right)
+\end{align*}
+となり，これは因子$2E$を除いてヘリシティ$+1/2$の部分空間への射影行列だ．反交換関係(25.2.7)より，この運動量をもつ超対称多重項の任意の状態に作用させたとき
+\begin{align*}
+\{\mr{Q}_{-\frac{1}{2}r},\mr{Q}^*_{-\frac{1}{2}r}\}\ket{p,\lambda}=2(\sigma_\mu P^\mu)_{-\frac{1}{2},-\frac{1}{2}} \ket{p,\lambda}=2(\sigma_\mu p^\mu)_{-\frac{1}{2},-\frac{1}{2}} \ket{p,\lambda}=0
+\end{align*}
+となる．よって
+\begin{align*}
+\bra{p,\lambda} \{\mr{Q}_{-\frac{1}{2}r},\mr{Q}^*_{-\frac{1}{2}r}\}\ket{p,\lambda}=&\left|\mr{Q}_{-\frac{1}{2}r} \ket{p,\lambda}\right|^2+\left|\mr{Q}_{-\frac{1}{2}r}^{*} \ket{p,\lambda}\right|^2=0 \\
+\therefore \quad \mr{Q}_{-\frac{1}{2}r}\ket{p,\lambda}=&\mr{Q}_{-\frac{1}{2}r}^*\ket{p,\lambda}
+\end{align*}
+がわかり，$\mr{Q}_{-\frac{1}{2}r}$と$\mr{Q}^*_{-\frac{1}{2}r}$もこの状態に作用するとゼロになることがわかる．したがって$\mr{Q}_{\frac{1}{2}r}$と$\mr{Q}^*_{\frac{1}{2}r}$のみを作用させて超対称多重項の状態を構成しなければならない．さらに以下のように$\mr{Q}$の添え字には$\mr{Q}_{ar}$の添え字$a$は，$J_3$の値
+\begin{align*}
+[J_3,\mr{Q}_{ar}]=-a \mr{Q}_{ar}
+\end{align*}
+をとっているのだった．したがって(質量ゼロ状態のヘリシティ$\lambda$は$J_3$の固有値$J_3\ket{p,\lambda}=\lambda \ket{p,\lambda}$だという2章の結果を思い出して)
+\begin{align*}
+J_3 \left(\mr{Q}_{\frac{1}{2}r}\ket{p,\lambda}\right)=\left[\mr{Q}_{\frac{1}{2}r}J_3 -\frac{1}{2}\mr{Q}_{\frac{1}{2}r}\right]\ket{p,\lambda} =\left(\lambda -\frac{1}{2}\right)\left(\mr{Q}_{\frac{1}{2}r}\ket{p,\lambda}\right)
+\end{align*}
+同様に
+\begin{align*}
+[J_3,\mr{Q}_{ar}^*]=&+a\mr{Q}_{ar}^* \\
+J_3 \left(\mr{Q}^*_{\frac{1}{2}r}\ket{p,\lambda}\right)=\left(\lambda +\frac{1}{2}\right)\left(\mr{Q}^*_{\frac{1}{2}r}\ket{p,\lambda}\right)
+\end{align*}
+となり，$\mr{Q}_{\frac{1}{2}r}$と$\mr{Q}^*_{\frac{1}{2}r}$はそれぞれヘリシティを$1/2$だけ下げ上げするということがわかる．
+
+\vskip\baselineskip
+
+
+最初に単純超対称性の場合を考える．超対称多重項を考えて，その中で最大のヘリシティが$\lambda_{\mr{max}}$であるとする．(例えば天下りになるけど，ヘリシティ$+1/2$の電子とそのパートナであるヘリシティ$0$のスエレクトロンで超対称性多重項を組むと，$\lambda_{\max}=+1/2$になる．代わりに電子がヘリシティ$-1/2$の状態なら$\lambda_{\max}=0$になる．)$\ket{p,\lambda_{\max}}$をこのヘリシティと4元運動量$p^\mu$をもつ任意の1粒子状態とする．するとこれに$\mr{Q}^*_{\frac{1}{2}}$を作用させたものは最大ヘリシティ以上になってしまうから
+\begin{align*}
+\mr{Q}^*_{\frac{1}{2}}\ket{p,\lambda_{\max}}=0
+\end{align*}
+となる．一方この状態に$\mr{Q}_{\frac{1}{2}}$を作用させるとヘリシティ$\lambda_{\max}-1/2$の状態$\ket{p,\lambda_{\max}-1/2}$が得られる．この状態を
+\begin{align*}
+\ket{p,\lambda_{\max}-1/2}\equiv (4E)^{-1/2}\mr{Q}_{\frac{1}{2}}\ket{p,\lambda_{\max}}
+\end{align*}
+と定義する．基本的な反交換関係(25.2.7)と(25.4.1)，(25.4.3)から
+\begin{align*}
+\braket{\lambda_{\max}-1/2|\lambda_{\max}-1/2}=&(4E)^{-1}\bra{p,\lambda_{\max}}\mr{Q}_{\frac{1}{2}}^*\mr{Q}_{\frac{1}{2}}\ket{p,\lambda_{\max}} \\
+=&(4E)^{-1}\bra{p,\lambda_{\max}}2\cdot 2E-\mr{Q}_{\frac{1}{2}}\mr{Q}_{\frac{1}{2}}^*\ket{p,\lambda_{\max}} \\
+=&\braket{p,\lambda_{\max}|p,\lambda_{\max}} \quad \because (25.4.3)
+\end{align*}
+となるので，$\ket{p,\lambda_{\max}}$と同じく規格化されている．よって特にこの状態は$\ket{p,\lambda_{\max}}$がゼロでないならゼロにはなれない．(もしゼロなら$\braket{p,\lambda_{\max}|p,\lambda_{\max}}$は非ゼロなのに上の関係式から矛盾が起きる．)単純超対称性だから(25.2.32)から$\mr{Q}_{\frac{1}{2}}^2=0$であり，よって$\mr{Q}_{\frac{1}{2}}$を$\ket{p,\lambda_{\max}-1/2}$に作用させるとゼロになる．
+\begin{align*}
+\mr{Q}_{\frac{1}{2}}\ket{p,\lambda_{\max}-1/2}=(4E)^{-1/2}\mr{Q}_{\frac{1}{2}}^2\ket{p,\lambda_{\max}}=0
+\end{align*}
+一方，$\mr{Q}_{\frac{1}{2}}^*$をこの状態に作用させると
+\begin{align*}
+\mr{Q}_{\frac{1}{2}}^*\ket{p,\lambda_{\max}-1/2}=&(4E)^{-1/2}\mr{Q}_{\frac{1}{2}}^*\mr{Q}_{\frac{1}{2}}\ket{p,\lambda_{\max}} \\
+=&(4E)^{-1/2}\left\{\mr{Q}_{\frac{1}{2}}^*,\mr{Q}_{\frac{1}{2}}\right\}\ket{p,\lambda_{\max}} \quad \because (25.4.3) \\
+=&(4E)^{-1/2}(\sigma_\mu P^\mu)_{\frac{1}{2}\frac{1}{2}}\ket{p,\lambda_{\max}}=(4E)^{1/2}\ket{p,\lambda_{\max}}
+\end{align*}
+となる．よって$\mr{Q}_{\frac{1}{2}}^*/\sqrt{4E},\mr{Q}_{\frac{1}{2}}/\sqrt{4E}$はそれぞれフェルミオン的な消滅・生成演算子として振舞うことがわかる．そしてこのように超対称多重項は，ヘリシティ$\lambda_{\max}$と$\lambda_{\max}-1/2$の2個の状態だけからなる．これら2個の状態からなる基底では，演算子$\mr{Q}_{\frac{1}{2}},\mr{Q}_{\frac{1}{2}}^*$はそれぞれ
+\begin{align*}
+\ket{p,\lambda_{\max}}=&\left(
+\begin{matrix}
+1 \\
+0
+\end{matrix}
+\right) ,\quad \ket{p,\lambda_{\max}-1/2}=\left(
+\begin{matrix}
+0 \\
+1
+\end{matrix}
+\right) \\
+q_{\frac{1}{2}}=&\sqrt{4E}\left(
+\begin{matrix}
+0 & 0 \\
+1 & 0
+\end{matrix}
+\right) ,\quad q^\dagger_{\frac{1}{2}}=\sqrt{4E}\left(
+\begin{matrix}
+0 & 1 \\
+0 & 0
+\end{matrix}
+\right)
+\end{align*}
+で表現され，演算子$\mr{Q}_{-\frac{1}{2}},\mr{Q}^*_{-\frac{1}{2}}$はゼロで表現される． \\
+これが単純超対称性を持つ理論において\uwave{唯一}の種類の質量ゼロ超対称多重項である．超対称パートナーをもたない質量ゼロ粒子は存在せず，2個以上の超対称パートナーをもつ質量ゼロ粒子も存在しない．もちろん$\mathsf{CPT}$不変性から，ヘリシティ$\lambda$と$\lambda-1/2$の質量ゼロ超対称多重項には，必ずヘリシティ$-\lambda+1/2$と$-\lambda$の反粒子からなる超対称多重項も伴って存在しなければならない．特に，ヘリシティ$+1/2$と$-1/2$の，質量ゼロ粒子とその反粒子には，ヘリシティ$+1$と$-1$か，またはヘリシティが共にゼロの質量ゼロ粒子と反粒子が伴っていなければならない．($\lambda=1/2$の場合には$\lambda-1/2=0$のパートナーが伴って，ヘリシティ$-1/2$の反粒子にもヘリシティ$0$のパートナーが伴うので，この場合は後者．$\lambda-1/2$の方が$1/2$なら$\lambda=+1$がパートナーとして伴い，これは前者になる．)\par
+既知のクォーク，レプトン，ゲージ・ボゾンはこの描像にどのように当てはまるか？超対称性生成子は$SU(3)\times SU(2)\times U(1)$ゲージ群の生成子とは交換すると仮定する．クォークとレプトンは$SU(3)$と$SU(2)$の基本表現に属しており，随伴表現に属するゲージ・ボゾンとはゲージ群の別の表現に属する．よってクォークとレプトンの超対称多重項も同様に基本表現に属している必要がある．(仮定より$\mr{Q}$とゲージ群生成子とは交換するから，$(e,\nu_e)$が$SU(2)$基本表現として変換されるなら，$\mr{Q}$を作用させて作った電子とニュートリノの超対称多重項の集まり$(\tilde{e},\tilde{\nu}_e)$も$SU(2)$基本表現として変換される必要がある．)それらの超対称パートナーはボゾンである必要があるが，随伴表現として変換されてはいけない．したがって$SU(2)\times U(1)$対称性の破れが無視できる高エネルギー理論では，それぞれのカラーとフレーバーをもった質量ゼロのレプトンとクォークは，\uwave{ゼロ・ヘリシティ}かつ同じカラーおよびフレーバーをもった質量ゼロのスレプトンとスクォークと対になって超対称多重項を組む(ヘリシティ$\pm 1$のベクトルボゾンと組むと，それらは質量ゼロであるからゲージ・ボゾンでなければならないため，随伴表現に属することになってしまう．)．一方質量ゼロのゲージ・ボゾンはヘリシティ$\pm 1/2$のゲージーノを伴って$SU(3)\times SU(2)\times U(1)$の随伴表現を構成すると結論づけなければならない．\par
+重力が存在するから，標準模型の粒子に加えてヘリシティ$\pm 2$の質量ゼロ粒子である重力子も存在しなければならないことがわかる．$|\lambda|\leq 1/2$のヘリシティ$\lambda$をもつ質量ゼロ粒子は，低運動量では保存量と結合しなければならない(12章)．ヘリシティ$\pm 1$の低エネルギー質量ゼロ粒子は様々な内部対称性の生成子と結合でき(例えば，光子は$U(1)_{\mr{em}}$電荷と結合するのだった．)，ヘリシティ$\pm 3/2$の低エネルギー質量ゼロ粒子は超対称性の生成子$\mr{Q}_a$と結合できるらしい．ヘリシティ$\pm 2$の低エネルギー質量ゼロ粒子は単一の保存量である4元運動量ベクトル$P_\mu$と結合できる．しかし$|\lambda|>2$の低エネルギー質量ゼロ粒子が結合できる保存量はない．これより重力子はヘリシティ$\pm 5/2$の粒子と超対称性多重項を組むことができず，したがってヘリシティ$\pm3/2$の質量ゼロ粒子と超対称多重項を組むことが期待される．この粒子はグラヴィティーノと呼ばれ，超対称性生成子自身と結合する．この超対称多重項の場の理論は超重力理論と呼ばれる．(31章)\par
+
+\vskip\baselineskip
+
+次に，$N$個の超対称性生成子をもつ拡張超対称性の場合を考える．まず最初に議論した一般論より$\mr{Q}_{-\frac{1}{2}r}$は超対称性多重項の状態に作用すると($\mr{Q}_{\frac{1}{2}s}$を多重項の任意の状態に作用させて得られる状態を含めて)全てゼロになるので
+\begin{align*}
+0=&\mr{Q}_{-\frac{1}{2}r}\mr{Q}_{\frac{1}{2}s}\ket{p,\lambda}+\mr{Q}_{\frac{1}{2}s}\mr{Q}_{-\frac{1}{2}r}\ket{p,\lambda} \\
+=&e_{-\frac{1}{2} \frac{1}{2}}Z_{rs} \ket{p,\lambda}=-Z_{rs} \ket{p,\lambda}
+\end{align*}
+よって中心電荷$Z_{rs}$もまた多重項の任意の状態$Z_{rs} \ket{p,\lambda}=0$で消さなければならない．中心電荷がなければ，超対称性生成子$\mr{Q}_{\frac{1}{2}r}(r=1,2,\cdots ,N)$たちは質量ゼロ粒子の超対称多重項に作用するときには全て反交換し，もちろん$\mr{Q}^2_{\frac{1}{2}r}=0$となる．よって$N$個の$\mr{Q}_{\frac{1}{2}r}$の中から，$n$個を重複なく選んで$\ket{p,\lambda_{\max}}$に作用させると
+\begin{align*}
+\ket{p,\lambda_{\max}-n/2;r_1,r_2,\cdots r_n}\equiv &\mr{Q}_{\frac{1}{2}r_1}\mr{Q}_{\frac{1}{2}r_2}\cdots \mr{Q}_{\frac{1}{2}r_n}\ket{p,\lambda_{\max}} \\
+J_3\ket{p,\lambda_{\max}-n/2;r_1,r_2,\cdots r_n}=&(\lambda_{\max}-n/2)\ket{p,\lambda_{\max}-n/2;r_1,r_2,\cdots r_n}
+\end{align*}
+これは同じ4元運動量$p$でヘリシティ$\lambda_{\max}-n/2$をもつ状態になる(それぞれの$\mr{Q}$は反交換するから，順序は関係なくなる)．順序を考えず重複のない$n$個の選び方は$\binom{N}{n}=N!/n!(N-n)!$通り存在する．よって4元運動量$p$でヘリシティ$\lambda_{\max}-n/2$の要素の数は$\binom{N}{n}=N!/n!(N-n)!$個となり，これは$SU(N)$R対称性(25.2.30)の$n$階反対称テンソル表現を作る．
+\begin{align*}
+\mr{Q}_{\frac{1}{2}r_1}\mr{Q}_{\frac{1}{2}r_2}\cdots \mr{Q}_{\frac{1}{2}r_n}\ket{p,\lambda_{\max}} \to& \sum_{s_1 \cdots s_n}V_{r_1 s_1}V_{r_2 s_2}\cdots V_{r_n s_n}\mr{Q}_{\frac{1}{2}s_1}\mr{Q}_{\frac{1}{2}s_2}\cdots \mr{Q}_{\frac{1}{2}s_n}\ket{p,\lambda_{\max}} \\
+\ket{p,\lambda_{\max}-n/2;r_1,r_2,\cdots r_n}\to& \sum_{s_1 \cdots s_n}V_{r_1 s_1}V_{r_2 s_2}\cdots V_{r_n s_n} \ket{p,\lambda_{\max}-n/2;s_1,s_2,\cdots s_n} \\
+\ket{p,\lambda_{\max}-n/2;\cdots, r_i, \cdots, r_j, \cdots }=&-\ket{p,\lambda_{\max}-n/2;\cdots, r_j,\cdots r_i, \cdots }
+\end{align*}
+ゼロでない状態を与える$n$の最大値は$n=N$であり(それ以上だと重複が起きて$\mr{Q}^2=0$のベキ零性から消えてしまう)，したがって超対称性多重項の最小ヘリシティは
+\begin{align*}
+\lambda_{\min}=\lambda_{\max}-N/2
+\end{align*}
+で与えられる．質量ゼロ粒子のヘリシティ$\lambda$が$|\lambda|>2$となることを排除したければ，$\lambda_{\max}-\lambda_{\min}\leq 2-(-2)=4$でなければならず，よって拡張超対称性は$N\leq 8$のものしか許されない．(もちろんこれは4次元時空の場合であり，高次元では別となる．例えばM理論は11次元時空であるが，このときは$N=1$しか許されない．)
+
+\vskip\baselineskip
+
+
+$N=8$の場合には，$|\lambda|>2$のヘリシティが許されないのだから，可能な超対称多重項はただ一つとなる．それは，\par
+ヘリシティ$\pm 2$の1個の重力子\par
+ヘリシティ$\pm 3/2$の$8!/1!(8-1)!=8$個のグラヴィティーノ\par
+ヘリシティ$\pm 1$の$8!/2!(8-2)!=28$個のゲージ・ボゾン\par
+ヘリシティ$\pm 1/2$の$8!/3!(8-3)!=56$個のフェルミオン\par
+ヘリシティ$0$の$8!/4!(8-4)!=70$個のボゾン\par
+\noindent からなる．\par
+これを$N=7$の場合と比較しよう．まずヘリシティ$+2$から下って行って\par
+ヘリシティ$+ 2$の1個の重力子\par
+ヘリシティ$+ 3/2$の$7!/1!(7-1)!=7$個のグラヴィティーノ\par
+ヘリシティ$+ 1$の$7!/2!(7-2)!=21$個のゲージ・ボゾン\par
+ヘリシティ$+ 1/2$の$7!/3!(7-3)!=35$個のフェルミオン\par
+ヘリシティ$ 0$の$7!/4!(7-4)!=35$個のボゾン\par
+ヘリシティ$- 1/2$の$7!/5!(7-5)!=21$個のフェルミオン\par
+ヘリシティ$- 1$の$7!/6!(7-6)!=7$個のゲージ・ボゾン\par
+ヘリシティ$-3/2 $の$7!/7!(7-7)!=1$個のグラヴィティーノ\par
+\noindent が得られる．これより下げることは不可能だ．重力子はヘリシティ$\pm 2$であるがヘリシティ$-2$が足りないので，全てのヘリシティを反転した$\mathsf{CPT}$共役な超対称多重項を作り加えなければならない．するとここに\par
+ヘリシティ$- 2$の1個の重力子\par
+ヘリシティ$- 3/2$の$7$個のグラヴィティーノ\par
+ヘリシティ$- 1$の$21$個のゲージ・ボゾン\par
+ヘリシティ$- 1/2$の$35$個のフェルミオン\par
+ヘリシティ$ 0$の$35$個のボゾン\par
+ヘリシティ$+ 1/2$の$21$個のフェルミオン\par
+ヘリシティ$+ 1$の$7$個のゲージ・ボゾン\par
+ヘリシティ$+ 3/2 $の$1$個のグラヴィティーノ\par
+\noindent を加えることになり，よって合計で\par
+ヘリシティ$\pm 2$の1個の重力子\par
+ヘリシティ$\pm 3/2$の$8$個のグラヴィティーノ\par
+ヘリシティ$\pm 1$の$28$個のゲージ・ボゾン\par
+ヘリシティ$\pm 1/2$の$56$個のフェルミオン\par
+ヘリシティ$0$の$70$個のボゾン\par
+\noindent となる．これは$N=8$のときの粒子内容と同じだ．このように，$N=8$と$N=7$の拡張超対称重力理論は正確に同じ粒子内容をもち，実際同等となるらしい．\par
+他方，$N\leq 6$の拡張超対称重力理論は各々のヘリシティが$\pm3/2$のグラヴィティーノをちょうど$N$個持つことになり，したがって全て異なる理論となる．(上の操作を同様にやってやればすぐわかる．)\par
+ただし，演習問題にあるようにヘリシティ$\pm 3/2$を超える粒子を含まない場合，$N=6$と$N=5$($\mathsf{CPT}$含む)をやってみると，\par
+ヘリシティ$\pm 3/2$の$1$個のグラヴィティーノ\par
+ヘリシティ$\pm 1$の$6$個のゲージ・ボゾン\par
+ヘリシティ$\pm 1/2$の$15$個のフェルミオン\par
+ヘリシティ$0$の$20$個のボゾン\par
+\noindent となって，$N=6$と$N=5$は同等になる．
+
+\vskip\baselineskip
+
+
+$N\leq 4$の場合には大域的超対称性理論，すなわち重力子やグラヴィティーノを含まない超対称多重項を含む理論の可能性がある($\lambda =+1$から上の操作をスタートしても$\lambda=-1$までに終わるから)．$N=4$超対称性の場合には，超対称多重項が1種類だけ存在し，それには\par
+ヘリシティ$\pm 1$の1個のゲージ・ボゾン\par
+ヘリシティ$\pm 1/2$の$4!/1!(4-1)!=4$個のフェルミオン\par
+ヘリシティ$0$の$4!/2!(4-2)!=6$個のボゾン \par
+\noindent が含まれる．これは$N=3$の大域的超対称性理論と同等になっている．実際$N=3$では\par
+ヘリシティ$+ 1$の1個のゲージ・ボゾン\par
+ヘリシティ$+ 1/2$の$3!/1!(3-1)!=3$個のフェルミオン\par
+ヘリシティ$0$の$3!/2!(3-2)!=3$個のボゾン \par
+ヘリシティ$-1/2$の$3!/3!(3-3)!=1$個のフェルミオン\par
+\noindent と，全てのヘリシティを反転した$\mathsf{CPT}$共役な超対称多重項\par
+ヘリシティ$- 1$の1個のゲージ・ボゾン\par
+ヘリシティ$- 1/2$の$3$個のフェルミオン\par
+ヘリシティ$0$の$3$個のボゾン \par
+ヘリシティ$+1/2$の$1$個のフェルミオン\par
+\noindent を加えることで\par
+ヘリシティ$\pm 1$の1個のゲージ・ボゾン\par
+ヘリシティ$\pm 1/2$の$4$個のフェルミオン\par
+ヘリシティ$0$の$6$個のボゾン \par
+\noindent となって，粒子内容が同じだとわかる．$N=4$については27.9節．
+
+\vskip\baselineskip
+
+$N=2$大域的拡張超対称性の場合は，$\mathsf{CPT}$によって関連している超対称多重項とは別に，二つの異なる種類の超対称多重項が存在する．一つ目は\textbf{ゲージ超対称多重項}で，その各々は\par
+ヘリシティ$+1$の1個のゲージ・ボゾン\par
+ヘリシティ$+1/2$の$2!/1!(2-1)!=2$個のフェルミオン($SU(2)$R対称性で二重項を作る)\par
+ヘリシティ$0$の$2!/2!(2-2)!=1$個のボゾン\par
+\noindent を含む．またこの超対称多重項にはヘリシティを逆にした$\mathsf{CPT}$共役な超対称多重項が伴っている．これは\par
+ヘリシティ$-1$の1個のゲージ・ボゾン\par
+ヘリシティ$-1/2$の$2$個のフェルミオン($SU(2)$R対称性で二重項を作る)\par
+ヘリシティ$0$の$1$個のボゾン\par
+であるから，これを合わせると
+ヘリシティ$\pm 1$の1個のゲージ・ボゾン\par
+ヘリシティ$\pm 1/2$の$2$個のフェルミオン($SU(2)$R対称性で二重項を作る)\par
+ヘリシティ$0$の$2$個のボゾン($SU(2)$1重項)\par
+\noindent となる．\par
+もう一個の種類は，\textbf{ハイパー多重項}で\par
+ヘリシティ$\pm 1/2$の1個のフェルミオン\par
+ヘリシティ$0$の$2!/1!(2-1)!=2$個のボゾン($SU(2)$R対称性で二重項を作る)\par
+\noindent を含み，さらに\uwave{$\mathsf{CPT}$多重項を伴っている}．(そうでないとすると，自分自身が$\mathsf{CPT}$で同じ，すなわち自分自身が反粒子となり，このようなヘリシティ$0$のボゾンは実スカラー場で表現されるのだった(5章)．しかし$SU(2)$の2次元実表現は存在せず，これは不可能だからだ．)\par
+もちろん，現実の世界では重力子も存在するだろうから\par
+ヘリシティ$+2$の$1$個の重力子\par
+ヘリシティ$+3/2$の$2$個のグラヴィティーノ($SU(2)$R対称性で二重項を作る)\par
+ヘリシティ$+1$の$1$個のゲージ・ボゾン\par
+\noindent を含む重力子超対称多重項，およびその逆ヘリシティを持った$\mathsf{CPT}$共役多重項も存在しなければならないだろう．$N=2$のゲージ理論を27.9節で構成し，29.5節で非摂動論的に調べる．
+
+\vskip\baselineskip
+
+
+これらの超対称多重項の粒子内容は，拡張超対称性を到達可能なエネルギーでの粒子の現実的な理論に組み込むことが如何に困難であるかを浮き彫りにする．一つの例外($N=2$ハイパー多重項)を除いて，ヘリシティ$+1/2$のフェルミオンはヘリシティ$+1$のゲージ・ボゾンと必ず超対称多重項に属する．ゲージ・ボゾンはゲージ群の随伴表現($SU(N)$や$SO(N)$の場合，これは実表現)に属するから，超対称性生成子がゲージ群のもとで不変ならヘリシティ$+1/2$のフェルミオンもまた随伴表現に属さなければならず，よって実表現に属することになる．これは既知のクォークとレプトンが属する$SU(3)\times SU(2)\times U(1)$の表現が\textbf{カイラル}であるという事実と矛盾する．カイラルであるとは，ヘリシティ$+1/2$のフェルミオンはその複素表現に属しているということであり，その表現は必然的に$\mathsf{CPT}$共役であるヘリシティ$-1/2$のフェルミオンが持っている表現とは異なる．(例えばヘリシティ$+1/2$レプトンは$SU(2)$の$\mathbf{2}$表現に属していて，その共役は共役表現$\bar{\mathbf{2}}$に属している．)\par
+ひとつの例外となる$N=2$ハイパー多重項については，ヘリシティ$+1/2$のフェルミオンはゲージ・ボゾンと同じ超対称多重項に属さない．しかしこの場合にはヘリシティ$+1/2$と$-1/2$の両方の粒子は同じ超対称多重項に属し，したがって超対称性生成子を不変に保つ任意のゲージ変換の下で\uwave{同じ変換性}を持つ必要がある．この場合，今度はゲージ群の複素表現に属していてもよいが，このハイパー多重項の$\mathsf{CPT}$共役多重項は複素共役表現に属す．よってハイパー多重項のヘリシティ$+1/2$のフェルミオンがゲージ群の複素表現に属しているとすると，その$\mathsf{CPT}$共役多重項のヘリシティ$+1/2$のフェルミオンは共役表現に属することとなり，この二つの粒子の和は実表現となり(?)，再び既存のクォークとレプトンのカイラルな性質とは矛盾する．\par
+これに対して，単純超対称性の場合にはヘリシティ$+1/2$とヘリシティ$0$\uwave{のみ}を含む超対称多重項が存在し，それは(前に言ったように)$\mathsf{CPT}$共役な超対称多重項が持つ表現とは異なるゲージ群の複素表現に属することが可能だ！この場合にはカイラルな性質との矛盾はない．到達可能なエネルギースケールにおいて破れずに残っている対称性としての超対称性の議論が，拡張超対称性ではなく単純超対称性に集中しているのはこれが理由らしい．
+
+\newpage
+
+\subsection{質量をもつ粒子の超対称多重項}
+既知のクォーク，レプトン，ゲージ・ボゾンとそれらの超対称パートナーは超対称性の破れが無視できるエネルギースケールでは多分質量ゼロとして扱えるかもしれないが，これは強い相互作用と電弱相互作用との大統一理論で要請される大きな質量をもった余分なゲージ・ボゾンを含めて，他の粒子については必ずしも正しくない．Wess・Zumino模型以降，質量をもつ粒子の理論は超対称性理論を研究するための有用な試験の場となってきた．そこで，質量をもつ粒子の場合に破れていない超対称性がもつ意味を簡潔に考察するのは有益となる．\par
+前節の序盤と同様に，超対称多重項の様々な1粒子状態は，それらの任意の一つに演算子$\mr{Q}_{ar}$と$\mr{Q}^*_{ar}$を作用させて得られて，それらの状態は全て同じ4元運動量をもつ．今度は質量ゼロの場合とは異なり，$M>0$の質量の場合には，これを静止した粒子の4元運動量に採ることができる．それは$i=1,2,3$については$p^i=0$で，$p^0=M$となる．この座標系では
+\begin{align*}
+\sigma_\mu p^\mu =M\sigma^0=M\left(
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right)
+\end{align*}
+となる．したがって，この4元運動量をもつ超対称多重項の任意の状態$\ket{p}$に反交換関係(25.2.7)を作用させると
+\begin{align*}
+\{\mr{Q}_{ar},\mr{Q}_{bs}^*\}\ket{p}=2(\sigma_\mu P^\mu)_{ab}\ket{p}=2M\delta_{ab}\delta_{rs} \ket{p}\neq 0
+\end{align*}
+を得る．よってゼロ質量の場合とは違い，この場合は$\mr{Q}_{ar}$あるいは$\mr{Q}_{ar}^*$が多重項全体を消すことはできず，よって2組の昇降演算子が存在する．つまり，$\mr{Q}_{\frac{1}{2}r}$と$\mr{Q}^*_{-\frac{1}{2}r}$の両方ともがスピンの第3成分を$1/2$だけ下げ，$\mr{Q}_{-\frac{1}{2}r}$と$\mr{Q}^*_{\frac{1}{2}r}$の両方ともがスピンの第3成分を$1/2$だけ上げる．
+\begin{align*}
+J_3\ket{p,\sigma}=&\sigma \ket{p,\sigma} \\
+J_3 \mr{Q}_{\frac{1}{2}r} \ket{p,\sigma}=&\left(\sigma-\frac{1}{2}\right)\mr{Q}_{\frac{1}{2}r} \ket{p,\sigma} ,\quad J_3 \mr{Q}_{-\frac{1}{2}r}^* \ket{p,\sigma}=\left(\sigma-\frac{1}{2}\right)\mr{Q}_{-\frac{1}{2}r}^* \ket{p,\sigma} \\
+J_3 \mr{Q}_{-\frac{1}{2}r} \ket{p,\sigma}=&\left(\sigma+\frac{1}{2}\right)\mr{Q}_{-\frac{1}{2}r} \ket{p,\sigma} ,\quad  J_3 \mr{Q}_{\frac{1}{2}r}^* \ket{p,\sigma}=\left(\sigma+\frac{1}{2}\right)\mr{Q}_{\frac{1}{2}r}^* \ket{p,\sigma}
+\end{align*}
+しかし，以下でみるように，拡張超対称性の場合には$Q$と$Q^*$のある線形結合をとるとゼロになることは可能らしい．
+
+\vskip\baselineskip
+
+最初に単純超対称性を考える．超対称代数(25.2.31)と(25.2.32)を使って，質量がゼロでない一般的な超対称多重項はスピン$j+1/2$の粒子1個と，スピン$j$の粒子の\uwave{対}と，スピン$j-1/2$の粒子1個からなることを示す．パリティが保存する場合には，スピン$j\pm 1/2$の粒子はある位相$\eta$で与えられる同一の固有パリティをもち，スピン$j$の対となる粒子はそれぞれパリティ$+i\eta$と$-i\eta$をもつ．ここで$j$はゼロより大きな整数または半整数だ．$2$個のスピンゼロ粒子と1個のスピン$1/2$粒子からなるつぶれた超対称多重項も存在し(つまり$j=0$なので$j-1/2$がない)，パリティが保存するとき，対となるスピンゼロ粒子はそれぞれパリティ$i\eta$と$-i\eta$をもつ．ここで$\eta$はスピン$1/2$粒子の固有パリティだ．\par
+証明は以下の通り．任意の超対称多重項は，状態$\ket{j,\sigma}$のスピン多重項で，スピンの第3成分$\sigma$は$-j$から$j$まで間隔1おきに値をとり，そのような全ての$\sigma$と$a=\pm 1/2$について
+\begin{align*}
+\mr{Q}_{a}\ket{j,\sigma}=0
+\end{align*}
+を満たすようなスピン$j$の状態を少なくとも1個含む，という特徴をもつことを最初に示そう．まず超対称多重項のゼロでない任意の状態$\ket{\psi}$(運動量は先程の通り静止しているとして)に対して，ゼロでない状態
+\begin{align*}
+\ket{\psi'}\equiv \left\{
+\begin{array}{ll}
+(2M)^{-1/2}\mr{Q}_{\frac{1}{2}}\ket{\psi} & (\mr{if} \quad \mr{Q}_{\frac{1}{2}}\ket{\psi}\neq 0) \\
+\ket{\psi} & (\mr{if} \quad \mr{Q}_{\frac{1}{2}}\ket{\psi}=0)
+\end{array}
+ \right.
+\end{align*}
+を定義できて，さらにそれに対してゼロでない状態
+\begin{align*}
+\ket{\psi''}\equiv \left\{
+\begin{array}{ll}
+(2M)^{-1/2}\mr{Q}_{-\frac{1}{2}}\ket{\psi'} & (\mr{if} \quad \mr{Q}_{-\frac{1}{2}}\ket{\psi'} \neq 0) \\
+\ket{\psi'} & (\mr{if} \quad \mr{Q}_{-\frac{1}{2}}\ket{\psi'}=0)
+\end{array}
+ \right.
+\end{align*}
+を定義できる．(25.2.32)より$\mr{Q}_a$は反交換するから，
+\begin{align*}
+\mr{Q}_{\frac{1}{2}}\ket{\psi'} =& \left\{
+\begin{array}{ll}
+(2M)^{-1/2}\mr{Q}_{\frac{1}{2}}^2\ket{\psi} & (\mr{if} \quad \mr{Q}_{\frac{1}{2}}\ket{\psi}\neq 0) \\
+\mr{Q}_{\frac{1}{2}}\ket{\psi} & (\mr{if} \quad \mr{Q}_{\frac{1}{2}}\ket{\psi}=0)
+\end{array}
+ \right. \\
+ =&0
+\end{align*}
+となってどちらにせよ消える．これを用いると，まず
+\begin{align*}
+\mr{Q}_{\frac{1}{2}}\ket{\psi''}=& \left\{
+\begin{array}{ll}
+(2M)^{-1/2}\mr{Q}_{\frac{1}{2}}\mr{Q}_{-\frac{1}{2}}\ket{\psi'} & (\mr{if} \quad \mr{Q}_{-\frac{1}{2}}\ket{\psi'} \neq 0) \\
+\mr{Q}_{\frac{1}{2}} \ket{\psi'} & (\mr{if} \quad \mr{Q}_{-\frac{1}{2}}\ket{\psi'}=0)
+\end{array}
+ \right. \\
+ =&\left\{
+\begin{array}{ll}
+-(2M)^{-1/2}\mr{Q}_{-\frac{1}{2}}\mr{Q}_{\frac{1}{2}}\ket{\psi'} & (\mr{if} \quad \mr{Q}_{-\frac{1}{2}}\ket{\psi'} \neq 0) \\
+\mr{Q}_{\frac{1}{2}} \ket{\psi'} & (\mr{if} \quad \mr{Q}_{-\frac{1}{2}}\ket{\psi'}=0)
+\end{array}
+ \right. \\
+ =& 0
+\end{align*}
+かつ
+\begin{align*}
+\mr{Q}_{-\frac{1}{2}}\ket{\psi''}=& \left\{
+\begin{array}{ll}
+(2M)^{-1/2}\mr{Q}_{-\frac{1}{2}}^2\ket{\psi'} & (\mr{if} \quad \mr{Q}_{-\frac{1}{2}}\ket{\psi'} \neq 0) \\
+\mr{Q}_{-\frac{1}{2}} \ket{\psi'} & (\mr{if} \quad \mr{Q}_{-\frac{1}{2}}\ket{\psi'}=0)
+\end{array}
+ \right. \\
+ =&0
+\end{align*}
+となり，よって$a=\pm 1/2$について$\mr{Q}_{a}\ket{\psi''}=0$がなりたつ．任意の状態$\ket{\psi''}$が条件$\mr{Q}_{a}\ket{\psi''}=0$を満たすならば，$U(R)\ket{\psi''}$も(p44の$[J_i,\mr{Q}_a]=-\frac{1}{2}(\sigma_i)_{ab}\mr{Q}_b$から)
+\begin{align*}
+\mr{Q}_{a}\left[U(R)\ket{\psi''}\right]=&U(R) U^{-1}(R)\mr{Q}_{a}U(R)\ket{\psi''} \\
+=&e^{i\theta_i J_i } e^{-i\theta_i J_i} \mr{Q}_{a} e^{i\theta_i J_i} \ket{\psi''} \\
+=&e^{i\theta_i J_i } \left[e^{i\theta_i \frac{\sigma_i}{2}}\right]_{ab}\mr{Q}_{b} \ket{\psi''} \\
+=&0
+\end{align*}
+となり，この条件を満たす．したがってこの状態部分空間$\{\ket{\psi''} :\mr{Q}_{a}\ket{\psi''}=0\}$は$SU(2)$回転群のもとで閉じており，完全系$\{\ket{j,\sigma}\}$で展開することができる．(回転$SU(2)$群の不変部分空間であるから，peter-weylの定理「コンパクト位相群の連続なユニタリ表現は有限次元既約表現の直和に分かれる」より，既約表現の有限個の直和として書けるので回転$SU(2)$の既約表現$\ket{j,\sigma}$の線形結合で書ける．)
+\begin{align*}
+\ket{\psi''}=\sum_{j,\sigma} c_{j,\sigma}\ket{j,\sigma}
+\end{align*}
+$\ket{\psi''}$はゼロでないから，少なくともひとつの係数$c_{j,\sigma}$は非ゼロであり，$\mr{Q}_{a}\ket{\psi''}=0$より
+\begin{align*}
+\mr{Q}_{a}\ket{j,\sigma}=0
+\end{align*}
+を満たす$j,\sigma$の組を少なくとも1つ含む．上と同じことだけど
+\begin{align*}
+\mr{Q}_a(J_{1}\pm i J_2)\ket{j,\sigma} =&+\frac{1}{2}(\sigma_1\pm i\sigma_2)_{ab}\mr{Q}_{b} \ket{j,\sigma}+(J_1\pm iJ_2)\mr{Q}_a \ket{j,\sigma}=0 \\
+\propto &\mr{Q}_a \ket{j,\sigma \pm 1} \\
+\therefore \quad &\mr{Q}_a \ket{j,\sigma \pm 1}=0
+\end{align*}
+これを繰り返して全ての$\sigma$について考えてやれば，これで全ての$-j\leq \sigma \leq +j$で条件式(25.5.3)を満たす状態$\ket{j,\sigma}$が存在するようなスピン$j$が少なくとも一つ存在することが分かった．これがまず証明したいことだった．\par
+(25.5.3)を満たすこれらのスピン多重項の任意の一つで
+\begin{align*}
+\braket{j,\sigma'|j,\sigma}=\delta_{\sigma\sigma'}
+\end{align*}
+と規格化されたものに着目する．$j>0$の場合，スピン$1/2$演算子$\mr{Q}_{a}^*$をこれらの状態に作用させると，スピン$j+a=j\pm 1/2$状態($\mr{Q}_a^*$はスピンの第三成分を$a=\pm 1/2$だけ上げるのだったから)
+\begin{align*}
+\ket{j\pm 1/2,\sigma}=\frac{1}{\sqrt{2M}}\sum_a C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)\mr{Q}_{a}^*\ket{j,\sigma-a}
+\end{align*}
+を構成できる．ここで$C_{jj'}(j'',\sigma'';\sigma,\sigma')$はスピン第三成分$\sigma,\sigma'$の$j,j'$を合成して第三成分$\sigma''=\sigma+\sigma'$のスピン$j''$を作る通常のグレブシュ・ゴルダン係数だ．(25.5.2)～(25.5.5)とクレブシュ・ゴルダン係数の正規直交性
+\begin{align*}
+\sum_{a=-A}^A \sum_{b=-B}^B C_{AB}(J,M;a,b)C_{AB}(J',M';a,b)=&\delta_{JJ'}\delta_{MM'} \\
+\therefore \quad \sum_{a=-A}^A C_{AB}(J,M;a,M-a)C_{AB}(J',M;a,M-a)=&\delta_{JJ'} \quad \because a+b=M
+\end{align*}
+を使うと
+\begin{align*}
+\braket{j\pm 1/2 ,\sigma|j\pm 1/2, \sigma'} =&\frac{1}{2M}\sum_{a}\sum_{b}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma' ;b ,\sigma- b\right)  \\
+&\qquad \qquad \qquad \times \bra{j,\sigma-a}\mr{Q}_{a}\mr{Q}_{b}^* \ket{j,\sigma'-b} \\
+=&\frac{1}{2M}\sum_{a}\sum_{b}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma' ;b ,\sigma'- b\right) \\
+&\qquad \qquad \qquad \times \bra{j,\sigma-a}\{\mr{Q}_{a},\mr{Q}_{b}^*\} \ket{j,\sigma'-b}\quad \because(25.5.3) \\
+=&\frac{1}{2M}\sum_{a}\sum_{b}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma' ;b ,\sigma'- b\right) \\
+&\qquad \qquad \qquad \times 2M \delta_{ab}\braket{j,\sigma-a|j,\sigma'-b} \\
+=&\frac{1}{2M}\sum_{a}\sum_{b}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma' ;b ,\sigma'- b\right) \\
+&\qquad \qquad \qquad \times 2M \delta_{ab}\braket{j,\sigma-a|j,\sigma'-a} \\
+=&\frac{1}{2M}\sum_{a}\sum_{b}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma' ;b ,\sigma'- b\right) \\
+&\qquad \qquad \qquad \times 2M \delta_{\sigma\sigma'}\delta_{ab} \\
+=&\delta_{\sigma\sigma'}\sum_{a}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right) \\
+=&\delta_{\sigma\sigma'} \\
+\braket{j\pm 1/2 ,\sigma|j\mp 1/2, \sigma'}=&0
+\end{align*}
+と適切に規格化されていることがわかる．したがって状態$\ket{j\pm 1/2 ,\sigma}$はどれもゼロになれない．ただし例外は$j=0$のときで，その場合はスピン$j-1/2$がないから状態$\ket{j-1/2,\sigma}$は存在しない．また\uwave{2個}の$\mr{Q}^*$を$\ket{j,\sigma}$に作用させて別の状態を構成できる．各々の$\mr{Q}_{a}^*$は自分自身と反交換するから$\mr{Q}_{a}^{*2}=0$となり，唯一のゼロでないそのような状態は演算子$\mr{Q}^*_{\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}(=-\mr{Q}^*_{-\frac{1}{2}}\mr{Q}^*_{\frac{1}{2}})$を作用させて作ることのできるものだ．この演算子は
+\begin{align*}
+\mr{Q}^*_{\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}=\frac{1}{2}\mr{Q}^*_{\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}-\frac{1}{2}\mr{Q}^*_{-\frac{1}{2}}\mr{Q}^*_{\frac{1}{2}}=\frac{1}{2}e_{ab}\mr{Q}^*_{a}\mr{Q}^*_{b}
+\end{align*}
+と書くことができ，したがって回転不変(直接出しておくと,$e\mr{Q}^*$は$(1/2,0)$表現なので
+\begin{align*}
+[A_i,(e\mr{Q}^*)_a]=&-\frac{1}{2}\sum_{b}(\sigma_i)_{ab}(e\mr{Q}^*)_b,\quad [B_i,(e\mr{Q}^*)_a]=0 \\
+\therefore \quad  [J_i,(e\mr{Q}^*)_a]=&-\frac{1}{2}\sum_{b}(\sigma_i)_{ab}(e\mr{Q}^*)_b \\
+[A_i,\mr{Q}_{a}^*]=&0,\quad [B_i,\mr{Q}_{a}^*]=+\frac{1}{2}\sum_{b}(\sigma_i)_{ba}\mr{Q}^*_b \\
+\therefore \quad [J_i,\mr{Q}_{a}^*]=&+\frac{1}{2}\sum_{b}(\sigma_i)_{ba}\mr{Q}^*_b \\
+[J_i,\mr{Q}^*_a e_{ab}\mr{Q}^*_b]=&[J_i,\mr{Q}^*_{a}](e\mr{Q}^*)_a+\mr{Q}^*_{a}[J_i,(e\mr{Q}^*)_a] \\
+=&+\frac{1}{2}\sum_{c}(\sigma_i)_{ca}\mr{Q}_{c}^*(e\mr{Q}^*)_a-\frac{1}{2}\sum_{c}\mr{Q}_{a}^* (\sigma_i)_{ac}(e\mr{Q}^*)_{c} \\
+=&+\frac{1}{2}\sum_{c}\mr{Q}_{a}^* (\sigma_i)_{ac}(e\mr{Q}^*)_{c}-\frac{1}{2}\sum_{c}\mr{Q}_{a}^* (\sigma_i)_{ac}(e\mr{Q}^*)_{c} \\
+=&0 \\
+U^{-1}(R)\mr{Q}^*_a e_{ab}\mr{Q}^*_b U(R)=&\mr{Q}^*_a e_{ab}\mr{Q}^*_b
+\end{align*}
+となって確かに回転不変になる．)これはスピン$j$の\uwave{別の}スピン多重項を与える．
+\begin{align*}
+\ket{j,\sigma}^\flat=\frac{1}{2M}\mr{Q}^*_{\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}\ket{j,\sigma}
+\end{align*}
+(実際に$J_3$を作用させたら$\mr{Q}^*_{\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}$を通りぬけて$\ket{j,\sigma}$に作用して$\sigma$が出てくるし，$J^2$をかけたら$j(j+1)$が出てくる．)これは(25.5.3)の代わりに
+\begin{align*}
+\mr{Q}^*_{a}\ket{j,\sigma}^\flat=0
+\end{align*}
+を満たすという点が$\ket{j,\sigma}$と異なる．再び(25.5.2)～(25.5.4)から
+\begin{align*}
+{}^\flat\braket{j,\sigma'|j,\sigma}^\flat=&\frac{1}{4M^2}\bra{j,\sigma'} \mr{Q}_{-\frac{1}{2}}\mr{Q}_{\frac{1}{2}}\mr{Q}^*_{\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}\ket{j,\sigma} \\
+=&\frac{1}{2M}\bra{j,\sigma'} \mr{Q}_{-\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}\ket{j,\sigma} \\
+&-\frac{1}{4M^2}\bra{j,\sigma'} \mr{Q}_{-\frac{1}{2}}\mr{Q}^*_{\frac{1}{2}} \mr{Q}_{\frac{1}{2}} \mr{Q}^*_{-\frac{1}{2}}\ket{j,\sigma}\\
+=&\braket{j,\sigma'|j,\sigma}-\frac{1}{2M}\bra{j,\sigma'} \mr{Q}^*_{-\frac{1}{2}} \mr{Q}_{-\frac{1}{2}} \ket{j,\sigma}  \\
+&+\frac{1}{4M^2}\bra{j,\sigma'} \mr{Q}_{-\frac{1}{2}}\mr{Q}^*_{\frac{1}{2}} \mr{Q}^*_{-\frac{1}{2}} \mr{Q}_{\frac{1}{2}}\ket{j,\sigma} \\
+=&\delta_{\sigma'\sigma} \quad \because (25.5.3)から最初の項だけ残り，(25.5.4) \\
+\braket{j,\sigma'|j,\sigma}^\flat =&\frac{1}{2M}\bra{j,\sigma'}\mr{Q}^*_{\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}\ket{j,\sigma} \\
+=&0 \quad \because (25.5.3)
+\end{align*}
+と規格化された状態であることがわかる．次に，ここまでに構成されてきた状態が超対称代数の完全な表現を構成することを示す．クレブシュ・ゴルダン係数の正規直交性から($\pm$についての和は$J=j+1/2,j-1/2$についての和と解釈する)
+\begin{align*}
+\ket{j+1/2,\sigma+1/2}=&\frac{1}{\sqrt{2M}}C_{\frac{1}{2}j}(j+1/2,\sigma+1/2;1/2,\sigma)\mr{Q}_{\frac{1}{2}}^*\ket{j,\sigma} \\
+&+\frac{1}{\sqrt{2M}}C_{\frac{1}{2}j}(j+1/2,\sigma+1/2;-1/2,\sigma+1)\mr{Q}_{-\frac{1}{2}}^*\ket{j,\sigma+1} \\
+=&\frac{1}{\sqrt{2M}}\sqrt{\frac{j+\sigma+1}{2j+1}}\mr{Q}_{\frac{1}{2}}^*\ket{j,\sigma} \\
+&+\frac{1}{\sqrt{2M}}\sqrt{\frac{j-\sigma}{2j+1}}\mr{Q}_{-\frac{1}{2}}^*\ket{j,\sigma+1}  \\
+\ket{j-1/2,\sigma+1/2}=&\frac{1}{\sqrt{2M}}C_{\frac{1}{2}j}(j-1/2,\sigma+1/2;1/2,\sigma)\mr{Q}_{\frac{1}{2}}^*\ket{j,\sigma} \\
+&+\frac{1}{\sqrt{2M}}C_{\frac{1}{2}j}(j+1/2,\sigma+1/2;-1/2,\sigma+1)\mr{Q}_{-\frac{1}{2}}^*\ket{j,\sigma+1} \\
+=&-\frac{1}{\sqrt{2M}}\sqrt{\frac{j-\sigma}{2j+1}}\mr{Q}_{\frac{1}{2}}^*\ket{j,\sigma} \\
+&+\frac{1}{\sqrt{2M}}\sqrt{\frac{j+\sigma+1}{2j+1}}\mr{Q}_{-\frac{1}{2}}^*\ket{j,\sigma+1}  \\
+\therefore \quad \mr{Q}^*_{\frac{1}{2}}\ket{j,\sigma}=& \sqrt{2M}C_{\frac{1}{2}j}(j+1/2,\sigma+1/2;1/2,\sigma)\ket{j+1/2,\sigma+1/2} \\
+&+\sqrt{2M}C_{\frac{1}{2}j}(j-1/2,\sigma+1/2;1/2,\sigma)\ket{j-1/2,\sigma+1/2} \\
+=&\sqrt{2M}\sum_{\pm}C_{\frac{1}{2}j}(j \pm 1/2,\sigma+1/2;1/2,\sigma)\ket{j\pm 1/2,\sigma+1/2}
+\end{align*}
+同様に
+\begin{align*}
+\mr{Q}^*_{-\frac{1}{2}}\ket{j,\sigma}=\sqrt{2M}\sum_{\pm}C_{\frac{1}{2}j}(j \pm 1/2,\sigma-1/2;-1/2,\sigma)\ket{j\pm 1/2,\sigma-1/2}
+\end{align*}
+もわかって
+\begin{align*}
+\mr{Q}^*_{a}\ket{j,\sigma}=\sqrt{2M}\sum_{\pm}C_{\frac{1}{2}j}(j \pm 1/2,\sigma+a;a,\sigma)\ket{j\pm 1/2,\sigma +a}
+\end{align*}
+がわかる．(直交関係式がダイレクトに使えない気がしたので，具体的なクレブシュゴルダン係数の表示を用いて導いた．うまくいかないかなぁ．一応クレブシュゴルダン係数の具体形がこうなることを証明しておく．数学的帰納法を使う．$j$スピンと$1/2$スピンの合成が
+\begin{align*}
+\Ket{j+\frac{1}{2},\sigma+\frac{1}{2}}=&C_{\frac{1}{2}j}\left(j+\frac{1}{2},\sigma+\frac{1}{2};\frac{1}{2},\sigma \right)\Ket{\frac{1}{2},\frac{1}{2}}\ket{j,\sigma} \\
+&+C_{\frac{1}{2}j}\left(j+\frac{1}{2},\sigma+\frac{1}{2};-\frac{1}{2},\sigma+1 \right)\Ket{\frac{1}{2},-\frac{1}{2}}\ket{j,\sigma+1}
+\end{align*}
+となるが，ここである$\sigma$で
+\begin{align*}
+\Ket{j+\frac{1}{2},\sigma+\frac{1}{2}}=&\sqrt{\frac{j+\sigma+1}{2j+1}}\Ket{\frac{1}{2},\frac{1}{2}}\ket{j,\sigma} \\
+&+\sqrt{\frac{j-\sigma}{2j+1}}\Ket{\frac{1}{2},-\frac{1}{2}}\ket{j,\sigma+1}
+\end{align*}
+となると仮定する．$\sigma=j,-j-1$では自明になりたつ．両辺に下降演算子(あるいは上昇演算子)を作用させると
+\begin{align*}
+J_-\Ket{j+\frac{1}{2},\sigma+\frac{1}{2}}=&\sqrt{\left(j+\frac{1}{2}\right)\left(j+\frac{3}{2}\right)-\left(\sigma+\frac{1}{2}\right)^2+\left(\sigma+\frac{1}{2}\right)}\Ket{j+\frac{1}{2},\sigma-\frac{1}{2}} \\
+=&\sqrt{(j-\sigma+1)(j+\sigma+1)}\Ket{j+\frac{1}{2},\sigma-\frac{1}{2}} \\
+=&+\sqrt{\frac{j+\sigma+1}{2j+1}}\sqrt{1}\Ket{\frac{1}{2},-\frac{1}{2}}\ket{j,\sigma} \\
+&+\sqrt{\frac{j+\sigma+1}{2j+1}}\sqrt{j(j+1)-\sigma^2+\sigma}\Ket{\frac{1}{2},\frac{1}{2}}\ket{j,\sigma-1} \\
+&+\sqrt{\frac{j-\sigma}{2j+1}}\sqrt{j(j+1)-(\sigma+1)^2+(\sigma+1)}\Ket{\frac{1}{2},-\frac{1}{2}}\ket{j,\sigma} \\
+=&+\left[\sqrt{\frac{j+\sigma+1}{2j+1}}+\sqrt{\frac{j-\sigma}{2j+1}}\sqrt{j^2+j-\sigma^2-\sigma}\right]\Ket{\frac{1}{2},-\frac{1}{2}}\ket{j,\sigma} \\
+&+\sqrt{\frac{j-\sigma}{2j+1}}\sqrt{j^2+j-\sigma^2+\sigma}\Ket{\frac{1}{2},\frac{1}{2}}\ket{j,\sigma-1} \\
+=&+\sqrt{\frac{j+\sigma+1}{2j+1}}(j-\sigma+1)\Ket{\frac{1}{2},-\frac{1}{2}}\ket{j,\sigma} \\
+&+\sqrt{\frac{(j+\sigma+1)(j+\sigma)(j-\sigma+1)}{2j+1}}\Ket{\frac{1}{2},\frac{1}{2}}\ket{j,\sigma-1} \\
+\therefore \quad \Ket{j+\frac{1}{2},(\sigma-1)+\frac{1}{2}}=&\sqrt{\frac{j+(\sigma-1)+1}{2j+1}}\Ket{\frac{1}{2},\frac{1}{2}}\ket{j,\sigma-1} \\
+&+\sqrt{\frac{j-(\sigma-1)}{2j+1}}\Ket{\frac{1}{2},-\frac{1}{2}}\ket{j,(\sigma-1)+1}
+\end{align*}
+となって，証明が完了する．まぁここで使いたいだけだったので，もっと一般的な結果があるはず．)また(25.5.2)から超対称多重項の任意の状態$\ket{p}$は
+\begin{align*}
+\left[\mr{Q}_a ,\mr{Q}_{\frac{1}{2}}^* \mr{Q}_{-\frac{1}{2}}^*\right]=&\left\{\mr{Q}_{a},\mr{Q}_{\frac{1}{2}}^*\right\}\mr{Q}_{-\frac{1}{2}}^*-\mr{Q}_{\frac{1}{2}}^* \left\{\mr{Q}_{a},\mr{Q}_{-\frac{1}{2}}^*\right\} \\
+=&2(\sigma_\mu P^\mu )_{a\frac{1}{2}} \mr{Q}_{-\frac{1}{2}}^*- \mr{Q}_{\frac{1}{2}}^* 2(\sigma_\mu P^\mu)_{a-\frac{1}{2}} \\
+=&\mr{Q}_{-\frac{1}{2}}^*2(\sigma_\mu P^\mu )_{a\frac{1}{2}} - \mr{Q}_{\frac{1}{2}}^* 2(\sigma_\mu P^\mu)_{a-\frac{1}{2}} \quad \because [\mr{Q}_a ,P_\mu]=0 \\
+\left[\mr{Q}_a ,\mr{Q}_{\frac{1}{2}}^* \mr{Q}_{-\frac{1}{2}}^*\right]\ket{p}=&\left[\mr{Q}_{-\frac{1}{2}}^*2M\delta_{a\frac{1}{2}} -\mr{Q}_{\frac{1}{2}}^* 2M\delta_{a-\frac{1}{2}}\right]\ket{p} \\
+=&2M\sum_b e_{ab} \mr{Q}_{b}^* \ket{p}
+\end{align*}
+となる．(あるいはエレガントに
+\begin{align*}
+\left[\mr{Q}_a ,\mr{Q}_{\frac{1}{2}}^* \mr{Q}_{-\frac{1}{2}}^*\right]=&\left[\mr{Q}_a ,\frac{1}{2}e_{bc}\mr{Q}_{b}^* \mr{Q}_{c}^*\right] \\
+=&\frac{1}{2}e_{bc}\left\{\mr{Q}_{a},\mr{Q}_{b}^*\right\}\mr{Q}_{c}^*-\frac{1}{2}e_{bc} \mr{Q}_{b}^* \left\{\mr{Q}_{a},\mr{Q}_{c}^*\right\} \\
+=&e_{bc} (\sigma_\mu P^\mu)_{ab}\mr{Q}_{c}^*- e_{bc}\mr{Q}_{b}^* (\sigma_\mu P^\mu)_{ac} \\
+=&\mr{Q}_{c}^*e_{bc} (\sigma_\mu P^\mu)_{ab}-e_{bc}\mr{Q}_{b}^* (\sigma_\mu P^\mu)_{ac} \quad \because [\mr{Q}_a ,P_\mu]=0 \\
+\left[\mr{Q}_a ,\mr{Q}_{\frac{1}{2}}^* \mr{Q}_{-\frac{1}{2}}^*\right]\ket{p}=&M \mr{Q}_{c}^*e_{bc} \delta_{ab}\ket{p}-Me_{bc}\mr{Q}_{b}^* \delta_{ac}\ket{p} \\
+=&2M\sum_b e_{ab}\mr{Q}^*_{b}\ket{p}
+\end{align*}
+とする．別に計算量減らなかったな)したがって，(25.5.7)(25.5.3)から
+\begin{align*}
+\mr{Q}_a \ket{j,\sigma}^\flat=&\frac{1}{2M} \mr{Q}_a \mr{Q}_{\frac{1}{2}}^* \mr{Q}_{-\frac{1}{2}}^* \ket{j,\sigma} \\
+=&\frac{1}{2M}\left[\mr{Q}_a ,\mr{Q}_{\frac{1}{2}}^* \mr{Q}_{-\frac{1}{2}}^*\right]\ket{j,\sigma}+\frac{1}{2M} \mr{Q}_{\frac{1}{2}}^* \mr{Q}_{-\frac{1}{2}}^* \mr{Q}_a \ket{j,\sigma} \\
+=&\sum_{b}e_{ab}\mr{Q}_{b}^* \ket{j,\sigma} \quad \because (25.5.3) \\
+=&\sqrt{2M}\sum_b e_{ab}\sum_{\pm}C_{\frac{1}{2}j}(j \pm 1/2,\sigma+b;b,\sigma)\ket{j\pm 1/2,\sigma +b} \quad \because (25.5.10)
+\end{align*}
+となる．(25.5.2)(25.5.3)(25.5.5)から
+\begin{align*}
+\mr{Q}_{a}\ket{j\pm 1/2 ,\sigma}=&\frac{1}{\sqrt{2M}}\sum_b C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;b ,\sigma- b\right)\mr{Q}_a \mr{Q}_{b}^*\ket{j,\sigma-b} \\
+=&\frac{1}{\sqrt{2M}}\sum_b C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;b ,\sigma- b\right)\{\mr{Q}_a ,\mr{Q}_{b}^*\}\ket{j,\sigma-b} \quad \because (25.5.3)\\
+=&\sqrt{2M}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right) \ket{j,\sigma-a}
+\end{align*}
+が得られる．一方(25.5.5)(25.2.31)(25.5.7)から
+\begin{align*}
+\mr{Q}_{\frac{1}{2}}^*\ket{j\pm 1/2 ,\sigma}=&\frac{1}{\sqrt{2M}}\sum_b C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;b ,\sigma- b\right)\mr{Q}^*_{\frac{1}{2}} \mr{Q}_{b}^*\ket{j,\sigma-b} \\
+=&\frac{1}{\sqrt{2M}} C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;-1/2 ,\sigma+ 1/2 \right)\mr{Q}^*_{\frac{1}{2}} \mr{Q}_{-\frac{1}{2}}^*\ket{j,\sigma+1/2} \\
+=&\sqrt{2M} C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;-1/2 ,\sigma+ 1/2 \right) \ket{j,\sigma+1/2}^\flat \\
+=&\sqrt{2M} \sum_{b}e_{\frac{1}{2}b}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;b ,\sigma- b \right) \ket{j,\sigma-b}^\flat \\
+\mr{Q}_{-\frac{1}{2}^*}\ket{j\pm 1/2 ,\sigma}=&\frac{1}{\sqrt{2M}}\sum_b C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;b ,\sigma- b\right)\mr{Q}^*_{-\frac{1}{2}} \mr{Q}_{b}^*\ket{j,\sigma-b} \\
+=&\frac{1}{\sqrt{2M}} C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;1/2 ,\sigma- 1/2 \right)\mr{Q}^*_{-\frac{1}{2}} \mr{Q}_{\frac{1}{2}}^*\ket{j,\sigma-1/2} \\
+=&-\sqrt{2M} C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;1/2 ,\sigma- 1/2 \right) \ket{j,\sigma-1/2}^\flat \\
+=&\sqrt{2M} \sum_{b}e_{-\frac{1}{2}b}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;b ,\sigma- b \right) \ket{j,\sigma-b}^\flat \\
+\therefore \quad \mr{Q}_{a}^*\ket{j\pm 1/2 ,\sigma}=&\sqrt{2M} \sum_{b}e_{ab}C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;b ,\sigma- b \right) \ket{j,\sigma-b}^\flat
+\end{align*}
+が得られる．ここまでで，超対称多重項$\ket{j,\sigma},\ket{j\pm1/2,\sigma},\ket{j,\sigma}^\flat$全てへの$\mr{Q}_{a},\mr{Q}^*_a$の作用が全て求まった．\par
+$j=0$の場合はつぶれた超対称性多重項が得られる．すなわち，(25.5.3)(25.5.8)(25.5.12)～(25.5.14)は
+\begin{align*}
+\mr{Q}_{a}\ket{0,0}=&0 ,\quad \mr{Q}^*_a \ket{0,0}^\flat =0 \\
+\mr{Q}^*_a \ket{0,0}=&\sqrt{2M}\ket{1/2,a } ,\quad \mr{Q}_a \ket{0,0}^\flat=\sqrt{2M}\sum_b e_{ab}\ket{1/2,b} \\
+\mr{Q}_a \ket{1/2,b}=&\sqrt{2M}\delta_{ab} \ket{0,0} ,\quad \mr{Q}_a^*\ket{1/2,b}=\sqrt{2M}e_{ab}\ket{0,0}^\flat
+\end{align*}
+となる．
+
+\vskip\baselineskip
+
+
+ここでパリティが保存されていると仮定する．単純超対称性生成子の位相は，これらの演算子へのパリティ演算子が(25.3.11)となるように選ばれていることを思い出そう．すると$\mr{Q}^*_{a}$を$\mathsf{P}\ket{j,\sigma}$に作用させたものは
+\begin{align*}
+\mr{Q}^*_a \mathsf{P} \ket{j,\sigma}=-i\sum_b e_{ab}\mathsf{P}\mr{Q}_b \ket{j,\sigma}
+\end{align*}
+となり$\mathsf{P} \mr{Q}_a \ket{j,\sigma}$の線形結合となり，それ(25.5.3)よりゼロだ．よって(25.5.8)と比べて，同じ性質をもち，かつ
+\begin{align*}
+\exp(i\theta_i J_i)\mathsf{P}\ket{j,\sigma}=&\mathsf{P}\exp(i\theta_i J_i)\ket{j,\sigma} \\
+=&\sum_{\sigma'}D_{\sigma \sigma'}^{(j)} \mathsf{P}\ket{j,\sigma'} \\
+\exp(i\theta_i J_i)\ket{j,\sigma}^\flat=&\sum_{\sigma'}D_{\sigma \sigma'}^{(j)} \ket{j,\sigma'}^\flat
+\end{align*}
+となって回転のもとで同じ特性をもっているので，両者は単に比例する．
+\begin{align*}
+\mathsf{P}\ket{j,\sigma}=-\eta \ket{j,\sigma}^\flat
+\end{align*}
+$\mathsf{P}$はユニタリーだから規格化条件を満たすように$\eta$は$|\eta|=1$を満たす位相因子だ．同様の議論から$\mathsf{P}\ket{j,\sigma}^\flat$は$\ket{j,\sigma}$に比例することがわかる．その比例係数を知るには，
+\begin{align*}
+\mathsf{P} \ket{j,\sigma}^\flat =&\frac{1}{2M}\mathsf{P} \mr{Q}^*_{\frac{1}{2}} \mr{Q}^*_{-\frac{1}{2}}\ket{j,\sigma} \\
+=&\frac{1}{2M}\mathsf{P} \mr{Q}^*_{\frac{1}{2}}\mathsf{P}^{-1} \mathsf{P} \mr{Q}^*_{-\frac{1}{2}} \mathsf{P}^{-1} \mathsf{P}\ket{j,\sigma} \\
+=&\frac{1}{2M}\left(+i e_{\frac{1}{2}b}\mr{Q}_b\right)\left(+i e_{-\frac{1}{2}c}\mr{Q}_c\right)\mathsf{P} \ket{j,\sigma} \\
+=&\frac{1}{2M}\mr{Q}_{-\frac{1}{2}}\mr{Q}_{\frac{1}{2}} \mathsf{P} \ket{j,\sigma} \\
+=&-\frac{1}{2M}\mr{Q}_{-\frac{1}{2}}\mr{Q}_{\frac{1}{2}} \eta \ket{j,\sigma}^\flat \\
+=&-\eta \frac{1}{(2M)^2}\mr{Q}_{-\frac{1}{2}}\mr{Q}_{\frac{1}{2}} \mr{Q}^*_{\frac{1}{2}}\mr{Q}^*_{-\frac{1}{2}}\ket{j,\sigma} \\
+=&-\eta\ket{j,\sigma}
+\end{align*}
+からわかる．最後の変形は(25.5.9)の導出計算を繰り返したらよい．するとスピン$j$で第三成分$\sigma$の状態
+\begin{align*}
+\ket{j,\sigma}^\pm \equiv \frac{1}{\sqrt{2}}\left(\ket{j,\sigma}\mp \ket{j,\sigma}^\flat\right)
+\end{align*}
+が作れて，これは
+\begin{align*}
+\mathsf{P}\ket{j,\sigma}^\pm =& \frac{1}{\sqrt{2}}\left(-\eta \ket{j,\sigma}^\flat \pm \eta \ket{j,\sigma}\right) \\
+=&\pm \eta \frac{1}{\sqrt{2}}\left(\ket{j,\sigma}\mp \ket{j,\sigma}^\flat\right) \\
+=&\pm \eta \ket{j,\sigma}^\pm
+\end{align*}
+となってパリティ固有状態になっている．最後にパリティ演算子を(25.5.5)に作用させ(25.3.13)(25.5.16)を使うと
+\begin{align*}
+\mathsf{P} \ket{j\pm 1/2,\sigma} =&\frac{1}{\sqrt{2M}}\sum_a C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)\mathsf{P} \mr{Q}_{a}^*\ket{j,\sigma-a} \\
+=& \frac{1}{\sqrt{2M}}\sum_a C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)i\sum_b e_{ab}\mr{Q}_{b}\mathsf{P}\ket{j,\sigma-a} \\
+=&-\frac{i\eta}{\sqrt{2M}}\sum_a C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)\sum_b e_{ab}\ket{j,\sigma-a}^\flat
+\end{align*}
+となる．(25.5.12)から
+\begin{align*}
+\mathsf{P} \ket{j\pm 1/2,\sigma} =&-\frac{i\eta}{\sqrt{2M}}\sum_a C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right)\\
+&\quad \times \sum_b e_{ab} \sqrt{2M}\sum_c e_{bc} \sum_{\pm}C_{\frac{1}{2}j}\left(j\pm 1/2,\sigma-a+c;c ,\sigma-a \right)\ket{j\pm 1/2 ,\sigma-a+c} \\
+=&i\eta\sum_a C_{\frac{1}{2}j }\left(j\pm 1/2 ,\sigma ;a ,\sigma- a\right) \\
+& \quad \times \sum_{\pm}C_{\frac{1}{2}j}\left(j\pm 1/2,\sigma;a ,\sigma-a \right)\ket{j\pm 1/2 ,\sigma} 
+\end{align*}
+(記号の乱用になっているが，右辺最後の$\pm$についての和は左辺の$\pm$とは無関係であることに注意．)クレブシュ・ゴルダン係数の正規直交性
+\begin{align*}
+\sum_{a=-A}^A C_{AB}(J,M;a,M-a)C_{AB}(J',M;a,M-a)=&\delta_{JJ'}
+\end{align*}
+を使えば(混乱するので$j+1/2$のときと$j-1/2$で場合分けして)
+\begin{align*}
+\mathsf{P} \ket{j+ 1/2,\sigma} =&i\eta  \sum_{\pm} \left[ \sum_a C_{\frac{1}{2}j }\left(j+ 1/2 ,\sigma ;a ,\sigma- a\right)C_{\frac{1}{2}j}\left(j\pm 1/2,\sigma;a ,\sigma-a \right)\right]\ket{j\pm 1/2 ,\sigma} \\
+=&i\eta \ket{j+ 1/2 ,\sigma} \\
+\mathsf{P} \ket{j- 1/2,\sigma} =&i\eta  \sum_{\pm} \left[ \sum_a C_{\frac{1}{2}j }\left(j- 1/2 ,\sigma ;a ,\sigma- a\right)C_{\frac{1}{2}j}\left(j\pm 1/2,\sigma;a ,\sigma-a \right)\right]\ket{j\pm 1/2 ,\sigma} \\
+=&i\eta \ket{j- 1/2 ,\sigma}
+\end{align*}
+よって
+\begin{align*}
+\mathsf{P} \ket{j\pm 1/2,\sigma} =i\eta \ket{j\pm 1/2,\sigma} 
+\end{align*}
+が得られる．(どっちの結果も本文と違うけど，誤植か？)
+
+\vskip\baselineskip
+
+次に$N$個の超対称性生成子をもつ拡張超対称性の場合を簡単に見る．前節で述べたように，質量ゼロ状態に中心電荷が作用すると必ず消えてしまい，したがって中心電荷のどれかについて固有値がゼロでない質量ゼロ粒子は存在できないのだった．ここからさらに進んで，中心電荷演算子の固有値は，任意の超対称多重項の\uwave{質量に下限を与える}ことが示せる．(25.2.10)(25.2.11)より，中心電荷$Z_{rs}$と$Z_{rs}^*$は互いに交換し$P_\mu$とも交換するので，1粒子状態は全ての中心電荷および$P_\mu$の固有状態にとることができる．また中心電荷は$\mr{Q}_{ar},\mr{Q}_{ar}^*$と交換するので，超対称多重項の全ての状態は同じ固有値をもつ．\par
+超対称多重項の質量$M$と，この超対称多重項の中心電荷の固有値を関係付ける不等式を導くために，反交換関係(25.2.7)(25.2.8)を使って
+\begin{align*}
+&\sum_{ar}\left\{ \left( \mr{Q}_{ar}-\sum_{bs}e_{ab} U_{rs} \mr{Q}^*_{bs} \right) , \left( \mr{Q}^*_{ar}-\sum_{ct}e_{ac} U^*_{rt} \mr{Q}_{ct} \right) \right\} \\
+=&\sum_{ar}\left\{\mr{Q}_{ar}, \mr{Q}^*_{ar}\right\}-\sum_{abrs}e_{ab}U_{rs}\left\{ \mr{Q}_{bs}^*,\mr{Q}_{ar}^* \right\}-\sum_{acrt}e_{ac}U_{rt}^*\left\{ \mr{Q}_{ar},\mr{Q}_{ct} \right\}  \\
+&+\sum_{ar}\sum_{bs}\sum_{ct}e_{ab}e_{ac}U_{rs}U^\dagger_{tr}\left\{\mr{Q}_{bs}^*, \mr{Q}_{ct}\right\} \\
+=&\sum_{ar}\left\{\mr{Q}_{ar}, \mr{Q}^*_{ar}\right\}-\sum_{abrs}e_{ab}U_{rs}\left\{ \mr{Q}_{bs}^*,\mr{Q}_{ar}^* \right\}-\sum_{acrt}e_{ac}U_{rt}^*\left\{ \mr{Q}_{ar},\mr{Q}_{ct} \right\} \\
+&+\sum_{bs}\sum_{ct}\delta_{ac}\delta_{st}\left\{\mr{Q}_{bs}^*, \mr{Q}_{ct}\right\} \\
+=&\sum_{ar}\left\{\mr{Q}_{ar}, \mr{Q}^*_{ar}\right\}-\sum_{abrs}e_{ab}U_{rs}\left\{ \mr{Q}^*_{bs},\mr{Q}_{ar}^* \right\}-\sum_{acrt}e_{ac}U_{rt}^*\left\{ \mr{Q}_{ar},\mr{Q}_{ct} \right\} \\
+&+\sum_{ar}\left\{\mr{Q}_{ar}^*, \mr{Q}^*_{ar}\right\} \\
+=&2\sum_{ar}\left\{\mr{Q}_{ar}, \mr{Q}^*_{ar}\right\}-\sum_{abrs}e_{ab}U_{rs}\left\{ \mr{Q}^*_{bs},\mr{Q}_{ar}^* \right\}-\sum_{acrt}e_{ac}U_{rt}^*\left\{ \mr{Q}_{ar},\mr{Q}_{ct} \right\} \\
+=&4\sum_{ar}(\sigma_\mu P^\mu)_{aa}\delta_{rr}-\sum_{abrs}e_{ab}U_{rs}e_{ba}Z_{sr}^*-\sum_{acrt}e_{ac}U_{rt}^*e_{ac}Z_{rt} \\
+=&8NP^0-2\sum_{rs}U_{rs}Z_{rs}^*-2\sum_{rs}U_{tr}^\dagger Z_{rt} \\
+=&8NP^0 -2\mr{Tr}(ZU^\dagger + UZ^\dagger)
+\end{align*}
+と書ける．ここで$U_{rs}$は任意の$N\times N$ユニタリー行列だ．(演算子のダガーはアスタリスクの意味と同じだったが，ここでは$Z_{rs}$の$rs$に関する転置を含めるとした．)左辺は$\{A,A^*\}$の形の式だから，必ず正定値な演算子であり，静止した超対称多重項の状態$\ket{p}$にこれを作用させて
+\begin{align*}
+0<&\bra{p}\sum_{ar}\left\{ \left( \mr{Q}_{ar}+\sum_{bs}e_{ab} U_{rs} \mr{Q}^*_{bs} \right) , \left( \mr{Q}^*_{ar}+\sum_{ct}e_{ac} U^*_{rt} \mr{Q}_{ct} \right) \right\}\ket{p} \\
+=&\bra{p}\left[8NP^0 -2\mr{Tr}(ZU^\dagger + UZ^\dagger)\right]\ket{p} \\
+=&8NM-2\mr{Tr}(ZU^\dagger + UZ^\dagger) \\
+\therefore \quad M \geq& \frac{1}{4N}\mr{Tr}(ZU^\dagger + UZ^\dagger)
+\end{align*}
+を得る．ここで最後の$Z_{rs}$は質量$M$の超対称多重項の中心電荷$Z_{rs}$の\uwave{値}を表す．つまり記号が被らないように演算子である中心電荷の方を$\mc{Z}_{rs}$と書くと
+\begin{align*}
+\mc{Z}_{rs}\ket{p}=&Z_{rs}\ket{p} \\
+\mc{Z}_{rs}^\dagger\ket{p}=&\mc{Z}_{sr}^*\ket{p}=Z^*_{sr}\ket{p}=Z^\dagger_{rs}\ket{p}
+\end{align*}
+としたときの行列値$Z_{rs}$だ．極分解定理より任意の正方行列$Z$は正エルミート行列$H$とユニタリー行列$V$で$Z=HV$と書ける．(2.7節参照)任意の行列$U$を$U=V$とすれば，
+\begin{align*}
+M\geq& \frac{1}{4N}\mr{Tr}(HVV^\dagger +V V^\dagger H^\dagger ) \\
+=&\frac{1}{2N}\mr{Tr}H \\
+=&\frac{1}{2N}\mr{Tr}\sqrt{Z^\dagger Z}
+\end{align*}
+と書ける．$M$がこの不等式で許される最小値に等しい状態は，23.3節で議論したボゴモルニ・プラサド・ゾンマーフェルトの磁気単極子との類推から\textbf{BPS状態}と呼ばれる．\par
+(25.5.22)のこの導出からわかるように，BPS超対称多重項の場合には演算子$\mr{Q}_{ar}-\sum_{bs}e_{ab}U_{rs}\mr{Q}^*_{bs}$はこの超対称多重項の任意の状態に作用したときにゼロになる．(不等式が等式になるときであるから，$\bra{p}\{A,A^*\}\ket{p}=0$となる場合であり，よって$A=0$．)したがって$N$個の独立なスピン第三成分を下げる演算子$\mr{Q}_{\frac{1}{2}r}$と，$N$個の独立なスピン第三成分を上げる演算子$\mr{Q}_{-\frac{1}{2}r}$が存在する．($\mr{Q}_{-\frac{1}{2}r}^*$や$\mr{Q}_{\frac{1}{2}}^*$はスピン第三成分を下げ上げするが，線形結合$\mr{Q}_{ar}-\sum_{bs}e_{ab}U_{rs}\mr{Q}^*_{bs}$が任意の状態に対してゼロになってしまうから，これらと独立な演算子ではない．)この結果，一般の場合に見られるより小さな超対称多重項が導かれる．(もしBPS状態でなければ$\mr{Q}_{-\frac{1}{2}r}^*$や$\mr{Q}_{\frac{1}{2}}^*$も独立に存在でき，スピン第三成分をもっと下げることができるため)\par
+例えば，$N=2$超対称性の場合には，中心電荷の行列固有値は
+\begin{align*}
+Z=\left(
+\begin{matrix}
+0 & Z_{12} \\
+-Z_{12} & 0 
+\end{matrix}
+\right)
+\end{align*}
+となるが，これは一個の複素数$Z_{12}$で決まる．極分解は
+\begin{align*}
+V=\left(
+\begin{matrix}
+0 & \frac{Z_{12}}{|Z_{12}|} \\
+-\frac{Z_{12}}{|Z_{12}|} & 0
+\end{matrix}
+\right) ,\quad H= |Z_{12}|I
+\end{align*}
+となる．不等式(25.5.22)はこの場合
+\begin{align*}
+\sqrt{Z^\dagger Z}=&\sqrt{Z_{12}^2I}=|Z_{12}|I \\
+M\geq & \frac{1}{4}\mr{Tr}(|Z_{12}|I)=\frac{|Z_{12}|}{2}
+\end{align*}
+となる．BPS状態の任意の超対称多重項に作用するとゼロになる演算子は
+\begin{align*}
+\mr{Q}_{a1}-\sum_{bs}e_{ab}V_{1s}\mr{Q}_{bs}^* =&\mr{Q}_{a1}-\frac{Z_{12}}{|Z_{12}|}(e\mr{Q}^*)_{a2} \\
+\mr{Q}_{a2}-\sum_{bs}e_{ab}V_{2s}\mr{Q}_{bs}^* =&\mr{Q}_{a2}+\frac{Z_{12}}{|Z_{12}|}(e\mr{Q}^*)_{a1}
+\end{align*}
+となる．$M=|Z_{12}|/2$のBPS状態のとき，質量がゼロでない超対称多重項のヘリシティ成分は質量ゼロ超対称多重項の成分と同じだ．すなわち，(作り方は質量ゼロのときと同じで，スピンが最大のところからだんだん$\mr{Q}_{\frac{1}{2}r}$を作用させていく)\par
+スピン1粒子が1個\par
+スピン$1/2$粒子が2個(1個の$SU(2)$R対称性2重項を作る)\par
+スピン$0$粒子が1個\par
+\noindent からなるゲージ超対称多重項(質量ゼロの方ではヘリシティ0粒子が2個だったので1個少なく見えるが，質量のあるスピン1粒子はヘリシティ$+1,0,-1$が存在するため，ここのヘリシティ0と合わせて勘定が合う．)および\par
+スピン1/2粒子が1個(第三成分$+1/2$と，$-1/2$の分を合わせて) \par
+スピン0粒子が2個(1個の$SU(2)$R対称性2重項を作る)\par
+\noindent からなるハイパー多重項が存在する．これらは$M> |Z_{12}|/2$のときに現れるもっと大きな超対称多重項と区別するために「小さい」超対称多重項と呼ばれることがある．
+
+\end{document}

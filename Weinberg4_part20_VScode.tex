@@ -1,0 +1,3227 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{tensor}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+\newcommand{\mr}[1]{\mathrm{#1}}
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part20}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+
+\maketitle
+\setcounter{part}{19}
+\part{演算子積展開}
+\setcounter{section}{20}
+\subsection{展開：記述と導出}
+ウィルソンは二つの演算子の積$A(x)B(y)$で$x\to y$での特異部分が，他の局所演算子の和
+\begin{eqnarray*}
+A(x)B(y)\to \sum_C F^{AB}_C(x-y) C(y)
+\end{eqnarray*}
+で与えられると仮定した．ここで$F^{AB}_C(x-y)$は特異なc関数だ\par
+$A(x)B(y)$は質量次元で$d_A+d_B$で，$C(y)$が$d_C$なので，$F^{AB}_C(x-y)$は$d_A+d_B-d_C$，つまり$x-y$の$d_C-d_A-d_B$乗として振る舞う．\par
+演算子$\mathcal{O}$に場や微分を加えると$d_{\mathcal{O}}$は増加するので，$F^{AB}_C(x-y)$の特異性の度合は，$C$が複雑になるにつれ，つまり$d_C$が大きくなるにつれ減少する($d_C-d_A-d_B$が大きくなるので，$(x-y)^{-n}$の$n$が大きくなる)．演算子積展開の重要な性質は，これが演算子の関係式である点だ．つまり，これを$\bra{\beta}A(x)B(y)\ket{\alpha}$のような行列要素に使うとき，任意の$\ket{\alpha}$と$\bra{\beta}$の状態について同じ関数$F^{AB}_C(x-y)$が現れる．\par
+\vskip\baselineskip
+
+演算子$C(y)$が複雑になるにつれ(20.1.1)の特異性が弱まるため，この展開は積$A(x)B(y)$の$x\to y$での振る舞いを導く際に有効となる．上の，簡単なベキ勘定はくりこみの効果によって変更を受ける．\par
+つまり(20.1.1)の展開はあるスケール$\mu$でくりこまれた演算子で行うべき行為であり，このために係数関数$F^{AB}_C(x-y)$に，$x-y$に加えて$\mu$が登場する．\par
+20.3節にて，漸近的自由な理論において$F^{AB}_C(x-y)$は次元解析で分かる$d_C-d_A-d_B$乗に加えて$\log (x-y)^2$のベキも持つことが分かる．より一般の理論でも，各種演算子$C(y)$が複雑になるにしたがって，$F^{AB}_C(x-y)$の特異性が弱まると思われる．
+\vskip\baselineskip
+
+運動量空間でこれに対応するのは，$k\to\infty$において
+\begin{eqnarray*}
+\int d^{4} x e^{-i k x} A(x) B(0) \rightarrow \sum_{C} \int d^{4} x e^{-i k x} F_C^{A B}(x) C(0)=\sum_{C} V_{C}^{A B}(k) C(0)
+\end{eqnarray*}
+となり，これに対応して
+\begin{eqnarray*}
+\int d^{4} x e^{-i k x} T\left\{A(x) B(0) \right\} = \sum_{C} U_{C}^{A B}(k) C(0)
+\end{eqnarray*}
+となることだ．ここで$V_C^{AB}(k),U_C^{AB}(k)$は$k^\mu$の関数であり，級数$C(0)$の項が複雑になるにつれ，大きな$k$でより早く減少する．\par
+\vskip\baselineskip
+
+ここではより一般に，任意個数の演算子が運ぶ運度量が無限大になるというウィルソン展開を導く．この目的のために，Green関数
+\begin{eqnarray*}
+&&\braket{T\left\{A_{1}\left(x_{1}\right), A_{2}\left(x_{2}\right), \cdots, B_{1}\left(y_{1}\right), B_{2}\left(y_{2}\right), \cdots \right\} }_{0} \\
+&=&\int \left[\prod_{\ell, z} d \phi_{\ell}(z)\right] a_{1}\left(x_{1}\right) a_{2}\left(x_{2}\right) \cdots b_{1}\left(y_{1}\right) b_{2}\left(y_{2}\right) \cdots \exp (i I[\phi])
+\end{eqnarray*}
+において，局所演算子$A_1(x_1),A_2(x_2)$等の引数が点$x$に近づき，他の局所演算子$B_1(y_1),B_2(y_2)$等の引数が固定された場合を考える．ここで小文字$a$と$b$は，$A$や$B$の中の場の演算子をc数の場で置き換えることを意味する．
+さて，点$x$を半径$R$の球$B(R)$で囲む．$R$は$x_1,x_2$等との間の距離よりずっと大きく，また，$y_1,y_2$等との間の距離よりはずっと小さくとる．\par
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw(1,1) circle (2);
+\draw(1,1) circle (0.02);
+\draw (1,1)node[above]{$x$};
+
+\draw(2,2) circle (0.02);
+\draw (2,2)node[above]{$x_1$};
+
+\draw(2,0) circle (0.02);
+\draw (2,0)node[right]{$x_2$};
+
+\draw(-0.5,0) circle (0.02);
+\draw (-0.5,0)node[above]{$x_3$};
+
+\draw(5,2) circle (0.02);
+\draw (5,2)node[above]{$y_1$};
+
+\draw(6,0) circle (0.02);
+\draw (6,0)node[above]{$y_2$};
+
+\draw[->] (2 - 0.1 , 2 - 0.1)--(1+0.1 ,1+0.1);
+\draw[->] (2 - 0.1 , 0 + 0.1)--(1+0.1 ,1-0.1);
+\draw[->] (-0.5 + 0.1 , 0 + 0.1)--(1-0.1 ,1-0.1);
+
+\draw (1,1)--(1,-1);
+\draw (1,-0.5)node[right]{$R$};
+
+\end{tikzpicture}
+\end{figure}
+\noindent
+作用は局所的だから，これを
+\begin{eqnarray*}
+I=\int_{z\in B(R)}d^4z\mathcal{L}(z)+\int_{z\notin B(R)}d^4z \mathcal{L}(z)
+\end{eqnarray*}
+と書くことができる．\par
+\vskip\baselineskip
+
+ここでは球の内部の場についての経路積分は，球の表面で場が球の外部の場と滑らかにつながるという境界条件で拘束されている．この\uwave{境界条件を除いては}，球の内部の場についての経路積分は球の外の場の振る舞いに全く影響されない．\par
+$\Rightarrow$境界条件，つまり球の表面についての振る舞いが分かれば積分は収束する．したがって球の内部の場についての積分は，\uwave{球の表面での場と場の微分の関数となる}．\par
+また，球の表面は球の中心$x$が分かれば決まる．\par
+$\Rightarrow$積分は\uwave{点$x$での場と，場の微分の関数となる}．\par
+もしこの積分を$x$におけるc数の場の積$\mathcal{O}(x)$の級数として表すと，その係数は座標の差のみの関数$U_{\mathcal{O}}(x_1-x,x_2-x,\cdots)$となる．点$y_1,y_2$等は全て球$B(R)$のはるか外部にあるから，球の外部の作用からこの球を除いても$R\to 0$の極限では何の影響もない．($x_1,x_2,\cdots$が$x$に近づくにつれ$R$もゼロに近付ける．)\par
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw(1,1) circle (2);
+\draw(1,1) circle (0.02);
+\draw (1,1)node[above]{$x$};
+
+\draw(2,2) circle (0.02);
+\draw (2,2)node[above]{$x_1$};
+
+\draw(2,0) circle (0.02);
+\draw (2,0)node[right]{$x_2$};
+
+\draw(-0.5,0) circle (0.02);
+\draw (-0.5,0)node[above]{$x_3$};
+
+\draw(5,2) circle (0.02);
+\draw (5,2)node[above]{$y_1$};
+
+\draw(6,0) circle (0.02);
+\draw (6,0)node[above]{$y_2$};
+
+\draw[->] (2 - 0.1 , 2 - 0.1)--(1+0.1 ,1+0.1);
+\draw[->] (2 - 0.1 , 0 + 0.1)--(1+0.1 ,1-0.1);
+\draw[->] (-0.5 + 0.1 , 0 + 0.1)--(1-0.1 ,1-0.1);
+
+\draw (1,1)--(1,-1);
+\draw (1,-0.5)node[right]{$R$};
+
+\draw[->](7,1)--(9,1);
+\draw (8 ,1)node[above]{$R\to 0$};
+
+\draw (10,1) circle (0.35);
+\draw (10,1) circle (0.02);
+\draw (10,1)node[above]{$x$};
+
+\draw(12,2) circle (0.02);
+\draw (12,2)node[above]{$y_1$};
+
+\draw(13,0) circle (0.02);
+\draw (13,0)node[above]{$y_2$};
+
+\end{tikzpicture}
+\end{figure}
+\noindent
+$R\to 0$の極限で，$x_1,x_2,\cdots$が$x$に近づくとき(20.1.6)は
+\begin{eqnarray*}
+&&\braket{T\left\{A_{1}\left(x_{1}\right), A_{2}\left(x_{2}\right), \cdots, B_{1}\left(y_{1}\right), B_{2}\left(y_{2}\right), \cdots \right\} }_{0} \\
+&=&\int \left[\prod_{\ell, z} d \phi_{\ell}(z)\right] \sum_o U_{o}^{A_1,A_2,\cdots}(x_1-x,x_2-x,\cdots )o(x) b_{1}\left(y_{1}\right) b_{2}\left(y_{2}\right) \cdots \exp (i I[\phi]) \\
+&=&\sum_{\mathcal{O}}U^{A_1,A_2,\cdots}_\mathcal{O}(x_1-x,x_2-x,\cdots)\braket{T\left\{ \mathcal{O}(x),B_{1}\left(y_{1}\right), B_{2}\left(y_{2}\right), \cdots \right\} }_{0} \\
+\end{eqnarray*}
+ここで$\mathcal{O}(x)$は$o(x)$に対応するハイゼンベルグ表示の量子力学的演算子だ．\par
+特に，$y$変数についてフーリエ変換をして適切な係数関数をかけると
+\begin{eqnarray*}
+\bra{\beta} T\left\{A_{1}\left(x_{1}\right), A_{2}\left(x_{2}\right), \cdots \right\}\ket{\alpha} \to \sum_{\mathcal{O}}U^{A_1,A_2,\cdots}_{\mathcal{O}}(x_1-x,x_2-x,\cdots)\bra{\beta}\mathcal{O}(x)\ket{\alpha}
+\end{eqnarray*}
+これは任意の状態について成り立つので，以下の一般的な演算子積展開が成立する．
+\begin{eqnarray*}
+T\left\{A_{1}\left(x_{1}\right), A_{2}\left(x_{2}\right), \cdots \right\} \to \sum_{\mathcal{O}}U^{A_1,A_2,\cdots}_{\mathcal{O}}(x_1-x,x_2-x,\cdots) \mathcal{O}(x)
+\end{eqnarray*}
+
+\newpage
+
+\subsection{運動量の流れ}
+\,OPEの簡単な場合を考える．一つの質量$m$の実スカラー場$\phi(x)$が$-g\phi^4/4!$の相互作用をする理論での，$(n+2)$点ファインマン振幅において，大きな運動量$k$が一本の線から流れ込み，別の線から流れ出し，他の外線の運動量は固定されているときの漸近的振る舞いを考える．\par
+$n$個の粒子の散乱振幅の連結ダイアグラムの和で，外線から$k,p-k$が流入し，$p_1,p_2,\cdots,p_n$が流出し$p=p_1+p_2+\cdots +p_n$となっているものを$\Gamma(k,p_1,\cdots,p_n)$と定義する．ここで便利のために，$\Gamma(k,p_1,\cdots,p_n)$は運動量$k,p-k$の線のプロパゲータを含むが，固定された運動量$p_1,p_2,\cdots,p_n$のプロパゲータは含まないもの，としておく．\par
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.7]
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-3,1)node[above]{$k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-3,-1)node[above]{$p-k$};
+
+\draw[very thick](1,{sqrt(3)})--(4,{sqrt(3)});
+\draw (3,{sqrt(3)})node[below]{$p_1$};
+
+\draw[very thick]({sqrt(3)},1)--(4,1);
+\draw (3,1)node[below]{$p_2$};
+
+\draw(3,0.2) circle (0.02);
+\draw(3,0) circle (0.02);
+\draw(3,-0.2) circle (0.02);
+
+\draw[very thick](1,-{sqrt(3)})--(4,-{sqrt(3)});
+\draw (3,-{sqrt(3)})node[above]{$p_n$};
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{tikzpicture}
+\end{figure}
+
+摂動論の任意の有限次で，$k\to \infty$のときに以下が成立することを示したい．(これがこの節で示したいこと！)
+\begin{eqnarray*}
+\Gamma(k,p_1,\cdots,p_n) \to U_{\phi^2}(k)F_{\phi^2}(p_1,p_2,\cdots,p_n)+O(k^{-5})
+\end{eqnarray*}
+ここで$U_{\phi^2}(k)$は$k^{-4}$の大きさの項の和だ．\par
+$F_{\phi^2}(p_1,\cdots,p_n)$は，$n$本の$\phi$の線と一つの$\phi^2$の挿入があり，これを有限にするために適切なくりこみ定数$Z_{\phi^2}$がかけられた振幅だ．
+$F_{\phi^2}(p_1,\cdots,p_n)$はくりこまれた演算子$(\phi^2)_R(0)=Z_{\phi^2}\phi^2(0)$の行列要素であるから，(20.2.1)は
+\begin{eqnarray*}
+\int d^{4} x e^{-i k x} T\left\{\phi_{R}(x) \phi_{R}(0)\right\}_{C} \rightarrow U_{\phi^{2}}(k)\left(\phi^{2}(0)\right)_{R}
+\end{eqnarray*}
+が$k\to\infty$での主要な項であることを示している．ここで$C$は連結ダイアグラムのみを含めることを意味している．また，展開する演算子はこの節を通じて(20.1.3)において$C=\phi^2$のみとなる．\par
+
+\vskip\baselineskip
+
+ファインマン振幅の漸近的振る舞いを知るには，運動量空間の積分領域の中には外線(運動量が無限となる)と一部の内線の運動量が同じオーダーとなり，他の内線はそうはならない，という領域もあることに留意しなければならない．\par
+ある部分ダイアグラム$\mathcal{S}$の外線が$k$の大きさの運動量を持つ積分領域からの$\Gamma(k,p_1,\cdots,p_n)$への寄与は，漸近的に$k^{D_\mathcal{S}}$となる．ここで$D_{\mathcal{S}}$は12.1節の法則に従って計算した部分ダイアグラム$\mathcal{S}$の次元：
+\begin{eqnarray*}
+D_{\mathcal{S}}=4-E_\phi(s_\phi+1)-4
+\end{eqnarray*}
+である．ここで$E_\phi$は\uwave{部分ダイアグラム$\mathcal{S}$における}外線の数で，最後の$-4$は，$k,p-k$のプロパゲータから来る因子である．スカラー場$\phi$では$s_\phi=0$である．もし$\mathcal{S}$がダイアグラムの残りの部分と$m$本の外線で繋がっているとすると，$D_{\mathcal{S}}=4-(2+m)-4=-2-m$となる．\par
+したがって$\Gamma(k,p_1,\cdots,p_n)$の漸近的振る舞いは，大きな運動量$k$がダイアグラム全体か，または部分ダイアグラムのうち，外線の数$m$が最も少ないものを流れる時の運動量空間の積分で決まってくる！
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.5]
+
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-4,1)node[above]{$k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-4,-1)node[above]{$p-k$};
+
+\begin{scope}
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\path[clip, preaction={draw, thick}] (8,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (6,2) -- (10,2) -- (10,-2) -- (6,-2) -- cycle;
+\end{scope}
+
+\draw[very thick](1,{sqrt(3)})--(7,{sqrt(3)});
+
+\draw[very thick]({sqrt(3)},1)--({8-sqrt(3)},1);
+
+\draw(4,0.2) circle (0.02);
+\draw(4,0) circle (0.02);
+\draw(4,-0.2) circle (0.02);
+\draw (4.2,-0.5)node[below]{$m$本の線};
+
+\draw[very thick](1,-{sqrt(3)})--(7,-{sqrt(3)});
+
+
+\draw[very thick](9,{sqrt(3)})--(12,{sqrt(3)});
+\draw (11,{sqrt(3)})node[above]{$p_1$};
+
+\draw[very thick]({8+sqrt(3)},1)--(12,1);
+\draw (11,1)node[below]{$p_2$};
+
+\draw(11,-0.2) circle (0.02);
+\draw(11,-0.4) circle (0.02);
+\draw(11,-0.6) circle (0.02);
+
+\draw[very thick](9,-{sqrt(3)})--(12,-{sqrt(3)});
+\draw (11,-{sqrt(3)})node[below]{$p_n$};
+
+
+\draw[dashed] (-3,2.5)--(2.35,2.5)--(2.35,-2.5)--(-3,-2.5)--(-3,2.5);
+\draw (0,2.-4.5)node[below]{部分ダイアグラム$\mathcal{S}$};
+
+\end{tikzpicture}
+\end{figure}
+\noindent
+$n=0$のとき，これはダイアグラム全体のみだ．つまり積分の主要な部分は，どの線も$k$の大きさの運動量を持つような積分領域から来る．そのため，これは漸近的に$k^{-2}$の大きさとなる．ここでは連結ダイアグラムのみを考えているので，$n>0$ではこの項は除外される．
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.5]
+
+\begin{scope}
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-3,1)node[above]{$k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-3,-1)node[above]{$-k$};
+
+\draw (0,-2)node[below]{$n=0$};
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\draw [very thick](3,2)--(3,-2);
+
+\begin{scope}
+\draw[very thick] (4,1)--({8-sqrt(3)},1);
+\draw (5,1)node[above]{$k$};
+
+\draw[very thick](4,-1)--({8-sqrt(3)},-1);
+\draw (5,-1)node[above]{$-k$};
+
+\path[clip, preaction={draw, thick}] (8,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (6,2) -- (10,2) -- (10,-2) -- (6,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick](15,{sqrt(3)})--(18,{sqrt(3)});
+
+\draw[very thick]({14+sqrt(3)},1)--(18,1);
+
+\draw(17,0.2) circle (0.02);
+\draw(17,0) circle (0.02);
+\draw(17,-0.2) circle (0.02);
+
+\draw[very thick](15,-{sqrt(3)})--(18,-{sqrt(3)});
+
+\path[clip, preaction={draw, thick}] (14,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (12,2) -- (16,2) -- (16,-2) -- (12,-2) -- cycle;
+\end{scope}
+
+\draw (11,-2)node[below]{このダイアグラムは非連結なので除外される};
+
+\end{tikzpicture}
+\end{figure}
+\noindent
+($n=1$のときは$\phi\to-\phi$の対称性より禁止される．)$n=2$のとき，主要な寄与は全ダイアグラムと，運動量$p-k$と$k$を持つ外線が他の2本の外線と，2本の内線からなる橋で繋がっている部分ダイアグラムとの両方からなる．したがってそれは漸近的に$k^{-4}$の振る舞いをする．
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.5]
+
+\begin{scope}
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-3,1)node[above]{$k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-3.5,-1)node[above]{$p-k$};
+
+\draw[very thick]({sqrt(3)},1)--({6-sqrt(3)},1);
+\draw (3,1)node[above]{$p_1$};
+
+\draw[very thick]({sqrt(3)},-1)--({6-sqrt(3)},-1);
+\draw (3,-1)node[above]{$p_2$};
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\draw [very thick](5,2)--(5,-2);
+\draw (0,-2)node[below]{$n=2$のダイアグラム};
+
+\begin{scope}
+\draw[very thick] (6,1)--({10-sqrt(3)},1);
+\draw (6.5,1)node[above]{$k$};
+
+\draw[very thick](6,-1)--({10-sqrt(3)},-1);
+\draw (6.5,-1)node[above]{$p-k$};
+
+\draw[very thick]({10+sqrt(3)},1)--({16-sqrt(3)},1);
+
+\draw[very thick]({10+sqrt(3)},-1)--({16-sqrt(3)},-1);
+
+\path[clip, preaction={draw, thick}] (10,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (8,2) -- (12,2) -- (12,-2) -- (8,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick]({16+sqrt(3)},1)--({22-sqrt(3)},1);
+\draw (19,1)node[above]{$p_1$};
+
+\draw[very thick]({16+sqrt(3)},-1)--({22-sqrt(3)},-1);
+\draw (19,-1)node[above]{$p_2$};
+
+\path[clip, preaction={draw, thick}] (16,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (14,2) -- (18,2) -- (18,-2) -- (14,-2) -- cycle;
+\end{scope}
+\draw[dashed] (7.5,2.5)--(12.5,2.5)--(12.5,-2.5)--(7.5,-2.5)--(7.5,2.5);
+\draw (10,-3)node[below]{$\mathcal{S}$};
+
+\end{tikzpicture}
+\end{figure}
+\noindent
+$n\geq 4$($n$が奇数のときは$n=1$のときと同様に禁止)のとき，主要な項は運動量$k$と$p-k$を持つ2本の外線が他の$n>2$本の外線と，2本の内線からなる橋で繋がっている部分ダイアグラムのみ(他は$k^{-5}$より大きな次数となり主要でなくなる)から生じ，これも$k^{-4}$の振る舞いをする．
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.5]
+
+\begin{scope}
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-3.5,1)node[above]{$k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-3.5,-1)node[above]{$p-k$};
+
+\draw[very thick]({sqrt(3)},1)--({6-sqrt(3)},1);
+
+\draw[very thick]({sqrt(3)},-1)--({6-sqrt(3)},-1);
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick](7,{sqrt(3)})--(10,{sqrt(3)});
+\draw (9,{sqrt(3)})node[below]{$p_1$};
+
+\draw[very thick]({6+sqrt(3)},1)--(10,1);
+\draw (9,1)node[below]{$p_2$};
+
+\draw(9,0.2) circle (0.02);
+\draw(9,0) circle (0.02);
+\draw(9,-0.2) circle (0.02);
+
+\draw[very thick](7,-{sqrt(3)})--(10,-{sqrt(3)});
+\draw (9,-{sqrt(3)})node[above]{$p_n$};
+
+\path[clip, preaction={draw, thick}] (6,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (4,2) -- (8,2) -- (8,-2) -- (4,-2) -- cycle;
+\end{scope}
+\draw[dashed] (-2.5,2.5)--(3,2.5)--(3,-2.5)--(-2.5,-2.5)--(-2.5,2.5);
+\draw (0,-3)node[below]{$\mathcal{S}$};
+
+\end{tikzpicture}
+\end{figure}
+
+$n=2$と$n\geq 4$のダイアグラムの解析は，一般のダイアグラムがこれらの2粒子からなる橋を複数含むために複雑となる．\par
+まず$n=2$の場合を考える．$I(k,k^{\prime},p)$を($p_1=k^{\prime},p_2=p-k^{\prime}$として)「$\Gamma(k,p_1,p_2)$に寄与し，2粒子既約な，全てのダイアグラムの和」と定義する．2粒子既約とはここでは，「運動量$k$と$p-k$を持つ2本の外線の対と，運動量$k'$と$p-k'$を持つ2本の外線の対が，内線を2本切っても分離されないもの」として定義する．\par
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.5]
+
+\begin{scope}
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-3.5,1)node[above]{$k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-3.5,-1)node[above]{$p-k$};
+
+\draw[very thick]({sqrt(3)},1)--({6-sqrt(3)},1);
+
+\draw[very thick]({sqrt(3)},-1)--({6-sqrt(3)},-1);
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick]({6+sqrt(3)},1)--(10,1);
+\draw (9,1)node[above]{$k''$};
+
+\draw[very thick]({6+sqrt(3)},-1)--(10,-1);
+\draw (9.5,-1)node[above]{$p-k''$};
+
+\path[clip, preaction={draw, thick}] (6,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (4,2) -- (8,2) -- (8,-2) -- (4,-2) -- cycle;
+\end{scope}
+
+\draw[very thick](0,2)--(0,-2);
+\draw[very thick](2.5,1.5)--(3,0.5);
+\draw[very thick](2.5,-0.5)--(3,-1.5);
+
+\draw(3,-2)node[below]{←分離できる→};
+\end{tikzpicture}
+\end{figure}
+\noindent
+これより$\Gamma-I$は2本の内線を切れば$p-k,k$の対と$p-k',k'$の対が分離できるダイアグラムからなり，したがって次のように書かれる．
+\begin{eqnarray*}
+\Gamma(k;k',p-k')-I(k,k',p)=\int d^4k'' I(k,k'',p)\Gamma(k'';k',p-k')
+\end{eqnarray*}
+(20.2.3)の右辺の振る舞いを調べるために，まず核$I(k,k',p)$において$k'$と$p$を固定しておいて$k\to \infty$としたときの漸近的振る舞いを見る．
+$I(k,k',p)$の主な寄与は外線が4本のときの$k^{-4}$の大きさだ．なぜなら，$I(k,k',p)$は2粒子既約であるため，どの内線も$k$程度の大きさの部分ダイアグラムと，そうでない他の部分ダイアグラムとで分解すると，その間の外線は3本以上の線である必要があり，その(どの内線も$k$の大きさで構成された)部分ダイアグラムは外線を5本以上持つことになる．
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.5]
+
+\begin{scope}
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-3.5,1)node[above]{$k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-3.5,-1)node[above]{$p-k$};
+
+\draw[very thick](1,{sqrt(3)})--(5,{sqrt(3)});
+
+\draw[very thick](2,0)--(4,0);
+
+\draw[very thick](1,-{sqrt(3)})--(5,-{sqrt(3)});
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick]({6+sqrt(3)},1)--(10,1);
+\draw (10,1)node[above]{$k''$};
+
+\draw[very thick]({6+sqrt(3)},-1)--(10,-1);
+\draw (10,-1)node[above]{$p-k''$};
+
+\path[clip, preaction={draw, thick}] (6,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (4,2) -- (8,2) -- (8,-2) -- (4,-2) -- cycle;
+\end{scope}
+\draw[very thick](6,2)--(6,-2);
+\draw[very thick](0,2)--(0,-2);
+
+\draw (0,-2)node[below]{内線が$k$程度};
+\draw (6,-2)node[below]{他のダイアグラム};
+\end{tikzpicture}
+\end{figure}
+\noindent
+つまり．$k^{-5}$以上の速さで減少することになる．これにより主要な寄与は$I(k,k',p)$全体が，どの内線も$k$の大きさを持つものであると分かる．これにより
+\begin{eqnarray*}
+I(k,k',p)=k^{-4}I\left(1,\frac{k'}{k},\frac{p}{k}\right)
+\end{eqnarray*}
+を$k'$や$p$で微分すると
+\begin{eqnarray*}
+\frac{\partial I}{\partial k'}&=&k^{-4}\left(\frac{k'}{k}\right)'\frac{\partial}{\partial (k'/k)}I\left(1,\frac{k'}{k},\frac{p}{k}\right) \\
+&=&k^{-5}I_{k'}'\left(1,\frac{k'}{k},\frac{p}{k}\right) \\
+\frac{\partial I}{\partial p}&=&k^{-5}I_{p}'\left(1,\frac{k'}{k},\frac{p}{k}\right)
+\end{eqnarray*}
+となって，$k^{-1}$だけ漸近的振る舞いが落ちる．すなわち$k$が大きいところでは$k',p$を変化させても関数$I(k,k',p)$はほぼ変化せず，これは$k$のみの関数であると見なすことができる．よって
+\begin{eqnarray*}
+I(k,k',p)\to I_{\infty}(k)
+\end{eqnarray*}
+となる．ここで$I_\infty(k)$は$k$のみの関数で$k^{-4}$の大きさだ．\par
+\vskip\baselineskip
+(20.2.3)の右辺で，単に$I(k,k'',p)\to I_\infty(k)$とはできない．なぜなら$k$がどれだけ大きくなろうと，$k''$に関する積分範囲が$-\infty\sim\infty$なので，$k''$が$k$の大きさのところから大きな寄与を受けるからだ．\par
+これに対応するため，数学的帰納法に基づく「あるトリック」使う．
+
+\begin{figure}[H]
+ \centering
+\begin{tikzpicture}
+\draw(0,0) circle(0.03);
+\draw(-0.5,1/3) circle(0.03);
+\draw(-0.5,-1/3) circle(0.03);
+
+\draw (-1.5,1)--(1.5,-1);
+\draw (-1.5,-1)--(1.5,1);
+
+\draw (-1.4,1)node[right]{$p-k$};
+\draw (-1.4,-1)node[right]{$k$};
+\draw (1.5,1)node[right]{$p-k'$};
+\draw (1.5,-1)node[right]{$k'$};
+
+\draw[->] (2,0)--(1,0.4);
+\draw[->] (2,0)--(1,-0.4);
+
+\draw (2,0)node[right]{ここのプロパゲータは$\Gamma$の定義より，含まない};
+\end{tikzpicture}
+\end{figure}
+$\Gamma(k;k',p-k')$の最低次では，2本の裸のプロパゲータがついた一つの頂点で表される．
+\begin{eqnarray*}
+\Gamma(k;k',p-k')_{最低次}&=&-i(2\pi)^4g \frac{-i}{(2\pi)^4}\frac{1}{(k^2+m^2)}\frac{-i}{(2\pi)^4}\frac{1}{((p-k)^2+m^2)} \\
+&=&\frac{ig}{(2\pi)^4(k^2+m^2)((p-k^2)+m^2)}
+\end{eqnarray*}
+これは(20.2.1)の振る舞いをする．
+\begin{eqnarray*}
+\Gamma(k;k',p-k')_{最低次}=k^{-4}\times \frac{ig}{(2\pi)^4(1+m^2/k^2)((p/k -1)^2+m^2/k^2)}
+\end{eqnarray*}
+$n=2$で$g$の次数$=N$まで(20.2.1)が成り立つと仮定する．すなわち，この次数までで$k\to \infty$で漸近的振る舞いが
+\begin{eqnarray*}
+\Gamma(k;k',p-k')\to U_{\phi^2}(k) F_{\phi^2}(k',p-k')+O(k^{-5})
+\end{eqnarray*}
+という形になると仮定する．この振る舞いが$g$の次数$=N+1$でも成り立つことを確かめることができれば，数学的帰納法により(20.2.1)が証明できる！\par
+(20.2.3)を次のように書き換えよう．
+\begin{eqnarray*}
+\underset{N+1次までの展開}{\uwave{\Gamma(k;k',p-k')}}&=&I(k,k',p) +\int d^4k'' \underset{少なくとも1次}{\uwave{I(k,k''p)}}\underset{←これより，高々N次なので(20.2.5)が使える}{\uwave{\left[ \Gamma(k'';k',p-k')-U_{\phi^2}(k'')F_{\phi^2}(k',p-k') \right]}} \\
+&+&F_{\phi^2}(k',p-k')\int d^4k'' I(k,k'',p)U_{\phi^2}(k'')
+\end{eqnarray*}
+$I$は(図20.2を見れば明らかなように)少なくとも$g$について1次なので，2項目の括弧の中は高々$N$次であるから(20.2.5)が適用できる．
+
+\begin{eqnarray*}
+\int_{k''\sim k} \underset{k^{+4}}{\uwave{d^4 k''}} \underset{k^{-4}}{\uwave{I(k,k'',p)}}\underset{k^{-5}}{\uwave{\left[ \Gamma(k'';k'p-k')-U_{\phi^2}(k'')F_{\phi^2}(k',p-k') \right]}}
+\end{eqnarray*}
+(注意！$k$ではなく$k''$の次数で$k''^{-5}$，かつ積分が$k''\sim k$の領域だということ)
+すなわち$k''$が$k$の大きさの積分領域からの寄与は$k^{-5}$のように減少する．よって$k''が\infty$に近い領域での積分は$k''$が有限の領域に比べ無視でき，さらに$k''$が有限のときは(20.2.4)が適用できて，以下の収束する積分が得られる．
+\begin{eqnarray*}
+I_{\infty}(k)\int d^4k' \left[ \Gamma(k'';k',p-k')-U_{\phi^2}(k'')F_{\phi^2}(k',p-k') \right]
+\end{eqnarray*}
+さらに，(20.2.4)を導いた方法を全く同様にして(ただし今回は$k''$は$k$の大きさなので$p$のみを固定して)，この積分の中で$I(k,k',p)$は漸近的に$I(k,k')\equiv I(k,k',0)$で置き換えられる．したがって$k\to\infty$では(20.2.6)は
+\begin{eqnarray*}
+I(k; k', p-k') &&\to F_{\phi^2}(k', p-k') \int d^{4} k'' I (k, k'') U_{\phi^2}\left(k''\right) \\
+&&+I_{\infty}(k)\left\{1+\int d^4 k'' \left[ \Gamma\left(k'', k' , p-k' \right)-U_{\phi^{2}}\left(k'' \right) F_{\phi^{2}}\left(k', p-k'\right)\right]\right\}
+\end{eqnarray*}
+となる．このため$g$について$N+1$次までの$U_{\phi^2}(k),F_{\phi^2}(k',p-k')$を，以下の等式が成り立つとして定義する．
+\begin{eqnarray*}
+U_{\phi^2}(k)&=&CI_{\infty}+\int d^4 k' I(k,k')U_{\phi^2}(k') \\
+F_{\phi^2}(k',p-k')&=&C^{-1}\left\{ 1+\int d^4 k'' [\Gamma(k'';k',p-k')-U_{\phi^2}(k'')F_{\phi^2}(k',p-k')] \right\}
+\end{eqnarray*}
+ここで$C$は任意に選べる．これらの定義より，(20.2.5)($N$次での仮定)から(20.2.7)($N+1$の次数)が導かれる．実際
+\begin{eqnarray*}
+U_{\phi^2}(k)F_{\phi^2}(k',p-k')&=&CI_{\infty}(k)F_{\phi^2}(k',p-k')\\
+&&+\int d^4 k'' I(k,k'')U_{\phi^2}(k'')F_{\phi^2}(k',p-k') \quad (U_{\phi^2}だけ展開)\\
+=I_{\infty}&(k)&\left\{1+\int d^4k'' \left[\Gamma(k'';k',p-k')-U_{\phi^2}(k'')F_{\phi^2}(k',p-k')\right]\right\} \\
+&+&F_{\phi^2}(k',p-k')\int d^4 k'' I(k,k'')U_{\phi^2}(k'') \\
+&=&(20.2.7)
+\end{eqnarray*}
+よって数学的帰納法より証明が完了した！
+
+
+\vskip\baselineskip
+
+
+あるくりこみ点$k'=k(\mu)$と$p=p(\mu)$で$F_{\phi^2}(k',p-k')=1$を満たすように定数$C$を選ぶと便利だ．ここで$k(\mu),p(\mu)$は$\mu$の大きさの基準的な運動量だ．そうすると
+\begin{eqnarray*}
+C=1+\int d^4 k'' \Gamma(k'';k(\mu),p(\mu)-k(\mu))-\int d^4 k''U_{\phi^2}(k'')
+\end{eqnarray*}
+と具体的に$C$を選ぶことができる．
+(20.2.5)を用いると，($F_{\phi^2}=1$なので)$k\to\infty$での(20.2.10)の二つの積分の発散は相殺することが分かる．(20.2.9)はこれにより
+\begin{eqnarray*}
+CF_{\phi^2}(k',p-k')&=&1+\int d^4 k'' \Gamma(k'';k',p-k')-\int d^4 k'' U_{\phi^2}(k'')F_{\phi^2}(k',p-k')\\
+\mathrm{LHS}&=& \left\{ 1+\int d^4 k'' \Gamma(k'';k(\mu),p(\mu)-k(\mu)) \right\}F_{\phi^2}(k',p-k') \\
+&&-\int d^4k''U_{\phi^2}(k'')F_{\phi^2}(k'-,p-k')
+\end{eqnarray*}
+右辺第三項目と左辺第二項目が等しいことが分かるので
+\begin{align*}
+&\left\{ 1+\int d^4 k'' \Gamma(k'';k(\mu),p(\mu)-k(\mu)) \right\}F_{\phi^2}(k',p-k')= 1+\int d^4 k'' \Gamma(k'';k',p-k') \\
+&F_{\phi^2}(k',p-k')=\left[ 1+\int d^4 k'' \Gamma(k'';k(\mu),p(\mu)-k(\mu)) \right]^{-1} \left[1+\int d^4 k'' \Gamma(k'';k',p-k')\right] \\
+&\equiv Z_{\phi^2}\left[ 1+\int d^4 k'' \Gamma(k'';k',p-k') \right]
+\end{align*}
+ここで$Z_{\phi^2}$は複合演算子$\phi^2$のくりこみ定数と解釈すれば，演算子$(\phi^2)_R=Z_{\phi^2}\phi^2$が有限な2粒子行列要素$F_{\phi^2}(k,p-k)$を持ち，$F_{\phi^2}(k,p-k)$は$k=k(\mu),p=p(\mu)$で1になるように定義されたものだと解釈できる．
+
+$U_{\phi^2}(k)$や$F_{\phi^2}(k,p-k)$を(20.2.8)(20.2.11)を用いて計算するのは便利ではない．それよりも$\Gamma(k;k',p-k')$を計算し，(20.2.5)と比較して$U_{\phi^2}(k),F_{\phi^2}(k,p-k)$を読み取る方が便利だ．1ループの次数で一般的な2-2粒子散乱振幅である関数(12.2.26)を用いよう．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[scale=0.5]
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-3,1)node[above]{$p_1=k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-4,-1)node[above]{$p_2=p-k$};
+
+\draw[very thick]({sqrt(3)},1)--({6-sqrt(3)},1);
+\draw (3,1)node[above]{$p'_1=k'$};
+
+\draw[very thick]({sqrt(3)},-1)--({6-sqrt(3)},-1);
+\draw (4,-1)node[above]{$p'_2=p-k'$};
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{tikzpicture}
+\end{figure}
+(12.2.26)の関数$F$に運動量$k$と$p-k$の線のプロパゲータの積をかけると，1ループの次数で
+\begin{align*}
+\Gamma(k;k',p-k')&=\left[\frac{-i}{(2 \pi)^{4}} \frac{1}{p^{2}+m^{2}}\right]\left[\frac{-i}{(2 \pi)^{4}} \frac{1}{(k-p)^{2}+m^{2}}\right]\left[-i(2 \pi)^{4} F\right]\\
+&=\left[\frac{-i}{(2 \pi)^{4}\left(p^{2}+m^{2}\right)}\right]\left[\frac{-i}{(2 \pi)^{4}\left((k-p)^{2}+m^{2}\right)}\right]\left[-i(2 \pi)^{4} g\right] \\
+&\times \left\{1-\frac{g}{32 \pi^{2}} \int_{0}^{1} d x\left\{ \ln \left(\frac{m^{2}+4 x(1-x) \mu^{2} / 3}{m^{2}-sx(1-x)}\right) \right. \right. \\
++& \left.\left. \ln \left(\frac{m^{2}+4x(1-x) \mu^{2} / 3}{m^{2}-tx(1-x)}\right)+\ln \left(\frac{m^{2}+4 x(1-x) \mu^{2} / 3}{m^{2}-u x(1-x)}\right) \right\} + \cdots \right\}
+\end{align*}
+ここで$s,t,u$はマンデルスタム変数
+\begin{eqnarray*}
+s&=&-(p_1+p_2)^2=-p^2 \\
+t&=&-(p_1-p'_1)^2=-(k-k')^2 \\
+u&=&-(p_1-p_2)^=-(p-k-k')^2
+\end{eqnarray*}
+($p_1=k,p_2=p-k,p_1'=k',p_2'=p-k'$であることを用いた)であり，$\mu$はくりこみスケール，そして$g$はくりこまれた結合定数(すなわち(12.2.26)の$g_R$)でファインマン振幅の$s=t=u=-4\mu^2/3$における$F$の値であったことを思い出そう．\par
+$k\to \infty$でマンデルスタム変数は$s=-p^2,t\to-k^2,u\to -k^2$であるから，$\Gamma$は$k\to \infty$で以下の漸近的な振る舞いをする．
+\begin{eqnarray*}
+\Gamma(k;k',p-k')\to \frac{ig}{(2\pi)^4(k^2)^2}\left\{ 1-\frac{g}{32\pi^2} \int^1_0 dx \left\{ \ln \left(\frac{m^{2}+4 x(1-x) \mu^{2} / 3}{m^{2}+p^2x(1-x)}\right) \right. \right. \\
+\left.\left.+2\ln \left(\frac{m^{2}+4 x(1-x) \mu^{2} / 3}{m^{2}+k^2x(1-x)}\right) \right\} +\cdots \right\}
+\end{eqnarray*}
+$g^2$の次数では，これは
+\begin{align*}
+&U_{\phi^2}(k)=\frac{ig}{(2\pi)^4(k^2)^2}\left\{ 1-\frac{g}{16\pi^2}\int^1_0 \ln \left(\frac{m^2+4x(1-x)\mu^2/3}{m^2+k^2x(1-x)}\right)+\cdots \right\} \\
+&F_{\phi^2}(k,p-k)= 1-\frac{g}{32\pi^2}\int^1_0 \ln \left( \frac{m^2+4x(1-x)\mu^2/3}{m^2+p^2x(1-x)} \right)+\cdots
+\end{align*}
+とすると(20.2.5)と一致する．(実際にこれらを掛けた$U_{\phi^2}(k)F_{\phi^2}(k',p-k')$は$\Gamma(k;k',p-k')$と$g^2$の次数までで一致していることが確認できる)
+ここで演算子$\phi^2$のくりこみ点$k(\mu),p(\mu)$を$p^2(\mu)=4\mu^2/3$となるように結合定数$g$のくりこみ点と関連付けていたので，くりこみ点$p^2=4\mu^2/3$のとき，($\ln1=0$なので)実際に$F_{\phi^2}(k,p-k)=1$が確認できる．\par
+3巻の内容をよく覚えていれば気付くけど，これは(18.1.9)
+\begin{eqnarray*}
+F(p)=1-\frac{g}{32\pi^2}\int^1_0 \ln \left( \frac{\Lambda^2}{m^2+p^2x(1-x)} \right) +\cdots
+\end{eqnarray*}
+を，今度はくりこみ点$p^2(\mu)=4\mu^2/3$でくりこんだもの
+\begin{align*}
+&Z_{\phi^2}F(4\mu^2/3)=1 \\
+&Z_{\phi^2}=1+\frac{g}{32\pi^2}\int^1_0 \ln \left( \frac{\Lambda^2}{m^2+4x(1-x)\mu^2/3} \right)\cdots \\
+&F_{R}(p)=Z_{\phi^2}F(p)=1-\frac{g}{32\pi^2}\int^1_0 \ln \left( \frac{m^2+4x(1-x)\mu^2/3}{m^2+p^2x(1-x)} \right)+\cdots
+\end{align*}
+と同じものだ．そして(20.2.11)は同様に(18.1.8)を示していることが分かる．そしてこの$F(p)$が表すダイアグラムは図18.3である．(20.2.11)の第一項目は図18.3の左図であるから1であり，第二項はその右図である．\par
+ここでようやく$F_{\phi^2}$の物理的意味が分かる．すなわち$\phi^2$によってもたらされる運動量が$p$で，持ち出される運動量が$k,p-k$の頂点関数がこの$F_{\phi^2}(k,p-k)$であったのだ．そしてこの$\phi^2$はOPEで展開される(今回は唯一の)演算子である．\par
+この一連の繋がりが補遺の理解に非常に関わってくる．
+
+
+
+\vskip\baselineskip
+
+
+さて，固定された運動量を持つ外線の本数$n$が2より大きい場合を考える．p7～p8にかけての議論より，$k\to \infty$の極限では，$\Gamma(k;p_1,p_2,\cdots,p_n)$の主要なダイアグラムは，運動量$k$と$p-k$を持つ2本の外線が固定された運動量を持つ$n$本の外線から，1対の内線2本を切ることによって分離できるものだと分かる．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[scale=0.5]
+
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw (-3,1)node[above]{$k$};
+
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+\draw (-3,-1)node[above]{$p-k$};
+
+\begin{scope}
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\path[clip, preaction={draw, thick}] (6,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (4,2) -- (8,2) -- (8,-2) -- (4,-2) -- cycle;
+\end{scope}
+
+\draw[very thick]({sqrt(3)},1)--({6-sqrt(3)},1);
+\draw (3,1)node[above]{$k'$};
+
+\draw[very thick]({sqrt(3)},-1)--({6-sqrt(3)},-1);
+\draw (3,-1)node[above]{$p-k'$};
+
+\draw[very thick](7,{sqrt(3)})--(10,{sqrt(3)});
+\draw (9,{sqrt(3)})node[below]{$p_1$};
+
+\draw[very thick]({6+sqrt(3)},1)--(10,1);
+\draw (9,1)node[below]{$p_2$};
+
+\draw(9,0.2) circle (0.02);
+\draw(9,0) circle (0.02);
+\draw(9,-0.2) circle (0.02);
+
+\draw[very thick](7,-{sqrt(3)})--(10,-{sqrt(3)});
+\draw (9,-{sqrt(3)})node[above]{$p_n$};
+
+\draw (0,-2)node[below]{$I$};
+\draw (6,-2)node[below]{$\Gamma$};
+\draw (3,2)node[above]{主要なダイアグラム};
+\end{tikzpicture}
+\end{figure}
+\noindent
+すなわち
+\begin{eqnarray*}
+\Gamma(k;p_1,\cdots,p_n)\to \int d^4k' I(k,k',p)\Gamma(k',p_1,\cdots,p_n)
+\end{eqnarray*}
+以前と同様，右辺において核$I(k,k',p)$の$k\to\infty$における漸近的極限を単純には用いることができない．これは$k'$の積分領域が$k$の大きさのところで大きな寄与を受けるからだ．これは(20.2.17)を以下のように書き換えることで対処できる．
+\begin{eqnarray*}
+\Gamma(k;p_1,\cdots,p_n)\to&& \int d^4 k' I(k,k',p)\left[  \Gamma(k';p_1,\cdots,p_n)-U_{\phi^2}(k')F_{\phi^2}(p_1,\cdots,p_n)  \right] \\
+&&+F_{\phi^2}(p_1,\cdots,p_n)\int d^4 k' I(k,k',p)U_{\phi^2}(k')
+\end{eqnarray*}
+前と同様，ある次数$N$までで
+\begin{eqnarray*}
+\Gamma(k,p_1,\cdots p_n)\to U_{\phi^2}(k)F_{\phi^2}(p_1,\cdots,p_n)+O(k^{-5})
+\end{eqnarray*}
+が成り立つとする．まず第一項目については$I_\infty(k')$が少なくとも1次なので括弧の中に仮定(20.2.19)が適用できる．すると括弧の中が$k^{-5}$の大きさなので$k'$が$k$の大きさのところからの寄与は$k\to \infty$で小さくなり，したがって$k'$積分の領域は有限のところから寄与があるが，このときは(20.2.4)の極限が使える．第二項目については，$n=2$のときに定義した(20.2.8)を使う．これらにより
+\begin{eqnarray*}
+\Gamma(k;p_1,\cdots,p_n)&\to&I_{\infty}(k)\int d^4 k'\left[ \Gamma(k',p_1,\cdots,p_n)- U_{\phi^2}(k')F_{\phi^2}(p_1,\cdots,p_n) \right] \\
+&&+F_{\phi^2}(p_1,\cdots,p_n)\left[U_{\phi^2}(k)-CI_{\infty}(k)  \right] \\
+&&=U_{\phi^2}(k)F_{\phi^2}(p_1,\cdots,p_n) \\
+&&+I_{\infty}(k)\left\{ \int d^4 k'\left[ \Gamma(k',p_1,\cdots,p_n)- U_{\phi^2}(k')F_{\phi^2}(p_1,\cdots,p_n) \right] \right. \\
+&&\biggl. -CF_{\phi^2}(p_1,\cdots,p_n) \biggr\}
+\end{eqnarray*}
+これは
+\begin{eqnarray*}
+CF_{\phi^2}(p_1,\cdots,p_n)=\int d^4 k'\left[ \Gamma(k',p_1,\cdots,p_n)- U_{\phi^2}(k')F_{\phi^2}(p_1,\cdots,p_n) \right] \quad (*)
+\end{eqnarray*}
+を仮定すれば$N+1$の次数で(20.2.19)と一致することが確認できる！\par
+最後の式$(*)$については，(20.2.10)(20.2.12)を使って(今回の(20.2.10)はくりこみ点$p_i(\mu)$で$F_{\phi^2}(p_1(\mu),p_2(\mu),\cdots,p_n(\mu))=1$となるようにして)
+\begin{align*}
+&\mathrm{LHS}=\left[1+\int d^4 k' \Gamma(k',p_1(\mu),\cdots,p_n(\mu))-\int d^4 k' U_{\phi^2}(k')\right]F_{\phi^2}(p_1,\cdots,p_n) \\
+&\mathrm{RHS}=\int d^4k'\Gamma(k';p_1,\cdots,p_n)-\int d^4k'U_{\phi^2}(k')F_{\phi^2}(p_1,\cdots,p_n) \\
+&\Rightarrow F_{\phi^2}(p_1,\cdots,p_n)=\left[ 1+ \int d^4k''\Gamma(k'';p_1(\mu),\cdots,p_n(\mu)) \right]^{-1}  \int  d^4 k'\Gamma(k';p_1,\cdots,p_n) \\
+&\qquad\qquad\qquad\qquad =Z_{\phi^2}\int  d^4 k'\Gamma(k';p_1,\cdots,p_n)
+\end{align*}
+が導かれる．これは，$F_{\phi^2}(p_1,\cdots,p_n)$はくりこまれた演算子$(\phi^2)_R\equiv Z_{\phi^2}\phi^2$の行列要素であり，(20.2.1)は演算子積の表式(20.2.2)に対応することを意味している，と解釈できる．特に，$n=2$のときと$n\geq 4$のときの証明で用いた(20.2.8)は共通している，すなわちどちらの場合の$U_{\phi^2}(k)$も同じ関数方程式を満たしている．$U_{\phi^2}(k)$はもちろん$p_1\sim p_n$に依らないし$F_{\phi^2}(p_1,\cdots,p_n)$が満たす関数方程式の形に依らないので，$n$や$p_1\sim p_n$がどんな値を取ろうとも，$U_{\phi^2}(k)$は同じ係数関数だと分かる！これが証明したかったことだ！
+
+\newpage
+
+\subsection*{補遺}
+次の節に進む前に補遺を見ておいた方が良いので，それを先に書いておく．\par
+任意の2本以上の外線の運動量が大きい振幅の漸近的振る舞いを，任意個数の場の因子と微分を含み次元がある限界$N$以下の演算子を取り入れることで考察する．
+\vskip\baselineskip
+文字$\ell,\ell'$等は，ファインマンダイアグラムか部分ダイアグラムに入るか出ていく特定の種類の外線$i$の集合を意味する．\par
+文字$k,k'$等はそのような線の4元運動量の集合で，その和がある固定された値$p$に等しい，という条件を満たすものを意味する．(例えば20.2節ならば，$k_1+k_2=p$で$k_1=k,k_2=p-k$，$p_1+p_2+\cdots +p_n=p$だった．)\par
+振幅$\Gamma_{\ell\ell'}(k,k',p)$は運動量$k$を持ち入射する線の集合が$\ell$で，運動量$k'$を持ち出ていく線の集合が$\ell '$の，全てのダイアグラムの和だ．これには集合$\ell$の裸のプロパゲータを含むが$\ell'$については含まない，と定義する．
+
+\vskip\baselineskip
+12.1節p279で示されているように，「結合定数も全て含めた運動量積分の次数は
+\begin{eqnarray*}
+4-\sum_f E_f (1+s_f) \quad (E_fは種類fの粒子の外線の数)
+\end{eqnarray*}
+となる．」だから，部分ダイアグラムの次元$d(\ell,\ell'')$は
+\begin{eqnarray*}
+d(\ell,\ell'')=4-\sum_{i\in \ell,\ell''}(1+s_i)-\sum_{i\in \ell}(2-2s_i)
+\end{eqnarray*}
+最後の項は，集合$\ell$の線のプロパゲータから生じる．ここで$s_i$は種類$i$の線のスピンだ．スカラーと\uwave{ゲージ・ボゾン}では$s_i=0$，スピン1/2では$s_i=1/2$だ．12.1節でも述べているように，ゲージボゾン(例えば光子)はスピン1を持つが$s_i=0$として扱うことに注意すること．\par
+上を導いたのにあたって，$\sum_i(1+s_i)$と$\sum_f E_f(1+s_f)$は同じ意味だということを一応明らかに述べておく．例えば，スピンゼロの線が5本，スピン1/2の線が3本の集合$\ell=\{\ell_i|\ell_1\sim\ell_5はスピンゼロの線，\ell_6\sim\ell_8はスピン1/2の線\}$とすれば
+\begin{eqnarray*}
+\sum_f E_f(1+s_f)&=&\underset{スピンゼロについて}{5(1+0)}+\underset{スピン1/2について}{3(1+(1/2))} \\
+\sum_i (1+s_i)&=&\underset{\ell_1について}{(1+0)}+\underset{\ell_2について}{(1+0)}+\cdots+\underset{\ell_5について}{(1+0)}\\
+&&+\underset{\ell_6について}{(1+(1/2))}+\cdots \underset{\ell_8について}{(1+(1/2))} \\
+&=& 5(1+0)+3(1+(1/2))=\sum_f E_f(1+s_f)
+\end{eqnarray*}
+が分かる．一般にこの二つは等しい．まぁ少しイメージしてみれば当たり前なんだけど…
+\vskip\baselineskip
+(20.A.1)を
+\begin{eqnarray*}
+d(\ell,\ell')&=&4-\sum_{i\in\ell,\ell''}(1+s_i)-\sum_{i\in\ell}(2-2s_i) \\
+&=& 4-\sum_{i\in \ell}(3-s_i)-\sum_{i\in\ell''}(1+s_i) \\
+&=& 4+\sum_{i\in\ell}(1+s_i)-4\sum_{\i\in\ell}1-\sum_{i\in\ell''}(1+s_i) \\
+&=& 4-4n(\ell)-N(\ell')+N(\ell)
+\end{eqnarray*}
+とすると便利らしい．ここで
+\begin{eqnarray*}
+n(\ell) \equiv \sum_{i\in \ell}1,\quad N(\ell) \equiv \sum_{i\in\ell}(1+s_i)
+\end{eqnarray*}
+
+これらの部分ダイアグラムに伴う漸近的振る舞いを勘定に入れて，$k',p$を固定して$k\to\infty$(各入射線の4元運動量が一斉に無限大にいく)とすると，$\Gamma_{\ell\ell'}(k,k',p)$の摂動論の各次数で
+\begin{eqnarray*}
+\Gamma_{\ell\ell'}(k,k',p)\to \sum^{(N)}_{\mathcal{O}} U^{\ell}_{\mathcal{O}}(k)F_{\mathcal{O},\ell'}(k',p)+o(k^{4-4n(\ell)+N(\ell)-N})
+\end{eqnarray*}
+という漸近形をしていることを示したい．ここで和$\sum_{\mathcal{O}}^{(N)}$は次元が$N(\mathcal{O})(\leq N)$の演算子$\mathcal{O}$についてとる．関数$U_{\mathcal{O}}^{\ell}(k)$は$k^{4+N(\ell)-N(\mathcal{O})}$の大きさである．$o(k^A)$は$k^A$より(少なくとも$1/k$の因子一つ分は，例えば20.2節においては$k^{-4}$に対して$k^{-5}$がこの項に属していた)速くゼロになる項を意味する．
+
+\vskip\baselineskip
+
+($N$以下の次元の)演算子の寄与を分離するために「$N$既約」振幅$I^{N}_{\ell\ell'}(k,k',p)$を「$N(\ell'')\leq N$の内線のどんな集合$\ell''$を切っても，集合$\ell$に属する線は集合$\ell'$の線から分離されない$\Gamma_{\ell\ell'}(k,k',p)$の全てのダイアグラムの和」と定義する(20.2節の「2粒子既約」の定義と比較すると分かりやすい)．\par
+差$\Gamma-I^N$は，定義中の操作によって分離できる全てのダイアグラムから構成されることに留意すれば，
+\begin{eqnarray*}
+\Gamma_{\ell\ell'}(k,k',p)-I^N_{\ell\ell'}(k,k',p)=\sum^{(N)}_{\ell''}\int dk'' I_{\ell\ell'}^N(k,k'',p)\Gamma_{\ell''\ell'}(k'',k',p)
+\end{eqnarray*}
+と書ける．
+
+\begin{tikzpicture}[scale=0.4]
+
+\begin{scope}
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw[very thick] (-4,0)--(-2,0);
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+
+\draw (-3,-2)node{$\ell$};
+\draw (9,-2)node{$\ell'$};
+
+\draw[very thick](2,0)--(4,0);
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick]({6+sqrt(3)},1)--(10,1);
+\draw[very thick] (8,0)--(10,0);
+\draw[very thick]({6+sqrt(3)},-1)--(10,-1);
+
+\path[clip, preaction={draw, thick}] (6,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (4,2) -- (8,2) -- (8,-2) -- (4,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick](0,2)--(0,-2);
+\draw (11,0)node{$+$};
+\draw[very thick](16,2)--(16,-2);
+
+\draw[very thick] (12,1)--({16-sqrt(3)},1);
+\draw[very thick] (12,0)--(14,0);
+\draw[very thick](12,-1)--({16-sqrt(3)},-1);
+
+\draw (-3,-2)node{$\ell$};
+\draw (9,-2)node{$\ell'$};
+
+\draw[very thick]({16+sqrt(3)},1)--({22-sqrt(3)},1);
+\draw[very thick]({16+sqrt(3)},-1)--({22-sqrt(3)},-1);
+
+\path[clip, preaction={draw, thick}] (16,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (14,2) -- (18,2) -- (18,-2) -- (14,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick]({22+sqrt(3)},1)--(26,1);
+\draw[very thick] (24,0)--(26,0);
+\draw[very thick]({22+sqrt(3)},-1)--(26,-1);
+
+\path[clip, preaction={draw, thick}] (22,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (20,2) -- (24,2) -- (24,-2) -- (20,-2) -- cycle;
+\end{scope}
+
+\draw (13,-2)node{$\ell$};
+\draw (25,-2)node{$\ell'$};
+
+\draw (27,0)node{$+$};
+\draw (29,0)node{$\cdots$};
+
+\draw (-3,-6)node{$+$};
+
+
+\begin{scope}
+\draw[very thick] (-2,-5)--({2-sqrt(3)},-5);
+\draw[very thick] (-2,-6)--(0,-6);
+\draw[very thick](-2,-7)--({2-sqrt(3)},-7);
+\draw[very thick](2,-4)--(2,-8);
+
+\draw (-1,-8)node{$\ell$};
+\draw (11,-8)node{$\ell'$};
+
+\draw[very thick](3,{-6+sqrt(3)})--(7,{-6+sqrt(3)});
+\draw[very thick]({2+sqrt(3)},-5)--({8-sqrt(3)},-5);
+\draw(5,0.2-7) circle (0.02);
+\draw(5,-7) circle (0.02);
+\draw(5,-0.2-7) circle (0.02);
+\draw[very thick](3,{-6-sqrt(3)})--(7,{-6-sqrt(3)});
+
+\path[clip, preaction={draw, thick}] (2,-6) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (0,-4) -- (4,-4) -- (4,-8) -- (0,-8) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick]({8+sqrt(3)},-5)--(12,-5);
+\draw[very thick] (10,-6)--(12,-6);
+\draw[very thick]({8+sqrt(3)},-7)--(12,-7);
+
+\path[clip, preaction={draw, thick}] (8,-6) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (6,-4) -- (10,-4) -- (10,-8) -- (6,-8) -- cycle;
+\end{scope}
+
+\draw (20,-6)node{(内線の集合は$N$を超えない次元)};
+
+\end{tikzpicture}
+
+\vskip\baselineskip
+
+\begin{tikzpicture}[scale=0.4]
+
+\draw (-4,0)node{$=\sum^{(N)}_{\ell''}$};
+
+\begin{scope}
+\draw[very thick] (-2,1)--({2-sqrt(3)},1);
+\draw[very thick] (-2,0)--(0,0);
+\draw[very thick](-2,-1)--({2-sqrt(3)},-1);
+
+\draw (-1,-2)node{$\ell$};
+\draw (11,-2)node{$\ell'$};
+\draw (5,-3)node{$\ell''$};
+
+\draw[very thick](3,{sqrt(3)})--(7,{sqrt(3)});
+\draw[very thick]({2+sqrt(3)},1)--({8-sqrt(3)},1);
+\draw(5,0.2-1) circle (0.02);
+\draw(5,0-1) circle (0.02);
+\draw(5,-0.2-1) circle (0.02);
+\draw[very thick](3,{-sqrt(3)})--(7,{-sqrt(3)});
+
+\draw[very thick](2,2)--(2,-2);
+
+\path[clip, preaction={draw, thick}] (2,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (0,2) -- (4,2) -- (4,-2) -- (0,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick]({8+sqrt(3)},1)--(12,1);
+\draw[very thick] (10,0)--(12,0);
+\draw[very thick]({8+sqrt(3)},-1)--(12,-1);
+
+\path[clip, preaction={draw, thick}] (8,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (6,2) -- (10,2) -- (10,-2) -- (6,-2) -- cycle;
+\end{scope}
+
+\end{tikzpicture}
+
+\noindent
+ここで$\sum^{(N)}_{\ell''}$は$N$以下の次元$N(\ell'')$を持つ粒子線$\ell''$についての和，$\int dk''$は集合$\ell''$の4元運動量の成分について，その和を$p$と拘束した積分．\par
+
+核$I^N_{\ell\ell''}(k,k'',p)$の漸近的振る舞いは，$\Gamma_{\ell\ell''}(k,k'',p)$の漸近的振る舞いよりはるかに簡単(らしい)．$k'',p$を固定して$k\to\infty$としたとき，$I^N_{\ell\ell''}(k,k'',p)$には「どの内線も$k$の大きさの運動量を持っている」積分領域から主要な寄与を受ける．なぜなら，$I^N$は$N$粒子既約なダイアグラムであるから，部分領域だけが大きな運動量を担っていて他の部分はそうでない部分である項は，ダイアグラムの他の部分と(橋$\ell'''$の次元$N(\ell''')$が$N$より高い)$\ell'''$によって結合されていなければならない．(20.A.5)の和より$N(\ell'')\leq N$であったから，$N(\ell''')>N \geq N(\ell'')$が成り立っている．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[scale=0.5]
+\begin{scope}
+\draw[very thick] (-4,1)--(-{sqrt(3)},1);
+\draw[very thick] (-4,0)--(-2,0);
+\draw[very thick](-4,-1)--(-{sqrt(3)},-1);
+
+\draw (-3,-2)node{$\ell$};
+\draw (3,-2)node{$\ell''$};
+
+\draw[very thick]({sqrt(3)},1)--(4,1);
+\draw[very thick](2,0)--(4,0);
+\draw[very thick]({sqrt(3)},-1)--(4,-1);
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\draw[very thick](0,2)--(0,-2);
+\draw (5,0)node{$=$};
+
+
+\begin{scope}
+\draw[very thick] (6,1)--({10-sqrt(3)},1);
+\draw[very thick] (6,0)--(8,0);
+\draw[very thick](6,-1)--({10-sqrt(3)},-1);
+
+\draw (-3,-2)node{$\ell$};
+\draw (3,-2)node{$\ell''$};
+
+\draw[very thick]({sqrt(3)},1)--(4,1);
+\draw[very thick](2,0)--(4,0);
+\draw[very thick]({sqrt(3)},-1)--(4,-1);
+
+\draw[very thick](11,{sqrt(3)})--(15,{sqrt(3)});
+\draw[very thick]({10+sqrt(3)},1)--({16-sqrt(3)},1);
+\draw(13,0.2-1) circle (0.02);
+\draw(13,0-1) circle (0.02);
+\draw(13,-0.2-1) circle (0.02);
+\draw[very thick](11,{-sqrt(3)})--(15,{-sqrt(3)});
+
+\path[clip, preaction={draw, thick}] (10,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (8,2) -- (12,2) -- (12,-2) -- (8,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+
+\path[clip, preaction={draw, thick}] (16,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (14,2) -- (18,2) -- (18,-2) -- (14,-2) -- cycle;
+\end{scope}
+
+\draw[very thick]({16+sqrt(3)},1)--(20,1);
+\draw[very thick](18,0)--(20,0);
+\draw[very thick]({16+sqrt(3)},-1)--(20,-1);
+
+\draw[very thick](10,2)--(10,-2);
+\draw[very thick](16,2)--(16,-2);
+
+\draw (10,-2)node[below]{内線$k$程度};
+\draw (16,-2)node[below]{それ以外};
+\draw (7,-2)node{$\ell$};
+\draw (19,-2)node{$\ell''$};
+\draw (13,-2.5)node{$\ell'''$};
+\draw (13,2.5)node{$N(\ell''')>N$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+この(部分ダイアグラムのさらに)部分ダイアグラム(20.A.2)より，
+\begin{eqnarray*}
+k^{4-4n(\ell)-N(\ell''')+N(\ell)}&=&k^{4-4n(\ell)-N(\ell'')+N(\ell)}k^{N(\ell'')-N(\ell''')} \\
+&=& k^{d(\ell,\ell'')}k^{N(\ell'')-N(\ell''')} \leq k^{d(\ell,\ell'')}k^{N(\ell'')-(N+1)} \quad \because N(\ell''')> N
+\end{eqnarray*}
+となって，全ての内線が$k$程度の大きさを持つ項に比べて最低$k^{N(\ell'')-N-1}$の因子分は小さくなる．よってこれは主要な項でなくなるため，主要な項は「内線が全て$k$の大きさを持つダイアグラム」で，$k^{d(\ell,\ell'')}$の大きさのものだと分かる．\par
+よって，$I^N_{\ell\ell''}(k,k'',p)$を$k'',p$で微分すると
+\begin{eqnarray*}
+\frac{\partial}{\partial k''}I^N_{\ell\ell''}(k,k'',p)&=&\frac{\partial}{\partial k''}\left\{k^{d(\ell,\ell'')}I^N_{\ell\ell''}\left(1,\frac{k''}{k},\frac{p}{k}\right)\right\} \\
+&=&k^{d(\ell,\ell'')}\left(\frac{k''}{k}\right)' \frac{\partial }{\partial (k''/k)}I_{\ell\ell''}^N\left(1,\frac{k''}{k},\frac{p}{k}\right) \\
+&=&k^{d(\ell,\ell'')-1}I_{\ell\ell'',k''}^N\left(1,\frac{k''}{k},\frac{p}{k}\right) \\
+\frac{\partial}{\partial k''}I^N_{\ell\ell''}(k,k'',p)&=&k^{d(\ell,\ell'')-1}I_{\ell\ell'',p}^N\left(1,\frac{k''}{k},\frac{p}{k}\right)
+\end{eqnarray*}
+となって漸近的振る舞いは$k^{d(\ell,\ell'')-1}$に落ちる．しかし$d$回微分するときは，その漸近的振る舞いは\uwave{$d\leq N-N(\ell'')+1$の場合のみ}$k^{d(\ell,\ell'')-d}$に落ちる(20.2節の場合では$N=2,N(\ell'')=2$だったので幸運にも特に考えず微分して$k^{-5}$に下げることができた)．なぜなら，それより高次の微分は，上で述べたような一部の部分ダイアグラムのみが$k$程度の運動量を持つダイアグラムにおいて，積の微分より
+\begin{align*}
+&\left[\frac{\partial}{\partial k''(\mathrm{or}\, p)}\right]^dI^N_{\ell\ell''}(k,k'',p)=\left[ \frac{\partial}{\partial k''(\mathrm{or}\, p)}\right]^d \left\{ \int dk''' \underset{内線がk程度}{\uwave{I^N_{\ell\ell'''}(k,k''',p)}} \, \underset{それ以外}{\uwave{I^N_{\ell'''\ell''}(k''',k'',p)}} \right\} \\
+&=\int dk'''I^N_{\ell\ell'''}(k,k''',p) \left\{\left[ \frac{\partial}{\partial k''(\mathrm{or}\, p)}\right]^d I^N_{\ell'''\ell''}(k''',k'',p)\right\} +(積の微分の他の項)
+\end{align*}
+となって，この最初の項は全体として
+\begin{eqnarray*}
+k^{4-4n(\ell)-N(\ell''')-N(\ell)}&=&k^{d(\ell,\ell'')+N(\ell'')-N(\ell''')}\\
+&\leq& k^{d(\ell,\ell'')+N(\ell'')-N-1} \quad \because N(\ell''')>N
+\end{eqnarray*}
+の振る舞いをするからだ．もし$d> -N(\ell'')+N+1$を満たす場合はこの項は，主要なダイアグラムを$d$回微分したもの($k^{d(\ell,\ell'')-d}$の大きさ)よりも，大きな寄与があるかもしれない．\par
+したがって，場の微分を含む演算子の寄与を考慮に入れるためには(？)，$I^N$の漸近的振る舞いを以下の通りに書く．
+\begin{eqnarray*}
+I^N_{\ell\ell''}(k,k'',p)=\sum_{\nu:d_\nu \leq N-N(\ell'')}I^N_{\ell\ell''\nu}(k)P_{\ell''\nu}(\ell'',p)+o(k^{d(\ell,\ell'')-N+N(\ell'')})
+\end{eqnarray*}
+ここで$P_{\ell''\nu}(k'',p)$は$n(\ell'')$個の運動量$k'',p$((20.A.5)の展開の間の外線の数一本一本に対応した運動量は$n(\ell'')$個ある)の$d_\nu$次の斉次多項式の完全系．そして$I^N_{\ell\ell''\nu}(k)$は$k$のみの関数で$k\to\infty$で$k^{d(\ell,\ell'')-d_\nu}$の大きさだ．一部の内線だけが$k$の大きさの部分ダイアグラムの寄与は(次数が最低でも$k^{d(\ell,\ell'')+N(\ell'')-N-1}$だったから)，$o(k^{d(\ell,\ell'')-N+N(\ell'')})$の項にまとめられていると分かる．\par
+(20.2節においては，$N=N(\ell'')=2$だったので和は$d_\nu=0$のみで，$I^N_\nu$は$k^{d(\ell,\ell'')}=k^{-4}$の大きさを持つ$I_{\infty}(k)$で，$P_\nu$は$k'',p$についてゼロ次の多項式となって存在しなかったのだと分かる．)\par
+この展開は線形代数でいう基底で展開したようなもので，実際$P_\nu$は完全系であるから内積はゼロであるので基底の役割をしていることが分かる．またこの$I_{\ell\ell''}^N$を$k'',p$で微分すると，第一項目において$d_\nu=0$の項は$k'',p$に依存しないのでゼロとなり，また$k'',p$について$d_\nu$次の$P_\nu$の項は斉次多項式なので$d_\nu-1$次となるが，その係数$I^N_\nu$は$k\to\infty$で$1/k\times k^{d(\ell,\\ell'')-(d_\nu+1)}$の大きさであるから，実際に全体として$k^{-1}$だけ漸近的振る舞いが落ちていることが分かる．
+
+\vskip\baselineskip
+
+20.2節と同様に，(20.A.5)において(20.A.6)をすぐには適用することはできない．これは$k$をどれだけ大きくとっても，$k''$積分の領域には$k''$が$k$の大きさの領域が存在し，それが大きな寄与をするからだ．(20.A.6)は$k'',p$がどちらも$k$に対して有限の大きさでなければならない．これに対処するためには，やはり以前と同じく数学的帰納法を用いる．つまり，まず(20.A.4)が摂動論のある次数まで成立することを仮定して，それを(20.A.5)の右辺に使って$\Gamma$の摂動論の次の次数での漸近的振る舞いを計算し(20.A.4)を導けば証明できる．\par
+(20.A.5)を以下のように書き換える．
+\begin{align*}
+&\Gamma_{\ell\ell'}(k,k',p)=I^N_{\ell\ell'}(k,k',p) \\
+&+\sum_{\ell''}^{(N)}\int dk'' I^N_{\ell\ell'}(k,k'',p)\left[\Gamma_{\ell''\ell'}(k'',k',p)-\sum^{(N)}_{\mathcal{O}} U^{\ell''}_{\mathcal{O}}(k'')F_{\mathcal{O},\ell'}(k',p) \right] \\
+&+\sum^{(N)}_{\mathcal{O}}F_{\mathcal{O},\ell'}(k',p) \sum_{\ell'':N(\ell')<N} \int dk'' I^N_{\ell\ell'}(k,k'',p)U_{\mathcal{O}}^{\ell''}(k'')
+\end{align*}
+(第三項目の$\sum_{\ell''}$は表記が違うだけで第二項目と同じ意味)(20.A.4)によると，(20.A.7)の右辺第二項目の括弧の中の量は$k''\to\infty$において$(k'')^{4-4n(\ell'')+N(\ell'')-N}$\uwave{より}速く減少するから，この因子と$d_\nu\leq N-N(\ell'')$の次数の多項式$P_{\ell''\nu}$との積は$(k'')^{4-4n(\ell'')}$より速く減少する．\par
+($0 \leq N-N(\ell'')$であるから，$d_\nu=0$の多項式との積は$(k'')^{4-4n(\ell'')+N(\ell'')-N}$より速く減少し，それは$(k'')^{4-4n(\ell'')}$より速く減少する．$d_\nu=N-N(\ell'')$の多項式との積でも$(k'')^{4-4n(\ell'')}$より速く減少するので，成り立つ．)\par
+運動量$k''$は$n(\ell'')$個存在あるが，その和が$p$だという条件で拘束されているので独立な運動量の数は$n(\ell'')-1$個．一つの運動量には4つの成分が存在するので独立成分の数は$4(n(\ell'')-1))$個である．よって積分は$4(n(\ell'')-1)$重積分となる．被積分関数は$k^{-4(n(\ell'')-1)}$より小さいから，$k''$が大きい領域での積分は速く減少し，したがって有限領域のみが寄与する．このとき(20.A.6)を適用することができて
+\begin{eqnarray*}
+\Gamma_{\ell\ell'}(k,k',p)&\to& \sum_{\nu: d_\nu +N(\ell')\leq N} I^N_{\ell\ell'\nu}(k)P_{\ell'\nu}(k',p) \\
+&&+\sum^{(N)}_{\ell''}\sum_{\nu : d_\nu+N(\ell'')\leq N} I^N_{\ell\ell''\nu}(k)\int dk'' P_{\ell''\nu}(k'',p) \\
+&&\quad \times \left[ \Gamma_{\ell''\ell'}(k'',k',p)-\sum^{(N)}_{\mathcal{O}}U^{\ell''}_{\mathcal{O}}(k'')F_{\mathcal{O},\ell'}(k',p) \right] \\
+&&+\sum^{(N)}_{\mathcal{O}}F_{\mathcal{O},\ell'}(k',p) \sum_{\ell'':N(\ell')<N} \int dk'' I^N_{\ell\ell'}(k,k'',p)U_{\mathcal{O}}^{\ell''}(k'')
+\end{eqnarray*}
+となる．ここで補正項は書かれている項より$1/k$の因子以上小さい．第一項目は$N(\ell')\leq N$の場合のみに存在する．実際，20.2節において$n\geq 4$のときの(20.2.17)等では第一項目に相当するものは存在しなかった．\par
+さて，$d_\nu+N(\ell)\leq N$となっている$\ell$と$\nu$のそれぞれの値について，$\ell$の線に対応する場の因子，と$d_\nu$個の微分，を持つ演算子$\mathcal{O}$(次元は$N(\mathcal{O})=d_\nu +N(\ell) \leq N$)がある．$F_{\phi^2}$の物理的意味を検討したときと同じ議論を用いると，摂動論のゼロ次では演算子$\mathcal{O}$が入射運動量$p$を持ち，外線$\ell$が流出運動量$k$を持つ頂点関数，が多項式$P_{\ell\nu}(k,p)$となっている．このときの(発散するであろう)頂点関数は
+\begin{eqnarray*}
+F^B_{\mathcal{O},\ell}(k,p)=P_{\ell_{\mathcal{O}}\nu_{\mathcal{O}}}(k,p)\delta_{\ell_{\mathcal{O}},\ell}+ \int dk' P_{\ell_{\mathcal{O}}\nu_{\mathcal{O}}}(k',p)\Gamma_{\ell_{\mathcal{O}}\ell}(k',k,p)
+\end{eqnarray*}
+したがってくりこまれた演算子$\mathcal{O}_R=\sum_{\mathcal{O}'}Z_{\mathcal{O,O'}}\mathcal{O}'$の対応する完全な頂点関数は
+\begin{eqnarray*}
+F_{\mathcal{O},\ell}(k,p)&=&\sum_{\mathcal{O}'}Z_{\mathcal{OO'}}\biggl\{ P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k,p)\delta_{\ell_{\mathcal{O'}},\ell}\biggr. \\
+&&\qquad\qquad \biggl. + \int dk' P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k',p)\Gamma_{\ell_{\mathcal{O'}}\ell}(k',k,p) \biggr\}
+\end{eqnarray*}
+となる．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[scale=0.4]
+
+\begin{scope}
+\draw[very thick](-4,0)--(-2,0);
+\draw (-3,0)node[below]{$\mathcal{O}(p)$};
+
+\draw[very thick](2,0)--(8,0);
+\draw(3.5,0)node[below]{$\ell_{\mathcal{O}}(k)$};
+
+\draw(7,0)node[below]{$\ell(k)$};
+
+\draw[thick](5,0.5)--(6,-0.5);
+\draw[thick](5,-0.5)--(6,0.5);
+
+\path[clip, preaction={draw, thick}] (0,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+\end{scope}
+
+\draw (9,0)node{$+$};
+\draw (0,-2)node[below]{$P$};
+
+\begin{scope}
+\draw[very thick](10,0)--(12,0);
+\draw (11,0)node[below]{$\mathcal{O}(p)$};
+
+\draw[very thick](16,0)--(20,0);
+\draw (18,0)node[below]{$\ell_{\mathcal{O}}(k')$};
+
+\draw (14,-2)node[below]{$P$};
+\draw (22,-2)node[below]{$\Gamma$};
+
+\path[clip, preaction={draw, thick}] (14,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (12,2) -- (16,2) -- (16,-2) -- (12,-2) -- cycle;
+\end{scope}
+
+\begin{scope}
+\draw[very thick](24,0)--(26,0);
+\draw (25,0)node[below]{$\ell(k)$};
+
+\path[clip, preaction={draw, thick}] (22,0) circle (2);
+\fill[draw=black, thick, pattern=north west lines] (20,2) -- (24,2) -- (24,-2) -- (20,-2) -- cycle;
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+\noindent
+(この説明は非常に分かりにくいし，言語化するのも非常に難しいのだけれど，この図と図18.3を見比べることが理解の手助けになるのではないかと思う．)
+
+このもとで次のように$U^{\ell}_{\mathcal{O}}$を定義すれば(20.A.4)を示すことができる．
+\begin{eqnarray*}
+U^{\ell}_{\mathcal{O}}(k)&=&\sum^{(N)}_{\mathcal{O'}}I_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)\left[ Z^{-1}_{\mathcal{O'}\mathcal{O}} -\int dk'' U^{\ell_{\mathcal{O'}}}_{\mathcal{O}}(k'') P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'') \right] \\
+&&\qquad +\sum^{(N)}_{\ell''}\int dk'' I^N_{\ell\ell''}(k,k'')U^{\ell''}_{\mathcal{O}}(k'')
+\end{eqnarray*}
+(最後の項の$U^{\ell''}_{\mathcal{O}}$の二重プライムは誤植で上下逆であることに注意)省略記法はここでは使わないで全てあらわに書いた．
+実際$\Gamma(k,k',p)$を以上の$U^{\ell}_{\mathcal{O}}(k)$と$F_{\mathcal{O},\ell}(k,p)$で計算してみると(補正項は面倒なので書かない)
+\begin{align*}
+&\Gamma(k,k',p)\to \sum^{(N)}_{\mathcal{O}}U^{\ell}_{\mathcal{O}}(k)F_{\mathcal{O},\ell'}(k',p) \\
+&=\sum^{(N)}_{\mathcal{O,O'}} I^N_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)\left[ Z^{-1}_{\mathcal{O'O}}-\int dk'' U^{\ell_{\mathcal{O'}}}_{\mathcal{O}}(k'') P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'') \right]F_{\mathcal{O}\ell'}(k',p) \\
+&\quad +\sum^{(N)}_{\mathcal{O}}\sum^{(N)}_{\ell''}F_{\mathcal{O}\ell'}(k',p)\int dk'' I^N_{\ell \ell''}(k,k')U^{\ell''}_{\mathcal{O}}(k'') \qquad(U^{\ell}_{\mathcal{O}}(k)について展開)\\
+&=\sum^{(N)}_{\mathcal{O,O''}} I^N_{\ell \, \ell_{\mathcal{O''}} \, \nu_{\mathcal{O''}}}(k)Z^{-1}_{\mathcal{O''O}} F_{\mathcal{O},\ell'}(k',p) \\
+&\quad -\sum^{(N)}_{\mathcal{O,O'}} I^N_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)\int dk'' P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'')U^{\ell_{\mathcal{O'}}}_{\mathcal{O}}(k'') F_{\mathcal{O},\ell}(k',p) \\
+&\quad +\sum^{(N)}_{\mathcal{O}}F_{\mathcal{O},\ell}(k',p)\sum^{(N)}_{\ell''}\int dk'' I^N_{\ell \ell'}(k,k')U^{\ell''}_{\mathcal{O}}(k'')
+\end{align*}
+各項に分けて展開する．
+\begin{align*}
+&(第一項目)=\sum^{(N)}_{\mathcal{O,O',O''}} I^N_{\ell \, \ell_{\mathcal{O''}} \, \nu_{\mathcal{O''}}}(k)Z^{-1}_{\mathcal{O''O}} Z_{\mathcal{OO'}}\biggl\{ P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k,p)\delta_{\ell_{\mathcal{O'}},\ell}\biggr. \\
+&\qquad\qquad \biggl. + \int dk'' P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k',p)\Gamma_{\ell_{\mathcal{O'}}\ell}(k'',k',p) \biggr\}\\
+&=\sum^{(N)}_{\mathcal{O',O''}} I^N_{\ell \, \ell_{\mathcal{O''}} \, \nu_{\mathcal{O''}}}(k)\delta _{\mathcal{O''O'}} \left\{ P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k,p)\delta_{\ell_{\mathcal{O'}},\ell}+ \int dk'' P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'',p)\Gamma_{\ell_{\mathcal{O'}}\ell}(k'',k',p) \right\} \\
+&=\sum^{(N)}_{\mathcal{O'}} I^N_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)\left\{ P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k,p)\delta_{\ell_{\mathcal{O'}},\ell}+ \int dk'' P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'',p)\Gamma_{\ell_{\mathcal{O'}}\ell}(k'',k',p) \right\} \\
+&=\sum^{(N)}_{\mathcal{O'}} I^N_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k,p)\delta_{\ell_{\mathcal{O'}},\ell} \\
+& \qquad +\sum^{(N)}_{\mathcal{O'}}I^N_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)\int dk'' P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'',p)\Gamma_{\ell_{\mathcal{O'}}\ell}(k'',k',p) \\
+&=\sum_{\nu:d_\nu \leq N-N(\ell')} I^N_{\ell \ell' \nu}(k)P_{\ell' \nu }(k,p) \\
+&\qquad +\sum^{(N)}_{\ell''}\sum^{(N)}_{\nu:d_\nu \leq N-N(\ell'')}I^N_{\ell \ell'' \nu}(k)\int dk'' P_{\ell'' \nu}(k'',p)\Gamma_{\ell'' \ell}(k'',k',p)
+\end{align*}
+最後の変形では，$\sum^{(N)}_{\mathcal{O}}=\sum^{(N)}_{\ell}\sum^{(N)}_{\nu:d_\nu\leq N-N(\ell)}$であることを用いて，第一項目では$\ell$についての和をとった．これは，微分と場の因子の合計の次元が$N$を超えないように足し合わせることは，OPEで$N$を超えない演算子で展開することと同値であるからだ．
+\begin{align*}
+&(第二項目)=-\sum^{(N)}_{\mathcal{O'}} I^N_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)\int dk'' P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'')\sum^{(N)}_{\mathcal{O}}U^{\ell_{\mathcal{O'}}}_{\mathcal{O}}(k'') F_{\mathcal{O},\ell}(k',p) \\
+&=-\sum^{(N)}_{\ell''}\sum^{(N)}_{\nu:d_\nu\leq N-N(\ell'')} I^N_{\ell \ell'' \nu}(k)\int dk'' P_{\ell'' \nu}(k'')\sum^{(N)}_{\mathcal{O}}U^{\ell''}_{\mathcal{O}}(k'') F_{\mathcal{O},\ell}(k',p)
+\end{align*}
+第三項目はそのままで十分だ．これらを合わせると，
+\begin{eqnarray*}
+\Gamma(k,k',p)&\to& \sum^{(N)}_{\mathcal{O}}U^{\ell}_{\mathcal{O}}(k)F_{\mathcal{O},\ell'}(k',p) \\
+&&=\sum_{\nu:d_\nu \leq N-N(\ell')} I^N_{\ell \ell' \nu}(k)P_{\ell' \nu }(k,p) \\
+&&\qquad +\sum^{(N)}_{\ell''}\sum^{(N)}_{\nu:d_\nu \leq N-N(\ell'')}I^N_{\ell \ell'' \nu}(k)\int dk'' P_{\ell'' \nu}(k'',p) \\
+&&\qquad\qquad\qquad \times \left[\Gamma_{\ell'' \ell}(k'',k',p) -U^{\ell''}_{\mathcal{O}}(k'') F_{\mathcal{O},\ell}(k',p) \right] \\
+&&\qquad +\sum^{(N)}_{\mathcal{O}}F_{\mathcal{O},\ell}(k',p)\sum^{(N)}_{\ell''}\int dk'' I^N_{\ell \ell'}(k,k')U^{\ell''}_{\mathcal{O}}(k'')
+\end{eqnarray*}
+一方，(20.A.8)の第三項目では，p10-p11での議論と同様にして$I^N_{\ell \ell'}(k,k')\equiv I^N_{\ell \ell'}(k,k',0)$として$p$依存性を消去することができるから，上の式は(20.A.8)と等しいことが確認できる．くりこまれた定数$Z_{\mathcal{OO'}}$はくりこみ点$k(\mu),p(\mu)$において関数$F_{\mathcal{O},\ell}(k(\mu),p(\mu))$が，相互作用がないときと同じ値$P_{\ell_{\mathcal{O}}\nu_{\mathcal{O}}}(k(\mu),p(\mu))\delta_{\ell_{\mathcal{O}},\ell}$に等しいととるように定義する．
+\begin{eqnarray*}
+P_{\ell_{\mathcal{O}}\nu_{\mathcal{O}}}(k(\mu),p(\mu))\delta_{\ell_{\mathcal{O}},\ell}&=&F_{\mathcal{O},\ell}(k(\mu),p(\mu)) \\
+&=&\sum_{\mathcal{O}'}Z_{\mathcal{O,O'}}\biggl\{ P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k(\mu),p(\mu))\delta_{\ell_{\mathcal{O'}},\ell}\biggr. \\
+&&\qquad\qquad \biggl. + \int dk' P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k',p(\mu))\Gamma_{\ell_{\mathcal{O'}}\ell}(k',k(\mu),p(\mu)) \biggr\}
+\end{eqnarray*}
+$\Gamma=0$では$Z_{\mathcal{OO'}}=\delta_{\mathcal{OO'}}$という解が存在する．線の集合の取り方についての和は，各項が線型独立であるからこれは唯一の解だ．したがって連続性より(20.A.12)は唯一の解を常に持つ．このため，(20.A.10)はOPE(20.A.4)の係数関数の再帰的な定義を与える．これが証明したかったことだ．
+
+\newpage
+
+\subsection{係数関数のくりこみ群方程式}
+ここでは補遺を先に解説しているので冗長かもしれないが，一応再び定義を説明しておく．グリーン関数$\Gamma_{\ell\ell'}(k,k',p)$の演算子積展開を考える．そこでは，線の集合$\ell$の入射運動量(これらをまとめて$k$，その和を$p$と書く)が全て揃って無限大に行き，残りの線の集合$\ell'$が固定された流出運動量(これらをまとめて$k'$，その和は$p$と書く)を持つ．
+\begin{eqnarray*}
+\Gamma_{\ell\ell'}(k,k',p)\to \sum_{\mathcal{O}}U^{\ell}_{\mathcal{O}}(k)F_{\mathcal{O},\ell'}(k',p)
+\end{eqnarray*}
+
+(20.A.9)のように，$F_{\mathcal{O},\ell'}(k',p)$はくりこまれた演算子$\mathcal{O}_R=\sum_{\mathcal{O}}Z_{\mathcal{OO'}}\mathcal{O'}$の行列要素で$Z_{\mathcal{OO'}}$に比例するので，$Z_{\mathcal{OO'}}$を打ち消すように$U_{\mathcal{O}}^{\ell}(k)$は$Z_{\mathcal{O'O}}^{-1}$に比例している．\\
+$\Rightarrow$この説明でも納得はできるが，補遺を先に見たのでもう少し分かりやすく見ることができる．(20.A.10)の積分方程式
+\begin{eqnarray*}
+U_{\mathcal{O}}^{\ell}(k)&=&\sum^{(N)}_{\mathcal{O'}}I_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)\left[ Z^{-1}_{\mathcal{O'}\mathcal{O}} -\int dk'' U^{\ell_{\mathcal{O'}}}_{\mathcal{O}}(k'') P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'') \right] \\
+&&\qquad +\sum^{(N)}_{\ell''}\int dk'' I^N_{\ell\ell''}(k,k'')U^{\ell''}_{\mathcal{O}}(k'') \\
+&=&\sum^{(N)}_{\mathcal{O'}}I_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)Z^{-1}_{\mathcal{O'}\mathcal{O}} \\
+&& -\sum^{(N)}_{\mathcal{O'}}I_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)\int dk'' U^{\ell_{\mathcal{O'}}}_{\mathcal{O}}(k'') P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k'') \\
+&&+\sum^{(N)}_{\ell''}\int dk'' I^N_{\ell\ell''}(k,k'')U^{\ell''}_{\mathcal{O}}(k'')
+\end{eqnarray*}
+の右辺に左辺を代入すると
+\begin{eqnarray*}
+U_{\mathcal{O}}^{\ell}(k)&=&\sum^{(N)}_{\mathcal{O'}}I_{\ell \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k)Z^{-1}_{\mathcal{O'}\mathcal{O}} \\
+&&-\sum^{(N)}_{\mathcal{O''}}I_{\ell \, \ell_{\mathcal{O''}} \, \nu_{\mathcal{O''}}}(k)\int dk'' \left\{ \sum^{(N)}_{\mathcal{O'}}I_{\ell_{\mathcal{O''}} \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k'')Z^{-1}_{\mathcal{O'}\mathcal{O}} \right\} P_{\ell_{\mathcal{O''}}\nu_{\mathcal{O''}}}(k'') \\
+&&+\sum^{(N)}_{\mathcal{O''}}I_{\ell \, \ell_{\mathcal{O''}} \, \nu_{\mathcal{O''}}}(k)\int dk'' \\
+&&\qquad \times \left\{ \sum^{(N)}_{\mathcal{O'}}I_{\ell_{\mathcal{O''}} \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k'')\int dk' U^{\ell_{\mathcal{O'}}}_{\mathcal{O}}(k') P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k') \right\} P_{\ell_{\mathcal{O''}}\nu_{\mathcal{O''}}}(k'') \\
+&&-\sum^{(N)}_{\mathcal{O''}}I_{\ell \, \ell_{\mathcal{O''}} \, \nu_{\mathcal{O''}}}(k)\int dk'' \left\{ \sum^{(N)}_{\ell''}\int dk' I^N_{\ell_{\mathcal{O''}}\ell''}(k'',k')U^{\ell''}_{\mathcal{O}}(k') \right\} P_{\ell_{\mathcal{O''}}\nu_{\mathcal{O''}}}(k'') \\
+&&+\sum^{(N)}_{\ell''}\int dk'' I^N_{\ell \ell''}(k,k'') \left\{ \sum^{(N)}_{\mathcal{O'}}I_{\ell'' \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k'')Z^{-1}_{\mathcal{O'}\mathcal{O}} \right\} \\
+&& -\sum^{(N)}_{\ell''}\int dk'' I^N_{\ell \ell''}(k,k'') \left\{ \sum^{(N)}_{\mathcal{O'}}I_{\ell'' \, \ell_{\mathcal{O'}} \, \nu_{\mathcal{O'}}}(k'')\int dk' U^{\ell_{\mathcal{O'}}}_{\mathcal{O}}(k') P_{\ell_{\mathcal{O'}}\nu_{\mathcal{O'}}}(k')\right\} \\
+&& +\sum^{(N)}_{\ell''}\int dk'' I^N_{\ell \ell''}(k,k'') \left\{ \sum^{(N)}_{\ell'}\int dk' I^N_{\ell''\ell'}(k'',k')U^{\ell'}_{\mathcal{O}}(k')\right\} 
+\end{eqnarray*}
+となるが，第1,2,5項目は$Z_{\mathcal{O'O}}^{-1}$に比例していることが分かる．残りの項には$U_{\mathcal{O}}^{\ell}(k)$に再び(20.A.10)を代入することができ，これを繰り返し無限に続ければ$U_{\mathcal{O}}^{\ell}(k)$全体は$Z_{\mathcal{O'O}}^{-1}$に比例していることが明らかに分かる．\par
+
+\vskip\baselineskip
+
+また，同時に$U_{\mathcal{O}}^{\ell}$は集合$\ell'$の場の因子全てのくりこみ行列因子$Z_{\ell\ell'}$にも比例する．したがって
+\begin{eqnarray*}
+U_{\mathcal{O}}^{\ell}=\sum_{\ell'\mathcal{O'}}Z_{\ell\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}Z^{-1}_{\mathcal{O'O}}
+\end{eqnarray*}
+と形式的に書くことができる．\par
+(18.2.25)と同様，くりこみ行列には
+\begin{eqnarray*}
+\mu\frac{\partial}{\partial \mu}Z_{\ell\ell'}=\sum_{\ell''}\gamma_{\ell\ell''}Z_{\ell''\ell'} ,\quad \mu\frac{\partial}{\partial \mu}Z_{\mathcal{OO'}}=\sum_{\mathcal{O''}}\gamma_{\mathcal{OO''}}Z_{\mathcal{O''O'}}
+\end{eqnarray*}
+の関係がある．一般に逆行列の微分には
+\begin{align*}
+&0=\frac{d}{dx}{A(x)A^{-1}(x)}=\frac{dA(x)}{dx}A^{-1}(x)+A(x)\frac{dA^{-1}(x)}{dx}\\
+&\Rightarrow \frac{d}{dx}A^{-1}(x)=-A^{-1}(x)\frac{dA(x)}{dx}A^{-1}(x)
+\end{align*}
+の関係があるから$Z_{\mathcal{OO'}}$の逆行列には
+\begin{eqnarray*}
+\frac{\partial}{\partial \mu}Z^{-1}_{\mathcal{O'O}}&=&-\sum_{\mathcal{O''O'''}}Z^{-1}_{\mathcal{O'O''}}\frac{\partial}{\partial \mu}Z_{\mathcal{O''O'''}}Z^{-1}_{\mathcal{O'''O}} \\
+\mu\frac{\partial}{\partial \mu}Z^{-1}_{\mathcal{O'O}}&=&-\sum_{\mathcal{O''O'''}}Z^{-1}_{\mathcal{O'O''}}\left\{ \mu\frac{\partial}{\partial \mu}Z_{\mathcal{O''O'''}}\right\} Z^{-1}_{\mathcal{O'''O}} \\
+&=&-\sum_{\mathcal{O''O'''}}Z^{-1}_{\mathcal{O'O''}}\gamma_{\mathcal{O''O''''}}Z_{\mathcal{O''''O'''}} Z^{-1}_{\mathcal{O'''O}} \\
+&=&-\sum_{\mathcal{O''}}Z^{-1}_{\mathcal{O'O''}}\gamma_{\mathcal{O''O}}
+\end{eqnarray*}
+の関係があると分かる．したがって$U_{\mathcal{O}}^{\ell}$に対しては
+\begin{eqnarray*}
+\mu\frac{d}{d\mu}U_{\mathcal{O}}^{\ell}&=&\mu\frac{d}{d\mu}\left[\sum_{\ell'\mathcal{O'}}Z_{\ell\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}Z^{-1}_{\mathcal{O'O}}\right] \\
+&=&\sum_{\ell'\ell''\mathcal{O'}}\gamma_{\ell\ell''}Z_{\ell''\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}Z^{-1}_{\mathcal{O'O}}-\sum_{\ell'\mathcal{O'O''}}Z_{\ell''\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}Z^{-1}_{\mathcal{O'O''}}\gamma_{\mathcal{O''O}}+\mu \frac{dg}{d\mu}\frac{\partial}{\partial g}U_{\mathcal{O}}^{\ell} \\
+&=&\sum_{\ell'}\gamma_{\ell\ell'}U_{\mathcal{O}}^{\ell'}-\sum_{\mathcal{O'}}U_{\mathcal{O'}}^{\ell}\gamma_{\mathcal{O'O}}+\beta(g)\frac{\partial}{\partial g}U_{\mathcal{O}}^{\ell}
+\end{eqnarray*}
+となる．簡単のために唯一のくりこみ可能な結合定数$g_\mu$は運動量が$\mu$の大きさのくりこみ点におけるファインマン振幅の値として定義され，$\mu dg_\mu /d\mu=\beta(g_\mu)$だとする．\par
+
+次元解析が使えるように，全ての演算子に$\mu$のベキをかけて無次元化する．つまり
+\begin{align*}
+&\mathcal{O}\to \mu^{-N(\mathcal{O})}\mathcal{O} \\
+&\mathcal{O}_R=\sum_{\mathcal{O'}}Z_{\mathcal{OO'}}\mu^{-N(\mathcal{O'})}\mathcal{O'}
+\end{align*}
+とすると，$Z$は無次元となる(元々無次元だと思うかもしれないが，それぞれ次元が違う演算子に$Z$をかけて足し合わせてくりこまれた演算子を作っていたので，$Z$に次元を持たせなければならなかった．例えば$\mathcal{O}_R=Z_{\mathcal{O}\phi^2}\phi^2+Z_{\mathcal{O}\psi}\psi$のような感じ)．このとき$U_{\mathcal{O}}^{\ell}$は
+\begin{eqnarray*}
+U_{\mathcal{O}}^{\ell}&=&\sum_{\ell'\mathcal{O'}}Z_{\ell\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}Z^{-1}_{\mathcal{O'O}} \\
+&&\to \sum_{\ell'\mathcal{O'}}Z_{\ell\ell'}\mu^{-N(\ell')}\mathcal{U}^{\ell'}_{\mathcal{O'}}\mu^{N(\mathcal{O'})}Z^{-1}_{\mathcal{O'O}} \\
+&=&\sum_{\ell'\mathcal{O'}}Z'_{\ell\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}Z'^{-1}_{\mathcal{O'O}} 
+\end{eqnarray*}
+となる．ここで$Z'_{\ell\ell'}=Z_{\ell\ell'}\mu^{-N(\ell')},Z'_{\mathcal{OO'}}=Z_{\mathcal{OO'}}\mu^{-N(\mathcal{O'})}$結合定数がゼロの極限の場合，くりこみ因子は不要で$Z'$は定数値であるから
+\begin{eqnarray*}
+0&=&\mu \frac{\partial}{\partial \mu}Z'_{\mathcal{OO'}} \\
+&=&\sum_{\mathcal{O''}}\gamma_{\mathcal{OO''}}Z_{\mathcal{O''O'}}\mu^{-N(\mathcal{O'})}-N(\mathcal{O}')Z_{\mathcal{OO'}}\mu^{-N(\mathcal{O'})} \\
+0&=&\mu \frac{\partial}{\partial \mu}Z'_{\ell\ell'} \\
+&=&\sum_{\ell''}\gamma_{\ell\ell''}Z_{\ell''\ell'}\mu^{-N(\ell')}-N(\ell')Z_{\ell\ell'}\mu^{-N(\ell')} 
+\end{eqnarray*}
+すなわち結合定数のゼロの極限で$\gamma$は
+\begin{eqnarray*}
+\gamma_{\mathcal{OO'}}\to \delta_{\mathcal{OO'}}N(\mathcal{O}), \qquad \gamma_{\ell\ell'}\to \delta_{\ell\ell'}N(\ell')
+\end{eqnarray*}
+という値をとると分かる．\par
+また，次元解析により$k^\mu=\kappa n^\mu$として$n^\mu$を固定すると，振幅はフーリエ変換を定義するのに用いた$k$の$4-4n(\ell)$重積分から生じる$\kappa^{4-4n(\ell)}$の因子を除いては今は(演算子を無次元化したので)$U^\ell_{\mathcal{O}}$は無次元なので比$\kappa/\mu$を通じてのみ$\kappa$に依存する．それぞれの$Z$の解の形は(18.2.27)でわかっているため(20.3.2)の解は
+\begin{align*}
+&U^\ell_{\mathcal{O}}(\kappa n)=\kappa^{4-4n(\ell)}\sum_{\ell'\mathcal{O'}}Z_{\ell\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}Z^{-1}_{\mathcal{O'O}}\\
+&=\kappa^{4-4n(\ell)}\sum_{\ell'\mathcal{O}'}\left[M\left\{ \exp\left(\int^ \kappa \frac{d\mu}{\mu} \gamma(g_\mu)\right) \right\} \right]_{\ell\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}(g_\kappa,n)\left[M\left\{ \exp\left(\int^ \kappa \frac{d\mu}{\mu} \gamma(g_\mu)\right) \right\} \right]^{-1}_{\mathcal{O'O}}
+\end{align*}
+という形であることが分かる．ここで$M$は$\mu$順序積($T$順序積のようなもの)で，指数関数のベキ展開を考えたときに$n$乗の項が現れるが，その並び順は左から右に$\mu$が減る順番に並び変えられている．$\mu$順序積によって$exp^{-1}(\sim)$は逆行列なので逆順となって，右から左に減っているように並び変えられていることに留意する．\par
+
+\vskip\baselineskip
+
+$\mu\to\infty$において$g_\mu$が固定点$g_*$に近づくとき，特に簡単な結果を与える．
+$\mu\to\infty$で$g_\mu\to g_*$は(18.3.13)より
+\begin{eqnarray*}
+\gamma(g_\mu)=\gamma(g_*)+c(g_*-g_\mu)+O((g_*-g_\mu)^2)
+\end{eqnarray*}
+この場合，$M\left\{ \exp(\int^\kappa \gamma(g_\mu)d\mu/\mu) \right\}$への大きな$\mu$の寄与は$\mu$順序積によって\uwave{左}に現れる$\kappa^{\gamma(g_*)}$の因子だ．
+\begin{align*}
+&M\left\{ \exp\left( \int^\kappa[\underset{最も\mu が大きい}{\uwave{\gamma(g_*)}}+c\underset{速さの因子}{(g_*-g_\mu)} ] \frac{d\mu}{\mu}\right) \right\}=M\left\{ \exp(\gamma(g_*)\ln\kappa )\times\sim\right\} \\
+&=\kappa^{\gamma(g_*)}\times\sim[ここは\mathcal{U}と一緒にして\mathcal{C}と定義する]
+\end{align*}
+したがって(20.3.5)は
+\begin{eqnarray*}
+U^\ell_{\mathcal{O}}(\kappa n)=\kappa^{4-4n(\ell)}\sum_{\ell',\mathcal{O'}}\left[\kappa^{\gamma(g_*)}\right]_{\ell\ell'}\mathcal{C}_{\ell'\mathcal{O'}}\left[ \kappa^{-\gamma(g_*)} \right]_{\mathcal{O'O}}
+\end{eqnarray*}
+となる．($\exp(\alpha\ln\kappa)=\kappa^{\alpha}$を用いた．)
+ここで$\mathcal{C}$は定数または$\ln \kappa$のベキの和であり，$g_\kappa$が$g_*$に近づく速さ(上の途中式で出てきた$(g_*-g_\mu)/\mu$の因子)に依存する．\par
+
+\vskip\baselineskip
+
+量子色力学のように，漸近的自由な理論は特に物理的に興味のある場合だ．\par
+ここでは固定点は(18.3節で議論した通り)$g_*=0$にとれて，(20.3.4)によればこの点の近傍では$\gamma$行列は
+\begin{eqnarray*}
+\gamma(g)_{\ell\ell'}\to N(\ell)\delta_{\ell\ell'}+g^2 c_{\ell\ell'},\qquad \gamma(g)_{\mathcal{OO'}}\to N(\mathcal{O})\delta_{\mathcal{OO'}}+g^2 c_{\mathcal{OO'}} 
+\end{eqnarray*}
+と振る舞う．($g$が小さい時に一次の項が存在しないで二次の項を無視したときに(20.3.4)が再現される．)量子色力学におけるくりこみ群方程式(18.7.4)から
+\begin{align*}
+&\mu\frac{d}{d\mu}g_\mu=-\frac{b}{16\pi^2}g^3_\mu \qquad\left(b=11-\frac{n_f}{24}\right)\\
+\Rightarrow \quad&\mu\frac{d}{d\mu}g^2_\mu=2g_\mu \left[\mu\frac{d}{d\mu}g_\mu\right]=-\frac{b}{8\pi^2}g^4_\mu
+\end{align*}
+となるから，ここで結合定数に対するくりこみ群方程式を
+\begin{eqnarray*}
+\mu\frac{d}{d\mu}g^2_\mu=-\frac{b}{8\pi^2}g^4_\mu
+\end{eqnarray*}
+と仮定することは標準的だ．もしこのように仮定すると
+\begin{align*}
+&\frac{d\mu}{\mu}g_\mu^2=-\frac{8\pi^2}{b}\frac{1}{g^2_\mu}dg^2_\mu \\
+&\int^\kappa \frac{d\mu}{\mu}g^2_\mu=\int^{g_\kappa}\left[-\frac{8\pi^2}{b}\frac{1}{g^2_\mu}\right] dg^2_\mu \\
+& \qquad\qquad =-\frac{8\pi^2}{b}\ln g^2_\kappa+\mathrm{Const}
+\end{align*}
+となる．これを(20.3.5)に代入して
+\begin{align*}
+&U^\ell_{\mathcal{O}}(\kappa n)\to \kappa^{4-4n(\ell)}\sum_{\ell'\mathcal{O}'}\left[M\left\{ \exp\left(\int^ \kappa \frac{d\mu}{\mu} (N(\ell)+g^2_\mu c)\right) \right\} \right]_{\ell\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}(g_\kappa,n)\\
+& \qquad \times \left[M\left\{ \exp\left(\int^ \kappa \frac{d\mu}{\mu} (N(\mathcal{O})+g^2_\mu c)\right) \right\} \right]^{-1}_{\mathcal{O'O}} \\
+&=\kappa^{4-4n(\ell)}\sum_{\ell'\mathcal{O}'}\left[M\left\{ \exp\left(N(\ell)\ln \kappa - \frac{8\pi^2c}{b}\ln g^2_\kappa +\mathrm{Const}\right) \right\} \right]_{\ell\ell'}\mathcal{U}^{\ell'}_{\mathcal{O'}}(g_\kappa,n)\\
+& \qquad\times \left[M\left\{ \exp\left(N(\mathcal{O})\ln \kappa - \frac{8\pi^2c}{b}\ln g^2_\kappa +\mathrm{Const}\right) \right\} \right]^{-1}_{\mathcal{O'O}} \\
+&=\kappa^{4-4n(\ell)+N(\ell)-N(\mathcal{O})}\\
+& \quad \times\sum_{\ell'\mathcal{O}'} \left[ (g_\kappa^2)^{-8\pi^2c/b} \right]_{\ell\ell'}\left[\exp(\mathrm{Const})\mathcal{U}(g_\kappa,n)\exp(\mathrm{Const})\right]^{\ell'}_{\mathcal{O'}}\left[(g_\kappa^2)^{8\pi^2c/b} \right]_{\mathcal{O'O}} \\
+&=\kappa^{4-4n(\ell)+N(\ell)-N(\mathcal{O})}\sum_{\ell'\mathcal{O}'} \left[ (g_\kappa^2)^{-8\pi^2c/b} \right]_{\ell\ell'}\mathcal{C}^{\ell'}_{\mathcal{O'}}\left[(g_\kappa^2)^{8\pi^2c/b} \right]_{\mathcal{O'O}}
+\end{align*}
+ここで$g_\kappa$は$\kappa\to\infty$で固定点$g_*=0$に近づき，$n^\mu$は前述の通り固定しているので，定数行列$\mathcal{U}^{\ell'}_{\mathcal{O'}}(0,n)$に定数因子をかけたものである$\mathcal{C}^{\ell'}_{\mathcal{O'}}$は定数行列となる．この定数因子は(20.3.5)の積分で$g_\mu$が($\mu$順序により)それほど小さくない(すなわち，$\mu$が大きくないので固定点$g_*=0$に十分近付けていない)ところから来るために，摂動論では計算できない．\par
+$\kappa\to\infty$では結合定数の振る舞いは(20.3.8)を解いて
+\begin{align*}
+&-\int \frac{1}{g^4_\mu}dg^2_\mu=\frac{b}{8\pi^2}\int \frac{d\mu}{\mu} \\
+&\Rightarrow \frac{1}{g^2_\mu}=\frac{b}{8\pi^2}(\ln \mu+ \ln M) \qquad (Mは積分定数)\\
+&\Rightarrow g^2_\mu=\frac{8\pi^2}{b\ln(\mu/M)}
+\end{align*}
+よって$\kappa\to\infty$では$g^2_\kappa\to 8\pi^2/b\ln\kappa$である．よって(20.3.9)は
+\begin{eqnarray*}
+U^\ell_{\mathcal{O}}(\kappa n)&\to&\kappa^{4-4n(\ell)+N(\ell)-N(\mathcal{O})}\sum_{\ell'\mathcal{O}'} \left[ \left(\frac{8\pi^2}{b\ln\kappa}\right)^{-8\pi^2c/b} \right]_{\ell\ell'}\mathcal{C}^{\ell'}_{\mathcal{O'}}\left[\left(\frac{8\pi^2}{b\ln\kappa}\right)^{8\pi^2c/b} \right]_{\mathcal{O'O}}\\
+&=&\kappa^{4-4n(\ell)+N(\ell)-N(\mathcal{O})}\sum_{\ell'\mathcal{O}'}\left[(\ln \kappa)^{8\pi^2c/b}\right]_{\ell\ell'}\mathcal{B}^{\ell'}_{\mathcal{O}'}\left[(\ln \kappa)^{-8\pi^2c/b}\right]_{\mathcal{O'O}}
+\end{eqnarray*}
+とも書ける．ここで$\mathcal{B}$は$\mathcal{C}$とはまた別の定数行列だ．(20.3.9)(20.3.10)が正しいための条件は以前と同じく「結合定数が小さい」であるから，今回この条件は$g_\mu$が固定点に十分近いということであるから$\kappa\to\infty$と同じで，すなわち$\ln \kappa\to\infty\Rightarrow 1/\ln\kappa <<1 \Rightarrow g^2_\kappa/8\pi^2<<1$である．$\ln \kappa$はそこまで大きくなくて良いらしい．
+
+\newpage
+
+\subsection{係数関数の対称性}
+くりこまれた演算子$\mathcal{O}_i(x)$の積の演算子積展開を考える．これらの演算子は，保存カレント$J^\mu(x)$を持つある対称性のもとで以下のように線型に変換するとする．
+\begin{eqnarray*}
+\left[ J^0(\mathbf{x},t), \mathcal{O}_i(\mathbf{y},t)\right]=-\delta^3(\mathbf{x-y})\sum_j t_{ij}\mathcal{O}_j(\mathbf{y},t)
+\end{eqnarray*}
+ここで$t_{ij}$は定数行列だ．(両辺を$\mathbf{x}$で空間積分すれば$\int d^3x J^0(\mathbf{x},t)=Q(t)$より
+\begin{eqnarray*}
+\left[ Q(t),\mathcal{O}_i(\mathbf{y},t) \right]=-\sum_j t_{ij}\mathcal{O}_j(\mathbf{y},t)
+\end{eqnarray*}
+となって見慣れた形になるだろう．)\par
+演算子積展開は，$x_1,x_2,\cdots ,x_n$が揃って$x$に($x_1-x,x_2-x,\cdots,x_n-x$の比が全て固定されたまま)近づくとき
+\begin{align*}
+&\bra{\beta} T\left\{ \mathcal{O}_{i_1}(x_1), \mathcal{O}_{i_2}(x_2), \cdots , \mathcal{O}_{i_n}(x_n)\right\} \ket{\alpha} \\
+&\to \sum_i U^{i_1\cdots i_n}_i(x_1-x,x_2-x,\cdots,x_n-x)\bra{\beta} \mathcal{O}_i(x)\ket{\alpha}
+\end{align*}
+と書ける．さて，カレント$J^\mu(x)$を持つ対称性が自発的に破れて，対応するNGボゾン$\pi$が以下を満たすとする．(恐らく誤植ではないとは思うが，以前との議論との繋がりを持たせるために(19.2.34)同様に$i$をつけておく．もし本文と完全に同じ式を導きたければ$iF\to F$とすれば良い．)
+\begin{eqnarray*}
+\bra{\mathrm{VAC}} J^\mu(0)\ket{\pi}=\frac{iFp^\mu_\pi}{(2\pi)^{3/2}\sqrt{2p^0_\pi}}
+\end{eqnarray*}
+(20.4.4)の導出は，19.2節のNGボゾンの極の理論と同様に示そうとしたが，以前とは式の状況が違うので同様にして示すのは難しかった．これを示すためには，極の理論の原点に立ち返って(10.2.7)を用いるのが良い．(10.2.1)から
+\begin{align*}
+&G(p_1,p_2,\cdots,p_n,q) \qquad(x_1,x_2,\sim,x_n,x\to p_1,p_2\sim p_n,qにフーリエ変換)\\
+&\int d^4x_1d^4x_2 \cdots d^4x_n d^4x \, e^{-ip_1x_1}e^{-ip_2x_2}\cdots e^{-ip_nx_n}e^{-iqx} \\
+& \qquad\qquad\times\frac{\partial}{\partial x^\mu}\bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \mathcal{O}_{i_2}(x_2), \cdots , \mathcal{O}_{i_n}(x_n) J^\mu(x) \right\} \ket{\alpha} \\
+&=\int d^4x_1\cdots d^4x_n d^4x \, e^{-ip_1x_1}\cdots e^{-ip_nx_n}e^{-iqx}  \\
+& \qquad\qquad \times iq_\mu  \bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \mathcal{O}_{i_2}(x_2), \cdots , \mathcal{O}_{i_n}(x_n) J^\mu(x) \right\} \ket{\alpha} \quad(\because 部分積分)\\
+&=i\int d^4k\left[ (2\pi)^{3/2}\sqrt{2q^0_\pi}\int d^4x_1\cdots d^4x_n \, e^{-ip_1x_1}\cdots e^{-ip_nx_n} \right. \\
+&\quad \times \biggl. \bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \mathcal{O}_{i_2}(x_2), \cdots , \mathcal{O}_{i_n}(x_n) \right\} \ket{\alpha+\pi} \biggr] \\
+&\quad \times\left[ \frac{-i}{(2\pi)^4}\frac{1}{k^2} \right] \left[ (2\pi)^4\delta^4(q-k) q_\mu \bra{\mathrm{VAC}}J^\mu(0)\ket{\pi}(2\pi)^{3/2}\sqrt{2q^0_\pi}\right] \because (10.2.6) \\
+&=\int d^4 k (2\pi)^{3/2}\sqrt{2q^0_\pi}\int d^4x_1\cdots d^4x_n \, e^{-ip_1x_1}\cdots e^{-ip_nx_n} \\
+&\quad \times \bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \cdots , \mathcal{O}_{i_n}(x_n) \right\} \ket{\alpha+\pi} \\
+&\quad \times \frac{1}{k^2}\delta^4(q-k)\frac{iFq^2}{(2\pi)^{3/2}\sqrt{2q^0_\pi}}(2\pi)^{3/2}\sqrt{2q^0_\pi} \quad \because (訂正された)(20.4.3)を代入 \\
+&=i(2\pi)^{3/2}\sqrt{2q^0_\pi}F \int d^4x_1\cdots d^4x_n \, e^{-ip_1x_1}\cdots e^{-ip_nx_n} \\
+& \qquad \times\bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \cdots , \mathcal{O}_{i_n}(x_n) \right\} \ket{\alpha+\pi}
+\end{align*}
+最初の式と最後の式で，フーリエ逆変換($p_1\sim p_n\to x_1\sim x_n$)を用いれば，
+\begin{align*}
+&\int d^4x e^{-iqx}\frac{\partial}{\partial x^\mu}\bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \mathcal{O}_{i_2}(x_2), \cdots , \mathcal{O}_{i_n}(x_n) J^\mu(x) \right\} \ket{\alpha} \\
+&=i(2\pi)^{3/2}\sqrt{2q^0_\pi}F\bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \cdots , \mathcal{O}_{i_n}(x_n) \right\} \ket{\alpha+\pi} 
+\end{align*}
+両辺$q\to 0$($\pi$中間子の運動量ゼロの極限)で
+\begin{align*}
+&\bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \cdots , \mathcal{O}_{i_n}(x_n) \right\} \ket{\alpha+\pi} \\
+&=\frac{-i}{(2\pi)^{3/2}\sqrt{2q^0_\pi}F}\int d^4 x \frac{\partial}{\partial x^\mu}\bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \mathcal{O}_{i_2}(x_2), \cdots , \mathcal{O}_{i_n}(x_n) J^\mu(x) \right\} \ket{\alpha}
+\end{align*}
+となる．\par
+
+
+\vskip\baselineskip
+
+
+(20.4.5)を導くのはさらに骨が折れる．これを示すためには，通常定義するよりも一般的な時間順序積の定義$(*)$
+\begin{eqnarray*}
+&T&\left\{ \mcO_{i_1}(x_1)\cdots \mcO_{i_n}(x_n) \right\} \\
+&&\equiv \mcO_{i_1}(x_1)\theta(x^0_1-x^0_2)\mcO_{i_2}(x_2)\theta(x^0_2-x^0_3)\times\cdots \\
+&&\quad \times\mcO_{i_{m-1}}(x_{m-1})\theta(x^0_{m-1}-x^0_m)\mcO_{m}(x_m)\theta(x^0_m-x^0_{m+1})\mcO_{i_{m+1}}(x_{m+1})\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+&&\quad +(演算子の順序を交換したもの)
+\end{eqnarray*}
+を使うのが良い．この定義はwell-definedであることはすぐ分かるだろう．実際例えば$x_1>x_2>\cdots >x_m>x_{m+1}>\cdots>x_n$の場合にはこの定義($*$)を使うと
+\begin{eqnarray*}
+\mcO_{i_1}(x_1)\mcO_{i_2}(x_2)\cdots \mcO_{i_m}\mcO_{i_{m+1}}\cdots\mcO_{i_n}(x_n)
+\end{eqnarray*}
+の項が残って，時間順序を果たしていることが分かる．階段関数に時間微分がかかる項以外はカレントの保存則
+\begin{eqnarray*}
+\frac{\partial}{\partial x^\mu}J^\mu(x)=0
+\end{eqnarray*}
+により消えることに留意すれば
+\begin{align*}
+& \int d^4 x \frac{\partial}{\partial x^\mu}\bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \mathcal{O}_{i_2}(x_2), \cdots , \mathcal{O}_{i_n}(x_n) J^\mu(x) \right\} \ket{\alpha} \\
+= & \int d^4x \left\langle \beta \middle| \biggl[J^0(x)\delta(x^0-x^0_1)\mcO_{i_1}(x_1)\theta(x^0_1-x^0_2)\mcO_{i_2}(x_2) \cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n)  \right. \\
+& -\mcO_{i_1}(x_1)\delta(x^0_1-x^0)J^0(x)\theta(x^0-x^0_2)\mcO_{i_2}(x_2) \cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+& +\mcO_{i_1}(x_1)\theta(x^0_1-x^0)J^0(x)\delta(x^0-x^0_2)\mcO_{i_2}(x_2) \cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+& -\sim \\
+&-\mcO_{i_1}(x_1)\cdots \mcO_{i_m}(x_m)\delta(x^0_m-x)J^0(x)\theta(x^0-x^0_{m+1})\mcO_{i_{m+1}}(x_{m+1})\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+& +\mcO_{i_1}(x_1)\cdots \mcO_{i_m}(x_m)\theta(x^0_m-x)J^0(x)\delta(x^0-x^0_{m+1})\mcO_{i_{m+1}}(x_{m+1})\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+& -\mcO_{i_1}(x_1)\cdots \mcO_{i_{m+1}}(x_{m+1})\delta(x^0_{m+1}-x)J^0(x)\theta(x^0-x^0_{m+2})\mcO_{i_{m+2}}(x_{m+2})\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+&  +\mcO_{i_1}(x_1)\cdots \mcO_{i_{m+1}}(x_{m+1})\theta(x^0_{m+1}-x)J^0(x)\delta(x^0-x^0_{m+2})\mcO_{i_{m+2}}(x_{m+2})\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+& -\sim \\
+& -\mcO_{i_1}(x_1)\cdots \mcO_{i_{n-1}}(x_{n-1})\delta(x^0_{n-1}-x^0)J^0(x)\theta(x^0-x^0_n)\mcO_{i_n}(x_n) \\
+& +\mcO_{i_1}(x_1)\cdots \mcO_{i_{n-1}}(x_{n-1})\theta(x^0_{n-1}-x^0)J^0(x)\delta(x^0-x^0_n)\mcO_{i_n}(x_n) \\
+& -\mcO_{i_1}(x_1)\cdots\mcO_{i_n}(x_n)\delta(x^0_n-x^0)J^0(x) \\
+& \left. +(\mcO_{i_1}(x_1)\sim \mcO_{i_n}(x_n)の順番を交換した全ての場合)←上の展開と同様\biggr]\middle| \alpha \right\rangle
+\end{align*}
+と展開される．詳しく説明しておくと，第1項目は順序積の定義$(*)$において$J\mcO_{i_1}\mcO_{i_2}\cdots\mcO_{i_n}$の順番の項を微分したときから来る項だ．この場合においては$x^0$に依存する階段関数は$J$の右の一つしか無いので，一つの項のみ生じる．第2項目と第3項目は$\mcO_{i_1}J\mcO_{i_2}\cdots\mcO_{i_n}$の順番から来る項だ．定義($*$)を見ればすぐ分かる通り，この項においては$x^0$に依存する階段関数は$J$の両側二つが存在しており，積の微分により二つの項が現れる．マイナス因子は，$J$の左側の階段関数の中身の$-x^0$から合成関数の微分により生じる．途中項を飛ばして，第4項目と第5項目は定義($*$)において$\mcO_{i_1}\cdots\mcO_{i_m}J\mcO_{i_{m+1}}\cdots\mcO_{i_n}$の項から生じる．これも第2,3項目と同じ理由により二つの項が現れる．第6,7項目と第8,9項目も第5,6項目と同様である．最後の項は定義($*$)において$\mcO_{i_1}\cdots \mcO_{i_n}J$の項から生じる．これも最初の項と同様の理由で，定義($*$)より$J$の左にしか$x^0$を含む階段関数は存在しないので一つの項しか生じない．\par
+ここで$x^0$積分すれば，それぞれの項のデルタ関数のはたらきにより
+\begin{align*}
+=&\int d^3\mathbf{x} \left\langle \beta \middle| \biggl[\uwave{J^0(\mathbf{x},x^0_1)\mcO_{i_1}(\mathbf{x}_1,x^0_1)}\theta(x^0_1-x^0_2)\mcO_{i_2}(x_2)\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \right. \\
+&\qquad\qquad \uwave{-\mcO_{i_1}(\mathbf{x}_1,x^0_1)J^0(\mathbf{x},x^0_1)}\theta(x^0_1-x^0_2)\mcO_{i_2}(x_2)\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+&+\mcO_{i_1}(x_1)\theta(x^0_1-x^0_2)\uwave{J^0(\mathbf{x},x^0_2)\mcO_{i_2}(\mathbf{x}_2,x^0_2)}\theta(x^0_2-x^0_3)\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+& -\sim \\
+& -\mcO_{i_1}\cdots \theta(x^0_{m-1}-x^0_m)\uwave{\mcO_{i_m}(\mathbf{x}_m,x^0_m)J(\mathbf{x},x^0_m)}\theta(x^0_m-x^0_{m+1})\mcO_{i_{m+1}}(x_{m+1})\cdots \mcO_{i_n}(x_n) \\
+& +\mcO_{i_1}\cdots \theta(x^0_m-x^0_{m+1})\uwave{J(\mathbf{x},x^0_{m+1})\mcO_{i_{m+1}}(\mathbf{x}_{m+1},x^0_{m+1})}\theta(x^0_{m+1}-x^0_{m+2})\mcO_{i_{m+2}}(x_{m+2})\cdots \mcO_{i_n}(x_n) \\
+& -\mcO_{i_1}\cdots \theta(x^0_m-x^0_{m+1})\uwave{\mcO_{i_{m+1}}(\mathbf{x}_{m+1},x^0_{m+1})J(\mathbf{x},x^0_{m+1})}\theta(x^0_{m+1}-x^0_{m+2})\mcO_{i_{m+2}}(x_{m+2})\cdots \mcO_{i_n}(x_n) \\
+& +\mcO_{i_1}\cdots \mcO_{i_{m+1}}(x_{m+1})\theta(x^0_{m+1}-x^0_{m+2})\uwave{J(\mathbf{x},x^0_{m+2})\mcO_{i_{m+2}}(\mathbf{x}_{m+2},x^0_{m+2})}\theta(x^0_{m+2}-x^0_{m+3})\cdots \mcO_{i_n}(x_n) \\
+& -\sim \\
+&-\mcO_{i_1}\cdots \theta(x^0_{n-2}-x^0_{n-1})\uwave{\mcO_{i_{n-1}}(\mathbf{x}_{n-1},x^0_{n-1})J^0(\mathbf{x},x_{n-1})}\theta(x^0_{n-1}-x^0_n)\mcO_{i_n}(x_n) \\
+& +\mcO_{i_1}\cdots \theta(x^0_{n-2}-x^0_{n-1})\mcO_{i_{n-1}}(x_{n-1})\theta(x^0_{n-1}-x^0_n)\uwave{J^0(\mathbf{x},x_n)\mcO_{i_n}(\mathbf{x}_n,x_n)} \\
+& \left. -\mcO_{i_1}\cdots \theta(x^0_{n-2}-x^0_{n-1})\mcO_{i_{n-1}}(x_{n-1})\theta(x^0_{n-1}-x^0_n)\uwave{\mcO_{i_n}(\mathbf{x}_n,x_n)J^0(\mathbf{x},x_n)}+(交換項)\biggr]\middle| \alpha \right\rangle
+\end{align*}
+ここで(20.4.1)を第1,2項目の組，第2,3項目の組…に適応すれば次を得る．
+\begin{align*}
+=\int d^3 &\mathbf{x} \left\langle \beta \middle| \biggl[ -\delta^3(\mathbf{x-x_1}) \sum_{j_1}t_{i_1 j_1}\mcO_{j_1}(x_1)\theta(x^0_1-x^0_2)\mcO_{i_2}(x_2)\cdots \mcO_{i_n}(x_n) \right. \\
+& -\delta^3(\mathbf{x-x_2})\sum_{j_2}t_{i_2 j_2}\mcO_{i_1}(x_1)\theta(x^0_1-x^0_2)\mcO_{j_2}(x_2)\theta(x^0_2-x^0_3)\cdots \mcO_{i_n}(x_n) \\
+& -\cdots \\
+& -\delta^3(\mathbf{x}-\mathbf{x}_m)\sum_{j_m}t_{i_m j_m}\mcO_{i_1}(x_1)\cdots\theta(x^0_{m-1}-x^0_m)\mcO_{j_m}(x_m)\theta(x^0_m-x^0_{m+1})\cdots \mcO_{i_n}(x_n) \\
+& -\cdots \\
+& -\delta^3(\mathbf{x}-\mathbf{x}_n)\sum_{j_n}t_{i_n j_n}\mcO_{i_1}(x_1)\cdots \theta(x^0_{n-1}-x^0_n)\mcO_{j_n}(x_n) \left. -(交換項)\biggr]\middle| \alpha \right\rangle \\
+=-\sum^n_{r=1}&\sum_{j_r}t_{i_r j_r}\Braket{ \beta|T\left\{ \mcO_{i_1}(x_1)\cdots \mcO_{j_r}(x_r)\cdots \mcO_{i_n}(x_n) \right\}|\alpha}
+\end{align*}
+よって
+\begin{align*}
+&\bra{\beta}T\left\{ \mathcal{O}_{i_1}(x_1), \cdots , \mathcal{O}_{i_n}(x_n) \right\} \ket{\alpha+\pi} \\
+&=\frac{i}{(2\pi)^{3/2}\sqrt{2q^0_\pi}F}\sum^n_{r=1}\sum_{j_r}t_{i_r j_r}\Braket{ \beta|T\left\{ \mcO_{i_1}(x_1)\cdots \mcO_{j_r}(x_r)\cdots \mcO_{i_n}(x_n) \right\}|\alpha}
+\end{align*}
+が導かれる．
+
+\vskip\baselineskip
+
+さて，この表式の両辺に演算子積展開(20.4.2)を適用する．$x_1,x_2,\cdots,x_n$が全て揃って$x$に近づく極限では以下を得る．
+\begin{align*}
+&\sum_i U^{i_1\cdots i_n}_i(x_1-x,x_2-x,\cdots,x_n-x)\bra{\beta} \mathcal{O}_i(x)\ket{\alpha+\pi} \\
+&=\frac{i}{(2\pi)^{3/2}\sqrt{2q^0_\pi}F}\sum^n_{r=1}\sum_{j_r}\sum_{j}t_{i_r j_r}U^{i_1\cdots j_r \cdots i_n}_j(x_1-x,x_2-x,\cdots,x_n-x)\bra{\beta} \mathcal{O}_j(x)\ket{\alpha}
+\end{align*}
+また(20.4.5)の$n=1$の特別な場合について
+\begin{align*}
+\bra{\beta} \mathcal{O}_i(x)\ket{\alpha+\pi}=\frac{i}{(2\pi)^{3/2}\sqrt{2q^0_\pi}F}\sum_j t_{ij} \bra{\beta} \mathcal{O}_j(x)\ket{\alpha}
+\end{align*}
+が成り立つ．これらは全て任意の状態$\bra{\beta},\ket{\alpha}$について成り立つから，(20.4.6)の両辺の$\bra{\beta} \mathcal{O}_j(x)\ket{\alpha}$の係数は等しくなければならない．したがって
+\begin{eqnarray*}
+&&\frac{i}{(2\pi)^{3/2}\sqrt{2q^0_\pi}F}\sum_{ij}t_{ij} U^{i_1\cdots i_n}_i(x_1-x,x_2-x,\cdots,x_n-x)\bra{\beta} \mathcal{O}_j(x)\ket{\alpha} \\
+&&=\frac{i}{(2\pi)^{3/2}\sqrt{2q^0_\pi}F}\sum^n_{r=1}\sum_{j_r}\sum_{j}t_{i_r j_r}U^{i_1\cdots i_n}_j(x_1-x,x_2-x,\cdots,x_n-x)\bra{\beta} \mathcal{O}_i(x)\ket{\alpha} \\
+\Rightarrow && \quad \sum_{ij}t_{ij} U^{i_1\cdots i_n}_i(x_1-x,x_2-x,\cdots,x_n-x)= \sum^n_{r=1}\sum_{j_r}t_{i_r j_r}U^{i_1\cdots j_r \cdots i_n}_j(x_1-x,x_2-x,\cdots,x_n-x)
+\end{eqnarray*}
+これは，$U^{i_1\cdots i_n}_i(x_1-x,x_2-x,\cdots,x_n-x)$が$t$によって生成される対称性のもとで不変であることを意味する．すなわち
+\begin{eqnarray*}
+\left[Ut\right]_j^{i_1\cdots i_n} &\equiv& \sum_{ij} U^{i_1\cdots i_n}_i t_{ij} \\
+\left[tU\right]_{j}^{i_1\cdots i_n}&\equiv& \sum^n_{r=1 }\sum_{j_r} t_{i_r j_r} U^{i_1\cdots j_r \cdots i_n}_j
+\end{eqnarray*}
+と定義すると交換関係$[U,t]=0$を満たす．
+
+\vskip\baselineskip
+
+時間順序積の定義($*$)はもう少しコンパクトに書けると思う．置換を用いれば，例えば
+\begin{align*}
+T\left\{\prod_{j=1}^n \mcO_{i_j}(x_j) \right\}=\sum_{\sigma_n\in S_n}\left[\left( \prod_{j=1}^n \mcO_{i_{\sigma_n(j)}} \right)\left(\prod_{k=1}^{n-1}\theta(x^0_{\sigma_n(k)}-x^0_{\sigma_n(k+1)})\right)\right]
+\end{align*}
+とできる．ここで置換$\sigma_n$は，$1$から$n$までの自然数の集合$N_n=\{1,2,\cdots ,n\}$に対しての全単射$\sigma_n:N_n\to N_n$であり，$S_n$は全ての$\sigma_n$の集合である．こっちの表記で今回の議論をすることもできるとは思うが，総積の中のひとつの階段関数を微分によりデルタ関数にするという操作が必要になるため，どちらにしても面倒なことになると思う．
+
+
+
+\newpage
+
+\subsection{スペクトル関数の和則}
+ローレンツ不変性を用いて，ローレンツの4元ベクトルになっている以外は任意のカレント$J^\mu_{\alpha}$の集合は
+\begin{align*}
+&\sum_N \delta^4(p-p_N) \braket{\VAC|J^{\mu}_{\alpha}(0)| N }\braket{\VAC|J^\nu_{\beta}(0)|N}^* \\
+&= \frac{1}{(2\pi)^3}\theta(p^0)\left[ \left (\eta^{\mu\nu}-\frac{p^\mu p^\nu}{p^2} \right)\rho^{(1)}_{\alpha\beta}(-p^2)+p^\mu p^\nu \rho^{(0)}_{\alpha\beta}(-p^2) \right]
+\end{align*}
+これは(10.7.4)(19.2.19)(19.2.20)と類似のもので，自然な定義だといえる．状態$\ket{N}$の完全性を用いてフーリエ変換することで
+\begin{align*}
+\mathrm{LHS}&=\sum_N  \delta^4(p-p_N) \braket{\VAC|J^{\mu}_{\alpha}(0)| N }\braket{\VAC|J^\nu_{\beta}(0)|N}^* \\
+&=\frac{1}{(2\pi)^4}\sum_{N} \int d^4 x e^{-i(p-p_N)x}\braket{\VAC|J^\mu_{\alpha}(0)|N}\braket{\VAC|J^\nu_{\beta}(0)|N}^* \\
+&=\frac{1}{(2\pi)^4}\sum_{N} \int d^4 x e^{-ipx}\braket{\VAC|J^\mu_{\alpha}(x)|N}\braket{N|J^\nu_{\beta}(0)|\VAC} \qquad \because(10.1.4)\\
+&=\frac{1}{(2\pi)^4} \int d^4 x e^{-ipx}\braket{J^\mu_{\alpha}(x)J^\nu_{\beta}(0)}_{\VAC} \\
+\mathrm{RHS}&= \frac{1}{(2\pi)^3}\theta(p^0)\left[ \left (\eta^{\mu\nu}-\frac{p^\mu p^\nu}{p^2} \right)\rho^{(1)}_{\alpha\beta}(-p^2)+p^\mu p^\nu \rho^{(0)}_{\alpha\beta}(-p^2) \right] \\
+&=\frac{1}{(2\pi)^3}\int d\mu^2 \delta(p^2+\mu^2) \theta(p^0)\left[ \left (\eta^{\mu\nu}+\frac{p^\mu p^\nu}{\mu^2} \right)\rho^{(1)}_{\alpha\beta}(\mu^2)+p^\mu p^\nu \rho^{(0)}_{\alpha\beta}(\mu^2) \right]  
+\end{align*}
+両辺を逆フーリエ変換してやれば
+\begin{align*}
+\mathrm{LHS}&=\frac{1}{(2\pi)^4} \int d^4p e^{ipx} \int d^4 x' e^{-ipx'}\braket{J^\mu_{\alpha}(x')J^\nu_{\beta}(0)}_{\VAC} \\
+&=\frac{1}{(2\pi)^4} \int d^4x' \int d^4 p e^{-ip(x'-x)} \braket{J^\mu_{\alpha}(x')J^\nu_{\beta}(0)}_{\VAC} \\
+&=\frac{1}{(2\pi)^4} \int d^4x' \delta^4(x'-x) \braket{J^\mu_{\alpha}(x')J^\nu_{\beta}(0)}_{\VAC} \\
+&=\braket{J^\mu_{\alpha}(x)J^\nu_{\beta}(0)}_{\VAC} \\
+\mathrm{RHS}&=\frac{1}{(2\pi)^3} \int d^4x e^{ipx} \int d\mu^2 \delta(p^2+\mu^2) \theta(p^0)\left[ \left (\eta^{\mu\nu}+\frac{p^\mu p^\nu}{\mu^2} \right)\rho^{(1)}_{\alpha\beta}(\mu^2)+p^\mu p^\nu \rho^{(0)}_{\alpha\beta}(\mu^2) \right] \\
+&= \int d\mu^2 \left[ \left (\eta^{\mu\nu}+\frac{(-i\partial^\mu) (-i\partial^\nu)}{\mu^2} \right)\rho^{(1)}_{\alpha\beta}(\mu^2)+(-i\partial^\mu) (-i\partial^\nu) \rho^{(0)}_{\alpha\beta}(\mu^2) \right] \\
+&\qquad \times\frac{1}{(2\pi)^3}\int d^4p \theta(p^0)\delta(p^2+\mu^2)e^{ipx} \\
+&=\int d\mu^2 \left[ \eta^{\mu\nu}\rho^{(1)}_{\alpha\beta}(\mu^2)-\left(\rho^{(0)}_{\alpha\beta}(\mu^2)+\frac{\rho^{(1)}_{\alpha\beta}(\mu^2)}{\mu^2}\right) \partial^\mu \partial^\nu \right] \Delta_{+}(x;\mu^2)
+\end{align*}
+ここで$\Delta_{+}(x;\mu^2)$は(5.2.7)(10.7.7)で定義される標準的な関数だ．
+
+\vskip\baselineskip
+
+
+カレントがエルミート演算子に選ばれていると仮定すると(20.5.1)より
+\begin{align*}
+\left[\sum_N \delta^4(p-p_N) \braket{\VAC|J^{\mu}_{\alpha}(0)| N }\braket{\VAC|J^\nu_{\beta}(0)|N}^* \right]^{\dagger }=\sum_N \delta^4(p-p_N) \braket{\VAC|J^{\nu}_{\beta}(0)| N }\braket{\VAC|J^\mu_{\alpha}(0)|N}^*
+\end{align*}
+であるが，右辺は(20.5.1)の$(\mu,\alpha)\leftrightarrow(\nu,\beta) $という入れ替えをしたものと等しい．したがって
+\begin{align*}
+&\frac{1}{(2\pi)^3}\theta(p^0)\left[ \left (\eta^{\mu\nu}-\frac{p^\mu p^\nu}{p^2} \right)\rho^{(1)\dagger}_{\alpha\beta}(-p^2)+p^\mu p^\nu \rho^{(0)\dagger}_{\alpha\beta}(-p^2) \right] \\
+&= \frac{1}{(2\pi)^3}\theta(p^0)\left[ \left (\eta^{\mu\nu}-\frac{p^\mu p^\nu}{p^2} \right)\rho^{(1)}_{\beta\alpha}(-p^2)+p^\mu p^\nu \rho^{(0)}_{\beta\alpha}(-p^2) \right] \\
+\Rightarrow &\rho^{(1)}_{\beta\alpha}=\rho^{(1)\dagger}_{\alpha\beta}=\rho^{(1)*}_{\beta\alpha},\qquad \rho^{(0)}_{\beta\alpha}=\rho^{(0)\dagger}_{\alpha\beta}=\rho^{(0)*}_{\beta\alpha}
+\end{align*}
+が導かれ，すなわち実であることが分かる．(エルミートではないと思う．)
+また，$x$が空間的(このとき$\Delta_+(x;\mu^2)$は偶関数)にとって，(20.5.2)で並進不変性と因果律(空間的なら場の交換子がゼロであるという要請)を用いると
+\begin{align*}
+\braket{J^\mu_\alpha(x)J^\nu_\beta(0)}_{\VAC}&=\int d\mu^2 \left[ \eta^{\mu\nu}\rho^{(1)}_{\alpha\beta}(\mu^2)-\left(\rho^{(0)}_{\alpha\beta}(\mu^2)+\frac{\rho^{(1)}_{\alpha\beta}(\mu^2)}{\mu^2}\right) \partial^\mu \partial^\nu \right] \Delta_{+}(x;\mu^2) \\
+&=\braket{J^\mu_\alpha(0)J^\nu_\beta(-x)}_{\VAC}\qquad \because 並進不変性 \\
+&=\braket{J^\nu_\beta(-x)J^\mu_\alpha(0)}_{\VAC} \qquad \because 因果律 \\
+&=\int d\mu^2 \left[ \eta^{\nu\mu}\rho^{(1)}_{\beta\alpha}(\mu^2)-\left(\rho^{(0)}_{\beta\alpha}(\mu^2)+\frac{\rho^{(1)}_{\beta\alpha}(\mu^2)}{\mu^2}\right) \partial^\nu \partial^\mu \right] \Delta_{+}(-x;\mu^2)
+\end{align*}
+$\Delta_+(-x;\mu^2)=\Delta_+(x;\mu^2)$が今回成り立っており，$\mu,\nu$については自明に対称なので
+\begin{align*}
+\rho^{(1)}_{\alpha\beta}=\rho^{(1)}_{\beta\alpha},\qquad \rho^{(0)}_{\alpha\beta}=\rho^{(0)}_{\beta\alpha}
+\end{align*}
+以上より，$\rho^{(1)}_{\alpha\beta},\rho^{(0)}_{\alpha\beta}$は実対称であることが分かる．(実対称はエルミートの一種だが，前半のみの議論でエルミートとは断ずることはできないと思う．)
+
+\vskip\baselineskip
+
+さて，$\Delta_+(x;\mu^2)$の$x\to 0$での漸近展開は(5.2.9)での第二種変形ベッセル関数(単に虚数倍の違いだが，ハンケル関数ではない)をwolfram alphaにでも入れるか小松勇作「特殊関数」「特殊関数演習」を参照すれば良いらしい．ここでは一応(5.2.7)から(5.2.9)をもう一度導いておく(他の本でも導出が省略されているらしいので)．(5.2.7)より
+\begin{align*}
+x^0=0,\quad |\mathbf{x}|=\sqrt{x^2}
+\end{align*}
+として
+\begin{align*}
+\Delta_+(x)&=\frac{1}{(2\pi)^3}\int \frac{d^3\mathbf{p}}{2\sqrt{\mathbf{p}^2+m^2}}e^{ipx}\\ 
+&=\frac{1}{(2\pi)^3}\int^{\infty}_{0}\int^{\pi}_{0}\int^{2\pi}_{0}\frac{e^{ipr\cos\theta}}{2\sqrt{\mathbf{p}^2+m^2}}p^2\sin\theta d\phi d\theta dp \\
+&=\frac{2\pi}{(2\pi)^3}\int^{\infty}_{0} \frac{p^2}{2\sqrt{\mathbf{p}^2+m^2}}\frac{2\sin(pr)}{pr}dp \qquad \because \int^{\pi}_{0}\sin(x)e^{iax}dx=\frac{2\sin(a)}{a} \\
+&=\frac{4\pi}{(2\pi)^3}\int^{\infty}_{0} \frac{p^2}{2\sqrt{\mathbf{p}^2+m^2}}\frac{\sin(pr)}{pr}dp  \quad(*)\\
+&\underset{u=p/m}{=} \frac{m}{4\pi^2\sqrt{x^2}}\int^{\infty}_{0}\frac{u}{\sqrt{u^2+1}}\sin (m\sqrt{x^2}u)du
+\end{align*}
+ここで第二種変形ベッセル関数
+\begin{align*}
+&K_{\nu}(z)=\frac{\Gamma(\nu+\frac{1}{2})(2z)^\nu}{\sqrt{\pi}}\int^{\infty}_{0}dt \frac{\cos t}{(t^2+z^2)^{\nu+\frac{1}{2}}} \\
+\Rightarrow \quad& \frac{\partial}{\partial z}K_0(z)=-K_1(z)
+\end{align*}
+を用いると($*$)式は
+\begin{align*}
+\frac{1}{4\pi^2 r}\int^\infty_0\frac{p^2dp}{\sqrt{p^2+m^2}}\frac{\sin(pr)}{p}&=\frac{1}{4\pi^2r}\int^\infty_0 \frac{p}{\sqrt{p^2+m^2}}\sin (pr)dp \\
+&=\frac{-1}{4\pi^2r}\frac{\partial}{\partial r}\int^\infty_0\frac{1}{\sqrt{p^2+m^2}}\cos (pr) dp \\
+&=\frac{-1}{4\pi^2r}\frac{\partial}{\partial r}\int^\infty_0 \frac{dq}{q}\frac{\cos(q)}{\sqrt{(q/r)^2+m^2}} \\
+&=\frac{-1}{4\pi^2r}\frac{\partial}{\partial r}\int^\infty_0 dq \frac{\cos(q)}{\sqrt{q^2+(mr)^2}} \\
+&=\frac{-1}{4\pi^2 r}\frac{\partial}{\partial r} K_0(mr) \\
+&=\frac{m}{4\pi^2r}K_1(mr)
+\end{align*}
+よって$x^0=0,\quad |\mathbf{x}|=\sqrt{x^2}$で
+\begin{align*}
+\Delta_+(x)=\frac{m}{4\pi^2r}K_1(mr)
+\end{align*}
+で，(5.2.9)が導かれた．\par
+第二種変形ベッセル関数の$x\to0$のときの漸近展開はwolfram alphaに入れると，$\gamma$をオイラー定数として
+\begin{align*}
+K_1(x)=\frac{1}{x}+\frac{1}{4}x(2\ln x+2\gamma-1-\ln 4)+O(x^3)
+\end{align*}
+と振る舞うらしい．よって$\Delta_+(x)$は$x^2>0$で$x\to0$のとき
+\begin{align*}
+\Delta_+(x)&=\frac{\mu}{4\pi^2\sqrt{x^2}}K_1(\mu\sqrt{x^2}) \\
+&\to \frac{1}{4\pi x^2}+\frac{\mu^2}{8\pi^2}\left( \ln \left(\frac{\mu\sqrt{x^2}}{2}\right) -\gamma \right)+O(x^2)
+\end{align*}
+と振る舞う．したがって$\braket{J^\mu_\alpha(x)J^\nu_\beta(0)}_{\VAC}$の展開の最初の数項は(20.5.2)より
+\begin{align*}
+\braket{J^\mu_\alpha(x)J^\nu_\beta(0)}_{\VAC} &\to \int d\mu^2 \left[ \eta^{\mu\nu}\rho^{(1)}_{\alpha\beta}(\mu^2)-\left(\rho^{(0)}_{\alpha\beta}(\mu^2)+\frac{\rho^{(1)}_{\alpha\beta}(\mu^2)}{\mu^2}\right) \partial^\mu \partial^\nu \right] \\
+&\qquad\qquad\qquad \times \left[ \frac{1}{4\pi x^2}+\frac{\mu^2}{8\pi^2}\left( \ln \left(\frac{\mu\sqrt{x^2}}{2}\right) -\gamma \right)\right]+O(\ln x^2) \\
+&=\int d\mu^2 \Biggl[ \frac{\eta^{\mu\nu}}{4\pi^2x^2}\rho^{(1)}_{\alpha\beta}(\mu^2) -\left( \rho^{(0)}_{\alpha\beta}(\mu^2)+\frac{\rho^{(1)}_{\alpha\beta}(\mu^2)}{\mu^2} \right) \left( \partial^\mu \partial^\nu \frac{1}{4\pi^2x^2} \right) \\
+&\quad -\frac{1}{8\pi^2}\left( \mu^2\rho^{(0)}_{\alpha\beta}(\mu^2)+\rho^{(1)}_{\alpha\beta}(\mu^2) \right)\left( \partial^\mu\partial^\nu \ln\left( \frac{\mu\sqrt{x^2}}{2} \right) \right) \Biggr]+O(\ln x^2)
+\end{align*}
+ここで
+\begin{align*}
+&\partial^\mu\partial^\nu \left[\frac{1}{x^2}\right]=\partial^\mu\left(-\frac{2x^\nu}{(x^2)^2}\right)=-\frac{2\eta^{\mu\nu}}{(x^2)^2}+\frac{4x^\mu\cdot 2x^\nu}{(x^2)^3} \qquad \because \partial^\mu x^\nu=\eta^{\mu\rho}\partial_\rho x^\nu=\eta^{\mu\rho}\delta^\nu_\rho=\eta^{\mu\nu} \\
+&\partial^\mu\partial^\nu \left[\ln \frac{\mu\sqrt{x^2}}{2}\right]=\partial^\mu \left( \frac{x^\nu}{x^2} \right)=\frac{\eta^{\mu\nu}}{x^2}-\frac{2x^\mu x^\nu}{(x^2)^2}
+\end{align*}
+よって
+\begin{align*}
+\braket{J^\mu_\alpha(x)J^\nu_\beta(0)}_{\VAC} \to &\frac{1}{2\pi^2}\left[ \frac{\eta^{\mu\nu}}{(x^2)^2}-\frac{4x^\mu x^\nu}{(x^2)^3} \right]\int d\mu^2 \left( \rho^{(0)}_{\alpha\beta}(\mu^2)+\frac{\rho^{(1)}_{\alpha\beta}(\mu^2)}{\mu^2} \right) \\
+&+\frac{\eta^{\mu\nu}}{4\pi^2x^2}\int d\mu^2 \rho^{(1)}_{\alpha\beta}(\mu^2)-\left[ \frac{\eta^{\mu\nu}}{8\pi^2 x^2}-\frac{x^\mu x^\nu}{4\pi^2(x^2)^2} \right]\int d\mu^2 \left(\mu^2\rho^{(0)}_{\alpha\beta}(\mu^2)+\rho^{(1)}_{\alpha\beta}(\mu^2)\right) \\
+&+O(\ln x^2)
+\end{align*}
+(結構違うけど多分誤植．次の結論に違いは出ないが．)もし二点関数のなんらかの線形結合$\sum_{\alpha\beta}c_{\alpha\beta}\braket{J^\mu_\alpha(x) J^\nu_\beta(0)}_{\VAC}$が$x\to0$において特異性を持っていて，それが$1/x^4$の次数より弱いと示すことができたならば
+\begin{align*}
+\sum_{\alpha\beta}c_{\alpha\beta}\int d\mu^2 \left( \rho^{(0)}_{\alpha\beta}(\mu^2)+\frac{\rho^{(1)}_{\alpha\beta}(\mu^2)}{\mu^2} \right)=0 
+\end{align*}
+が要請される．また，もしその特異性がさらに$1/x^2$より弱ければ
+\begin{align*}
+\sum_{\alpha\beta}c_{\alpha\beta}\int d\mu^2 \rho^{(1)}_{\alpha\beta}(\mu^2)=0,\quad \sum_{\alpha\beta}c_{\alpha\beta}\int d\mu^2 \mu^2 \rho^{(0)}_{\alpha\beta}(\mu^2)=0
+\end{align*}
+が要請される．これらは，第1～3のスペクトル関数の和則として知られている，らしい．
+
+\vskip\baselineskip
+
+これが最も興味のある場合，すなわち量子色力学においてどのようにはたらくか見る．$J^\mu_\alpha(x)$が量子色力学のような理論の保存カレントの場合，カレントの保存則から(20.5.1)は$p_\mu$と縮約すると消える．なぜなら
+\begin{align*}
+0&=\bra{\VAC}\partial_\mu J^\mu_\alpha(x)\ket{N}=\partial_\mu \left( \bra{\VAC}J^\mu_\alpha(0) \ket{N}e^{ip_Nx}\right) \\
+&=ip^N_\mu\bra{\VAC}J^\mu_\alpha(0) \ket{N}e^{ip_Nx} \\
+\Rightarrow &\quad p^N_\mu \bra{\VAC}J^\mu_\alpha(0) \ket{N}=0 \qquad\because e^{ip_Nx}\neq 0
+\end{align*}
+よって，(20.5.1)を$p_\mu$と縮約すると
+\begin{align*}
+\mathrm{LHS}&=\sum_N \delta^4(p-p_N) p_\mu \braket{\VAC|J^{\mu}_{\alpha}(0)| N }\braket{\VAC|J^\nu_{\beta}(0)|N}^* \\
+&=\sum_N \delta^4(p-p_N) \underset{=0}{\uwave{p^N_\mu \braket{\VAC|J^{\mu}_{\alpha}(0)| N }}}\braket{\VAC|J^\nu_{\beta}(0)|N}^* \\
+\mathrm{RHS}&= \frac{1}{(2\pi)^3}\theta(p^0)\left[ \underset{=0}{\left (\uwave{p^\nu-\frac{p^\nu p^2}{p^2} }\right)}\rho^{(1)}_{\alpha\beta}(-p^2)+p^2 p^\nu \rho^{(0)}_{\alpha\beta}(-p^2) \right] \\
+&=\frac{\theta(p^0)}{(2\pi)^3}p^2p^\nu \rho^{(0)}_{\alpha\beta}(-p^2) \\
+\Rightarrow &\quad p^2 \rho^{(0)}_{\alpha\beta}(-p^2)=0 \\
+\Rightarrow &\quad \rho^{(0)}_{\alpha\beta}(-p^2)\propto \delta(-p^2) \qquad \because x\delta(x)=0
+\end{align*}
+となって，$\rho^{(0)}_{\alpha\beta}(-p^2)$は$\delta(-p^2)$に比例していなければならない．\par
+$x\delta(x)=0$の性質を用いれば，(20.5.8)の被積分関数はゼロとなり自動的に第3の和則は満たされていることが分かる．3巻p231の$\ell$12の議論と同様，$\braket{\VAC|J^{\mu}_{\alpha}(0)| N }$は$J^\mu_\alpha$と同じパリティ・内部量子数を持つ$N=B_a$のみから寄与受ける．この粒子は実質NGボゾンだ．\par
+ローレンツ不変性により
+\begin{eqnarray*}
+\bra{\VAC}J^\mu_\alpha(0)\ket{B_a}=\frac{iF_{\alpha a}p^\mu_B}{(2\pi)^{3/2}\sqrt{2p^0_B}}
+\end{eqnarray*}
+で，(19.2.36)の上の計算と同様，(20.5.1)より
+\begin{align*}
+&\sum_N \delta^4(p-p_N) \bra{\VAC}J^\mu_\alpha(0)\ket{N}\bra{\VAC}J^\nu_\beta(0)\ket{N}^* \\
+&=\frac{1}{(2\pi)^4} \int d^4 x e^{-ipx}\braket{J^\mu_{\alpha}(x)J^\nu_{\beta}(0)}_{\VAC} \\
+&=\frac{1}{(2\pi)^4} \int d^4 x e^{-ipx}\int d^3\mathbf{p}_B \bra{\VAC}J^\mu_{\alpha}(x)\ket{B_a}\bra{B_a}J^\nu_{\beta}(0)\ket{\VAC} \\
+&=\frac{1}{(2\pi)^4} \int d^4 x e^{-i(p-p_B )x}\int d^3\mathbf{p}_B \bra{\VAC}J^\mu_{\alpha}(0)\ket{B_a}\bra{B_a}J^\nu_{\beta}(0)\ket{\VAC} \\
+&=\sum_a \int d^3\mathbf{p}_B \bra{\VAC}J^\mu_\alpha(0)\ket{B_a}\bra{\VAC}J^\nu_\beta(0)\ket{B_a}^*\delta^4(p-p_B) \\
+&=\sum_a \int d^3 \mathbf{p}_B \frac{F_{\alpha a}F^*_{\beta a}}{(2\pi)^3(2p^0_B)}p^\mu_B p^\nu_B \delta^4(p-p_B) \\
+&=\sum_a \frac{F_{\alpha a}F^*_{\beta a}}{(2\pi)^3(2p^0)}p^\mu p^\nu \delta(p^0-|\mathbf{p}|) \qquad \because デルタ関数により\mathbf{p}_B=\mathbf{p}でp^0_B=|\mathbf{p}_B|=|\mathbf{p}| 
+\end{align*}
+デルタ関数の公式より$\theta(p^0)\delta(-p^2)=\delta(p^0-|\mathbf{p}|)(2p^0)^{-1}$であるから
+\begin{align*}
+=\sum_a \frac{F_{\alpha a}F^*_{\beta a}}{(2\pi)^3}p^\mu p^\nu \theta(p^0)\delta(-p^2)
+\end{align*}
+これが(20.5.1)と等しいことから，$p^\mu p^\nu$の係数比較をして
+\begin{align*}
+\rho^{(0)}_{\alpha\beta}(-p^2)=\delta(-p^2)\sum_a F_{\alpha a}F^*_{\beta a}
+\end{align*}
+を得る．対して$\rho^{(1)}_{\alpha\beta}(-p^2)$は$-p^2>0(-p^2は正で，-p^2\neq 0)$のときのみゼロでない．$\rho^{(0)}_{\alpha\beta}$は$-p^2\neq0$でゼロなので，そのときは$\rho^{(1)}_{\alpha\beta}$が(20.5.1)の寄与となる．
+
+
+\vskip\baselineskip
+
+
+より特定の例を扱うために，くりこみ可能で漸近的自由なゲージ理論において，$N$個のスピン1/2の質量ゼロ(もしくはほとんどゼロ)のフェルミオンがゲージ群の同じ表現に属している場合を考える．量子色力学は$u,d,s$クォークの質量を無視すれば$N=3$，また$u,d$クォークの質量を無視すれば$N=2$としてこの描像に当てはまる．\par
+19章で見たように，そのような理論には$SU(N)\times SU(N)$対称性が存在する．この対称性は軽いフェルミオン場の左手と右手成分を，それぞれ$(N,1)$と$(1,N)$表現として変換する．ここで$Nと1$はそれぞれ$SU(N)$の基本表現と単位表現を意味する．つまり，$SU(N)\times SU(N)$の元を
+\begin{align*}
+g=\exp \left[ i\sum_a(\theta^V_a \lambda_a +\theta^A_a \gamma_5\lambda_a) \right] \in SU(N)_V \times SU(N)_A
+\end{align*}
+あるいは同等に($\theta_L=\theta_V+\theta_A,\theta_R=\theta_V-\theta_A$とすれば上と同じ)
+\begin{align*}
+g=\exp \left[ i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a +\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right] \in SU(N)_L \times SU(N)_R
+\end{align*}
+と書ける．このとき左手フェルミオン場$\psi_L$と右手フェルミオン場$\psi_R$は
+\begin{align*}
+g\psi_L=g\frac{1+\gamma_5}{2}\psi&=\exp \left[ i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a +\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right]\frac{1+\gamma_5}{2}\psi \\
+&=\exp \left[ i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a\right) \right]\frac{1+\gamma_5}{2}\psi=\exp \left[ i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a\right) \right]\psi_L \\
+g\psi_R=g\frac{1-\gamma_5}{2}\psi&=\exp \left[ i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a +\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right]\frac{1-\gamma_5}{2}\psi \\
+&=\exp \left[ i\sum_a\left(\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right]\frac{1-\gamma_5}{2}\psi=\exp \left[ i\sum_a\left(\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right]\psi_R
+\end{align*}
+と変換する．$\psi_L$は$SU(N)_L$の元に対しては基本表現として変換するが，$SU(N)_R$の元に対しては単位表現として変換することが分かる．$\psi_R$はその逆である．すなわち，フェルミオン場の左手と右手成分はそれぞれ$(N,1)表現と(1,N)$表現であることがわかる．\par
+左手と右手の$SU(N)$対称性のカレントは(7.3.15)より($F=\lambda_a \psi_{L,R}$なので)
+\begin{align*}
+\mathcal{L}_M&=-\bar{\psi}(\gamma^\mu\partial_\mu +m)\psi=-\bar{\psi}_L(\gamma^\mu\partial_\mu +m)\psi_L-\bar{\psi}_R(\gamma^\mu\partial_\mu +m)\psi_R \\
+J^\mu_{L a}&=-i\frac{\partial \mathcal{L}_M}{\partial (\partial_\mu \psi_L)}\lambda_a\psi_L=i\bar{\psi}_L\gamma^\mu\lambda_a \psi_L=i\bar{\psi}\gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \psi \\
+J^\mu_{R a}&=-i\frac{\partial \mathcal{L}_M}{\partial (\partial_\mu \psi_R)}\lambda_a\psi_R=i\bar{\psi}_R\gamma^\mu\lambda_a \psi_R=i\bar{\psi}\gamma^\mu \frac{1-\gamma_5}{2}\lambda_a \psi
+\end{align*}
+で与えられる．(-1/2がないが，誤植ではない．定数倍違ってもカレントではある．(20.5.14)の定義も少し違ってくるがスペクトル関数の和則(20.5.18)(20.5.19)は結局変わらない．より合理的な起源にするためにここではこの定義を用いることにする．)ここで$\lambda_a$は($N=2$でのパウリ行列や$N=3$でのゲルマン行列のような)$N$個の軽いクォークを区別する「フレーバー」の添え字にはたらくトレースゼロ・エルミートの行列の完全系をなす．($\psi$がスピン1/2なので次元は3/2より)これらのカレントは質量次元+3を持ち，2つのカレントの積の展開(20.3.6)における次元$d(\mcO)$の演算子の係数は$x\to0$で$x^{-6+d(\mcO)}$の次数の特異性を持つ．($x$は質量とは逆の次元なので$x^{-6+d(\mcO)}$)
+\begin{align*}
+\underset{+6}{\uwave{\braket{J(x)J(0)}}}\to \sum_\mcO \underset{6-d(\mcO)}{\uwave{U_\mcO(x)}}\underset{d(\mcO)}{\uwave{\mcO(x)}}
+\end{align*}
+したがって，もしカレントの積の線型結合展開が単位演算子$\mcO=I$を含めば，$d(I)=0$なので，対応するスペクトル関数の線形結合は$x^{-6}$のように振る舞う．\par
+$\Rightarrow$一般に，スペクトル関数の第1,2の和則はどちらも満たさない．\par
+一方，この展開の真空期待値の最低次の演算子が微分(次元+1)をゼロ個または1個しか持たないフェルミオンの二次形式(+3)なら，スペクトル関数の線型結合は$x^{-6+3}=x^{-3}$か$x^{-6+4}=x^{-2}$のように振る舞い，したがってスペクトル関数の第1の和則は満たすが，一般に第2の和則は満たさない．\par
+また，この展開の真空期待値の最低次の演算子が二つ以上の微分(+2)を含むフェルミオンの二次形式(+3)か，フェルミオンの四次形式(+6)ならば，対応するスペクトル関数の線型結合は$x^{-2}$よりも特異性は弱く，したがってスペクトル関数の第1,2の和則を満たす．\par
+二つのカレントの積の展開に，どの演算子が現れるかを知るためには，積に含まれる$SU(N)\times SU(N)$の表現の分類する必要がある．また，これらの演算易の真空期待値がゼロでないかどうかを知るには，自発的に破れていない$SU(N)\times SU(N)$の部分群のもとでどれが不変であるかを問わなくてはいけない．(演算子積の展開で現れる演算子は，演算子の積全体の表現と同じ表現に属していなければならない．)\par
+$\Rightarrow$これらの質問に答えるためには，カレント$J^\mu_{L a}(x),J^\mu_{R b}(x)$は$SU(N)\times SU(N)$のもとで，それぞれ$SU(N)\times SU(N)$のもとで$(A,1)表現と(1,A)表現$として変換されることに注意する．ここで$A$と1は，$SU(N)$の随伴表現と単位表現である．実際$SU(N)\times SU(N)$
+\begin{align*}
+&g=\exp \left[ i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a +\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right] 
+\end{align*}
+の変換の下で
+\begin{align*}
+J^\mu_{L a}(x)&=i\bar{\psi}(x)\gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \psi(x) \\
+\rightarrow J'^\mu_{L a}(x)&=i[g\psi(x)]^\dagger \beta\gamma^\mu \frac{1+\gamma_5}{2}\lambda_a g\psi(x) \\
+&=i\psi^\dagger (x) \exp \left[ -i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a +\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right] \beta \\
+& \quad \times \gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \exp \left[ i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a +\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right]\psi(x) \quad \because \lambda_aはエルミート \\
+&=i\bar{\psi}(x) \exp \left[ -i\sum_a\left(\frac{1-\gamma_5}{2}\theta^L_a \lambda_a +\frac{1+\gamma_5}{2}\theta^R_a \lambda_a\right) \right] \\
+& \quad \times \frac{1-\gamma_5}{2} \gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \exp \left[ i\sum_a\left(\frac{1+\gamma_5}{2}\theta^L_a \lambda_a +\frac{1-\gamma_5}{2}\theta^R_a \lambda_a\right) \right]\psi(x) \quad \because \gamma_5\gamma^\mu=-\gamma^\mu \gamma_5 \\
+&=i\bar{\psi}(x) \exp \left[ -i\sum_a \theta^L_a \lambda_a \right] \frac{1-\gamma_5}{2} \gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \exp \left[ i\sum_a \theta^L_a \lambda_a \right]\psi(x) \\
+&=i\bar{\psi}(x) \exp \left[ -i\sum_a \theta^L_a \lambda_a \right] \lambda_a \exp \left[ i\sum_a \theta^L_a \lambda_a \right]\gamma^\mu \frac{1+\gamma_5}{2}\psi(x) \\
+&=i\bar{\psi}(x) \left[\mathrm{Ad}(g_L^{-1})\lambda_a \right] \gamma^\mu \frac{1+\gamma_5}{2}\psi(x)
+\end{align*}
+ここでリー群の随伴表現
+\begin{align*}
+\mathrm{Ad}(g)X=gXg^{-1} ,\quad g\in G ,X\in \mathfrak{g}
+\end{align*}
+を用いた．(小林俊行・大島利雄著「リー群と表現論」p211参照)また$g_L$は$SU(N)_L$の元
+\begin{align*}
+g_L=\exp \left[ i\sum_a \theta^L_a \lambda_a \right] \in SU(N)_L
+\end{align*}
+である．全く同様にして
+\begin{align*}
+J^\mu_{R a}(x)&=i\bar{\psi}(x)\gamma^\mu \frac{1-\gamma_5}{2}\lambda_a \psi(x) \\
+\rightarrow J'^\mu_{R a}(x)&=i\bar{\psi}(x) \left[\mathrm{Ad}(g_R^{-1})\lambda_a \right] \gamma^\mu \frac{1-\gamma_5}{2}\psi(x)
+\end{align*}
+となる．ここで$g_R$は$SU(N)_R$の元
+\begin{align*}
+g_R=\exp \left[ i\sum_a \theta^R_a \lambda_a \right] \in SU(N)_R
+\end{align*}
+である．したがってカレント$J^\mu_{L a}(x),J^\mu_{R b}(x)$は$SU(N)\times SU(N)$のもとで，それぞれ$SU(N)\times SU(N)$のもとで$(A,1)表現と(1,A)表現$として変換されることが確認できた．\par
+ここで，$SU(N)\times SU(N)$の自発的に破れていない部分群はベクトル的な$SU(N)_V$であって，そのカレントは$J^\mu_{L a}(x)+J^\mu_{R a}(x)(=J^\mu_{V a}(x))$であるとする．ここで
+\begin{align*}
+J^\mu_{V a}=i\bar{\psi}\gamma^\mu\lambda_a\psi ,\quad J^\mu_{A a}=i\bar{\psi}\gamma^\mu \gamma_5 \lambda_a \psi
+\end{align*}
+と定義する．
+これは量子色力学と(19.9節で見たように)他の広い種類の理論でも成立している．また，パリティ保存は自発的には\uwave{破れていない}(すなわち$\mathbf{P}\ket{0}=\ket{0}$)とする．以上より
+\begin{align*}
+\braket{J^\mu_{\alpha}(x)J^\nu_{\beta}(0)}&=\bra{0}\mathbf{P^\dagger P}J^\mu_{\alpha}(x)J^\nu_{\beta}(0)\mathbf{P^\dagger P}\ket{0}\\
+&=\bra{0}\mathbf{P}J^\mu_{\alpha}(x)J^\nu_{\beta}(0)\mathbf{P}^{-1}\ket{0}
+\end{align*}
+が要請される．よって(5.4.30)(5.5.57)等を用いると
+\begin{align*}
+\braket{J^\mu_{V a}(x)J_{\mu A b}(0)}&=\braket{\mathbf{P}\left\{ -\bar{\psi}(x)\gamma^\mu \lambda_a \psi(x) \bar{\psi}(0)\gamma_\mu \gamma_5 \lambda_b \psi(0) \right\}\mathbf{P}} \\
+&=\braket{ -\bar{\psi}(\mathcal{P}x) \beta \gamma^\mu \beta \lambda_a \psi(\mathcal{P}x) \bar{\psi}(0)\beta \gamma_\mu \gamma_5 \beta \lambda_b \psi(0) } \\
+&=\braket{ +\bar{\psi}(\mathcal{P}x) \gamma^{\mu\dagger} \lambda_a \psi(\mathcal{P}x) \bar{\psi}(0) \gamma_\mu^\dagger \gamma_5 \lambda_b \psi(0) } \quad \because \beta\gamma^\mu\beta =-\gamma^{\mu\dagger},\gamma_5\beta=-\beta\gamma_5 \\
+&=\braket{ \bar{\psi}(x)\gamma^\mu \lambda_a \psi(x) \bar{\psi}(0)\gamma_\mu \gamma_5 \lambda_b \psi(0) } \quad \because \gamma^{0\dagger}=-\gamma^0,\gamma^{i\dagger}=\gamma^i\\
+&=-\braket{J^\mu_{Va}(\mathcal{P}x)J_{\mu Ab}(0)}
+\end{align*}
+ここで$x$が空間的とすると$\rho_{Va\, Ab}=0$が分かる．同様にして$\rho_{A a\, Vb}=0$も分かる．また
+\begin{align*}
+\braket{J^\mu_{L a}(x)J_{\mu L b}(0)}&=\braket{-\bar{\psi}(x)\gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \psi(x)\bar{\psi}(0)\gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \psi(0)} \\
+&=\braket{-\bar{\psi}(\mathcal{P}x)\gamma^\mu \frac{1-\gamma_5}{2}\lambda_a \psi(\mathcal{P}x)\bar{\psi}(0)\gamma^\mu \frac{1-\gamma_5}{2}\lambda_a \psi(0)} \\
+&=\braket{J^\mu_{R a}(\mathcal{P}x)J_{\mu R b}(0)}
+\end{align*}
+ここで$x$が空間的だとすれば$\rho_{La\, Lb}=\rho_{Ra\, Rb}$が分かる．同様に
+\begin{align*}
+\braket{J^\mu_{L a}(x)J_{\mu R b}(0)}&=\braket{-\bar{\psi}(x)\gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \psi(x)\bar{\psi}(0)\gamma^\mu \frac{1-\gamma_5}{2}\lambda_a \psi(0)} \\
+&=\braket{-\bar{\psi}(\mathcal{P}x)\gamma^\mu \frac{1-\gamma_5}{2}\lambda_a \psi(\mathcal{P}x)\bar{\psi}(0)\gamma^\mu \frac{1+\gamma_5}{2}\lambda_a \psi(0)} \\
+&=\braket{J^\mu_{R a}(\mathcal{P}x)J_{\mu R b}(0)}
+\end{align*}
+より$\rho_{La\, Rb}=\rho_{Ra\, Lb}$が分かる．\par
+以上より
+\begin{align*}
+\braket{J^\mu_{L a}(x)J^\nu_{L b}(0)}&=\frac{1}{4}\braket{\left\{ J^\mu_{Va}(x)+J^\mu_{Aa}(x) \right\}\left\{ J^\nu_{Vb}(0)+J^\nu_{Ab}(0)\right\}} \\
+&=\frac{1}{4} \Bigl[ \braket{J^\mu_{V a}(x)J^\nu_{V b}(0)} +\braket{J^\mu_{V a}(x)J^\nu_{A b}(0)} + \braket{J^\mu_{A a}(x)J^\nu_{V b}(0)} + \braket{J^\mu_{A a}(x)J^\nu_{A b}(0)}\Bigr] 
+\end{align*}
+を用いると
+\begin{align*}
+\rho^{(1)}_{L a L b}(\mu^2)=\rho^{(1)}_{R a R b}(\mu^2)=\frac{1}{4}\delta_{ab}[\rho^{(1)}_V(\mu^2)+\rho^{(1)}_A{(\mu^2 )}]
+\end{align*}
+がわかる．ここで$\delta_{ab}\rho^{(1)}_V,\delta_{ab}\rho^{(1)}_A$は
+\begin{align*}
+&\braket{J^\mu_{V a}(x)J^\nu_{V b}(0)}=\int d\mu^2 \left[ \eta^{\mu\nu}\delta_{ab}\rho^{(1)}_{V}(\mu^2)-\delta_{ab}\left(\rho^{(0)}_{V}(\mu^2)+\frac{\rho^{(1)}_{V}(\mu^2)}{\mu^2}\right) \partial^\mu \partial^\nu \right] \Delta_{+}(x;\mu^2) \\
+&\braket{J^\mu_{A a}(x)J^\nu_{A b}(0)}=\int d\mu^2 \left[ \eta^{\mu\nu}\delta_{ab}\rho^{(1)}_{A}(\mu^2)-\delta_{ab}\left(\rho^{(0)}_{A}(\mu^2)+\frac{\rho^{(1)}_{A}(\mu^2)}{\mu^2}\right) \partial^\mu \partial^\nu \right] \Delta_{+}(x;\mu^2)
+\end{align*}
+で定められる関数だ．同様にして
+\begin{align*}
+\braket{J^\mu_{L a}(x)J^\nu_{R b}(0)}&=\frac{1}{4}\braket{\left\{ J^\mu_{Va}(x)+J^\mu_{Aa}(x) \right\}\left\{ J^\nu_{Vb}(0)-J^\nu_{Ab}(0)\right\}} \\
+&=\frac{1}{4} \Bigl[ \braket{J^\mu_{V a}(x)J^\nu_{V b}(0)} -\braket{J^\mu_{V a}(x)J^\nu_{A b}(0)} + \braket{J^\mu_{A a}(x)J^\nu_{V b}(0)} + \braket{J^\mu_{A a}(x)J^\nu_{A b}(0)}\Bigr] 
+\end{align*}
+を用いると
+\begin{align*}
+\rho^{(1)}_{L a R b}(\mu^2)=\rho^{(1)}_{R a L b}(\mu^2)=\frac{1}{4}\delta_{ab}[\rho^{(1)}_V(\mu^2)-\rho^{(1)}_A{(\mu^2 )}] 
+\end{align*}
+が分かる．\par
+また，(19.4.24)と同様に
+\begin{align*}
+\braket{\VAC|J^\mu_{A a}(0)|B_b}=\frac{i\delta_{ab} F p^\mu_B}{(2\pi)^{3/2}\sqrt{2p^0_B}}
+\end{align*}
+とすれば，
+\begin{align*}
+\frac{i F_{L ab} p^\mu_B}{(2\pi)^{3/2}\sqrt{2p^0_B}}&=\braket{\VAC|J^\mu_{L a}(0)|B_b}\\
+&=\frac{1}{2}\uwave{\braket{\VAC|J^\mu_{V a}(0)|B_b}}+\frac{1}{2}\braket{\VAC|J^\mu_{A a}(0)|B_b}=\frac{i\delta_{ab} F p^\mu_B}{2(2\pi)^{3/2}\sqrt{2p^0_B}} \\
+\frac{i F_{R ab} p^\mu_B}{(2\pi)^{3/2}\sqrt{2p^0_B}}&=\braket{\VAC|J^\mu_{L a}(0)|B_b}\\
+&=\frac{1}{2}\uwave{\braket{\VAC|J^\mu_{V a}(0)|B_b}}-\frac{1}{2}\braket{\VAC|J^\mu_{A a}(0)|B_b}=-\frac{i\delta_{ab} F p^\mu_B}{2(2\pi)^{3/2}\sqrt{2p^0_B}} \\
+\Rightarrow &F_{Lab}=-F_{Rab}=\delta_{ab}F/2
+\end{align*}
+(19.4.44)と同じ形式のものができる．ここで，第二式目において$J_V$は破れていないカレントなので NGボゾンの量子数と異なり，第一項目はゼロであることに留意する．これにより(20.5.10)は
+\begin{align*}
+&\rho^{(0)}_{LaLb}(\mu^2)=\delta(\mu^2)\sum_c F_{L ac}F^*_{L bc}=\frac{1}{4}\delta(\mu^2)\sum_c F^2 \delta_{ac}\delta_{bc}=\frac{1}{4}F^2 \delta(\mu^2)\delta_{ab}\\
+&\rho^{(0)}_{RaRb}(\mu^2)=\delta(\mu^2)\sum_c F_{R ac}F^*_{R bc}=\frac{1}{4}\delta(\mu^2)\sum_c F^2 \delta_{ac}\delta_{bc}=\frac{1}{4}F^2 \delta(\mu^2)\delta_{ab}\\
+&\rho^{(0)}_{LaRb}(\mu^2)=\delta(\mu^2)\sum_c F_{L ac}F^*_{R bc}=-\frac{1}{4}\delta(\mu^2)\sum_c F^2 \delta_{ac}\delta_{bc}=-\frac{1}{4}F^2 \delta(\mu^2)\delta_{ab}\\
+&\rho^{(0)}_{RaLb}(\mu^2)=\delta(\mu^2)\sum_c F_{R ac}F^*_{L bc}=-\frac{1}{4}\delta(\mu^2)\sum_c F^2 \delta_{ac}\delta_{bc}=-\frac{1}{4}F^2 \delta(\mu^2)\delta_{ab}
+\end{align*}
+となる．
+
+
+\vskip\baselineskip
+
+
+カイラリティが同じ場合，積$J^\mu_{La}(x)J^\nu_{Lb}(0)$と$J^\mu_{Ra}(x)J^\nu_{Rb}(0)$は$SU(N)\times SU(N)$のもとでそれぞれ
+\begin{align*}
+J^\mu_{La}(x)J^\nu_{Lb}(0)&=  -\bar{\psi}(x) \lambda_a \gamma^\mu \frac{1+\gamma_5}{2}\psi(x) \bar{\psi}(x) \lambda_b \gamma^\mu \frac{1+\gamma_5}{2}\psi(x)\\
+&\to -\bar{\psi}(x) \left[\mathrm{Ad}(g_L^{-1})\lambda_a \right] \gamma^\mu \frac{1+\gamma_5}{2}\psi(x) \bar{\psi}(x) \left[\mathrm{Ad}(g_L^{-1})\lambda_b \right] \gamma^\mu \frac{1+\gamma_5}{2}\psi(x) \\
+J^\mu_{Ra}(x)J^\nu_{Rb}(0)&=  -\bar{\psi}(x) \lambda_a \gamma^\mu \frac{1-\gamma_5}{2}\psi(x) \bar{\psi}(x) \lambda_b \gamma^\mu \frac{1-\gamma_5}{2}\psi(x)\\
+&\to -\bar{\psi}(x) \left[\mathrm{Ad}(g_R^{-1})\lambda_a \right] \gamma^\mu \frac{1-\gamma_5}{2}\psi(x) \bar{\psi}(x) \left[\mathrm{Ad}(g_R^{-1})\lambda_b \right] \gamma^\mu \frac{1-\gamma_5}{2}\psi(x) 
+\end{align*}
+と変換されるから，それぞれ$(A\times A , 1)表現と(1,A\times A)表現$として変換されることが分かる．任意の群は単位元を含むので，これらカレントの積は部分空間として単位演算子を含む．(小林俊行・大島利雄著「リー群と表現論」p13参照)これらの積の演算子積展開に現れる演算子には，単位演算子が含まれる．$\rho_{LaLb},\rho_{RaRb}$はどちらも$\delta_{ab}$に比例するので$\braket{J^\mu_{La}J^\nu_{Lb}},\braket{J^\mu_{Ra}J^\nu_{Rb}}$の演算子積展開も$\delta_{ab}$に比例していなければならず，よって単位演算子の係数には$\delta_{ab}$がある．(この単位演算子は，$SU(N)$の作用するフレーバー添え字に関して単位表現なのであって，$\delta_{ab}$が単位演算子ということではない．)前の説明通り，単位演算子がある場合には一般に和則を満たさないが，スペクトル関数がゼロ；
+\begin{align*}
+\delta_{ab}[\rho^{(1)}_V(\mu^2)+\rho^{(1)}_A{(\mu^2 )}]=0
+\end{align*}
+である場合には和則を満たしている．($\delta_{ab}$に比例，すなわち対角成分であるからトレースゼロ)しかし(20.5.1)の左辺は$\alpha=\beta$のとき$|\braket{\VAC|J^\mu_\alpha|N}|>0$があるので，スペクトル関数は正定値で，ゼロとはならない．よってカイラリティが同じときは常にスペクトル関数の和則が満たされない．
+
+
+\vskip\baselineskip
+
+
+カイラリティが異なる場合，積$J^\mu_{La}(x)J^\nu_{Rb}(0),J^\mu_{Ra}(x)J^\nu_{Lb}(0)$は$SU(N)\times SU(N)$のもとでそれぞれ
+\begin{align*}
+J^\mu_{La}(x)J^\nu_{Rb}(0)&=  -\bar{\psi}(x) \lambda_a \gamma^\mu \frac{1+\gamma_5}{2}\psi(x) \bar{\psi}(x) \lambda_b \gamma^\mu \frac{1-\gamma_5}{2}\psi(x)\\
+&\to -\bar{\psi}(x) \left[\mathrm{Ad}(g_L^{-1})\lambda_a \right] \gamma^\mu \frac{1+\gamma_5}{2}\psi(x) \bar{\psi}(x) \left[\mathrm{Ad}(g_R^{-1})\lambda_b \right] \gamma^\mu \frac{1-\gamma_5}{2}\psi(x) \\
+J^\mu_{Ra}(x)J^\nu_{Lb}(0)&=  -\bar{\psi}(x) \lambda_a \gamma^\mu \frac{1-\gamma_5}{2}\psi(x) \bar{\psi}(x) \lambda_b \gamma^\mu \frac{1+\gamma_5}{2}\psi(x)\\
+&\to -\bar{\psi}(x) \left[\mathrm{Ad}(g_R^{-1})\lambda_a \right] \gamma^\mu \frac{1-\gamma_5}{2}\psi(x) \bar{\psi}(x) \left[\mathrm{Ad}(g_L^{-1})\lambda_b \right] \gamma^\mu \frac{1+\gamma_5}{2}\psi(x) 
+\end{align*}
+と変換されるから，どちらも$(A,A)$表現として変換されることが分かる．よってこれらはまとめて$SU(N)\times SU(N)$二重項を形成する．単位演算子や$F_{a\mu\nu}F_a^{\mu\nu}$のような演算子は$SU(N)\times SU(N)$一重項なので，これらの演算子積展開には現れない．また$\bar{\psi}\psi$のような，微分のないフェルミオン二次形式は
+\begin{align*}
+\bar{\psi}\psi &=\bar{\psi}_L\psi_R +\bar{\psi}_R\psi_L \\
+&\to \left\{ g_L\psi_L \right\}^\dagger \beta g_R \psi_R +\left\{ g_R\psi_R \right\} ^\dagger \beta g_L \psi_L  \\
+&=\bar{\psi}_L g^\dagger_L g_R \psi_R +\bar{\psi}_R g^\dagger_R g_L \psi_L
+\end{align*}
+と変換し，第一項目は$(\bar{N},N)$と変換し第二項目は$(N,\bar{N})$と変換することがわかる．ここで$\bar{N}$は共役表現だ．したがって$(A,A)$の部分空間でないし二重項でもないので，これも演算子積展開には出てこない．微分を一つ含み，ゲージ不変でローレンツ不変なフェルミオン二次形式は，ゲージ共変微分$\gamma^\mu \mathcal{D}_\mu$が$\psi$にかかる$\bar{\psi}\Slash{\mathcal{D}}\psi$だけだがディラック方程式より
+\begin{align*}
+\bar{\psi}\gamma^\mu \mc{D}_\mu \psi=-m\bar{\psi}\psi
+\end{align*}
+となり，上の議論よりやはりこの項は現れない．\par
+以上の議論より，p24上から$\ell 1 \sim \ell 7$の話と合わせると，カイラリティが異なる場合はスペクトル関数の和則が成り立つことが分かる．
+\begin{align*}
+&\sum_{ab}c_{ab}\int d\mu^2 \left[ \rho^{(0)}_{LaRb}(\mu^2)+\frac{\rho^{(1)}_{LaRb}(\mu^2)}{\mu^2} \right]=0 \qquad(第1の和則) \\
+\Rightarrow\quad &\sum_{ab} c_{ab }\int d\mu^2 \delta_{ab}\left[ -\frac{\delta(\mu^2)F^2}{4} + \frac{\rho^{(1)}_V(\mu^2)-\rho^{(1)}_A(\mu^2)}{4\mu^2} \right]=0 \\
+\Rightarrow \quad & \int d\mu^2 [\rho^{(1)}_V(\mu^2)-\rho^{(1)}_A(\mu^2)]/\mu^2=F^2 \\
+& \sum_{ab}c_{ab}\int d\mu^2 \rho^{(1)}_{La Rb}(\mu^2) =0 \qquad (第2の和則) \\
+\Rightarrow \quad& \int d\mu^2 \left[ \rho^{(1)}_V(\mu^2)-\rho^{(1)}_A(\mu^2) \right]=0
+\end{align*}
+$N=2$で$\lambda_a$をパウリ行列とするときには，(19.7.2)のように，$F=F_\pi=184\mathrm{MeV}$が成り立つ．
+
+
+\vskip\baselineskip
+
+
+$SU(2)\times SU(2)$のスペクトル関数は，$\rho^{(1)}_{V}(\mu^2)$については$\mu=m_\rho=770\mathrm{MeV}$において，また$\rho^{(1)}_A(\mu^2)$については未知の質量$\mu=m_A$において鋭いピークを持つと仮定された．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[scale=1.5]
+\draw (2,0)[below]node{$m_\rho,m_A$};
+\draw (0,2.8)[left]node{$\rho_{V,A}$};
+\draw (4,0)[right]node{$\mu$};
+\draw(2.03,0) circle (0.02);
+\draw[dashed](2.03,0)--(2.03,2);
+\draw[->] (-0.2,0) -- (4,0);
+\draw[->] (0,-0.2) -- (0,3);
+\draw [smooth,samples=100,domain=0.035:1] plot({\x+2},{\x - ln(\x) -0.8});
+\draw [smooth,samples=100,domain=0.035:1] plot({-\x+2.07},{\x - ln(\x) -0.8});
+\end{tikzpicture}
+\end{figure}
+\noindent
+つまり
+\begin{align*}
+\rho^{(1)}_{V}(\mu^2)\simeq g^2_\rho \delta(\mu^2-m^2_\rho) ,\quad \rho^{(1)}_A(\mu^2)\simeq g^2_A(\mu^2)\delta(\mu^2-m^2_A)
+\end{align*}
+これよりスペクトル関数の和則から
+\begin{align*}
+&\frac{g^2_\rho}{m^2_\rho}-\frac{g^2_A}{m^2_A}=F_\pi^2 \quad(第1の和則)\\
+&g^2_\rho=g^2_A (第2の和則)\\
+\Rightarrow \quad& g^2_\rho=F^2_\pi \left( \frac{1}{m^2_\rho}-\frac{1}{m^2_A} \right)^{-1}
+\end{align*}
+が導ける．1967年に$g^2_\rho=2F^2_\pi m^2_\rho$という式と共に用いられ
+\begin{align*}
+&2m^2_\rho\left( \frac{1}{m^2_\rho}-\frac{1}{m^2_A} \right)=1 \quad\Rightarrow \quad 2-\frac{2m^2_\rho}{m^2_A}=1 \quad \Rightarrow \quad m^2_A=2m^2_\rho \\
+\Rightarrow \quad & m_A=\sqrt{2}m_\rho \qquad \because m_A,m_\rho>0
+\end{align*}
+という結果が導かれる．
+
+\newpage
+
+\subsection{深非弾性散乱}
+深非弾性散乱を学ぶ前に，散乱断面積について復習しておく．\\
+・ラザフォード散乱(非相対論的弾性散乱)素粒子物理学の基礎(以下「同著」)p92参照
+\begin{align*}
+\left[ \frac{d\sigma}{d\Omega} \right]_{\mathrm{Ruth}}&=\left( \frac{Ze^2}{4\pi} \right)^2\frac{4m^2}{q^4} \\
+&=\frac{Z^2\alpha^2m^2}{4p^4\sin^4 \frac{\theta}{2}} \qquad \because 同著\text{p92(5.22)}参照
+\end{align*}
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}
+      \draw[thick](0,0)node[above=2mm]{$\mathbf{p}$}node[above=6mm]{運動量}node[below=2mm]{点電子}circle[radius=0.2];
+      \draw[thick,dashed](-1,0)--(4,0);
+      \draw[very thick,-{Stealth[length=3mm]}](0.2,0)--(1,0)to[out=0,in=-135](3.5,1.5);
+      \draw[thick](3.7,1.7)node[above right=1mm]{$\mathbf{p}$}circle[radius=0.2];
+      \draw[thick](3,0)node[below=2mm]{点電荷}node[below=6mm]{固定粒子}circle[radius=0.2];
+      \draw[thick](3.5,0)arc(0:35:2);
+      \node(a) at (3.7,0.7){$\theta$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+・mott散乱(散乱粒子のスピンを考慮した相対論的ラザフォード散乱)同著p102参照
+\begin{align*}
+\left[ \frac{d\sigma}{d\Omega} \right]_{\mathrm{mott}}&=\frac{4Z^2\alpha^2}{q^4}E^2(1-\beta^2 \sin^2 \frac{\theta}{2}) \\
+&\to \frac{4Z^2\alpha^2}{q^4}E_e^2 \cos^2 \frac{\theta}{2} \qquad \because E_e>>m_e,v=cより\beta=1,|\mathbf{p}|=E_e \\
+&=\frac{Z^2\alpha^2}{4E^2_e}\frac{\cos^2\frac{\theta}{2}}{\sin^4 \frac{\theta}{2}}
+\end{align*}
+ここで$E_e>>m_e,v=cより\beta=1,|\mathbf{p}|=E_e $であり
+\begin{align*}
+q^2&=(p-p')^2=p^2+p'^2-2p\cdot p' =-m_e^2-m_e^2-2p\cdot p' \\
+&=-2(-EE'+|\mathbf{p}| |\mathbf{p'}|\cos \theta) \qquad\because E>>m \\
+&=2E^2(1-\cos \theta)=4E^2\sin^2\frac{\theta}{2} \qquad \because E'=E , |\mathbf{p}|=|\mathbf{p}'|=E
+\end{align*}
+を用いた．電子-電子散乱では$Z=1$なので(20.6.4)式となる(係数若干誤植)．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}
+      \draw[thick](0,0)node[above=2mm]{$p=(\mathbf{p},E)$}node[above=6mm]{4元運動量}node[below=2mm]{点電子}circle[radius=0.2];
+      \draw[thick,dashed](-1,0)--(4,0);
+      \draw[very thick,-{Stealth[length=3mm]}](0.2,0)--(1,0)to[out=0,in=-135](3.5,1.5);
+      \draw[thick](3.7,1.7)node[above right=1mm]{$p=(\mathbf{p},E)$}circle[radius=0.2];
+      \draw[thick](3,0)node[below=2mm]{点電荷}node[below=6mm]{固定粒子}circle[radius=0.2];
+      \draw[thick](3.5,0)arc(0:35:2);
+      \node(a) at (3.7,0.7){$\theta$};
+\end{tikzpicture}
+\end{figure}
+\noindent
+・$e-\mu$散乱(スピン1/2同士の弾性散乱)同著p106(5.80)参照
+\begin{align*}
+\left[ \frac{d\sigma}{d\Omega} \right]_{\mathrm{LAB}}=\left[ \frac{d\sigma}{d\Omega} \right]_{\mathrm{mott}}\frac{p_3}{p_1}\left[ 1-\frac{q^2}{2M^2}\tan^2\left(\frac{\theta}{2}\right) \right]
+\end{align*}
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (b1) at (-2,2){};
+\coordinate (b2) at (-2,-2){};
+\coordinate (m1) at (0,1){};
+\coordinate (a1) at (2,2){};
+\coordinate (a2) at (2,-2){};
+\coordinate (m2) at (0,-1){};
+\draw[thick,postaction={decorate}](b1)node[left]{$e$}node[above right]{$p_1$}--(m1);
+\draw[thick,postaction={decorate}](m1)--(a1)node[right]{$e$}node[above left]{$p_3$};
+
+\draw[thick,postaction={decorate}](b2)node[left]{$\mu$}node[below right]{$p_2$}--(m2);
+\draw[thick,postaction={decorate}](m2)--(a2)node[right]{$\mu$}node[below left]{$p_4$};
+
+\begin{feynhand}
+\propag[photon,thick](m1)--(m2);
+\end{feynhand}
+
+\node(q) at (-0.3,0){$q$};
+\node(g) at (0.3,0){$\gamma^*$};
+    
+\end{tikzpicture}
+\end{figure}
+\noindent
+・形状因子(標的粒子が大きさを持つとする弾性散乱)同著p428参照\par
+ラザフォード散乱では標的粒子は点状だった． \\
+$\Rightarrow$陽子との$e-p$散乱では大きさによる寄与である形状因子$F(q^2)$を持たせる必要がある．このときの散乱断面積は
+\begin{align*}
+\frac{d\sigma}{d\Omega}=\left[\frac{d\sigma}{d\Omega}\right]_{\mathrm{Ruth}}|F(q^2)|^2
+\end{align*}
+となる．\\
+・Rosenbluthの公式(標的に形状因子を持たせた非弾性散乱)同著p434，ワインバーグ2巻p219，導出についてはランダウ相対論的量子力学2巻p207参照
+\begin{align*}
+\frac{d\sigma}{d\Omega}=\left[\frac{d\sigma}{d\Omega}\right]_{\mathrm{mott}}\frac{p_3}{p_1}\left[ \frac{G^2_E+\tau G^2_M}{1+\tau}-2\tau G^2_M \tan^2\frac{\theta}{2} \right] 
+\end{align*}
+ここで$\tau=-q^2/4M^2$だ．ワインバーグ2巻p219の表式は一見これと形が違うように見えるが，括弧の外は同じである(形状因子に関しては定義の違い)．それを確かめておく．始状態の，終状態の電子の運動量をそれぞれ$p,p'$，またエネルギーを$p^0=E_e,p'^0=E'_e$とする．また始状態，終状態の標的粒子の運動量をそれぞれ$q,q'$，また質量とエネルギーをそれぞれ$M,Q$とおく．このもとで電子の質量を無視すると
+\begin{align*}
+k^2&=(p-p')^2=-2m_e^2-2(p\cdot p')=-2(-p^0p'^0+|\mathbf{p}||\mathbf{p'}|\cos\theta) \\
+&=4E_eE'_e\sin^2\frac{\theta}{2} =4E_e(E_e+M-Q)\sin^2\frac{\theta}{2} \quad \because p'+q'=p+qの時間成分E'_e+Q=E_e+M \\
+&=4E_e^2\sin^2 \frac{\theta}{2}+4E_e(M-Q)\sin^2\frac{\theta}{2}
+\end{align*}
+また標的粒子に関して
+\begin{align*}
+k^2&=(q'-q)^2=-2M^2-2(q'\cdot q)=-2M^2+2MQ \\
+\Rightarrow \quad & M-Q=-\frac{k^2}{2M}
+\end{align*}
+を得るので，結局
+\begin{align*}
+k^2&=4E_e^2\sin^2 \frac{\theta}{2}+4E_e(M-Q)\sin^2\frac{\theta}{2} \\
+&=4E_e^2\sin^2 \frac{\theta}{2}-2E_e\frac{k^2}{M}\sin^2\frac{\theta}{2} \\
+\Rightarrow \quad & k^2=\frac{4E_e^2\sin^2(\theta/2)}{1+2E_e\sin^2(\theta/2)/M}
+\end{align*}
+これがまずワインバーグ2巻p220の$k^2$だ．そして$p_3/p_1=E'_e/E_e$は
+\begin{align*}
+\frac{E'_e}{E_e}&=\frac{E_e+M-Q}{E_e}=1+\frac{M-Q}{E_e}=1-\frac{k^2}{2E_eM} \\
+&=1-\frac{1}{2E_e M}\frac{4E_e^2\sin^2(\theta/2)}{1+2E_e\sin^2(\theta/2)/M} =1-\frac{2E_e \sin^2(\theta/2)}{M+2E_e \sin^2 (\theta/2)} \\
+&=\frac{M}{M+2E_e \sin^2 (\theta/2)}=\left[1+\frac{2E_e}{M} \sin^2 (\theta/2)\right]^{-1}  \\
+\end{align*}
+がわかる．したがってワインバーグ2巻p219の公式も他の文献と同じ形であることが分かる．
+
+\vskip\baselineskip
+
+深非弾性散乱とは何か，を先に説明する．クォークが存在することの決定的な証拠をもたらしたのがこの散乱現象である．相対論的なエネルギースケールで電子などのレプトンが入射され陽子や中性子などの核子に衝突すると，核子が「破砕」され，多数の新粒子を生み出す．これらはハドロンだ．これを単純化すると，核子を構成しているクォークが電子によって叩き出され，クォークの閉じ込めにより観測不可能なクォークがハドロン化して散乱する．こうして核子の内部構造を調べることができるため「深部」と言える．これらハドロンは電子の運動量を一部持っていくのでこれは「非弾性」散乱だ．これらの性質により「深非弾性散乱」と呼ばれている．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}
+\draw[thick](0,0)node[above=2mm]{$k$}node[above=6mm]{運動量}node[below=2mm]{電子}circle[radius=0.2];
+\draw[thick,dashed](-1,0)--(4,0);
+\draw[very thick,-{Stealth[length=3mm]}](0.2,0)--(1,0)to[out=0,in=-135](3.5,1.5);
+\draw[thick](3.7,1.7)node[above right=1mm]{$k'$}circle[radius=0.2];
+\draw[thick](3,0)node[below=4mm]{核子$N$}circle[radius=0.4];
+\draw[thick](3.5,0)arc(0:35:2);
+\node(a) at (3.7,0.7){$\theta$};
+
+\draw[very thick,-{Stealth[length=3mm]}](3,0)--(5,-0.5);
+\draw(5,-0.5)node[right]{$\pi$};
+
+\draw[very thick,-{Stealth[length=3mm]}](3,0)--(5,-0.9);
+\draw(5,-0.9)node[right]{$\pi \Biggr\}H$};
+
+\draw[very thick,-{Stealth[length=3mm]}](3,0)--(5,-1.3);
+\draw(5,-1.3)node[right]{$p$};
+
+\draw(6,1)node{$\Longrightarrow$};
+\draw(6,1.5)node{};
+\end{tikzpicture}
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (b1) at (-2,2){};
+\coordinate (b2) at (-2,-1){};
+\coordinate (m1) at (0,1){};
+\coordinate (a1) at (2,2){};
+\coordinate (a2) at (2.5,-0.5){};
+\coordinate (m2) at (1,0){};
+\coordinate (a3) at (2,-2.4){};
+\coordinate (a4) at (2,-1.6){};
+\draw[thick,postaction={decorate}](b1)node[left]{$e$}node[above right]{$k$}--(m1);
+\draw[thick,postaction={decorate}](m1)--(a1)node[right]{$e$}node[above left]{$k'$};
+
+\draw[thick,postaction={decorate}](b2)node[above=2mm]{$N$}--(m2);
+\draw[thick,postaction={decorate}](m2)--(a2)node[right]{$H$};
+\draw(-2,-1.5)circle(0.8);
+\draw(b2)circle(0.2);
+\draw(-1.7,-1.5)circle(0.2);
+\draw(-2.2,-1.9)circle(0.2);
+\draw[thick,postaction={decorate}](-1.7,-1.5)--(2.5,-1.5);
+\draw[thick,postaction={decorate}](-2.2,-1.9)--(2.5,-1.9);
+\draw(2.5,-1.5)node[right]{$H$};
+\draw(2.5,-1.9)node[right]{$H$};
+
+\draw(m1)node[above]{$x$};
+\draw(m2)node[below]{$y$};
+
+\begin{feynhand}
+\propag[photon,thick](m1)--(m2);
+\end{feynhand}
+
+\node(q) at (0,0.5){$q$};
+\node(g) at (0.9,0.6){$\gamma*$};
+
+\end{tikzpicture}
+\end{figure}
+
+さて，今までの散乱断面積の表式から類推すれば，(20.6.3)の形は自然であると分かる．また$W_1,W_2$は形状因子に対応する関数(構造関数と呼ぶ)であるということも類推できる．この感覚のもと，以下で(20.6.3)を頑張って導出することにしよう．せっかくなので，復習も兼ねて散乱断面積の初歩的なところから導出しようと思う．\par
+相互作用ハミルトニアンは(相互作用ラグランジアンと符号だけ違うので)
+\begin{align*}
+&\mc{L}=-\bar[{\psi}\Slash{\mc{D}}+m]\psi =-\bar{\psi}[\Slash{\partial}+m]\psi-ieA\bar{\psi}\gamma^\mu \psi \\
+&\mc{H}=ieA_\mu\bar{\psi} \gamma^\mu \psi \equiv ieA_\mu J^\mu
+\end{align*}
+で与えられるので$S$行列は，$\mc{J}^\mu$が(20.6.1)で出てくる「電荷$e$で割った(またフェルミオンの外線$u,\bar{u}$に付随する$1/(2\pi)^{3/2}$の因子2つで割った)カレント」とすれば，
+\begin{align*}
+S&=\frac{(-i)^2}{2!} \int d^4x \int d^4y \bra{e(k'),H}T\left\{ \mc{H}(x)\mc{H}(y) \right\} \ket{e(k),N} \\
+&=\int d^4x \int d^4y \, e^2T\{ \bra{H} J^\mu (x)\ket{N}[\bra{0} A_\mu(x)A_\nu(y) \ket{0}] \bra{e(k')}J^\nu(y) \ket{e(k)} \}
+\end{align*}
+ここで$e(k') \leftrightarrow N,e(k)\leftrightarrow H$の寄与もあるが，$ x\leftrightarrow y$で対称なので，1/2!で相殺されている．真中の項はプロパゲータ(6.2.31)であるから
+\begin{align*}
+&=\int d^4x d^4y \, e^2\bra{H} J^\mu (x)\ket{N}[-i\Delta_{\mu\nu}(x-y)]\bra{e(k')}J^\nu(y)\ket{e(k)} \\
+&=\int d^4 x d^4y \, e^2\bra{H}J^\mu (0)\ket{N}e^{i(p_N-p_H)x}\left[\frac{-i}{(2\pi)^4}\int d^4 q \frac{\eta_{\mu\nu}}{q^2-i\epsilon}e^{iq(x-y)} \right]e^{i(k-k')y}\bra{e(k')}J^\nu(0)\ket{e(k)} \\
+&=\int d^4q \int d^4xd^4y \, e^2\bra{H}J^\mu (0)\ket{N}e^{i(p_N-p_H+q)x}\left[\frac{-i}{(2\pi)^4} \frac{\eta_{\mu\nu}}{q^2-i\epsilon} \right]e^{i(k-k'-q)y}\bra{e(k')}J^\nu(0)\ket{e(k)} \\
+&= \int d^4q \, e^2\bra{H}J^\mu (0)\ket{N}(2\pi)^4\delta^4(p_N-p_H+q)\left[\frac{-i}{(2\pi)^4} \frac{\eta_{\mu\nu}}{q^2-i\epsilon} \right](2\pi)^4\delta^4(k-k'-q)\bra{e(k')}J^\nu(0)\ket{e(k)} \\
+&=e^2\bra{H}J^\mu (0)\ket{N}(2\pi)^4\delta^4(p_N-p_H+k-k')\left[\frac{-i}{(2\pi)^4} \frac{\eta_{\mu\nu}}{q^2} \right](2\pi)^4\bra{e(k')}J^\nu(0)\ket{e(k)} \\
+&=-(2\pi)^4 ie^2 \delta^4(p_N-p_H+k-k') \bra{H}J^\mu (0)\ket{N}\frac{1}{q^2}\bra{e(k')}J_\mu(0)\ket{e(k)} \\
+&=-(2\pi)^4 i e^2 \delta^4(p_N-p_H+k-k') \frac{1}{(2\pi)^3}\bra{H}\mc{J}^\mu (0)\ket{N}\frac{1}{q^2} \frac{1}{(2\pi)^3} \bra{e(k')}\mc{J}_\mu(0)\ket{e(k)} \\
+&=-(2\pi)^4 i \delta^4(p_N-p_H+k-k') e^2 \frac{1}{(2\pi)^6}\bra{H}\mc{J}^\mu (0)\ket{N}\frac{1}{q^2} \bar{u}(k')\gamma_\mu u(k)
+\end{align*}
+で与えられ，ファインマン振幅$M$は一般に(3.3.2)で(散乱が起きるとしているので)
+\begin{align*}
+&S=-2\pi i \delta^4(p_N-p_H+k-k') M \\
+\Rightarrow \quad & M=\frac{e^2}{(2\pi)^3q^2}\bra{H}\mc{J}^\mu (0)\ket{N} \bar{u}(k')\gamma_\mu u(k)
+\end{align*}
+2体散乱の微分散乱断面積は(3.4.15)で与えられ
+\begin{align*}
+d\sigma =(2\pi)^4 u^{-1}|M|^2\delta^4(p_N-p_H+k-k') d^3k'
+\end{align*}
+となる．(ハドロン$H$については測定しないので$d\beta$は$d^3k'$ひとつだけ)核子$N$は静止していて，電子の質量については無視するので，相対速度(3.4.17)は$u=1$となる．したがって
+\begin{align*}
+d\sigma=\frac{e^4}{(2\pi)^2q^4}\biggl[\bra{H}\mc{J}^\mu (0)\ket{N}\bra{H}\mc{J}^\nu (0)\ket{N}^{*}\biggr]\biggl[\bar{u}(k')\gamma_\mu u(k)u^\dagger(k)\gamma^\dagger_\nu \beta u(k')\biggr]\delta^4(p_N-p_H+k-k')d^3k'
+\end{align*}
+ハドロンについては測定しないので$H$について和をとり，また始状態と終状態の$z$成分については測定しないのが通常なので，電子のスピン$\sigma,\sigma'$と核子のスピン$\sigma_N$については平均をとる．よって
+\begin{align*}
+d\bar\sigma &\equiv \frac{1}{4}\sum_{\sigma \sigma'}\sum_{\sigma_N,H}d\sigma \\
+&=\frac{e^4}{(2\pi)^2q^4}\biggl[\frac{1}{2}\sum_{\sigma_N,H} \bra{H}\mc{J}^\mu (0)\ket{N}\bra{H}\mc{J}^\nu (0)\ket{N}^{*}\biggr] \\
+&\quad \times\biggl[\frac{1}{2}\sum_{\sigma \sigma'}\bar{u}(k')\gamma_\mu u(k)u^\dagger(k)\gamma^\dagger_\nu \beta u(k') \biggr]\delta^4(p_N-p_H+k-k')d^3k'  \\
+&=\frac{e^4}{(2\pi)^2q^4}W^{\mu\nu}L_{\mu\nu}d^3k'=\frac{e^4}{(2\pi)^2q^4}W^{\mu\nu}L_{\mu\nu}(k'^0)^2dk'^0d\Omega \quad\because |\mathbf{k}|=k^0
+\end{align*}
+が計算すべき断面積だ．ここで$d\Omega=\sin \theta d\theta d \phi$は終状態の電子が散乱される立体角であり，$\theta$は$\mathbf{k}$と$\mathbf{k'}$の間の角度，そして
+\begin{align*}
+&W^{\mu\nu}=\frac{m_N}{p^0_N}W^{\mu\nu} \equiv \frac{1}{2}\sum_{\sigma_N,H} \delta^4(p_N-p_H+k-k') \bra{H}\mc{J}^\mu (0)\ket{N}\bra{H}\mc{J}^\nu (0)\ket{N}^{*} \\
+&L_{\mu\nu} \equiv \frac{1}{2}\sum_{\sigma \sigma'}\bar{u}(k')\gamma_\mu u(k)u^\dagger(k)\gamma^\dagger_\nu \beta u(k')=\frac{1}{2}\sum_{\sigma \sigma'}\bar{u}(k')\gamma_\mu u(k)\bar u(k)(-\gamma_\nu)  u(k')
+\end{align*}
+である．(8.7.20)を用いると
+\begin{align*}
+&L_{\mu\nu}=\frac{1}{2}\mathrm{Tr} \left\{ \gamma_\mu \left( \frac{-i\Slash{k}+m_e}{2k^0} \right)(-\gamma_\nu) \left(\frac{-i\Slash{k}'+m_e}{2k'^0}\right)  \right\} \\
+&=\frac{1}{8k^0k'^0}\left[  \mathrm{Tr}\left\{ \gamma_\mu \gamma_\rho \gamma_\nu \gamma_\sigma \right\}k^\rho k'^\sigma -m_e^2 \mathrm{Tr}\left\{ \gamma_\mu \gamma_\nu \right\} \right]  \qquad \because 奇数個の\gamma 行列のトレースはゼロ \\
+&=\frac{1}{8k^0k'^0}\left[  \left\{ 4\eta_{\mu\rho}\eta_{\nu\sigma}+\eta_{\mu\sigma}\eta_{\rho\nu}-\eta_{\mu\nu}\eta_{\rho\sigma} \right\}k^\rho k'^\sigma -4m_e^2\eta_{\mu\nu}  \right] \\
+&=\frac{1}{2k^0k'^0}\left[  \left\{ k_\mu k'_\nu+k'_\mu k_\nu-(k\cdot k')\eta_{\mu\nu} \right\} -m_e^2\eta_{\mu\nu}  \right]  \\
+&=\frac{1}{2k^0k'^0}\left[ k_\mu k'_\nu+k'_\mu k_\nu+\left\{-(k\cdot k') +\frac{k^2}{2}+ \frac{k'^2}{2}\right\}\eta_{\mu\nu} \right] \\
+&=\frac{1}{2k^0k'^0}\left[ k_\mu k'_\nu+k'_\mu k_\nu+\frac{q^2}{2} \eta_{\mu\nu} \right] 
+\end{align*}
+となる．さて，カレントの保存則からも分かる通り
+\begin{align*}
+&(k-k')^\mu\bra{e(k')}\mc{J}_\mu(0)\ket{e(k)}=q^\mu\bra{e(k')}\mc{J}_\mu(0)\ket{e(k)}=0 \\
+&(p_H-p_N)^\mu\bra{H}\mc{J}_\mu(0)\ket{N}=q^\mu\bra{H}\mc{J}_\mu(0)\ket{N}=0
+\end{align*}
+が成り立っている．したがって
+\begin{align*}
+&q^\mu L_{\mu\nu}=q^\nu L_{\mu\nu}=0 \\
+&q_\mu W^{\mu\nu}=q_\nu W^{\mu\nu}=0
+\end{align*}
+という条件がつく．前者の条件は自明だ．なぜなら$q=k-k',k^2=k'^2$に留意すれば
+\begin{align*}
+q^\mu L_{\mu\nu}&=\frac{1}{2k^0 k'^0}\left[ (q\cdot k) k'_\nu+(q \cdot k') k_\nu+\frac{q^2}{2} q_\nu \right] \\
+&=\frac{1}{2k^0 k'^0}\biggl[ (k)^2 k'_\nu-(k'\cdot k)k'_\nu +(k \cdot k') k_\nu-(k')^2 k_\nu  \\
+&\qquad \qquad + \frac{(k)^2}{2}k_\nu +\frac{(k')^2}{2}k_\nu-(k\cdot k')k_\nu -\frac{(k)^2}{2}k'_\nu- \frac{(k')^2}{2}k'_\nu +  (k\cdot k')k_\nu \biggr] \\
+&=0
+\end{align*}
+となるからだ．後者の条件について考えてみる．$J^\mu$はエルミートなので$W^{\mu\nu}=W^{\nu\mu*}$であり，定義より正低値行列だ．実際
+\begin{align*}
+v_\mu W^{\mu\nu}v_\nu=\frac{1}{2}\sum_{\sigma_N,H}\delta^4(p_N-p_H+k-k')|\bra{H}J^\mu(0) v_\mu\ket{N}|^2>0
+\end{align*}
+である．また核子のスピンについては平均をとってしまっているので，$W^{\mu\nu}$は$qとp$のみの関数であり，しかもローレンツテンソルである．したがって$\eta^{\mu\nu},q^\mu q^\nu ,p^\mu p^\nu , p^\mu q^\nu , q^\mu p^\nu ,i\epsilon^{\mu\nu\rho\sigma}p_\rho q_\sigma$で展開できる．($i\epsilon^{\mu\nu\rho\sigma}p_\rho p_\sigma,i\epsilon^{\mu\nu\rho\sigma}q_\rho q_\sigma$は反対称性により自動的にゼロ)ここで条件$q_\mu W^{\mu\nu}=q_\nu W^{\mu\nu}=0$を満たす量は
+\begin{align*}
+\left(\frac{q^\mu q^\nu}{q^2}-\eta_{\mu\nu}\right),\quad \left(p^\mu -\frac{(p\cdot q)}{q^2}q^\mu \right)\left(p^\nu -\frac{(p\cdot q)}{q^2}q^\nu \right), \quad i\epsilon^{\mu\nu\rho\sigma}p_\rho q_\sigma
+\end{align*}
+である．前者二つはグラムシュミットの直交化法(懐かしい！)を思い出せば自然に導かれる．実際にこれらに$q_\mu,q_\nu$を縮約してみればゼロになることを確認してみるといい．さらに電磁相互作用では，パリティが保存するので三つ目の項は存在しない(実際に$L_{\mu\nu}$にかければ反対称性より自動的にゼロになることはすぐ確認できる)したがって自然に
+\begin{align*}
+W^{\mu\nu}(q,p)=-\left(\frac{q^\mu q^\nu}{q^2}-\eta^{\mu\nu}\right)W_1(\nu,q^2)+\frac{1}{m_N^2}\left(p^\mu -\frac{(p\cdot q)}{q^2}q^\mu \right)\left(p^\nu -\frac{(p\cdot q)}{q^2}q^\nu \right)W_2(\nu,q^2)
+\end{align*}
+という形に導かれる．ここで$W^{\mu\nu}=W^{\nu\mu*}$より$W_1,W_2$は実関数であり$W^{\mu\nu}$は正定値
+\begin{align*}
+0<v_\mu W^{\mu\nu} v_\nu =-\left(\frac{(v\cdot q)^2}{q^2}-v^2\right)W_1+\frac{1}{m_N^2}\left|(v\cdot p) -\frac{(p\cdot q)}{q^2}(v\cdot q) \right|^2W_2
+\end{align*}
+であるから，$W_2$の係数は自明に正，また$W_1$の係数はコーシー・シュワルツの不等式$(v\cdot q)^2\leq v^2 q^2$を用いれば正であることから，$W_1,W_2$は実かつ正の関数であることが要請される．これらはスカラー関数であるから，$p,q$から作られる独立な二つのスカラー量$q^2,\nu \equiv -q\cdot p/m_N(=q^0)$のみに依存する($p^2$は$-m^2_N$であるから変数ではない)．第二項目は次元を合わせるために係数$1/m_N^2$をかけてある．条件$q^\mu L_{\mu\nu}=q^\nu L_{\mu\nu}=0$と，電子の質量を無視することから
+\begin{align*}
+q^2=(k-k')^2&=-2m_e^ 2 - 2(k\cdot k') \\
+&=-2(k\cdot k') =2(k^0k'^0-|\mathbf{k}||\mathbf{k'}|\cos\theta)=2 k^0k'^0(1-\cos\theta) \quad \because |\mathbf{k}|=k^0 \\
+&=4k^0k'^0 \sin^2\frac{\theta}{2} 
+\end{align*}
+を用いると
+\begin{align*}
+W^{\mu\nu}L_{\mu\nu}&=\left[-\left(\frac{q^\mu q^\nu}{q^2}-\eta^{\mu\nu}\right)W_1+\frac{1}{m_N^2}\left(p^\mu -\frac{(p\cdot q)}{q^2}q^\mu \right)\left(p^\nu -\frac{(p\cdot q)}{q^2}q^\nu \right)W_2\right]L_{\mu\nu} \\
+&=\eta^{\mu\nu}L_{\mu\nu}W_1 + \frac{1}{m_N^2}p^\mu p^\nu L_{\mu\nu}W_2 \\
+&=\eta^{\mu\nu}\frac{1}{2k^0k'^0}\left[ k_\mu k'_\nu+k'_\mu k_\nu+\frac{q^2}{2} \eta_{\mu\nu} \right]W_1 +\frac{1}{m_N^2}p^\mu p^\nu\frac{1}{2k^0k'^0}\left[ k_\mu k'_\nu+k'_\mu k_\nu+\frac{q^2}{2} \eta_{\mu\nu} \right]  \\
+&=\frac{1}{2k^0k'^0}\left[ 2(k\cdot k')+2q^2 \right] W_1 +\frac{1}{2k^0k'^0m_N^2}\left[ 2(p\cdot k)(p\cdot k')+\frac{q^2 p^2}{2} \right]  \quad \because \eta^{\mu\nu}\eta_{\mu\nu}=4 \\
+&=\frac{1}{2k^0k'^0}\left[ -2(k\cdot k') \right] W_1 +\frac{1}{2k^0k'^0m_N^2}\left[ 2m_N^2 k^0k'^0 -m_N^2\frac{q^2}{2} \right]  \quad \because p=(0,0,0,m_N)\\
+&=2\sin^2\frac{\theta}{2} W_1 +\frac{1}{2k^0k'^0}\left[ 2 k^0k'^0 -\frac{q^2}{2} \right] =2\sin^2\frac{\theta}{2} W_1 +\frac{1}{2k^0k'^0}\left[ 2 k^0k'^0 -2k^0k'^0\sin^2\frac{\theta}{2} \right] \\
+&=2\sin^2\frac{\theta}{2} W_1 + \cos^2 \frac{\theta}{2}W_2=\cos^2 \frac{\theta}{2}\left[W_2 +2\tan^2 \frac{\theta}{2}W_1 \right]
+\end{align*}
+であるから，求めるべき断面積は
+\begin{align*}
+d\bar{\sigma}&=\frac{e^4}{(2\pi)^2q^4}W^{\mu\nu}L_{\mu\nu}(k'^0)^2dk'^0d\Omega \\
+&=\frac{4\alpha^2}{q^4}E_e'^2\cos^2 \frac{\theta}{2}\left[W_2 +2\tan^2 \frac{\theta}{2}W_1 \right]dE_e' d\Omega \\
+&=\frac{4\alpha^2}{q^4}E_e'^2\cos^2 \frac{\theta}{2}\left[W_2 +2\tan^2 \frac{\theta}{2}W_1 \right]d\nu d\Omega \quad \because \nu=q^0=k^0-k'^0
+\end{align*}
+(最後はマイナスがつきそうだが，積分範囲が$E_e':[-\infty\sim\infty]\to \nu:[\infty\sim-\infty]$となるので，それをマイナスで戻してやると打ち消し合うのでマイナスは出てこない)mott散乱の断面積の表式を思い出せば
+\begin{align*}
+\frac{d\bar{\sigma}}{d\nu d\Omega}&=\frac{4\alpha^2}{q^4}E_e'^2\cos^2 \frac{\theta}{2}\left[W_2 +2W_1\tan^2 \frac{\theta}{2} \right] \\
+&=\left[ \frac{d\sigma}{d\Omega}\right]_{\mathrm{mott}}\left[W_2 +2W_1\tan^2 \frac{\theta}{2} \right] 
+\end{align*}
+を得る．これが求めたかったものだ！
+
+\vskip\baselineskip
+
+$-p^2_H=-(p+q)^2=-q^2-2p\cdot q -p^2 =-q^2 +2m_N \nu +m^2_N$が固定された値のとき，微分断面積は$q^{-4}$の因子により$q^2\to \infty$のとき非常に速く減少すると思われる．\\
+$\Rightarrow$しかし$\nu W_2(\nu,q^2)$は$\omega\equiv 2m_N\nu/q^2$
+\begin{align*}
+-p^2_H&=-q^2 +\frac{2m_N \nu}{q^2}q^2 +m^2_N \overset{q^2\to \infty}{\longrightarrow} (\omega-1)q^2 >0 \quad \because -p^2_H>0\\
+\Rightarrow \quad &\omega>1
+\end{align*}
+が固定された値のときに$q^2$に対して定数だと分かった(らしい)．
+
+
+\vskip\baselineskip
+
+
+$\nu W_2(\nu,q^2)$と$W_1(\nu,q^2)$は，$\nu$と$q^2$が共に無限大にいくときに，$q^2$と$\nu$の2変数関数ではなく比$\omega=2m_N\nu/q^2$に依存する，とブヨルケンは仮定した．
+\begin{align*}
+\nu W_2(\nu,q^2)\to F_2(\omega),\quad W_1(\nu,q^2)\to F_1(\omega)
+\end{align*}
+(素粒子物理学の基礎p440と同様に$m_NW_1\to F_1$とした方が後の表式は綺麗になるが，ここはワインバーグに合わせる)少し後にファインマンがより直感的な説明を与えた．非常に相対論的な核子の深非弾性散乱では核子はあたかも各種のパートンからできているように振る舞うとした．(これはクォークとグルーオンだ！)このパートンには$i$という添え字を与え，核子の運動量を$\mathbf{p}$として，それぞれのパートンの運動量が$x\mathbf{p}$と$(x+dx)\mathbf{p}$との間にある確率は$\mc{F}_i(x)dx$で与えられるとする(分布関数の話を復習しておくと良い．すなわちパートンの運動量$x\mathbf{p}$が従う分布関数が$\mc{F}_i(x)$だ．それぞれのパートンは種類が同じとは限らないので，それぞれのパートン$i$の運動量はそれぞれ分布関数$\mc{F}_i(x)$に従うとおく)．\par
+各パートンの運動量は$0(x=0)\sim \mathbf{p}(x=1)$の中には必ずあるので，各$i$について
+\begin{align*}
+\int^1_0 \mc{F}_i(x)dx=1
+\end{align*}
+が成り立つ．また核子全体の運動量が$\mathbf{p}$なので，それぞれの核子の運動量期待値を全て足し合わせたら$\mathbf{p}$となることが要請される．
+\begin{align*}
+&\sum_i \int^1_0 (x\mathbf{p})\mc{F}_i(x)dx=\mathbf{p} \\
+\Rightarrow \quad &\int^1_0 \sum_i \mc{F}_i(x)xdx=1
+\end{align*}
+が成り立つ．\par
+4元運動量$xp$のパートンから電子弾性散乱について
+\begin{align*}
+&-(xp)^2=x^2m_N^2=-(q+xp)^2 \\
+&=-q^2-2x(p\cdot q)-x^2p^2 = -q^2 +2m_N \nu x+x^2m_N^2 \quad \because \nu=-\frac{(p\cdot q)}{m_N}\\
+\Rightarrow \quad & \nu=\frac{q^2}{2m_N x}
+\end{align*}
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (b1) at (-2,2){};
+\coordinate (b2) at (-2,-1){};
+\coordinate (m1) at (0,1){};
+\coordinate (a1) at (2,2){};
+\coordinate (a2) at (2,-1){};
+\coordinate (m2) at (0,0){};
+\coordinate (a3) at (2,-2.4){};
+\coordinate (a4) at (2,-1.6){};
+\draw[thick,postaction={decorate}](b1)node[left]{$e$}node[above right]{$k$}--(m1);
+\draw[thick,postaction={decorate}](m1)--(a1)node[right]{$e$}node[above left]{$k'$};
+
+\draw[thick,postaction={decorate}](b2)node[above=2mm]{$N$}--(m2);
+\draw[thick,postaction={decorate}](m2)--(a2)node[above=2mm]{$q+xp$};
+\draw(-2,-1.5)circle(0.8);
+\draw(b2)circle(0.2);
+\draw(-1.7,-1.5)circle(0.2);
+\draw(-2.2,-1.9)circle(0.2);
+\draw(-0.5,-0.5)node[below]{$xp$};
+;\draw(a2)circle(0.2);
+
+\begin{feynhand}
+\propag[photon,thick](m1)--(m2);
+\end{feynhand}
+
+\node(q) at (-0.3,0.5){$q$};
+\node(g) at (0.3,0.5){$\gamma*$};
+
+\end{tikzpicture}
+\end{figure}
+
+この散乱はパートンひとつひとつについて$e-\mu$散乱と(電荷を除いて)同じだ．つまり(20.6.3)の断面積を$\nu$で積分したら$e-\mu
+$散乱断面積であるから，各$i$について($M^2\to x^2m_N^2$として)
+\begin{align*}
+\left[\frac{d\sigma}{d\Omega}\right]_i=\left[ \frac{d\sigma}{d\Omega} \right]_{\mathrm{mott}} Q_i^2 \frac{E'_e}{E_e}\left(1+\frac{q^2}{2m_N^2x^2} \tan^2 \frac{\theta}{2} \right)
+\end{align*}
+ここで
+\begin{align*}
+\frac{q^2}{2m_N x}=\frac{2E_e E'_e}{m_N x}\sin^2 \frac{\theta}{2}
+\end{align*}
+であることに留意すると，($q^2$は$\nu$の関数なので以下の積分は単純には行うことはできない)
+\begin{align*}
+\int^\infty_{-\infty}\delta \left(\nu -\underset{\nu の関数}{\uwave{\frac{q^2}{2m_N x} }}\right)d\nu&=-\int^{-\infty}_{\infty}\delta \left(E_e -E'_e -\frac{2E_e E'_e}{m_N x}\sin^2 \frac{\theta}{2} \right) dE'_e \\
+&=\int^\infty_{-\infty}\delta \left( -E'_e\left[ 1+\frac{2E_e}{m_N x}\sin^2 \frac{\theta}{2} \right]+E_e \right)dE'_e \\
+&=\int^\infty_{-\infty}\delta(-E'_e \alpha +E_e)dE'_e \\
+&=\int^\infty_{-\infty}\frac{1}{\alpha}\delta\left(-E'_e +\frac{E_e}{\alpha}\right)dE'_e \\
+&=\frac{1}{\alpha} \quad \left(E'_e=\frac{E_e}{\alpha}\right) \\
+&=\frac{E'_e}{E_e}
+\end{align*}
+よって
+\begin{align*}
+\left[ \frac{d^2\sigma}{d\Omega d\nu} \right]_i =\left[ \frac{d\sigma}{d\Omega} \right]_{\mathrm{mott}}Q^2_i\left( 1+\frac{q^2}{2m_N^2x^2}\tan^2 \frac{\theta}{2} \right)\delta\left(\nu-\frac{q^2}{2m_N x}\right)
+\end{align*}
+(実際に$\nu$で積分すれば$e-\mu$散乱断面積と形式が一致することが分かる)各$i$についての散乱断面積が分かったので，これらをパートン分布関数とかけて$x$について積分し，パートン全てについて足し合わせることで核子全体についての散乱断面積となる．
+\begin{align*}
+\frac{d^2\sigma}{d\Omega d\nu}&=\sum_i \int^1_0\left[ \frac{d^2\sigma}{d\Omega d\nu} \right]_i \mc{F}_i(x)dx \\
+&=\left[\frac{d\sigma}{d\Omega}\right]_{\mathrm{mott}}\sum_i Q^2_i \int^1_0 \mc{F}_i(x)\left( 1+\frac{q^2}{2m_N^2x^2}\tan^2 \frac{\theta}{2} \right)\delta\left(\nu-\frac{q^2}{2m_N x}\right) dx
+\end{align*}
+これと(20.6.3)と比較すると
+\begin{align*}
+W_2(\nu,q^2)&=\sum_i Q^2_i \int^1_0 dx \mc{F}_i (x)\delta\left(\nu-\frac{q^2}{2m_N x}\right) \\
+&=\sum_i Q^2_i \int^1_0 dx \mc{F}_i(x)\frac{1}{\nu}\delta\left(1-\frac{q^2}{2m_N\nu x}\right) =\sum_i Q^2_i \int^1_0 dx\mc{F}_i(x)\frac{1}{\nu}\delta\left( 1-\frac{1}{\omega x} \right) \\
+&=\sum_i Q^2_i \int^1_0 dx\mc{F}_i(x)\frac{1}{\nu\omega}\delta\left(x-\frac{1}{\omega}\right) \quad \because デルタ関数の公式 \, \delta(f(x))=\frac{1}{|f'(x_0)|}\delta(x-x_0) \\
+&=\frac{1}{\nu\omega}\sum_i Q^2_i \mc{F}_i\left(\frac{1}{\omega}\right) \\
+2W_1(\nu,q^2)&=\sum_i Q_i^2 \int^1_0 dx \mc{F}_i(x)\frac{q^2}{2m_N^2 x^2}\delta\left( \nu-\frac{q^2}{2m_Nx} \right) \\
+&=\sum_i Q^2_i \int^1_0 dx \mc{F}_i(x)\frac{1}{\omega\nu}\frac{q^2}{2m_N^2 x^2}\delta\left( x-\frac{1}{\omega} \right) \\
+&=\sum_i Q^2_i \mc{F}_i\left(\frac{1}{\omega}\right)\frac{1}{\omega\nu}\frac{q^2\omega^2}{2m_N^2}=\sum_i Q^2 \mc{F}_i\left(\frac{1}{\omega}\right)\frac{1}{\omega\nu}\frac{q^2}{2m_N^2}\frac{2m_N\nu}{q^2}\omega \\
+&=\sum_i Q^2_i \mc{F}_i\left(\frac{1}{\omega}\right)\frac{1}{m_N}=\frac{\omega\nu}{m_N}W_2(\nu,q^2) \\
+\Rightarrow \quad &W_1(\nu,q^2)=\frac{\omega\nu}{2m_N}W_2(\nu,q^2)
+\end{align*}
+これは
+\begin{align*}
+&F_2(\omega)=\frac{1}{\omega}\sum_iQ^2_i \mc{F}_i\left(\frac{1}{\omega}\right) \\
+&F_1(\omega)=\frac{\omega}{2m_N}F_2(\omega)
+\end{align*}
+としてブヨルケンのスケーリング則(20.6.5)に一致する．
+
+\vskip\baselineskip
+
+陽子が二つのアップクォーク$u$(電荷+3/2)と一つのダウンクォーク$d$(電荷-1/3)，中性子が一つの$u$(+3/2)と二つの$d$(-1/3)，およびそれぞれさらに任意個数の中性パートンからなるという仮説に基づくと(20.6.11)と(20.6.6)は以下の$W_2$についての和則を与える．
+\begin{align*}
+1&=\int^1_0 \mc{F}_i(x)dx=\int^1_\infty \mc{F}_i\left(\frac{1}{\omega}\right)\left(-\frac{1}{\omega^2}d\omega\right) \quad \because x=\frac{1}{\omega},dx=-\frac{1}{\omega^2}d\omega \\
+&=\int^\infty_1 \mc{F}_i\left(\frac{1}{\omega}\right)\frac{1}{\omega^2}d\omega \\
+\Rightarrow \quad & \int^\infty_1 F_2(\omega)\frac{d\omega}{\omega}=\int^\infty_1 \frac{1}{\omega^2}\sum_i Q^2_i \mc{F}_i\left(\frac{1}{\omega}\right)d\omega =\sum_iQ^2_i \\
+&\qquad\qquad\qquad =\left\{
+\begin{array}{ll}
+(2/3)^2+(-1/3)^2+( -1/3)^2=2/3 &(中性子nのとき) \\
+(2/3)^2 +(-2/3)^2+( -1/3)^2=1 &(陽子pのとき)
+\end{array}
+\right.
+\end{align*}
+核子の運動量は3つのクォークが等しく担っており中性パートンは運動量ゼロと仮定すると，クォークの運動量期待値はそれぞれ$\mathbf{p}/3$となる．
+\begin{align*}
+\int^1_0 \mc{F}_i(x)(x\mathbf{p})dx=\frac{\mathbf{p}}{3}
+\end{align*}
+したがって
+\begin{align*}
+&\int^1_0\mc{F}_i(x)xdx=\int^1_\infty \mc{F}_i\left(\frac{1}{\omega}\right)\frac{1}{\omega}\left(-\frac{1}{\omega^2}d\omega \right)=\int^\infty_1 \mc{F}_i\left(\frac{1}{\omega}\right)\frac{d\omega}{\omega^3}=\frac{1}{3} \\
+\Rightarrow \quad &\int^\infty_1 F_2(\omega)\frac{d\omega}{\omega^2}=\int^\infty_1 \frac{1}{\omega^3}\sum_i Q^2_i \mc{F}_i \left(\frac{1}{\omega}\right)d\omega=\frac{1}{3}\sum_iQ^2_i \\
+&\qquad\qquad =\left\{
+\begin{array}{ll}
+1/3 & (陽子pのとき) \\
+2/9 &(中性子nのとき)
+\end{array}
+\right.
+\end{align*}
+これは測定値とずれるらしい．つまり，核子の運動量の多くは中性パートン(これはグルーオンに対応する)によって担われていることを示している．
+
+\vskip\baselineskip
+
+以上の現象論は，特定の場の理論(QED.QCD等)に依存していない．基礎の場の理論を深非弾性散乱に用いる方法を最終的に与えるのはOPEだ．特にOPEは(20.6.5)のスケール仮定を説明するのに「漸近的自由な場の理論」が必要ということを明らかにした．この「漸近的自由な場の理論」を我々は知っている．すなわち，QCDだ！\par
+OPEを用いるために，まず(20.6.1)をフーリエ変換する．並進不変性とハドロン状態の完全性を用いると
+\begin{align*}
+\left(\frac{m_N}{p^0_N}\right)W^{\mu\nu}(q,p)&=\frac{1}{2}\sum_{\sigma_N}\sum_H \delta^4(p_H-p-q)\bra{H}J^\mu (0)\ket{N}\bra{H}J^\nu (0)\ket{N}^* \\
+&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N}\sum_H \int d^4z \, e^{i(p_H-p-q)z}\bra{N}J^\nu (0)\ket{H}\bra{H}J^\mu (0)\ket{N} \\
+&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N}\sum_H \int d^4z \, e^{-iqz}\bra{N}J^\nu (z)\ket{H}\bra{H}J^\mu (0)\ket{N} \\
+&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-iqz}\bra{N}J^\nu (z)J^\mu (0)\ket{N}
+\end{align*}
+となる．(20.1.2)で述べているように，$q\to \infty$での$W^{\mu\nu}(q,p)$の漸近的振る舞いは，この関係式によりOPEの$z\to 0$における特異性と関係する．\par
+これは以下の2点グリーン関数の行列要素に関係する．
+\begin{align*}
+\left(\frac{m_N}{p^0_N}\right)T^{\mu\nu}(q,p)\equiv\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-iqz}\bra{N}T\{J^\nu (z),J^\mu (0)\} \ket{N}
+\end{align*}
+これは$W^{\mu\nu}$と同様に$q_\mu$と縮約するとカレント保存によりゼロとなるので，(20.6.2)と同じように
+\begin{align*}
+T^{\mu\nu}(q,p)=-\left(\frac{q^\mu q^\nu}{q^2}-\eta^{\mu\nu}\right)T_1(\nu,q^2)+\frac{1}{m_N^2}\left(p^\mu -\frac{(p\cdot q)}{q^2}q^\mu \right)\left(p^\nu -\frac{(p\cdot q)}{q^2}q^\nu \right)T_2(\nu,q^2)
+\end{align*}
+として展開できる．(10.8.5)と同様に，$T^{\mu\nu}$の中の時間順序は交換子を用いて，以下のように異なった仕方で書き換えることができる．
+\begin{align*}
+T\{J^\nu (z),J^\mu (0)\}&=\theta(z^0)[J^\nu(z),J^\mu(0)]+J^\mu(0)J^\nu(z) \\
+&=-\theta(-z^0)[J^\nu(z),J^\mu(0)]+J^\nu(z)J^\mu(0)
+\end{align*}
+($z^0>0$のときは$J^\nu(z)J^\mu(0)$，$z^0<0$のときは$J^\mu(0)J^\nu(z)$となることが確認できる)これを用いて
+\begin{align*}
+T^{\mu\nu}(q,p)&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-iqz}\bra{N}T\{J^\nu (z),J^\mu (0)\} \ket{N} \\
+&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, \theta(z^0)e^{-iqz}\bra{N}[J^\nu (z),J^\mu (0)] \ket{N} \\
+&\qquad \qquad +\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-iqz}\bra{N}J^\mu (0)J^\nu (z) \ket{N} \\
+&=-\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, \theta(-z^0)e^{-iqz}\bra{N}[J^\nu (z),J^\mu (0)] \ket{N} \\
+&\qquad \qquad +\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-iqz}\bra{N}J^\nu (z)J^\mu (0) \ket{N}
+\end{align*}
+とできる．これらを(10.8.7)$\sim$(10.8.10)と同様に
+\begin{align*}
+W^{\mu\nu}_A(q,p)&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, \theta(z^0)e^{-iqz}\bra{N}[J^\nu (z),J^\mu (0)] \ket{N} \\
+W^{\mu\nu}_R(q,p)&=-\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, \theta(-z^0)e^{-iqz}\bra{N}[J^\nu (z),J^\mu (0)] \ket{N} \\
+W^{\mu\nu}_+(q,p)&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-iqz}\bra{N}J^\mu (0)J^\nu (z) \ket{N} \\
+&= \frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{iqz}\bra{N}J^\mu (z)J^\nu (0) \ket{N}=W^{\nu\mu}(-q,p) \\
+W^{\mu\nu}_-(q,p)&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-iqz}\bra{N}J^\nu (z)J^\mu (0) \ket{N}=W^{\mu\nu}(q,p)
+\end{align*}
+としておこう．すると
+\begin{align*}
+T^{\mu\nu}(q,p)=W^{\mu\nu}_A(q,p)+W^{\mu\nu}(q,p)=W^{\mu\nu}_R(q,p)+W^{\mu\nu}(-q,p)
+\end{align*}
+(最後の項は$\mu\nu$について対称であることを用いている)\par
+さて，今回も10.8節での$\ell^\mu$と同様のベクトルを定義する．脚注にあるとおり，$q^2=0$の場合は10.8節の方法と同様だ．$q^\mu=\nu\ell^\mu$とおき，$\ell^\mu$は$\ell^\mu \ell_\mu=0$かつ$\ell^0=1$(すなわち三次元ベクトル部分のノルムは1だ：$|\bm{\ell}|=1$)と定義すれば以降は同じ議論が使える．($\nu$は定義より$q^0$だったことを思い出そう)もし$q^2\neq 0$の場合はこのように定義できないため，別の方法を使う必要がある．それについては分からなかったので，ここでは簡単のため$q^2=0$の場合に限定して話をする．この場合，上の各$W^{\mu\nu}$は以下のようになる．
+\begin{align*}
+W^{\mu\nu}_A(\nu,p)&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, \theta(z^0)e^{-i\nu(\ell\cdot z)}\bra{N}[J^\nu (z),J^\mu (0)] \ket{N} \\
+W^{\mu\nu}_R(\nu,p)&=-\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, \theta(-z^0)e^{-i\nu(\ell\cdot z)}\bra{N}[J^\nu (z),J^\mu (0)] \ket{N} \\
+W^{\mu\nu}_+(\nu,p)&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-i\nu(\ell\cdot z)}\bra{N}J^\mu (0)J^\nu (z) \ket{N} \\
+&= \frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{i\nu(\ell\cdot z)}\bra{N}J^\mu (z)J^\nu (0) \ket{N}=W^{\nu\mu}(-\nu,p) \\
+W^{\mu\nu}_-(\nu,p)&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-i\nu(\ell\cdot z)}\bra{N}J^\nu (z)J^\mu (0) \ket{N}=W^{\mu\nu}(\nu,p)
+\end{align*}
+微視的因果律によれば，$W_A,W_R$の中の交換子は$z^\mu$が光錐の中にないとゼロになる．したがって階段関数の効果も合わせると，$W_A$では$z^\mu$が未来の光錐内($z^2<0$かつ$z^0>0$，したがって$z^0>|\mathbf{z}|$)，つまり
+\begin{align*}
+\ell\cdot z=-\ell^0 z^0+|\bm{\ell}||\mathbf{z}|\cos\varphi=-z^0+|\mathbf{z}|\cos\varphi < -z^0+z^0\cos\varphi<0
+\end{align*}
+となって$\ell \cdot z<0$を要求する．また$W_R$も同様に過去の光錐内($z^2<0$かつ$z^0<0$，したがって$z^0<-|\mathbf{z}|$)，つまり
+\begin{align*}
+\ell\cdot z=-\ell^0 z^0+|\bm{\ell}||\mathbf{z}|\cos\varphi=-z^0+|\mathbf{z}|\cos\varphi > |\mathbf{z}|+|\mathbf{z}|\cos\varphi>0
+\end{align*}
+となって$\ell \cdot z>0$を要求する．これより$W_A$は$\mathrm{Im}\,\nu>0$で解析的で，$W_R$は$\mathrm{Im}\, \nu<0$で解析的だ．(指数関数の肩の$-i\nu(\ell\cdot z)$全体で負である必要を考える)このため，以下の関数を定義する．
+\begin{align*}
+\mc{W}^{\mu\nu}(\nu,p)=\left\{
+\begin{array}{ll}
+W^{\mu\nu}_A(\nu,p) &\quad \mathrm{Im}\, \nu>0 \\
+W^{\mu\nu}_R(\nu,p) & \quad  \mathrm{Im}\, \nu<0
+\end{array}
+\right.
+\end{align*}
+これは$\nu$の実軸上のカットを除き全平面で解析的だ．これよりどんな実の$\nu'$での不連続性も
+\begin{align*}
+\mc{W}^{\mu\nu}(\nu'+i\epsilon,p)-\mc{W}^{\mu\nu}(\nu'-i\epsilon,p)=W^{\mu\nu}_A(\nu',p)-W^{\mu\nu}_R(\nu',p)=W^{\mu\nu}(-\nu',p)-W^{\mu\nu}(\nu',p)
+\end{align*}
+を満たす．\par
+深非弾性散乱の散乱断面積はmott散乱断面積に比例し，それは$\nu\to\infty$で(すなわち$E_e\to\infty$で)ゼロになる．よって多項式$P(\nu)$は1とすることができて，
+\begin{align*}
+\mc{W}^{\mu\nu}(\nu,p)=\frac{1}{2\pi i}\oint_C \frac{\mc{W}^{\mu\nu}(z,p)}{z-\nu}dz
+\end{align*}
+となる．ここで$\nu$は実軸上にはないがそれ以外は任意の点だとする．また$C$は二つの部分からなる．$-\infty+i\epsilon$から$+\infty +i\epsilon$へ実軸上のすぐ上を通り，大きな半円をまわって$-\infty+i\epsilon$に戻る部分と，$+\infty-i\epsilon$から$-\infty-i\epsilon$へ実軸のすぐ下を通り，大きな半円を通って$+\infty-i\epsilon$に戻る部分だ．$\mc{W}^{\mu\nu}$は$|\nu|\to\infty$でゼロになるから，大きな半円からの寄与は無視できる．したがって
+\begin{align*}
+\mc{W}^{\mu\nu}(\nu,p)=\frac{1}{2\pi i}\int^\infty_{-\infty} \frac{W^{\mu\nu}(-\nu',p)-W^{\mu\nu}(\nu',p)}{\nu'-\nu}d\nu'
+\end{align*}
+となる．$\nu$を実軸に向かって上から近付けると，
+\begin{align*}
+W^{\mu\nu}_A(\nu,p)=\frac{1}{2\pi i}\int^\infty_{-\infty} \frac{W^{\mu\nu}(-\nu',p)-W^{\mu\nu}(\nu',p)}{\nu'-\nu-i\epsilon}d\nu'
+\end{align*}
+となる．(3.1.25)を使うと，これは
+\begin{align*}
+\frac{1}{\nu'-\nu-i\epsilon}=\frac{\mc{P}}{\nu'-\nu}+i\pi\delta(\nu'-\nu)
+\end{align*}
+であるから
+\begin{align*}
+W^{\mu\nu}_A(\nu,p)&=\frac{1}{2\pi i}\int^\infty_{-\infty} \frac{W^{\mu\nu}(-\nu',p)-W^{\mu\nu}(\nu',p)}{\nu'-\nu}d\nu' \\
+&\qquad\qquad +\frac{1}{2\pi i}\int^\infty_{-\infty} i\pi\delta(\nu'-\nu)\{W^{\mu\nu}(-\nu',p)-W^{\mu\nu}(\nu',p)\}d\nu' \\
+&=\frac{1}{2\pi i}\int^\infty_{-\infty} \frac{W^{\mu\nu}(-\nu',p)-W^{\mu\nu}(\nu',p)}{\nu'-\nu}d\nu'+\frac{1}{2}W^{\mu\nu}(-\nu,p)-\frac{1}{2}W^{\mu\nu}(\nu,p) \\
+T^{\mu\nu}(\nu,p)&=W^{\mu\nu}_A(\nu,p)+W^{\mu\nu}(\nu,p) \\
+&=\frac{1}{2}W^{\mu\nu}(\nu,p)+\frac{1}{2}W^{\mu\nu}(-\nu,p)+\frac{1}{2\pi i}\int^\infty_{-\infty} \frac{W^{\mu\nu}(-\nu',p)-W^{\mu\nu}(\nu',p)}{\nu'-\nu}d\nu'
+\end{align*}
+が分かる．ここで(20.6.2)と(20.6.17)を用いれば，$T_1,T_2$についての関係式が得られる．$W_1,W_2$や$T_1,T_2$の係数には$q^\mu,p\cdot q$などがあり，安易に積分の外にこの係数を出せなさそうだが，$q^\mu=\nu\ell^\mu$としていたので$\nu$の寄与はこの係数には存在せず，積分の外に出してよい．
+\begin{align*}
+\left(\frac{q^\mu q^\nu}{q^2}-\eta^{\mu\nu}\right)=\left( \frac{\ell^\mu \ell^\nu}{\ell^2}-\eta^{\mu\nu} \right),\quad \left(p^\mu-\frac{p\cdot q}{q^2}q^\mu\right)=\left( p^\mu-\frac{p\cdot \ell}{\ell^2}\ell^\mu \right)
+\end{align*}
+よって
+\begin{align*}
+T_r(\nu,q^2)=\frac{1}{2}W_r(-\nu,q^2)+\frac{1}{2}W_r(\nu,q^2)+\frac{1}{2\pi i}\int^\infty_{-\infty}d\nu'\frac{W_r(-\nu',q^2)-W_r(\nu',q^2)}{\nu'-\nu}
+\end{align*}
+が示された．これが求めたかったものだ！$q^2\neq0$が固定された場合についてもこれが導出できるようだが，脚注にある通りそれは難しそうだ．$\nu>q^2/2m_N$なので，$W_r(\nu,q^2)$は$\nu<q^2/2m_N$での値はゼロだ．したがって分散関係の第三項目は
+\begin{align*}
++&\frac{1}{2\pi i}\int^\infty_{-\infty}d\nu'\frac{W_r(-\nu',q^2)-W_r(\nu',q^2)}{\nu'-\nu} \\
+&=\frac{1}{2\pi i}\int^\infty_{-\infty}d\nu'\frac{W_r(-\nu',q^2)}{\nu'-\nu}-\frac{1}{2\pi i}\int^\infty_{-\infty}d\nu'\frac{W_r(\nu',q^2)}{\nu'-\nu} \\
+&=-\frac{1}{2\pi i}\int^{-\infty}_{\infty}d\nu'\frac{W_r(\nu',q^2)}{-\nu'-\nu}-\frac{1}{2\pi i}\int^\infty_{-\infty}d\nu'\frac{W_r(\nu',q^2)}{\nu'-\nu} \quad \because 第一項目で\nu'\to -\nu' \\
+&=-\frac{1}{2\pi i}\int^{\infty}_{-\infty}d\nu'\frac{W_r(\nu',q^2)}{\nu'+\nu}-\frac{1}{2\pi i}\int^\infty_{-\infty}d\nu'\frac{W_r(\nu',q^2)}{\nu'-\nu} \\
+&=-\frac{1}{2\pi i}\int^\infty_{-\infty}d\nu' W_r(\nu',q^2)\left( \frac{1}{\nu'+\nu}+\frac{1}{\nu'-\nu} \right) \\
+&=-\frac{1}{2\pi i}\int^\infty_{q^2/2m_N}d\nu' W_r(\nu',q^2)\left( \frac{1}{\nu'+\nu}+\frac{1}{\nu'-\nu} \right)
+\end{align*}
+とできる．\par
+$T^{\mu\nu}$のOPEを(20.1.3)より
+\begin{align*}
+\left(\frac{m_N}{p_N^0}\right)T^{\mu\nu}(q,p)&=\frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int d^4z \, e^{-iqz}\bra{N}T\{J^\nu (z),J^\mu (0)\} \ket{N} \\
+&\to \frac{1}{2}\sum_{\sigma_N}\left\{ \sum_{n=2}^\infty U_{\mc{O},\mu_1 \cdots \mu_{n-2}}(q) \bra{N} \underset{n階のテンソル}{\uwave{\mc{O}^{\mu\nu \mu_1\cdots \mu_{n-2}}(p)}} \ket{N} \right\}
+\end{align*}
+$n$階のテンソル$\mc{O}^{\mu_1 \mu_2\cdots \mu_n}$は，ローレンツ変換性より$p^{\mu_1}p^{\mu_2}\cdots p^{\mu_n}$に比例する…と思うだろうが，$p^{\mu_1}p^{\mu_2}\cdots p^{\mu_n}$はローレンツ群の下で様々な変換性を持つ表現の足し合わせである．\par
+$\Rightarrow$\uwave{既約表現}として分類したものに比例する，とするのが良い！\\
+既約表現である条件は(ジョージアイp147などを参照)「対称」かつ「トレースレス$\eta_{\mu_i \mu_j}T^{\mu_1 \cdots \mu_i \cdots \mu_j \cdots \mu_n}=0$」だ．もしトレースレスでなければ縮約により$n-2$階のテンソルとして再び表現になるので，既約表現ではないということになる．これらを念頭に置いて既約表現を構成しよう．例えば$n=2の\mc{O}^{\mu\nu}$の場合，$p^\mu p^\nu$は
+\begin{align*}
+p^\mu p^\nu=\uwave{\left( p^\mu p^\nu - \frac{1}{4}\eta^{\mu\nu}p^2 \right)}+\frac{1}{4}\eta^{\mu\nu}p^2
+\end{align*}
+と既約分解され，第一項目は対称かつトレースレスだ．したがって$\mc{O}^{\mu\nu}\propto p^\mu p^\nu - \eta^{\mu\nu}p^2/4 $だと分かる．$n=3$のとき，$p^\mu p^\nu p^\rho$は
+\begin{align*}
+p^\mu p^\nu p^\rho=&\left( p^\mu p^\nu p^\rho -\frac{1}{6}\eta^{\mu\nu}p^2p^\rho -\frac{1}{6}\eta^{\mu\rho}p^2p^\nu -\frac{1}{6}\eta^{\nu\rho}p^2p^\mu \right) +\frac{1}{6}\eta^{\mu\nu}p^2p^\rho +\frac{1}{6}\eta^{\mu\rho}p^2p^\nu +\frac{1}{6}\eta^{\nu\rho}p^2p^\mu
+\end{align*}
+と既約分解され，第一項目は対称かつトレースレスであることが確認できる．($\eta^{\mu\nu},\eta^{\nu\rho},\eta^{\rho\mu}$をかけるとゼロになる)よって
+\begin{align*}
+\mc{O}^{\mu\nu\rho}\propto p^\mu p^\nu p^\rho -\frac{1}{6}\eta^{\mu\nu}p^2p^\rho -\frac{1}{6}\eta^{\mu\rho}p^2p^\nu -\frac{1}{6}\eta^{\nu\rho}p^2p^\mu
+\end{align*}
+が分かる．(まぁ偶数個の添え字のものしか以降では出てこないので，これは考える必要ないが)これ以上高階のものは手計算で既約分解するのはかなり大変だが，原理的には適切なトレース項($\eta^{\mu_i\mu_j}に比例$)を差し引くことで対称かつトレースレスのものが得られる．よって
+\begin{align*}
+\frac{1}{2}\sum_{\sigma_N}\bra{N} \mc{O}_{si}^{\mu_1 \mu_2\cdots \mu_n} \ket{N}=\left(\frac{m_N}{p^0_N}\right)\biggl[ p^{\mu_1}p^{\mu_2}\cdots p^{\mu_s} - [\mathrm{Traces}(\eta^{\mu_i \mu_j}に比例)] \biggr]\braket{\mc{O}_{si}}
+\end{align*}
+とすることができる．$i$は同じテンソル構造でも異なる演算子を区別するための添え字だ．$s$はローレンツ変換性を区別するための添え字だ．$\braket{\mc{O}_{si}}$は定数係数だ．(peskin,p628も参照すると良い)これによって(演算子についての和は，演算子の種類を区別する添え字$i$の和に変えて)
+\begin{align*}
+T^{\mu\nu}(q,p)&\to \frac{1}{2}\sum_{\sigma_N}\left[\sum_i \sum^\infty_{s=2}U_{i,\mu_1\cdots \mu_{s-2}}(q)\bra{N} \mc{O}_{si}^{\mu\nu \mu_1\cdots \mu_{s-2}}(p) \ket{N}\right] \\
+&=\sum_i \sum_{s=2}^\infty \left[\frac{1}{2}\sum_{\sigma_N}U_{i,\mu_1\cdots \mu_{s-2}}(q)\bra{N} \mc{O}_{si}^{\mu\nu \mu_1\cdots \mu_{s-2}}(p) \ket{N}\right] =\sum_{i,s}T^{\mu\nu}_{si}(q,p) 
+\end{align*}
+としてローレンツ群の既約表現で関数を演算子積展開することができる！また$T^{\mu\nu}_{si}$は$p$の$s$乗に比例する寄与があると分かるので
+\begin{align*}
+\left(\frac{m_N}{p_N^0}\right)T^{\mu\nu}_{si}(q,p)=-\left(\frac{q^\mu q^\nu}{q^2}-\eta^{\mu\nu}\right)T_{1,si}(\nu,q^2)+\frac{1}{m_N^2}\left(p^\mu -\frac{(p\cdot q)}{q^2}q^\mu \right)\left(p^\nu -\frac{(p\cdot q)}{q^2}q^\nu \right)T_{2,si}(\nu,q^2)
+\end{align*}
+と書いておくと便利だ．この演算子$\mc{O}^{\mu_1\cdots \mu_s}_{si}$は左辺には$p^s$の大きさの寄与をするから，右辺の$T_{1,si},T_{2,si}$にはそれぞれ$p^s,p^{s-2}$に比例していると分かる($[\mathrm{Traces}]$の項は考えない．なぜならその項は$\eta^{\mu_i \mu_j}$によって添え字が奪われた分$p^2$を含んでおり，これは$-m_N^2$なので$m^2_N/q^2$か$m^2_N/p\cdot q$の因子で抑えられるから)．これらは$\nu=-p\cdot q/m_Nとq^2$の関数なので，$T_{1,si},T_{2,si}$にはそれぞれ$\nu^s,\nu^{s-2}$の寄与があると分かる．もし対数的補正を無視すれば(あとで考える)，漸近的自由な理論では係数関数$U(q)$の$q^2$依存性は
+\begin{align*}
+\left(\frac{m_N}{p^0_N}\right)T^{\mu\nu}(q,p) &= \frac{1}{2(2\pi)^4}\sum_{\sigma_N} \int \underset{-4}{\uwave{d^4z}} \, e^{-iqz}\bra{N}\underset{+3+3}{\uwave{T\{J^\nu (z),J^\mu (0)\} }}\ket{N} \\
+&\to \frac{1}{2}\sum_{\sigma_N}\left[\sum_i \sum^\infty_{s=2}\underset{-4+6-d(s,i)}{\uwave{U_{i,\mu_1\cdots \mu_{s-2}}(q)}}\bra{N} \underset{+d(s,i)}{\uwave{ \mc{O}_{si}^{\mu\nu \mu_1\cdots \mu_{s-2}}(p)}} \ket{N}\right]
+\end{align*}
+より$(q^2)^{(-4+6-d(s,i))/2}$だと分かる．ここで$d(s,i)$は演算子$\mc{O}_{si}$の次元だ．したがって$T_{1,si},T_{2,si}$にはさらにそれぞれ$(q^2)^{(-4+6-d-s)/2},(q^2)^{(-4+6-d-(s-2))/2}$だけの寄与があると分かる．ここで$(q^2)^{-s/2},(q^2)^{-(s-2)/2}$の分は，$\nu^s,\nu^{s-2}$の寄与の中に既に$(q^2)^{+s/2},(q^2)^{+(s-2)/2}$だけの分があることに因る．(定義$\nu=-p\cdot q/m_N$を思い出す)$\omega=2m_N\nu/q^2$より$\nu\propto q^2\omega$を使うと，以上より
+\begin{align*}
+T_{1,si} \propto \nu^s (q^2)^{(2-d(s,i)-s)/2} & \propto \omega^s (q^2)^{(2-d(s,i)+s)/2} \\
+&\propto \omega^s(q^2)^{(2-\tau(s,i))/2} 
+\end{align*}
+と
+\begin{align*}
+\nu T_{2,si} \propto \nu^{s-1}(q^2)^{(4-d(s,i)-s)/2} & \propto \omega^{s-1}(q^2)^{(2-d(s,i)+s)/2} \\
+&\propto \omega^{s-1}(q^2)^{(2-\tau(s,i))/2}
+\end{align*}
+となることがわかる．ここで$\tau(s,i)$は演算子$\mc{O}_{si}$のツイストであり，以下で定義される．
+\begin{align*}
+\tau(s,i)\equiv d(s,i)-s
+\end{align*}
+これにより$\omega$が固定されて$q^2\to\infty$としたときの$T_1,\nu T_2$への主要な寄与は，ツイストが最小の演算子から得られることが分かる．また(20.6.18)より$T_r(\nu,q^2)$には$\nu$について奇数次の項はないので，これに寄与できる演算子$\mc{O}_{si}$は$s$が偶数のものだけだ．これを見るには
+\begin{align*}
+\frac{1}{\nu'+\nu}+\frac{1}{\nu'-\nu}&=\frac{2\nu'}{\nu'^2-\nu^2} \\
+&=\frac{2}{\nu'}\frac{1}{1-(\nu/\nu')^2} \\
+&=\frac{2}{\nu'}\left\{ 1+\left(\frac{\nu}{\nu'}\right)^2+\left(\frac{\nu}{\nu'}\right)^4+\cdots \right\}
+ \quad\because \frac{1}{1-x}=1+x+x^2+\cdots =\sum_{i=0}^{\infty}x^i 
+\end{align*}
+であることを用いれば良い．($\nu'$の積分範囲は$q^2/2m_N=\nu<\nu'<\infty$なので$\nu/\nu'<1$が満たされており，安心してマクローリン展開を用いて良い．)
+\begin{align*}
+T_r(\nu,q^2)&=\frac{1}{2}W_r(-\nu,q^2)+\frac{1}{2}W_r(\nu,q^2)-\frac{1}{2\pi i}\int^\infty_{q^2/2m_N}d\nu' W_r(\nu',q^2)\left( \frac{1}{\nu'+\nu}+\frac{1}{\nu'-\nu} \right) \\
+&=\frac{1}{2}W_r(-\nu,q^2)+\frac{1}{2}W_r(\nu,q^2)-\frac{2}{2\pi i}\int^\infty_{q^2/2m_N}d\nu' W_r(\nu',q^2)\sum_{s=偶数}\nu^s \nu'^{-s-1}
+\end{align*}
+第1,2項目は全体で明らかに$\nu$に対して偶関数だ．第3項目も明らかに$\nu$の偶数次の項のみだ．したがって$T_r$は全体として$\nu'$に対して偶数次の項しか存在しない．(この表式は後に用いる)\par
+対称・トレースレスで$s$階のテンソルで最低の次元をもつ演算子は，場と微分から共変なように構成すれば良いから，
+\begin{align*}
+&(\mc{O}_{sf})_{\mu_1\cdots \mu_s}\equiv \left( \frac{i^{s-2}}{s!} \right)\bar{\psi}_f \gamma_{\{ \mu_1}D_{\mu_2}^{\leftrightarrow}\cdots D_{\mu_s\}}^{\leftrightarrow}\psi_f \\
+&(\mc{O}_{s0})_{\mu_1\cdots \mu_s}\equiv \left( \frac{i^{s-2}}{s!} \right)F_{\alpha\, \nu\{\mu_1}D_{\mu_3}^{\leftrightarrow}\cdots D_{\mu_s}^{\leftrightarrow}F^{\,\,\, \nu}_{\alpha \,\,\, \mu_s\}}\quad(\alpha はリー代数添え字)
+\end{align*}
+ここで$\leftrightarrow$は，右の場を微分したものから左の場を微分したものを引いたものの半分，という意味だ．$J^\mu$がエルミートであったから，全体をエルミートに保つためにこの演算が必要となる．(足すと全微分となってしまう．同じ運動量をもつ状態で挟んだ行列要素は，$D_\mu \psi$からは$ip_\mu\psi$が，$D_\mu\bar{\psi}からは-ip_\mu\psi$が出てくるので足し合わせるとゼロになってしまう．そこで，引いてそれぞれ半分，として定義すると$\bar{\psi}\cdots D^\leftrightarrow_\mu\psi$からは丁度$\bar{\psi}\cdots ip_\mu\psi$が出てくる)$\{\}$は置換について和をとり，適切なトレース項を引くことを意味する．例えば$s=2$なら
+\begin{align*}
+(\mc{O}_{2f})_{\mu_1\mu_2} & =\frac{1}{2}\bar{\psi}_f \gamma_{\{\mu_1}D^{\leftrightarrow}_{\mu_2\}}\psi_f \\
+&=\frac{1}{2}\bar{\psi}_f\gamma_{\mu_1}D^{\leftrightarrow}_{\mu_2}\psi_f+\frac{1}{2}\bar{\psi}_f\gamma_{\mu_2}D^{\leftrightarrow}_{\mu_1}\psi_f-\frac{1}{4}\eta_{\mu_1\mu_2}[\bar{\psi}_f\gamma^{\nu}D^{\leftrightarrow}_{\nu}\psi_f] \\
+&=\frac{1}{4}\bar{\psi}_f\gamma_{\mu_1}D_{\mu_2}\psi_f-\frac{1}{4}D_{\mu_2}\bar{\psi}_f\gamma_{\mu_1}\psi_f \\
+&\quad +\frac{1}{4}\bar{\psi}_f\gamma_{\mu_2}D_{\mu_1}\psi_f-\frac{1}{4}D_{\mu_1}\bar{\psi}_f\gamma_{\mu_2}\psi_f \\
+&\quad -\frac{1}{8}\eta_{\mu_1\mu_2}[\bar{\psi}_f\gamma^{\nu}D_{\nu}\psi_f-D_{\nu}\bar{\psi}_f\gamma^{\nu}\psi_f] \\
+&=\frac{1}{4} \left\{ \bar{\psi}_f\gamma^{\mu}D^{\nu}\psi_f +\bar{\psi}_f\gamma^{\nu}D^{\mu}\psi_f  -\frac{1}{2}\eta^{\mu\nu}\bar{\psi}_f\gamma^{\nu}D_{\nu}\psi_f \right\} \\
+&\quad -\frac{1}{4}\left\{ D^{\mu}\bar{\psi}_f\gamma^{\nu}\psi_f -D^{\nu}\bar{\psi}_f\gamma^{\mu}\psi_f  +\frac{1}{2}\eta^{\mu\nu}D_{\nu}\bar{\psi}_f\gamma^{\nu}\psi_f \right\} \\
+&=\frac{1}{4} \left\{ \bar{\psi}_f\gamma^{\mu}D^{\nu}\psi_f +\bar{\psi}_f\gamma^{\nu}D^{\mu}\psi_f  -\frac{1}{2}\eta^{\mu\nu}\bar{\psi}_f\gamma^{\nu}D_{\nu}\psi_f \right\} +\mathrm{H.c.} \quad\because (5.4.33)
+\end{align*}
+($D_\mu\bar{\psi}$は$[D_\mu\psi]^\dagger\beta$の意だ．そうでなければ対称性変換のもとで不変でなくなるし，全体は実でもなくなる．)これは実際に$\eta^{\mu_1\mu_2}$をかけるとゼロであり，トレースレスであることが確認できる．また$\mu_1\leftrightarrow\mu_2$で対称であることも明らかに分かる．\par
+(20.6.23)(20.6.24)の演算子の次元は共に$3+(s-1)=4+(s-2)=2+s$なので，ツイストは2だ．よって$T_{r,si}$は共に$q^2$依存性がなくなり，対数補正を除いてブヨルケン・スケーリングを保証する．
+
+\vskip\baselineskip
+
+対数補正を考える．漸近的自由な理論の係数関数の漸近的振る舞いは(20.3.9)で決まるのだった．\par
+さて，10.4節で学んだ通り，(電荷で割っておく)カレント
+\begin{align*}
+J^\mu=\frac{1}{e}\frac{\delta\mc{L}}{\delta A_\mu}=i\bar{\psi}\gamma^\mu\psi
+\end{align*}
+で，くりこまれた電磁場および電荷は$A_\mu=Z^{-1/2}_3A_{\mu B},e=\sqrt{Z_3}e_B$なので$J^\mu$には電磁場に関するくりこみ因子は存在しない．またくりこまれた$\psi$場を用いることで電磁輻射補正をくりこみ因子に押し付けることができるのであった．しかし電磁輻射補正を無視する場合には$\psi$にくりこみは必要ない．したがって電磁輻射補正を無視するとすれば電磁カレントにくりこみ因子は不要だ．このとき$J^\mu$から作られている$T^{\mu\nu}$において，(20.3.9)の行列は，くりこみ因子が存在しないのでゼロだ：$c_{\ell\ell'}=0$．また，行列$c_{\mc{O}\mc{O}'}=c_{si,s'i'}$は，ローレンツ変換性の違う二つの演算子$\mc{O}_s,\mc{O}_{s'}(s\neq s')$を結びつける効果を持たないので，$c_{si,s'i'}=\delta_{ss'}c_{ii'}(s)$となる．\par
+以上を踏まえて(20.3.9)がどのような形になるかを見る．$\ell^2=q^2$を係数関数を定義するために選んだ$q^2$の特定の値とすると，
+\begin{align*}
+\int^{q}_{\ell} \frac{d\mu}{\mu}g^2_\mu=-\frac{8\pi^2}{b}\ln g^2_q+\frac{8\pi^2}{b}\ln g^2_\ell=-\frac{8\pi^2}{b}\ln \left(g^2_q/g^2_{\ell}\right)
+\end{align*}
+よって(20.3.9)は，
+\begin{align*}
+U^\ell_{si}(q n)&\to q^{-4+6-d(s,i)}\sum_{\ell's'i'}\delta_{\ell\ell'}\mc{C}^{\ell'}_{s'i'}\left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{s's,i'i} \\
+&=\kappa^{-4+6-d(s,i)}\sum_{i'}\mc{C}^{\ell}_{si'}\left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{i'i}
+\end{align*}
+ここで$q$は$q^\mu=q n^\mu$で$n^\mu$を固定したときの値，$\mc{C}^{\ell}_{si}$は定数係数だ．これより
+\begin{align*}
+T^{\mu\nu}(q,p) &\to \sum_{s j} \left[\frac{1}{2}\sum_{\sigma_N}U_{j,\mu_1\cdots \mu_{s-2}}(q)\bra{N} \mc{O}_{sj}^{\mu\nu \mu_1\cdots \mu_{s-2}}(p) \ket{N}\right] \\
+&=\sum_{sij}q^{-4+6-d(s,i)}p^s\, \mc{C}_{si}\left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}}
+\end{align*}
+と振る舞う．ここで$p$は$p^\mu=pm^\mu$で$m^\mu$を固定したときの値だ．$qとp$のベキについては対数補正以外の部分なので既に計算に取り入れた．したがって$T_r$は
+\begin{align*}
+T_1(\nu,q^2)\to \sum_{sij}\omega^s\mc{A}_{si}\left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}} \\
+T_2(\nu,q^2)\to \sum_{sij}\omega^{s-1}\mc{B}_{si}\left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}}
+\end{align*}
+と振る舞うことが分かる．(主要な演算子は(20.6.23)(20.6.24)であるから$q^2$依存性は現れない．)ここで$\mc{A,B}$は$\mc{O}$の係数関数に現れる$\mc{C}_{si}$から来る定数係数だ．\par
+OPEの係数は問題の特定の過程(今回の$eN\to eH$などの散乱過程)や，クォークの閉じ込めという束縛条件からは独立だ．よって係数$\mc{A}_{si}$と$\mc{B}_{si}$は仮想的に単純な過程を考察して求めることができる！\par
+$\Rightarrow$ フレーバー$f$の自由クォークによる電子の散乱を考える．このとき，自由クォークは相互作用前と相互作用後では運動量は等しいので，前に述べた通り$\bar{\psi}\cdots D_\mu^\leftrightarrow \psi$は丁度$\bar{\psi}\cdots ip_\mu\psi$となる．したがって
+\begin{align*}
+\bra{f',\sigma'}\mc{O}_{sf}\ket{f'',\sigma''}&=\frac{i^{s-2}}{s!}\delta_{f'f}\bar{u}'\gamma^{\{ \mu_1}(ip^{\mu_2})\cdots (ip^{\mu_s\}})u\delta_{ff''} \\
+&=\frac{i^{s-2}}{s!}i^{s-1}(\bar{u}'\gamma^{\{\mu_1}u)p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'}\delta_{ff''} \\
+&=\frac{(-1)^s i}{s!}(\bar{u}'\gamma^{\{\mu_1}u)p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'}\delta_{ff''}
+\end{align*}
+となる．(20.6.27)を$\sigma'=\sigma''$について平均し，その結果を(20.6.19)と比べる．$\bra{N}\mc{O}\ket{N}$のために$f'=f''$として(2巻p92参照)
+\begin{align*}
+\frac{1}{2}\sum_{\sigma'=\sigma''}\bra{f',\sigma'}\mc{O}_{sf}\ket{f',\sigma''}&=\frac{(-1)^s i}{2s!}\left(\sum_{\sigma'}\bar{u}_\alpha(\mathbf{p},\sigma') \gamma^{\{\mu_1}_{\alpha\beta} u_\beta(\mathbf{p},\sigma')\right)p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'} \\
+&=\frac{(-1)^s i}{2s!}\left(\sum_{\sigma'}u_\beta(\mathbf{p},\sigma')\bar{u}_\alpha(\mathbf{p},\sigma') \gamma^{\{\mu_1}_{\alpha\beta} \right)p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'} \\
+&=\frac{(-1)^s i}{2s!}\mathrm{Tr}\left[ \left(\frac{-i\Slash{p}+m_f}{2p^0}\right) \gamma^{\{\mu_1} \right]p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'} \\
+&=\frac{(-1)^s}{4p^0 s!}\mathrm{Tr}\left[\gamma^\nu \gamma^{\{\mu_1} \right]p_\nu p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'}  \\
+&\qquad +m_f\frac{(-1)^si}{4p^0 s!}\mathrm{Tr}\left[\gamma^{\{\mu_1} \right]p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'} \\
+&=\frac{(-1)^s}{p^0 s!}\eta^{\nu\{\mu_1}p_\nu p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'}  \quad \because 奇数個の\gamma 行列のトレースはゼロ\\
+&=\frac{(-1)^s}{p^0 s!}p^{\{\mu_1} p^{\mu_2}\cdots p^{\mu_s\}}\delta_{ff'} \\
+&=\frac{(-1)^s}{p^0}\biggl[ p^{\mu_1}p^{\mu_2}\cdots p^{\mu_s} - [\mathrm{Traces}] \biggr]\delta_{ff'}
+\end{align*}
+最後の等号については，括弧$\{\}$の意味を思い出す．これは$\mu_1\sim\mu_s$について置換して適切なトレース項を引くのであった．置換した項は$s!$個あるが，$p$同士は可換なので$s!p^{\mu_1}\cdots p^{\mu_s}$が現れ，トレース項も同様に同じ項が$s!$個現れるからこれが成り立つ．これが(20.6.19)(ただし$m_N\to m_f$としたもの)に等しいので
+\begin{align*}
+\left(\frac{m_f}{p^0}\right)\biggl[ p^{\mu_1}p^{\mu_2}\cdots p^{\mu_s} - [\mathrm{Traces}] \biggr]\braket{\mc{O}_{sf}}_{f'}=\frac{(-1)^s}{p^0}\biggl[ p^{\mu_1}p^{\mu_2}\cdots p^{\mu_s} - [\mathrm{Traces}] \biggr]\delta_{ff'}
+\end{align*}
+p35$\ell$7の通り，$s$が偶数のときのみが寄与するので
+\begin{align*}
+\braket{\mc{O}_{sf}}_{f'}=\delta_{ff'}/m_f,\quad \braket{\mc{O}_{s0}}_{f'}=0
+\end{align*}
+がわかる．\par
+(20.6.9)と(20.6.10)を導くパートン模型の計算を，この$Q-e$散乱についてもう一度たどる．まず(20.6.2)が$Q-e$散乱では
+\begin{align*}
+W_f^{\mu\nu}(q,p)&=-\left(\frac{q^\mu q^\nu}{q^2}-\eta^{\mu\nu}\right)W'_{1}(\nu,q^2)+\frac{1}{m_f^2}\left(p^\mu-\frac{p\cdot q}{q^\mu}\right)\left(p^\nu-\frac{p\cdot q}{q^\nu}\right)W'_{2}(\nu,q^2) \\
+&=-\left(\frac{q^\mu q^\nu}{q^2}-\eta^{\mu\nu}\right)W'_{1}(\nu,q^2)+\frac{1}{m_N^2}\left(p^\mu-\frac{p\cdot q}{q^\mu}\right)\left(p^\nu-\frac{p\cdot q}{q^\nu}\right)\left\{\frac{m_N^2}{m_f^2}W'_{2}(\nu,q^2)\right\}
+\end{align*}
+すなわち
+\begin{align*}
+W'_{1}(\nu,q^2)=W_1(\nu,q^2),\quad W'_{2}(\nu,q^2)=\left(m_f/m_N\right)^2W_2(\nu,q^2)
+\end{align*}
+と対応付けられることがわかる．また，(20.6.3)と同様に
+\begin{align*}
+\left[\frac{d^2\sigma}{d\Omega d\nu}\right]_f=\left(\frac{d\sigma}{d\Omega}\right)_{\mathrm{mott}}\left(W'_2+2W'_1\tan^2\frac{\theta}{2}\right)
+\end{align*}
+となるが，(20.6.8)と同様にこの散乱は$e-\mu$散乱と同様の($\mu$粒子をクォークに置き換えただけの)散乱断面積であるから
+\begin{align*}
+\left[ \frac{d^2\sigma}{d\Omega d\nu} \right]_f =\left[ \frac{d\sigma}{d\Omega} \right]_{\mathrm{mott}}Q^2_f\left( 1+\frac{q^2}{2m_f^2}\tan^2 \frac{\theta}{2} \right)\delta\left(\nu'-\frac{q^2}{2m_f}\right)
+\end{align*}
+となる．ここで$\nu'=-p\cdot q/m_f=(m_N/m_f)\nu$だ．したがって
+\begin{align*}
+W'_{2}(\nu,q^2)&=\left(m_f/m_N\right)^2W_2(\nu,q^2)=Q^2_f\delta\left(\frac{m_N}{m_f}\nu-\frac{q^2}{2m_N}\frac{m_N}{m_f} \right) \\
+&=Q^2_f\frac{m_f}{m_f   }\delta\left(\nu-\frac{q^2}{2m_N}\right) \\
+&=Q^2_f\frac{m_f}{m_N}\delta\left(\frac{q^2}{2m_N}\omega-\frac{q^2}{2m_N}\right) \quad \because 定義より\frac{q^2}{2m_N}=\frac{\nu}{\omega} \\
+&=Q^2_f\frac{m_f}{m_N}\frac{2m_N}{q^2}\delta\left(\omega-1\right)=Q^2_f\frac{m_f}{m_N}\frac{\omega}{\nu}\delta\left(\omega-1\right) \\
+&=Q^2_f\frac{m_f}{m_N}\frac{1}{\nu}\delta\left(\omega-1\right) \quad \because x\delta(x-a)=a\delta(x-a)
+\end{align*}
+すなわち
+\begin{align*}
+\nu W_2(\nu,q^2)=Q^2_f \left(\frac{m_N}{m_f}\right)\delta(\omega-1)
+\end{align*}
+$W_1$についても
+\begin{align*}
+W'_{2}(\nu,q^2)&=W_1(\nu,q^2)=\frac{1}{2}Q_f^2\frac{q^2}{2m_f^2}\delta\left(\nu'-\frac{q^2}{2m_f}\right) \\
+&=\frac{1}{2}Q_f^2\frac{q^2}{2m_f^2}\left(\frac{m_f}{m_N}\right)\delta\left(\nu-\frac{q^2}{2m_N}\right) \\
+&=\frac{1}{2}Q_f^2\frac{q^2}{2m_f^2}\left(\frac{m_f}{m_N}\right)\delta\left(\nu-\frac{q^2}{2m_N}\right) \\
+&=\frac{1}{2}Q_f^2\frac{q^2}{2m_fm_N}\frac{2m_N}{q^2}\delta\left(\omega-1\right) \\
+&=\frac{1}{2}Q_f^2\frac{1}{m_f}\delta(\omega-1)=Q^2_f \delta(\omega-1)/2m_f 
+\end{align*}
+となる．(脚注の通り(20.6.10)を用いてもいい)
+(20.6.31)(20.6.32)を分散関係(20.6.18)に使うと，$\omega\neq1$では($\delta(\omega-1)$より第1,2項目がゼロ)
+\begin{align*}
+T_{1,f}(\nu,q^2)&=-\frac{1}{2\pi i}\int^\infty_{q^2/2m_N}d\nu' W_{1,f}(\nu',q^2)\left( \frac{1}{\nu'+\nu}+\frac{1}{\nu'-\nu} \right) \\
+&=-\frac{1}{2\pi i}\int^\infty_{q^2/2m_N}d\omega' \frac{q^2}{2m_N} \frac{Q^2_f}{2m_f} \delta(\omega'-1) \left( \frac{2m_N}{q^2(\omega'+\omega)}+\frac{2m_N}{q^2(\omega'-\omega)} \right) \quad \because \nu'=q^2\omega'/2m_N\\
+&=-\frac{Q^2_f}{4\pi im_f}\int^\infty_1 d\omega' \delta(\omega-1)\left( \frac{1}{\omega'+\omega}+\frac{1}{\omega'-\omega} \right) \\
+&=-\frac{Q^2_f}{4\pi im_f}\left( \frac{1}{1+\omega}+\frac{1}{1-\omega} \right) =\frac{Q^2_f}{4\pi im_f}\frac{2}{\omega^2-1} \\
+&=\frac{Q^2_f}{2\pi im_f}\frac{1}{\omega^2-1} \\
+\nu T_{2,f}(\nu,q^2)&=-\frac{\nu}{2\pi i}\int^\infty_{q^2/2m_N}d\nu' W_{2,f}(\nu',q^2)\left( \frac{1}{\nu'+\nu}+\frac{1}{\nu'-\nu} \right) \\
+&=-\frac{\nu}{2\pi i}\int^\infty_{q^2/2m_N}d\omega'\frac{q^2}{2m_N} \left[\frac{1}{\omega'}\frac{2m_N}{q^2}Q^2_f \left(\frac{m_N}{m_f}\right)\delta(\omega-1)\right]\frac{2m_N}{q^2}\left( \frac{1}{\omega'+\omega}+\frac{1}{\omega'-\omega} \right)  \\
+&=-\frac{\nu}{2\pi i}\int^\infty_{q^2/2m_N}d\omega' \frac{1}{\omega'}Q^2_f \left(\frac{m_N}{m_f}\right)\delta(\omega-1)\frac{2m_N}{q^2}\left( \frac{1}{\omega'+\omega}+\frac{1}{\omega'-\omega} \right) \\
+&=\frac{\nu}{2\pi i}Q^2_f\frac{m_N}{m_f}\frac{2m_N}{q^2}\frac{2}{1-\omega^2} \\
+&=\frac{2\nu}{2\pi i}Q^2_f \frac{m_N}{m_f}\frac{\omega}{\nu}\frac{1}{\omega^2-1} \quad \because \frac{q^2}{2m_N}=\frac{\omega}{\nu} \\
+&=\frac{2Q^2_f}{2\pi i}\frac{m_N}{m_f}\frac{\omega}{\omega^2-1}
+\end{align*}
+を得る．マクローリン展開
+\begin{align*}
+\frac{1}{1-x}=1+x+x^2+\cdots =\sum_{i=0}^\infty x^i
+\end{align*}
+を用いると，(20.6.33)(20.6.34)は
+\begin{align*}
+T_{1,f}&=\frac{-Q^2_f}{2\pi i m_f}(1+\omega^2+\omega^4+\cdots)=\frac{iQ^2_f}{2\pi m_f}\sum_{s=偶数} \omega^s \\
+\nu T_{2,f}&=\frac{-2Q^2_f}{2\pi i}\frac{m_N}{m_f}(\omega+\omega^3+\omega^5+\cdots)=\frac{iQ^2_f}{\pi}\frac{m_N}{m_f}\sum_{s=偶数}\omega^{s-1}
+\end{align*}
+よって(20.6.25)(20.6.26)と比較すると，くりこみ点$q^2=\ell^2$においては$g^2_q/g^2_\ell=1$なので
+\begin{align*}
+T_{1}(\nu,\ell^2)&=\sum_{sij}\omega^s \mc{A}_{si}\delta_{ij}\braket{\mc{O}_{sj}} =\sum_{si}\omega^s \mc{A}_{si}\braket{\mc{O}_{si}} \\
+&=\sum_{sf}\omega^s \mc{A}_{sf}\braket{\mc{O}_{sf}}_{f'}+\sum_{s}\omega^s \mc{A}_{s0}\braket{\mc{O}_{s0}}_{f'} \\
+&=\sum_{sf}\omega^s \mc{A}_{sf}\delta_{ff'}/m_f \quad \because(20.6.29)(20.6.30)\\
+&=\sum_{s=偶数}\omega^s \frac{\mc{A}_{sf}}{m_f}=\sum_{s=偶数} \omega^s\frac{iQ^2_f}{2\pi m_f} \\
+\Rightarrow \quad &\mc{A}_{si}=\frac{iQ^2_i}{2\pi} \\
+\nu T_{2}(\nu,\ell^2)&=\sum_{sij}\omega^{s-1} \mc{B}_{si}\delta_{ij}\braket{\mc{O}_{sj}} =\sum_{si}\omega^s \mc{B}_{si}\braket{\mc{O}_{si}} \\
+&=\sum_{sf}\omega^s \mc{B}_{sf}\braket{\mc{O}_{sf}}_{f'}+\sum_{s}\omega^s \mc{B}_{s0}\braket{\mc{O}_{s0}}_{f'} \\
+&=\sum_{sf}\omega^s \mc{B}_{sf}\delta_{ff'}/m_f \quad \because(20.6.29)(20.6.30)\\
+&=\sum_{s=偶数}\omega^s \frac{\mc{B}_{sf}}{m_f}=\sum_{s=偶数} \omega^s\frac{iQ^2_f}{\pi }\frac{m_N}{m_f} \\
+\Rightarrow \quad &\mc{B}_{si}=\frac{im_N Q^2_i}{\pi}
+\end{align*}
+を得る．ここでグルーオンの電荷$Q_0$は(中性粒子なので)ゼロとおいた．よって下を得る．
+\begin{align*}
+T_1(\nu,q^2)\to \frac{i}{2\pi}\sum_{sij}\omega^s Q^2_i \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}} \\
+\nu T_2(\nu,q^2) \to \frac{im_N}{\pi}\sum_{sij}\omega^{s-1}Q^2_i \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}}
+\end{align*}
+
+構造関数$W_r(\nu,q^2)$に戻る．$T_r(\nu,q^2)$の$\omega^s=(2m_N\nu/q^2)^s$の係数を求める．
+\begin{align*}
+T_r(\nu,q^2)=&\frac{1}{2}W_r(-\nu,q^2)+\frac{1}{2}W_r(\nu,q^2)\qquad\leftarrow \omega^sに比例していないので以降省略 \\
+&-\frac{1}{2\pi i}\int^\infty_{q^2/2m_N}d\nu' W_r(\nu',q^2)\left\{ \frac{1}{\nu'+\nu}+\frac{1}{\nu'-\nu} \right\} \\
+=&-\frac{2}{2\pi i}\int^\infty_{q^2/2m_N}d\nu' W_r(\nu',q^2)\sum_{s=偶数}\nu^s \nu'^{-s-1} \\
+=&-\frac{2}{2\pi i}\int^\infty_{q^2/2m_N}d\nu' W_r(\nu',q^2)\sum_{s=偶数}\left(\frac{q^2}{2m_N}\right)^s \nu'^{-s-1}\omega^s
+\end{align*}
+よって$\omega^s$の係数は
+\begin{align*}
+-&\frac{2}{2\pi i}\left(\frac{q^2}{2m_N}\right)^s\int^\infty_{q^2/2m_N}d\nu' \nu'^{-1-s}W_r(\nu',q^2) \\
+&=\frac{i}{\pi}\left(\frac{q^2}{2m_N}\right)\int^\infty_1\left(d\omega \frac{q^2}{2m_N}\right)\left( \frac{q^2}{2m_N}\omega \right)^{-1-s}W_r\left(\frac{\omega q^2}{2m_N},q^2\right) \\
+&=\frac{i}{\pi}\int^\infty_1d\omega\,\omega^{-1-s}W_r\left(\frac{\omega q^2}{2m_N},q^2\right)
+\end{align*}
+(20.6.36)および(20.6.37)と比較する．$\omega^s$の係数を比べると
+\begin{align*}
+\int^\infty_1d\omega\, \omega^{-1-s}W_1\left(\frac{\omega q^2}{2m_N},q^2\right)\to\frac{1}{2}\sum_{ij}Q^2_i \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}} 
+\end{align*}
+また$\omega^{s-1}$の係数を比べると
+\begin{align*}
+&\int^\infty_1d\omega\, \omega^{-1-(s-1)}\nu W_2\left(\frac{\omega q^2}{2m_N},q^2\right) \\
+&=\int^\infty_1d\omega\, \omega^{-s}\nu W_2\left(\frac{\omega q^2}{2m_N},q^2\right)\to m_N\sum_{ij}Q^2_i \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}}
+\end{align*}
+となる．これらが満たされるためには，パートン分布関数$\mc{F}_i$がモーメント方程式
+\begin{align*}
+\int^1_0 dx\, x^{s-1}\mc{F}_i(x,q^2)=\frac{1}{2}\sum_j \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}}
+\end{align*}
+を満たすとして
+\begin{align*}
+W_1\left(\frac{\omega q^2}{2m_N},q^2\right)&\to \sum_iQ^2_i \mc{F}_i\left(\frac{1}{\omega},q^2\right) \\
+\nu W_2\left(\frac{\omega q^2}{2m_N},q^2\right)&\to \frac{2m_N}{\omega}\sum_iQ^2_i \mc{F}_i\left(\frac{1}{\omega},q^2\right)
+\end{align*}
+であるならば良い．実際
+\begin{align*}
+\int^1_0 dx \, x^{s-1}\mc{F}_i(x,q^2)&=-\int^1_\infty d\omega\frac{1}{\omega^2}\left(\frac{1}{\omega}\right)^{s-1}\mc{F}_i\left(\frac{1}{\omega},q^2\right) \quad \because x=\frac{1}{\omega},dx=-\frac{d\omega}{\omega^2} \\
+&=\int^\infty_1d\omega\,\omega^{-1-s}\mc{F}_i\left(\frac{1}{\omega},q^2\right)
+\end{align*}
+であるから
+\begin{align*}
+(20.6.38)左辺=\int^\infty_1 d\omega \, \omega^{-1-s}W_1\left(\frac{\omega q^2}{2m_N},q^2\right)&\to\int^\infty_1d\omega\, \omega^{-1-s}\sum_iQ^2_i \mc{F}_i\left(\frac{1}{\omega},q^2\right) \\
+&=\frac{1}{2}\sum_{ij}Q^2_i \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}} =(20.6.38)右辺 \\
+(20.6.39)左辺=\int^\infty_1d\omega\, \omega^{-s}\nu W_2\left(\frac{\omega q^2}{2m_N},q^2\right) &\to \int^\infty_1d\omega \, \omega^{-s-1}(2m_N)\sum_i Q^2_i \mc{F}_i\left(\frac{1}{\omega},q^2\right) \\
+&=m_N\sum_{ij}Q^2_i \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}} =(20.6.39)右辺
+\end{align*}
+となっている．\par
+(20.6.40)(20.6.41)は明らかにパートン模型の表式(20.6.9)(20.6.10)だ！\\
+ここまでに用いた条件はOPEと漸近的自由性のみだ．\par
+$\Rightarrow$つまり，漸近的自由性はブヨルケン・スケーリングの補正版だけでなく，$W_1$と$W_2$の間のキャラン・グロス関係式(20.6.12)も意味している！
+
+\vskip\baselineskip
+
+(20.6.42)とくりこみ群方程式(20.3.8)より以下の微分方程式が導かれる．
+\begin{align*}
+q^2\frac{d}{dq^2}\int^1_0 dx \, x^{s-1}\mc{F}_i(x,q^2)&=q^2\frac{d}{dq^2}\left\{ \frac{1}{2}\sum_k \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ik}\braket{\mc{O}_{sk}} \right\} \\
+&=\frac{1}{2}\sum_{jk}\left(q^2\frac{d}{dq^2}g^2_q\right)\left(\frac{1}{g^2_\ell} \right)\frac{8\pi^2c_{ij}(s)}{b}\left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b-1} \right]_{jk} \braket{\mc{O}_{sk}} \\
+&=\frac{1}{2}\sum_{jk}\left( -\frac{b}{8\pi^2}g^4_q \right) \left(\frac{1}{g^2_\ell} \right)\frac{8\pi^2c_{ij}(s)}{b}\left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b-1} \right]_{jk} \braket{\mc{O}_{sk}} \\
+&=-\frac{1}{2}\sum_{jk}g^2_qc_{ij}(s)\left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{jk} \braket{\mc{O}_{sk}} \\
+&=-g^2_q \sum_j c_{ij}(s)\left[ \frac{1}{2}\sum_k \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{jk}\braket{\mc{O}_{sk}} \right] \\
+&=-g^2_q\sum_j c_{ij}(s)\int^1_0 dx \, x^{s-1}\mc{F}_j(x,q^2)
+\end{align*}
+これらの方程式は，くりこみ点$\ell^2$での初期条件
+\begin{align*}
+\int^1_0 dx \, x^{s-1}\mc{F}_i(x,\ell^2)=\frac{1}{2}\braket{\mc{O}_{si}} 
+\end{align*}
+を用いると，解を一つだけ持つ．\par
+$\Rightarrow$この微分方程式と初期条件の組を，モーメント方程式の代わりに用いることができる！
+(20.6.43)は以下の$\mc{F}_i$の微分方程式の解によって満たされている．
+\begin{align*}
+q^2\frac{d}{dq^2}\mc{F}_i(x,q^2)=\frac{g^2_q}{4\pi^2}\sum_j \int^1_x \frac{dy}{y}P_{ij}\left(\frac{x}{y}\right)\mc{F}_j(y,q^2)
+\end{align*}
+ここで行列関数$P_{ij}(z)$は以下の条件を満たすとする．
+\begin{align*}
+\int^1_0 z^{s-1}P_{ij}(z)dz=-4\pi^2c_{ij}(s)
+\end{align*}
+この微分方程式の解が(20.6.43)を満たすことを見よう．
+\begin{align*}
+(20.6.43)左辺&=q^2\frac{d}{dq^2}\int^1_0 dx \, x^{s-1}\mc{F}_i(x,q^2)=\int^1_0 dx \, x^{s-1} q^2\frac{d}{dq^2}\mc{F}_i(x,q^2) \\
+&=\frac{g^2_q}{4\pi^2}\sum_j \int^1_0 dx\,x^{s-1}\int^1_y \frac{dy}{y}P_{ij}\left(\frac{x}{y}\right)\mc{F}_j(y,q^2) \\
+&=\frac{g^2_q}{4\pi^2}\sum_j \int^1_0 \frac{dy}{y}\mc{F}_j(y,q^2)\int^y_0 dx \, x^{s-1}P_{ij}\left(\frac{x}{y}\right) \\
+&=\frac{g^2_q}{4\pi^2}\sum_j \int^1_0 \frac{dy}{y}\mc{F}_j(y,q^2)\int^1_0 (dz\, y) \, (yz)^{s-1}P_{ij}(z) \quad \because x=yz ,x:[1\sim y]\to z:[0\sim 1]\\
+&=\frac{g^2_q}{4\pi^2}\sum_j \int^1_0 \frac{dy}{y}\mc{F}_j(y,q^2)\, y^s\uwave{\int^1_0 dz \, z^{s-1}P_{ij}(z)} \\
+&=-g^2_q\sum_j c_{ij}(s)\int^1_0 dy\, y^{s-1}\mc{F}_j(y,q^2) \quad \because (20.6.46)\\
+&=-g^2_q\sum_j c_{ij}(s)\int^1_0 dx\, x^{s-1}\mc{F}_j(x,q^2) =(20.6.43)右辺
+\end{align*}
+2行目から3行目にかけての等号では，面積分の入れ替え
+\begin{align*}
+\int^1_0 dx\int^1_x dy=\int^1_0 dy \int^y_0 dx \quad (面積分範囲は0<x<y<1)
+\end{align*}
+を用いた．これにより，微分方程式(20.6.45)を満たす解$\mc{F}_i$によって(20.6.43)は満たされていることがわかる．
+
+\vskip\baselineskip
+
+行列$c_{ij}(s)$は量子色力学ではジョージァイとポリッツァー，およびグロスとウィルチェックによって計算された．$N$フレーバーのクォーク($f=f_1,f_2,\cdots f_N$の$N$個のフレーバーがある)が，十分軽く，質量ゼロとして扱えるとした．また，その他の全てのクォークは非常に重く，場について積分されて，それらは強い相互作用の結合定数への影響以外は無視できるとした．その結果は，(20.6.23)(20.6.24)演算子に対し以下となる．(導出はPeskinのp637等参照)
+\begin{align*}
+&c_{00}(s)=\frac{1}{2\pi^2}\left\{ C_1\left[ \frac{1}{12}-\frac{1}{s(s-1)}-\frac{1}{(s+1)(s+2)}+\sum^s_{t=2}\frac{1}{t} \right] +\frac{N}{3}C_2\right\} \\
+&c_{f0}(s)=\frac{1}{\pi^2}C_2\left[ \frac{1}{s+2}+\frac{2}{s(s+1)(s+2)} \right] \\
+&c_{of}(s)=\frac{1}{8\pi^2}C_3\left[\frac{1}{s+1}+\frac{2}{s(s-1)}\right] \\
+&c_{ff'}(s)=\frac{1}{8\pi^2}C_3\left[ 1-\frac{2}{s(s+1)}+4\sum^s_{t=2}\frac{1}{t} \right]\delta_{ff'}
+\end{align*}
+ここで$0,f$はそれぞれ演算子(20.6.24)(20.6.23)を意味する．定数$C_1,C_2$は(17.5.33)(17.5.34)で定義される．$N$はフレーバーの個数．$C_3$は17.4節の記法で
+\begin{align*}
+t_\alpha t_\alpha=C_3 g^2 \bm{1}
+\end{align*}
+$SU(3)$ゲージ群でクォークがその基本表現$\bm{3}$だという現実的な場合には
+\begin{align*}
+C_1=3,C_2=\frac{1}{2},C_3=\frac{4}{3}
+\end{align*}
+となる．\par
+これらの複雑な結果は，アルタレリ・パリジ関数$P_{ij}(z)$を用いることでより簡潔になる(らしいがとてもそうは思えない…)以下が成立すると(20.6.46)が満たされていることが確認できる．
+\begin{align*}
+&P_{ff'}=\delta_{ff'}\left[ \frac{4}{3}\left( \frac{1+x^2}{(1-x)_+} \right)+2\delta(1-x) \right] \\
+&P_{f0}=-4\left(x^2-x+\frac{1}{2}\right) \\
+&P_{0f}=-\frac{2}{3}\left( \frac{2}{x}-2+x \right) \\
+&P_{00}=6\left[ \frac{1-x}{x}+x(1-x)+\frac{x}{(1-x)_+}+\frac{11}{12}\delta(1-x) \right]-\frac{N}{3}\delta(1-x)
+\end{align*}
+(多分誤植．確認の計算はこれからする)ここで
+\begin{align*}
+\int^1_0\frac{f(x)}{(1-x)_+}dx=\int^1_0\frac{f(x)-f(1)}{1-x}dx
+\end{align*}
+だ．若干計算ルールを誤解しやすいので注意が必要である．例えば$P_{ff'}$には$(1+x^2)/(1-x)_+$という項があるが，先に計算するのではなく積分してから演算を開始する必要がある．つまり例えばこの項ならば
+\begin{align*}
+\int^1_0 f(x)\left( \frac{1+x^2}{(1-x)_+} \right)d&x=\int^1_0 \frac{f(x)}{(1-x)_+}dx +\int^1_0 \frac{f(x)x^2}{(1-x)_+}dx \\
+&=\int^1_0 \frac{f(x)-f(1)}{1-x}dx+\int^1_0 \frac{f(x)x^2-f(1)}{1-x}dx
+\end{align*}
+のように計算する必要がある．\par
+さて，これが(20.6.46)を満たすことを見よう．まず$P_{ff'}$であるが
+\begin{align*}
+\int^1_0 x^{s-1}P_{ff'}(x)dx&=\delta_{ff'}\int^1_0 x^{s-1}\left[  \frac{4}{3}\left( \frac{1+x^2}{(1-x)_+} \right)+2\delta(1-x)  \right]dx \\
+&=\delta_{ff'}\left[ \frac{4}{3}\int^1_0\frac{x^{s-1}}{(1-x)_+}dx+\frac{4}{3}\int^1_0\frac{x^{s+1}}{(1-x)_+}dx+2 \right] \\
+&=\delta_{ff'}\left[ \frac{4}{3}\int^1_0\frac{x^{s-1}-1}{1-x}dx+\frac{4}{3}\int^1_0\frac{x^{s+1}-1}{1-x}dx+2 \right] \\
+&=\delta_{ff'}\left[ -\frac{4}{3}\int^1_0\{1+x+x^2+\cdots +s^{s-2}\}dx-\frac{4}{3}\int^1_0\{1+x+x^2+\cdots x^{s}\}dx+2 \right] \\
+&=\delta_{ff'}\left[- \frac{4}{3}\left\{1+\frac{1}{2}+\frac{1}{3}+\cdots +\frac{1}{s-1}\right\}-\frac{4}{3}\left\{1+\frac{1}{2}+\frac{1}{3}+\cdots +\frac{1}{s+1}\right\}+2 \right] \\
+&=\delta_{ff'}\left[-\frac{8}{3}-\frac{8}{3}\sum^s_{t=2}\frac{1}{t}+\frac{4}{3}\frac{1}{s}-\frac{4}{3}\frac{1}{s+1}+2 \right] \\
+&=\delta_{ff'}\left[-\frac{2}{3}+\frac{4}{3}\frac{1}{s(s+1)}-\frac{8}{3}\sum^2_{t=2}\frac{1}{t}\right] \\
+&=-\frac{2}{3}\left[ 1-\frac{2}{s(s+1)}+4\sum^s_{t=2}\frac{1}{t} \right]\delta_{ff'} \\
+&=-4\pi^2\frac{1}{8\pi^2}\frac{4}{3}\left[ 1-\frac{2}{s(s+1)}+4\sum^s_{t=2}\frac{1}{t} \right]\delta_{ff'}\\
+&=-4\pi^2c_{ff'}(s)
+\end{align*}
+となる．次に$P_{f0}$は
+\begin{align*}
+\int^1_0 x^{s-1}P_{f0}(x)dx&=-4\int^1_0 x^{s-1}\left[x^2-x+\frac{1}{2}\right]dx \\
+&=-4\left[\int^1_0x^{s+1}dx-\int^1_0 x^{s}dx+\frac{1}{2}\int^1_0 x^{s-1}dx\right] \\
+&=-4\left[ \frac{1}{s+2}-\frac{1}{s+1}+\frac{1}{2s} \right]\\
+&=-\frac{2(s^2+s+2)}{s(s+1)(s+2)} \\
+&=-2\left[\frac{1}{s+2}+\frac{2}{s(s+1)(s+2)}\right] \\
+&=-4\pi^2\frac{1}{\pi^2}\frac{1}{2}\left[\frac{1}{s+2}+\frac{2}{s(s+1)(s+2)}\right] =-4\pi^2 c_{f0}(s)
+\end{align*}
+となる．次に$P_{0f}$は
+\begin{align*}
+\int^1_0x^{s-1}P_{0f}(x)dx&=-\frac{2}{3}\int^1_0 x^{s-1}\left(\frac{2}{x}-2+x\right)dx \\
+&=-\frac{2}{3}\left(2\int^1_0 x^{s-2}dx-2\int^1_0 x^{s-1}dx+\int^1_0x^sdx\right) \\
+&=-\frac{2}{3}\left( \frac{2}{s-1}-\frac{2}{s}+\frac{1}{s+1} \right) \\
+&=-\frac{2}{3}\left( \frac{1}{s+1}+\frac{2}{s(s-1)} \right) \\
+&=-4\pi^2\frac{1}{8\pi^2}\frac{4}{3}\left( \frac{1}{s+1}+\frac{2}{s(s-1)} \right) \\
+&=-4\pi^2 c_{0f}(s)
+\end{align*}
+となる．最後に$P_{00}$は
+\begin{align*}
+\int^1_0 x^{s-1}P_{00}(x)dx&=\int^1_0 x^{s-1}\left\{ 6\left[ \frac{1-x}{x}+x(1-x)+\frac{x}{(1-x)_+}+\frac{11}{12}\delta(1-x) \right]-\frac{N}{3}\delta(1-x) \right\}dx \\
+&=6\left[\int^1_0x^{s-2}dx-\int^1_0x^{s-1}dx +\int^1_0 x^sdx -\int^1_0 x^{s+1}dx+\int^1_0 \frac{x^s}{(1-x)_+}dx+\frac{11}{12} \right]-\frac{N}{3} \\
+&=6\left[\frac{1}{s-1}-\frac{1}{s}+\frac{1}{s+1}-\frac{1}{s+2}-\left(1+\frac{1}{2}+\frac{1}{3}+\cdots \frac{1}{s}\right)+\frac{11}{12}\right]-\frac{N}{3} \\
+&=6\left[-\frac{1}{12}+\frac{1}{s(s-1)}+\frac{1}{(s+1)(s+2)}-\sum^s_{t=2}\frac{1}{t}  \right]-\frac{N}{3} \\
+&=-4\pi^2\frac{1}{2\pi^2}\left\{ 3\left[ \frac{1}{12}-\frac{1}{s(s-1)}-\frac{1}{(s+1)(s+2)}+\sum^s_{t=2}\frac{1}{t} \right]+\frac{N}{6} \right\} \\
+&=-4\pi^2 c_{00}(s)
+\end{align*}
+となる．\par
+各$s$について，行列$c_{ij}(s)$には$(N-1)$重に縮退した固有値があることを示す．簡単のために(20.6.47)を$\alpha$，(20.6.48)を$\beta$，(20.6.49)を$\rho$，(20.6.50)の$\delta_{ff'}$の係数を$\sigma$とおくと$c_{ij}$行列は$(N+1)\times (N+1)$正方行列
+\begin{align*}
+c_{ij}=\left(
+\begin{array}{ccccc}
+c_{00}          & c_{0 f_1}             & c_{0 f_2}      &  \cdots      & c_{0 f_N} \\
+c_{f_1 0}      & c_{f_1 f_1}            & c_{f_1 f_2}    &  \cdots      & c_{f_1 f_N}      \\
+c_{f_2 0}      & c_{f_2 f_1}            &  c_{f_2 f_2}      & \cdots       &c_{f_2 f_N}     \\
+\vdots        & \vdots              &    \vdots       &  \ddots     &         \\
+c_{f_N 0}      & c_{f_N f_1}           &   c_{f_N f_2}    &                 & c_{f_N f_N} 
+\end{array}
+\right)=\left(
+\begin{array}{ccccc}
+\alpha      & \rho    & \rho      &  \cdots  & \rho \\
+\beta     & \sigma  & 0          &  \cdots  & 0      \\
+\beta      & 0          &  \sigma & \cdots   &0       \\
+\vdots & \vdots  &   \vdots    &  \ddots  &         \\
+\beta      & 0         &   0         &               & \sigma 
+\end{array}
+\right)
+\end{align*}
+と書ける．これの固有ベクトルのひとつは，$(0,v_{f_1},v_{f_2},\cdots ,v_{f_N})^t$というベクトルに，成分の和がゼロ$\sum_i v_{f_i}=0$という条件をつけたものである．実際これは
+\begin{align*}
+\left(
+\begin{array}{ccccc}
+\alpha      & \rho    & \rho      &  \cdots  & \rho \\
+\beta      & \sigma  & 0          &  \cdots  & 0      \\
+\beta      & 0          &  \sigma & \cdots   &0       \\
+\vdots & \vdots  &   \vdots    &  \ddots  &         \\
+\beta      & 0         &   0         &               & \sigma 
+\end{array}
+\right)\left(
+\begin{array}{ccccc}
+0 \\
+v_{f_1} \\
+v_{f_2} \\
+\vdots \\
+v_{f_N}
+\end{array}
+\right)
+=\left(
+\begin{array}{ccccc}
+\rho(v_{f_1}+v_{f_2}+\cdots +v_{f_N}) \\
+\sigma v_{f_1} \\
+\sigma v_{f_2} \\
+\vdots \\
+\sigma v_{f_N}
+\end{array}
+\right)=\sigma \left(
+\begin{array}{ccccc}
+0 \\
+v_{f_1} \\
+v_{f_2} \\
+\vdots \\
+v_{f_N}
+\end{array}
+\right)
+\end{align*}
+となる．したがって固有ベクトルは$\sum_i v_{f_i}=0$という条件をもつ$\sum_i v_{f_i}\bm{e}_{f_i}$というベクトルで，その固有値は$\sigma$だとわかる．$N$重縮退のように見えるが，固有ベクトルに条件式が一つあるのでこれは$(N-1)$重縮退だ．このベクトルを，$\mc{O}_{sf}$が係数となるように基底を$\bm{e}_{f}\to \bm{w}_f$と変換すると
+\begin{align*}
+\sum_i v_{f_i}\bm{e}_{f_i}=\sum_i \mc{O}_{sf_i}\bm{w}_{f_i}
+\end{align*}
+となって，対応する条件式は，成分の和をとることで
+\begin{align*}
+\sum_j\left\{\sum_i v_{f_i}(\bm{e}_{f_i})_{f_j}\right\}&=\sum_i v_{f_i}\sum_j(\bm{e}_{f_i})_{f_j}=\sum_i v_{f_i}=0 \\
+&=\sum_j\left\{\sum_i \mc{O}_{sf_i}(\bm{w}_{f_i})_{f_j}\right\}=\sum_i \mc{O}_{sf_i}\sum_j (\bm{w}_{f_i})_{f_j}
+\end{align*}
+$\mc{O}_{sf_i}$は独立であるから，$\sum_j (\bm{w}_{f_i})_{f_j}=0$が同値の条件であるとわかる．すなわち$c_{ij}$の固有ベクトルは(20.6.23)の演算子の線型結合$\sum_i \mc{O}_{sf_i}\bm{a}_{f_i}$で，$\mc{O}_{sf}$の係数は成分の和がゼロ$\sum_i (\bm{a}_{f_i})_f$だ．基底であるから$\bm{a}_f$はそれぞれ独立だ．そして(くどいようだが)その固有値は(20.6.50)の$\delta_{ff'}$の係数
+\begin{align*}
+c(s,随伴)=c_{ff'}(s)=\frac{1}{8\pi^2}C_3\left[ 1-\frac{2}{s(s+1)}+4\sum^s_{t=2}\frac{1}{t} \right]
+\end{align*}
+となり$(N-1)$重縮退である．\par
+今の計算で何がわかるだろうか．(20.3.9)によれば，演算子積展開に現れる係数関数$U_{si}$はくりこみ因子を含み，OPE$\sum_i U_{si}\mc{O}_{si}$は，どのような演算子で展開するかによって$c_{ij}$の固有値が決まり，係数関数が計算できる．つまり今回の場合ならば
+\begin{align*}
+O'_{sf_i}=\sum_{f_j}a_{f_i f_j}\mc{O}_{sf_j} \quad \left(\sum_{f_i}{a_{f_if_j}}=0\right)
+\end{align*}
+という演算子で展開するならば，固有値の値が$c(s,随伴)$だと決まり，係数関数が計算できる，ということだ．\par
+さらに，$SU(N)$の単位表現に属する固有演算子が二つある．これらは演算子(20.6.24)と，演算子(20.6.23)の$f$についての和，の二つの線型結合
+\begin{align*}
+\bm{a}\left[x\mc{O}_{s0}+y\sum_{f}\mc{O}_{sf}\right]=\left(
+\begin{array}{ccccc}
+a_0(x\mc{O}_{s0}+y\sum_{f}\mc{O}_{sf} )\\
+a_{f_1}(x\mc{O}_{s0}+y\sum_{f}\mc{O}_{sf} ) \\
+a_{f_2}(x\mc{O}_{s0}+y\sum_{f}\mc{O}_{sf}) \\
+\vdots \\
+a_{f_N}(x\mc{O}_{s0}+y\sum_{f}\mc{O}_{sf})
+\end{array}
+\right)
+\end{align*}
+で与えられる．(これらの演算子は$SU(N)$のもとで不変であることを思い出そう．よってこのベクトルは$SU(N)$のもとで単位表現に属する．)$\bm{a}$は$c_{ij}$の固有ベクトルとすれば全体で固有ベクトルである．これを知るためには，
+\begin{align*}
+\left(
+\begin{array}{ccccc}
+\alpha      & \rho    & \rho      &  \cdots  & \rho \\
+\beta      & \sigma  & 0          &  \cdots  & 0      \\
+\beta      & 0          &  \sigma & \cdots   &0       \\
+\vdots & \vdots  &   \vdots    &  \ddots  &         \\
+\beta      & 0         &   0         &               & \sigma 
+\end{array}
+\right)\left(
+\begin{array}{ccccc}
+a \\
+b \\
+b \\
+\vdots \\
+b
+\end{array}
+\right)
+\end{align*}
+を計算して，固有演算子である$x,y$を見つける必要がある．この式は実質
+\begin{align*}
+\left(
+\begin{array}{cc}
+\alpha & \rho N \\
+\beta & \sigma
+\end{array}
+\right)\left(
+\begin{array}{cc}
+a \\
+b
+\end{array}
+\right)=\left(
+\begin{array}{cc}
+c_{00(s)} & c_{0f}(s)N \\
+c_{f0}(s) & c(s,随伴)
+\end{array}
+\right)\left(
+\begin{array}{cc}
+a \\
+b
+\end{array}
+\right)
+\end{align*}
+であるから，固有演算子と固有値は$2\times 2$行列
+\begin{align*}
+c(s)_{\mathrm{singlet}}=\left(
+\begin{array}{cc}
+c_{00}(s) & c_{0f}(s)N \\
+c_{f0}(s) & c(s,随伴)
+\end{array}
+\right)
+\end{align*}
+を対角化すれば得られる．(20.6.47)-(20.6.50)に$s=2$を代入すれば
+\begin{align*}
+c(2)_{\mathrm{singlet}}=\left(
+\begin{array}{cc}
+NC_2/6\pi^2 & NC_3/6\pi^2 \\
+C_2/3\pi^2 & C_3/3\pi^2
+\end{array}
+\right)
+\end{align*}
+という形になる．これの固有値は
+\begin{align*}
+\det (c(s)_{\mathrm{singlet}}-\lambda I)&=\left(\frac{NC_2}{6\pi^2}-\lambda\right)\left(\frac{C_3}{3\pi^2}-\lambda\right)-\frac{NC_3}{6\pi^2}\frac{C_2}{6\pi^2} \\
+&=\lambda^2-\lambda\left(\frac{NC_2}{6\pi^2}+\frac{C_3}{3\pi^2}\right)=0 \\
+&\Leftrightarrow \lambda=0,\quad \frac{NC_2}{6\pi^2}+\frac{C_3}{3\pi^2}
+\end{align*}
+である．つまりこれはゼロ固有値を一つ持つ．
+\begin{align*}
+\mc{O}^{\mu\nu}_{20}&=\frac{1}{4}F^{\,\rho \{\mu}_{\alpha}F_{\alpha \,\,\rho}^{\,\nu\}} \\
+&=\frac{1}{4}\left\{F_{\alpha}^{\rho \mu}F^{\nu}_{\alpha\,\rho}+F_{\alpha}^{\rho \nu}F^{\mu}_{\alpha\,\rho}-\frac{1}{2}\eta^{\mu\nu}F_{\alpha\, \rho \sigma}F^{\rho\sigma}_{\alpha} \right\}
+\end{align*}
+と
+\begin{align*}
+\sum_f \mc{O}^{\mu\nu}_{2f}&=\sum_f \frac{1}{2}\bar{\psi}_f \gamma^{\{\mu_1}D_{\leftrightarrow}^{\nu \}}\psi_f  \\
+&=\frac{1}{4} \sum_f \left\{ \bar{\psi}_f\gamma^{\mu}D^{\nu}\psi_f +\bar{\psi}_f\gamma^{\nu}D^{\mu}\psi_f  -\frac{1}{2}\eta^{\mu\nu}\bar{\psi}_f\gamma^{\rho}D_{\rho}\psi_f \right\} +\mathrm{H.c.}
+\end{align*}
+の線型結合でエネルギー・運動量テンソルに等しいものに相当する．実際，QCDラグランジアンを通常の通り
+\begin{align*}
+\mc{L}=-\frac{1}{4}F_{\alpha\,\mu\nu}F^{\mu\nu}_{\alpha}-\sum_f \bar{\psi}_f\gamma^\mu D_\mu \psi_f
+\end{align*}
+ととると，(7.3.34)(7.4.11)を用いて計算されるエネルギー運動量テンソルと類似のものだと理解できる．(ここで計算するには複雑で面倒なので，QEDのエネルギー運動量テンソルで調べればすぐわかる．Peskinのp430等参照．トレース項がまさに(7.3.34)の$\delta^\mu_\nu$に比例する項から来るものだ．)$c_{ij}$の固有値がゼロであるから，このときは(20.3.7)よりくりこみ因子は不要となる．またもう一つの固有値として$NC_2/6\pi^2+ C_3/3\pi^2$がある．\par
+さて，(20.6.42)を両辺$s$微分すると，
+\begin{align*}
+\mathrm{LHS} &=\frac{d}{ds}\left\{\int^1_0 dx\, x^{s-1}\mc{F}_i(x,q^2)\right\} \\
+&=\int^1_0 dx \ln x \,x^{s-1}\mc{F}_i(x,q^2)<0 \quad \because \ln x<0 \quad(0<x<1) \\
+\mathrm{RHS} &=\frac{d}{ds}\left\{\frac{1}{2}\sum_j \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{ij}\braket{O_{sj}}\right\} \\
+&= \frac{1}{2}\sum_{jk}\frac{8\pi^2}{b}c'_{ij}(s)\ln \left(g^2_q/g^2_{\ell} \right) \left[\left(g^2_q/g^2_{\ell} \right)^{8\pi^2c(s)/b} \right]_{jk}\braket{O_{sk}} \\
+&=\sum_{j}\frac{8\pi^2}{b}c'_{ij}(s)\ln \left(g^2_q/g^2_{\ell} \right)\int^1_0 dx\, x^{s-1}\mc{F}_j(x,q^2)
+\end{align*}
+ここで$\mc{F}_i$は確率分布関数であるから正であり，また漸近的自由であるから$q\to\infty$で$g_q^2$はゼロに近づき$g^2_q<g^2_\ell$であるから$\ln \left(g^2_q/g^2_{\ell} \right)<0$である．左辺が負であるから，右辺も負である必要があり，したがって$c'_{ij}(s)>0$である必要がある．すなわち，ある与えられた$s$について$c_{ij}(s)$の最小固有値は，任意の$s'<s$の$c_{ij}(s')$の最小固有値よりも大きくなければならない．$s=2$については最小固有値はゼロだから，$s>2$の他の全ての固有値は正だと結論できる．実際，$s>2$の演算子は次元が4以上であるから，これらはくりこまれるので，くりこみ因子があり$c$はゼロでないとわかる．したがって$g^2_q\to 0$でエネルギー運動量テンソルのみの寄与が生き残るという極端な場合にのみ，ブヨルケンスケーリング則が厳密に満たされる．実際，このときは$s=2$のみ生き残り$c=0$であるから(20.6.42)より
+\begin{align*}
+\int^1_0 x \mc{F}_i(x,q^2)=\frac{1}{2}\braket{\mc{O}_{si}}
+\end{align*}
+となるので，その$i$についての和も定数となり(20.6.7)と同じ形式となる．
+
+
+\newpage
+
+\subsection{リノーマロン}
+ダイソンは$n$次のダイアグラムの数は$n!$の程度に大きくなることに気付いた．\par
+$\Rightarrow$($n\to\infty$)の極限でゼロにならないので，収束半径はゼロだ．(ダランベールの公式等参照)\par
+$n$次の項が$n!$のように大きくなるベキ級数の収束性を改善するには，ボレル変換という方法がある．\par
+$\Rightarrow$これで級数を収束させたり，少なくともその級数の振る舞いを改善して結合定数の(より広い範囲にわたって)漸近級数として使えるようにできる．
+
+\vskip\baselineskip
+
+ある与えられた級数
+\begin{align*}
+F(g)=\sum_n f_n g^n
+\end{align*}
+(結合定数のベキであるから，これがダイアグラムに対応)について，ボレル変換$B(z)\equiv B(F)(z)$
+\begin{align*}
+B(z)\equiv\sum_n \frac{f_n}{n!}z^n
+\end{align*}
+を考える．もし$f_n$が$n!$より速く大きくならなければ$\lim_{n\to\infty}(f_n/n!)=0$となりダランベールの公式等より級数$B(z)$は一般的にゼロでない収束半径を持つ．
+\begin{align*}
+\int^\infty_0 \exp(-z/g)z^ndz&=\int^\infty_0 (-g)\left\{ \exp(-z/g) \right\}'z^ndz \\
+&=\left[(-g)\exp(-z/g)z^n\right]^\infty_0+gn\int^\infty_0 \exp(-z/g)z^{n-1}dz \\
+&=gn \int^\infty_0 \exp(-z/g)z^{n-1}dz=g^2n(n-1)\int^\infty_0 \exp(-z/g)z^{n-2}dz \\
+&=\cdots = g^i n(n-1)\cdots (n-i+1)\int^\infty_0 \exp(-z/g)z^{n-i}dz=\cdots \\
+&=g^n n! \int^\infty_0 \exp(-z/g)dz=g^nn! [(-g)\exp(-z/g)]^\infty_0 \\
+&=n! g^{n+1}
+\end{align*}
+を用いると，少なくとも形式的には
+\begin{align*}
+gF(g)=\sum_n f_n g^{n+1}&=\sum_n \frac{f_n}{n!}n!g^{n+1} \\
+&=\sum_n \frac{f_n}{n!}\int^\infty_0\exp(-z/g)z^n dz \\
+&=\int^\infty_0 \exp(-z/g)\left\{ \sum_n \frac{f_n}{n!}z^n \right\}dz \\
+&=\int^\infty_0 \exp(-z/g)B(z)dz
+\end{align*}
+となる．
+
+\vskip\baselineskip
+
+$B(z)$が複素平面上のどこかに特異性をもてば，それによって(20.7.2)の収束半径が制限される．(一般の収束半径の話)
+$\Rightarrow$しかし，\uwave{その特異性が正の実軸上になければ}，これは乗り越えられない問題ではない！\par
+(20.7.3)を用いて，$F(g)$を計算するには，積分範囲が$[0\sim\infty]$であるうえに$\exp(-z/g)$は$z\gg g$においてほぼゼロなので$F(g)$の計算にほぼ寄与しない．よって$B(z)$は$z$が$g$より小さい，あるいは$g$程度の大きさの実の正値について知れば良い！\par
+$\Rightarrow$ $B(z)$の特異性が，全て原点から$g$よりずっと大きい場所にあるなら，$g$程度の距離までで(20.7.1)で展開できて，$B(z)$がわかる．もしいくつかの極$z_1,z_2\cdots$等が$g$と同じかそれより小さい絶対値をもっていても，$(z-z_1)(z-z_2)\cdots\times B(z)$に対するベキ級数を使って$B(z)$を$g$の大きさの$z$まで求められる．(しかし，そのためには$B(z)$の極がどこにあるかを知らなければならない) \par
+ただし，もし$B(z)$の特異性が正の実軸上にある場合，$\exp(-z/g)$は$z\gg g$においてほぼゼロでも$B(z)$が特異性をもつので$z\gg g$の範囲の積分も大きく寄与し，無視できない．よって(20.7.3)を無効にしてしまい，タチが悪い．この積分の経路は特異点を避けるように曲げられるが，上を通るか下を通るかの不定性がある．
+
+\vskip\baselineskip
+
+ボレル変換$B(z)$には「インスタントン」として知られる，古典的な場の方程式(KG方程式のような)の解に伴う特異性と，OPEに関係した「リノーマロン」として知られる特異性が存在することを示す．QCDでは摂動級数の和をとるためのボレル変換を妨害するのはリノーマロンだ．\par
+以下の経路積分で定義される関数$F(g)$を考える．
+\begin{align*}
+F(g)\equiv \int [d\phi]\exp (I[\phi,g])
+\end{align*}
+虚時間を用いているので，$\exp(iI)$ではない．これを(20.7.1)で展開するときの係数は
+\begin{align*}
+&F(g)=\sum_n f_n g^n \quad \Rightarrow \quad g^{-(i+1)}F(g)=\cdots \frac{f_{i-1}}{g^2}+\frac{f_i}{g}+f_{i+1}+\cdots \\
+&\oint g^{-i-1}F(g)dg=2\pi i f_i \quad \because コーシーの積分公式 \\
+\Rightarrow \quad & f_n=\frac{1}{2\pi i}\int [d\phi]\oint dg\, g^{-n-1}\exp(I[\phi,g]) \\
+&\quad =\frac{1}{2\pi i}\int [d\phi]\oint dg\, \exp(I[\phi,g]-(n+1)\ln g) \quad \because x^a=\exp(a\ln x)
+\end{align*}
+ここで$\oint$は複素$g$空間で$g=0$の点を囲む閉曲線についての反時計まわりの一周積分を意味する．$n$が非常に大きいとき，この積分は指数関数の因数が$\phi,g$の両方について停留点
+\begin{align*}
+&\left. \frac{\delta}{\delta\phi(x)}\left[ I[\phi,g]-(n+1)\ln g \right]\right|_{\phi=\phi_n,g=g_n}=0 \quad \Rightarrow\quad \left.\frac{\delta I[\phi,g]}{\delta \phi(x)}\right|_{\phi=\phi_n}=0 \\
+&\left.\frac{\partial}{\partial g}\left[ I[\phi,g]-(n+1)\ln g \right]\right|_{\phi=\phi_n g=g_n}=0 \quad \Rightarrow \quad \left.\frac{\partial I[\phi_n ,g ] }{\partial g}\right|_{g=g_n}=\frac{n+1}{g_n}
+\end{align*}
+から主要な寄与があるとするのが妥当だ．\par
+たとえば，もし$I[\phi,g]$が質量ゼロのスカラー場の作用
+\begin{align*}
+I[\phi,g]=-\frac{1}{2}\int \partial_i \phi \partial_i \phi \,d^4x -\frac{g}{24} \int \phi^4 \,d^4x \quad(和iはユークリッド座標の方向1\sim4についてとる)
+\end{align*}
+と仮定すると，場の方程式(20.7.6)は
+\begin{align*}
+&\mc{L}=-\frac{1}{2}\partial_i \phi \partial_i \phi -\frac{g}{24} \phi^4 \quad として \quad \left.\frac{\delta I[\phi,g]}{\delta \phi(x)}\right|_{\phi=\phi_n}= \left[ \partial_i \left(\frac{\partial \mc{L}}{\partial(\partial_i \phi)}\right)-\frac{\partial \mc{L}}{\partial \phi} \right]_{\phi=\phi_n,g=g_n}=0
+\end{align*}
+であるから
+\begin{align*}
+&\partial_i \partial_i \phi_n\equiv \Box \phi_n =\frac{g_n}{6}\phi^3_n
+\end{align*}
+となる．すぐ後で$g_n$は負だとわかるので，この解は
+\begin{align*}
+\phi_n(x)=(-g_n)^{-1/2}\chi(x) \quad (\chi(x)は方程式\Box\chi=-\frac{1}{6}\chi^3の解で，gに独立)
+\end{align*}
+と書ける．実際，これは
+\begin{align*}
+\Box \phi_n&=(-g_n)^{-1/2}\Box \chi \\
+&=-(-g_n)^{-1/2}\frac{1}{6}\chi^3 =-\frac{1}{6}(-g_n)^{-1/2}(-g_n)^{3/2}\phi_n^3 \\
+&=\frac{g_n}{6}\phi^3_n
+\end{align*}
+で解とわかる．条件(20.7.7)は
+\begin{align*}
+-\frac{1}{24}\int d^4x \phi^4_n=\frac{n+1}{g_n}
+\end{align*}
+(20.7.10)を用いて
+\begin{align*}
+&-\frac{1}{24}\int d^4x (-g_n)^2\chi^4=\frac{n+1}{g_n} \\
+\Rightarrow\quad & g_n=-\frac{1}{24(n+1)}\int d^4x\chi^4
+\end{align*}
+だとわかる．この停留点$\phi_n,g_n$では，作用(20.7.8)は
+\begin{align*}
+I[\phi_n,g_n]&=-\frac{1}{2}\int \partial_i \phi_n \partial_i \phi_n \,d^4x -\frac{g}{24} \int \phi^4_n \,d^4x \\
+&=\frac{1}{2}\int \phi_n \Box \phi_n d^4x -\frac{g_n}{24}\int \phi^4_n d^4x \\
+&=\frac{g_n}{12}\int \phi^4_n d^4x-\frac{g_n}{24}\int \phi^4_n d^4x \quad \because (20.7.9) \\
+&=\frac{g_n}{24}\int \phi^4_n d^4x \\
+&=-n-1\quad \because p45下から\ell 1
+\end{align*}
+となる．(20.7.5)をこの停留点で計算すると，$n\to\infty$で以下を得る．
+\begin{align*}
+f_n&\approx g^{-n-1}_n\exp(I[\phi_n,g_n]) \quad ((9.3.6)から出る定数因子があるが，無視) \\
+&=\left(-\frac{1}{24}\int \chi^4 d^4x\right)^{-n-1}e^{-n-1} \quad\because (20.7.12)(20.7.13) \\
+&=(n+1)^{n+1}\left(-\frac{e}{24}\int \chi^4 d^4x\right)^{-n-1} \\
+&\approx n^n\left(-\frac{e}{24}\int \chi^4 d^4x\right)^{-n} \quad \because n\to\infty なので+1して良い\\
+&\approx n!\left(-\frac{1}{24}\int \chi^4 d^4x\right)^{-n} \quad \because スターリングの公式n!\approx\sqrt{2\pi n}\left(\frac{n}{e}\right)^n
+\end{align*}
+最後の等式では，脚注にある通り$\sqrt{2\pi n}$因子も無視．したがって$B(z)$は
+\begin{align*}
+B(z)=\sum_n \frac{f_n}{n!}z^n\approx \sum_n \left(-\frac{1}{24}\int \chi^4 d^4x\right)^{-n}z^n=\sum_n \left(\frac{z}{z_1}\right)^n
+\end{align*}
+とできる．ここで
+\begin{align*}
+z_1\equiv -\frac{1}{24}\int \chi^4 d^4x
+\end{align*}
+だ．$z=z_1$でこの級数は発散し，$z=z_1$が主要な特異点だとわかる．$z_1$は負であるから，(20.7.3)の積分を実行する妨げにはならない．\par
+極の位置(20.7.15)を計算するには，場の方程式(20.7.11)に解
+\begin{align*}
+\chi=\frac{4\sqrt{3}a}{r^2+a^2} \quad (r=(x_ix_i)^{1/2}，aは任意のパラメータ)
+\end{align*}
+があることに気付けばいいようだ．とても気付けないが．実際これは
+\begin{align*}
+\Box \chi=\sum_{i=1}^4 \partial_i \partial_i \chi&=\sum_{i=1}^44\sqrt{3}a\left( \frac{8(x_i)^2}{(r^2+a^2)^3}-\frac{2}{(r^2+a^2)^2} \right) \\
+&=4\sqrt{3}a\left( \frac{8r^2}{(r^2+a^2)^3}-\frac{8}{(r^2+a^2)^2} \right) \\
+&=4\sqrt{3}a\left( \frac{8r^2}{(r^2+a^2)^3}-\frac{8(r^2+a^2)}{(r^2+a^2)^3} \right) \\
+&=4\sqrt{3}a\frac{-8a^2}{(r^2+a^2)^3}=-32\sqrt{3}\frac{a^3}{(r^2+a^2)^2}=-\frac{1}{6}\chi^3
+\end{align*}
+であって解だ．この解は23.5節で論じる「インスタントン解」の初歩的な例になっている…らしい．幸運にも極の位置は$a$に依存しない．
+\begin{align*}
+z_1&=-\frac{1}{24}\int \chi^4 d^4x=-\frac{1}{24}\int^\infty_0 \frac{(4\sqrt{3}a)^4}{(r^2+a^2)^4}2\pi^2 r^3 dr  \quad \because 2巻p246よりd^4x\to2\pi^2r^3dr \\
+&=-\frac{1}{24}\int^\infty_0 \frac{(4\sqrt{3}a)^4}{(r^2+a^2)^4}2\pi^2 \frac{r^2}{2} dr^2 \quad \because \frac{dr^2}{dr}=2rよりr^3dr=\frac{r^2}{2}dr^2 \\
+&=-96\pi^2a^4\int^\infty_0 \frac{r^2}{(r^2+a^2)^4}dr^2 \\
+&=-96\pi^2a^4 \frac{1}{6a^4} \quad\because \int^\infty_0 \frac{x}{(x+a)^4}dx=\frac{1}{6a^2} \\
+&=-16\pi^2
+\end{align*}
+これにより，結合定数が$g\ll 16\pi^2$のエネルギーでは$B(z)$の摂動級数を(20.7.3)に使えることがわかる．もし$g/16^2$が1より大きくても，最初に述べた通り$B(z)$を$(z+16\pi^2)B(z)$の摂動級数から計算することができる．\par
+量子色力学の現実の問題はこれと異なる種類の特異性である．これらはリノ―マロンと呼ばれる．リノ―マロンは20.3図のようなダイアグラムからくる．このときは$f_n$が$n!$より大きくなるから，(20.7.2)の級数$B(z)$に特異性が出てくる．これは変化する結合定数$g_\mu$を定義するのに用いられたくりこみ点の運動量よりはるかに小さな仮想運動量から生じるので，特に赤外リノーマロンと呼ばれるらしい．
+
+\vskip\baselineskip
+
+仮想運動量が小さいダイアグラムのせいで摂動論が使えなくなるのは何も新しいことではない．20.2節で見たように，演算子積展開の重要な点は，ファインマンダイアグラムのうち，\uwave{どの線も大きな運動量をもつ部分}を分離することにある．その部分は漸近的自由な理論では摂動論を用いて計算できる．ファインマンダイアグラムのうち，残された小さな運動量が流れる部分は摂動論では計算できない．
+
+
+
+\end{document}

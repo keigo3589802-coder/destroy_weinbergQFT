@@ -1,0 +1,2374 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{tensor}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+\usepackage{physics}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part3}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+\maketitle
+
+\setcounter{part}{2}
+\part{散乱理論}
+\setcounter{section}{3}
+\setcounter{subsection}{0}
+\subsection{In状態とout状態}
+1粒子状態$\Psi_{p,\sigma,n}$全体の張るヒルベルト空間$\mc{H}_1$
+\begin{align*}
+\mc{H}_1\ni \int d^3\mathbf{p} f_{\sigma,n}(p) \Psi_{p,\sigma,n}
+\end{align*}
+を用いて，$N$個の\uwave{相互作用していない}粒子からなる多粒子状態を考えよう．ここで1粒子状態を表示するのに，その4元運動量$p^\mu$，スピンの$z$成分(質量ゼロ粒子の場合ではヘリシティ)$\sigma$，2種類以上の粒子を取り扱う場合にはさらに質量・スピン・電荷等を含めた粒子のタイプを表す添え字$n$を用いる．$N$個のテンソル積の「(反)対称化」によって，$N$粒子状態を表す状態空間
+\begin{align*}
+\mc{H}_N:=&\mathrm{Sym}_{\pm}\otimes^N \mc{H}_1 \\
+\ni &\Psi^N=\sum_{n_1\sigma_1 n_2 \sigma_2\cdots n_N \sigma_N} \int d^3\mathbf{p}_1 \cdots d^3\mathbf{p}_N f_{\mathbf{p}_1,\sigma_1,n_1;\cdots ;\mathbf{p}_N,\sigma_N,n_N}\Psi^N_{p_1,\sigma_1,n_1;\cdots ;p_N,\sigma_N,n_N}
+\end{align*}
+が得られる．$N$粒子状態はその基底$\Psi^N_{p_1,\sigma_1,n_1;\cdots ;p_N,\sigma_N,n_N}$で定義される．すなわち相互作用していない粒子からなる多粒子状態は，非斉次ローレンツ群のもとで1粒子状態のテンソル積として変換するものとみなせる．全系の状態空間$\mc{H}$は
+\begin{align*}
+\mc{H}=\bigoplus_{N=0}^\infty \mc{H}_N
+\end{align*}
+で定義され，その元は
+\begin{align*}
+\Psi=\sum_{N=0}^\infty \sum_{n_1\sigma_1 \cdots n_N\sigma_N}\frac{1}{\prod_i N_i!}\int d^3\mathbf{p}_1 \cdots d^3\mathbf{p}_N \Psi^N_{p_1, \sigma_1, n_1;\cdots ;p_N,\sigma_N ,n_N} f^N_{p_1, \sigma_1 ,n_1;\cdots; p_N ,\sigma_N ,n_N}
+\end{align*}
+で書かれる．ポアンカレ群による変換則は1粒子状態への変換則から一意的に定義される．一般の変換則は，
+\begin{align*}
+U(\Lambda,a)=\exp(-ia_\mu P^\mu) U(\Lambda)
+\end{align*}
+と(2.5.23)を用いて
+\begin{align*}
+&U(\Lambda ,a)\Psi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2\cdots } \\
+=&e^{-ia_\mu P^\mu }U(\Lambda) \Psi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2\cdots } \\
+=&\prod_i \left[e^{-ia_\mu (\Lambda p_i)^\mu}\sqrt{\frac{(\Lambda p_i)^0}{p_i^0}} \sum_{\sigma'_i}D_{\sigma'_i\sigma_i}^{(j_i)}\Bigl(W(\Lambda,p_i)\Bigr)\right]\Psi_{\Lambda p_1,\sigma_1',n_1;\Lambda p_2,\sigma'_2,n_2\cdots } \\
+=&\exp\left[-ia_\mu ((\Lambda p_1)^\mu+(\Lambda p_2)^\mu)+\cdots \right] \sqrt{\frac{(\Lambda p_1)^0(\Lambda p_2)^0\cdots }{p^0_1p_2^0\cdots}} \\
+&\times \sum_{\sigma_1,\sigma_2\cdots }D^{(j_1)}_{\sigma'_1\sigma_1}\Bigl(W(\Lambda,p_1)\Bigr)D^{(j_2)}_{\sigma'_2\sigma_2}\Bigl(W(\Lambda,p_2)\Bigr)\cdots \Psi_{\Lambda p_1,\sigma_1',n_1;\Lambda p_2,\sigma'_2,n_2\cdots }
+\end{align*}
+ここで$W(\Lambda,p)$はウィグナーの回転(2.5.10)，$D^{(j)}_{\sigma',\sigma}$は，質量があれば3次元回転群の表現である通常の$(2j+1)$次元ユニタリー行列，質量ゼロなら$D^{(j)}_{\sigma'\sigma}=\delta_{\sigma'\sigma}\exp(i\sigma\theta(\Lambda,p))$となる．ここで$\theta(\Lambda,p)$は(2.5.43)で定義される角度だ．状態は(2.5.19)のように規格化される．
+\begin{align*}
+&(\Psi^{N'}_{p_1',\sigma'_1,n'_1;p'_2,\sigma'_2,n'_2\cdots },\Psi^N_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2\cdots }) \\
+=&\delta_{N'N}\delta^3(\mathbf{p}'_1-\mathbf{p}_1)\delta_{\sigma'_1\sigma_1}\delta_{n_1'n_1}\delta^3(\mathbf{p}'_2-\mathbf{p}_2)\delta_{\sigma'_2\sigma_2}\delta_{n'_2n_2}\cdots \\
+&\pm[置換]
+\end{align*}
+ここで$\pm[置換]$の項は，組$(p_1,\sigma_1,n_1),\cdots,(p_N,\sigma_N,n_N)$についての置換であり，それぞれの変数を個別に置換しているわけではない．これは粒子のタイプ$n_1',n_2',\cdots$の入れ替えが粒子のタイプ$n_1,n_2$と同じになる可能性を考慮して付けてある．4章でより完全に述べられるらしいが，その符号はこの入れ替えが半整数スピン粒子の奇数回の入れ替えで$-1$，それ以外では$+1$となる．(例えば$n_1,n_2$が共に電子であり，$n_1',n_2'$も共に電子であるような場合
+\begin{align*}
+(\Psi_{p'_1,\sigma_1';p'_2,\sigma_2'},\Psi_{p_1,\sigma_1;p_2,\sigma_2})=&\delta^3(\mathbf{p}_1'-\mathbf{p}_1)\delta_{\sigma'_1\sigma_1}\delta^3(\mathbf{p}'_2-\mathbf{p}_2)\delta_{\sigma'_2\sigma_2} \\
+&-\delta^3(\mathbf{p}_2'-\mathbf{p}_1)\delta_{\sigma'_2\sigma_1}\delta^3(\mathbf{p}'_1-\mathbf{p}_2)\delta_{\sigma'_1\sigma_2}
+\end{align*}
+となる．$\Psi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2;\cdots}$も組$(p_i,\sigma_i,n_i)$と$(p_j,\sigma_j,n_j)$の組の入れ替えがフェルミオン同士だったらマイナスが出るとする．)これはこの章の内容では重要ではない．
+
+\vskip\baselineskip
+
+一つのギリシャ文字，例えば$\alpha$が$p_1,\sigma_1,n_1;p_2,\sigma_2,n_2;\cdots$全体を表す省略記法をしばしば用いる．
+\begin{align*}
+\Psi_{\alpha}=\Psi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2\cdots }
+\end{align*}
+この記法では特に規格化条件(3.1.2)は
+\begin{align*}
+(\Psi_{\alpha'},\Psi_\alpha)=\delta(\alpha'-\alpha)
+\end{align*}
+と書かれる．右辺のデルタ関数は，離散的な添え字(スピン添え字$\sigma$と粒子のタイプ$n$)についてはクロネッカーのデルタであり，連続的な運動量添え字についてはデルタ関数として扱う．また状態和をとるとき
+\begin{align*}
+\int d\alpha := \sum_{N=0}^\infty\sum_{n_1\sigma_1 \cdots n_N \sigma_N}\frac{1}{\prod_i N_i!} \int d^3\mathbf{p}_1 d^3\mathbf{p}_2\cdots d^3\mathbf{p}_N
+\end{align*}
+と書く．つまり離散的な添え字($\sigma,n$)については和をとり，連続的な運動量添え字については積分する．さらに$N$粒子状態の総数$N$についても和をとる．ただし，和の中で$n_i$と種類が同じ粒子が二種類以上入っているときはその数を$N_i$として，$N_i !$で割る必要がある(例えば電子2個と陽電子1個の3粒子状態の項については係数に$1/2!1!$が出てくる．重複が無いように注意．$\sum_i N_i=N$である．)．特に，(3.1.3)で規格化された状態の完全性は
+\begin{align*}
+\Psi=\int d\alpha \Psi_\alpha (\Psi_\alpha, \Psi)
+\end{align*}
+と表示できる．実際，$\Psi_\alpha$が完全性をなすとすれば
+\begin{align*}
+\Psi=& \int d\alpha \Psi_{\alpha} f_\alpha \\
+=&\sum_{N=0}^\infty \sum_{n_1\sigma_1 \cdots n_N\sigma_N}\frac{1}{\prod_i N_i!}\int d^3\mathbf{p}_1 \cdots d^3\mathbf{p}_N \Psi^N_{p_1\sigma_1n_1;\cdots ;p_N \sigma_N n_N} f^N_{p_1 \sigma_1 n_1;\cdots; p_N \sigma_N n_N}
+\end{align*}
+として展開できるが，係数$f_\alpha$を得るためには，両辺を$\Psi_{\beta}$と内積することによって得られて
+\begin{align*}
+&(\Psi^{N'}_{p'_1\sigma'_1n'_1;p'_2\sigma'_2n'_2,\cdots} ,\Psi) \\
+=&\sum_{N=0}^\infty \sum_{n_1\sigma_1 \cdots n_N \sigma_N}\frac{1}{\prod_i N_i !}\int d^3\mathbf{p}_1 d^3\mathbf{p}_2\cdots (\Psi^{N'}_{p'_1\sigma'_1n'_1;p'_2\sigma'_2n'_2,\cdots},\Psi^{N}_{p_1\sigma_1n_1;p_2\sigma_2n_2\cdots }) f^N_{p_1\sigma_1n_1;p_2\sigma_2n_2\cdots } \\
+=&\sum_{n_1\sigma_1 n_2 \sigma_2\cdots }\frac{1}{\prod_i N_i !}\int d^3\mathbf{p}_1 d^3\mathbf{p}_2\cdots \Bigl[\delta_{N'N}\delta^3(\mathbf{p}'_1-\mathbf{p}_1)\delta_{\sigma'_1\sigma_1}\delta_{n_1'n_1}\delta^3(\mathbf{p}'_2-\mathbf{p}_2)\delta_{\sigma'_2\sigma_2}\delta_{n'_2n_2}\cdots \pm[置換]\Bigr] \\
+&\qquad \qquad \qquad \qquad \qquad \qquad \times  f^N_{p_1\sigma_1n_1;p_2\sigma_2n_2\cdots } \\
+=&\frac{1}{\prod_i N_i!}\left[f^{N'}_{p'_1\sigma'_1n'_1;p'_2\sigma'_2n'_2;\cdots}\pm [置換]\right]
+\end{align*}
+となる．置換の総数は$\prod_i N_i!$個である．これを完全性の展開に用いると
+\begin{align*}
+\Psi=&\sum_{N=0}^\infty \sum_{n_1\sigma_1 \cdots n_N \sigma_N}\frac{1}{\prod_i N_i!}\int d^3\mathbf{p}_1 \cdots d^3\mathbf{p}_N \Psi^N_{p_1 \sigma_1 n_1;\cdots p_N \sigma_N n_N} f^N_{p_1 \sigma_1 n_1;\cdots p_N \sigma_N n_N} \\
+=&\sum_{N=0}^\infty \sum_{n_1\sigma_1 \cdots n_N \sigma_N}\frac{1}{\prod_i N_i!}\int d^3\mathbf{p}_1 \cdots d^3\mathbf{p}_N \Psi^N_{p_1 \sigma_1 n_1;\cdots; p_N \sigma_N n_N} \frac{1}{\prod_j N_j!}\left[f^N_{p_1 \sigma_1 n_1;\cdots; p_N \sigma_N n_N}\times \prod_j N_j! \right] \\
+=&\sum_{N=0}^\infty \sum_{n_1\sigma_1 \cdots n_N \sigma_N}\frac{1}{\prod_i N_i!}\int d^3\mathbf{p}_1 \cdots d^3\mathbf{p}_N \Psi^N_{p_1 \sigma_1 n_1;\cdots ;p_N \sigma_N n_N} \frac{1}{\prod_j N_j!}\left[f^N_{p_1 \sigma_1 n_1;\cdots; p_N \sigma_N n_N}\pm [置換]\right] \\
+=&\sum_{N=0}^\infty \sum_{n_1\sigma_1 \cdots n_N \sigma_N}\frac{1}{\prod_i N_i!}\int d^3\mathbf{p}_1 \cdots d^3\mathbf{p}_N \Psi^N_{p_1 \sigma_1 n_1;\cdots; p_N \sigma_N n_N}(\Psi^N_{p_1 \sigma_1 n_1;\cdots; p_N \sigma_N n_N},\Psi) \\
+=&\int d\alpha \Psi_\alpha(\Psi_\alpha,\Psi)
+\end{align*}
+となり示すことができる．3個目の等号では，$(p_1,\sigma_1,n_1),(p_2,\sigma_2,n_2),\cdots$の添え字の組についての和と積分を入れ替え，その後$\Psi_{p_1,\sigma_1,n_1;\cdots}$の添え字を入れ替えるとフェルミオン同士の置換でマイナスが出てきて，それが$f_{p_1,\sigma_1,n_1,\cdots}$の添え字についての置換でのマイナスと一致することを用いた．電子が2個の2粒子状態についての完全性で具体的に確認するとわかりやすい．\par
+(ちなみに，peskinなどで採用されるような規格化条件
+\begin{align*}
+(\Psi_{p',\sigma',n'},\Psi_{p,\sigma,n})=2p^0(2\pi)^3\delta^3(\mathbf{p}'-\mathbf{p})\delta_{\sigma'\sigma}\delta_{n'n}
+\end{align*}
+を採用すると，これで再び完全性が$\Psi=\int d\alpha \Psi_\alpha(\Psi_\alpha ,\Psi)$の形になるためには積分測度$d\alpha$の定義も変更する必要があり
+\begin{align*}
+\int d\alpha=\sum_{N=0}^\infty \sum_{n_1\sigma_1 \cdots n_N \sigma_N}\frac{1}{\prod_i N_i!}\int \frac{d^3\mathbf{p}_1}{(2\pi)^3 2p^0_1} \frac{d^3\mathbf{p}_2}{(2\pi)^32p^0_2}\cdots \frac{d^3\mathbf{p}_N}{(2\pi)^3 2p^0_N}
+\end{align*}
+となる．こっちの積分測度は(2.5.15)から明確にローレンツ不変である．)
+
+\vskip\baselineskip
+
+変換則(3.1.1)は粒子が相互作用していない場合にのみに可能となる．$\tensor{\Lambda}{^\mu_\nu}=\delta^\mu_\nu$および$a^\mu=(0,0,0,\tau)$とおくと
+\begin{align*}
+U(1,a)=&\exp(-ia_\mu P^\mu) \\
+=&\exp(iH\tau) \quad \because (2.4.26)
+\end{align*}
+となり，(2.5.1)より
+\begin{align*}
+H\Psi_\alpha=&(p^0_1+p^0_2 +\cdots)\Psi_\alpha \\
+=&E_\alpha \Psi_\alpha
+\end{align*}
+よって$\Psi_\alpha$はハミルトニアン$H$のエネルギー固有値
+\begin{align*}
+E_\alpha=p^0_1+p^0_2+\cdots
+\end{align*}
+のエネルギー固有状態となっている．このエネルギーは1粒子のエネルギーの和であり，相互作用項(すなわち同時に2粒子以上の相互作用によって生まれるエネルギーの項(クーロンエネルギー等))はない．\par
+
+\vskip\baselineskip
+
+他方，変換則(3.1.1)は散乱過程の時刻$t\to \pm \infty$で成り立つ．典型的な散乱実験は，時刻$t\to -\infty$で粒子が十分離れていてまだ相互作用していない状態から出発し，$t\to +\infty$で粒子が十分離れて相互作用しなくなる状態で終わる．だから(3.1.1)のように変換する状態は1つではなく\uwave{2つ}存在する．すなわち，「in」状態$\Psi^+_\alpha$と「out」状態である．それぞれの状態は，$\tensor{\Psi}{_\alpha^+}$は$t\to -\infty$で，$\tensor{\Psi}{_\alpha^-}$は$t\to +\infty$で観測することにより，添え字$\alpha=(p_1,\sigma_1,n_1)(p_2,\sigma_2,n_2)\cdots$で表される自由粒子を含む状態を見出す．\par
+定義の枠組みに注意する．ローレンツ不変性を保つため，ここでは状態ベクトルは時間とともに変化しない．つまり状態ベクトルは$\Psi$粒子系の全時空にわたる履歴を記述する．これはハイゼンベルグ表示として知られていて，状態は変わらないが演算子は時間と共に変化するという描像である．演算子が時間的に一定で，状態ベクトルが時間と共に変化する場合はシュレーディンガー表示である．したがってハイゼンベルグ表示でのin(out)状態$\tensor{\Psi}{_\alpha^\pm}$はシュレーディンガー表示の状態ベクトル$\Psi(t)$の$t \to \pm \infty$の極限，とは解釈しない．(イメージ的に，シュレーディンガー表示での状態ベクトルは，時間によって刻々と変化する映画のフィルムのようなもの．ハイゼンベルグ表示は映画全編が入ったDVD1枚のようなもの．後者では見たいシーン(時間$t$の物理量)はプレイヤー(時間変化する演算子)を通して選ぶ．伝われ．)\par
+しかし，状態を定義する際に，観測者が系を観測する慣性系\footnote{同じ「系」という言葉が使われるが，前者はsystemの意であり，後者の慣性系はframeの意．}が暗に洗濯されている．すなわち，異なる観測者$\mc{O},\mc{O}'$は等価な状態ベクトルを見るのであり，同じ状態ベクトルを見るわけではない．2.2節の最初に述べた通り，$\mc{O}$が射線$\mc{R}$の状態$\Psi$を観測したとすると，異なる観測者$\mc{O}'$は等価だが異なる射線$\mc{R}'$の状態$\Psi'$を観測する．そしてその二つは対称性変換$T:\mc{R}\to \mc{R}'$およびユニタリー演算子$U(T):\Psi \to \Psi'$で結びついているのだった．もし観測者$\mc{O},\mc{O}'$が別の慣性系に属しているならば両者はポアンカレ対称性変換で結びついており，その観測者らが同じ系を見たとすると，その両者が観測する状態ベクトルは等価だが演算子$U(\Lambda,a)$で結びついており同じ状態ではない．\par
+特に，標準的な観測者$\mc{O}$は衝突過程の\uwave{ある瞬間}\footnote{衝突の瞬間でなくてよい．衝突の3秒後みたいな時刻点でもよい．}の時刻が$t=0$となるように時計を合わせ，その観測者に対して静止している別の観測者$\mc{O}'$は時刻$t'=0$を$t=\tau$になるように時計を合わせるとする．つまり$t'=t-\tau$で関係している．この両者は$\tensor{\Lambda}{^\mu_\nu}=\delta^\mu_\nu,a^\mu=(0,0,0,-\tau)$によるポアンカレ変換
+\begin{align*}
+T(\Lambda,a)=T(1,-\tau):x^\mu \mapsto x'^\mu=\tensor{\Lambda}{^\mu_\nu}x^\nu+a^\mu (t\mapsto t'=t-\tau)
+\end{align*}
+で結びついている．したがって系が状態$\Psi$であることを$\mc{O}$が観測したとき，観測者$\mc{O}'$はその系が状態
+\begin{align*}
+U(1,-\tau)\Psi=\exp(-iH\tau)\Psi
+\end{align*}
+にあることを観測するだろう．\par
+観測者$\mc{O}'$の存在自体は本質ではない．このようにして，我々が観測するであろう状態ベクトルが，時刻$\tau$だけ前後で状態がどうなっているかを調べるためには，($\mc{O}$がどのような基底ベクトルをとっているかにかかわらず)時間推進演算子$U(1,-\tau)=\exp(-iH\tau)$をかけてやれば知ることができる，ということが重要である．我々が既に定義した状態はただ二つだけの$\tensor{\Psi}{_\alpha^\pm}$だから，ここから前後の状態を調べるには，衝突のずっと後の状態は$\exp(-iH\tau)\tensor{\Psi}{_\alpha^+}$で$\tau\to +\infty$をとることで，ずっと前の状態は$\exp(-iH\tau)\tensor{\Psi}{_\alpha^-}$で$\tau \to -\infty$をとることで得ることができる．しかし，状態が実際にエネルギー固有状態ならば，その状態は真に時間に依存せず，演算子$\exp(-iH\tau)$は重要でない位相因子$\exp(-iE_\alpha \tau)$を与えるだけだ．
+
+\vskip\baselineskip
+
+さて，$\tensor{\Psi}{_\alpha^\pm}$は散乱前後の極限$\tau \to \mp \infty$で，粒子は互いに十分離れて相互作用をしていないと仮定した．この過程は暗に，空間的に局在化した状態である波束状態を考えていることになる．なぜなら，粒子の波動関数が空間全体に広がって重なり合っていると，互いに相互作用していない状況が保証されないからである．しかし，今考えている$\tensor{\Psi}{_\alpha^\pm}$は，それぞれの運動量$\mathbf{p}_1,\mathbf{p}_2,\cdots $は確定した運動量であり，したがって量子力学における不確定性原理よりそれぞれの粒子は空間的に局在せず，空間全体に広がっていることになる．だとすると，粒子は互いに空間的に必ず重なり合っており，どれだけ過去へ遡っても粒子間の相互作用を無視することができない．また，これらの状態は規格化もできない(例えば1粒子状態は$(\Psi_{p},\Psi_p)=\infty$となる．)から，数学的にきちんと取り扱おうとすると問題が生じる．\par
+この問題を解決するために，空間的に局在化した波束を考えたい．そこで，単純に特定の運動量$\mathbf{p}_0$を持った1粒子状態を扱うのではなく，任意の関数$g(\mathbf{p};\mathbf{p}_0,\sigma)$を用いて重みづけていろいろな運動量$\mathbf{p}$を重ね合わせて，波束状態を
+\begin{align*}
+\sum_{\sigma}\int d^3\mathbf{p} g(\mathbf{p};\mathbf{p}_0,\sigma)\Psi_{p,\sigma}
+\end{align*}
+と定義する\footnote{このように定義した状態も$\Psi_{p,\sigma}$と同じ$-P^\mu P_\mu$の固有状態となっている．例えば質量非ゼロ状態ならば．$m^2$が固有値となり，質量ゼロ状態ならば$0$が固有値として出てくる．1粒子状態である．$g$の$\sigma$依存性は，初期状態が偏極している状態ならば$\delta_{\sigma'\sigma}$に比例するが，固定していなければ成分ごとに重みづけをする．}．このような1粒子状態は運動量の広がりを許し，したがって空間的に広がりが有限の広さとなり局在した状態を扱うことができる．これが上手くいくことは，非相対論的な量子力学でポテンシャルによる1粒子の単純な散乱を扱って初めて理解できると思う．そのため一旦その議論をしてから一般の多粒子系での相対論的量子力学へ移行する．
+
+\vskip\baselineskip
+
+非相対論的量子力学で考える．\footnote{この話はWeinberg「Lectures on Quantum Mechanics」の7.1節にほぼ依る．参照してくれと言いたいけど，流石にこの話をせずに本文の話が理解できるとは思えないので書きます．}質量$\mu$の非相対論的粒子がポテンシャル$V(\mathbf{x})$の中にいるとする．まずハミルトニアンは
+\begin{align*}
+H=H_0+V(\mathbf{x})
+\end{align*}
+である．$ H_0 =\hat{\mathbf{P}}^2 / 2 \mu$は運動エネルギー演算子である．状態ベクトル$\Psi_{\mathbf{p}}^+$は時間に依存しないベクトルである．上付き添え字$+$はやはり，測定が散乱される十分前に行われたとした場合に，この状態が散乱の中心から離れたところで運動量$\mathbf{p}$として観測されることを示す．非常に早い時期には粒子はポテンシャルが無視できる場所にいるから，そのエネルギーは$\mathbf{p}^2/2\mu$であり，この状態ベクトルはハミルトニアンの固有状態となる．
+\begin{align*}
+H \Psi_{\mathbf{p}}^+=&E(\mathbf{p})\Psi_{\mathbf{p}}^+ \\
+=&\frac{\mathbf{p}^2}{2\mu}\Psi_{\mathbf{p}}^+
+\end{align*}
+この$\Psi_{\mathbf{p}}^+$の定義を解釈するには，上で話したように，エネルギーの広がりを持ち時間依存性の異なる状態ベクトルの重ね合わせ
+\begin{align*}
+\Psi_{g}(t):=&\int d^3 \mathbf{p} \, g(\mathbf{p})\exp(-iE(\mathbf{p})t) \Psi_{\mathbf{p}}^+ \\
+=&\int d^3 \mathbf{p} \, g(\mathbf{p})\exp\left(-i\frac{\mathbf{p}^2}{2\mu}t\right) \Psi_{\mathbf{p}}^+
+\end{align*}
+を考える必要がある．$g(\mathbf{p})$は滑らかな関数であり，ある運動量$\mathbf{p}_0$にピークをもつ．状態ベクトル$\Psi_{\mathbf{p}}^+$は固有値$E(\mathbf{p})=\mathbf{p}^2/2\mu$をもつ方程式$H\Psi=E(\mathbf{p})\Psi$の特殊解で，さらに任意の十分滑らかな関数$g(\mathbf{p})$について$t\to -\infty$で
+\begin{align*}
+\Psi_g(t) \to& \int d^3\mathbf{p} \, g(\mathbf{p})\exp(-iE(\mathbf{p})t)\Phi_{\mathbf{p}} \\
+=&\int d^3\mathbf{p} \, g(\mathbf{p})\exp\left(-i\frac{\mathbf{p}^2}{2\mu}t\right)\Phi_{\mathbf{p}}
+\end{align*}
+を満足する解だと定義できる．ここで$\Phi_{\mathbf{p}}$は3元運動量演算子$\hat{\mathbf{P}}$の規格直交化された固有ベクトルであり，その固有値は$\mathbf{p}$であるようなもの
+\begin{align*}
+\hat{\mathbf{P}}\Phi_{\mathbf{p}}=\mathbf{p}\Phi_{\mathbf{p}} ,\quad (\Phi_{\mathbf{p}'},\Phi_{\mathbf{p}})=\delta^3 (\mathbf{p}'-\mathbf{p})
+\end{align*}
+したがって$\Phi_{\mathbf{p}}$は($H$ではなく)$H_0$の固有ベクトルである．固有値は$E(\mathbf{p})=\mathbf{p}^2/2\mu$である．そうすると，規格化の条件$(\Psi_g,\Psi_g)=1$は，$t \to -\infty$で
+\begin{align*}
+(\Psi_g(t),\Psi_g(t))\to& \int d^3\mathbf{p}' \, g^*(\mathbf{p}')\exp(+iE(\mathbf{p}')t) \int d^3\mathbf{p} \, g(\mathbf{p})\exp(-iE(\mathbf{p})t) (\Phi_{\mathbf{p}'},\Phi_{\mathbf{p}}) \\
+=&\int d^3\mathbf{p}' \, g^*(\mathbf{p}')\exp(+iE(\mathbf{p}')t) \int d^3\mathbf{p} \, g(\mathbf{p})\exp(-iE(\mathbf{p})t) \delta^3(\mathbf{p}'-\mathbf{p}) \\
+=&\int d^3 \mathbf{p} |g(\mathbf{p})|^2
+\end{align*}
+と書けることから
+\begin{align*}
+\int d^3 \mathbf{p} |g(\mathbf{p})|^2=1
+\end{align*}
+と等価である．\par
+位置の確定した状態$\Phi_{\mathbf{x}}$とのスカラー積を考える．普通の平面波の波動関数は運動量が確定していて，
+\begin{align*}
+(\Phi_{\mathbf{x}},\Phi_{\mathbf{p}})=(2\pi)^{-3/2} e^{i\mathbf{p}\cdot \mathbf{x}}
+\end{align*}
+の形をしている．これより$t\to -\infty$について
+\begin{align*}
+(\Phi_{\mathbf{x}},\Psi_g(t))\to (2\pi)^{-3/2}\int d^3\mathbf{p}\, g(\mathbf{p}) \exp\left(i\mathbf{p}\cdot \mathbf{x}-i\frac{\mathbf{p}^2}{2\mu}t \right)
+\end{align*}
+関数$g(\mathbf{p})$について簡単な例を
+\begin{align*}
+g(\mathbf{p})\propto& \exp\left( -\frac{\Delta_0^2 }{2}(\mathbf{p}-\mathbf{p}_0)^2 -i\frac{\mathbf{p}\cdot \mathbf{p}_0 t_0}{\mu}+\frac{it_0 \mathbf{p}^2}{2\mu} \right)
+\end{align*}
+ととる．ここで$t_0$は始まりの時間で，大きな負の値である．$\mathbf{p}_0$は入射運動量であり，$g(\mathbf{p})$がピークをとる値である．$\Delta_0$は定数である．指数関数の中の$t_0$に比例する項は，次の計算で分かる通り$\Delta_0$が時間$t=t_0$での座標空間での波動関数の広がりであるように選んである．これを代入すると，$t\to -\infty$で
+\begin{align*}
+(\Phi_{\mathbf{x}},\Psi_g(t))\propto& \int d^3\mathbf{p}\, \exp\left(-\frac{\Delta_0^2 }{2} (\mathbf{p}-\mathbf{p}_0)^2 -i\frac{\mathbf{p}^2}{2\mu}(t-t_0)+i\mathbf{p}\cdot \left(\mathbf{x}-\frac{\mathbf{p}_0 t_0}{\mu}\right) \right) \\
+=&e^{-\Delta_0^2 \mathbf{p}^2_0/2}\int d^3\mathbf{p}\, \exp\left(-\frac{1}{2}\left[\Delta_0^2 + i\frac{(t-t_0)}{\mu}\right]\mathbf{p}^2 +\mathbf{p}\cdot \left[\Delta_0^2\mathbf{p}_0 +i\left(\mathbf{x}-\frac{\mathbf{p}_0 t_0}{\mu}\right)\right] \right) \\
+\propto &\int d^3\mathbf{p}\, \exp\left(-\frac{1}{2}A\mathbf{p}^2 +\mathbf{p}\cdot \mathbf{B}\right) \quad A=\Delta_0^2 + i\frac{(t-t_0)}{\mu} ,\mathbf{B}=\Delta_0^2\mathbf{p}_0 +i\left(\mathbf{x}-\frac{\mathbf{p}_0 t_0}{\mu}\right) \\
+=&\left(\frac{2\pi}{A}\right)^{3/2}\exp\left(\frac{\mathbf{B}^2}{2A}\right)
+\end{align*}
+これの絶対値をとると，空間的確率分布が得られる．計算すると
+\begin{align*}
+\Bigl|\Bigl(\Phi_{\mathbf{x}},\Psi_g(t)\Bigr)\Bigr|^2\propto& \frac{1}{|A|^3}\exp\left( \frac{\mathbf{B}^{2}}{2A} +\frac{\mathbf{B}^{*2}}{2A^*} \right) \\
+=&\frac{1}{|A|^3}\exp\left( \frac{1}{2|A|^2}(\mathbf{B}^{2}A^* +\mathbf{B}^{*2}A )\right) \\
+|A|^2=&\Delta_0^4 + \frac{(t-t_0)^2}{\mu^2}=\Delta_0^2\left(\Delta_0^2 + \frac{(t-t_0)^2}{\mu^2\Delta_0^2}\right) \\
+A^*\mathbf{B}^2=&\left(\Delta^2_0 -i \frac{(t-t_0)}{\mu}\right)\left( (\Delta_0^2\mathbf{p}_0)^2+2i\Delta_0^2\mathbf{p}_0\cdot \left(\mathbf{x}-\frac{\mathbf{p}_0t_0}{\mu}\right) -\left(\mathbf{x}-\frac{\mathbf{p}_0t_0}{\mu}\right)^2  \right) \\
+A^*\mathbf{B}^2+A\mathbf{B}^{*2}=&2\Delta^6_0\mathbf{p}_0^2-2\Delta_0^2\left(\mathbf{x}-\frac{\mathbf{p}_0t_0}{\mu}\right)^2+4\Delta_0^2\frac{(t-t_0)}{\mu}\mathbf{p}_0 \cdot \left(\mathbf{x}-\frac{\mathbf{p}_0t_0}{\mu}\right) \\
+=&2\Delta_0^2\left[\Delta_0^2\left(\Delta_0^2+\frac{(t-t_0)^2}{\mu^2\Delta_0^2}\right)\mathbf{p}_0^2-\left(\mathbf{x}-\frac{\mathbf{p}_0}{\mu}t\right)^2\right] \\
+\therefore \quad \Bigl|\Bigl(\Phi_{\mathbf{x}},\Psi_g(t)\Bigr)\Bigr|^2\propto& \Delta(t)^{-3} \exp\left(-\frac{1}{\Delta(t)^{2}}\left[\mathbf{x}-\frac{\mathbf{p}_0}{\mu}t\right]^2\right) \\
+\Delta(t):=&\left(\Delta_0^2+\frac{(t-t_0)^2}{\mu^2\Delta_0^2}\right)^{-1/2}
+\end{align*}
+となる．したがって確率分布は，速度が運動量の平均$\mathbf{p}_0$を質量$\mu$で割った値を中心としており，それは$t=0$で散乱の中心$\mathbf{x}=0$に近づく．\par
+この分布の広がりは，始まり$t=t_0$で$\Delta_0$であるが，$t>t_0$では増え始める．$t=t_0$から$t=0$までの時間内に波束が目に見えて広がらないためには
+\begin{align*}
+\Delta^2_0 >&\frac{(0-t_0)^2}{\mu^2 \Delta_0^2} \\
+\therefore \quad& \Delta_0^2>\frac{|t_0|}{\mu} 
+\end{align*}
+を要請する．しかし，一方
+\begin{align*}
+\Delta_0 \ll \frac{|\mathbf{p}_0|}{\mu} |t_0|
+\end{align*}
+でなければならない．なぜなら，$t_0$は十分早くて，$t=t_0$で波束は散乱中心まで広がっていないことを要請しなければならないからである．右辺は$t=t_0$の粒子の位置から散乱中心までの距離を表しており，初期の波束の広がり$\Delta_0$が中心に及んでいないためにはこれが要請される．この二つの条件は
+\begin{align*}
+\Delta_0^2<&\frac{|t_0|}{\mu} \ll \frac{|\mathbf{p}_0|^2}{\mu^2} |t_0|^2 \\
+\therefore \quad 1 \ll& \frac{\mathbf{p}_0^2 |t_0|}{\mu}
+\end{align*}
+ならば両立する．\par
+今回，$E(\mathbf{p})=\mathbf{p}^2/2\mu$であるから，運動量の幅$\Delta p=1/\Delta_0$に対応して
+\begin{align*}
+\Delta E=\left. \frac{dE}{dp}\right|_{\mathbf{p}=\mathbf{p}_0} \Delta p=\frac{|\mathbf{p}_0|}{\mu}\frac{1}{\Delta_0}
+\end{align*}
+となる．したがって上の条件式と合わせて
+\begin{align*}
+|t_0|\ll 1/\Delta E
+\end{align*}
+が導かれる．したがって，最初の条件式へ戻ると，$g(\mathbf{p})$が$\Delta E$の幅に渡ってゼロでなく滑らかに変化するようなものだとして，
+\begin{align*}
+\Psi_g(t)=\exp(-iHt )\int d^3\mathbf{p} \, g(\mathbf{p})\Psi_{\mathbf{p}}^+=\int d^3\mathbf{p} \, g(\mathbf{p})e^{-iE(\mathbf{p})t}\Psi_{\mathbf{p}}^+
+\end{align*}
+が$t \ll -1/\Delta E$のときに対応する自由粒子状態の重ね合わせ
+\begin{align*}
+\int d^3\mathbf{p} \, g(\mathbf{p})e^{-iE(\mathbf{p})t}\Phi_{\mathbf{p}}=\exp(-iH_0 t)\int d^3\mathbf{p} \, g(\mathbf{p})\Phi_{\mathbf{p}}
+\end{align*}
+になるように$\Psi_{\mathbf{p}}^+$を定義する．(時間は次元のある量であるから，スケール依存性があり，したがってこの条件が必要となる．)
+
+
+\vskip\baselineskip
+
+
+相対論的な議論へ戻ろう．以上の議論を同様に多粒子状態であるin状態とout状態においても用いる．つまり重ね合わせ
+\begin{align*}
+&\sum_{n_1\sigma_1 n_2 \sigma_2\cdots }\frac{1}{\prod_i N_i!}\int d^3\mathbf{p}_1 d^3\mathbf{p}_2\cdots g(p_1,\sigma_1,n_1,;p_2,\sigma_2,n_2;\cdots )\Psi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2,\cdots } \\
+&=\int d\alpha g(\alpha)\tensor{\Psi}{_{\alpha}^{\pm}}
+\end{align*}
+を考える．$g(\alpha)$はそれぞれの運動量$\mathbf{p}_1,\mathbf{p}_2,\cdots$の滑らかな関数となっており，エネルギーに関してピーク$E_0=\sqrt{\mathbf{p}^2_1+m_1^2}+\sqrt{\mathbf{p}^2_2+m_2^2}+\cdots$から幅$\Delta E$で滑らかに変化する分布だとみなせる．このような波束に対して時間発展演算子を作用させた重ね合わせ
+\begin{align*}
+\exp(-iH\tau)\int d\alpha g(\alpha)\tensor{\Psi}{_{\alpha}^{\pm}}=\int d\alpha e^{-iE_\alpha \tau}g(\alpha)\tensor{\Psi}{_{\alpha}^{\pm}}
+\end{align*}
+がそれぞれ$\tau \ll -1/\Delta E$あるいは$\tau \gg 1/\Delta E$で対応する自由粒子状態の重ね合わせ
+\begin{align*}
+\int d\alpha e^{-iE_\alpha \tau}g(\alpha)\Phi_\alpha
+\end{align*}
+になるようにin状態とout状態を定義する．\par
+時間推進演算子$H$は自由粒子ハミルトニアン$H_0$と相互作用部分$V$の二つに分解
+\begin{align*}
+H=H_0+V
+\end{align*}
+でき，$H_0$はハミルトニアン全体の固有状態$\Psi_\alpha^+$および$\Psi_{\alpha}^-$と同じに見える固有状態
+\begin{align*}
+H_0\Phi_{\alpha}=E_\alpha \Phi_\alpha \\
+(\Phi_{\alpha'} ,\Phi_{\alpha})=\delta(\alpha'-\alpha)
+\end{align*}
+ここで$H_0$は全体のハミルトニアン$H$と同じスペクトル(連続的に添え字づけられた固有値)をもつと仮定している．このため，$H_0$に現れる質量は\uwave{実際に測定される物理的な質量}であり，$H$に現れる「裸」の質量項と必ずしも同じではない．つまりその間に差があれば，それは$H_0$ではなく相互作用項$V$に含まれなければならない．例えばスカラー場のラグランジアン密度を
+\begin{align*}
+\mc{L}=-\frac{1}{2}\partial_\mu \Phi_B \partial^\mu \Phi_B -\frac{1}{2}m_B^2 \Phi^2_B -V_B(\Phi_B)
+\end{align*}
+として，くりこまれたスカラー場と質量
+\begin{align*}
+\Phi_R:=Z^{-1/2}\Phi_B ,\quad m^2_R :=m^2_B +\delta m^2
+\end{align*}
+を導入すると
+\begin{align*}
+\mc{L}=&-\frac{1}{2}\partial_\mu \Phi_R \partial^\mu \Phi_R -\frac{1}{2}m^2_R \Phi^2_R \\
+&-\frac{1}{2}(Z-1)\left[\partial_\mu \Phi_R \partial^\mu \Phi_R +m^2_R \Phi^2_R\right] +\frac{1}{2}Z\delta m^2 \Phi^2_R -V(\Phi) \quad (V(\Phi):=V_B(\sqrt{Z}\Phi_R)) \\
+=&\mc{L}_0 +\mc{L}_1 \\
+\mc{L}_0=&-\frac{1}{2}\partial_\mu \Phi_R \partial^\mu \Phi_R -\frac{1}{2}m^2_R \Phi^2_R \\
+\mc{L}_1=&-\frac{1}{2}(Z-1)\left[\partial_\mu \Phi_R \partial^\mu \Phi_R +m^2_R \Phi^2_R\right] +\frac{1}{2}Z\delta m^2 \Phi^2_R -V(\Phi) \quad (V(\Phi):=V_B(\sqrt{Z}\Phi_R))
+\end{align*}
+となる．共役運動量は
+\begin{align*}
+\Pi_R:=\frac{\partial \mc{L}}{\partial \dot{\Phi}_R}=Z\dot{\Phi}_R=Z^{1/2}\dot{\Phi}_B
+\end{align*}
+で定められ，ハミルトニアン密度は
+\begin{align*}
+\mc{H}=&\Pi_R \dot{\Phi}_R -\mc{L} \\
+=&\mc{H}_0 +\mc{V} \\
+\mc{H}_0=&\frac{1}{2} \Pi^2_R +\frac{1}{2}(\nabla \Phi_R)^2 +\frac{1}{2}m_R^2\Phi^2_R \\
+\mc{V}=&-\frac{1}{2}(1-Z^{-1})\Pi_R^2+\frac{1}{2}(Z-1)\left[\frac{1}{2}(\nabla \Phi_R)^2+\frac{1}{2}m_R^2 \Phi_R^2 \right]-\frac{1}{2}Z\delta m^2 \Phi_R^2 +V(\Phi_R)
+\end{align*}
+$m_R$が物理的な質量$m_P$であるくりこみ(on-shell scheme)を考えると，物理的質量と裸の質量の差$\delta m^2$は相互作用項$V$に含まれる．また，$H$のスペクトル中の任意の束縛状態は$H_0$の中にあたかも素粒子であるかのように入れておかねばならない．(クォークの束縛状態を，例えばメソンならばスカラー場，バリオンならばディラック場として入れておく，ということだと思う．)
+
+\vskip\baselineskip
+
+非相対論のときと同じように，in状態とout状態は$H_0$ではなく$H$の固有状態として
+\begin{align*}
+H\tensor{\Psi}{_\alpha^\pm}=E_\alpha \tensor{\Psi}{_\alpha^\pm}
+\end{align*}
+を満たし，かつそれらは$\tau \to -\infty$または$\tau \to +\infty$で，それぞれ次の条件
+\begin{align*}
+\int d\alpha e^{-iE_\alpha \tau}g(\alpha)\tensor{\Psi}{_\alpha^\pm} \to \int d\alpha e^{-iE_\alpha \tau} g(\alpha)\Phi_{\alpha}
+\end{align*}
+を満たすものだとして定義できる．\par
+この条件は$\tau \to -\infty$または$\tau \to +\infty$でそれぞれ
+\begin{align*}
+\exp(-iH\tau)\int d\alpha g(\alpha)\tensor{\Psi}{_\alpha^\pm} \to \exp(-iH_0 \tau)\int d\alpha g(\alpha)\Phi_\alpha
+\end{align*}
+と書き直せる．これはin状態とout状態の公式として
+\begin{align*}
+\tensor{\Psi}{_\alpha^\pm} =&\lim_{\tau \to \mp \infty}\exp(+iH\tau)\exp(-iH_0 \tau)\Phi_\alpha \\
+=&\Omega(\mp \infty)\Phi_\alpha \\
+\Omega(\tau):=&\exp(+iH\tau)\exp(-iH_0 \tau)
+\end{align*}
+と書き直せる\footnote{クーロン散乱のような長距離相互作用によるポテンシャル散乱などを考えるとこれは厳密には正しくなく，その場合Dollardによって変更された$\lim_{t\to \mp \infty}e^{iHt}C(t)e^{-iH_0t}$という演算子を使う必要があるらしい．量子力学ではDollardによる論文を参照．場の量子論ではこれは「荷電粒子はphoton cloudをまとっており1粒子状態がFock状態として存在しない」という問題に関わってくるらしく，Kulish・Faddeevなどによる論文などを参照してほしい．}．ただし，$\Omega(\mp \infty)$はエネルギー固有状態の滑らかな重ね合わせにかかったときのみ極限$\tau$で意味のある結果を与えており，それ単体では意味がないことに留意する．
+
+\vskip\baselineskip
+
+定義(3.1.12)からただちに結論されるのは，in状態とout状態が自由粒子状態と全く同様に規格直交化されているということだ．これを見るには，(3.1.12)の左辺はユニタリー演算子$\exp(-iH\tau)$を時間に依存しない状態にかけて得られるので，そのノルム
+\begin{align*}
+\left(\int d\beta g(\beta)\tensor{\Psi}{_\beta^\pm},\int d\alpha g(\alpha)\tensor{\Psi}{_\alpha^\pm} \right) =&\left(\exp(-iH\tau)\int d\beta g(\beta)\tensor{\Psi}{_\beta^\pm},\exp(-iH\tau )\int d\alpha g(\alpha)\tensor{\Psi}{_\alpha^\pm} \right) \\
+=&\left(\int d\beta e^{-iE_\beta \tau}g(\beta)\tensor{\Psi}{_\beta^\pm},\int d\alpha e^{-iE_\alpha\tau}g(\alpha)\tensor{\Psi}{_\alpha^\pm} \right) \\
+=&\int d\alpha d\beta \exp(-i(E_\alpha -E_\beta)\tau) g(\alpha)g^*(\beta )(\tensor{\Psi}{_\beta^\pm},\tensor{\Psi}{_\alpha^\pm})
+\end{align*}
+は時間に依存せず，よって$\tau \to \pm\infty$の極限のノルム，すなわち(3.1.12)の右辺のノルム
+\begin{align*}
+\left(\int d\beta e^{-iE_\beta \tau}g(\beta)\tensor{\Psi}{_\beta^\pm},\int d\alpha e^{-iE_\alpha\tau}g(\alpha)\tensor{\Psi}{_\alpha^\pm} \right) \to&\left(\int d\beta e^{-iE_\beta \tau}g(\beta)\Phi_\beta,\int d\alpha e^{-iE_\alpha\tau}g(\alpha)\Phi_\alpha \right) \\
+=&\int d\alpha d\beta \exp(-i(E_\alpha -E_\beta)\tau) g(\alpha)g^*(\beta )(\Phi_\beta,\Phi_\alpha)
+\end{align*}
+に等しい．
+\begin{align*}
+\int d\alpha d\beta \exp(-i(E_\alpha -E_\beta)\tau) g(\alpha)g^*(\beta )(\tensor{\Psi}{_\beta^\pm},\tensor{\Psi}{_\alpha^\pm})=\int d\alpha d\beta \exp(-i(E_\alpha -E_\beta)\tau) g(\alpha)g^*(\beta )(\Phi_\beta,\Phi_\alpha)
+\end{align*}
+このことは全ての滑らかな関数$g(\alpha)$について正しいと考えられるので，スカラー積は
+\begin{align*}
+(\tensor{\Psi}{_\beta^\pm},\tensor{\Psi}{_\alpha^\pm})=(\Phi_\beta,\Phi_\alpha)=\delta(\beta-\alpha) \quad \because(3.1.10)
+\end{align*}
+に等しいはずだ\footnote{$\Omega\subset \mathbb{R}^n$上の$L^2(\Omega)$空間上での双線形形式$\braket{f}{g}=\int_\Omega f(x)g(x)dx$は非退化になり，したがって任意の$f\in L^2(\Omega)$について$ \int_\Omega f(x)g(x)dx=\int_\Omega f(x)h(x)dx$を満たすならば$g=h$が成り立つ．}．
+
+\vskip\baselineskip
+
+
+条件(3.1.12)を満たすエネルギー固有状態(3.1.11)の形式的かつ具体的な解を求めておく．このために(3.1.11)を
+\begin{align*}
+(E_\alpha -H_0)\tensor{\Psi}{_\alpha^\pm}=V\tensor{\Psi}{_\alpha^\pm} 
+\end{align*}
+と書く．$(E_\alpha -H_0)$は$\Phi_\alpha$だけを消すわけではなく，違う状態であってもエネルギーが同じ$E_\beta=E_\alpha$な状態$\Phi_\beta$をも消す．つまり
+\begin{align*}
+(E_\alpha-H_0)\Phi_\beta=(E_\alpha-E_\beta)\Phi_\beta =(E_\alpha-E_\alpha)\Phi_\beta=0
+\end{align*}
+であるから，$(E_\alpha-H_0)$を作用させて$V\tensor{\Psi}{_\alpha^\pm}$となる状態$\tensor{\Psi}{_\alpha^\pm}$を見つけたいのだが，それはいくらでも存在することになる．(例えば以下での解(3.1.16)にそのような$\Phi_\beta$を付け足すだけで別の解ができる．)そこで，in状態とout状態は相互作用項が存在しない$V\to 0$で$\Phi_\alpha$になるはずだと考え，とりあえず$V\tensor{\Psi}{_{\alpha}^\pm}$に比例する項を$\Phi_\alpha$に付け加えることで
+\begin{align*}
+\tensor{\Psi}{_\alpha^\pm}=\Phi_\alpha +(E_\alpha -H_0\pm i\epsilon)^{-1}V\tensor{\Psi}{_\alpha^\pm}
+\end{align*}
+とする．これはとりあえず方程式$(E_\alpha -H_0)\tensor{\Psi}{_\alpha^\pm}=V\tensor{\Psi}{_\alpha^\pm}$の解になっている．第二項目を完全性(3.1.5)で展開して
+\begin{align*}
+V\tensor{\Psi}{_\alpha^\pm}=&\int d\beta (\Phi_\beta ,V\tensor{\Psi}{_\alpha^\pm})\Phi_\beta \\
+=&\int d\beta \tensor{T}{_{\beta\alpha}^\pm}\Phi_\beta \\
+\tensor{\Psi}{_\alpha^\pm}=&\Phi_\alpha +(E_\alpha -H_0\pm i\epsilon)^{-1}V\tensor{\Psi}{_\alpha^\pm} \\
+=&\Phi_\alpha +\int d\beta \tensor{T}{_{\beta\alpha}^\pm}(E_\alpha -H_0\pm i\epsilon)^{-1} \Phi_\beta \\
+=&\Phi_\alpha +\int d\beta \frac{\tensor{T}{_{\beta\alpha}^\pm}\Phi_\beta}{E_\alpha -E_\beta\pm i\epsilon} \\
+\tensor{T}{_{\beta\alpha}^\pm}:=&(\Phi_\beta,V\tensor{\Psi}{_\alpha^\pm}) 
+\end{align*}
+最後の行では
+\begin{align*}
+(E_\alpha -H_0 \pm i\epsilon)\Phi_\beta=(E_\alpha -E_\beta \pm i\epsilon)\Phi_\beta
+\end{align*}
+であり，固有値は$\pm i\epsilon$を挿入しているおかげで任意の$\Phi_\beta$について非ゼロになるから逆演算子が存在することを用いた．ここで$\epsilon$は正の微小量であり，$(E_\alpha-H_0)$の逆演算子に意味を持たせるためのものだ．右辺の$T$には$\tensor{\Psi}{_\alpha^\pm}$が含まれているから，これは形式的な解であることに注意．これをリップマン・シュウィンガー方程式という．\par
+先程述べたようにこれらには$\Phi_\beta$を加えるだけの任意性が残っている．これを排除するためにin,out状態に関する条件(3.1.12)を用いる．すなわち，次の重ね合わせを考える．
+\begin{align*}
+\tensor{\Psi}{_g^\pm}(t):=&\int d\alpha e^{-iE_\alpha t} g(\alpha)\tensor{\Psi}{_\alpha^\pm} \\
+\Phi_g(t):=&\int d\alpha e^{-iE_\alpha t}g(\alpha) \Phi_\alpha
+\end{align*}
+条件(3.1.12)は，この$\tensor{\Psi}{_g^+}(t)$と$\tensor{\Psi}{_\alpha^-}(t)$がそれぞれ$t \to -\infty$と$t \to +\infty$で$\Phi_g(t)$に近づくことを示すことができれば良い．(3.1.17)をこの式の中に代入して
+\begin{align*}
+\tensor{\Psi}{_g^\pm}(t) =& \int d\alpha e^{-iE_\alpha t} g(\alpha)\left[ \Phi_\alpha + \int d\beta \frac{\tensor{T}{_{\beta\alpha}^\pm}\Phi_\beta}{E_\alpha -E_\beta\pm i\epsilon} \right] \\
+=& \Phi_g (t) +\int d\alpha \int d\beta \frac{e^{-iE_\alpha t} g(\alpha) \tensor{T}{_{\beta\alpha}^\pm}\Phi_\beta}{E_\alpha - E_\beta \pm i\epsilon} \\
+=&\Phi_g (t) + \int d\beta \Phi_\beta \left[\int d\alpha \frac{e^{-iE_\alpha t} g(\alpha) \tensor{T}{_{\beta\alpha}^\pm}}{E_\alpha - E_\beta \pm i\epsilon}\right]
+\end{align*}
+となる．したがって積分
+\begin{align*}
+\tensor{\mc{I}}{_\beta^\pm} := \int d\alpha \frac{e^{-iE_\alpha t} g(\alpha) \tensor{T}{_{\beta\alpha}^\pm}}{E_\alpha - E_\beta \pm i\epsilon}
+\end{align*}
+を考える．エネルギー変数$E_\alpha$を複素平面に拡張することを考えると，指数関数部分は
+\begin{align*}
+e^{-iE_\alpha t}=\exp(-i\mathrm{Re}(E_\alpha) t+\mathrm{Im}(E_\alpha)t)
+\end{align*}
+であるから，複素数化した$E_\alpha$が$\mathrm{Im}E_\alpha >0$ならば$t\to -\infty$の極限でゼロに向かう．逆に$E_\alpha$が$\mathrm{Im}E_\alpha <0$ならば$t\to +\infty$の極限でゼロに向かう．エネルギー変数$E_\alpha$は(3.1.7)
+\begin{align*}
+E_\alpha =\sqrt{\mathbf{p}_1^2+m_1^2}+\sqrt{\mathbf{p}_2^2+m_2^2}+\cdots
+\end{align*}
+で運動量変数$\mathbf{p}_1,\mathbf{p}_2,\cdots $と結びついている．\par
+簡単のために$\alpha$が1粒子の場合で考えてみる．
+\begin{align*}
+\tensor{\mc{I}}{_\beta^\pm} := \int d^3\mathbf{p} \frac{e^{-iE(\mathbf{p}) t} g(\mathbf{p}) \tensor{T}{_{\beta\alpha}^\pm}}{E(\mathbf{p}) - E_\beta \pm i\epsilon}
+\end{align*}
+を評価してやる．ここで$E(\mathbf{p})=\sqrt{\mathbf{p}^2+m^2}$である．極座標に移行して
+\begin{align*}
+\tensor{\mc{I}}{_\beta^\pm} = \int d\Omega \int_0^\infty dp p^2 \frac{e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) \tensor{T}{_{\beta\alpha}^\pm}}{\sqrt{p^2+m^2} - E_\beta \pm i\epsilon}
+\end{align*}
+$p=\pm im \sim \pm i\infty$の部分にbranch cutが存在する．まず$t\to -\infty$での場合を考えるために，$i\epsilon$の符号を正にとる．$p$積分の部分だけ考えよう．評価すべき積分は
+\begin{align*}
+\int_0^\infty dp p^2 \frac{e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)}{\sqrt{p^2+m^2} - E_\beta + i\epsilon}
+\end{align*}
+となる．ここで，それぞれの運動量変数の複素平面上の経路を
+\begin{align*}
+C_1 =& \{p =x |x \in [0,R]\} \\
+C_2 =& \{p =R+iy | y \in [0,\delta] \} \\
+C_3 =& \{p =x + i\delta |x \in [R,0]\} \\
+C_4 =& \{p =iy | y \in [\delta,0] \}
+\end{align*}
+のように右上平面での長方形にとる．ここでbranch cutを横切らないように$\delta <m $とする．分母からくる極は
+\begin{align*}
+0=&\sqrt{p^2+m^2}-E_\beta +i\epsilon \\
+\therefore \quad p=&\pm\left(\sqrt{E_\beta^2-m^2} -i\epsilon \right)=\pm (p_0 - i\epsilon)
+\end{align*}
+にある．(一般に$T_{\beta\alpha}^\pm$からも極が発生することに注意．)このときそれぞれの経路による複素積分
+\begin{align*}
+\oint dp p^2 \frac{e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)}{\sqrt{p^2+m^2} - E_\beta + i\epsilon}=I_1+I_2+I_3+I_4
+\end{align*}
+を考えると，まず$C_1$に関して
+\begin{align*}
+I_1=\int_0^R dp p^2 \frac{e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)}{\sqrt{p^2+m^2} - E_\beta + i\epsilon}
+\end{align*}
+である．$C_2$に関して
+\begin{align*}
+I_2=&\int_{0}^\delta idy (R+iy)^2 \frac{e^{-i\sqrt{(R+iy)^2+m^2} t} g(R+iy,\theta,\phi) T_{\beta\alpha}^+(R+iy,\theta,\phi)}{\sqrt{(R+iy)^2+m^2} - E_\beta + i\epsilon} \\
+=&\int_{0}^\delta idy (R+iy)^2 \frac{e^{-iRt+yt/2} g(R+iy,\theta,\phi) T_{\beta\alpha}^+(R+iy,\theta,\phi)}{R+iy/2 - E_\beta + i\epsilon}
+\end{align*}
+となる．ここで$R \gg m >y$で
+\begin{align*}
+\sqrt{(R+iy)^2+m^2} \approx R+i\frac{y}{2}
+\end{align*}
+であることを使った．この積分は$g(R+iy,\theta,\phi)$が十分遠い$R\to \infty$で滑らかに消えることからゼロ$I_2 \to 0$になる．$C_4$に関しても$g(iy,\theta,\phi)$が滑らかに消えることから同様に$I_4\to 0$である．$C_3$に関しては
+\begin{align*}
+I_3=\int_R^0 dp (p+i\delta)^2 \frac{e^{-i\sqrt{(p+i\delta)^2+m^2} t} g(p+i\delta,\theta,\phi) T_{\beta\alpha}^+(p+i\delta,\theta,\phi)}{\sqrt{(p+i\delta)^2+m^2} - E_\beta + i\epsilon}
+\end{align*}
+ここで近似
+\begin{align*}
+\sqrt{(p+i\delta)^2+m^2}=\sqrt{p^2+m^2-\delta^2-2ip\delta} \approx \sqrt{p^2+m^2} +i\frac{p\delta}{\sqrt{p^2+m^2}}
+\end{align*}
+を使うと\footnote{$p$は$[0,R]$の範囲を動く変数だから，どの範囲においてもこの近似がなりたつかどうかを議論する必要はある．実際に確かめると，$m$が有限の大きさかつ$\delta$が十分小さく$m>\delta$をとっている今回のような場合は$p$がどの範囲であってもこの近似は有効である．}，この積分は
+\begin{align*}
+-\int_0^R dp (p+i\delta)^2 \frac{e^{-i\sqrt{p^2+m^2} t+p\delta t/\sqrt{p^2+m^2}} g(p+i\delta,\theta,\phi) T_{\beta\alpha}^+(p+i\delta,\theta,\phi)}{\sqrt{(p+i\delta)^2+m^2} - E_\beta + i\epsilon}
+\end{align*}
+となる．$p$積分は$g(p)$が限られた範囲のみで値をとりそれ以外では滑らかにゼロになることから有限となり，さらに$t\to -\infty$のもとで指数部分が
+\begin{align*}
+\exp\left(\frac{p\delta}{\sqrt{p^2+m^2}} t\right)=\exp\left(t \delta \frac{1}{\sqrt{1+p^2/m^2}}\right) < \exp(t \delta)\to 0
+\end{align*}
+になることからゼロ$I_3 \to 0$になる．以上より周回積分は$t\to -\infty$の極限を考える限り，$R\to \infty$で
+\begin{align*}
+\int_0^\infty dp p^2 \frac{e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)}{\sqrt{p^2+m^2} - E_\beta + i\epsilon} =\oint dp p^2 \frac{e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)}{\sqrt{p^2+m^2} - E_\beta + i\epsilon}
+\end{align*}
+となることがわかる．左辺の周回積分は留数定理により，留数の和の$2\pi i$倍で与えられるが，分母の極は$p=\pm(p_0-i\epsilon)$で与えられるのだったから，これは今回考えている右上平面上の経路の内側には存在しない．$T_{\beta\alpha}^+$には複素平面上で一般に極がエネルギー変数で書いて$E=E_0 -i\Gamma/2$の形で存在する(束縛状態)が，これも下平面に存在するからこの場合回避可能である．以上により経路の内側に極は存在せず，$t\to -\infty$では$\mc{I}_{\beta}^+\to 0$となる．\par
+一方$t\to +\infty$を考えると，$-i\epsilon$の符号を選ぶことになり，そのときの評価すべき積分は
+\begin{align*}
+\int_0^\infty dp p^2 \frac{e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^-(p,\theta,\phi)}{\sqrt{p^2+m^2} - E_\beta - i\epsilon}
+\end{align*}
+となる．この場合の経路は右下平面上で
+\begin{align*}
+C_1 =& \{p =x |x \in [0,R]\} \\
+C_2 =& \{p =R+iy | y \in [0,-\delta] \} \\
+C_3 =& \{p =x + i\delta |x \in [R,0]\} \\
+C_4 =& \{p =iy | y \in [-\delta,0] \}
+\end{align*}
+と長方形にとる．この場合にも同様の議論ができて，評価すべき積分は周回積分，すなわち留数の和に$2\pi i$倍したものに等しくなる．分母の極は$p=\pm (p_0+i\epsilon)$に存在するから，再びこれは回避される．束縛状態による$T_{\beta\alpha}^-$の極$E=E_0 -i\Gamma/2$は存在するかもしれないが，この留数による寄与は(何位の極だとしても)指数関数部分から$e^{-iE_0t}e^{-\Gamma t/2}$に比例する寄与を生み出し，これは$t\to +\infty$でゼロになる．\par
+以上の処置を1粒子だけでなく一般の多粒子状態に対しても適用できるとする．(多分できると思うが，それぞれの運動量変数$(\mathbf{p}_n)_i(i=1,2,3)$の経路を，$\sqrt{p_i^2+m_i^2}$によるbranch cutを避けるために$\delta_i <m_i$は十分小さくとって
+\begin{align*}
+C_1 =& \{(p_n)_i =x |x \in [0,R]\} \\
+C_2 =& \{(p_n)_i =R+iy | y \in [0,\delta_i] \} \\
+C_3 =& \{(p_n)_i =x + i\delta_i |x \in [R,0]\} \\
+C_4 =& \{(p_n)_i =iy | y \in [\delta_i,0] \}
+\end{align*}
+ととるのだと思うと，複雑な関数の複素多変数積分になるので1粒子の場合と同様に解析するのが困難だと思う．しかし本質的に$g(\alpha)$の減衰性と$e^{-iE_\alpha t}$の指数関数的振る舞い，分母の極の位置の解析は同様のはずだから，本質的な困難ではないと思う．)これにより$\tensor{\Psi}{_g^\pm}(t)$は$t\to \mp \infty$で$\Phi_g(t)$になり，リップマン・シュウィンガー方程式の解(3.1.17)は漸近条件を満たす．
+
+\vskip\baselineskip
+
+(3.1.17)の因子$(E_\alpha -E_\beta\pm i\epsilon)^{-1}$の便利な表現を与える．一般に
+\begin{align*}
+(E\pm i\epsilon)^{-1}=&\frac{E\mp i\epsilon}{E^2+\epsilon^2} \\
+=&\frac{E}{E^2+\epsilon^2 }\mp i\pi \frac{\epsilon}{\pi(E^2+\epsilon^2)} \\
+=& \frac{\mc{P}_\epsilon}{E} \mp i\pi \delta_{\epsilon}(E)
+\end{align*}
+と書ける．ここで
+\begin{align*}
+\frac{\mc{P}_\epsilon}{E}:=&\frac{E}{E^2+\epsilon^2 } \\
+\delta_\epsilon(E):=&\frac{\epsilon}{\pi(E^2+\epsilon^2)} 
+\end{align*}
+である．$\mc{P_\epsilon}/E$は$|E|\gg \epsilon$でちょうど$1/E$のように振る舞い，$E\to 0$ではゼロになる．したがってこれは$\epsilon \to 0$の極限では主値関数$\mc{P}/E$のように振舞う．これは，$1/E$の$E=0$近傍の微小間隔を取り除くことによって$1/E$と滑らかな関数が広義積分可能になっているものだ．実際，
+\begin{align*}
+\lim_{a\to 0}\int_{-\infty}^{\infty} \frac{x}{x^2+a^2}\varphi(x)dx =\lim_{a\to 0}\left[\int_{|x|>\epsilon} \frac{x}{x^2+a^2}\varphi(x)dx+\int_{|x|<\epsilon} \frac{x}{x^2+a^2}\varphi(x)dx\right]
+\end{align*}
+と任意の小さい$\epsilon>0$で積分を分解すると，第二項目はどの点でも滑らかだから$\epsilon \to 0$でゼロになり，第一項目も被積分関数はどの点でも滑らかだから極限を交換することができて\footnote{極限の交換に関する詳しい条件は知らん．ルベーグ積分を復習する余裕あったらいつかちゃんと書きます．}
+\begin{align*}
+&\lim_{a\to 0}\lim_{\epsilon \to +0}\left[\int_\epsilon^\infty \frac{x}{x^2+a^2}\varphi(x)dx+\int_{-\infty}^{-\epsilon} \frac{x}{x^2+a^2}\varphi(x)dx\right] \\
+=&\lim_{\epsilon \to 0}\lim_{a \to +0}\left[\int_\epsilon^\infty \frac{x}{x^2+a^2}\varphi(x)dx+\int_{-\infty}^{-\epsilon} \frac{x}{x^2+a^2}\varphi(x)dx\right]\\
+=&\lim_{\epsilon\to 0}\left[\int_\epsilon^\infty \frac{1}{x}\varphi(x)dx+\int_{-\infty}^{-\epsilon} \frac{1}{x}\varphi(x)dx\right] \\
+=&\mc{P} \int^{\infty}_{-\infty} \frac{1}{x}\varphi(x)dx
+\end{align*}
+となって，主値積分になっていることが理解できる．関数$\delta_\epsilon(E)$は$|E|\gg \epsilon$で$\epsilon$の大きさ(ほぼゼロ)であり，$E$の全域で積分すると1になる．実際，極は$E=\pm i\epsilon$にあるから，上を通る半円の経路で(下でもいい)周回複素積分すると
+\begin{align*}
+&\oint \frac{\epsilon}{\pi(E^2+\epsilon^2)} dE =\int_0^{\pi} \frac{\epsilon}{\pi(R^2e^{2i\theta}+\epsilon^2)}iRe^{i\theta}d\theta +\int^{R}_{-R}\frac{\epsilon}{\pi(E^2+\epsilon)^2} dE \to \int^\infty_{-\infty} \frac{\epsilon}{\pi(E^2+\epsilon^2)} dE \\
+=&2\pi i \left\{\lim_{E\to i\epsilon} (E-i\epsilon)\frac{\epsilon}{\pi (E^2+\epsilon^2)}\right\}=2\pi i \frac{\epsilon}{\pi 2i\epsilon}=1
+\end{align*}
+となる．したがって$\epsilon\to 0$の極限でデルタ関数$\delta(E)$のように振舞う．実際
+\begin{align*}
+&\oint \frac{\epsilon}{\pi(E^2+\epsilon)^2}\varphi(E) dE =\int_0^{\pi} \frac{\epsilon}{\pi(R^2e^{2i\theta}+\epsilon^2)}iRe^{i\theta}\varphi(R e^{i\theta})d\theta +\int^{R}_{-R}\frac{\epsilon}{\pi(E^2+\epsilon)^2}\varphi(E) dE \\
+&\to  \int^\infty_{-\infty} \frac{\epsilon}{\pi(E^2+\epsilon)^2}\varphi(E) dE=\int^\infty_{-\infty} \delta_{\epsilon}(E)\varphi(E) dE \\
+=&2\pi i \left\{\lim_{E\to i\epsilon} (E-i\epsilon)\frac{\epsilon}{\pi (E^2+\epsilon^2)}\varphi(E)\right\}=\varphi(i\epsilon) \\
+&\epsilon\to 0 で \quad \int^\infty_{-\infty} \delta_{\epsilon}(E)\varphi(E) dE=\varphi(0)
+\end{align*}
+このように理解することにすれば，(3.1.22)の添え字$\epsilon$は落として，超関数(distribution)の意味で等式
+\begin{align*}
+(E \pm i\epsilon)^{-1} = \frac{\mc{P}}{E}\mp i\pi \delta(E)
+\end{align*}
+がなりたっているといえる．
+
+
+\newpage
+
+
+
+\subsection{$S$行列}
+実験屋は一般に特定の粒子からなる状態を$t\to -\infty$で用意し，$t\to +\infty$でこの状態がどう見えるかを測定する．もし用意された状態が$t\to -\infty$で粒子の内容として$\alpha$を持つなら，それはin状態$\tensor{\Psi}{_\alpha^+}$だ．また，$t\to +\infty$で粒子の内容$\beta$を持つことが見いだされれば，それはout状態$\tensor{\Psi}{_\beta^-}$だ．したがって，遷移$\alpha \to \beta$の確率振幅はスカラー積
+\begin{align*}
+S_{\beta\alpha}=(\tensor{\Psi}{_\beta^-},\tensor{\Psi}{_\alpha^+})
+\end{align*}
+で与えられる．この複素振幅の配列は$S$行列として知られている．もし相互作用が中間になければ，in状態とout状態は同じとなり，$S_{\beta\alpha}$はちょうど$\delta(\alpha-\beta)$となるはずだ．したがって，反応$\alpha\to \beta$の\uwave{確率}は$|S_{\beta\alpha}-\delta(\alpha-\beta)|^2$に比例する．$S_{\beta\alpha}$が，測定される反応率や断面積とどう関係しているかは3.4節で詳しく見る．
+
+\vskip\baselineskip
+
+
+in状態とout状態は二つの異なる種類のヒルベルト空間に存在するわけではなく，両者の違いはラベルのつけ方のみだ．すなわち，$t\to -\infty$でどう見えるか，あるいは$t\to +\infty$でどう見えるかの違いだけだ．任意のin状態はout状態の和で展開でき
+\begin{align*}
+\tensor{\Psi}{_\alpha^+}=\int d\alpha S_{\beta\alpha}\tensor{\Psi}{_\beta^-}
+\end{align*}
+その展開係数は$S$行列で与えられる．\par
+$S_{\beta\alpha}$は直交する状態の2組の完全系を結ぶ行列なので，ユニタリーでなければならない．このことをより詳細に見るために，完全性の関係をout状態に適用して
+\begin{align*}
+\int d\beta S_{\beta \gamma}^* S_{\beta\alpha}=\int d\beta (\tensor{\Psi}{_\gamma^+},\tensor{\Psi}{_\beta^-})(\tensor{\Psi}{_\beta^-},\tensor{\Psi}{_\alpha^+})=(\tensor{\Psi}{_\gamma^+},\tensor{\Psi}{_\alpha^+})
+\end{align*}
+(3.1.15)を用いると
+\begin{align*}
+\int d\beta S_{\beta \gamma}^* S_{\beta\alpha}=\delta(\gamma-\alpha)
+\end{align*}
+あるいは短く書いて
+\begin{align*}
+S^\dagger S=1
+\end{align*}
+を与える．同様にin状態の完全性から
+\begin{align*}
+\int d\beta S_{\gamma\beta}S^*_{\alpha\beta}=\int d\beta (\tensor{\Psi}{_\gamma^-},\tensor{\Psi}{_\beta^+})(\tensor{\Psi}{_\beta^+},\tensor{\Psi}{_\alpha^-})=(\tensor{\Psi}{_\gamma^+},\tensor{\Psi}{_\alpha^-})=\delta(\gamma-\alpha)
+\end{align*}
+すなわち
+\begin{align*}
+SS^\dagger =1
+\end{align*}
+である．以上より$S$行列はユニタリー性を満たしていることがわかった\footnote{この行列$S_{\beta\alpha}$は有限次元ではないので，$SS^\dagger=1$と$S^\dagger S=1$は同値ではなくどちらも示さなければユニタリー性の証明とはならない．なぜなら，有限次元では任意の行列$A$に対して$AB=1$を満たす行列$B$が存在すればそれは一意的で$BA=AB=1$を満たすが，無限次元ではこの性質が成立しない場合があるからだ．実際，任意の無限次元のベクトル$(a_1,a_2,\cdots )$に対して，左にシフトする演算子
+\begin{align*}
+A:(a_1,a_2,\cdots )\mapsto (0,a_1,a_2,\cdots )
+\end{align*}
+と，右にシフトする演算子
+\begin{align*}
+B:(a_1,a_2,\cdots )\mapsto (a_2,a_3,\cdots )
+\end{align*}
+を考えると$BA=1$を満たすが$AB \neq 1$である．}．
+
+
+\vskip\baselineskip
+
+$S$行列を扱う代わりに，自由粒子状態間の行列要素が$S$行列の対応する要素に等しくなるような演算子，すなわち
+\begin{align*}
+(\Phi_{\beta},S\Phi_{\alpha})=S_{\beta\alpha}
+\end{align*}
+となるように定義された演算子$S$を扱った方が便利なことがあるらしい．(3.1.13)より$S$演算子は
+\begin{align*}
+S_{\beta\alpha}=&(\tensor{\Psi}{_\beta^-},\tensor{\Psi}{_\alpha^+}) \\
+=&(\Omega(+\infty)\Phi_\beta,\Omega(-\infty)\Phi_\alpha) \\
+=&(\Phi_\beta,\Omega(+\infty)^\dagger \Omega(-\infty)\Phi_\alpha) \\
+S=&\Omega (\infty)^\dagger \Omega(-\infty) =U(+\infty,-\infty) \\
+U(\tau ,\tau_0):=&\Omega(\tau)^\dagger \Omega(\tau_0)=\exp(iH_0 \tau)\exp(-iH(\tau-\tau_0))\exp(-iH_0 \tau_0)
+\end{align*}
+となる．\par
+前節の積分による方法は，$S$行列の別の公式を導くのにも使われる．in状態$\tensor{\Psi}{_\alpha^+}$の式(3.1,21)に戻って，今度は$t\to +\infty$ととる．
+\begin{align*}
+\tensor{\Psi}{_g^+}(t)=&\Phi_g (t) + \int d\beta \Phi_\beta \left[\int d\alpha \frac{e^{-iE_\alpha t} g(\alpha) \tensor{T}{_{\beta\alpha}^\pm}}{E_\alpha - E_\beta \pm i\epsilon}\right] \\
+\tensor{\mc{I}}{_\beta^+}=&\int d\alpha \frac{e^{-iE_\alpha t} g(\alpha) \tensor{T}{_{\beta\alpha}^+}}{E_\alpha - E_\beta + i\epsilon}
+\end{align*}
+再び一粒子で考えよう．すると，$e^{-iE_\alpha t}$の因子のために今度は$p$積分は右下平面を通る経路
+\begin{align*}
+C_1 =& \{p =x |x \in [0,R]\} \\
+C_2 =& \{p =R+iy | y \in [0,-\delta] \} \\
+C_3 =& \{p =x + i\delta |x \in [R,0]\} \\
+C_4 =& \{p =iy | y \in [-\delta,0] \}
+\end{align*}
+でとる必要がある．この経路内部にある特異点は$E_\alpha= E_\beta-i\epsilon$の点からくる$p=p_0-i\epsilon(p_0=\sqrt{E_\beta^2-m^2})$の寄与のみだ．(束縛状態による他の極もあるが，それは前と同じように$t\to +\infty$で消える．)これは時計回りの経路だから，留数の方法によって
+\begin{align*}
+\tensor{\mc{I}}{_\beta^+}(t)=&\int d\Omega \int_0^\infty dp p^2 \frac{e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)}{\sqrt{p^2+m^2} - E_\beta + i\epsilon} \\
+=&\int d\Omega (-2\pi i)\left[\lim_{p\to p_0-i\epsilon} (p-p_0+i\epsilon)p^2 e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)\frac{\sqrt{p^2+m^2}+E_\beta}{p^2+m^2-E_\beta+i\epsilon}\right] \\
+=&-2\pi i\int d\Omega \left[\lim_{p\to p_0-i\epsilon} p^2 e^{-i\sqrt{p^2+m^2} t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)\frac{\sqrt{p^2+m^2}+E_\beta}{p+p_0-i\epsilon}\right] \\
+=&-2\pi i\int d\Omega \left[p^2_0 e^{-iE_\beta t} g(p_0,\theta,\phi) T_{\beta\alpha}^+(p_0,\theta,\phi)\frac{E_\beta}{\sqrt{E_\beta^2-m^2}}\right] \quad (\epsilon \to 0)\\
+=&-2\pi i \int d\Omega \int^\infty_0 \delta(p-p_0) \left[p^2 e^{-iE_\beta t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)\frac{E_\beta}{\sqrt{E^2_\beta-m^2}}\right] \\
+=&-2\pi i \int d\Omega \int^\infty_0 dp\Biggl[p^2 e^{-iE_\beta t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi) \\
+&\qquad \qquad \times \frac{E_\beta}{\sqrt{E^2_\beta-m^2}}\left\{\delta\left(p-\sqrt{E_\beta^2-m^2}\right)+\delta\left(p+\sqrt{E_\beta^2-m^2}\right)\right\}\Biggr] \\
+=&-2\pi i \int d\Omega \int^\infty_0 dp\, p^2\Biggl[ e^{-iE_\beta t} g(p,\theta,\phi) T_{\beta\alpha}^+(p,\theta,\phi)\delta(\sqrt{p^2+m^2}-E_\beta)\Biggr] \\
+=&-2\pi i e^{-iE_\beta t} \int d^3\mathbf{p} \delta(E(\mathbf{p})-E_\beta) g(\mathbf{p}) T_{\beta\alpha}^+(\mathbf{p})
+\end{align*}
+が得られる．(極限をとる順番に注意．$t\to +\infty$は最後の行で暗黙に行っている．ここでは書いていないが全ての行で束縛状態による留数からくる$e^{-\Gamma t/2}$に比例する項が存在し，それらは$\Gamma$が有限の大きさであることから最後の$t\to +\infty$の極限で消えてしまう．)ここで2行目では留数定理を使い，また分母を有理化している．4行目では積分を実行してしまったから$\epsilon$をゼロにもっていった．6行目では$p>0$であることを用いて，全域でゼロになるデルタ関数を挿入した．7行目ではデルタ関数の公式を使って
+\begin{align*}
+\delta(\sqrt{p^2+m^2}-E_\beta)=\frac{E_\beta}{\sqrt{E^2_\beta-m^2}}\left\{\delta\left(p-\sqrt{E_\beta^2-m^2}\right)+\delta\left(p+\sqrt{E_\beta^2-m^2}\right)\right\}
+\end{align*}
+を用いた．以上の手続きが一般の$n$粒子の場合でも同様に行えるとして，$t\to +\infty$によって
+\begin{align*}
+\tensor{\mc{I}}{_\beta^+}(t)\to -2\pi i e^{-iE_\beta t} \int d\alpha \delta(E_\alpha-E_\beta)g(\alpha)T_{\beta\alpha}^+
+\end{align*}
+と漸近する．したがって$t\to +\infty$では
+\begin{align*}
+\tensor{\Psi}{_g^+}(t)=&\int d\alpha e^{-iE_\beta}g(\beta)\Phi_\beta + \int d\beta \tensor{\mc{I}}{_\beta^+}(t) \\
+\to &\int d\beta e^{-iE_\beta t} \Phi_\beta\left[g(\beta)-2\pi i \int d\alpha \delta(E_\alpha-E_\beta)g(\alpha)T_{\beta\alpha}^+\right]
+\end{align*}
+という漸近的振る舞いをする．一方，(3.1.19)をout状態の完全系で展開すると
+\begin{align*}
+\tensor{\Psi}{_g^+}(t)=&\int d\alpha e^{-iE_\alpha t}g(\alpha)\int d\beta \tensor{\Psi}{_\beta^-}(\tensor{\Psi}{_\beta^-},\tensor{\Psi}{_\alpha^-}) \\
+=&\int d\alpha e^{-iE_\alpha t}g(\alpha)\int d\beta \tensor{\Psi}{_\beta^-}S_{\beta\alpha} \\
+=&\int d\beta \tensor{\Psi}{_\beta^-} \int d\alpha e^{-iE_\alpha t} g(\alpha) S_{\beta\alpha}
+\end{align*}
+$\tensor{\Psi}{_\alpha^+},\tensor{\Psi}{_\beta^-}$はそれぞれハミルトニアン$H$の固有状態であり，その内積はエネルギースペクトルが等しくなければ直交する．したがって$S_{\beta\alpha}$は$\delta(E_\alpha-E_\beta)$の因子を必ず含み
+\begin{align*}
+\tensor{\Psi}{_g^+}(t)=\int d\beta \tensor{\Psi}{_\beta^-} e^{-iE_\beta t}\int d\alpha g(\alpha) S_{\beta\alpha}
+\end{align*}
+と変形できる．$g(\alpha)$が$E_\alpha$から幅$\Delta E$でゼロになる滑らかさな波束関数であることを用いると，$\int d\alpha g(\alpha)S_{\beta\alpha}$も$E_\beta$から幅$\Delta E$で滑らかにゼロになる波束関数である．よって$t\to +\infty$で$\tensor{\Psi}{_\beta^-}$とそのような波束での重ね合わせは$\Phi_\beta$の重ね合わせに漸近するというout状態の定義を用いれば
+\begin{align*}
+\tensor{\Psi}{_g^+}(t) \to \int d\beta \Phi_\beta e^{-iE_\beta t}\int d\alpha g(\alpha) S_{\beta\alpha}
+\end{align*}
+となる．これで$\tensor{\Psi}{_g^+}$の二通りの漸近が得られたが，それぞれは等しいはずだから
+\begin{align*}
+\int d\alpha g(\alpha) S_{\beta\alpha}=&g(\beta)-2\pi i \int d\alpha \delta(E_\alpha-E_\beta)g(\alpha)T_{\beta\alpha}^+ \\
+=&\int d\alpha g(\alpha ) \left[\delta(\alpha-\beta)-2\pi i \delta(E_\alpha-E_\beta)T_{\beta\alpha}^+\right]
+\end{align*}
+$g(\alpha)$は滑らかだから
+\begin{align*}
+S_{\beta\alpha}=&\delta(\alpha-\beta)-2\pi i \delta(E_\alpha-E_\beta) T_{\beta\alpha}^+ \\
+T_{\beta\alpha}^+=&(\Phi_\beta, V \tensor{\Psi}{_\alpha^+})
+\end{align*}
+が得られる．これが欲しかった結果だ．\par
+相互作用が弱く(3.1.18)のin状態と自由粒子状態との差が十分小さいとできる場合，$T_{\beta\alpha}^+\approx (\Phi_\beta,V\Phi_\alpha)$と近似でき
+\begin{align*}
+S_{\beta\alpha}\approx \delta(\alpha-\beta)-2\pi i \delta(E_\alpha-E_\beta) (\Phi_\beta, V \Phi_\alpha)
+\end{align*}
+が得られる．これはボルン近似として知られている．\par
+これが実際に我々の知っているボルン近似と同じものであることを見るには，スピンに依らない1粒子の非相対論的ポテンシャル散乱を考えるといい．ポテンシャル$V(\mathbf{r})$による散乱が起きるとすると，非相対論的な場合を考えているので位置表示の完全性$\Phi_{\mathbf{p}}=(2\pi)^{3/2}\int d^3 \mathbf{x} \Phi_\mathbf{x}e^{i\mathbf{p}\cdot \mathbf{x}}$が使えて，さらに$(\Phi_{\mathbf{x}'},\Phi_{\mathbf{x}})=\delta^3(\mathbf{x}'-\mathbf{x})$を使うと
+\begin{align*}
+(\Phi_{\mathbf{p}'},V \Phi_{\mathbf{p}})=&\frac{1}{(2\pi)^3}\int d^3 \mathbf{r} V(\mathbf{r})e^{-i(\mathbf{p}'-\mathbf{p})\cdot \mathbf{r}}=\tilde{V}(\mathbf{q})
+\end{align*}
+が得られる．ここで$\tilde{V}(\mathbf{q})$はポテンシャル$V(\mathbf{r})$のフーリエ変換であり，$\mathbf{q}=\mathbf{p}'-\mathbf{p}$とおいた．よって$S$行列は
+\begin{align*}
+S_{\mathbf{p}'\mathbf{p}}=&\delta^3(\mathbf{p}'-\mathbf{p})-2\pi i \delta(E(\mathbf{p}')-E(\mathbf{p}))(\Phi_{\mathbf{p}'},V(\mathbf{r})\Phi_{\mathbf{p}}) \\
+=&\delta^3(\mathbf{p}'-\mathbf{p})-2\pi i \delta(E(\mathbf{p}')-E(\mathbf{p}))\tilde{V}(\mathbf{q})
+\end{align*}
+という形になる．よって散乱振幅はポテンシャル$V(\mathbf{r})$のフーリエ変換によって得られ，これは確かにボルン近似の性質である．\par
+さらに後の計算のために，スピンに依らないポテンシャル$V(\mathbf{r}_1-\mathbf{r}_2)$による2粒子の散乱$1,2\to 1',2'$も考えておく．特に11章で使う．ここで$1$と$1'$，$2$と$2'$の組が同じ種類の粒子とする．このとき平面波は
+\begin{align*}
+(\Phi_{\mathbf{r}_1,\mathbf{r}_2},\Phi_{\mathbf{p}_1,\mathbf{p}_2})=\frac{1}{(2\pi)^3} e^{i\mathbf{p}_1 \cdot \mathbf{r}_1} e^{i\mathbf{p}_2\cdot \mathbf{r}_2}
+\end{align*}
+で与えられて
+\begin{align*}
+(\Phi_{\mathbf{p}'_1,\mathbf{p}_2'} ,V\Phi_{\mathbf{p}_1,\mathbf{p}_2})=\frac{1}{(2\pi)^6}\int d^3\mathbf{r}_1 d^3 \mathbf{r}_2 e^{-i\mathbf{p}'_1 \cdot \mathbf{r}_1} e^{-i\mathbf{p}_2'\cdot \mathbf{r}_2} V(\mathbf{r}_2-\mathbf{r}_1) e^{i\mathbf{p}_1 \cdot \mathbf{r}_1} e^{i\mathbf{p}_2\cdot \mathbf{r}_2}
+\end{align*}
+ここで重心座標と相対座標
+\begin{align*}
+\mathbf{R}:=\frac{m_1\mathbf{r}_1+m_2\mathbf{r}_2}{m_1+m_2},\mathbf{r}:=\mathbf{r}_2-\mathbf{r}_1
+\end{align*}
+および全運動量と相対運動量
+\begin{align*}
+\mathbf{P}:=\mathbf{p}_1+\mathbf{p}_2,\mathbf{p}:=\frac{m_2\mathbf{p}_1-m_1 \mathbf{p}_2}{m_1+m_2}
+\end{align*}
+を導入すると，$\mathbf{p}_1\cdot \mathbf{r}_1+\mathbf{p}_2\cdot \mathbf{r}_2=\mathbf{P}\cdot \mathbf{R}+\mathbf{p}\cdot \mathbf{r}$とうまく分解できることを使って
+\begin{align*}
+(\Phi_{\mathbf{p}'_1,\mathbf{p}_2'} ,V\Phi_{\mathbf{p}_1,\mathbf{p}_2})=&\frac{1}{(2\pi)^6}\int d^3\mathbf{r} d^3 \mathbf{R} e^{-i\mathbf{P}' \cdot \mathbf{R}} e^{-i\mathbf{p}'\cdot \mathbf{r}} V(\mathbf{r}) e^{i\mathbf{P} \cdot \mathbf{R}} e^{i\mathbf{p}\cdot \mathbf{r}} \\
+=&\frac{1}{(2\pi)^3}\delta^3(\mathbf{P}'-\mathbf{P})\int d^3\mathbf{r} V(\mathbf{r})e^{-i(\mathbf{p}'-\mathbf{p})\cdot \mathbf{r}} \\
+=&\delta^3(\mathbf{p}_1'+\mathbf{p}_2-\mathbf{p}_1-\mathbf{p}_2)\tilde{V}(\mathbf{q})
+\end{align*}
+が得られる．ここで再び$\tilde{V}(\mathbf{q})$はポテンシャル$V(\mathbf{r})$のフーリエ変換だ．(変数変換したとき，$d^3\mathbf{r}_1d^3 \mathbf{r}_2$から生じるヤコビアンが1になることは確認しなければならない．ただ直接示そうとすると
+\begin{align*}
+\frac{\partial(\mathbf{R},\mathbf{r})}{\partial(\mathbf{r}_1,\mathbf{r}_2)}=\left(
+\begin{matrix}
+\frac{\partial \mathbf{R}}{\partial \mathbf{r}_1} & \frac{\partial \mathbf{R}}{\partial \mathbf{r}_2} \\
+\frac{\partial \mathbf{r}}{\partial \mathbf{r}_1} & \frac{\partial \mathbf{r}}{\partial \mathbf{r}_2}
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+\frac{m_1}{m_1+m_2} \mathbf{I} & \frac{m_2}{m_1+m_2} \mathbf{I} \\
+\mathbf{I} & -\mathbf{I}
+\end{matrix}
+\right)
+\end{align*}
+となって，この行列式を計算するのは若干骨が折れる．ここで実は2.5節で示しているブロック行列に関する行列式の定理
+\begin{align*}
+\det \left(
+\begin{matrix}
+A & B \\
+C & D
+\end{matrix}
+\right)=\det D \det(A-BD^{-1}C)
+\end{align*}
+を使うと楽に計算できる．その結果ちゃんとヤコビアンは1になる．)したがって$S$行列は
+\begin{align*}
+S_{\mathbf{p}'_1,\mathbf{p}_2';\mathbf{p}_1,\mathbf{p}_2}=\delta^3(\mathbf{p}_1'+\mathbf{p}_2-\mathbf{p}_1-\mathbf{p}_2)-2\pi i \delta^4(p_\beta -p_\alpha) \tilde{V}(\mathbf{q})
+\end{align*}
+と書ける．
+
+\vskip\baselineskip
+
+
+in状態とout状態に関するリップマン・シュウィンガー方程式(3.1.16)を使えば，(3.2.7)だけでなく，これらの状態の正規直交性と$S$行列のユニタリー性を$t\to \mp \infty$の極限を考えなくても証明できる．\par
+まず，(3.1.16)を行列要素$(\tensor{\Psi}{_\beta^\pm},V\tensor{\Psi}{_\alpha^\pm})$の左側または右側に用いて，それらの結果を等しいとおく．つまり
+\begin{align*}
+(右側): (\tensor{\Psi}{_\beta^\pm},V\tensor{\Psi}{_\alpha^\pm}) =&(\tensor{\Psi}{_\beta^\pm},V\Phi_\alpha)+(\tensor{\Psi}{_\beta^\pm},V(E_\alpha-H_0 \pm i\epsilon)^{-1} V \tensor{\Psi}{_\alpha^\pm}) \\
+(左側) :(\tensor{\Psi}{_\beta^\pm},V\tensor{\Psi}{_\alpha^\pm}) =&(\Phi_\beta,V\tensor{\Psi}{_\alpha^\pm}) +((E_\beta-H_0\pm i\epsilon)^{-1} V \Phi_\beta,V\tensor{\Psi}{_\alpha^\pm}) \\
+=&(\Phi_\beta,V\tensor{\Psi}{_\alpha^\pm}) +( \Phi_\beta,V (E_\beta-H_0\mp i\epsilon)^{-1} V\tensor{\Psi}{_\alpha^\pm})
+\end{align*}
+であるから，これらが等しいとおいて
+\begin{align*}
+&(\tensor{\Psi}{_\beta^\pm},V\Phi_\alpha)+(\tensor{\Psi}{_\beta^\pm},V(E_\alpha-H_0 \pm i\epsilon)^{-1} V \tensor{\Psi}{_\alpha^\pm}) \\
+&\qquad \qquad =(\Phi_\beta,V\tensor{\Psi}{_\alpha^\pm}) +( \Phi_\beta,V (E_\beta-H_0\mp i\epsilon)^{-1} V\tensor{\Psi}{_\alpha^\pm})
+\end{align*}
+とできる．ここで$T_{\beta\alpha}^\pm=(\Phi_\beta,V\tensor{\Psi}{_\alpha^\pm})$と
+\begin{align*}
+(\tensor{\Psi}{_\beta^\pm},V\Phi_\alpha)=(V\tensor{\Psi}{_\beta^\pm},\Phi_\alpha) =(\Phi_\alpha,V\tensor{\Psi}{_\beta^\pm})^*=T^{\pm*}_{\alpha\beta}
+\end{align*}
+であることを使うと
+\begin{align*}
+T^{\pm*}_{\alpha\beta}-T^\pm_{\beta\alpha}=-(\tensor{\Psi}{_\beta^\pm},V(E_\alpha-H_0 \pm i\epsilon)^{-1} V \tensor{\Psi}{_\alpha^\pm})+( \Phi_\beta,V (E_\beta-H_0\mp i\epsilon)^{-1} V\tensor{\Psi}{_\alpha^\pm})
+\end{align*}
+と書ける．中間状態$\Phi_\gamma$について完全性を使うと，
+\begin{align*}
+T^{\pm*}_{\alpha\beta}-T^\pm_{\beta\alpha}=&-\int d\gamma \left(\tensor{\Psi}{_\beta^\pm},V(E_\alpha-H_0 \pm i\epsilon)^{-1} \Phi_\gamma (\Phi_\gamma ,V \tensor{\Psi}{_\alpha^\pm})\right) \\
+&+\int d\gamma \left( \Phi_\beta,V (E_\beta-H_0\mp i\epsilon)^{-1} \Phi_\gamma (\Phi_\gamma ,V\tensor{\Psi}{_\alpha^\pm})\right) \\
+=&-\int d\gamma (\tensor{\Psi}{_\beta^\pm},V\Phi_\gamma)(\Phi_\gamma,V\tensor{\Psi}{_\alpha^\pm})\frac{1}{E_\alpha-E_\gamma\pm i\epsilon} \\
+&+\int d\gamma (\tensor{\Psi}{_\beta^\pm},V\Phi_\gamma)(\Phi_\gamma,V\tensor{\Psi}{_\alpha^\pm})\frac{1}{E_\beta-E_\gamma \mp i\epsilon} \\
+=& -\int d\gamma T^{\pm *}_{\gamma\beta}T^\pm_{\gamma\alpha}\left[(E_\alpha-E_\gamma\pm i\epsilon)^{-1}- (E_\beta- E_\gamma\mp i\epsilon)^{-1}\right]
+\end{align*}
+ここで
+\begin{align*}
+\frac{1}{E_\alpha-E_\gamma\pm i\epsilon}-\frac{1}{E_\beta-E_\gamma \mp i\epsilon} =-\frac{E_\alpha-E_\beta \pm 2i\epsilon}{(E_\alpha-E_\gamma\pm i\epsilon)(E_\beta-E_\gamma\mp i\epsilon)}
+\end{align*}
+と書けるから，両辺を$E_\alpha-E_\beta \pm 2i\epsilon$で割って
+\begin{align*}
+(\mathrm{LHS})=&\frac{T_{\alpha\beta}^{\pm *}}{E_\alpha-E_\beta \pm 2i\epsilon}-\frac{T_{\beta\alpha}^{\pm}}{E_\alpha-E_\beta \pm 2i\epsilon} \\
+=&-\frac{T_{\alpha\beta}^{\pm *}}{E_\beta-E_\alpha \mp 2i\epsilon}-\frac{T_{\beta\alpha}^{\pm}}{E_\alpha-E_\beta \pm 2i\epsilon} \\
+=&-\left(\frac{T^\pm_{\alpha\beta}}{E_\beta-E_\alpha \pm 2i\epsilon}\right)^* -\frac{T^\pm_{\beta\alpha}}{E_\alpha-E_\beta \pm 2i\epsilon} \\
+(\mathrm{RHS})=&\int d\gamma \frac{T^{\pm*}_{\gamma\beta}}{E_\beta-E_\gamma \mp i\epsilon} \frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma \pm i\epsilon} \\
+=&\int d\gamma \left(\frac{T^\pm_{\gamma\beta}}{E_\beta-E_\gamma \pm i\epsilon}\right)^* \frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma \pm i\epsilon} \\
+\therefore \quad & \left(\frac{T_{\alpha\beta}^{\pm}}{E_\beta-E_\alpha \pm 2i\epsilon}\right)^*+\frac{T_{\beta\alpha}^{\pm}}{E_\alpha-E_\beta \pm 2i\epsilon}=-\int d\gamma \left(\frac{T^\pm_{\gamma\beta}}{E_\beta-E_\gamma \pm i\epsilon}\right)^* \frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma \pm i\epsilon}
+\end{align*}
+が得られる．左辺の分母の$2\epsilon$は，これが正の微小量であることだけが重要であるから，$\epsilon$で置き換えて
+\begin{align*}
+\left(\frac{T_{\alpha\beta}^{\pm}}{E_\beta-E_\alpha \pm i\epsilon}\right)^*+\frac{T_{\beta\alpha}^{\pm}}{E_\alpha-E_\beta \pm i\epsilon}=-\int d\gamma \left(\frac{T^\pm_{\gamma\beta}}{E_\beta-E_\gamma \pm i\epsilon}\right)^* \frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma \pm i\epsilon}
+\end{align*}
+となる．この関係式を用いると，$\delta(\beta-\alpha)+T^\pm_{\beta\alpha}/(E_\alpha-E_\beta\pm i\epsilon)$がユニタリー行列であることが示せる．実際これを$U_{\beta\alpha}$とおくと
+\begin{align*}
+U^\pm_{\beta\alpha}:=&\delta (\beta-\alpha)+\frac{T^\pm_{\beta\alpha}}{E_\alpha-E_\beta\pm i\epsilon} \\
+[U^{\pm\dagger} U^\pm]_{\beta\alpha}=&\int d\gamma U^{\pm*}_{\gamma\beta} U^\pm_{\gamma\alpha} \\
+=&\int d\gamma\left[\delta (\gamma-\beta)+\frac{T^\pm_{\gamma\beta}}{E_\beta -E_\gamma \pm i\epsilon}\right]^* \left[\delta (\gamma-\alpha)+\frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma\pm i\epsilon}\right] \\
+=&\delta(\beta-\alpha) +\left(\frac{T^\pm_{\alpha\beta}}{E_\beta -E_\alpha \pm i\epsilon}\right)^*+\frac{T^\pm_{\beta\alpha}}{E_\alpha -E_\beta \pm i\epsilon}+\int d\gamma \left(\frac{T^\pm_{\gamma\beta}}{E_\beta-E_\gamma \pm i\epsilon}\right)^* \frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma \pm i\epsilon} \\
+=&\delta(\alpha-\beta)
+\end{align*}
+が得られ，略記すればこれは$U^{\pm \dagger} U^\pm=1$となる．また条件式の両辺を複素共役すれば
+\begin{align*}
+\frac{T^\pm_{\alpha\beta}}{E_\beta -E_\alpha \pm i\epsilon}+\left(\frac{T^\pm_{\beta\alpha}}{E_\alpha -E_\beta \pm i\epsilon}\right)^*=-\int d\gamma \frac{T^\pm_{\gamma\beta}}{E_\beta-E_\gamma \pm i\epsilon} \left( \frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma \pm i\epsilon} \right)^*
+\end{align*}
+が得られ，したがって
+\begin{align*}
+[U_{\pm}U_{\pm}^\dagger]_{\beta\alpha}=& \int d\gamma U^\pm_{\gamma\beta}U^{\pm *}_{\gamma\alpha} \\
+=&\int d\gamma\left[\delta (\gamma-\beta)+\frac{T^\pm_{\gamma\beta}}{E_\beta -E_\gamma \pm i\epsilon}\right] \left[\delta (\gamma-\alpha)+\frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma\pm i\epsilon}\right]^* \\
+=&\delta(\beta-\alpha) +\frac{T^\pm_{\alpha\beta}}{E_\beta -E_\alpha \pm i\epsilon}+\left(\frac{T^\pm_{\beta\alpha}}{E_\alpha -E_\beta \pm i\epsilon}\right)^*+\int d\gamma \frac{T^\pm_{\gamma\beta}}{E_\beta-E_\gamma \pm i\epsilon} \left( \frac{T^\pm_{\gamma\alpha}}{E_\alpha-E_\gamma \pm i\epsilon} \right)^* \\
+=&\delta(\beta-\alpha)
+\end{align*}
+を得る．これも略記すれば$U^\pm U^{\pm\dagger} =1$となる．したがってこれはユニタリーだ．したがって(3.1.17)より
+\begin{align*}
+\tensor{\Psi}{_\alpha^\pm}=&\int d\beta \left[\delta (\beta-\alpha)+\frac{T^\pm_{\beta\alpha}}{E_\alpha-E_\beta\pm i\epsilon}\right] \Phi_\beta \\
+=&\int d\beta U^\pm_{\beta\alpha} \Phi_\beta
+\end{align*}
+と書けるから
+\begin{align*}
+(\tensor{\Psi}{_{\beta}^\pm},\tensor{\Psi}{_\alpha^\pm})=& \int d\alpha' d\beta' (U^\pm_{\beta'\beta}\Phi_{\beta'} , U^\pm_{\alpha'\alpha}\Phi_{\alpha'}) \\
+=&\int d\alpha' d\beta' U^{\pm *}_{\beta'\beta} U^\pm_{\alpha'\alpha} \delta(\beta'-\alpha') \\
+=&\int d\alpha' U^{\pm *}_{\alpha'\beta} U^\pm_{\alpha'\alpha} \\
+=&\delta(\beta-\alpha)
+\end{align*}
+となって，規格直交であることが示すことができた．\par
+$S$行列のユニタリー性を示すためには，(3.2.9)の両辺に$(E_\alpha -E_\beta\pm 2i\epsilon)^{-1}$ではなく$\delta(E_\beta-E_\alpha)$をかけることで，$f(x)\delta(x-a)=f(a)\delta(x-a)$の性質を使うと
+\begin{align*}
+T^{\pm *}_{\alpha\beta}\delta(E_\beta-E_\alpha)-T^\pm_{\beta\alpha}\delta(E_\beta-E_\alpha) =&\int d\gamma T^{\pm *}_{\gamma\beta}T^\pm_{\gamma\alpha} \left[\frac{E_\alpha-E_\beta \pm 2i\epsilon}{(E_\alpha-E_\gamma\pm i\epsilon)(E_\beta-E_\gamma\mp i\epsilon)}\right]\delta(E_\beta-E_\alpha) \\
+=&\pm 2\pi i \int d\gamma T^{\pm *}_{\gamma\beta}T^\pm_{\gamma\alpha} \left[\frac{\epsilon}{\pi(E_\alpha-E_\gamma)^2+\epsilon^2}\right]\delta(E_\beta-E_\alpha) \\
+=&\pm 2\pi i \int d\gamma T^{\pm *}_{\gamma\beta}T^\pm_{\gamma\alpha} \delta (E_\alpha-E_\gamma) \delta(E_\beta-E_\alpha) \quad \because (3.1.24)\\
+=& \pm 2\pi i \int d\gamma T^{\pm *}_{\gamma\beta}T^\pm_{\gamma\alpha} \delta (E_\alpha-E_\gamma) \delta(E_\beta-E_\gamma) \\
+\therefore \quad T^{+ *}_{\alpha\beta}\delta(E_\beta-E_\alpha)-T^+_{\beta\alpha}\delta(E_\beta-E_\alpha) =&2\pi i \int d\gamma T^{+ *}_{\gamma\beta}T^+_{\gamma\alpha} \delta (E_\alpha-E_\gamma) \delta(E_\beta-E_\gamma)
+\end{align*}
+が得られる．よって(3.2.7)の$S_{\beta\alpha}$は
+\begin{align*}
+[S^\dagger S]_{\beta\alpha}=&\int d\gamma S^*_{\gamma\beta}S_{\gamma\alpha} \\
+=&\int d\gamma \left[\delta(\gamma-\beta)-2\pi i \delta(E_\gamma-E_\beta)T^+_{\gamma\beta}\right]^*\left[\delta(\gamma-\alpha)-2\pi i \delta(E_\gamma-E_\alpha)T^+_{\gamma\alpha}\right] \\
+=&\delta(\beta-\alpha)+2\pi i \delta(E_\beta -E_\alpha)T^+_{\alpha\beta}-2\pi i \delta(E_\alpha-E_\beta)T^{+*}_{\beta\alpha} \\
+&-4\pi^2\int d\gamma T^{\pm *}_{\gamma\beta}T^\pm_{\gamma\alpha} \delta (E_\alpha-E_\gamma) \delta(E_\beta-E_\gamma) \\
+=&\delta(\beta-\alpha)
+\end{align*}
+を満たす．これは略記すれば$S^\dagger S=1$となる．条件式に両辺複素共役したものを用いれば同様に$SS^\dagger=1$も示せる．
+
+\newpage
+
+
+\subsection{$S$行列の対称性}
+$S$行列の不変性が意味することや，どのような条件をハミルトニアンに課すとそのような不変性が保証されるかを考察する．
+
+\vskip\baselineskip
+
+\textbf{(A)ローレンツ不変性}\par
+任意の非斉次ローレンツ$ISO(3,1)$変換$x\to \Lambda x+a$に対して，ユニタリー演算子$U(\Lambda,a)$を(3.1.1)のようにin状態またはout状態の\uwave{どちらかに}作用するとして定義することができる．理論がローレンツ不変であるとは，それは同じ演算子$U(\Lambda,a)$が(3.1.1)のようにin状態およびout状態の\uwave{両方}に作用することを意味する．そのとき，演算子$U(\Lambda,a)$はユニタリーであるから
+\begin{align*}
+S_{\beta\alpha}=\Bigl(\Psi_{\beta}^- , \Psi_\alpha^+\Bigr)=\Bigl(U(\Lambda,a)\Psi_{\beta}^- , U(\Lambda,a)\Psi_\alpha^+\Bigr)
+\end{align*}
+を満たす．よって(3.1.1)を用いると，$S$行列のローレンツ不変性(実際は共変性)が得られる．すなわち，任意のローレンツ変換$\tensor{\Lambda}{^\mu_\nu}$と並進$a^\mu$に対して(添え字$\alpha,\beta$等をあらわに書いて)
+\begin{align*}
+&S_{p_1',\sigma_1',n_1';p_2',\sigma_2',n_2';\cdots , \, p_1,\sigma_1,n_1;p_2,\sigma_2,n_2;\cdots} \\
+=&\Bigl(U(\Lambda,a)\Psi_{p_1',\sigma_1',n_1';p_2',\sigma_2',n_2';\cdots}^- \, , \, U(\Lambda,a)\Psi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2;\cdots}^+\Bigr) \\
+=&\Biggl(\prod_i \left[e^{-ia_\mu (\Lambda p'_i)^\mu}\sqrt{\frac{(\Lambda p'_i)^0}{p'^0_i}} \sum_{\bar{\sigma}_i'}D_{\bar{\sigma}'_i\sigma'_i}^{(j'_i)}\Bigl(W(\Lambda,p'_i)\Bigr)\right] \Psi_{\Lambda p_1',\bar{\sigma}_1',n_1';\Lambda p_2',\bar{\sigma}_2',n_2';\cdots}^- \\
+&\qquad \qquad \qquad , \prod_i \left[e^{-ia_\mu (\Lambda p_i)^\mu}\sqrt{\frac{(\Lambda p_i)^0}{p^0_i}} \sum_{\bar{\sigma}_i}D_{\bar{\sigma}_i\sigma_i}^{(j_i)}\Bigl(W(\Lambda,p_i)\Bigr)\right]\Psi_{\Lambda p_1,\bar{\sigma}_1,n_1;\Lambda p_2,\bar{\sigma}_2,n_2;\cdots}^+ \Biggr) \\
+=&\exp\Bigl(-ia_\mu \tensor{\Lambda}{^\mu_\nu}(p_1^\nu+p_2^\nu+\cdots -p'^\nu_1-p'^\nu_2-\cdots) \Bigr) \\
+&\qquad \times \sqrt{\frac{(\Lambda p_1)^0 (\Lambda p_2)^0\cdots (\Lambda p_1')^0(\Lambda p_2')^0}{p_1^0 p_2^0\cdots p'^0_1 p'^0_2\cdots }} \\
+&\qquad \times \sum_{\bar{\sigma}_1 ,\bar{\sigma}_2,\cdots }D^{(j_1)}_{\bar{\sigma}_1\sigma_1}\Bigl( W(\Lambda,p_1) \Bigr)D^{(j_2)}_{\bar{\sigma}_2\sigma_2}\Bigl( W(\Lambda,p_2) \Bigr)\cdots \\
+&\qquad \times \sum_{\bar{\sigma}_1' ,\bar{\sigma}_2',\cdots }D^{(j'_1)}_{\bar{\sigma}'_1\sigma'_1}\Bigl( W(\Lambda,p'_1) \Bigr)D^{(j'_2)}_{\bar{\sigma}'_2\sigma'_2}\Bigl( W(\Lambda,p'_2) \Bigr)\cdots \\
+&\qquad \times S_{\Lambda p'_1,\bar{\sigma}'_1,n_1';\Lambda p'_2,\bar{\sigma}'_2,n_2';\cdots ,\Lambda p_1,\bar{\sigma}_1,n_1;\Lambda p_2,\bar{\sigma}_2,n_2;\cdots }
+\end{align*}
+となる．(これは定理ではなく定義であることに注意！)特に左辺は$a^\mu$に依らないので，右辺も同様に$a^\mu$に依ってはいけない．よって$S$行列は4元運動量が保存しなければゼロだ．したがって$S$行列の粒子間の相互作用を表す部分は(3.2.8)からの類推で
+\begin{align*}
+S_{\beta\alpha}-\delta(\beta-\alpha)=-2\pi i M_{\beta\alpha}\delta^4(p_\beta-p_\alpha)
+\end{align*}
+の形で書ける\footnote{係数因子は単に定義であり，Peskinなどの教科書では
+\begin{align*}
+S_{\beta\alpha}-\delta(\beta-\alpha)=+(2\pi)^4 i M_{\beta\alpha}\delta^4(p_\beta-p_\alpha)
+\end{align*}
+となっている．これは一つのデルタ関数とセットで$2\pi$が出てくることに対応した定義である．(規格化の定義$(\Psi_{p',\sigma'},\Psi_{p,\sigma})=2E_p(2\pi)^3\delta^3(\mathbf{p}'-\mathbf{p})\delta_{\sigma'\sigma}$の影響でもある．)ただしこの定義の違いで3.4節での散乱断面積の計算に影響が出るので気を付ける．また，$S$演算子の行列要素が$S_{\beta\alpha}$であることに対応して，行列要素が$M_{\beta\alpha}$であるような演算子$T$を導入し
+\begin{align*}
+S=1+iT
+\end{align*}
+と書く文脈もあることを覚えておく．このように書く場合，もっぱらpeskinのような定義が採用されている．}．(しかし，4.4節の(4.4.6)の後で書いてあるように，$M_{\beta\alpha}$自身に他のデルタ関数因子を含む項がある．)
+
+\vskip\baselineskip
+
+(3.3.1)は定理というより，$S$行列のローレンツ不変性の定義とみなせる．なぜなら，in状態とout状態の\uwave{両方}に(3.1.1)のように作用するユニタリー演算子が存在するのは，特別なハミルトニアンに対してのみだ．したがって，$S$行列のローレンツ不変性を保証するための，そのようなハミルトニアンに対する条件を定式化する必要がある．ここで一通りまとめておこう．\par
+自由粒子状態に対して，in状態かout状態のどちらかに同じ作用を実現する演算子を定義することはできる．実際，線形空間$\mc{X}$に対して$A:\mc{X}\to \mc{X}$がある既知の線形演算子だとして，別の線形空間$\mc{Y}$との線形同型写像$\varphi:\mc{X}\to \mc{Y}$が存在するならば$B=\varphi\circ A \circ \varphi^{-1}:\mc{Y}\to \mc{Y}$は$\mc{Y}$に対して$A$と同じ作用をする線形演算子となる．($A,B$がそれぞれ$\mc{X},\mc{Y}$に表現として作用する演算子ならば，同値表現．)今回の場合，$\mc{X}$が自由粒子状態のなすヒルベルト空間であり，$\mc{Y}$はin状態あるいはout状態のどちらかの属するヒルベルト空間として対応付ける．今回の散乱理論の仮定では自由状態とin状態(およびout状態)は同型だとするから\footnote{前の脚注で書いた通り，QEDなどの長距離力を考える理論ではこの仮定はうまくいかないが，今回はそのような場合は考えない}，自由粒子状態に作用するポアンカレ演算子$U_0(\Lambda,a)$に対してin状態あるいはout状態に作用するポアンカレ演算子$U(\Lambda,a)$が定義できる．このときの$\varphi$は(3.1.13)より$\Omega(\mp \infty)$である．しかし，例えばin状態に作用する$U_{\mathrm{in}}(\Lambda,a)=\Omega(-\infty) U_0(\Lambda,a)\Omega(-\infty)^{-1}$を定義できたからといって，それがout状態に対しても同じ演算子とは限らない．out状態に作用する演算子は$U_{\mathrm{out}}(\Lambda,a)=\Omega(+\infty)U_0(\Lambda,a)\Omega(+\infty)^{-1}$であり，一般に$\Omega(-\infty)\neq \Omega(+\infty)$だから$U_{\mathrm{out}}(\Lambda)\neq U_{\mathrm{in}}(\Lambda,a)$だ．しかし，$U_{\mathrm{out}}(\Lambda,a)=U_{\mathrm{in}}(\Lambda,a)=:U(\Lambda,a)$となる特別な理論が存在するとき，その理論をローレンツ不変な理論と呼ぶ．これは$\Omega(+\infty)=\Omega(-\infty)$を意味するわけではなく，実際この条件式を書き直すと，$U_0(\Lambda,a)^{-1}\Omega(+\infty)^{-1}\Omega(-\infty) U_0(\Lambda,a)=\Omega(+\infty)^{-1}\Omega(-\infty)$であり，(3.2.5)を用いるとこれは$S$演算子と$U_0(\Lambda,a)$の可換性$U_0 (\Lambda,a)^{-1}S U_0(\Lambda,a)=S$となる．\par
+別の解釈からも同じ条件式を導く．つまり，(3.2.4)
+\begin{align*}
+S_{\beta\alpha}=(\Phi_\beta,S\Phi_\alpha)
+\end{align*}
+からスタートする．自由粒子状態$\Phi_\alpha$は1粒子状態の直積として変換し，したがって非斉次ローレンツ群の表現を与える．つまりこれらの状態に(3.1.1)の変換
+\begin{align*}
+U_0(\Lambda,a)\Phi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2;\cdots}=&\exp\Bigl[-ia_\mu ((\Lambda p_1)^\mu+(\Lambda p_2)^\mu)+\cdots \Bigr] \sqrt{\frac{(\Lambda p_1)^0(\Lambda p_2)^0\cdots }{p^0_1p_2^0\cdots}} \\
+&\times \sum_{\sigma_1,\sigma_2\cdots }D^{(j_1)}_{\sigma'_1\sigma_1}\Bigl(W(\Lambda,p_1)\Bigr)D^{(j_2)}_{\sigma'_2\sigma_2}\Bigl(W(\Lambda,p_2)\Bigr)\cdots \Phi_{\Lambda p_1,\sigma_1',n_1;\Lambda p_2,\sigma'_2,n_2\cdots }
+\end{align*}
+を引き起こすユニタリー演算子$U_0(\Lambda,a)$を常に定義できる．このユニタリー演算子が$S$演算子と
+\begin{align*}
+U_0(\Lambda,a)^{-1}S U_0(\Lambda,a)=S
+\end{align*}
+のように交換するなら(3.3.1)は成り立つ．実際(3.3.1)は
+\begin{align*}
+(\mathrm{LHS})=&(\Phi_\alpha , S \Phi_\beta) \\
+(\mathrm{RHS})=&(U_0(\Lambda,a)\Phi_\beta,S U_0(\Lambda,a)\Phi_\alpha) \\
+=&(\Phi_\beta,U_0(\Lambda,a)^{-1} S U_0(\Lambda,a)\Phi_\alpha)
+\end{align*}
+と書けるから，これが成り立つためには$S$と$U_0(\Lambda,a)$が交換すれば十分だ．\par
+この条件は微小ローレンツ変換から生じる演算子で表現することもできる．2.4節と全く同様に，1組のエルミート演算子，すなわち運動量$\mathbf{P}_0$，角運動量$\mathbf{J}_0$，ブースト演算子$\mathbf{K}_0$が存在し，それらは$H_0$とともに自由粒子状態に作用したときに微小非斉次ローレンツ変換を生成する．上の条件は，$S$演算子はこれらの生成子と交換するということと同等だ．
+\begin{align*}
+[H_0,S]=[\mathbf{P}_0 ,S]=[\mathbf{J}_0,S]=[\mathbf{K}_0,S]=0
+\end{align*}
+演算子$H_0,\mathbf{P}_0,\mathbf{J}_0,\mathbf{K}_0$は$\Phi_\alpha$の微小非斉次ローレンツ変換を生成するから，それらは自動的に交換関係(2.4.18)～(2.4.24)を満足する．
+\begin{align*}
+[J_0^i ,J_0^j]=&i\epsilon_{ijk}J^k_0 \\
+[J_0^i,K^j_0]=&i\epsilon_{ijk}K^k_0 \\
+[K_0^i,K_0^j]=&-i\epsilon_{ijk}J_0^k \\
+[J_0^i,P^j_0]=&i\epsilon_{ijk}P_0^k \\
+[K_0^i,P_0^j]=&-iH_0 \delta_{ij} \\
+[J_0^i,H_0]=&[P_0^i,H_0]=[P_0^i,P_0^j]=0 \\
+[K_0^i,H_0]=&-iP_0^i
+\end{align*}
+同様にして，全ハミルトニアン$H$とともに，例えばin状態に変換(3.1.1)を生成する「正確な生成子」の組$\mathbf{P},\mathbf{J},\mathbf{K}$を定義できる．(前述の通り，これらの演算子が同じ変換をout状態に引き起こすことは自明ではない．)群の構造により，2.4節の計算を繰り返せばこれらの正確な生成子も同じ交換関係
+\begin{align*}
+[J^i ,J^j]=&i\epsilon_{ijk}J^k \\
+[J^i,K^j]=&i\epsilon_{ijk}K^k \\
+[K^i,K^j]=&-i\epsilon_{ijk}J^k \\
+[J^i,P^j]=&i\epsilon_{ijk}P^k \\
+[K^i,P^j]=&-iH \delta_{ij} \\
+[J^i,H]=&[P^i,H]=[P^i,P^j]=0 \\
+[K^i,H]=&-iP^i
+\end{align*}
+を満たすことが分かる．(この説の最初の説明と同様に，この真の生成子は，例えばin状態に作用する真の運動量演算子$\mathbf{P}$は自由粒子状態に作用する演算子$\mathbf{P}_0$と$\mathbf{P}=\Omega(- \infty) \mathbf{P}_0 \Omega(- \infty)^{-1}$で関係している．くどいようだが，さらに$\mathbf{P}=\Omega(+ \infty) \mathbf{P}_0 \Omega(+ \infty)^{-1}$を満たすかどうかは別問題だ．)\par
+事実上，全ての既知の場の理論において，相互作用の効果は相互作用項$V$を自由ハミルトニアン$H_0$に付け加えることだけであり，運動量や角運動量を変えない\footnote{例外として，位相的にtwistされた場を含む理論がある．これについては夏学の菅野浩明「位相的弦理論と分配関数と数え上げ」p12を参照．twistとはSUSYでのR対称性をゲージ化して局所対称性へと格上げさせ，それに伴って生じるゲージ場をスピン接続と同一視する，という操作のことを指すらしい．実際にtwistによってフェルミオンのスピンが変化し，スピンゼロになるものとスピン1になるものが生じる．このような理論は位相場の理論であり，物理量は散乱振幅やエネルギースペクトルなどではなくコホモロジー類や位相的不変量などであり，そもそもWeinbergがこの本で定める「場の量子論」の定義に当てはまらない．もっぱら今回の範疇では考えないことにする．}．
+\begin{align*}
+H=H_0+V,\quad \mathbf{P}=\mathbf{P}_0,\quad \mathbf{J}=\mathbf{J}_0
+\end{align*}
+二組の交換関係(3.3.4)～(3.3.10),(3.3.11)～(3.3.17)とこれらの仮定から他の条件を導こう．(3.3.11)(3.3.14)は何の情報も与えない．(3.3.16)より，相互作用項は自由粒子の運動量および角運動量と
+\begin{align*}
+[V,\mathbf{P}_0]=[V,\mathbf{J}_0]=0
+\end{align*}
+のように交換することを要請する．この交換関係により，リップマン・シュウィンガー方程式(3.1.16)あるいはそれと同等な(3.1.13)から，in状態とout状態の\uwave{両方に}作用するとき，並進と回転を生成する演算子$\mathbf{P},\mathbf{J}$は単に$\mathbf{P}_0,\mathbf{J}_0$だということが容易にわかる．
+\begin{align*}
+\mathbf{P}=&\Omega(\mp \infty) \mathbf{P}_0 \Omega(\mp \infty)^{-1} \\
+=& \lim_{t\to \mp \infty}\exp(i(H_0+V)t)\exp(-iH_0 t)\mathbf{P}_0 \exp(iH_0 t) \exp(-i(H_0+V)t) \\
+=&\mathbf{P}_0 \\
+\mathbf{J}=&\Omega(\mp \infty) \mathbf{J}_0 \Omega(\mp \infty)^{-1}=\mathbf{J}_0
+\end{align*}
+(この条件は(3.3.18)と同じことを言っているのではなく，例えば(3.3.11)～(3.3.17)がin状態に作用する正確な演算子だとしたら，もう一方のout状態の正確な演算子もそれと同じ演算子であることを示している．)同様にして$\mathbf{P}_0,\mathbf{J}_0$は(3.2.6)で定義される$U(t,t_0)=\exp(iH_0t)\exp(-iH(t-t_0))\exp(iH_0t_0)$と交換し，よって$S$演算子$U(\infty,-\infty)$とも交換することがわかる．
+\begin{align*}
+[\mathbf{P}_0,S]=[\mathbf{J}_0,S]=0
+\end{align*}
+さらに，(3.2.7)の二項ともにエネルギー保存のデルタ関数があるから
+\begin{align*}
+E_\beta S_{\beta\alpha}=E_\alpha S_{\beta\alpha}
+\end{align*}
+を満たしており，したがって
+\begin{align*}
+(\mathrm{LHS})=&E_\beta (\Phi_\beta ,S \Phi_\alpha) \\
+=&(H_0\Phi_\beta,S \Phi_\alpha) \\
+=&(\Phi_\beta,H_0 S \Phi_\alpha) \\
+(\mathrm{RHS})=&E_\alpha (\Phi_\beta ,S \Phi_\alpha) \\
+=&(\Phi_\beta,S H_0\Phi_\alpha) \\
+\therefore \quad [H_0,S]=&0
+\end{align*}
+が得られ，$S$演算子と$H_0$が交換することもわかる．最後に示さなければならないのはブースト生成子$\mathbf{K}_0$だけだ！
+
+\vskip\baselineskip
+
+ブースト生成子も$\mathbf{K}=\mathbf{K}_0$と等しいとおきたいが，それは不可能である．なぜなら，もしそう仮定すると(3.3.15)と(3.3.8)から直ちに$H=H_0$が導かれ，これは相互作用のある理論では明らかに正しくない．このように，相互作用$V$を自由ハミルトニアン$H_0$に付け加えると，ブースト生成子は同時に補正$\mathbf{W}$が付け加わることとなる．
+\begin{align*}
+\mathbf{K}=\mathbf{K}_0+\mathbf{W}
+\end{align*}
+残った交換関係のうち，(3.3.17)を用いると\footnote{$[K_i,H]=-iP_i$が本文と誤植があるのにここからしばらく何度も使うので，逐一誤植に気を付けること．}
+\begin{align*}
+(\mathrm{LHS})=&[\mathbf{K},H]\\
+=&[\mathbf{K}_0,H_0]+[\mathbf{K}_0,V]+[\mathbf{W},H] \\
+=&-i\mathbf{P}_0+[\mathbf{K}_0,V]+[\mathbf{W},H] \\
+(\mathrm{RHS})=&-i\mathbf{P}=-i\mathbf{P}_0 \\
+\therefore \quad [\mathbf{K}_0,V]=&-[\mathbf{W},H]
+\end{align*}
+を得る．この条件自体には$[\mathbf{K}_0,S]=0$を示すための有益な情報は含まれていない．なぜなら，この交換関係より
+\begin{align*}
+(\Psi_\beta,[\mathbf{K}_0,V]\Psi_\alpha)=&-(\Psi_\beta,[\mathbf{W},H]\Psi_\alpha) \\
+=&(\Psi_\beta ,H\mathbf{W}\Psi_\alpha)-(\Psi_\beta ,\mathbf{W}H\Psi_\alpha) \\
+=&(E_\beta-E_\alpha)(\Psi_\beta ,\mathbf{W}\Psi_\alpha) \\
+\therefore \quad (\Psi_\beta ,\mathbf{W}\Psi_\alpha)=&\frac{(\Psi_\beta,[\mathbf{K}_0,V]\Psi_\alpha)}{E_\beta-E_\alpha}
+\end{align*}
+であるから，逆に任意の相互作用$V$が与えられれば，それに対して$H$の固有状態$\Psi_\alpha,\Psi_\beta$との間の$\mathbf{W}$の行列要素を$(\Psi_\beta,[\mathbf{K}_0,V]\Psi_\alpha)/(E_\beta-E_\alpha)$と与えることにより常に演算子$\mathbf{W}$を定義することができるからだ．$[\mathbf{K}_0,S]=0$を証明するためには，$\mathbf{W}$の行列要素がエネルギーの滑らかな関数であり，特に上のような$(E_\beta-E_\alpha)^{-1}$の形の特異点を持たない，という要請を課すことで(3.3.21)は意味を持つようになり，$[\mathbf{K}_0,S]=0$がわかる．\par
+これを証明するために，$\mathbf{K}_0$と(3.2.6)で定義される演算子$U(t,t_0)$の交換子を，有限な$t,t_0$について考える．(3.3.10)と$\mathbf{P}_0$が$H_0$と交換する(3.3.9)から，BCH公式より
+\begin{align*}
+[\mathbf{K}_0,\exp(iH_0t)] =& -\Bigl(\exp(iH_0 t)\mathbf{K}_0 \exp(-iH_0 t)-\mathbf{K}_0\Bigr) \exp(iH_0 t) \\
+=&-\left(\mathbf{K}_0 +it[H_0 ,\mathbf{K}_0]+\frac{1}{2}(it)^2[H_0,[H_0,\mathbf{K}_0]]+\cdots -\mathbf{K}_0 \right)\exp(iH_0 t) \\
+=&-it(+i\mathbf{P}_0)\exp(iH_0 t) \\
+=&+t \mathbf{P}_0 \exp(iH_0 t)
+\end{align*}
+が得られる．ここで(3.3.9)(3.3.10)より$n\geq 2$の$n$重交換子
+\begin{align*}
+[H_0,\cdots ,[H_0,[H_0,\mathbf{K}_0]]\cdots]=[H_0,\cdots,[H_0 ,+i\mathbf{P}_0]\cdots] 
+\end{align*}
+がゼロになることを使った．一方，(3.3.21)($\Leftrightarrow$(3.3.17))(3.3.16)から，同様に
+\begin{align*}
+[\mathbf{K},\exp(iHt)]=&+t\mathbf{P} \exp(iHt) \\
+=&+t \mathbf{P}_0\exp(iH t)
+\end{align*}
+が得られる．運動量演算子は$\mathbf{K}_0$と$U$の交換子において相殺して
+\begin{align*}
+\Bigl[\mathbf{K}_0,U(\tau,\tau_0)\Bigr]=&\Bigl[\mathbf{K}_0 ,e^{iH_0\tau}e^{-iH(\tau-\tau_0)}e^{-iH_0 \tau_0}\Bigr] \\
+=&\Bigl[\mathbf{K}_0 ,e^{iH_0\tau}\Bigr]e^{-iH(\tau-\tau_0)}e^{-iH_0 \tau_0} \\
+&+ e^{iH_0\tau}\Bigl[\mathbf{K}_0,e^{-iH(\tau-\tau_0)}\Bigr]e^{-iH_0 \tau_0} \\
+&+e^{iH_0\tau}e^{-iH(\tau-\tau_0)}\Bigl[\mathbf{K}_0 ,e^{-iH_0 \tau_0}\Bigr] \\
+=&\Bigl(+\tau \mathbf{P}_0e^{iH_0\tau}\Bigr)e^{-iH(\tau-\tau_0)}e^{-iH_0 \tau_0} \\
+&+ e^{iH_0\tau}\Bigl[\mathbf{K}-\mathbf{W},e^{-iH(\tau-\tau_0)}\Bigr]e^{-iH_0 \tau_0} \\
+&+e^{iH_0\tau}e^{-iH(\tau-\tau_0)}\Bigl(-\tau_0 \mathbf{P}_0e^{-iH_0\tau_0}\Bigr) \\
+=&\Bigl(+\tau \mathbf{P}_0e^{iH_0\tau}\Bigr)e^{-iH(\tau-\tau_0)}e^{-iH_0 \tau_0} \\
+&+ e^{iH_0\tau}\Bigl[\mathbf{K},e^{-iH(\tau-\tau_0)}\Bigr]e^{-iH_0 \tau_0} -e^{iH_0\tau}\Bigl[\mathbf{W},e^{-iH(\tau-\tau_0)}\Bigr]e^{-iH_0 \tau_0} \\
+&+e^{iH_0\tau}e^{-iH(\tau-\tau_0)}\Bigl(-\tau_0 \mathbf{P}_0e^{-iH_0\tau_0}\Bigr) \\
+=&\Bigl(+\tau \mathbf{P}_0e^{iH_0\tau}\Bigr)e^{-iH(\tau-\tau_0)}e^{-iH_0 \tau_0} \\
+&+ e^{iH_0\tau}\Bigl(-(\tau-\tau_0)\mathbf{P}_0e^{-iH(\tau-\tau_0)}\Bigr)e^{-iH_0 \tau_0} \\
+&-e^{iH_0\tau}\Bigl[\mathbf{W},e^{-iH(\tau-\tau_0)}\Bigr]e^{-iH_0 \tau_0} \\
+&+e^{iH_0\tau}e^{-iH(\tau-\tau_0)}\Bigl(-\tau_0 \mathbf{P}_0e^{-iH_0\tau_0}\Bigr) \\
+=&-e^{iH_0\tau}\Bigl[\mathbf{W},e^{-iH(\tau-\tau_0)}\Bigr]e^{-iH_0 \tau_0} \quad \because [\mathbf{P}_0,H_0]=[\mathbf{P}_0,H]=0 \\
+=&-e^{iH_0\tau}\mathbf{W}e^{-iH(\tau-\tau_0)}e^{-iH_0 \tau_0} \\
+&+e^{iH_0\tau}e^{-iH(\tau-\tau_0)}\mathbf{W}e^{-iH_0 \tau_0} \\
+=&-\Bigl(e^{iH_0\tau}\mathbf{W}e^{-iH_0\tau}\Bigr)e^{iH_0\tau}e^{-iH(\tau-\tau_0)}e^{-iH_0 \tau_0} \\
+&+e^{iH_0\tau}e^{-iH(\tau-\tau_0)}e^{-iH_0\tau_0}\Bigl(e^{iH_0\tau_0}\mathbf{W}e^{-iH_0 \tau_0}\Bigr) \\
+=&-\mathbf{W}(\tau)U(\tau,\tau_0)+U(\tau,\tau_0)\mathbf{W}(\tau_0)
+\end{align*}
+ここで
+\begin{align*}
+\mathbf{W}(\tau):=\exp(iH_0\tau)\mathbf{W}\exp(-iH_0\tau)
+\end{align*}
+とした．さて，in状態とout状態の定義より$\tau \to + \infty,\tau_0\to -\infty$の極限で
+\begin{align*}
+&\lim_{\tau\to +\infty }\lim_{\tau_0\to -\infty} \left(\int d\beta g(\beta) \Phi_\beta ,\mathbf{W}(\tau) U(\tau,\tau_0)\int d\alpha g(\alpha) \Phi_\alpha \right) \\
+=&\lim_{\tau\to +\infty }\lim_{\tau_0\to -\infty} \left(\int d\beta g(\beta) \Phi_\beta ,\mathbf{W}(\tau) \Omega(\tau)^\dagger \int d\alpha g(\alpha) \Omega(\tau_0) \Phi_\alpha \right) \\
+=&\lim_{\tau\to +\infty } \left(\int d\beta g(\beta) \Phi_\beta ,\mathbf{W}(\tau) e^{iH_0\tau}e^{-iH\tau}\int d\alpha g(\alpha) \Psi_\alpha^+ \right) \\
+=&\lim_{\tau\to +\infty } \left(\int d\beta g(\beta) \Phi_\beta ,\mathbf{W}(\tau) e^{iH_0\tau}\int d\alpha g(\alpha) e^{-iE_\alpha \tau}\Psi_\alpha^+ \right) \\
+=&\lim_{\tau\to +\infty } \left(\int d\beta g(\beta) e^{-iE_\beta \tau} \Phi_\beta ,\mathbf{W} \int d\alpha g(\alpha) e^{-iE_\alpha \tau}\Psi_\alpha^+ \right) \\
+=&\lim_{\tau\to +\infty } \left(\int d\beta g(\beta) e^{-iE_\beta \tau} \Psi_\beta^- ,\mathbf{W} \int d\alpha g(\alpha) e^{-iE_\alpha \tau}\Psi_\alpha^+ \right) \\
+=&\lim_{\tau\to +\infty } \int d\alpha d\beta g(\alpha) g^*(\beta) e^{-i(E_\alpha-E_\beta) \tau}\left(\Psi_\beta^- ,\mathbf{W} \Psi_\alpha^+ \right)
+\end{align*}
+となるから，もし$H$の任意のエネルギー固有状態間の$\mathbf{W}$の行列要素$(\Psi_\beta,\mathbf{W}\Psi_\alpha)$がエネルギーの滑らかな関数だと仮定\footnote{本文中では$H_0$のエネルギー固有状態間について，としているがそれではうまくいかないと思う．その場合$\mathbf{W}(\tau)$の行列要素が$\tau \to \pm \infty$でゼロになることはリーマン・ルベーグの補題からやはり簡単に示せるが，今回示したいのは$\mathbf{W}(\tau)U(\tau,\tau_0)$などの形だからだ．}すれば，これは$\tau + \infty$の極限でリーマン・ルベーグの補題によりゼロになる．同様に
+\begin{align*}
+&\lim_{\tau\to +\infty }\lim_{\tau_0\to -\infty} \left(\int d\beta g(\beta) \Phi_\beta ,U(\tau,\tau_0)\mathbf{W}(\tau_0) \int d\alpha g(\alpha) \Phi_\alpha \right) \\
+=&\lim_{\tau\to +\infty }\lim_{\tau_0\to -\infty}\left(\int d\beta g(\beta) \Omega(\tau)\Phi_\beta ,\Omega(\tau_0)\mathbf{W}(\tau_0) \int d\alpha g(\alpha)\Phi_\alpha \right) \\
+=&\lim_{\tau_0\to -\infty } \left(\int d\beta g(\beta) \Psi^-_\beta ,e^{iH\tau_0} e^{-iH_0\tau_0} \mathbf{W}(\tau_0) \int d\alpha g(\alpha) \Phi_\alpha \right) \\
+=&\lim_{\tau_0\to -\infty } \left(\int d\beta g(\beta)e^{-iE_\beta \tau_0} \Psi^-_\beta ,e^{-iH_0\tau_0} \mathbf{W}(\tau_0) \int d\alpha g(\alpha) \Phi_\alpha \right) \\
+=&\lim_{\tau_0\to -\infty } \left(\int d\beta g(\beta) e^{-iE_\beta \tau_0} \Psi^-_\beta ,\mathbf{W} \int d\alpha g(\alpha) e^{-iE_\alpha \tau}\Phi_\alpha \right) \\
+=&\lim_{\tau_0\to -\infty } \left(\int d\beta g(\beta) e^{-iE_\beta \tau_0} \Psi_\beta^- ,\mathbf{W} \int d\alpha g(\alpha) e^{-iE_\alpha \tau}\Psi_\alpha^+ \right) \\
+=&\lim_{\tau_0\to -\infty } \int d\alpha d\beta g(\alpha) g^*(\beta) e^{-i(E_\alpha-E_\beta) \tau_0}\left(\Psi_\beta^- ,\mathbf{W} \Psi_\alpha^+ \right)
+\end{align*}
+これもゼロになる．したがって(3.3.22)の左辺は任意の自由粒子状態の滑らかな重ね合わせに対して$\tau \to +\infty ,\tau_0 \to -\infty$でゼロになる\footnote{$E_\alpha=E_\beta$部分から有限の寄与が出てくるかもしれないが，その部分は指数が消えて$\tau,\tau_0$依存性がなくなるため，第一項目と第二項目でキャンセルする．}．したがって右辺はその極限のもとでゼロ演算子とできて
+\begin{align*}
+0=\lim_{\substack{\tau \to +\infty \\ \tau_0 \to -\infty }}\Bigl[\mathbf{K}_0,U(\tau,\tau_0)\Bigr]=[\mathbf{K}_0,S]
+\end{align*}
+を与える．これが示したいことだった．すなわち，(3.3.21)と，$\mathbf{W}$の行列要素のエネルギーについての滑らかさの条件は，$S$行列のローレンツ不変性(3.3.3)の十分条件を構成する．この滑らかさの条件は自然なものだ．なぜなら，まさに$S$行列の考え方を数学的に正当化するためには$V(t)$が$t\to \pm \infty$でゼロになることが要求され，そのために必要な$V$の行列要素の条件に，この条件は含まれているらしい．
+
+\vskip\baselineskip
+
+以上で(3.3.21)が示すことができた．最初に述べた通り，これらの「真の生成子」がこの条件を満たすことと，in状態とout状態に同じ演算子で作用することは同値である．すなわち
+\begin{align*}
+\mathbf{P}=&\Omega(\mp \infty) \mathbf{P}_0 \Omega(\mp \infty)^{-1} \\
+\mathbf{J}=&\Omega(\mp \infty) \mathbf{J}_0 \Omega(\mp \infty)^{-1} \\
+\mathbf{K}=&\Omega(\mp \infty) \mathbf{K}_0 \Omega(\mp \infty)^{-1} \\
+H=&\Omega(\mp \infty) H_0 \Omega(\mp \infty)^{-1}
+\end{align*}
+である．
+
+\vskip\baselineskip
+
+\textbf{(B)内部対称性}\par
+原子物理学における中性子と陽子の入れ替えに関する対称性や，粒子と反粒子の間の荷電共役対称性などのように，ローレンツ不変性とは直接関係がなく，全ての慣性系で同じに見える様々な対称性が存在する．そのような対称性変換$T : \mc{R} \to T\mc{R}$は物理的状態のヒルベルト空間にユニタリー演算子$U(T)$として作用し，粒子の種類を記述する添え字$n$について
+\begin{align*}
+U(T)\Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}=&\prod_i \left[\sum_{\bar{n}_i}\mc{D}_{\bar{n}_i n_i}(T) \right]\Psi_{p_1 \sigma_1 \bar{n}_1;p_2 \sigma_2 \bar{n}_2;\cdots} \\
+=&\sum_{\bar{n}_1\bar{n}_2\cdots} \mc{D}_{\bar{n}_1 n_1}(T)\mc{D}_{\bar{n}_2 n_2}(T)\cdots \Psi_{p_1 \sigma_1 \bar{n}_1;p_2 \sigma_2 \bar{n}_2;\cdots}
+\end{align*}
+のように線形変換を引き起こす．2.2節での一般的な議論に従って，$U(T)$は群の乗法則
+\begin{align*}
+U(\bar{T})U(T)=U(\bar{T}T)
+\end{align*}
+を満たさねばならない\footnote{もちろん射影表現の場合も存在するが，その場合は超選択則により禁止される重ね合わせを除けば物理的状態空間上(射影空間上)でこの表式が許される}．ここで$\bar{T}T$は最初に$T$を実行し，それからある別の変換$\bar{T}$を実行して得られる変換である．(3.3.29)に$U(\bar{T})$を作用させると，
+\begin{align*}
+U(\bar{T})U(T)\Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}=&\sum_{\bar{n}_1\bar{n}_2\cdots} \mc{D}_{\bar{n}_1 n_1}(T)\mc{D}_{\bar{n}_2 n_2}(T)\cdots U(\bar{T})\Psi_{p_1 \sigma_1 \bar{n}_1;p_2 \sigma_2 \bar{n}_2;\cdots} \\
+=&\sum_{\substack{\bar{n}_1\bar{n}_2\cdots \\ \bar{n}'_1\bar{n}'_2\cdots}} \mc{D}_{\bar{n}_1 n_1}(T)\mc{D}_{\bar{n}_2 n_2}(T)\cdots \mc{D}_{\bar{n}'_1 \bar{n}_1}(\bar{T})\mc{D}_{\bar{n}'_2 \bar{n}_2}(\bar{T})\cdots\Psi_{p_1 \sigma_1 \bar{n}'_1;p_2 \sigma_2 \bar{n}'_2;\cdots} \\
+=&\sum_{\bar{n}_1\bar{n}_2\cdots} \Bigl(\mc{D}(\bar{T})\mc{D}(T)\Bigr)_{\bar{n}_1 n_1}\Bigl(\mc{D}(\bar{T})\mc{D}(T)\Bigr)_{\bar{n}_2 n_2}\cdots \Psi_{p_1 \sigma_1 \bar{n}_1;p_2 \sigma_2 \bar{n}_2;\cdots} \\
+=U(\bar{T}T) \Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} =&\sum_{\bar{n}_1\bar{n}_2\cdots} \mc{D}_{\bar{n}_1 n_1}(\bar{T}T)\mc{D}_{\bar{n}_2 n_2}(\bar{T}T)\cdots \Psi_{p_1 \sigma_1 \bar{n}_1;p_2 \sigma_2 \bar{n}_2;\cdots}
+\end{align*}
+となる．したがって表現行列$\mc{D}$は群と同じ乗法則
+\begin{align*}
+\mc{D}(\bar{T})\mc{D}(T)=\mc{D}(\bar{T}T)
+\end{align*}
+を満たすことが分かる．また，$U(T)$を二つの異なるin状態(あるいはout状態)に作用させて得られる状態のスカラー積をとれば，規格化条件(3.1.2)より
+\begin{align*}
+&\Bigl( \Psi_{p_1' \sigma_1' n_1';p'_2 \sigma'_2 n'_2;\cdots} , \Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} \Bigr)=\delta^3(\mathbf{p}'_1-\mathbf{p}_1)\delta_{\sigma'_1\sigma_1}\delta_{n_1'n_1}\delta^3(\mathbf{p}'_2-\mathbf{p}_2)\delta_{\sigma'_2\sigma_2}\delta_{n'_2n_2}\cdots \pm[置換] \\
+=&\Bigl(U(T)\Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} , U(T)\Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}\Bigr) \\
+=&\sum_{\bar{n}'_1\bar{n}'_2\cdots} \mc{D}^*_{\bar{n}'_1 n'_1}(\bar{T}T)\mc{D}^*_{\bar{n}'_2 n'_2}(\bar{T}T)\cdots \sum_{\bar{n}_1\bar{n}_2\cdots} \mc{D}_{\bar{n}_1 n_1}(\bar{T}T)\mc{D}_{\bar{n}_2 n_2}(\bar{T}T)\cdots \\
+&\times \Bigl( \Psi_{p_1' \sigma_1' \bar{n}_1';p'_2 \sigma'_2 \bar{n}'_2;\cdots} , \Psi_{p_1 \sigma_1 \bar{n}_1;p_2 \sigma_2 \bar{n}_2;\cdots} \Bigr) \\
+=&\sum_{\bar{n}'_1\bar{n}'_2\cdots} \mc{D}^\dagger_{n'_1\bar{n}'_1}(\bar{T}T)\mc{D}^\dagger_{n'_2\bar{n}'_2}(\bar{T}T)\cdots \sum_{\bar{n}_1\bar{n}_2\cdots} \mc{D}_{\bar{n}_1 n_1}(\bar{T}T)\mc{D}_{\bar{n}_2 n_2}(\bar{T}T)\cdots \\
+&\times \delta^3(\mathbf{p}'_1-\mathbf{p}_1)\delta_{\sigma'_1\sigma_1}\delta_{\bar{n}_1'\bar{n}_1}\delta^3(\mathbf{p}'_2-\mathbf{p}_2)\delta_{\sigma'_2\sigma_2}\delta_{\bar{n}'_2\bar{n}_2}\cdots \pm[置換] \\
+=&\delta^3(\mathbf{p}'_1-\mathbf{p}_1)\delta_{\sigma'_1\sigma_1}(\mc{D}^\dagger (T)\mc{D}(T))_{n_1'n_1}\delta^3(\mathbf{p}'_2-\mathbf{p}_2)\delta_{\sigma'_2\sigma_2}(\mc{D}^\dagger(T)\mc{D}(T))_{n'_2n_2}\cdots \pm[置換]
+\end{align*}
+を得る．したがって$\mc{D}(T)$はユニタリーでなければならないことがわかる．
+\begin{align*}
+\mc{D}^\dagger(T)=\mc{D}^{-1}(T)
+\end{align*}
+以上より$\mc{D}$は対称性変換群のユニタリー表現をなす．最後に，$U(T)$をout状態とin状態に作用させて得られる状態のスカラー積をとると，$\mc{D}$は
+\begin{align*}
+&S_{p_1'\sigma_1'n_1';p_2'\sigma_2'n_2';\cdots , \, p_1\sigma_1n_1;p_2\sigma_2n_2;\cdots} \\
+=&\Bigl(U(T)\Psi_{p_1',\sigma_1',n_1';p_2',\sigma_2',n_2';\cdots}^- \, , \, U(T)\Psi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2;\cdots}^+\Bigr) \\
+=&\Biggl(\prod_i \left[ \sum_{\bar{n}_i'}\mc{D}_{\bar{n}'_i n'_i}(T)\right] \Psi_{p'_1 \sigma'_1 \bar{n}_1';p_2',\sigma_2',\bar{n}_2';\cdots}^- , \prod_i \left[ \sum_{\bar{n}_i'}\mc{D}_{\bar{n}'_i n'_i}(T)\right] \Psi_{p_1 \sigma_1 \bar{n}_1;p_2,\sigma_2,\bar{n}_2;\cdots}^+ \Biggr) \\
+=&\sum_{\bar{N}'_1\bar{N}'_2\cdots} \sum_{\bar{N}_1\bar{N}_2\cdots}\mc{D}^*_{\bar{N}'_1n'_1}(\bar{T}T)\mc{D}^*_{\bar{N}'_2 n'_2}(\bar{T}T)\cdots \mc{D}_{\bar{N}_1 n_1}(\bar{T}T)\mc{D}_{\bar{N}_2 n_2}(\bar{T}T)\cdots S_{p_1'\sigma_1'\bar{N}_1';p_2'\sigma_2'\bar{N}_2';\cdots , \, p_1\sigma_1\bar{N}_1;p_2\sigma_2\bar{N}_2;\cdots}
+\end{align*}
+の意味で，$S$行列と交換する．前と同じく，これは「内部対称性変換$T$に関して理論が不変である」ことの\uwave{定義}だ．なぜなら，この式を導くためには\uwave{同じ}ユニタリー演算子$U(T)$が変換(3.3.39)をin状態とout状態の両方に引き起こすことを示す必要があるからだ．これは，まず自由状態にこれらの変換
+\begin{align*}
+U_0(T)\Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}=&\prod_i \left[\sum_{\bar{N}_i}\mc{D}_{\bar{N}_i n_i}(T) \right]\Phi_{p_1 \sigma_1 \bar{N}_1;p_2 \sigma_2 \bar{N}_2;\cdots} \\
+=&\sum_{\bar{N}_1\bar{N}_2\cdots} \mc{D}_{\bar{N}_1 n_1}(T)\mc{D}_{\bar{N}_2 n_2}(T)\cdots \Phi_{p_1 \sigma_1 \bar{N}_1;p_2 \sigma_2 \bar{N}_2;\cdots}
+\end{align*}
+のように引き起こし，かつハミルトニアンの自由粒子部分と相互作用部分の両方と
+\begin{align*}
+U^{-1}_0(T)H_0 U_0(T)=H_0 \\
+U_0^{-1}(T)V U_0(T)=V
+\end{align*}
+のように交換する，所謂「摂動を受けない」変換演算子$U_0(T)$が存在すれば，これは正しい．実際，これを満たす$U_0(T)$を定義できればin状態(あるいはout状態)に同じ作用をする
+\begin{align*}
+U_{\mathrm{in}}(T):=\Omega(-\infty)^{-1}U_0(T)\Omega(-\infty) \\
+U_{\mathrm{out}}(T):=\Omega(+\infty)^{-1}U_0(T)\Omega(+\infty)
+\end{align*}
+を定義することができる．しかしこれは条件(3.3.35)(3.3.36)により$[U_0,H]=[U_0,H_0]=0$を満たすから$U_0(T)$は(3.1.14)の$\Omega(\tau)=e^{iH\tau}e^{-iH_0\tau}$と可換となり
+\begin{align*}
+U_{\mathrm{in}}(T)=U_{\mathrm{out}}=U_0(T)=:U(T)
+\end{align*}
+が得られる．したがって演算子$U_0(T)$は変換(3.3.29)を自由粒子状態だけでなくin状態とout状態の\uwave{両方}に同じ作用を引き起こす．$U(T)$を$U_0(T)$で定義して(3.3.33)を導ける．\par
+内部対称性は粒子の種類$n$を入れ替えるような変換\uwave{だけ}から構成され，ローレンツ対称性は運動量$p$とスピン(あるいはヘリシティ)$\sigma$を変えるような変換\uwave{だけ}から構成される．ではこの二つを混ぜ込むような対称性は存在しないのか？と考えるのは当然である．しかしこれは24.B節で示すコールマン・マンデューラの定理により(いくつかの物理的に妥当な仮定を課せば)，物理的状態の$p,\sigma,n$を混ぜ込むような対称性群は必ずローレンツ対称性と内部対称性の直積で表され，非自明にこれらを混ぜ込むようなものは(超対称性を除き)存在しないことが示される．
+
+
+\vskip\baselineskip
+
+物理的に非常に重要な特別な場合は，$T$が単一のパラメータ$\theta$の関数で
+\begin{align*}
+T(\bar{\theta})T(\theta)=T(\bar{\theta}+\theta)
+\end{align*}
+を満たす1パラメータのリー群となっている場合だ．2.2節で示したように，この場合のヒルベルト空間への演算子は，$Q$をエルミート演算子として
+\begin{align*}
+U\Bigl(T(\theta)\Bigr)=\exp(iQ\theta)
+\end{align*}
+の形をとらねばならない．同様にユニタリー行列$\mc{D}(T)$は，$q_n$を粒子の種類$n$に依存する実数の組として
+\begin{align*}
+\mc{D}_{n'n}\Bigl(T(\theta)\Bigr)=\delta_{n'n}\exp(iq_n \theta)
+\end{align*}
+の形をとらねばならない\footnote{というより，そうなるように基底を選ぶことができる．$\mc{D}(T(\theta))$はユニタリー行列となるから，補遺Cで示したように$P^{-1} \mc{D}(T) P$が対角行列で，その対角成分が$e^{iq_n}$となるようにユニタリー行列$P$を選ぶことができる．すなわち基底を$\Psi'_{p\sigma n}:=\sum_{n'}P_{n'n}\Psi_{p\sigma n'}$と選べばよい．
+\begin{align*}
+U(T(\theta))\Psi'_{p\sigma n}=\sum_{N}(P^{-1}\mc{D}(T(\theta))P)_{Nn}\Psi'_{p\sigma N}=\sum_{N}\delta_{Nn}\exp(iq_n \theta)\Psi'_{p\sigma N}=\exp(iq_n \theta)\Psi'_{p\sigma n}
+\end{align*}
+この線形結合の添え字は粒子の種類$n$のみだから，この基底の変更はローレンツ対称性に関する議論を何ら変更しない．ただし，これはもちろん対称性変換$T$が単一のパラメータ$\theta$にのみ依存する場合であり，一般に(2.2.26)のように複数パラメータに依存する場合は対角化できない．(当たり前だが，カルタン部分代数のところは同時対角化できる．例えば$SU(2)$なら$t_3$，$SU(3)$なら$\lambda_3$と$\lambda_8$だけ対角化するように基底を選べる．)}．ここで(3.3.33)から
+\begin{align*}
+&S_{p_1'\sigma_1'n_1';p_2'\sigma_2'n_2';\cdots , \, p_1\sigma_1n_1;p_2\sigma_2n_2;\cdots} \\
+=&\sum_{\bar{N}'_1\bar{N}'_2\cdots} \sum_{\bar{N}_1\bar{N}_2\cdots}\mc{D}^*_{\bar{N}'_1n'_1}(\bar{T}T)\mc{D}^*_{\bar{N}'_2 n'_2}(\bar{T}T)\cdots \mc{D}_{\bar{N}_1 n_1}(\bar{T}T)\mc{D}_{\bar{N}_2 n_2}(\bar{T}T)\cdots S_{p_1'\sigma_1'\bar{N}_1';p_2'\sigma_2'\bar{N}_2';\cdots , \, p_1\sigma_1\bar{N}_1;p_2\sigma_2\bar{N}_2;\cdots} \\
+=&\exp\left[i\theta(-q_{n'_1}-q_{n'_2}-\cdots +q_{n_1}+q_{n_2}+\cdots )\right]S_{p_1'\sigma_1'n_1';p_2'\sigma_2'n_2';\cdots , \, p_1\sigma_1n_1;p_2\sigma_2n_2;\cdots}
+\end{align*}
+を与える．左辺に$\theta$依存性がないから，右辺もそうでなくてはならず，したがって
+\begin{align*}
+q_{n'_1}+q_{n'_2}+\cdots =q_{n_1}+q_{n_2}+\cdots 
+\end{align*}
+でなければ$S_{\beta\alpha}$はゼロになる．これは単に全$q$量の保存則を表している．そのような保存則の典型的な例は$U(1)_{\mathrm{em}}$電荷の保存則である．また，知られている全ての過程はバリオン数$B$(陽子，中性子，ハイペロン等のバリオンの数から，それらの反粒子の数を引いたもの)およびレプトン数$L$(電子，ミューオン，$\tau$粒子，またそれらのニュートリノなどのレプトンの数からそれらの反粒子の数を引いたもの)を保存する．ただし4巻で見るように，これらの保存則は非常に良い近似に過ぎず，実際は$B-L$が保存量になっていると考えられている．\par
+また，この種の保存則の中で，明らかに近似的にしか成立しないものもある．この例としては，ロチェスターとバトラーのストレンジネス保存則がある．$K^+,K^0$中間子にはストレンジネス$+1$が\footnote{ストレンジネスは，現在はストレンジクォーク$s$の\uwave{反粒子$\bar{s}$の数}(から$s$の数を引いたもの)として定義される．歴史的に$K^+$にストレンジネス+1を割り当ててしまったがために，このような奇妙な割り当てがされてしまうようになった．電流の向き問題の再来．}，ハイペロン$\Lambda^0,\Sigma^+,\Sigma^0,\Sigma^-$にはストレンジネス$-1$が割り当てられる．陽子，中性子，$\pi$中間子(パイオン)にはストレンジネスがゼロである．強い相互作用におけるストレンジネス保存則は，なぜストレンジ粒子が$\pi^+n\to K^+ +\Lambda^0$のような反応で常に対で生成されるかを説明する．一方，$\Lambda^0 \to p+\pi^-$および$K^+\to \pi^+ +\pi^0$ではストレンジ粒子が非ストレンジネス粒子に比較的ゆっくり崩壊する反応は，ストレンジネスを保存しない相互作用が非常に\uwave{弱い}ことを示している．(実際，強い相互作用と電磁相互作用はストレンジネスを保存するが，弱い相互作用は保存しない．保存しない反応の例で挙げたものは弱い相互作用が媒介しているものだ．前者は$\Lambda^0$はクォークレベルで見ると$uds$対であるから，$s$が弱い相互作用により$u$と仮想$W^-$になり，仮想$W^-$がさらに$d\bar{u}$対になることで$(uud)(d\bar{u})$対になり，$p+\pi^0$になる．後者は$K^+=u\bar{s}$から，$\bar{s}$が弱い相互作用により$\bar{u}$と仮想$W^+$の対になり，仮想$W^+$が$u,\bar{d}$対になることで$(u\bar{d})(u\bar{u})$対になり，$p+\pi^0$になる．)
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{feynhand}
+        \vertex (u_i) at (-3,1) {$u$};
+        \vertex (d_i) at (-3,0) {$d$};
+        \vertex (s_i) at (-3,-1) {$s$};
+        \vertex (i_1) at (-1,-1);
+        \vertex (i_2) at (1,-2);
+        \vertex (u_f1) at (3,1) {$u$};
+        \vertex (d_f1) at (3,0) {$d$};
+        \vertex (u_f2) at (3,-1) {$u$};
+        \vertex (bar_u_f) at (3,-2) {$\overline{u}$};
+        \vertex (d_f2) at (3,-3) {$d$};
+        \propag[fermion] (u_i) to (u_f1);
+        \propag[fermion] (d_i) to (d_f1);
+        \propag[fermion] (s_i) to (i_1);
+        \propag[fermion] (i_1) to (u_f2);
+        \propag[photon] (i_1) to (i_2);
+        \draw(0,-2)node{$W^-$};
+        \propag[fermion] (bar_u_f) to (i_2);
+        \propag[fermion] (i_2) to (d_f2);
+        \draw (-3.5,1.25) to [out=260, in=100] (-3.5,-1.25);
+        \draw (3.5,1.25) to [out=280, in=80] (3.5,-1.25);
+        \draw (3.5,-1.75) to [out=280, in=80] (3.5,-3.25);
+        \draw (-3.75,0)node[left]{$\Lambda$};
+        \draw (3.75,0)node[right]{$p$};
+        \draw (3.75,-2.5)node[right]{$\pi^-$};
+      \end{feynhand}
+    \end{tikzpicture}
+  \end{center}
+  \caption{$\Lambda \to p \pi$のダイアグラム}
+\end{figure}
+
+\vskip\baselineskip
+
+
+生成子が互いに可換でない「非可換」な対称性についても考える．これの典型的な例は，アイソスピンの対称性だ．これは，陽子-中性子間の強い力と同様に，陽子-陽子間の強い力が存在することを示す実験を基礎に1937年に提唱されたものだ．数学的に，その対称性群は$SU(2)$群であり，その生成子は$t_i(i=1,2,3)$で(2.4.18)
+\begin{align*}
+[t_i,t_j]=i\epsilon_{ijk}t_k
+\end{align*}
+を満たすものだ．アイソスピン対称性は，粒子が整数または半整数$T$とその$t_3$の値で区別される$2T+1$個の成分を添え字に持つ縮退した多重項を持つことを(対称性が保存する程度に)要求する．これはちょうど，回転不変性により縮退したスピン多重項が要求されるのと同じだ．これらのアイソスピン多重項は，$T=\frac{1}{2}$表現で$t_3=\frac{1}{2},-\frac{1}{2}$の核子$p,n$($t_i$の形は$T$の値に応じて表現(2.5.21)(2.5.22)を使い与える)
+\begin{align*}
+&t_1=\frac{1}{2}\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right), \quad t_2=\frac{1}{2}\left(
+\begin{matrix}
+0 & -i \\
+i & 0
+\end{matrix}
+\right),\quad \frac{1}{2}\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right) \\
+&t_3\left(
+\begin{matrix}
+p \\
+n
+\end{matrix}
+\right)=\left(
+\begin{matrix}
++(1/2)p \\
+-(1/2)n
+\end{matrix}
+\right)
+\end{align*}
+$T=1$表現で$t_3=+1,0,-1$のパイオン
+\begin{align*}
+&t_1=\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+0 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 0 
+\end{matrix}
+\right), \quad  t_2 =\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+0 & -i & 0 \\
+i & 0 & -i \\
+0 & i & 0 
+\end{matrix}
+\right) ,\quad t_3=\left(
+\begin{matrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & -1 
+\end{matrix}
+\right) \\
+&t_3\left(
+\begin{matrix}
+\pi^+ \\
+\pi^0 \\
+\pi^-
+\end{matrix}
+\right)=\left(
+\begin{matrix}
++\pi^+ \\
+0\cdot \pi^0 \\
+-\pi^-
+\end{matrix}
+\right)
+\end{align*}
+および$T=0,t_3=0$の$\Lambda^0$ハイペロンなどを含む．\par
+以上に挙げた三種類の保存則の例は，電荷$Q$，バリオン数$B$，ストレンジネス$S$，アイソスピンの第三成分$t_3$の間の関係
+\begin{align*}
+Q=t_3+(B+S)/2
+\end{align*}
+の実例となっている．例えば，$\pi^+$は$Q=+1,t_3=+1,B=0,S=0$であり，$p$は$Q=+1,t_3=+1/2,B=+1,S=0$であり，$\Lambda^0$は$Q=0,t_3=0,B=1,S=-1$を持つ．これらは確かに上の関係式を満たしている．この関係は元々，観測された結果から経験則的に得られたものだが，1960年にゲルマンとンーマンによって，アイソスピン$\mathbf{t}$とハイパーチャージ$Y:=B+S$の両方を，非可換群$SU(3)$に基づくもっと大きいがもっとひどく破れている非可換内部対称性のリー代数$\mathfrak{su}(3)$に埋め込んだ結果として解釈された．19.4節19.7節で扱うように，今日ではアイソスピン$SU(2)$対称性と$SU(3)$対称性はそれぞれ，強い相互作用の現代的な理論である量子色力学QCDにおいて，最も軽い2個または3個のクォークの質量が小さく近似的に無視できることの付随的結果として理解されている．\par
+強い相互作用をする粒子間の反応におけるアイソスピン$SU(2)$対称性の帰結は，回転$SU(2)$不変性の意味を導くために考え出されたよく知られた方法と同じ方法で導くことができる．すなわち，クレブシュゴルダン係数を使った既約分解ができる．特に，2体反応$A+B\to C+D$の場合
+\begin{align*}
+&S_{t_{C3}t_{D3};t_{A3}t_{B3}} \\
+=&\Bigl(\Psi_{t_{C3}t_{D3}},S\Psi_{t_{A3}t_{D3}}\Bigr) \\
+=&\sum_{T,t_3,T',t_3'}\Bigl(\Psi_{t_{C3}t_{D3}},\Psi_{Tt_3}^{T_{C}T_{D}}\Bigr)\Bigl(\Psi_{Tt_3}^{T_CT_C},S\Psi_{T't_3'}^{T_AT_B}\Bigr)\Bigl(\Psi^{T_AT_B}_{T't_3'},\Psi_{t_{A3}t_{D3}}\Bigr) \\
+=&\sum_{T,t_3}C_{T_C T_D}(Tt_3;t_{C3},t_{D3})C_{T_A T_B}(T't'_3;t_{A3},t_{B3})S_{T}(t_3) \\
+=&\sum_{T,t_3}C_{T_C T_D}(Tt_3;t_{C3},t_{D3})C_{T_A T_B}(T't'_3;t_{A3},t_{B3})S_{T}
+\end{align*}
+の形に書けることを要求する．3個目の行では，アイソスピン対称性により$S$演算子は$\mathbf{t}^2,t_3$の両方と可換だから，遷移の前後で$T,t_3$の両方が保存することを用いて$T'=T,t_3'=t_3$であることを使った．最後の行では，再びアイソスピン対称性により$t_3$を上下する$t_\pm=t_1\pm it_2$が$S$演算子と可換であることから，$t_3$の依存性がないことを用いた(ウィグナー・エッカルトの定理)．ここで$S_T$は$T$および，ここでは書いていない全ての運動量とスピン変数に依存するが，アイソスピンの第3成分$t_{A3},t_{B3},t_{C3},t_{D3}$には依存しない$S$行列の既約成分だ．またクレブシュゴルダン係数は
+\begin{align*}
+\Psi_{j\sigma}^{j_1j_2}=\sum_{\sigma_1\sigma_2}C_{j_1j_2}(j\sigma;\sigma_1\sigma_2)\Psi_{j_1\sigma_1;j_2\sigma_2},\quad C_{j_1j_2}(j\sigma;\sigma_1\sigma_2)=\Bigl(\Psi_{j_1\sigma_1;j_2\sigma_2},\Psi_{j\sigma}^{j_1j_2}\Bigr)
+\end{align*}
+で与えられる．もちろんこれは，全てのアイソスピン対称性と同様に，近似的にしかなりたっていない．なぜならこの対称性は，例えば$p$と$n$のような同じアイソスピン多重項の異なるメンバーが異なる電荷と若干異なる質量をもつという事実に示されているように，電磁相互作用(およびその他の相互作用)では保存しないからだ．
+
+\vskip\baselineskip
+
+\textbf{(C)パリティ}\par
+空間変換$\mathbf{x}\to -\mathbf{x}$に対する対称性が実際に正しい範囲で(つまり2.6節の話がなりたつ範囲内で)，in状態とout状態の\uwave{両方}が(2.6.16)の1粒子状態の直積のように変換するユニタリー演算子$\mathsf{P}$が存在することを要請する．
+\begin{align*}
+\mathsf{P} \Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}^\pm =\eta_{n_1}\eta_{n_2}\cdots \Psi_{\mc{P}p_1 \sigma_1 n_1;\mc{P}p_2 \sigma_2 n_2;\cdots}^\pm
+\end{align*}
+ここで$\eta_{n}$は種類$n$に依存する粒子の固有パリティであり，また$\mc{P}$は$p^\mu$の空間成分を反転させる．(これは全ての粒子が質量をもっている場合．質量ゼロ粒子の場合は(2.6.22)に変えればよい．)$S$行列がパリティを保存する条件は
+\begin{align*}
+&S_{p_1'\sigma_1'n_1';p_2'\sigma_2'n_2';\cdots , \, p_1\sigma_1n_1;p_2\sigma_2n_2;\cdots} =\Bigl(\mathsf{P}\Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}^- , \mathsf{P}\Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}^+  \Bigr) \\
+=&\eta^*_{n'_1}\eta^*_{n'_2}\cdots \eta_{n_1}\eta_{n_2}\cdots S_{\mc{P}p_1'\sigma_1'n_1';\mc{P}p_2'\sigma_2'n_2';\cdots , \, \mc{P}p_1\sigma_1n_1;\mc{P}p_2\sigma_2n_2;\cdots}
+\end{align*}
+である．内部対称性の場合と同じように，これはパリティ対称性(パリティが保存)の定義である．(3.3.41)を満たす$\mathsf{P}$は，自由粒子状態にこのように作用するような演算子$\mathsf{P}_0$が存在し，それが$H_0$だけでなく$V$とも交換すれば，実際に存在する．\par
+位相$\eta_n$は力学的な模型または実験のどちらかから推察できるが，それらによって$\eta$が一意的に決まるわけではない．これは，常に$\mathsf{P}$を，任意の保存する内部対称性の演算子と組み合わせて再定義する自由度があるからである．例えば，もし$\mathsf{P}$が保存するならば
+\begin{align*}
+\mathsf{P}':=\mathsf{P} \exp(i\alpha B+ i\beta L +i\gamma Q)
+\end{align*}
+も保存するはずだ．ここで$B,L,Q$はそれぞれバリオン数，レプトン数，電荷であり，$\alpha,\beta,\gamma$は任意の実位相である．実際(ほぼ自明だが)
+\begin{align*}
+&\Bigl(\Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} , \mathsf{P}'^{-1} S \mathsf{P}'\Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}  \Bigr) \\
+=&\eta^*_{n'_1}\eta^*_{n'_2}\cdots \eta_{n_1}\eta_{n_2}\cdots \\
+&\times \exp\Bigl[i\alpha(b_{n_1}+b_{n_2}+\cdots -b_{n_1'}-b_{n_2'}-\cdots) \\
+&\qquad +i\beta(l_{n_1}+l_{n_2}+\cdots -l_{n_1'}-l_{n_2'}-\cdots) \\
+&\qquad +i\gamma(q_{n_1}+q_{n_2}+\cdots -q_{n_1'}-q_{n_2'}-\cdots)\Bigr] S_{\mc{P}p_1'\sigma_1'n_1';\mc{P}p_2'\sigma_2'n_2';\cdots , \, \mc{P}p_1\sigma_1n_1;\mc{P}p_2\sigma_2n_2;\cdots} \\
+=&\eta^*_{n'_1}\eta^*_{n'_2}\cdots \eta_{n_1}\eta_{n_2}\cdots S_{\mc{P}p_1'\sigma_1'n_1';\mc{P}p_2'\sigma_2'n_2';\cdots , \, \mc{P}p_1\sigma_1n_1;\mc{P}p_2\sigma_2n_2;\cdots} \\
+=&S_{p_1'\sigma_1'n_1';p_2'\sigma_2'n_2';\cdots , \, p_1\sigma_1n_1;p_2\sigma_2n_2;\cdots}=\Bigl(\Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} , S \Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}  \Bigr) \\
+\therefore \quad & \mathsf{P}'^{-1} S \mathsf{P}'=S
+\end{align*}
+となり，$\mathsf{P}$パリティと$B,L,Q$が過程の前後で保存しているならば$\mathsf{P}'$パリティも保存している\footnote{バリオン数は破れてるだろうと前述しておいてそれらが保存しているとするのはおかしい気もするが，どのみちパリティが保存していると仮定する範囲でしかこの議論はできないのだから，その範囲ではバリオン数もレプトン数も保存しているとみなしてよさそう．}．よって$\mathsf{P}'$と$\mathsf{P}$のどちらをパリティ演算子と呼んでもよい．中性子，陽子，電子は異なる$B,L,Q$数を持っている(中性子は$(1,0,0)$，陽子は$(1,0,1)$，電子は$(0,1,-1)$となっている)ので，実位相$\alpha,\beta,\gamma$をうまく選べばそれら三つの固有パリティを$+1$とできる！(具体的には
+\begin{align*}
+\mathsf{P}'\Psi_{p,n}=&\eta_{n}\exp(i\alpha)\Psi_{\mc{P}p,n}=e^{i\theta_n+i\alpha}\Psi_{\mc{P}p,n} \\
+\mathsf{P}'\Psi_{p,p^+}=&\eta_{p}\exp(i\alpha+i\gamma)\Psi_{\mc{P}p,p^+}=e^{i\theta_p +i\alpha+i\gamma}\Psi_{\mc{P}p,p^+} \\
+\mathsf{P}'\Psi_{p,e}=&\eta_{e}\exp(i\beta-i\gamma)\Psi_{\mc{P}p,e}=e^{i\theta_e+i\beta-i\gamma}\Psi_{\mc{P}p,e}
+\end{align*}
+となるから，$\alpha$の位相を$\alpha=-\theta_n$に合わせて，$\gamma=-\theta_p-\alpha=-\theta_p+\theta_n$，$\beta=-\theta_e+\gamma=-\theta_e-\theta_p+\theta_n$と選べばよい．)これで$p,n,e^-$の場合は全て固有パリティが$+1$となるようにできたが，既に位相を固定してしまったから，この三つ以外の粒子(例えば荷電パイオン$\pi^+$)の固有パリティはもはや任意ではない．例えば$\pi^+$の$B,L,Q$数は$(0,0,1)$だから
+\begin{align*}
+\mathsf{P}'\Psi_{\pi^+}=\eta_{\pi^+}\exp(i\gamma)\Psi_{\pi^+}=\eta_{\pi^+}e^{i(-\theta_n+\theta_p)}\Psi_{\pi^+}
+\end{align*}
+となり，もう位相$\gamma$を選んで調節することはできない．さらに，中性パイオン$\pi^0$のような$B,L,Q$数が全てゼロであるような任意の粒子はこのようなパリティ演算子の変更で固有パリティが変化しないから，どのような粒子(例えば今回は陽子・中性子・電子)を固有パリティ$+1$の基準としても，その基準からの相対位相がゼロでなく常に意味が生じる．
+
+
+\vskip\baselineskip
+
+
+以上の注意は，一般に固有パリティは常に値を$\pm 1$しかとらねばならないのかという疑問を解く助けになる．空間反転$\mathsf{P}$は群の乗法則$\mathsf{P}^2=1$を満たすように定義される，というのは容易だが，実際に保存すべきパリティ演算子$\mathsf{P}$が一般に$\mathsf{P}^2=1$を満たしているかは自明ではなく，位相分だけ違うかもしれない\footnote{なぜなら，$\mathsf{P}^2$は確かに射線を変えないが，2章でやったようにそれはヒルベルト空間上では恒等演算子と位相だけ異なっていてもいいからだ．後で議論する，必ずしも$\mathsf{P}^2=1$ととれない理論は$U(\mc{P})U(\mc{P})\neq U(\mc{P}^2)=U(1)$を表し，したがってまさに$O(3,1)$のパリティ$\mc{P}$に関して射影表現になっている．そもそも$SO(3,1)$が射影表現しかもたないんだけどね．}．$\mathsf{P}^2=1$か否かに関わらず，(3.3.41)より演算子$\mathsf{P}^2$は
+\begin{align*}
+\mathsf{P}^2 \Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}^\pm=\eta_{n_1}^2\eta_{n_2}^2\cdots \Psi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}^\pm
+\end{align*}
+となり，これはまさに$\mc{D}_{n'n}=\delta_{n'n}\eta_{n}^2=\delta_{n'n}e^{2i\theta_n}$としたときの内部対称性の変換則(3.3.29)(3.3.39)とみなせる．したがってもし$\mathsf{P}$が保存しているならば$\mathsf{P}^2$も保存しており，$\mathsf{P}^2$はなんらかの内部対称性に属しているとみなせる．もしこの内部対称性$\mathsf{P}^2$が$\alpha,\beta,\gamma$を任意の値とする位相変換$\exp(i\alpha B+i\beta L+i\gamma Q)$のなす群のような連続対称性群に属するならば，ならば，その逆の平方根もまたその群に属するはずだ．それを例えば$I_P$と書くと，定義より
+\begin{align*}
+\mathsf{P}^2 I_P^2=1,\quad [\mathsf{P},I_P]=0
+\end{align*}
+を満たす\footnote{後者の条件は若干非自明だが，$I_P$は可換対称群に属する変換(3.3.39)だから，粒子の種類を入れ替えず，よって$\mathsf{P}$パリティの変換に何の影響も与えないことからくる．}．例えば，$\mathsf{P}^2$は中性子，陽子，電子に対して
+\begin{align*}
+\mathsf{P}^2\Psi_{n}=&e^{2i\theta_n} \Psi_n=e^{2i\theta_n B}\Psi_n \\
+\mathsf{P}^2\Psi_{p}=&e^{2i\theta_p} \Psi_p=e^{2i\theta_n B+2i(\theta_p-\theta_n) Q}\Psi_p \\
+\mathsf{P}^2\Psi_{e}=&e^{2i\theta_e} \Psi_e=e^{2i(\theta_e+\theta_p-\theta_n)L+2i(\theta_p -\theta_n)Q}\Psi_n
+\end{align*}
+となるから，これは内部対称性演算子$\exp(i\alpha B+i\beta L+i\gamma Q)$で位相が$\alpha=2\theta_n,\beta=2(\theta_e+\theta_p-\theta_n),\gamma=2(\theta_p-\theta_n)$である場合とみなせる．
+\begin{align*}
+\mathsf{P}^2=\exp\Bigl(2i\theta_n B+2i(\theta_e+\theta_p-\theta_n) L+2i(\theta_p-\theta_n) Q\Bigr)
+\end{align*}
+その内部対称性には，$\mathsf{P}^2$の逆元の平方根
+\begin{align*}
+I_P=\exp\Bigl(-i\theta_n B-i(\theta_p+\theta_p-\theta_n) L-i(\theta_p-\theta_n) Q\Bigr)
+\end{align*}
+も存在する．したがって$\mathsf{P}':=\mathsf{P}I_P$とおけば，これは$\mathsf{P}'^2=1$を満たす．この演算子は$\mathsf{P}$と同程度\footnote{同程度に，とはパリティが保存する理論に限れば$B,L$などの真には保存しないであろう量も保存するとみなせて，それらを用いれば$\mathsf{P}'$も保存するということ．$\mathsf{P}$が多少破れていれば$\mathsf{P}'$も同程度に破れているだろう．}に保存するはずであるから，これをパリティ演算子と呼んでいけない理由はない．その場合，$\mathsf{P}'^2=1$よりその固有パリティは$\pm 1$しかとれない．今の例は中性子・陽子・電子のみを考えている場合だから，これ以外の粒子を含む場合はどうすればよいのかがわからないが，一般に$\mathsf{P}^2$は少なくともなんらかの内部対称性に属しているはずだから，(排中律により内部対称性は連続対称性か離散対称性のどちらかには属しているはずだから)それが連続内部対称性に属しているとみなせる限りその内部対称性を使って同様の議論で$\mathsf{P}^2= 1$となるようにできる\footnote{位相を固定してしまうから，このとき矛盾なしに陽子・中性子・電子がパリティ$+1$の基準にできるかは怪しい．}．問題は離散的対称性を含まなければ内部対称性と解釈できない場合だ．\par
+全ての固有パリティが値$\pm 1$ととれるように定義することが必ずしも可能ではない唯一の種類の理論は，どの位相変換の連続対称性群にも属さない離散的な内部対称性がある理論だ．例えば，角運動量保存の結果，全ての半整数スピン粒子の総数$F$は偶数だけ変化できる\footnote{この$F$はFermion数の意味であり，フレーバー数とかの意味ではない．}．
+\begin{align*}
+&\Bigl((-1)^{F}\Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} , S (-1)^F\Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}  \Bigr) \\
+=&(-1)^{f_{n1}+f_{n2}+\cdots +f_{n'1}+f_{n'2}+\cdots}\Bigl(\Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} , S \Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} \Bigr) \\
+=&\Bigl(\Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots} , S \Phi_{p_1 \sigma_1 n_1;p_2 \sigma_2 n_2;\cdots}  \Bigr) \quad \because f_{n1}+f_{n2}+\cdots +f_{n'1}+f_{n'2}+\cdots \in 2\mathbb{Z}\\
+\therefore \quad &(-1)^{-F}S (-1)^F=S
+\end{align*}
+よって内部対称性演算子$(-1)^{F}$は角運動量保存に伴って保存する．さらに，既知の半整数スピン粒子は全てバリオン数とレプトン数の和$B+L$は奇数である．したがって，$F$の偶奇と$B+L$の偶奇は一致し，$(-1)^F=(-1)^{B+L}$がなりたつ．もしこれがなりたつならば，$(-1)^F$は$\alpha$を任意の実数とする演算子$\exp(i\alpha(B+L))$からなる連続対称群の一部($\alpha=\pi$)であり，平方根の逆$I_P=\exp\left(-i\frac{\pi}{2}(B+L)\right)$をもつ．この場合，もし$\mathsf{P}^2=(-1)^F$なら，全ての固有パリティが$\pm 1$となるように$\mathsf{P}$を$\mathsf{P}':=\mathsf{P}I_P$によって再定義できる．しかし，もし($j=\frac{1}{2}$と$B+L=0$をもつ，いわゆるマヨラナニュートリノのように)半整数スピンかつ偶数の$B+L$をもつ粒子が発見されれば，$\mathsf{P}^2=(-1)^F$が連続対称性の一部とみなすことができず，したがってパリティ演算子自身が固有値$\pm 1$を持つように再定義することができない．　ただし，この場合はもちろん$\mathsf{P}^4=1$となることができ，よって全ての粒子は$\pm 1$かまたは(マヨラナニュートリノのように)$\pm i$のいずれかの固有パリティを持つ\footnote{実際，(5.5.41)より，自分自身が反粒子となるマヨラナ粒子に対しては$\eta\eta^c=\eta^2=-1$がなりたち，よって$\eta=\pm i$が出てくる場合がある．}．
+
+
+\vskip\baselineskip
+
+
+(3.3.42)から，終状態の固有パリティの積が始状態の固有パリティの積に等しいか，またはこの積の逆符号に等しいなら，$S$行列はそれぞれ3元運動量について全体として偶，または奇でなければならない．例えば，$\pi^- d$原子($d$は重水素で，陽子1つと中性子1つからなる)の$\ell=0$の1s状態から，$\pi^-$は急激に原子核へ吸収され$\pi^-+d \to n+n$反応(クォークレベルで見ると$(d\bar{u})+(uud)(udd)\to (udd)+(udd)$)で2中性子の対になることが1951年に観測された\footnote{W. Chinowsky and J. Steinberger. $Phys.\, Rev.\, \mathbf{95}$, 1561 (1954).}．\footnote{軌道角運動量の量子数$\ell$は相対論的物理においても，非相対論的波動力学と同様に用いることができるらしい．3.7節でやるらしいが．}パイオンと重水素はそれぞれスピンゼロと1をもつ\footnote{重水素は陽子と中性子で構成されているから，原理的にはスピンゼロとスピン1の両方の状態がありえそうである．しかし核力の理論から，スピンが逆方向の陽子-中性子間のテンソル力がほぼ消えるという奇妙な性質があり，スピンが一致する場合のみのスピン1の重水素しか存在できないらしい．}から，1s状態の始状態は$j=1$のみがありえる．したがって全角運動量保存則より終状態も$j=1$である必要がある．中性子$n$はスピン$1/2$であるから，$n+n$の全スピンは$s=0,1$である．角運動量の合成よりこの2粒子系の軌道角運動量を$\ell$とすると，$|\ell-s|\leq j \leq \ell +s$より
+\begin{align*}
+(\ell,s)=(1,0),(0,1),(1,1),(2,1)
+\end{align*}
+が候補となる．しかし同種フェルミオンの2中性子の系はスピンと座標の両方の交換について反対称でなければならない．全スピンが$s=1$ならスピンについて対称的であり，全スピンが$s=0$ならスピンについて反対称的である．一方座標の交換では$\ell=0$では対称的，$\ell=1$では反対称的である．これを見るには，終状態は重心座標が静止している慣性系で
+\begin{align*}
+\Phi_{JM}^{\ell s}=&\int d^3 \mathbf{p} u(|\mathbf{p}|)\sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) \sum_{\sigma_1,\sigma_2} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1,\sigma_2) \Phi_{\mathbf{p},\sigma_1;-\mathbf{p},\sigma_2}
+\end{align*}
+と書けるから(2粒子に対してスピン角運動量の合成によって合成スピン角運動量$s=0,1$の状態にし，球面調和関数で全体の角運動量$\ell$で束縛させて，$\ell$と$s$についてさらに合成して角運動量$J$状態を作っている．$u(|\mathbf{p}|)$は動径波束であり，規格化条件$\int p^2|u(p)|^2dp=1$を満たすようにしている(例えばラゲールの多項式)．束縛された2粒子が同種粒子ならば重複のためさらに$1/2$が必要．これにより実際に，規格化
+\begin{align*}
+(\Psi_{J'M'}^{\ell' s'},\Psi_{JM}^{\ell s})=&\int d^3 \mathbf{p} \int d^3\mathbf{q} u(|\mathbf{p}|)u^*(|\mathbf{q}|) \\
+&\quad \times \sum_{m,\sigma,m',\sigma'}C_{\ell s}(JM;m,\sigma)C^*_{\ell' s'}(J'M';m,\sigma) Y_{\ell m}(\hat{\mathbf{p}})Y^*_{\ell' m'}(\hat{\mathbf{q}}) \\
+&\quad \times \sum_{\sigma_1,\sigma_2,\sigma'_1,\sigma'_2} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1,\sigma_2)C_{\frac{1}{2}\frac{1}{2}}(s'\sigma';\sigma_1',\sigma_2') (\Phi_{\mathbf{p},\sigma'_1;-\mathbf{p},\sigma'_2},\Phi_{\mathbf{q},\sigma_1;-\mathbf{q},\sigma_2}) \\
+=&\int d^3 \mathbf{p} \int d^3\mathbf{q} u(|\mathbf{p}|)u^*(|\mathbf{q}|) \\
+&\quad \times \sum_{m,\sigma,m',\sigma'}C_{\ell s}(JM;m,\sigma)C^*_{\ell' s'}(J'M';m',\sigma') Y_{\ell m}(\hat{\mathbf{p}})Y^*_{\ell' m'}(\hat{\mathbf{q}}) \\
+&\quad \times \sum_{\sigma_1,\sigma_2,\sigma'_1,\sigma'_2} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1,\sigma_2)C^*_{\frac{1}{2}\frac{1}{2}}(s'\sigma';\sigma_1',\sigma_2') \delta^3(\mathbf{p}-\mathbf{q})\delta_{\sigma'_1\sigma_1}\delta_{\sigma'_2\sigma_2} \\
+=&\int dp p^2 |u(p)|^2 \\
+&\quad \times \int d\Omega\sum_{m,\sigma,m',\sigma'}C_{\ell s}(JM;m,\sigma)C^*_{\ell' s'}(J'M';m',\sigma') Y_{\ell m}(\hat{\mathbf{p}})Y^*_{\ell' m'}(\hat{\mathbf{p}}) \\
+&\quad \times \sum_{\sigma_1,\sigma_2,\sigma'_1,\sigma'_2} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1,\sigma_2)C^*_{\frac{1}{2}\frac{1}{2}}(s'\sigma';\sigma_1,\sigma_2) \\
+=&\sum_{m,\sigma,m',\sigma'}C_{\ell s}(JM;m,\sigma)C^*_{\ell' s'}(J'M';m',\sigma') \delta_{\ell'\ell}\delta_{m'm} \\
+&\quad \times \sum_{\sigma_1,\sigma_2} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1,\sigma_2)C_{\frac{1}{2}\frac{1}{2}}(s'\sigma';\sigma_1,\sigma_2) \\
+=&\sum_{m,\sigma,m',\sigma'}C_{\ell s}(JM;m,\sigma)C^*_{\ell' s'}(J'M';m',\sigma') \delta_{\ell'\ell}\delta_{m'm} \delta_{ss'}\delta_{\sigma\sigma'} \\
+=&\sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)C^*_{\ell s}(J'M';m,\sigma) \delta_{\ell'\ell} \delta_{s's} \\
+=&\delta_{J'J}\delta_{M'M}\delta_{\ell'\ell} \delta_{s's}
+\end{align*}
+が満たされている\footnote{正しい式変形ではない．最初の式変形で$(\Phi_{\mathbf{p},\sigma'_1;-\mathbf{p},\sigma'_2},\Phi_{\mathbf{q},\sigma_1;-\mathbf{q},\sigma_2})=(\delta^3(\mathbf{p}-\mathbf{q}))^2=\delta^3(\mathbf{p}-\mathbf{q})\delta^3(0)$なので，本当は無限大の因子が余分に出てくる．これはどちらの状態も重心系としたことが原因で，イメージ的には$\braket{x|x}=\delta(x-x)=\delta(0)$のようなもの．ちゃんと確かめるためには重心系ではなく一般の運動量で考えなければならない．面倒なのでここでは無視した．ちなみにPeskinの5.3節Bound Statesの話で同じような状況の計算が出てくる．俺たちは雰囲気で物理をやっている．}．ここで球面調和関数とクレブシュゴルダン係数の規格直交性
+\begin{align*}
+\int d\Omega Y_{\ell m}(\hat{\mathbf{p}})Y^*_{\ell' m'}(\hat{\mathbf{p}})=\delta_{\ell'\ell}\delta_{m'm},\quad \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)C^*_{\ell s}(J'M';m,\sigma)=\delta_{J'J}\delta_{M'M}
+\end{align*}
+を用いた．)この状態と$\Phi_{\mathbf{x}_1,\sigma'_1,\mathbf{x}_2,\sigma'_2}$の内積をとって
+\begin{align*}
+(\Phi_{\mathbf{x}_1,\sigma'_1,\mathbf{x}_2,\sigma'_2},\Phi_{JM}^{\ell s})=&\int d^3 \mathbf{p} u(|\mathbf{p}|) \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) \sum_{\sigma_1,\sigma_2} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1,\sigma_2) (\Phi_{\mathbf{x}_1,\sigma'_1;\mathbf{x}_2,\sigma_2'} ,\Phi_{\mathbf{p},\sigma_1;-\mathbf{p},\sigma_2}) \\
+=&\int d^3 \mathbf{p} u(|\mathbf{p}|) \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) \sum_{\sigma_1,\sigma_2} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1,\sigma_2) e^{i\mathbf{p}\cdot (\mathbf{x}_1-\mathbf{x}_2)} \delta_{\sigma'_1 \sigma_1}\delta_{\sigma'_2\sigma_2} \\
+=&\int d^3 \mathbf{p} u(|\mathbf{p}|) \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) e^{i\mathbf{p}\cdot (\mathbf{x}_1-\mathbf{x}_2)} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1',\sigma_2')
+\end{align*}
+これは$(\mathbf{x}_1,\sigma_1') \leftrightarrow (\mathbf{x}_2,\sigma_2')$の入れ替えで
+\begin{align*}
+(\Phi_{\mathbf{x}_2,\sigma_2';\mathbf{x}_1,\sigma_1'},\Phi_{JM}^{\ell s})=&\int d^3 \mathbf{p} u(|\mathbf{p}|) \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) e^{i\mathbf{p}\cdot (\mathbf{x}_2-\mathbf{x}_1)} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_2',\sigma_1') \\
+=&\int d^3 \mathbf{p} u(|\mathbf{p}|) \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(-\hat{\mathbf{p}}) e^{i\mathbf{p}\cdot (\mathbf{x}_1-\mathbf{x}_2)} C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1',\sigma_2') \\
+=&(-1)^\ell \int d^3 \mathbf{p} u(|\mathbf{p}|) \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) e^{i\mathbf{p}\cdot (\mathbf{x}_1-\mathbf{x}_2)} (-1)^{s-\frac{1}{2}-\frac{1}{2}}C_{\frac{1}{2}\frac{1}{2}}(s\sigma;\sigma_1',\sigma_2') \\
+=&(-1)^{\ell}(-1)^{s-1} (\Phi_{\mathbf{x}_1,\sigma_1';\mathbf{x}_2,\sigma_2'},\Phi_{JM}^{\ell s})
+\end{align*}
+ここでクレブシュ・ゴルダン係数についての性質
+\begin{align*}
+C_{j'j''}(jm,m_1m_2)=(-1)^{j-j'-j''}C_{j''j'}(jm,m_2m_1)
+\end{align*}
+と，球面調和関数に関する性質$Y_\ell^m (-\hat{\mathbf{p}})=(-1)^\ell Y_\ell^m (\hat{\mathbf{p}})$を用いた．これが奇であるためには，$\ell +s$が偶数でなければならない．したがって$(\ell,s)=(1,1)$の場合のみが許される．さて，これにパリティ演算子を作用させることで
+\begin{align*}
+\mathsf{P}\Phi_{JM}^{\ell s}=&\int d^3 \mathbf{p} \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) \sum_{\sigma_1,\sigma_2} C_{s_1,s_2}(s\sigma;\sigma_1,\sigma_2) \mathsf{P} \Phi_{\mathbf{p},\sigma_1;-\mathbf{p},\sigma_2} \\
+=&\eta_{n}^2 \int d^3 \mathbf{p} \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) \sum_{\sigma_1,\sigma_2} C_{s_1,s_2}(s\sigma;\sigma_1,\sigma_2) \Phi_{-\mathbf{p},\sigma_1;+\mathbf{p},\sigma_2} \\
+=&\eta_{n}^2 \int d^3 \mathbf{p} \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(-\hat{\mathbf{p}}) \sum_{\sigma_1,\sigma_2} C_{s_1,s_2}(s\sigma;\sigma_1,\sigma_2) \Phi_{+\mathbf{p},\sigma_1;-\mathbf{p},\sigma_2} \\
+=&(-1)^\ell \eta_{n}^2 \int d^3 \mathbf{p} \sum_{m,\sigma}C_{\ell s}(JM;m,\sigma)Y_{\ell m}(\hat{\mathbf{p}}) \sum_{\sigma_1,\sigma_2} C_{s_1,s_2}(s\sigma;\sigma_1,\sigma_2) \Phi_{+\mathbf{p},\sigma_1;-\mathbf{p},\sigma_2} \\
+=&(-1)^\ell \eta_{n}^2 \Phi_{JM}^{\ell s}
+\end{align*}
+が得られ，したがって$\ell=1$ではこの終状態の固有パリティは$-\eta_{n}^2$である．始状態の固有パリティは1s状態であることから同様に$\eta_d \eta_{\pi^-}$であることがわかる．パリティ対称性により，始状態の固有パリティと終状態の固有パリティは一致していなければならない．すなわち
+\begin{align*}
+\eta_{d}\eta_{\pi^-}=-\eta_{n}^2
+\end{align*}
+が要請される．重水素は偶数の軌道角運動量(主に$\ell=0$らしい)を持った陽子と中性子の束縛状態であることが知られており，中性子と陽子の固有パリティを同じにとるのだったから，
+\begin{align*}
+\eta_d=\eta_{p}\eta_n=\eta_{n}^2
+\end{align*}
+となる．以上より$\eta_{\pi^-}=-1$，すなわち負の荷電パイオンは擬スカラー粒子であると結論できる！アイソスピン不変性からこの性質は$\pi^0,\pi^+$に対しても同様であるはずであり，これらも擬スカラー粒子である．\par
+パイオンの負パリティから考察を進めよう．3個のパイオン($3\pi^0,\pi^0\pi^+\pi^-$など)に崩壊するスピンゼロ粒子は固有パリティ$\eta^3_\pi=-1$を持たなければならない．同様に2個のパイオン($2\pi^0,\pi^+\pi^-$など)に崩壊するスピンゼロ粒子は固有パリティ$\eta_\pi^2=+1$を持たなければならない．それらはパリティが保存すると仮定する限り異なる粒子であるはずだ．では現実ではどうだろう．\par
+宇宙線において二つの似たような質量の荷電粒子が発見された．一つは$\theta^+$で，$\pi^+\pi^0$に崩壊した．もう一つは$\tau^+$で，$\pi^+\pi^+\pi^-$に崩壊した($\pi^+\pi^0\pi^0$にも崩壊した)．$\tau$崩壊の終状態の$\pi$の角運動量を調べたところ，これらの$\pi$は軌道角運動量をもっていなかった．したがって$\pi$のパリティが奇でスピンゼロであるから，$\tau^+$もまたパリティが奇でスピンがゼロでなければならない．一方，終状態が2つのパイオンであるから，もし$\theta^+$が$\tau^+$のようにスピンゼロだったら，パリティは偶となるだろう．したがって$\theta^+$と$\tau^+$は同じ粒子ではありえない．しかし測定が進歩するにつれて$\theta^+$と$\tau^+$の質量と平均寿命のいずれもが区別がないことがわかってきた．何らかの対称性があってこの二つの質量が同じになるということが考えられるが，さまざまな崩壊の仕方があるのに，どうして平均寿命まで同じになるのだろうか．1956年に，李(リー)と楊(ヤン)は$\theta^+,\tau^+$は実は同じ粒子(今日では$K^\pm$で知られている粒子)であり，パリティ対称性は電磁及び強い相互作用では守られるが，粒子の崩壊を引き起こすはるかに弱い相互作用では守られないのだという説を提唱した．(この相互作用の弱さは$K^+$粒子の寿命が長いことで示される．寿命は$1.235\times 10^{-8}$ sであり，特徴的な時間スケールの$\hbar/m_K c^2=1.3\times 10^{-24}$ sと比べてはるかに長い．)リーとヤンはさらに，空間反転の下での不変性は素粒子の全ての弱い相互作用(原子核のベータ崩壊含む)でひどく破れていると示唆し，それを確かめる実験を提唱した．間もなく彼らの正しいことが確かめられた．
+
+\newpage
+
+
+\subsection{反応率と断面積}
+物理的な粒子の系全体が巨視的な体積$V$をもった大きな箱に閉じこまれているとする．例えば，この箱を立方体$V=L^3$ととることができ，反対側の点を同一視する周期的境界条件をとると，空間の波動関数の一価性の要請から
+\begin{align*}
+(\Psi_{x,y,z},\Psi_\mathbf{p})=&(\Psi_{x+L,y,z},\Psi_\mathbf{p}) \\
+\frac{1}{(2\pi)^{3/2}} \exp\Bigl(i(p_x x+p_y y +p_z z)\Bigr)=&\frac{1}{(2\pi)^{3/2}} \exp\Bigl(i(p_x (x+L)+p_y y +p_z z)\Bigr) \\
+\exp(ip_x L)=&1 \\
+\therefore \quad p_x=&\frac{2\pi}{L}n_x \quad (n_x \in \mathbf{Z})
+\end{align*}
+同様に$y,z$方向についても行い，運動量が
+\begin{align*}
+\mathbf{p}=\frac{2\pi}{L}\mathbf{n}=\frac{2\pi}{L}(n_1,n_2,n_3) \quad (n_1, n_2,n_3 \in \mathbf{Z})
+\end{align*}
+と量子化される．これにより，全ての三次元デルタ関数のフーリエ積分表示の積分領域が$V$に制限され
+\begin{align*}
+\delta^3_V(\mathbf{p}'-\mathbf{p}):=&\frac{1}{(2\pi)^3}\int_V d^3x e^{i(\mathbf{p}'-\mathbf{p})\cdot x} \\
+(\mathbf{p}'\neq \mathbf{p})=&\frac{1}{(2\pi)^3}\int_0^L e^{i(p_x'-p_x) x} dx \int_0^L e^{i(p_y'-p_y)y}dy \int_0^L e^{i(p_z'-p_z)z}dz \\
+=&\frac{1}{(2\pi)^3}\frac{1}{i((p'_x-p_x))}\frac{1}{i((p'_y-p_y))}\frac{1}{i((p'_z-p_z))}\Bigl[e^{i(p'_x-p_x)x}\Bigr]_0^L\Bigl[e^{i(p'_y-p_y)y}\Bigr]_0^L\Bigl[e^{i(p'_z-p_z)z}\Bigr]_0^L \\
+=&\frac{L^3}{-i(n_x'-n_x)(n_y'-n_y)(n_z'-n_z)}\Bigl[e^{i2\pi(n_x'-n_x)}-1\Bigr]\Bigl[e^{i2\pi(n_y'-n_y)}-1\Bigr]\Bigl[e^{i2\pi(n_z'-n_z)}-1\Bigr] \\
+=&0 \\
+(\mathbf{p}'=\mathbf{p})=&\frac{1}{(2\pi)^3}\int_V d^3x =\frac{V}{(2\pi)^3}
+\end{align*}
+したがって
+\begin{align*}
+\delta^3(\mathbf{p}'-\mathbf{p}):=&\frac{1}{(2\pi)^3}\int_V d^3x e^{i(\mathbf{p}'-\mathbf{p})\cdot x}= \frac{V}{(2\pi)^3}\delta_{\mathbf{p}',\mathbf{p}}
+\end{align*}
+となる．ここで$\delta_{\mathbf{p}',\mathbf{p}}$はクロネッカーのデルタ記号で，運動量が一致していれば1をとる．\par
+規格化条件(3.1.2)は，この変更により$[V/(2\pi)^3]^N$だけ含まれることになる．
+\begin{align*}
+&(\Psi_{p_1',\sigma'_1,n'_1;p'_2,\sigma'_2,n'_2\cdots },\Psi_{p_1,\sigma_1,n_1;p_2,\sigma_2,n_2\cdots }) \\
+=&\delta^3(\mathbf{p}'_1-\mathbf{p}_1)\delta_{\sigma'_1\sigma_1}\delta_{n_1'n_1}\delta^3(\mathbf{p}'_2-\mathbf{p}_2)\delta_{\sigma'_2\sigma_2}\delta_{n'_2n_2}\cdots \pm[置換] \\
+=&\left[\frac{V}{(2\pi)^3}\right]^N \left(\delta^3_{\mathbf{p}'_1\mathbf{p}_1}\delta_{\sigma'_1\sigma_1}\delta_{n_1'n_1}\delta^3_{\mathbf{p}'_2\mathbf{p}_2}\delta_{\sigma'_2\sigma_2}\delta_{n'_2n_2}\cdots \pm[置換]\right)
+\end{align*}
+ここで$N$は状態に含まれる粒子の数．遷移確立を計算するためには，内積が1の規格化された状態を使わなければならないから，今考えている箱について近似的に規格化された状態
+\begin{align*}
+\Psi^{\mathrm{Box}}_{\alpha}:=\left[\frac{(2\pi)^3}{V}\right]^{N_\alpha/2}\Psi_\alpha
+\end{align*}
+を導入し，その内積を
+\begin{align*}
+\Bigl(\Psi^{\mathrm{Box}}_{\beta},\Psi^{\mathrm{Box}}_{\alpha}\Bigr)=\delta^3_{\mathbf{p}'_1\mathbf{p}_1}\delta_{\sigma'_1\sigma_1}\delta_{n_1'n_1}\delta^3_{\mathbf{p}'_2\mathbf{p}_2}\delta_{\sigma'_2\sigma_2}\delta_{n'_2n_2}\cdots \pm[置換]=:\delta_{\beta\alpha}
+\end{align*}
+とする．これに対応して$S$行列は
+\begin{align*}
+S_{\beta\alpha}=&(\Phi_\beta , S \Phi_\alpha) \\
+&=\left[\frac{V}{(2\pi)^3}\right]^{(N_\beta+N_\alpha)/2}\Bigl(\Phi_\beta^{\mathrm{Box}} , S \Phi_\alpha^{\mathrm{Box}}\Bigr)=:\left[\frac{V}{(2\pi)^3}\right]^{(N_\beta+N_\alpha)/2}S^{\mathrm{Box}}_{\beta\alpha}
+\end{align*}
+と書かれる．$S^{\mathbf{Box}}$は状態(3,4,3)を用いて記述される．\par
+
+\vskip\baselineskip
+
+粒子を箱の中に永久に放置すれば，あらゆる可能な遷移が何度も起こるはず．意味のある遷移確率を計算するためには，系を「時間の箱」にも入れなければならない．すなわち，相互作用は有限時間$T$の間だけ働いていると考える．これにより，エネルギー保存のデルタ関数が
+\begin{align*}
+\delta_T(E_\alpha -E_\beta):=\frac{1}{2\pi}\int_{-T/2}^{T/2}\exp(i(E_\alpha-E_\beta)t)dt
+\end{align*}
+で置き換わる．相互作用がはたらく以前に状態$\alpha$にある多粒子状態が，相互作用が切れた後にちょうど状態$\beta$になっている確率$P(\alpha\to \beta)$は，振幅の絶対値の二乗で与えられるから
+\begin{align*}
+P(\alpha\to \beta)=\left|S_{\beta\alpha}^{\mathrm{Box}}\right|^2=\left[\frac{(2\pi)^3}{V}\right]^{(N_\alpha+N_\beta)}\left|S_{\beta\alpha}\right|^2
+\end{align*}
+となる．これは箱の中のある特定の状態$\beta=(\mathbf{p}'_1,\sigma_1',n_1';\mathbf{p}'_2,\sigma_2',n_2';\cdots )$についての確率であるから，運動量についての幅をとらなければ観測装置で測定することはできない．したがって$i$でラベル付けされた各粒子の運動量$\mathbf{p}_i$について$\mathbf{p}_i \sim \mathbf{p}_i +d\mathbf{p}_i$だけの範囲をとる．このとき箱の中の1粒子が運動量空間の体積$d^3\mathbf{p}$内にもつ状態数は(3.4.1)より
+\begin{align*}
+d^3\mathbf{n}=\left(\frac{L}{2\pi}\right)^3 d^3\mathbf{p}=\frac{V}{(2\pi)^3}d^3\mathbf{p}
+\end{align*}
+である．終状態の幅$d\beta$を終状態の各粒子の$d\beta=d^3\mathbf{p}_1' d^3\mathbf{p}_2'\cdots$の積(ラベル$i$で区別できない同種粒子に関しては重複しないように$1/\prod N_i!$もかける)と定義すると，この範囲内の全状態数は
+\begin{align*}
+d\mc{N}_\beta=&\left(\prod_i\frac{1}{N_i!}\right)d^3\mathbf{n}_1'd^3\mathbf{n}_2\cdots \\
+=&\left[\frac{V}{(2\pi)^3}\right]^{N_\beta} \left(\prod_i\frac{1}{N_i!}\right)d^3\mathbf{p}_1'd^3\mathbf{p}_2\cdots \\
+=&\left[\frac{V}{(2\pi)^3}\right]^{N_\beta}d\beta
+\end{align*}
+となる．よって系が微小範囲$d\beta$の範囲の終状態に達する全確率は，その範囲内の全状態数について和をとることで
+\begin{align*}
+dP(\alpha\to \beta)=P(\alpha\to \beta)d\mc{N}_\beta=\left[\frac{(2\pi)^3}{V}\right]^{N_\alpha} \left|S_{\beta\alpha}\right|^2 d\beta
+\end{align*}
+となる\footnote{観測で区別できないものについては和をとる，という大前提を思い出す．微小な幅$d\mathbf{p}_i$の中の運動量同士は区別できない．}．この節を通して，終状態$\beta$は始状態$\alpha$と(少しでも)異なるだけでなく，状態$\beta$の粒子のどの真部分集合(状態全体以外の部分集合)をとっても，状態$\alpha$の粒子の対応する部分集合と正確に同じ4元運動量を持つ\footnote{例えば，始状態$\alpha$が3粒子状態でそれぞれ$p^\mu_1,p^\mu_2,p^\mu_3$を持つとする．終状態も3粒子状態として運動量$p'^\mu_1,p'^\mu_2,p'^\mu_3$をもつとして，どれか一つでも始状態の運動量と違えば前者の条件$\beta\neq \alpha$は満たされるが，$p'^\mu_1\neq p^\mu_1,p'^\mu_2\neq p^\mu_2,p'^\mu_3=p^\mu_3$となっている場合は$\beta\neq \alpha$だが後者の条件を満たさない．}ことがないという，より厳しい条件を満たすものに限る．(次の章で導入する言葉を使えば，これは$S$行列の連結部分のみを考えることを意味する．)そのような状態については，デルタ関数を含まない行列要素$M_{\beta\alpha}$を以下のように定義できる．
+\begin{align*}
+S_{\beta\alpha}=:-2\pi i\delta^3_V(\mathbf{p}_\beta-\mathbf{p}_\alpha)\delta_T(E_\beta-E_\alpha)M_{\beta\alpha}
+\end{align*}
+箱を導入したことで，$\beta\neq \alpha$の場合の$|S_{\beta\alpha}|^2$の中のデルタ関数の二乗は有限で解釈できて
+\begin{align*}
+\left[\delta^3_V(\mathbf{p}_\beta-\mathbf{p}_\alpha)\right]^2=&\delta^3_V(\mathbf{p}_\beta-\mathbf{p}_\alpha)\delta^3_V(0)=\delta^3_V(\mathbf{p}_\beta-\mathbf{p}_\alpha)\frac{V}{(2\pi)^3} \\
+\left[\delta_T(E_\beta-E_\alpha)\right]^2=&\delta_T(E_\beta-E_\alpha)\delta_T(0)=\delta_T(E_\beta-E_\alpha) \frac{T}{2\pi}
+\end{align*}
+と可能になる\footnote{$\delta_T$に関してはクロネッカーのデルタを含まないから，厳密に二つ目のデルタ関数の引数がゼロとはみなせない．十分$T$が大きくデルタ関数と近似できると仮定してこの計算は行っている．}．よって(3.4.9)は微分遷移確率
+\begin{align*}
+dP(\alpha\to \beta)=&\left[\frac{(2\pi)^3}{V}\right]^{N_\alpha} \left|S_{\beta\alpha}\right|^2 d\beta \\
+=&\left[\frac{(2\pi)^3}{V}\right]^{N_\alpha} (2\pi)^2 \left[\delta^3_V(\mathbf{p}_\beta-\mathbf{p}_\alpha)\right]^2 \left[\delta_T(E_\beta-E_\alpha)\right]^2 \left|M_{\beta\alpha}\right|^2 d\beta \\
+=&(2\pi)^2 \left[\frac{(2\pi)^3}{V}\right]^{N_\alpha-1}\frac{T}{2\pi} \left|M_{\beta\alpha}\right|^2 \delta^3_V(\mathbf{p}_\beta-\mathbf{p}_\alpha) \delta_T(E_\beta-E_\alpha) d\beta
+\end{align*}
+を与える．$V,T$を非常に大きくする極限で，このデルタ関数の積$\delta^3_V(\mathbf{p}_\beta-\mathbf{p}_\alpha) \delta_T(E_\beta-E_\alpha)$は通常の4次元デルタ関数$\delta^4(p_\beta-p_\alpha)$と解釈できる．この極限で，遷移確率$dP(\alpha\to \beta)$は単に相互作用がはたらいている時間$T$に比例し，その係数が微分遷移率
+\begin{align*}
+d\Gamma(\alpha\to \beta):=&dP(\alpha\to \beta)/T \\
+=&(2\pi)^{3N_\alpha-2} V^{1-N_\alpha} \left|M_{\beta\alpha}\right|^2 \delta^4(p_\beta-p_\alpha) d\beta
+\end{align*}
+と解釈できる(なぜそう解釈できるかは，このあとすぐ見る不安定粒子の崩壊率に関する議論で理解できると思う)．ここで$M_{\beta\alpha}$は，この極限のもとで
+\begin{align*}
+S_{\beta\alpha}=:-2\pi i \delta^4(p_\beta-p_\alpha)M_{\beta\alpha}
+\end{align*}
+で計算できる．これが，$S$行列の計算を解釈して，実際の実験に対する予言をするときに用いる基本公式となる！\par
+特に重要なのは以下の二つの場合となる．
+
+\vskip\baselineskip
+
+$N_\alpha=1$:\par
+この場合，(3.4.11)で体積$V$は相殺し，1粒子状態$\alpha$が一般の多粒子状態$\beta$に\uwave{崩壊}する遷移率
+\begin{align*}
+d\Gamma(\alpha\to \beta)=2\pi|M_{\beta\alpha}|^2\delta^4(p_\beta-p_\alpha)d\beta
+\end{align*}
+が得られる．もちろん，これは相互作用が働いている時間$T$が単一粒子$\alpha$の寿命$\tau_\alpha$よりずっと短い場合のみ意味がある．なぜなら，不安定粒子の崩壊確率$P(\alpha\to \beta)$は厳密には全崩壊率$\Gamma$と
+\begin{align*}
+P(T)=1-e^{-\Gamma T}
+\end{align*}
+で関係しているが，$T\ll \tau_\alpha =1/\Gamma$の近似で
+\begin{align*}
+P(T)\approx& \Gamma T \\
+\therefore \quad P(T)/T&\approx \Gamma
+\end{align*}
+と書けるからだ．この近似がなりたつ$T$でなければ，$d\Gamma(\alpha\to \beta)=dP(\alpha\to \beta)/T$が遷移率として解釈することはできない．これにより，$\tau_\alpha$が有限の大きさである限り，$\delta_T(E_\alpha-E_\beta)$において$T\to \infty$の極限に行くことはできない．ではどのような場合に$\delta_T(E_\alpha-E_\beta)$は十分デルタ関数とみなせるだろうか．
+\begin{align*}
+\delta_T(E_\alpha-E_\beta)=&\frac{1}{2\pi}\int_{-T/2}^{T/2}\exp(i(E_\alpha-E_\beta)t)dt \\
+=&\frac{1}{2\pi}\left[\frac{e^{i(E_\alpha-E_\beta)t}}{i(E_\alpha-E_\beta)}\right]_{-T/2}^{T/2} \\
+=&\frac{1}{\pi}\frac{\sin\left(\frac{(E_\alpha-E_\beta)T}{2}\right)}{E_\alpha-E_\beta}=\frac{T}{2\pi} \mathrm{sinc}((\Delta E)T) \qquad (\Delta E=E_\alpha-E_\beta)
+\end{align*}
+であるから，このデルタ関数にはピーク$E_\alpha=E_\beta$から除去できない幅$\Delta E\simeq 1/T\gtrsim 1/\tau_\alpha$が存在する($\mathrm{sinc}\, x=\sin x/x$のグラフを書けばすぐわかる)．よってこの幅が十分小さく$\delta_T(E_\alpha-E_\beta)$がデルタ関数とみなせて(3.4.13)が有効であるためには，幅の下界$1/\tau_\alpha=\Gamma$(全崩壊率)が過程の特徴的なエネルギースケールのどれよりもはるかに小さい場合でなければならない．
+
+\vskip\baselineskip
+
+$N_\alpha=2$:\par
+この場合，遷移率(3.4.11)は
+\begin{align*}
+d\Gamma(\alpha\to \beta)=(2\pi)^4 \frac{1}{V}|M_{\beta\alpha}|^2\delta^4(p_\beta-p_\alpha)d\beta
+\end{align*}
+となり$1/V$，すなわち一方の粒子に対するもう一方の粒子の密度に比例する．実験屋が報告するのは密度あたりの遷移率ではなく，粒子束あたりの反応率，すなわち断面積である．どちらかの粒子の，相手の粒子の位置での粒子束$\Phi_\alpha$は，密度$1/V$と相対速度$u_\alpha$の積
+\begin{align*}
+\Phi_\alpha:=u_\alpha/V
+\end{align*}
+で定義される．($u_\alpha$の定義は後で．)すると微分断面積は
+\begin{align*}
+d\sigma(\alpha\to \beta):=&d\Gamma(\alpha\to \beta)/\Phi_\alpha \\
+=&(2\pi)^4 u_\alpha^{-1}|M_{\beta\alpha}|^2\delta^4(p_\beta-p_\alpha)d\beta
+\end{align*}
+となる．
+
+\vskip\baselineskip
+
+次に，遷移率と断面積のローレンツ変換性の問題を考える．これは(3.4.15)の相対速度$u_\alpha$のより一般的な定義を与えるのに役立つらしい．\par
+$S$行列のローレンツ変換性(3.3.1)は，各粒子のスピンに付随した運動量に依存する行列のために複雑な構造になっている．この複雑さを避けるために，(ローレンツ不変なデルタ関数$\delta^4(p_\beta-p_\alpha)$を(3.4.12)から取り除いた後に\footnote{一般に$\delta^{(n)}(Ax)=\frac{1}{|\mathrm{det}A|}\delta^{(n)}(x)$がなりたつから，ローレンツ変換の性質$|\mathrm{det}\Lambda|=1$を用いて不変性がわかる．})(3.3.1)の絶対値の二乗を考え，あらゆるスピンについて和をとる．(3.3.1)と(3.4.12)より
+\begin{align*}
+&M_{p'_1,\sigma'_1,n_1';p'_2,\sigma'_2,n_2';\cdots ,p_1,\sigma_1,n_1; p_2,\sigma_2,n_2;\cdots } \\
+=&\sqrt{\frac{(\Lambda p_1)^0 (\Lambda p_2)^0\cdots (\Lambda p_1')^0(\Lambda p_2')^0}{p_1^0 p_2^0\cdots p'^0_1 p'^0_2\cdots }} \\
+&\sum_{\bar{\sigma}_1 ,\bar{\sigma}_2,\cdots }D^{(j_1)}_{\bar{\sigma}_1\sigma_1}\Bigl( W(\Lambda,p_1) \Bigr)D^{(j_2)}_{\bar{\sigma}_2\sigma_2}\Bigl( W(\Lambda,p_2) \Bigr)\cdots \\
+&\qquad \times \sum_{\bar{\sigma}_1' ,\bar{\sigma}_2',\cdots }D^{(j'_1)}_{\bar{\sigma}'_1\sigma'_1}\Bigl( W(\Lambda,p'_1) \Bigr)D^{(j'_2)}_{\bar{\sigma}'_2\sigma'_2}\Bigl( W(\Lambda,p'_2) \Bigr)\cdots \\
+&\qquad \times M_{\Lambda p'_1,\bar{\sigma}'_1,n_1';\Lambda p'_2,\bar{\sigma}'_2,n_2';\cdots ,\Lambda p_1,\bar{\sigma}_1,n_1;\Lambda p_2,\bar{\sigma}_2,n_2;\cdots }
+\end{align*}
+であるから，行列$D^{(j)}_{\bar{\sigma}\sigma}(W)$(あるいは質量ゼロの場合はそれに対応する行列)のユニタリー性により
+\begin{align*}
+&\sum_{\sigma_1,\sigma_2,\cdots \sigma'_1,\sigma_2',\cdots }\left|M_{p'_1,\sigma'_1,n_1';p'_2,\sigma'_2,n_2';\cdots ,p_1,\sigma_1,n_1; p_2,\sigma_2,n_2;\cdots }\right|^2 \\
+=&\frac{(\Lambda p_1)^0 (\Lambda p_2)^0\cdots (\Lambda p_1')^0(\Lambda p_2')^0}{p_1^0 p_2^0\cdots p'^0_1 p'^0_2\cdots } \\
+&\times \sum_{\sigma_1,\sigma_2,\cdots \sigma'_1,\sigma_2',\cdots }\Biggl|\sum_{\bar{\sigma}_1 ,\bar{\sigma}_2,\cdots }D^{(j_1)}_{\bar{\sigma}_1\sigma_1}\Bigl( W(\Lambda,p_1) \Bigr)D^{(j_2)}_{\bar{\sigma}_2\sigma_2}\Bigl( W(\Lambda,p_2) \Bigr)\cdots \\
+&\qquad \qquad \qquad \times \sum_{\bar{\sigma}_1' ,\bar{\sigma}_2',\cdots }D^{(j'_1)}_{\bar{\sigma}'_1\sigma'_1}\Bigl( W(\Lambda,p'_1) \Bigr)D^{(j'_2)}_{\bar{\sigma}'_2\sigma'_2}\Bigl( W(\Lambda,p'_2) \Bigr)\cdots \\
+&\qquad \qquad \qquad \times M_{\Lambda p'_1,\bar{\sigma}'_1,n_1';\Lambda p'_2,\bar{\sigma}'_2,n_2';\cdots ,\Lambda p_1,\bar{\sigma}_1,n_1;\Lambda p_2,\bar{\sigma}_2,n_2;\cdots } \Biggr|^2 \\
+=&\frac{(\Lambda p_1)^0 (\Lambda p_2)^0\cdots (\Lambda p_1')^0(\Lambda p_2')^0}{p_1^0 p_2^0\cdots p'^0_1 p'^0_2\cdots }\sum_{\bar{\sigma}_1,\bar{\sigma}_2,\cdots \bar{\sigma}'_1,\bar{\sigma}_2',\cdots } \left|M_{\Lambda p'_1,\bar{\sigma}'_1,n_1';\Lambda p'_2,\bar{\sigma}'_2,n_2';\cdots ,\Lambda p_1,\bar{\sigma}_1,n_1;\Lambda p_2,\bar{\sigma}_2,n_2;\cdots }\right|^2 \\
+\therefore \quad & \sum_{\sigma_1,\sigma_2,\cdots \sigma'_1,\sigma_2',\cdots }\left|M_{p'_1,\sigma'_1,n_1';p'_2,\sigma'_2,n_2';\cdots ,p_1,\sigma_1,n_1; p_2,\sigma_2,n_2;\cdots }\right|^2 p_1^0 p_2^0\cdots p'^0_1 p'^0_2\cdots \\
+&= \sum_{\sigma_1,\sigma_2,\cdots \sigma'_1,\sigma_2',\cdots } \left|M_{\Lambda p'_1,\sigma'_1,n_1';\Lambda p'_2,\sigma'_2,n_2';\cdots ,\Lambda p_1,\sigma_1,n_1;\Lambda p_2,\sigma_2,n_2;\cdots }\right|^2 (\Lambda p_1)^0 (\Lambda p_2)^0\cdots (\Lambda p_1')^0(\Lambda p_2')^0
+\end{align*}
+となり，(3.3.1)のエネルギー因子を除いて，和はローレンツ不変である．すなわち
+\begin{align*}
+\sum_{\mathrm{spin}}|M_{\beta\alpha}|^2 \prod_\beta E \prod_\alpha E=:R_{\beta\alpha}
+\end{align*}
+という量は状態$\alpha$と$\beta$の粒子の4元運動量のスカラー関数である．\par
+スピンの和をとった1粒子の崩壊率(3.4.13)は
+\begin{align*}
+\sum_{\mathrm{spin}}d\Gamma(\alpha\to \beta)=2\pi E_{\alpha}^{-1} R_{\beta\alpha} \delta^4(p_\beta-p_\alpha)\frac{d\beta}{\prod_\beta E}
+\end{align*}
+と書ける．因子$d\beta/\prod_\beta E$は，あらわに書けば
+\begin{align*}
+\frac{d\beta}{\prod_\beta E}=&\left(\prod_i \frac{1}{N_i!}\right) \frac{d^3 \mathbf{p}'_1}{p'^0_1}\frac{d^3 \mathbf{p}'_2}{p'^0_2}\cdots \\
+=&\left(\prod_i \frac{1}{N_i!}\right) \frac{d^3 \mathbf{p}'_1}{\sqrt{\mathbf{p}'^2_1+m_1^2}}\frac{d^3 \mathbf{p}'_2}{\sqrt{\mathbf{p}'^2_2+m_2^2}}\cdots
+\end{align*}
+であり，これは運動量空間のローレンツ不変な体積要素(2.5.15)の積になっているから，ローレンツ不変である．$R_{\beta\alpha}$と$\delta^4(p_\beta-p_\alpha)$もローレンツ不変であり，始状態の1粒子のエネルギー$E_\alpha$に関する因子$1/E_\alpha$だけがローレンツ不変でない！以上より，崩壊率が$1/E_\alpha$と同じローレンツ変換性をもつことがわかる．これはもちろん，まさに通常の特殊相対論の時間の遅れであり，粒子が速く運動すればするほど，ゆっくり崩壊することに対応する．\par
+同様に，スピン和をとった断面積(3.4.15)は，始状態$\alpha$の2粒子のエネルギーを$E_1,E_2$として
+\begin{align*}
+\sum_{\mathrm{spin}}d\sigma(\alpha\to \beta)=(2\pi)^4 u_\alpha^{-1} E_1^{-1}E_2^{-1} R_{\beta\alpha} \delta^4(p_\alpha-p_\beta)\frac{d\beta}{\prod_\beta E}
+\end{align*}
+と書ける．断面積は(スピン和をとれば)4元運動量のローレンツ不変な関数となるように定義するのが慣例らしい．因子$R_{\beta\alpha},\delta^4(p_\beta-p_\alpha)$と$d\beta/\prod_\beta E$はすでにローレンツ不変だとわかったから，これより任意の慣性系における相対速度$u_\alpha$を，$u_\alpha E_1 E_2$がローレンツスカラーとなるように定義しなければならない．また，相対速度の定義より，一方の粒子(例えば粒子1)が静止しているローレンツ系では$u_\alpha$は他方の粒子の速度そのものとならなければならない．このことから，$u_\alpha$の値は一般のローレンツ系において
+\begin{align*}
+u_\alpha=\frac{\sqrt{(p_1\cdot p_2)^2-m_1^2m_2^2}}{E_1E_2}
+\end{align*}
+と一意的に\footnote{$u_\alpha E_1E_2=\sqrt{(p_1\cdot p_2)^2-m_1^2m_2^2}$がローレンツスカラーであることは明らか．また粒子1が静止しているとき，$\mathbf{p}_1=0,E_1=m_1$であるから，$(p_1\cdot p_2)=-m_1 E_2$となり，代入すると
+\begin{align*}
+u_\alpha=\frac{\sqrt{m_1^2 E_2^2-m_1^2m_2^2}}{m_1 E_2}=\frac{\sqrt{E_2^2-m_2^2}}{E_2}=\frac{|\mathbf{p}_2|}{E_2}=|\mathbf{v}_2|
+\end{align*}
+となり，これはちょうど粒子2の速度である．(相対論的に$\mathbf{p}=\gamma m \mathbf{v},E=\gamma m$であることを思い出す．)\par
+一意性を示そう．スカラー$S:=u_\alpha E_1E_2$とおく．もし別の定義の相対速度$\tilde{u}_\alpha$が存在すると，$\tilde{S}:=\tilde{u}_\alpha E_1 E_2$もローレンツスカラーであるはずだが，そのようなスカラーが\uwave{全ての$p_1,p_2$について}ある系で一致するなら，全ての系で$\tilde{S}=S$である．一方の粒子が静止する系では一致することが相対速度の定義より要請されるから，よってこの定義での相対速度は一意的に定まる．}定まる．ここで$p_1,p_2$と$m_1,m_2$は始状態$\alpha$の2粒子の4元運動量と質量である．
+
+\vskip\baselineskip
+
+全3元運動量がゼロになる重心系では
+\begin{align*}
+p_1=(\mathbf{p},E_1),\quad p_2=(-\mathbf{p}_2,E_2)
+\end{align*}
+であり(実際に$p_1+p_2=(0,E_1+E_2)$で全3元運動量がゼロになっている)，(3.4.17)を計算すると相対速度に期待される通り
+\begin{align*}
+p_1\cdot p_2=&-|\mathbf{p}|^2-E_1E_2 \\
+u_\alpha=&\frac{\sqrt{(E_1E_2+|\mathbf{p}|^2)^2-m_1^2m_2^2}}{E_1E_2} \\
+=&\frac{\sqrt{|\mathbf{p}|^4 +2E_1E_2|\mathbf{p}|^2+E_1^2E_2^2-m_1^2m_2^2}}{E_1E_2} \\
+=&\frac{\sqrt{|\mathbf{p}|^4 +2E_1E_2|\mathbf{p}|^2+E_1^2E_2^2-(E_1^2-|\mathbf{p}|^2)(E_2^2-|\mathbf{p}|^2)}}{E_1E_2} \\
+=&\frac{\sqrt{2E_1E_2|\mathbf{p}|^2+E_1^2|\mathbf{p}|^2+E_2^2|\mathbf{p}|^2}}{E_1E_2} \\
+=&\frac{|\mathbf{p}|(E_1+E_2)}{E_1E_2}=\left|\frac{\mathbf{p}}{E_1}+\frac{\mathbf{p}}{E_2}\right| \\
+=&\left|\frac{\mathbf{p}_1}{E_1}-\frac{\mathbf{p}_2}{E_2}\right| \quad \because \mathbf{p}_1=\mathbf{p},\mathbf{p}_2=-\mathbf{p} \\
+=&|\mathbf{v}_1-\mathbf{v}_2|
+\end{align*}
+が得られる．しかし，この系では$u_\alpha$は実際には物理的な速度ではなく，特に(3.4.18)は極度に相対論的粒子の場合($|\mathbf{v}_1|=|\mathbf{v}_2|\approx 1=c$)には$2=2c$に近い値をとることを示している．これは，重心系での観測者にとって，両方から速度$c$で向かってくる粒子はあたかも相対速度$2c$であるとみなせることから来ている．光速を超えているから当然物理的な速度ではない．
+
+\vskip\baselineskip
+
+次に遷移率の一般式(3.4.11)や崩壊率(3.4.13)と断面積(3.4.15)に現れるいわゆる位相空間の因子$\delta^4(p_\beta-p_\alpha)d\beta$の議論に移る．ここでは始状態の全3元運動量が
+\begin{align*}
+\mathbf{p}_\alpha=\mathbf{p}_1+\mathbf{p}_2+\cdots =0
+\end{align*}
+となる重心系の場合に話を限る．($N_\alpha=1$の崩壊現象については，これはちょうど崩壊粒子が静止している場合である．)終状態が運動量$\mathbf{p}_1',\mathbf{p}_2',\cdots$の粒子からなるとすると，$E:=E_\alpha=E_1+E_2+\cdots$を始状態の全エネルギーとして
+\begin{align*}
+\delta^4(p_\beta-p_\alpha)d\beta=\delta^3(\mathbf{p}_1'+\mathbf{p}_2'+\cdots)\delta(E_1'+E_2'+\cdots -E) d^3\mathbf{p}_1'd^3\mathbf{p}_2'\cdots
+\end{align*}
+となる．(面倒なので重複の因子は無視した．)$\mathbf{p}_k'$の任意の一つ，例えば$\mathbf{p}_1'$についての積分は単に，運動量デルタ関数を落とし，測度が
+\begin{align*}
+\delta^4(p_\beta-p_\alpha)d\beta \to \delta(E_1'+E_2'+\cdots -E) d^3\mathbf{p}_2'\cdots
+\end{align*}
+となり，($E_1'=\sqrt{\mathbf{p}'^2_1+m'^2_1}$のように)$\mathbf{p}_1'$が現れるところには常に
+\begin{align*}
+\mathbf{p}_1'=-\mathbf{p}_2'-\mathbf{p}_3'-\cdots
+\end{align*}
+の置き換えをするだけでよい．同様に，残ったデルタ関数$\delta(E_1'+E_2'+\cdots -E)$を用いて任意の\uwave{1個の}積分を取り除ける．それを以下で実行しよう．\par
+最も簡単なのは終状態が2粒子の場合である．この場合，(3.4.21)は
+\begin{align*}
+\delta^4(p_\beta-p_\alpha)d\beta \to \delta(E_1'+E_2' -E) d^3\mathbf{p}_2'
+\end{align*}
+となる．$\mathbf{p}_1',\mathbf{p}_2'$依存性をあらわに書けば，これは
+\begin{align*}
+\delta^4(p_\beta-p_\alpha)d\beta \to& \delta\left(\sqrt{|\mathbf{p}_1'|^2+m'^2_1}+\sqrt{|\mathbf{p}_2'|^2+m'^2_2} -E\right) d^3\mathbf{p}_2' \\
+=&\delta\left(\sqrt{|\mathbf{p}_1'|^2+m'^2_1}+\sqrt{|\mathbf{p}_1'|^2+m'^2_2} -E\right) |\mathbf{p}_1'|^2d|\mathbf{p}_1'| d\Omega
+\end{align*}
+である．ここで(3.4.22)
+\begin{align*}
+\mathbf{p}_2'=-\mathbf{p}_1'
+\end{align*}
+と，極座標を用いて$d^3\mathbf{p}_1'=|\mathbf{p}_1'|^2d|\mathbf{p}_1'| d\Omega$と書いた\footnote{奇数個の変数がマイナスだけされたので$d^3\mathbf{p}_1'=-d^3\mathbf{p}_2'$となる$\cdots$と勘違いしないように．積分範囲を逆にするところからさらにマイナスが生じるのでマイナスがキャンセルして生じなくなる．よくあるミスなのでこれから何度も注意することになると思う．}．$d\Omega:=\sin\theta d\theta d\phi$は$\mathbf{p}_1'$の立体角微分である．デルタ関数の中身は$|\mathbf{p}_1'|$に関して単調増加関数であるから，$x=x_0$にだけ1位のゼロ点($\Leftrightarrow f'(x_0)\neq 0$)をもつ任意の実関数について成り立つ標準的な式
+\begin{align*}
+\delta(f(x))=\delta(x-x_0)/|f'(x_0)|
+\end{align*}
+を用いると簡単になる．(この式について簡単に証明しておく．任意の有界区間内に高々有限個の1位のゼロ点$(f(x_1)=\cdots=f(x_n)=0)$をもつ任意の関数$f(x)$を引数にもつデルタ関数$\delta(f(x))$を考える．各ゼロ点に対して，微小な$\epsilon$で開近傍をとることでゼロ点同士を分離することができて\footnote{厳密には$\mathbb{R}^n$が通常のノルムで距離空間になり，距離空間がハウスドロフ(2点分離可能)であることを使っている．$\sin(1/x)$のような$x=0$の近傍に無限個のゼロ点をもち，ゼロ点同士がどれだけ小さい近傍をとっても分離することができないので，このような関数はこの議論に使えない．$\sin x$のように$\mathbb{R}$上で無限個のゼロ点を持っていても，任意の\uwave{有界}区間内にゼロ点が有限個となっていればよい．}テスト関数$\varphi$を用いて
+\begin{align*}
+\int_{-\infty}^\infty \varphi(x)\delta(f(x))dx=&\sum_{i=1}^n\int_{x_i-\epsilon}^{x_i+\epsilon}\varphi(x)\delta(f(x))dx \\
+=&\sum_{i=1}^n\int_{f^{-1}(x_i-\epsilon)}^{f^{-1}(x_i+\epsilon)}\varphi(f^{-1}(y))\delta(y)\frac{dy}{|f'(f^{-1}(y))|} \quad (y=f(x),dx=\frac{dy}{|f'(f^{-1}(y))|}) \\
+=&\sum_{i=1}^n\varphi(f^{-1}(0)) \frac{1}{|f'(f^{-1}(0))|}  \\
+=&\sum_{i=1}^n\left[\varphi(x_i) \frac{1}{|f'(x_i)|}\right]_{f(x_i)=0} \\
+=&\int_{-\infty}^\infty \varphi(x)\left[\sum_{i=1}^n\frac{1}{|f'(x_i)|} \delta(x-x_i)\right]dx \\
+\therefore \quad \delta(f(x))=&\sum_{i=1}^n\frac{1}{|f'(x_i)|} \delta(x-x_i)
+\end{align*}
+が得られる\footnote{途中で$f^{-1}(y)$をとるために，逆関数定理を使っており，微分係数$f'(x_i)$がゼロでないから$x_i$の近傍$(x_i-\epsilon,x_i+\epsilon)$で$f$が可逆になることを使っている．}．ゼロ点が1個しかなければ，今回用いる式になる．)今の場合，(3.4.23)のデルタ関数の引数$E_1'+E_2'-E$がゼロとなるゼロ点$|\mathbf{p}_1'|$の値$k'$は
+\begin{align*}
+k'=&\frac{\sqrt{(E^2-m'^2_1-m'^2_2)^2-4m'^2_1m'^2_2}}{2E}
+\end{align*}
+である．実際にこれは
+\begin{align*}
+E_1'=&\sqrt{k'^2+m'^2_1}=\sqrt{\frac{(E^2-m'^2_1-m'^2_2)^2-4m'^2_1m'^2_2}{4E^2}+m'^2_1} \\
+=&\sqrt{\frac{E^4+m'^4_1+m'^4_2-2E^2m'^2_1-2E^2m'^2_2+2m'^2_1m'^2_2-4m'^2_1m'^2_2+4E^2m'^2_1}{4E^2}} \\
+=&\sqrt{\frac{E^4+m'^4_1+m'^4_2+2E^2m'^2_1-2E^2m'^2_2-2m'^2_1m'^2_2}{4E^2}}=\sqrt{\frac{(E^2+m'^2_1-m'^2_2)^2}{4E^2}} \\
+=&\frac{E^2+m'^2_1-m'^2_2}{2E} \\
+E_2'=&\sqrt{k'^2+m'^2_2}=\sqrt{\frac{(E^2-m'^2_1-m'^2_2)^2-4m'^2_1m'^2_2}{4E^2}+m'^2_2} \\
+=&\sqrt{\frac{E^4+m'^4_1+m'^4_2-2E^2m'^2_1+2E^2m'^2_2-2m'^2_1m'^2_2}{4E^2}}=\sqrt{\frac{(E^2-m'^2_1+m'^2_2)^2}{4E^2}} \\
+=&\frac{E^2-m'^2_1+m'^2_2}{2E} \\
+\therefore \quad &E_1'+E'_2-E=0
+\end{align*}
+となっているからゼロ点である．またデルタ関数の引数の微分は
+\begin{align*}
+&\left[\frac{d}{d|\mathbf{p}_1'|}\left(\sqrt{|\mathbf{p}_1'|^2+m'^2_1}+\sqrt{|\mathbf{p}_1'|^2+m'^2_2} -E\right)\right]_{|\mathbf{p}_1'|=k'} \\
+=&\left[\frac{|\mathbf{p}_1'|}{\sqrt{|\mathbf{p}_1'|^2+m'^2_1}}+\frac{|\mathbf{p}_1'|}{\sqrt{|\mathbf{p}_1'|^2+m'^2_2}}\right]_{|\mathbf{p}_1'|=k'} \\
+=&\frac{k'}{E_1'}+\frac{k'}{E_2'} \\
+=&\frac{k'(E_1'+E_2')}{E_1'E_2'}=\frac{k' E}{E_1'E_2'}
+\end{align*}
+となっている．よって(3.4.23)は
+\begin{align*}
+\delta^4(p_\beta-p_\alpha)d\beta \to& \delta\left(\sqrt{|\mathbf{p}_1'|^2+m'^2_1}+\sqrt{|\mathbf{p}_2'|^2+m'^2_2} -E\right) d^3\mathbf{p}_2' \\
+=&\delta\left(\sqrt{|\mathbf{p}_1'|^2+m'^2_1}+\sqrt{|\mathbf{p}_1'|^2+m'^2_2} -E\right) |\mathbf{p}_1'|^2d|\mathbf{p}_1'| d\Omega \\
+=&\frac{E_1'E_2'}{k'E} \delta(|\mathbf{p}_1'|-k') |\mathbf{p}_1'|^2d|\mathbf{p}_1'| d\Omega \\
+\to &\frac{k'E_1'E_2'}{E} d\Omega
+\end{align*}
+このようにして，$k',E_1',E_2'$が全て(3.4.24)～(2.4.26)で与えられると理解することで$d|\mathbf{p}_1'|$積分が実行できて，デルタ関数を落とすことができる．特に，運動量ゼロ，エネルギー$E$の1粒子状態の2粒子への微分崩壊率(3.4.13)は
+\begin{align*}
+d\Gamma(\alpha\to \beta)=&2\pi |M_{\beta\alpha}|^2 \frac{k'E_1'E_2'}{E} d\Omega \\
+\therefore \quad \frac{d\Gamma(\alpha\to \beta)}{d\Omega}=&\frac{2\pi k'E_1'E_2'}{E}|M_{\beta\alpha}|^2 
+\end{align*}
+と書ける．2体散乱過程$12\to 1'2'$の微分断面積は(3.4.15)より，始重心系なので$k:=|\mathbf{p}_1|=|\mathbf{p}_2|$として
+\begin{align*}
+d\sigma(\alpha\to \beta)=&(2\pi)^4u_\alpha^{-1}|M_{\beta\alpha}|^2 \frac{k'E_1'E_2'}{E} d\Omega \\
+\therefore \quad \frac{d\sigma(\alpha\to \beta)}{d\Omega}=&\frac{(2\pi)^4 k'E_1'E_2'}{Eu_\alpha}|M_{\beta\alpha}|^2 \\
+=& \frac{(2\pi)^4 k'E_1'E_2'E_1E_2}{E^2 k}|M_{\beta\alpha}|^2 \quad \because (3.4.18),u_\alpha=\frac{k E}{E_1E_2}
+\end{align*}
+で与えられる．重心系での散乱に関するこれらの公式は至る所で便利！(定性的には，重心系であることから終状態の2粒子は互いに同じ大きさで反対の向きの運動量に向かなければならず，運動量の大きさも始状態のエネルギー$E$によって$k'$に定まってしまう．残された自由度はどの向きに互いに放出されるかという角度パラメータのみであり，これは力学的(kinematics)なものではなくハミルトニアン$H$(相互作用項$V$)の構造(dynamics)によって角度のどのような関数になるかは変化する．)
+
+\vskip\baselineskip
+
+
+最後に，Peskinなどでよく使われている微分遷移率との違いについて言及しておく．Peskinの(4.79)式で示されている2体散乱の微分断面積の式は(多少今回の記法に合わせて)
+\begin{align*}
+d\sigma=\frac{1}{2E_A2E_B|\mathbf{v}_A-\mathbf{v}_B|}\left(\prod_f \frac{d^3\mathbf{p}_f}{(2\pi)^3}\frac{1}{2E_f}\right)|M_{\beta\alpha}|^2(2\pi)^4\delta^4(p_\beta-p_\alpha)
+\end{align*}
+これは(3.4.15)とは異なる表式になっている．これはPeskinとWeinbergでは1粒子状態の定義が異なっており，規格化も異なっていることに起因する．Peskin(2.35)(3.106)などを見れば1粒子状態の定義に次の違いがあることがわかる．
+\begin{align*}
+\Psi_{p,\sigma}^{\mathrm{Peskin}}=\sqrt{(2\pi)^32E_p}\Psi_{p,\sigma}^{\mathrm{Weinberg}}
+\end{align*}
+(規格化の$(2\pi)^3$も補正しなければならないことに注意．)これにより，もしPeskin流の1粒子状態を採用することにすると，$M_{\beta\alpha}$は始・終状態の各粒子について$\sqrt{(2\pi)^32E_p}$で割らないといけない．さらにPeskinでは(4.73)より
+\begin{align*}
+S_{\beta\alpha}=+i(2\pi)^4 \delta^4(p_\beta-p_\alpha) M_{\beta\alpha}
+\end{align*}
+を採用しているから，(3.4.11)(3.4.11)での$|M_{\beta\alpha}|^2$では
+\begin{align*}
+|M^{\mathrm{W}}_{\beta\alpha}|^2=(2\pi)^6|M_{\beta\alpha}^{\mathrm{P}}|\prod_\alpha \frac{1}{(2\pi)^32E} \prod_\beta\frac{1}{(2\pi)^3 2E}
+\end{align*}
+を使わなければならない(添え字のW,PはWeinberg流,Peskin流の意味)．これを用いると(3.4.11)は
+\begin{align*}
+d\Gamma(\alpha\to \beta)=&(2\pi)^{3N_{\alpha}+4} V^{1-N_\alpha} |M_{\beta\alpha}^{\mathrm{P}}|^2 \delta^4(p_\beta-p_\alpha) \left(\prod_\alpha \frac{1}{(2\pi)^32E} \right) \left(\prod_\beta\frac{1}{(2\pi)^3 2E}\right) d^3\mathbf{p}_1'd^3\mathbf{p}_2\cdots \\
+=&(2\pi)^4 V^{1-N_\alpha}|M_{\beta\alpha}^{\mathrm{P}}|^2\delta^4(p_\beta-p_\alpha) \left(\prod_\alpha\frac{1}{2E}\right) \left(\prod_\beta \frac{d^3\mathbf{p}_\beta}{(2\pi)^3 2E_\beta}\right)
+\end{align*}
+この表式で$N_\alpha=2$とおいて，再び(3.4.14)を用いて微分断面積にすれば(重複の因子は無視して)
+\begin{align*}
+d\sigma(\alpha\to \beta)=\frac{1}{2E_12E_2u_\alpha}(2\pi)^4 |M_{\beta\alpha}^{\mathrm{P}}|^2\delta^4(p_\beta-p_\alpha) \left(\prod_\beta \frac{d^3\mathbf{p}_\beta}{(2\pi)^3 2E_\beta}\right)
+\end{align*}
+となって，無事Peskin流の断面積が復活する．(実は相対速度の定義も違うが，面倒だしそこまで本質的じゃない．)もちろん$N_\alpha=1$の崩壊率も同様に同じになることがわかる．\par
+どちらの流儀で計算しても最終的に与えられる断面積などの結果は同じである．しかし5章で与えられる場の定義なども全て1粒子状態の定義に合わせてWeinbergとPeskinなどで異なるため，一度どちらかの流儀で計算すると決めたなら最後まで一方で計算しなければならない．
+
+
+\newpage
+
+\subsection{摂動論}
+$S$行列が計算できれば，それを用いて測定量と比較できる断面積や崩壊率などの量を得ることができることが分かった．次に考えるべきは，そもそも$S$行列はどのようにして計算できるのかという点である．$S$行列を計算する上で歴史的に見て最も有用な技法は摂動論，すなわちハミルトニアン$H=H_0+V$の相互作用項$V$のベキでの展開である．(3.2.7)と(3.1.18)から$S$行列は
+\begin{align*}
+S_{\beta\alpha}=&\delta(\beta-\alpha)-2\pi i \delta(E_\beta-E_\alpha)T_{\beta\alpha}^+ \\
+T_{\beta\alpha}^+=&(\Phi_{\beta},V\Psi_\alpha^-)
+\end{align*}
+と表せる．ここで$\Psi_{\alpha}^+$はリップマン・シュウィンガー方程式(3.1.17)を満たす．
+\begin{align*}
+\Psi_\alpha^+=\Phi_\alpha+\int d\gamma \frac{T^+_{\beta\alpha}\Phi_\gamma}{E_\alpha-E_\gamma+i\epsilon}
+\end{align*}
+この方程式に$V$を作用させ$\Phi_\beta$とのスカラー積をとると，
+\begin{align*}
+(\Phi_\beta,V\Psi_\alpha^+)=&(\Phi_\beta ,V\Phi_\alpha)+\int d\gamma \frac{(\Phi_\beta,V \Phi_\gamma)T^+_{\gamma\alpha}}{E_\alpha-E_\gamma+i\epsilon} \\
+\therefore \quad T_{\beta\alpha}^+=& V_{\beta\alpha}+\int d\gamma \frac{V_{\beta\gamma}T^+_{\gamma\alpha}}{E_\alpha-E_\gamma+i\epsilon}
+\end{align*}
+という積分方程式が得られる．左辺を右辺に用いると
+\begin{align*}
+T_{\beta\alpha}^+=&V_{\beta\alpha}+\int d\gamma \frac{V_{\beta\gamma}V_{\gamma\alpha}}{E_\alpha-E_\gamma+i\epsilon}+\int d\gamma \frac{V_{\beta\gamma}}{E_\alpha-E_\gamma+i\epsilon }\int d\gamma' \frac{V_{\gamma\gamma'}T^+_{\gamma'\alpha}}{E_\alpha-E_{\gamma'}+i\epsilon} \\
+=&V_{\beta\alpha}+\int d\gamma \frac{V_{\beta\gamma}V_{\gamma\alpha}}{E_\alpha-E_\gamma+i\epsilon}+\int d\gamma d\gamma' \frac{V_{\beta\gamma}V_{\gamma\gamma'}T^+_{\gamma'\alpha}}{(E_\alpha-E_\gamma+i\epsilon)(E_\alpha-E_{\gamma'}+i\epsilon)}
+\end{align*}
+これを繰り返すと
+\begin{align*}
+T_{\beta\alpha}^+=&V_{\beta\alpha}+\int d\gamma \frac{V_{\beta\gamma}V_{\gamma\alpha}}{E_\alpha-E_\gamma+i\epsilon}+\int d\gamma d\gamma' \frac{V_{\beta\gamma}V_{\gamma\gamma'}V_{\gamma'\alpha}}{(E_\alpha-E_\gamma+i\epsilon)(E_\alpha-E_{\gamma'}+i\epsilon)}+\cdots
+\end{align*}
+という形になる．この式に基づく$S$行列の計算は\uwave{旧式の}摂動論である．これの代わりに，以下で導出する\uwave{時間に依存する}摂動論を使う．
+
+\vskip\baselineskip
+
+(3.2.5)を用いて$S$演算子を
+\begin{align*}
+S=&U(+\infty,-\infty) =\lim_{\tau\to \infty} \lim_{\tau_0 \to -\infty} U(\tau,\tau_0) \\
+U(\tau,\tau_0):=&e^{iH_0\tau}e^{-iH(\tau-\tau_0)}e^{-iH_0\tau_0}
+\end{align*}
+と表す．この$U(\tau,\tau_0)$を$\tau$で微分すると
+\begin{align*}
+\frac{d}{d\tau}U(\tau,\tau_0)=&\left[e^{iH_0\tau}iH_0\right] e^{-iH(\tau-\tau_0)}e^{-iH_0\tau_0}+e^{iH_0\tau}\left[-iH e^{-iH(\tau-\tau_0)}\right]e^{-iH_0\tau_0} \\
+=&-i e^{iH_0\tau}Ve^{-iH(\tau-\tau_0)}e^{-iH_0\tau_0} \\
+=&-i \left[e^{iH_0\tau}V e^{-iH_0\tau}\right] e^{iH_0\tau}e^{-iH(\tau-\tau_0)}e^{-iH_0\tau_0} \\
+=&-iV(\tau)U(\tau,\tau_0) \\
+i\frac{d}{d\tau}U(\tau,\tau_0)=&V_I(\tau)U(\tau,\tau_0)
+\end{align*}
+という微分方程式が得られる．ここで
+\begin{align*}
+V_I(t):=e^{iH_0t} V e^{-iH_0t}
+\end{align*}
+である．(この時間依存性はハイゼンベルグ表示で要求される
+\begin{align*}
+O_H(t)=e^{iHt} O e^{iHt}
+\end{align*}
+の時間依存性とは異なるので，区別するために相互作用表示で定義されているという．ここでは添え字に$I$をつけて区別しやすくするが，明らかに違いがわかる文脈では省略する．)この微分方程式の形式的な解は，積分方程式
+\begin{align*}
+U(\tau,\tau_0)=1-i\int^\tau_{\tau_0} dt V_I(t)U(t,\tau_0)
+\end{align*}
+であり，実際両辺$\tau$微分すれば微分方程式を満たしていることがわかり，さらに初期条件$U(\tau_0,\tau_0)=1$も満たしている．積分方程式の左辺を右辺に代入すれば
+\begin{align*}
+U(\tau,\tau_0)=&1-i\int^\tau_{\tau_0} dt V(t)\left[1-i\int^t_{\tau_0} dt' V_I(t')U(t',\tau_0)\right] \\
+=&1-i\int^\tau_{\tau_0} dt V_I(t)+(-i)^2\int^\tau_{\tau_0} dt \int^{t}_{\tau_0}dt' V_I(t)V_I(t')U(t',\tau_0)
+\end{align*}
+これを繰り返せば，次のような$V_I$に関するベキ展開
+\begin{align*}
+U(\tau,\tau_0)=&1-i\int^\tau_{\tau_0} dt_1 V_I(t_1)+(-i)^2\int^\tau_{\tau_0} dt_1 \int^{t_1}_{\tau_0} dt_2 V_I(t_1)V_I(t_2) \\
+&+(-i)^3\int^\tau_{\tau_0} dt_1 \int^{t_1}_{\tau_0} dt_2 \int^{t_2}_{\tau_0} dt_3 V_I(t_1)V_I(t_2)V_I(t_3)+\cdots \\
+&+(-i)^n\int^\tau_{\tau_0} dt_1 \int^{t_1}_{\tau_0} dt_2 \cdots \int^{t_{n-1}}_{\tau_0} dt_n V_I(t_1)V_I(t_2)\cdots V_I(t_n)+\cdots
+\end{align*}
+を得る．$\tau=\infty$および$\tau_0=-\infty$をとれば，$S$演算子の摂動展開
+\begin{align*}
+S=&1-i\int^\infty_{-\infty} dt_1 V_I(t_1)+(-i)^2\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 V_I(t_1)V_I(t_2) \\
+&+(-i)^3\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 \int^{t_2}_{-\infty} dt_3 V_I(t_1)V_I(t_2)V_I(t_3)+\cdots \\
+&+(-i)^n\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 \cdots \int^{t_{n-1}}_{-\infty} dt_n V_I(t_1)V_I(t_2)\cdots V_I(t_n)+\cdots
+\end{align*}
+を得る．これは実は旧式の摂動論の方からでも，エネルギー因子のフーリエ表示\footnote{右辺は収束しないので，被積分関数の中に収束因子$e^{-\epsilon\tau}$を入れて積分し，後から$\epsilon\to 0$をとって評価する．実際に右辺を積分してみれば
+\begin{align*}
+-i\int^{\infty}_0 d\tau \exp(i(E_\alpha-E_\gamma+i\epsilon)\tau) =\left[\frac{1}{E_\alpha-E_\gamma+i\epsilon} e^{i(E_\alpha-E_\gamma)}e^{-\epsilon\tau}\right]^\infty_0 =\frac{1}{E_\alpha-E_\gamma+i\epsilon}
+\end{align*}
+となる．}
+\begin{align*}
+\frac{1}{E_\alpha-E_\gamma+i\epsilon}=-i\int^{\infty}_0 d\tau \exp(i(E_\alpha-E_\gamma)\tau)
+\end{align*}
+を使えば導くことができる．実際
+\begin{align*}
+S_{\beta\alpha}=&\delta(\beta-\alpha)-2\pi i \delta(E_\beta-E_\alpha)T_{\beta\alpha}^+ \\
+=&\delta(\beta-\alpha)-2\pi i \delta(E_\beta-E_\alpha) V_{\beta\alpha} -2\pi i \delta(E_\beta-E_\alpha)\int d\gamma \frac{V_{\beta\gamma}V_{\gamma\alpha}}{E_\alpha-E_\gamma+i\epsilon} \\
+&-2\pi i \delta(E_\beta-E_\alpha)\int d\gamma d\gamma' \frac{V_{\beta\gamma}V_{\gamma\gamma'}V_{\gamma'\alpha}}{(E_\alpha-E_\gamma+i\epsilon)(E_\alpha-E_{\gamma'}+i\epsilon)}+\cdots
+\end{align*}
+となり，各項を調べてみると，まず第一項目と第二項目は
+\begin{align*}
+\delta(\beta-\alpha)=&(\Phi_\beta,1 \Phi_\alpha) \\
+-2\pi i \delta(E_\beta-E_\alpha) V_{\beta\alpha}=&-i\int^\infty_{-\infty} dt_1 e^{i(E_\beta-E_\alpha)t_1}(\Phi_\beta,V\Phi_\alpha) \\
+=&-i\int^\infty_{-\infty} dt_1 (e^{-iE_\beta t_1}\Phi_\beta,Ve^{-iE_\alpha t_1}\Phi_\alpha) \quad ((a \Phi,\Psi)=a^* (\Phi,\Psi) に注意)\\
+=&-i\int^\infty_{-\infty} dt_1 (e^{-iH_0 t_1}\Phi_\beta,Ve^{-iH_0t_1}\Phi_\alpha)=-i\int^\infty_{-\infty} dt_1 (\Phi_\beta,e^{iH_0t_1}Ve^{-iH_0t_1}\Phi_\alpha) \\
+=&\left(\Phi_\beta ,\left[-i \int^\infty_{-\infty} dt_1 V_I(t_1)\right]\Phi_\alpha\right)
+\end{align*}
+となり，第三項目は
+\begin{align*}
+&-2\pi i \delta(E_\beta-E_\alpha) \int d\gamma \frac{V_{\beta\gamma}V_{\gamma\alpha}}{E_\alpha-E_\gamma+i\epsilon} \\
+=&(-i)^2\int^\infty_{-\infty} dt_1 e^{i(E_\beta-E_\alpha)t_1} \int d\gamma (\Phi_{\beta},V\Phi_{\gamma})(\Phi_\gamma,V\Phi_\alpha)\int^\infty_0 dt_2 e^{-i(E_\alpha-E_\gamma)t_2} \\
+=&(-i)^2\int^\infty_{-\infty} dt_1 \int^\infty_0 dt_2 \int d\gamma (e^{-iE_\beta t_1} \Phi_{\beta},V e^{-iE_\gamma t_2}\Phi_{\gamma})( \Phi_\gamma ,V e^{-iE_\alpha (t_1-t_2)}\Phi_\alpha) \\
+=&(-i)^2\int^\infty_{-\infty} dt_1 \int^\infty_0 dt_2 \int d\gamma (\Phi_{\beta},e^{iH_0t_1}V e^{-iH_0 t_2}\Phi_{\gamma})( \Phi_\gamma ,V e^{-iH_0 (t_1-t_2)}\Phi_\alpha) \\
+=&(-i)^2\int^\infty_{-\infty} dt_1 \int^\infty_0 dt_2 (\Phi_{\beta},e^{iH_0t_1}V e^{-iH_0 t_2} V e^{-iH_0 (t_1-t_2)}\Phi_\alpha) \\
+=&(-i)^2\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 (\Phi_{\beta},e^{iH_0t_1}V e^{-iH_0t_1} e^{iH_0t_2}V e^{-iH_0 t_2}\Phi_\alpha) \quad (t_2 \to t'_2=t_1-t_2) \\
+=&\left(\Phi_\beta \left[(-i)^2\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 V_I(t_1) V_I(t_2)\right] \Phi_\alpha\right)
+\end{align*}
+これをさらに高次の項についても同様に繰り返してやれば，時間に依存する摂動が導ける．\par
+$S$演算子の，各項の時間積分の積分範囲に注目する．
+\begin{align*}
+(-i)^n\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 \cdots \int^{t_{n-1}}_{-\infty} dt_n V_I(t_1)V_I(t_2)\cdots V_I(t_n)
+\end{align*}
+積分範囲は$-\infty< t_n < t_{n-1}<\cdots < t_2 <t_1 < +\infty$となっていることに気付く．さらに，時間が速い$V(t)$が順に右から左に並べられていることにも気付く．したがって，時間に依存する任意の演算子の時間順序積を，時間が最も遅い演算子が最も左に来て，次に遅い演算子がその右に来て，…というように各演算子を並び替えた積で定義する．例えば
+\begin{align*}
+T\{V_I(t)\}:=&V_I(t) \\
+T\{V_I(t_1)V_I(t_2)\}:=&V_I(t_1) \theta(t_1-t_2)V_I(t_2)+V_I(t_2) \theta(t_2-t_1)V_I(t_1)
+\end{align*}
+といった具合である\footnote{一般に$n$個の演算子$\mc{O}_1,\cdots \mc{O}_n$の時間順序積は
+\begin{align*}
+&T\left\{\prod_{j=1}^n \mcO_j(x_j) \right\}=T\left\{ \mcO_{1}(x_1)\cdots \mcO_{n}(x_n) \right\} \\
+&:= \mcO_{1}(x_1)\theta(x^0_1-x^0_2)\mcO_{2}(x_2)\theta(x^0_2-x^0_3)\times\cdots \\
+&\quad \times\mcO_{m-1}(x_{m-1})\theta(x^0_{m-1}-x^0_m)\mcO_{m}(x_m)\theta(x^0_m-x^0_{m+1})\mcO_{m+1}(x_{m+1})\cdots \theta(x^0_{n-1}-x^0_n)\mcO_n(x_n) \\
+&\quad +((\mc{O}_i,t_i)の組の置換) \\
+=&\sum_{\sigma_n\in S_n}\left[\left( \prod_{j=1}^n \mcO_{\sigma_n(j)} \right)\left(\prod_{k=1}^{n-1}\theta(x^0_{\sigma_n(k)}-x^0_{\sigma_n(k+1)})\right)\right]
+\end{align*}
+と定義される．この定義を直接使う場面は4巻の20章まで無いのだが，個人的な経験でいえば，階段関数は演算子と演算子の間に入れて，演算子と階段関数の引数がうまく隣り合う$\mc{O}_i(x_i)\theta(x^0_i-x^0_j)\mc{O}_j(x_j)$という感覚をもっておくのは大事だと思う．}．ここで$\theta(\tau)$は，$\tau$の符号に対応して$0,1$の値をとる
+\begin{align*}
+\theta(\tau)=\left\{
+\begin{array}{ll}
++1 \quad & (\tau>0 )\\
+0        & (\tau< 0)
+\end{array}
+\right.
+\end{align*}
+という階段関数である\footnote{$\tau=0$での値は$1,0,1/2$あたりから選ばれる．ほぼ使わないので，必要になったら適当に与えることにする．}．これを用いると，積分変数$t_1,\cdots ,t_n$についての$n!$個の置換に分けて
+\begin{align*}
+&\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 \cdots \int^{t_{n-1}}_{-\infty} dt_n V_I(t_1)V_I(t_2)\cdots V_I(t_n) \\
+=&\frac{1}{n!}\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 \cdots \int^{t_{n-1}}_{-\infty} dt_n V_I(t_1)V_I(t_2)\cdots V_I(t_n) \\
+&+\frac{1}{n!}\int^\infty_{-\infty} dt_2 \int^{t_2}_{-\infty} dt_1 \cdots \int^{t_{n-1}}_{-\infty} dt_n V_I(t_2)V_I(t_1)\cdots V_I(t_n) \\
+&+\cdots \\
+&+\frac{1}{n!}\int^\infty_{-\infty} dt_n \int^{t_n}_{-\infty} dt_{n-1} \cdots \int^{t_2}_{-\infty} dt_1 V_I(t_n)V_I(t_{n-1})\cdots V_I(t_1) \\
+=&\frac{1}{n!}\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 \cdots \int^{t_{n-1}}_{-\infty} dt_n T\{V_I(t_1)V_I(t_2)\cdots V_I(t_n)\} \\
+&+\frac{1}{n!}\int^\infty_{-\infty} dt_2 \int^{t_2}_{-\infty} dt_1 \cdots \int^{t_{n-1}}_{-\infty} dt_n T\{V_I(t_1)V_I(t_2)\cdots V_I(t_n)\} \\
+&+\cdots \\
+&+\frac{1}{n!}\int^\infty_{-\infty} dt_n \int^{t_n}_{-\infty} dt_{n-1} \cdots \int^{t_2}_{-\infty} dt_1 T\{V_I(t_1)V_I(t_2)\cdots V_I(t_n)\} \\
+=&\frac{1}{n!}\left[\int^\infty_{-\infty} dt_1 \int^{t_1}_{-\infty} dt_2 \cdots \int^{t_{n-1}}_{-\infty} dt_n+(t_1,\cdots ,t_n の置換)\right]T\{V_I(t_1)V_I(t_2)\cdots V_I(t_n)\} \\
+=&\frac{1}{n!}\int^\infty_{-\infty} dt_1 \int^{\infty}_{-\infty} dt_2 \cdots \int^{\infty}_{-\infty} dt_n T\{V_I(t_1)V_I(t_2)\cdots V_I(t_n)\}
+\end{align*}
+となる．よって(3.5.8)は
+\begin{align*}
+S=1+\sum_{n=1}^\infty \frac{(-i)^n}{n!}\int_{-\infty}^\infty dt_1 dt_2 \cdots dt_n T\Bigl\{V_I(t_1)V_I(t_2)\cdots V_I(t_n)\Bigr\}
+\end{align*}
+と書きなおすことができる．これはダイソンの級数と知られている．形式的にこれはさらに
+\begin{align*}
+S=&T\left[1+\sum_{n=1}^\infty \frac{1}{n!}\left(-i \int_{-\infty}^\infty dt V_I(t)\right)^n \right] \\
+=&T\exp\left(-i \int_{-\infty}^\infty dt V_I(t)\right)
+\end{align*}
+と書かれる．ここでの$T$は，指数関数の級数展開の各項を，時間の順序に並べて評価するという意味である．
+
+\vskip\baselineskip
+
+この形式までくると$S$行列が明白にローレンツ不変な，一つの大きな部類の理論を容易に見つけることができる！$S$行列の要素は，$S$演算子の$\Phi_\alpha,\Phi_\beta$など自由粒子状態間の行列要素$S_{\beta\alpha}=(\Phi_\beta,S\Phi_\alpha)$なので，3.3節より，$S$行列のローレンツ不変性のために示したいことは，$S$演算子がこれらの1粒子状態にローレンツ変換を生成する演算子$U_0(\Lambda,a)$と交換しなければならない．すなわち(3.3.3)の通り，$S$演算子は$U_0(\Lambda,a)$の生成子$H_0,\mathbf{P}_0,\mathbf{J}_0,\mathbf{K}_0$と交換しなければならないということである．\par
+この要求を満たすために，$V_I(t)$が3次元空間積分
+\begin{align*}
+V_I(t)=\int d^3\mathbf{x} \mc{H}_I(\mathbf{x},t)
+\end{align*}
+で書けて，$\mc{H}_I(x)$が
+\begin{align*}
+U_0(\Lambda,a)\mc{H}_I(x)U^{-1}_0(\Lambda,a)=\mc{H}(\Lambda x+a)
+\end{align*}
+の意味でスカラーだと仮定してみる．(この仮定は
+\begin{align*}
+e^{iH_0 t}V e^{-iH_0t} =& e^{iH_0 t}V_I(0)e^{-iH_0t} \\
+=& U_0(1,t) \left[\int d^3\mathbf{x}\mc{H}_I(\mathbf{x},0)\right] U_0^{-1}(1,t) \\
+=&\int d^3\mathbf{x}\mc{H}_I(\mathbf{x},t) \\
+=&V_I(t)
+\end{align*}
+となるから，(3.5.5)と無矛盾である．)すると，$S$演算子は4次元積分の和
+\begin{align*}
+S=1+\sum_{n=1}^\infty \frac{(-i)^n}{n!}\int d^4x_1 \cdots \int d^4x_n T\Bigl\{\mc{H}_I(x_1)\cdots \mc{H}_I(x_n)\Bigr\}
+\end{align*}
+と書ける．こで演算子の時間順序積に含まれる時間の依存性を除いて，全てが明白にローレンツ不変である！実際，ローレンツ変換によって\uwave{各$x_i$同士の過去と未来の順序が入れ替わることがない}と仮定すれば
+\begin{align*}
+&U_0(\Lambda,a)S U_0^{-1}(\Lambda,a) \\
+=&U_0(\Lambda,a)U^{-1}_0(\Lambda,a)+\sum_{n=1}^\infty \frac{(-i)^n}{n!}\int d^4x_1 \cdots \int d^4x_n T\Bigl\{U_0(\Lambda,a) \mc{H}_I(x_1)\cdots \mc{H}_I(x_n) U_0^{-1}(\Lambda,a)\Bigr\} \\
+=&1+\sum_{n=1}^\infty \frac{(-i)^n}{n!}\int d^4x_1 \cdots \int d^4x_n T\Bigl\{\left[U(\Lambda,a)\mc{H}_I(x_1)U^{-1}_0(\Lambda,a)\right]\cdots \left[U(\Lambda,a)\mc{H}_I(x_n)U^{-1}_0(\Lambda,a)\right]\Bigr\} \\
+=&1+\sum_{n=1}^\infty \frac{(-i)^n}{n!}\int d^4x_1 \cdots \int d^4x_n T\Bigl\{\mc{H}_I(\Lambda x_1+a)\cdots \mc{H}_I(\Lambda x_n+a)\Bigr\}
+\end{align*}
+となり，$x^\mu \to x'^\mu=\tensor{\Lambda}{^\mu_\nu} x^\nu+a^\mu$の変数変換によるヤコビアンは$|\det \Lambda|d^4x=d^4x'$であるが，ローレンツ変換は$|\det \Lambda |=1$を満たすから，$d^4x=d^4x'$である．したがって
+\begin{align*}
+=&1+\sum_{n=1}^\infty \frac{(-i)^n}{n!}\int d^4x'_1 \cdots \int d^4x'_n T\Bigl\{\mc{H}_I(x'_1)\cdots \mc{H}_I(x'_n)\Bigr\} \\
+=&S \\
+\therefore \quad & U_0(\Lambda,a)S U_0^{-1}(\Lambda,a)=S
+\end{align*}
+となり，ローレンツ不変な理論であることが明白になる！\par
+しかし，時間順序積に現れる$\theta(\tau)$があらわに時間に依存するから，ローレンツ変換による過去・未来の順序が入れ替わる場合にはこれは成り立たない．実際，簡単に$\mc{H}_I$について二次の項を見てみると
+\begin{align*}
+&\int d^4x_1 d^4x_2 U_0(\Lambda,a)T\Bigl\{ \mc{H}_I(x_1)\mc{H}_I(x_2)\Bigr\} U^{-1}_0(\Lambda,a)\\
+=&\int d^4x_1 d^4x_2 U_0(\Lambda,a) \Bigl[\mc{H}_I(x_1)\theta(x^0_1-x^0_2)\mc{H}_I(x_2)+\mc{H}_I(x_2)\theta(x^0_2-x^0_1)\mc{H}_I(x_1)\Bigr] U_0^{-1}(\Lambda,a) \\
+=&\int d^4x_1 d^4x_2 \Bigl[\mc{H}_I(\Lambda x_1+a) \theta(x^0_1-x^0_2)\mc{H}_I(\Lambda x_2+a)+\mc{H}_I(\Lambda x_2+a)\theta(x^0_2-x^0_1)\mc{H}_I(\Lambda x_1+a)\Bigr] \\
+=&\int d^4x_1 d^4x_2 \left[\mc{H}_I(x_1) \theta\Bigl([\Lambda^{-1}(x_1-x_2)]^0\Bigr)\mc{H}_I(x_2)+\mc{H}_I(x_2) \theta\Bigl([\Lambda^{-1}(x_2-x_1)]^0\Bigr)\mc{H}_I(x_1)\right]
+\end{align*}
+となる．2.5節の最初に運動量$p^\mu$の場合で計算したのと同じ手順により，$\Lambda$が固有順時ローレンツ変換であるならば時間的(time-like)に離れている$(x_1-x_2)^2 \leq 0$である限り$(x_1-x_2)^0$の符号がローレンツ変換の下で変化しないことがわかる．すなわち引数の符号によって定まる階段関数は不変$\theta\Bigl([\Lambda^{-1}(x_1-x_2)]^0\Bigr)=\theta(x_1-x_2)$である．しかし，空間的(space-like)に離れている$(x_1-x_2)^2>0$の場合，$(x_1-x_2)^0$の符号が反転するような(つまり過去と未来の因果が反転するような)ローレンツ変換$\Lambda$が存在する\footnote{イメージ的には，$x-t$平面を描いてもらって，space-likeな2点(例えば$x_1$を座標原点に，$x_2$を第一象限だが斜め$45^\circ$線より下側に)を書けばわかりやすい．そのままだと$x_1$が過去で$x_2$は未来に位置するが，ローレンツ変換によって同時刻線が斜めになることを使えば，$x_2$が未来で$x_1$が過去になるように慣性系を選ぶことができることがわかるはず．time-likeな2点(例えば今度は$x_2$を斜め$45^\circ$線より上側に)を考えれば，ローレンツ変換のもとで同時刻線は最大でも$45^\circ$線までしか斜めにできないので，過去と未来が入れ替わるようにはできない．}．その場合$\theta\Bigl([\Lambda^{-1}(x_1-x_2)]^0\Bigr)=\theta(x_2^0-x_1^0)$であるから
+\begin{align*}
+=&\int d^4x_1 d^4x_2 \left[\mc{H}_I(x_1)\theta(x^0_2-x^0_1)\mc{H}_I(x_2)+\mc{H}_I(x_2)\theta(x^0_1-x^0_2)\mc{H}_I(x_1)\right] \\
+\neq &\int d^4x_1 d^4x_2 \left[\mc{H}_I(x_1)\theta(x^0_1-x^0_2)\mc{H}_I(x_2)+\mc{H}_I(x_2)\theta(x_2-x_1)\mc{H}_I(x_1)\right]
+= \int d^4x_1 d^4x_2 T\Bigl\{ \mc{H}_I(x_1)\mc{H}_I(x_2)\Bigr\}
+\end{align*}
+となり，一般に$U_0(\Lambda,a)SU^{-1}_0(\Lambda,a)\neq S$になってしまう．この式をよく見ると，これが再び$S$演算子の2次の項に戻るためには，$x_1,x_2$がspace-likeに離れている$(x_1-x_2)^2>0$場合には演算子$\mc{H}_I(x)$同士が交換
+\begin{align*}
+\mc{H}_I(x_1)\mc{H}_I(x_2)=&\mc{H}_I(x_2)\mc{H}_I(x_1) \\
+\therefore \quad [\mc{H}_I(x_1),\mc{H}_I(x_2)]=&0
+\end{align*}
+すればよいことがわかる．より高次の項で考えても，$x_1,x_2,\cdots , x_n$のいくつか(例えば$x_3$と$x_5$など)が空間的に離れている場合，時間順序積に現れる階段関数がローレンツ変換のもとで不変でない組み合わせが存在する(例えば$\mc{H}_I(x_3)\theta(x_3-x_5)\mc{H}_I(x_5)$の現れる項)．その組み合わせはローレンツ変換のもとで過去と未来が入れ替わる項が現れる($\mc{H}_I(x_3)\theta(x_3-x_5)\mc{H}_I(x_5)\to \mc{H}_I(x_3)\theta(x_5-x_3)\mc{H}_I(x_5)$)が，空間的に離れた相互作用が交換($[\mc{H}_I(x_3),\mc{H}_I(x_5)]=0$)すれば高次の項も時間順序積を保ち，$S$行列はローレンツ変換のもとで不変となる．以上より，$\mc{H}_I(x)$同士がspace-likeに離れているときにすべて交換
+\begin{align*}
+[\mc{H}_I(x),\mc{H}_I(x')]=0 \quad (x-x')^2 \geq 0
+\end{align*}
+すれば\footnote{上の議論から$(x-x')^2 > 0$のときに交換すればいいのだが，6章で出てくる$x=x'$での特異性によって少し条件を強めて$(x-x')^2 \geq 0$としているらしい．}，(3.5.13)の時間順序での並べ替えによって特別なローレンツ系が導入されることはない．\par
+慣性系によって過去と未来が入れ替わるような2点は相対論的に因果がないとするのであった．したがってこの条件はまさに因果律を制定するものである．イメージ的には，因果のない相互作用同士は互いに干渉しないことを意味している．
+
+\vskip\baselineskip
+
+
+3.3節の結果を用いて，(3.5.12)と(3.5.14)を満たす相互作用(3.5.11)が正しいローレンツ変換性をもつ$S$行列を導くことが，形式的だが非摂動論的に示せる．\par
+微小なブースト$\mathbf{x}\to \mathbf{x}'=\mathbf{x}+\bm{\beta} t,t\to t'=t+\bm{\beta} \cdot \mathbf{x}$に対して，(3.5.12)は2.4節の結果より
+\begin{align*}
+U_0(\Lambda,0)\mc{H}_I(\mathbf{x},t)U_0(\Lambda,0)=&(1-i\mathbf{K}_0\cdot \bm{\beta}) \mc{H}_I(\mathbf{x},t)(1+i\mathbf{K}_0\cdot \bm{\beta}) \\
+=&\mc{H}_I(\mathbf{x},t)-i\bm{\beta}\cdot [\mathbf{K}_0,\mc{H}_I(\mathbf{x},t)] \\
+=\mc{H}_I(\mathbf{x}+\bm{\beta}t,t+\bm{\beta}\cdot \mathbf{x})=&\mc{H}_I(\mathbf{x},t)+t\bm{\beta}\cdot \nabla \mc{H}_I(\mathbf{x},t)+\bm{\beta}\cdot \mathbf{x} \frac{\partial}{\partial t}\mc{H}_I(\mathbf{x},t) \\
+\therefore \quad -i[\mathbf{K}_0 ,\mc{H}_I(\mathbf{x},t)]=&t\bm{\nabla} \mc{H}_I(\mathbf{x},t)+\mathbf{x} \frac{\partial}{\partial t}\mc{H}_I(\mathbf{x},t)
+\end{align*}
+を与える．$\mathbf{x}$で積分して
+\begin{align*}
+(\mathrm{LHS})=&-i\int d^3\mathbf{x}[\mathbf{K}_0 ,\mc{H}_I(\mathbf{x},t)]=-i\left[\mathbf{K}_0 ,\int d^3\mathbf{x} \mc{H}_I(\mathbf{x},t)\right] \\
+=&-i[\mathbf{K}_0 ,V_I(t)] \\
+(\mathrm{RHS})=&t\int d^3\mathbf{x} \bm{\nabla}\mc{H}_I(\mathbf{x},t)+\frac{\partial}{\partial t}\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t)
+\end{align*}
+さらに$t=0$とおくと
+\begin{align*}
+-i[\mathbf{K}_0 ,V]=\left[\frac{\partial}{\partial t}\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t)\right]_{t=0}
+\end{align*}
+一方，$a^\mu=(0,0,0,\epsilon)$とおいて再び(3.5.12)より
+\begin{align*}
+U_0(1,a)\left[\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t)\right]U^{-1}_0(1,a)=&\int d^3\mathbf{x}\, \mathbf{x} U_0(1,a)\mc{H}_I(\mathbf{x},t)U(1,a) \\
+=&\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t+\epsilon) \\
+=&\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t)+\epsilon \frac{\partial}{\partial t}\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t) \\
+=(1+iH_0 \epsilon)\left[\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t)\right](1-iH_0\epsilon)=&\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t)+i\epsilon \left[H_0,\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t)\right]
+\end{align*}
+で$t=0$とおくと
+\begin{align*}
+\left[\frac{\partial}{\partial t}\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},t)\right]_{t=0}=i\left[H_0,\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},0)\right]
+\end{align*}
+を与える．以上より
+\begin{align*}
+[\mathbf{K}_0,V]=&-[\mathbf{W},H_0] \\
+\mathbf{W}:=&-\int d^3\mathbf{x}\, \mathbf{x} \mc{H}_I(\mathbf{x},0)
+\end{align*}
+となる．この$\mathbf{W}$がブースト生成子$\mathbf{K}_0$の補正であり，(3.3.21)を満たすためには
+\begin{align*}
+[\mathbf{K}_0,V]=&-[\mathbf{W},H_0]=-[\mathbf{W},H]+[\mathbf{W},V] \\
+\therefore \quad [\mathbf{W},V]=&0
+\end{align*}
+でなければならない．これは書き換えれば
+\begin{align*}
+0=[\mathbf{W},V]=\int d^3\mathbf{x} \int d^3\mathbf{y}\,  \mathbf{x} [\mc{H}_I(\mathbf{x},0),\mc{H}_I(\mathbf{y},0)]
+\end{align*}
+であるから，任意の$\mathbf{x},\mathbf{y}$について
+\begin{align*}
+[\mc{H}_I(\mathbf{x},0),\mc{H}_I(\mathbf{y},0)]=0
+\end{align*}
+であることが十分条件である．これはまさに因果律(3.5.14)により導かれる！(時間$t=0$が一致している同時交換関係なので，任意の$\mathbf{x},\mathbf{y}$が$(\mathbf{x}-\mathbf{y})^2\geq 0$であることより因果律の関係性から導かれる．)したがって，3.3節のローレンツ不変性の条件は相互作用(3.5.11)と因果律(3.5.14)を仮定すれば満たされることがわかる．\par
+ローレンツ不変性を満たすことを確認するだけならば前半の$S$行列の不変性だけで十分だが，3.3節はローレンツ不変性の一般的な条件を与えてり，今回の仮定が実際にその一般的な条件を満たすことを確認した．今回与えた仮定はローレンツ不変性の必要十分条件ではなく，3.3節で与えた条件に比べて幾分強い十分条件だが，4章で与えるクラスター分解原理も満たさなければならないことを考えると(3.5.11)(3.5.14)でほとんど一般的な条件となっている．
+
+\vskip\baselineskip
+
+
+この節でこれまでに述べた方法は，相互作用演算子$V$が十分小さいときに(つまり結合定数が十分小さいときに)有効である．この近似の修正版で歪曲波ボルン近似として知られているものもある．それは，相互作用が
+\begin{align*}
+V=V_{\mathrm{s}}+V_{\mathrm{w}}
+\end{align*}
+のように，弱い項$V_{\mathrm{w}}$と強い項$V_{\mathrm{s}}$の二つの項を含む場合に有用である．相互作用$V$の中に通常の摂動論が使えない程度に強い相互作用$V_{\mathrm{s}}$を含んでいる場合でも，もし$V_{\mathrm{w}}$のベキだけで散乱振幅が書けたらそれは摂動論が適用できるはず！$\Psi_{\mathrm{s}\alpha}^\pm$を，$V_{\mathrm{s}}$を全相互作用をみなしたときのin,out状態(3.1.16)
+\begin{align*}
+\Psi_{\mathrm{s}\alpha}^\pm=\Phi_\alpha+(E_\alpha-H_0\pm i\epsilon)^{-1}V_{\mathrm{s}}\Psi_{\mathrm{s}\alpha}^\pm
+\end{align*}
+で定義する．すると(3.1.18)は
+\begin{align*}
+T_{\beta\alpha}^+=&(\Phi_\beta ,V \Psi_\alpha^+) \\
+=&\left(\left[\Psi_{\mathrm{s}\beta}^- - (E_\beta-H_0-i\epsilon)^{-1} V_{\mathrm{s}}\Psi_{\mathrm{s}\beta}^-\right] ,V \Psi_\alpha^+\right) \quad \because(3.5.20)\\
+=&\left(\left[\Psi_{\mathrm{s}\beta}^- - (E_\beta-H_0-i\epsilon)^{-1} V_{\mathrm{s}}\Psi_{\mathrm{s}\beta}^-\right] ,(V_{\mathrm{s}}+V_{\mathrm{w}}) \Psi_\alpha^+\right) \quad \because(3.5.19) \\
+=&(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+)+(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{s}}\Psi_{\alpha}^+) \\
+&-\left( (E_\beta-H_0-i\epsilon)^{-1} V_{\mathrm{s}}\Psi_{\mathrm{s}\beta}^-,(V_{\mathrm{s}}+V_{\mathrm{w}}) \Psi_\alpha^+\right) \\
+=&(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+)+(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{s}}\Psi_{\alpha}^-) \\
+&-\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} (E_\beta-H_0+i\epsilon)^{-1} (V_{\mathrm{s}}+V_{\mathrm{w}}) \Psi_\alpha^+\right) \\
+=&(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+) \\
+&+\left( \Psi_{\mathrm{s}\beta}^-,\left[ V_{\mathrm{s}}- V_{\mathrm{s}} (E_\beta-H_0+i\epsilon)^{-1} (V_{\mathrm{s}}+V_{\mathrm{w}})\right] \Psi_\alpha^+\right) \\
+=&(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+) \\
+&+\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \left[ \Psi_\alpha^+ -  (E_\beta-H_0+i\epsilon)^{-1} V\Psi_\alpha^+\right]\right)
+\end{align*}
+と書ける．よって
+\begin{align*}
+\delta(E_\beta-E_\alpha)T_{\beta\alpha}^+=&\delta(E_\beta-E_\alpha)\left[(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+) +\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \left[ \Psi_\alpha^+ -  (E_\beta-H_0+i\epsilon)^{-1} V\Psi_\alpha^+\right]\right)\right] \\
+=&\delta(E_\beta-E_\alpha)\left[(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+) +\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \left[ \Psi_\alpha^+ -  (E_\alpha-H_0+i\epsilon)^{-1} V\Psi_\alpha^+\right]\right)\right] \\
+=&\delta(E_\beta-E_\alpha)\left[(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+)+\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \Psi_\alpha^+\right)\right] \quad \because (3.1.16)
+\end{align*}
+となるから，$S_{\beta\alpha}=\delta(\beta-\alpha)-2\pi i\delta(E_\beta-E_\alpha)T_{\beta\alpha}^+$に現れる$T_{\beta\alpha}^+$は
+\begin{align*}
+T_{\beta\alpha}^+=(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+)+\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \Psi_\alpha^+\right)
+\end{align*}
+で計算される．右辺第2項目はちょうど，強い相互作用のみが存在するときの$T_{\beta\alpha}^+$になっている．実際
+\begin{align*}
+T_{\mathrm{s}\beta\alpha}^+:=&(\Phi_\beta ,V_{\mathrm{s}} \Psi_{\mathrm{s}\alpha}^+) \\
+=&\left(\left[\Psi_{\mathrm{s}\beta}^- - (E_\beta-H_0-i\epsilon)^{-1} V_{\mathrm{s}}\Psi_{\mathrm{s}\beta}^-\right] ,V_{\mathrm{s}} \Psi_{\mathrm{s}\alpha}^+\right) \\
+=&(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{s}}\Psi_{\alpha}^+) -\left( (E_\beta-H_0-i\epsilon)^{-1} V_{\mathrm{s}}\Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \Psi_\alpha^+\right) \\
+=&(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+)+(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{s}}\Psi_{\alpha}^-) -\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} (E_\beta-H_0+i\epsilon)^{-1} V_{\mathrm{s}} \Psi_\alpha^+\right) \\
+=&\left( \Psi_{\mathrm{s}\beta}^-,\left[ V_{\mathrm{s}}- V_{\mathrm{s}} (E_\beta-H_0+i\epsilon)^{-1} (V_{\mathrm{s}}+V_{\mathrm{w}})\right] \Psi_\alpha^+\right) \\
+=&\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \left[ \Psi_\alpha^+ -  (E_\beta-H_0+i\epsilon)^{-1} V_{\mathrm{s}}\Psi_\alpha^+\right]\right) \\
+\delta(E_\beta-E_\alpha)T_{\mathrm{s}\beta\alpha}^+=&\delta(E_\beta-E_\alpha)\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \left[ \Psi_\alpha^+ -  (E_\beta-H_0+i\epsilon)^{-1} V_{\mathrm{s}}\Psi_\alpha^+\right]\right) \\
+=&\delta(E_\beta-E_\alpha)\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \left[ \Psi_\alpha^+ -  (E_\alpha-H_0+i\epsilon)^{-1} V_{\mathrm{s}}\Psi_\alpha^+\right]\right) \\
+=&\delta(E_\beta-E_\alpha)\left( \Psi_{\mathrm{s}\beta}^-,V_{\mathrm{s}} \Psi_\alpha^+\right)
+\end{align*}
+よって
+\begin{align*}
+T_{\beta\alpha}^+=(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+)+T_{\mathrm{s}\beta\alpha}^+
+\end{align*}
+で計算される．これは第2項目$T_{\mathrm{s}\beta\alpha}^+$がゼロになるとき，すなわち過程$\alpha\to\beta$が強い相互作用だけでは生成されないときに最も有用となる．(例えば，原子核のベータ崩壊過程において，原子核の始状態と終状態に作用する強い核力の存在は無視できないほど強い．しかし中性子を陽子に転換するには弱い相互作用が必要であり，強い相互作用だけではこの過程を生成できない．)そのような過程$\alpha\to \beta$では
+\begin{align*}
+T_{\beta\alpha}^+=(\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\alpha}^+)
+\end{align*}
+となる．\par
+ここまでの結果は全て正確で，非摂動論的な結果である．しかし$T$行列をこのように書き換えるのが有用なのは，(3.5.23)の始状態$\Psi_{\alpha}^+$($V_{\mathrm{w}}$と$V_{\mathrm{s}}$の両方の影響を考慮したin状態)への$V_{\mathrm{w}}$の影響が無視できるほど弱く，$\Psi_{\alpha}^+$を$\Psi_{\mathrm{s}\alpha}^+$(強い相互作用$V_{\mathrm{s}}$のみを考慮したin状態)でそのまま置き換えてよい場合である．この近似では，(3.5.23)は
+\begin{align*}
+T_{\beta\alpha}^+ \simeq (\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\mathrm{s}\alpha}^+)
+\end{align*}
+となる．これは$V_{\mathrm{w}}$の1次での近似で正しいが，$V_{\mathrm{s}}$については全次数で正しい．($V_{\mathrm{s}}$についての影響は完全に取り入れたin,out状態を用いているからだ．)\par
+この近似は物理の至る所で出てくるらしい．先程の例と同様に，$V_{\mathrm{s}}$を強い相互作用として，$V_{\mathrm{w}}$をそれぞれ原子核の弱い相互作用や電磁相互作用として用いて，$\Psi_{\mathrm{s}\beta}^-$と$\Psi_{\mathrm{s}\alpha}^+$を原子核の終状態と始状態として用いることで，原子核のベータ崩壊やガンマ崩壊の$S$行列が計算できる．
+
+
+\newpage
+
+
+\subsection{ユニタリー性の意味}
+$S$行列のユニタリー性は，任意の多粒子状態$\alpha$の前方散乱$\alpha\to \alpha$振幅$M_{\alpha\alpha}$をその状態の全ての反応の全確率と関連付ける有用な条件を課す．
+
+\vskip\baselineskip
+
+一般の場合，状態$\beta$が状態$\alpha$と同じか否かにかかわらず，$S$行列は(3.3.2)のように
+\begin{align*}
+S_{\beta\alpha}=\delta(\beta-\alpha)-2\pi i \delta^4(p_\beta-p_\alpha)M_{\beta\alpha}
+\end{align*}
+と書けることを思い出す．するとユニタリー条件(3.2.2)から
+\begin{align*}
+\delta(\gamma-\alpha)=&\int d\beta S^*_{\beta\gamma}S_{\beta\alpha} \\
+=&\int d\beta \left[\delta(\beta-\gamma)-2\pi i \delta^4(p_\beta-p_\gamma)M_{\beta\gamma}\right]^* \left[\delta(\beta-\alpha)-2\pi i \delta^4(p_\beta-p_\alpha)M_{\beta\alpha}\right] \\
+=&\int d\beta \Bigl[\delta(\beta-\gamma)\delta(\beta-\alpha)-2\pi i \delta(\beta-\gamma)\delta^4(p_\beta-p_\alpha)M_{\beta\alpha}+2\pi i \delta(\beta-\alpha)\delta^4(p_\beta-p_\gamma)M^*_{\beta\gamma} \\
+&\qquad +4\pi^2 \delta^4(p_\beta-p_\gamma)\delta^4(p_\beta-p_\alpha)M^*_{\beta\gamma}M_{\beta\alpha}\Bigr] \\
+=&\delta(\gamma-\alpha)-2\pi i \delta^4(p_\gamma-p_\alpha)M_{\gamma\alpha}+2\pi i\delta^4(p_\alpha-p_\gamma)M^*_{\alpha\gamma} \\
+&\qquad +4\pi^2 \int d\beta \delta^4(p_\beta-p_\gamma)\delta^4(p_\beta-p_\alpha)M^*_{\beta\gamma}M_{\beta\alpha} \\
+=&\delta(\gamma-\alpha)-2\pi i \delta^4(p_\gamma-p_\alpha)M_{\gamma\alpha}+2\pi i\delta^4(p_\gamma-p_\alpha)M^*_{\alpha\gamma} \\
+&\qquad +4\pi^2 \delta^4(p_\gamma-p_\alpha) \int d\beta \delta^4(p_\beta-p_\gamma)M^*_{\beta\gamma}M_{\beta\alpha} \\
+=&\delta(\gamma-\alpha) \\
+&\qquad +2\pi \delta^4(p_\gamma-p_\alpha)\left[-iM_{\gamma\alpha}+iM_{\alpha\gamma}^* +2\pi\int d\beta \delta^4(p_\beta-p_\alpha)M_{\beta\gamma}^* M_{\beta\alpha}\right]
+\end{align*}
+を得る．$\delta(\gamma-\alpha)$と$\delta^4(p_\gamma-p_\alpha)$の因子を落として，
+\begin{align*}
+0=-iM_{\gamma\alpha}+iM_{\alpha\gamma}^* +2\pi\int d\beta \delta^4(p_\beta-p_\alpha)M_{\beta\gamma}^* M_{\beta\alpha}
+\end{align*}
+が得られる．これは$\alpha=\gamma$とおくことで
+\begin{align*}
+0=&-iM_{\alpha\alpha}+iM_{\alpha\alpha}^* +2\pi\int d\beta \delta^4(p_\beta-p_\alpha)M_{\beta\alpha}^* M_{\beta\alpha} \\
+\mathrm{Im}M_{\alpha\alpha}=&-\pi \int d\beta \delta^4(p_\beta-p_\alpha)|M_{\beta\alpha}|^2
+\end{align*}
+となる．(3.4.11)を用いると，これは体積$V$中の始状態$\alpha$により生成される全ての反応の全反応率の公式
+\begin{align*}
+\Gamma_\alpha:=&\int d\beta \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&(2\pi)^{3N_\alpha-2}V^{1-N_\alpha} \int d\beta \delta^4(p_\beta-p_\alpha)|M_{\beta\alpha}|^2 \\
+=&-\frac{1}{\pi}(2\pi)^{3N_\alpha-2}V^{1-N_\alpha} \mathrm{Im}M_{\alpha\alpha}
+\end{align*}
+として表現できる．\par
+特に$\alpha$が2粒子状態のとき，$N_\alpha=2$であるから
+\begin{align*}
+\mathrm{Im}M_{\alpha\alpha}=&-\pi \int d\beta \delta^4(p_\beta-p_\alpha)|M_{\beta\alpha}|^2 \\
+=&-\frac{u_\alpha \sigma_\alpha}{16\pi^3}
+\end{align*}
+と書ける．ここで$u_\alpha$は状態$\alpha$の相対速度(3.4.17)であり，また$\sigma_\alpha$はこの状態の全断面積で，(3.4.15)より
+\begin{align*}
+\sigma_\alpha:=\int d\beta \frac{d\sigma(\alpha\to \beta)}{d\beta} = (2\pi)^4 u^{-1}_\alpha \int d\beta |M_{\beta\alpha}|^2 \delta^4(p_\beta-p_\alpha)
+\end{align*}
+で与えられる．これは通常，散乱振幅$f(\alpha\to \beta)$を用いて，少し異なった形で表される．(3.4.30)より，重心系での2体散乱の微分断面積が，$k,k'$をそれぞれ始状態と終状態の運動量の大きさとして
+\begin{align*}
+\frac{d\sigma(\alpha\to \beta)}{d\Omega}=\frac{(2\pi)^4 k'E_1'E_2'E_1E_2}{kE^2}|M_{\beta\alpha}|^2
+\end{align*}
+となることを示している．そこで散乱振幅を
+\begin{align*}
+f(\alpha\to \beta):=-\frac{4\pi^2}{E} \sqrt{\frac{k'E_1'E_2' E_1E_2}{k}} M_{\beta\alpha}
+\end{align*}
+と定義すると，微分断面積は単に
+\begin{align*}
+\frac{d\sigma(\alpha\to \beta)}{d\Omega}=|f(\alpha\to \beta)|^2
+\end{align*}
+となる．2体弾性散乱の場合，$E_1=E_1',E_2=E_2',k=k'$なので
+\begin{align*}
+f(\alpha\to \beta)=-\frac{4\pi^2 E_1 E_2}{E} M_{\beta\alpha}
+\end{align*}
+を得る．相対速度$u_\alpha$に(3.4.18)を用いれば$u_\alpha=k E/E_1 E_2$であるから
+\begin{align*}
+\mathrm{Im}f(\alpha\to \alpha)=&-\frac{4\pi^2 E_1 E_2}{E} \mathrm{Im}M_{\alpha\alpha} \\
+=&+\frac{4\pi^2 E_1 E_2}{E} \frac{u_\alpha \sigma_\alpha}{16\pi^3} \\
+=&\frac{k}{4\pi}\sigma_\alpha
+\end{align*}
+と表せる．ユニタリー条件(3.6.3)をこの形に表したものは，光学定理として知られている．\par
+
+
+
+\vskip\baselineskip
+
+
+任意個の粒子を含む一般的な反応の場合に戻って，(3.6.2)を$\mathsf{CPT}$不変性と一緒に用いると，粒子と反粒子の全反応率について言えることがある．$\mathsf{CPT}$は反ユニタリーなので，その保存は，一般には$\alpha\to\beta$の過程と，粒子をその反粒子に置き換えた\uwave{過程}との間の，どのような簡単な関係も導き出せない．その代わりに，ある過程と，その反粒子を含む\uwave{逆過程}との関係が与えられる！$\mathsf{CPT}$不変性により$S$行列が条件
+\begin{align*}
+S_{\beta,\alpha}=&(\Psi_{\beta}^-,\Psi_{\alpha}^+) \\
+=&(\mathsf{CPT}\Psi_{\beta}^-,\mathsf{CPT}\Psi_{\alpha}^+)^* \\
+=&(\mathsf{CPT}\Psi_{\alpha}^+,\mathsf{CPT}\Psi_{\beta}^-) \\
+=&(\Psi_{\mc{CPT}\alpha}^-,\Psi_{\mc{CPT}\beta}^+) \\
+=&S_{\mc{CPT}\alpha,\mc{CPT}\beta}
+\end{align*}
+を満たすことが示せる．ここで$\mc{CPT}$は，全てのスピン$z$成分を反転させ，全ての粒子を対応する反粒子に変え，行列要素に始状態の粒子の様々な位相因子と終状態の粒子の位相因子の複素共役をかけることを表す．
+\begin{align*}
+S_{\mc{CPT}\alpha,\mc{CPT}\beta}=&\prod_{n\in \alpha}\xi_{n_i}\eta_{n_i}(-1)^{j_i-\sigma_n}\zeta_{n_i} \prod_{j\in \beta}\xi^*_{n_j}\eta^*_{n_j}(-1)^{j_j-\sigma_j}\zeta^*_{n_j} \\
+&\quad \times S_{p_1-\sigma_1n_1^c;p_2-\sigma_2n_2^c;\cdots,p'_1-\sigma'_1n'^c_1;p'_2-\sigma'_2n'^c_2;\cdots}
+\end{align*}
+ここで$n$の上付き添え字は$n$の反粒子を表す．$\mathsf{CPT}$不変性はまた粒子がその対応する反粒子と同じ質量をもつことを要求するから，$S_{\beta\alpha}$の$\delta^4(p_\alpha-p_\beta)$の係数についても同じ関係がなりたつ．
+\begin{align*}
+M_{\beta,\alpha}=M_{\mc{CPT}\alpha,\mc{CPT}\beta}
+\end{align*}
+特に，始状態と終状態が同じとき，位相因子は全て相殺$|\xi_i|^2=|\eta_i|^2=|\zeta_i|^2=1$するから
+\begin{align*}
+M_{p_1\sigma_1n_1;p_2\sigma_2n_2;\cdots,p_1\sigma_1n_1;p_2\sigma_2n_2;\cdots}=M_{p_1-\sigma_1n_1^c;p_2-\sigma_2n_2^c;\cdots,p'_1-\sigma'_1n'^c_1;p'_2-\sigma'_2n'^c_2;\cdots}
+\end{align*}
+となる．一般化された光学定理(3.6.2)を用いると，ある粒子の組からなる始状態$\alpha$からの全反応率は，スピンを反転した対応する反粒子からなる始状態の場合と同じだということを教えてくれる．
+\begin{align*}
+\Gamma_{p_1\sigma_1n_1;p_2\sigma_2n_2;\cdots}=\Gamma_{p_1-\sigma_1n_1^c;p_2-\sigma_2n_2^c;\cdots}
+\end{align*}
+特に，これを1粒子に適用すると，任意の粒子の崩壊率$\Gamma_\alpha$はスピンを反転させた反粒子の崩壊率に等しいことがわかる．1粒子の場合のスピンの向きは回転により自由に変更でき，回転不変性により崩壊率はスピンの$z$成分によらないはずである．ｓたがって一般的な結果(3.6.15)の特殊な場合として，不安定粒子とその対応する反粒子とは性格に同じ寿命を持つことが分かる．(もちろん，各崩壊チャンネルごとの崩壊率は同じになるとは限らない．)
+
+\vskip\baselineskip
+
+
+ユニタリー条件$S^\dagger S=1$から(3.6.2)を導いたのと同じ議論を，もう一方のユニタリー条件$SS^\dagger=1$についても行うことができる．
+\begin{align*}
+\delta(\gamma-\alpha)=&\int d\beta S_{\gamma\beta}S_{\alpha\beta}^* \\
+=&\int d\beta \left[\delta(\gamma-\beta)-2\pi i \delta^4(p_\gamma-p_\beta)M_{\gamma\beta}\right] \left[\delta(\alpha-\beta)-2\pi i \delta^4(p_\alpha-p_\beta)M_{\alpha\beta}\right]^* \\
+=&\int d\beta \Bigl[\delta(\gamma-\beta)\delta(\alpha-\beta)-2\pi i \delta(\alpha-\beta)\delta^4(p_\gamma-p_\beta)M_{\gamma\beta}+2\pi i \delta(\gamma-\beta)\delta^4(p_\alpha-p_\beta)M^*_{\alpha\beta} \\
+&\qquad +4\pi^2 \delta^4(p_\gamma-p_\beta)\delta^4(p_\alpha-p_\beta)M_{\gamma\beta}M^*_{\alpha\beta}\Bigr] \\
+=&\delta(\gamma-\alpha)-2\pi i \delta^4(p_\gamma-p_\alpha)M_{\gamma\alpha}+2\pi i\delta^4(p_\alpha-p_\gamma)M^*_{\alpha\gamma} \\
+&\qquad +4\pi^2 \int d\beta \delta^4(p_\beta-p_\gamma)\delta^4(p_\beta-p_\alpha)M_{\gamma\beta}M^*_{\alpha\beta} \\
+=&\delta(\gamma-\alpha)-2\pi i \delta^4(p_\gamma-p_\alpha)M_{\gamma\alpha}+2\pi i\delta^4(p_\gamma-p_\alpha)M^*_{\alpha\gamma} \\
+&\qquad +4\pi^2 \delta^4(p_\gamma-p_\alpha) \int d\beta \delta^4(p_\beta-p_\gamma)M_{\gamma\beta}M^*_{\alpha\beta} \\
+=&\delta(\gamma-\alpha) \\
+&\qquad +2\pi \delta^4(p_\gamma-p_\alpha)\left[-iM_{\gamma\alpha}+iM_{\alpha\gamma}^* +2\pi\int d\beta \delta^4(p_\beta-p_\alpha)M_{\gamma\beta}M_{\alpha\beta}^*\right] \\
+\therefore \quad \mathrm{Im}M_{\alpha\beta}=&-\pi \int d\beta \delta^4(p_\beta-p_\alpha)|M_{\alpha\beta}|^2
+\end{align*}
+((3.6.2)と同じに見えるが，$\alpha$と$\beta$が入れ替わっていることに注意．)これを(3.6.2)に用いると，逆反応の関係式
+\begin{align*}
+\int d\beta \delta^4(p_\beta-p_\alpha)|M_{\beta\alpha}|^2=\int d\beta \delta^4(p_\beta-p_\alpha)|M_{\alpha\beta}|^2
+\end{align*}
+が得られる．(3.4.11)から
+\begin{align*}
+(\mathrm{LHS})=&\int d\beta \delta^4(p_\beta-p_\alpha)|M_{\beta\alpha}|^2 \\
+=&\int d\beta (2\pi)^{3N_\alpha-2}V^{1-N_\alpha} \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&\frac{V}{(2\pi)^2}\int d\beta \left[\frac{(2\pi)^3}{V}\right]^{N_\alpha} \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+(\mathrm{RHS})=&\int d\beta \delta^4(p_\beta-p_\alpha)|M_{\alpha\beta}|^2 \\
+=&\int d\beta (2\pi)^{3N_\beta-2}V^{1-N_\beta} \frac{d\Gamma(\alpha\to \beta)}{d\alpha} \\
+=&\frac{V}{(2\pi)^2}\int d\beta \left[\frac{(2\pi)^3}{V}\right]^{N_\beta} \frac{d\Gamma(\beta\to \alpha)}{d\alpha} \\
+\therefore \quad &\int d\beta \left[\frac{(2\pi)^3}{V}\right]^{N_\alpha} \frac{d\Gamma(\alpha\to \beta)}{d\beta}=\int d\beta \left[\frac{(2\pi)^3}{V}\right]^{N_\beta} \frac{d\Gamma(\beta\to \alpha)}{d\alpha}
+\end{align*}
+ここで$c_\beta:=[V/(2\pi)^3]^{N_\beta}$とおくと
+\begin{align*}
+\int d\beta c_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta}=\int d\beta c_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}
+\end{align*}
+($d\beta$積分は$N_\beta$についての和を含んでいるが$N_\alpha$についての和を含んでいないことで左辺と右辺に非対称性があることに注意．)この結果から，熱力学の重要な結果を導く．\par
+系が多粒子状態$\Phi_\alpha$の空間の体積$d\alpha$内に見いだされる確率を$P_\alpha d\alpha$とする．$P_\alpha d\alpha$が遷移$\alpha\to \beta$によって減少する単位時間あたりの率は$P_\alpha d\alpha d\Gamma(\alpha\to \beta)$であるから，$P_\alpha d\alpha$が他の全ての状態へ遷移することにより減少する率は$\beta$について全て和をとり
+\begin{align*}
+\int P_\alpha d\alpha d\Gamma(\alpha\to \beta)=P_\alpha d\alpha \int d\beta \frac{d\Gamma(\alpha\to \beta)}{d\beta}
+\end{align*}
+となる．したがって$P_\alpha$が他の全ての状態へ遷移することにより減少する単位時間あたりの率は
+\begin{align*}
+P_\alpha \int d\beta \frac{d\Gamma(\alpha\to \beta)}{d\beta}
+\end{align*}
+となる．一方，$P_\alpha d\alpha$が他の状態$\beta$からの遷移$\beta \to \alpha$によって増加する率は$P_\beta d\beta d\Gamma(\beta\to \alpha)$であるから，$P_\alpha \alpha$が他の全ての状態からの遷移により増加する単位時間あたりの率は$\beta$について全て和をとり
+\begin{align*}
+\int P_\beta d\beta d\Gamma(\beta\to \alpha)=\left[\int P_\beta d\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}\right]d\alpha
+\end{align*}
+となる．したがって，$P_\alpha$が他の全ての状態からの遷移により増加する単位時間あたりの率は
+\begin{align*}
+\int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}
+\end{align*}
+となる．以上より，$P_\alpha$の単位時間あたりの変化率が
+\begin{align*}
+\frac{dP_\alpha}{dt}=\int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}-\int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta}
+\end{align*}
+で与えられる．これを用いると，$\int P_\alpha d\alpha$の時間変化は
+\begin{align*}
+\frac{d}{dt}\int P_\alpha d\alpha=&\int d\alpha \int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}-\int d\alpha \int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&\int d\alpha \int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}-\int d\beta \int d\alpha P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha} \quad \because (第二項目で \alpha \leftrightarrow \beta) \\
+=&0
+\end{align*}
+となる．したがって，$\int P_\alpha d\alpha$は時間に依らない定数である．(つまり，系はなんらかの状態$\alpha$として見出されるのだから，その全状態$\alpha$について足し合わせた全確率$\int P_\alpha d\alpha$は時間に依らない定数でありナイーブには$\int P_\alpha d\alpha=1$である．)\par
+他方，エントロピー\footnote{$c_\alpha$は$P_\alpha$を無次元化するために入れている．$P_\alpha d\alpha$が確率(無次元)であり$d\alpha$は$3N_\alpha$運動量積分であるから，$P_\alpha$自体は$-3N_\alpha$質量次元の量であり，それを無次元化するために$-3N_\alpha$質量次元の量$c_\alpha$(運動量空間の格子体積)で割っている．}
+\begin{align*}
+H=-\int d\alpha P_\alpha \log (P_\alpha/c_\alpha)
+\end{align*}
+の時間変化率は
+\begin{align*}
+\frac{dH}{dt}=&-\int d\alpha \frac{d P_\alpha}{dt} \log (P_\alpha/c_\alpha)-\int d\alpha P_\alpha \frac{d}{dt} \log \left(\frac{P_\alpha}{c_\alpha}\right) \\
+=&-\int d\alpha \left[\int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}-\int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \right] \log \left(\frac{P_\alpha}{c_\alpha}\right) \\
+&-\int d\alpha P_\alpha \frac{c_\alpha}{P_\alpha}\frac{d}{dt} \frac{P_\alpha}{c_\alpha} \\
+=&-\int d\alpha \int d\beta\left[ P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}- P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \right] \log \left(\frac{P_\alpha}{c_\alpha}\right) \\
+&-\frac{d}{dt}\int P_\alpha d\alpha \\
+=&-\int d\alpha \int d\beta \left[ P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}- P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \right] \log \left(\frac{P_\alpha}{c_\alpha}\right) \\
+=&-\int d\alpha \int d\beta  P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha} \log \left(\frac{P_\alpha}{c_\alpha}\right)+\int d\alpha \int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \log \left(\frac{P_\alpha}{c_\alpha}\right)
+\end{align*}
+第二項目の$\alpha$と$\beta$の積分変数の名前を入れ替えると，
+\begin{align*}
+=&-\int d\alpha \int d\beta  P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha} \log \left(\frac{P_\alpha}{c_\alpha}\right)+\int d\alpha \int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha} \log \left(\frac{P_\beta}{c_\beta}\right) \\
+=&\int d\alpha \int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha} \log \left(\frac{P_\beta c_\alpha}{P_\alpha c_\beta}\right)
+\end{align*}
+となる．任意の$x>0,y>0$に対し，関数$y \log(y/x)$は不等式
+\begin{align*}
+y \log\left(\frac{y}{x}\right) \geq y-x
+\end{align*}
+が成り立つ\footnote{実際，$x>0$を固定し$f(y)=y \log(y/x)-y+x$を$y>0$で微分すると
+\begin{align*}
+\frac{d}{dy} f(y) = \log(y/x) + 1
+\end{align*}
+となる．これは$y>x$のとき正，$y<x$のとき負，$x=y$のときゼロであるから，$f(y)$は$y=x$のとき最小値$f(x)=0$を取る下に凸の関数である．以上より$f(y)\geq 0$が成り立ち，$x>0$は任意であったから任意の$x>0,y>0$に対し$y \log(y/x) \geq y-x$が成り立つ．}．定義より明らかに$P_\alpha >0,c_\alpha>0,P_\beta >0,c_\beta>0$であるから
+\begin{align*}
+& P_\beta c_\alpha \log \left(\frac{P_\beta c_\alpha}{P_\alpha c_\beta}\right) \geq P_\beta c_\alpha -P_\alpha c_\beta \\
+\therefore \quad & P_\beta \log \left(\frac{P_\beta c_\alpha}{P_\alpha c_\beta}\right) \geq \left(\frac{P_\beta}{c_\beta} -\frac{P_\alpha}{c_\alpha}\right)c_\beta
+\end{align*}
+したがって，
+\begin{align*}
+\frac{dH}{dt} \geq& \int d\alpha \int d\beta \left[\frac{P_\beta}{c_\beta} -\frac{P_\alpha}{c_\alpha}\right]c_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha} \\
+=&\int d\alpha \int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha} -\int d\alpha \frac{P_\alpha}{c_\alpha} \int d\beta c_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}
+\end{align*}
+第一項目では$\alpha$と$\beta$を入れ替えて，第二項目では(3.6.18)を用いれば
+\begin{align*}
+=&\int d\alpha \int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} -\int d\alpha \frac{P_\alpha}{c_\alpha} \int d\beta c_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&\int d\alpha \int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta}-\int d\alpha \int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&0
+\end{align*}
+が成り立つ．以上より
+\begin{align*}
+\frac{dH}{dt} =-\int d\alpha P_\alpha \log \left(\frac{P_\alpha}{c_\alpha}\right) \geq 0
+\end{align*}
+これはエントロピー$H=-\int d\alpha P_\alpha \log \left(P_\alpha/c_\alpha\right)$が時間とともに増加することを示している．これは「ボルツマンの$H$定理」と呼ばれる，孤立した粒子系ではエントロピー$H$は不可逆的に増大し最終的には最も安定で平衡なマクスウェル・ボルツマン分布に達することを主張する定理である．\par
+途中で用いた不等式$y \log(x/y) \geq y-x$の等号成立条件は$x=y$であり，したがって$dH/dt=0$は$P_\alpha/c_\alpha=P_\beta/c_\beta$が成り立つときになりたつ．そこで，確率密度$P_\alpha$が全エネルギー$E_\alpha$や全電荷$Q_\alpha$のような保存量\uwave{のみ}に依存する関数$f(E_\alpha,Q_\alpha,\cdots)$に$c_\alpha$をかけたもの$P_\alpha=c_\alpha f(E_\alpha,Q_\alpha,\cdots)$であると仮定する．すると，もし$P_\alpha/c_\alpha=P_\beta/c_\beta$でなければ$f(E_\alpha,Q_\alpha,\cdots)\neq f(E_\beta,Q_\beta,\cdots)$であり，少なくとも$E_\alpha =E_\beta,Q_\alpha=Q_\beta,\cdots$のいずれかがなりたっておらず，$\alpha$と$\beta$で保存量の1つが異なり，そのような二つの状態は遷移で移りあわないため$d\Gamma(\beta\to \alpha)/d\alpha=0$である．逆に言えば$P_\alpha/c_\alpha=P_\beta/c_\beta$でなければ$d\Gamma(\beta\to \alpha)/d\alpha$は非ゼロの値を持たず，したがって(3.6.19)の第一項目で$P_\beta=P_\alpha c_beta/c_\alpha$と置き換えてよい．(そうでなければ第一項目はゼロになるからである．)すると
+\begin{align*}
+\frac{dP_\alpha}{dt}=&\int d\beta P_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}-\int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&\int d\beta \frac{P_\alpha}{c_\alpha}c_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}-\int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&\frac{P_\alpha}{c_\alpha} \int d\beta c_\beta \frac{d\Gamma(\beta\to \alpha)}{d\alpha}-\int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&\frac{P_\alpha}{c_\alpha} \int d\beta c_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta}-\int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \quad \because (3.6.18) \\
+=&\int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta}-\int d\beta P_\alpha \frac{d\Gamma(\alpha\to \beta)}{d\beta} \\
+=&0
+\end{align*}
+となり，$P_\alpha$は時間に依存しなくなる．したがって上の仮定がなりたつならばエントロピー$H=-\int d\alpha P_\alpha \log \left(P_\alpha/c_\alpha\right)$も時間に依存しなくなり，この系は平衡状態に達している．
+
+
+
+
+
+
+
+
+\end{document}

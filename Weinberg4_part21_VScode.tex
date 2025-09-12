@@ -1,0 +1,3979 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{tensor}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+\newcommand{\mr}[1]{\mathrm{#1}}
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part21}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+
+\maketitle
+\setcounter{part}{20}
+\part{ゲージ対称性の自発的破れ}
+\setcounter{section}{21}
+\setcounter{subsection}{0}
+\subsection{ユニタリー・ゲージ}
+19章で見たように，大域的対称性の群$G$が部分群$H$に自発的に破れた理論では，各々の独立な破れた対称性毎に質量ゼロのNGボゾンが存在する．(NG定理) \par
+$\Rightarrow$すなわち，スピンゼロの実場$\phi_n(x)$の質量行列$M^2_{nm}$(19.2節の最初を参照すれば，実表現のみを対象にしている．複素表現も実場にできることを思い出す．)は，$G$の各々の独立な対称性の生成子$t_\alpha$に対応して，ゼロ固有値と固有ベクトル$\sum_m (t_\alpha)_{nm}v_m$をもつ．(19.2節参照)ここで$v_m=\braket{\phi_m(0)}_{\VAC}$\par
+これらのNGボゾンモード(成分)は，場に$G$変換$\gamma^{-1}(x)$
+\begin{align*}
+\tilde{\phi}_n(x)=\sum_m \gamma^{-1}_{nm}(x)\phi_m(x)
+\end{align*}
+を施して，新しい場$\tilde{\phi}(x)$がNGボゾン方向と直交させる，すなわち
+\begin{align*}
+\sum_{nm}\tilde{\phi}_n(x)(t_\alpha)_{nm}v_m=0
+\end{align*}
+とすることで消し去ることができる，ということを(19.6.4)で見た．(21.1.2)を満たすように場を回転(21.1.1)させた後では，NGボゾンモードは時空に依存するパラメータ$\gamma(x)$がNGボゾン場として再登場した．((19.6.12)参照，そのときはNGボゾン場として出てくるのは具体的に$\xi(x)$だった．)この手続きの重要な点は，時空的に定数の$\gamma(x)=\gamma$変換(21.1.1)のもとではラグランジアンは(大域$G$不変なので)不変なので，$\gamma(x)$依存性は全て\uwave{$\gamma(x)$に微分がかかる場合を除いて消える}，ということだった．ここまでが19章の復習だ．
+
+\vskip\baselineskip
+
+他方，ラグランジアンが\uwave{定数の$G$変換}ばかりでなく，\uwave{時空点に依存する$G$変換}のもとでも不変ならば，変換(21.1.1)は理論の真の対称性であり，$\phi_n\to\tilde{\phi}_n$で置き換えるだけなので全ての$\gamma(x)$依存性はラグランジアンから消える！(つまり(19.5.6)のような新しい項は出てこない．)\par
+$\Rightarrow$これは，ゲージ場自身に条件(ゲージ条件)を課して$A^\mu\to \tilde{A}^\mu$($\tilde{A}^\mu$はゲージ条件を満たすゲージ場)という再定義をする代わりに，$\phi\to\tilde{\phi}$($\tilde{\phi}$は条件(21.1.2)を満たすスカラー場)という再定義をすることに相当．\par
+$\Rightarrow$(21.1.2)で再定義されるゲージは「ユニタリー・ゲージ」と呼ばれる．(8.2節参照)
+
+\vskip\baselineskip
+
+(21.1.2)より，ラグランジアンに現れる$\phi_n$はNGボゾンモードのない$\tilde{\phi}_n$に置き換えられるので，ユニタリーゲージではNGボゾン場は現れない．理論はゲージ不変なので，(ゲージ変換で自分の好きなゲージに移れるから)全てのゲージ条件において同様に物理的なNGボゾン場は存在しない！\par
+$\Rightarrow$ベクトル・ボゾン($A^\mu_\alpha$の表す粒子)についてはどうだろうか？\par
+もし$\phi_n$が正準規格化された基本的なスカラー場なら，ラグランジアンは
+\begin{align*}
+\mc{L}_\phi=-\frac{1}{2}\sum_n \mc{D}_\mu\phi_n \mc{D}^\mu\phi_n&=-\frac{1}{2}\sum_n \mc{D}_\mu\tilde{\phi}_n \mc{D}^\mu\tilde{\phi}_n \\
+&=-\frac{1}{2}\sum_n\left\{ \partial_\mu \tilde{\phi}_n - i\sum_{m,\alpha}t^\alpha_{nm}A_{\alpha\mu}\tilde{\phi}_m \right\}^2
+\end{align*}
+の項を含む．ここで$t_\alpha$はゲージ群$G$の全ての生成子を動く．$\phi$と$\tilde{\phi}$は等価なので，今後チルダは省略し，この節では\uwave{常にユニタリーゲージ(21.1.2)を採用している}とする．対称性$G$は$\phi_n$の真空期待値$v_m$によってやぶれていると仮定しているので，粒子のスペクトルの性質を見るため，ずらした場
+\begin{align*}
+\phi_n=v_n+\phi'_n
+\end{align*}
+を定義する．(21.1.3)を$\phi'とA$について二次まで展開すると，
+\begin{align*}
+&\mc{L}_\phi=-\frac{1}{2}\sum_n\left\{ \partial_\mu \phi'_n - i\sum_{m,\alpha}t^\alpha_{nm}A_{\alpha\mu}(\phi'_m+v_m) \right\}^2 \\
+\Rightarrow \quad &\mc{L}_{\phi,\mathrm{QUAD}}=-\frac{1}{2}\sum_n\left\{ \partial_\mu \phi'_n - i\sum_{m,\alpha}t^\alpha_{nm}A_{\alpha\mu}v_m \right\}^2
+\end{align*}
+(21.1.2)を微分すると，条件
+\begin{align*}
+0=\sum_{nm}\partial_\mu\phi_n(x)t^\alpha_{nm}v_m=\sum_{nm}\partial_\mu\phi'_n(x)t^\alpha_{nm}v_m
+\end{align*}
+を得るので，$\phi'$と$A$の交差項は消えて
+\begin{align*}
+\mc{L}_{\phi,\mathrm{QUAD}}&=-\frac{1}{2}\sum_n \partial_\mu\phi'_n(x)\partial^\mu \phi'_n(x)+i\sum_{nm\alpha}\uwave{\partial_\mu\phi'_n(x)t^\alpha_{nm}v_m}A^\mu_\alpha +\frac{1}{2}\sum_{nm\ell \alpha\beta} t^\alpha_{nm}v_mt^\beta_{n\ell}v_{\ell}A_{\alpha\mu}A_{\beta}^{\mu} \\
+&=-\frac{1}{2}\sum_n \partial_\mu\phi'_n(x)\partial^\mu \phi'_n(x)+\frac{1}{2}\sum_{nm\ell \alpha\beta} t^\alpha_{nm}v_mt^\beta_{n\ell}v_{\ell}A_{\alpha\mu}A_{\beta}^{\mu} \\
+&=-\frac{1}{2}\sum_n \partial_\mu\phi'_n(x)\partial^\mu \phi'_n(x)-\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A_{\alpha\mu}A_{\beta}^{\mu}
+\end{align*}
+ここで
+\begin{align*}
+\mu^2_{\alpha\beta}\equiv -\sum_{nm\ell}t^\alpha_{nm}t^{\beta}_{n\ell}v_mv_{\ell}
+\end{align*}
+と定義した．これとヤン・ミルズラグランジアン$-\frac{1}{4}F_{\alpha\mu\nu}F_{\alpha}^{\mu\nu}$の二次の項を合わせると，ベクトル粒子は質量行列$\mu^2_{\alpha\beta}$をもつ．
+
+\vskip\baselineskip
+
+$\mu^2_{\alpha\beta}$の代数的な性質を見る．$t^\alpha_{nm}$は虚：$(t^{\alpha}_{nm})^*=-t^\alpha_{nm}$で反対称：$(t^{\alpha}_{nm})^T=t^\alpha_{mn}=-t^\alpha_{nm}$(したがってエルミート：$(t^\alpha_{nm})^\dagger=t^\alpha_{nm}$)なので，行列$\mu^2_{\alpha\beta}$は
+\begin{align*}
+\mu^2_{\alpha\beta}&=-\sum_{nm\ell}t^\alpha_{nm}t^{\beta}_{n\ell}v_mv_{\ell}=-\sum_{n}(t^\alpha v)_{n}(t^\beta v)_{n}  \\
+&=\sum_{nm\ell}v_m t^\alpha_{mn} t^\beta_{n\ell}v_\ell
+\end{align*}
+などのように書き換えることができることに留意しておけば，
+\begin{align*}
+(\mu^2_{\alpha\beta})^*=-\sum_{nm\ell}\left(t^\alpha_{nm}t^\beta_{n\ell}v_m v_\ell\right)^*&=-\sum_{nm\ell}\left(t^\alpha_{nm}\right)^*(t^\beta_{n\ell})^*v_m v_\ell \quad \because vは実場 \\
+&=-\sum_{nm\ell}t^\alpha_{nm}t^\beta_{n\ell}v_m v_\ell=\mu^2_{\alpha\beta}
+\end{align*}
+となって実がわかる．また
+\begin{align*}
+\mu^2_{\beta\alpha}=\sum_{nm\ell}v_mt^\beta_{mn}t^\alpha_{n\ell}v_\ell &=\sum_{nm\ell}v_\ell t^{\alpha}_{n\ell}t^\beta_{mn}v_m \quad \because t^\alpha_{nm} は成分なので入れ替えて良い \\
+&=\sum_{nm\ell}v_\ell t^\alpha_{\ell n} t^\beta_{nm}v_m =\mu^2_{\alpha\beta}
+\end{align*}
+となって対称がわかる．また任意の非ゼロのベクトル$c_{\alpha}$に対して($it^\alpha$が実行列であるから)
+\begin{align*}
+\sum_{\alpha\beta}c_{\alpha}\mu^2_{\alpha\beta}c_{\beta}&=\sum_{n}\left\{\sum_{m\alpha} c_{\alpha} ( it^\alpha_{nm})v_m \right\} \left\{\sum_{\ell\beta}c_{\beta}( it^\beta_{n\ell}) v_\ell \right\} \\
+&=\sum_{n}\left\{ \sum_{m\alpha}c_{\alpha} ( it^\alpha_{nm})v_m \right\}^2\geq0 \quad \because Gは破れていて(t^a v)_n\neq 0\quad(a は G/H の添え字)
+\end{align*}
+となって正行列がわかる．以上より$\mu^2_{\alpha\beta}$は実・対称・正行列だ．\par
+また，生成子の実数の線型結合$t'^i=\sum_{\alpha}c^i_\alpha t^\alpha$で与えられる生成子が，破れていない群の生成子(例えば，$SU(2)\times U(1)\to U(1)_{em}においての，U(1)_{em}$の生成子$q$(21.3.9)のような)であるとき，破れていない群$H$について(19.6.2)と同様
+\begin{align*}
+0=\sum_{m}t'^i_{nm} v_m=\sum_{m}(c^i_\alpha t^\alpha)_{nm} v_m
+\end{align*}
+となる．この場合(21.1.7)より
+\begin{align*}
+\sum_{\beta}\mu^2_{\alpha\beta}c_\beta^i=\sum_{nm\ell\beta}v_m t^\alpha_{mn}(c^i_{\beta} t^{\beta}_{nm}v_m)=0
+\end{align*}
+すなわち，$A_{\alpha\mu}$を
+\begin{align*}
+A_{\alpha\mu}=\sum_i c^i_\alpha A'_{i\mu}+\cdots
+\end{align*}
+と展開すれば
+\begin{align*}
+\sum_\alpha t^\alpha_{nm}A_{\alpha\mu}&=\sum_{\alpha i}t^\alpha_{nm}c^{i}_{\alpha}A'_{i\mu}+\cdots \\
+&=\sum_{i}t'^i_{nm} A'_{i\mu}+\cdots
+\end{align*}
+となり，$A'_{i\mu}$が破れていない生成子に結合するゲージ場となり，(21.1.6)の第二項目から発生する$A'_{i\mu}$の係数はゼロであることがわかる．よって$A'^{i\mu}$は質量ゼロとわかる．逆もまた正しい．(21.1.7)より任意の実定数$c^\beta_\alpha$について
+\begin{align*}
+\sum_{\alpha\beta}c^i_{\alpha}\mu^2_{\alpha\beta}c^i_{\beta}=\sum_{n}\left\{ \sum_{m\alpha}c^\gamma_{\alpha} ( it^\alpha_{nm})v_m \right\}^2\geq0
+\end{align*}
+($i$については和はとっていない．$t'^i$に結合するゲージ場の二次の項の振る舞いが知りたいからだ．)左辺がゼロになるのは$c^i_\alpha$が(21.1.8)を満たすときだけだ．\par
+特に，破れていない対称性の生成子が$\sum_\alpha c_\alpha t^\alpha$の一個だけならば，一般のゲージ場は
+\begin{align*}
+A^\mu_\alpha=c_\alpha A^\mu+\cdots
+\end{align*}
+と書くことができる．($A^\mu$が所謂，後に出てくる質量ゼロの「電磁場」だ．)ここで「$\cdots$」は明確にゼロでない質量をもつ，ゲージ場の線型結合を表す．また$c_\alpha$は唯一の破れていない生成子$q$
+\begin{align*}
+q=\sum_\alpha c_\alpha t^\alpha
+\end{align*}
+の$t^\alpha$の係数なので，質量項$-\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A^\mu_\alpha A_{\mu\beta}$のなかで場$A^\mu$の係数はゼロだ．ゲージ場のラグランジアンの運動項を展開したとき
+\begin{align*}
+-\frac{1}{4}\sum_\alpha(\partial_\mu A_{\alpha\nu}-\partial_\nu A_{\alpha\mu})^2 &=-\frac{1}{4}\sum_\alpha(\partial_\mu (c_\alpha A_\nu)-\partial_\nu (c_\alpha A_\mu)+\cdots)^2 \\
+&=-\frac{1}{4}\sum_\alpha c_\alpha^2(\partial_\mu A_{\nu}-\partial_\nu A_{\mu})^2+\cdots
+\end{align*}
+となるが，第一項目の係数が正準値1になるためには，$c_\alpha$は
+\begin{align*}
+\sum_\alpha c^2_\alpha=1
+\end{align*}
+と規格化される必要がある．$q$は
+\begin{align*}
+\sum_{\alpha}t^\alpha A^\mu_\alpha=qA^\mu+\cdots
+\end{align*}
+の意味で$A^\mu$が結合する荷電だ．これは共変微分が
+\begin{align*}
+\mc{D}_\mu&=\partial_\mu-i\sum_\alpha t^\alpha A_{\alpha\mu}\\
+&=\partial_\mu-iqA_\mu-\cdots
+\end{align*}
+の形となって，QEDの共変微分(8.1.21)と見比べれば第二項目の$q$が荷電であると理解できる．これらの一般的な結果は21.3節で電弱理論を調べる際に使う．
+
+\vskip\baselineskip
+
+以上の結果はここではゲージ群の実表現を形成するスカラー場について導いたが，複素表現に対して適切な形に書き換えることができる．19.6節で見たように，エルミートな生成子$T^\alpha$をもつゲージ群の表現に従って変換する複素スカラー場$\chi(x)$は，実場の組
+\begin{align*}
+\phi(x)=\left(
+\begin{array}{cc}
+\mr{Re}\chi(x) \\
+\mr{Im}\chi(x)
+\end{array}
+\right)
+\end{align*}
+として記述できる．この場の組は生成子
+\begin{align*}
+it^\alpha=\left(
+\begin{array}{cc}
+-\mr{Im}T^\alpha & -\mr{Re}T^\alpha \\
+\mr{Re}T^\alpha & -\mr{Im}T^\alpha
+\end{array}
+\right)
+\end{align*}
+をもつゲージ場の実表現をなす．19章の復習をしておくと，実際$\epsilon_\alpha$を微小パラメータとして
+\begin{align*}
+\chi(x)&=\mr{Re}\chi(x)+i\mr{Im}\chi(x)=(1,\ i)\left(
+\begin{array}{cc}
+\mr{Re}\chi(x) \\
+\mr{Im}\chi(x)
+\end{array}
+\right)=(1,\ i)\phi(x)\\
+\to \chi'(x)&=\left(1+i\sum_\alpha\epsilon_\alpha T^\alpha\right)\chi(x) \\
+&=\left(\mr{Re}\chi(x)+i\mr{Im}\chi(x)\right)+i\sum_\alpha \epsilon_\alpha (\mr{Re}T^\alpha+i\mr{Im}T^\alpha)(\mr{Re}\chi(x)+i\mr{Im}\chi(x)) \\
+&=(\mr{Re}\chi(x)+i\mr{Im}\chi(x))+i\sum_\alpha \epsilon_\alpha(\mr{Re}T^\alpha \mr{Re}\chi(x)-\mr{Im}T^\alpha \mr{Im}\chi(x)) \\
+&\ \qquad\qquad\qquad\qquad\qquad -\sum_\alpha \epsilon_\alpha(\mr{Im}T^\alpha \mr{Re}\chi(x)+\mr{Re}T^\alpha \mr{Im}\chi(x)) \\
+&=\left\{\mr{Re}\chi(x)-\sum_\alpha \epsilon_\alpha(\mr{Im}T^\alpha \mr{Re}\chi(x)+\mr{Re}T^\alpha \mr{Im}\chi(x))\right\} \\
+&+i\left\{\mr{Im}\chi(x)+\sum_\alpha \epsilon(\mr{Re}T^\alpha \mr{Re}\chi(x)-\mr{Im}T^\alpha \mr{Im}\chi(x))\right\} \\
+&=(1,\ i)\left[ \left(
+\begin{array}{cc}
+\mr{Re}\chi(x) \\
+\mr{Im}\chi(x)
+\end{array}
+\right)+\sum_\alpha \epsilon_\alpha\left(
+\begin{array}{cc}
+-\mr{Im}T^\alpha & -\mr{Re}T^\alpha \\
+\mr{Re}T^\alpha & -\mr{Im}T^\alpha
+\end{array}
+\right)\left(
+\begin{array}{cc}
+\mr{Re}\chi(x) \\
+\mr{Im}\chi(x)
+\end{array}
+\right)
+ \right] \\
+&=(1,\ i)\left(1+i\sum_\alpha\epsilon_\alpha t^\alpha\right)\phi(x)
+\end{align*}
+となって，
+\begin{align*}
+&\chi(x)\to\chi'(x)=\left(1+i\sum_\alpha\epsilon_\alpha T^\alpha\right)\chi(x) \\
+\Leftrightarrow \quad &\phi(x)\to \phi'(x)=\left(1+i\sum_\alpha\epsilon_\alpha t^\alpha\right)\phi(x)
+\end{align*}
+という対応が確認できる．(21.1.15)(21.1.16)を(21.1.7)に代入する．
+\begin{align*}
+\mr{Re}(XY)=\mr{Re}X\mr{Re}Y-\mr{Im}X\mr{Im}Y,\quad \mr{Im}(XY)=\mr{Re}X\mr{Im}Y+\mr{Im}X\mr{Re}Y
+\end{align*}
+に留意すると
+\begin{align*}
+\mu^2_{\alpha\beta}&=-\sum_{nm\ell}v_m(it^\alpha)_{mn}(it^\beta)_{n\ell}v_\ell \\
+&=-(\mr{Re}\braket{\chi},\ \mr{Im}\braket{\chi})\left(
+\begin{array}{cc}
+-\mr{Im}T^\alpha & -\mr{Re}T^\alpha \\
+\mr{Re}T^\alpha & -\mr{Im}T^\alpha
+\end{array}
+\right)\left(
+\begin{array}{cc}
+-\mr{Im}T^\beta & -\mr{Re}T^\beta \\
+\mr{Re}T^\beta & -\mr{Im}T^\beta
+\end{array}
+\right)\left(
+\begin{array}{cc}
+\mr{Re}\braket{\chi} \\
+\mr{Im}\braket{\chi}
+\end{array}
+\right) \\
+&=-(\mr{Re}\braket{\chi},\ \mr{Im}\braket{\chi})\left(
+\begin{array}{cc}
+-\mr{Im}T^\alpha & -\mr{Re}T^\alpha \\
+\mr{Re}T^\alpha & -\mr{Im}T^\alpha
+\end{array}
+\right)\left(
+\begin{array}{cc}
+-\mr{Im}T^\beta \mr{Re}\braket{\chi} -\mr{Re}T^\beta \mr{Im}\braket{\chi}\\
+\mr{Re}T^\beta \mr{Re}\braket{\chi} -\mr{Im}T^\beta \mr{Im}\braket{\chi}
+\end{array}
+\right) \\
+&=-(\mr{Re}\braket{\chi},\ \mr{Im}\braket{\chi})\left(
+\begin{array}{cc}
+-\mr{Im}T^\alpha & -\mr{Re}T^\alpha \\
+\mr{Re}T^\alpha & -\mr{Im}T^\alpha
+\end{array}
+\right)\left(
+\begin{array}{cc}
+-\mr{Im}(T^\beta\braket{\chi}) \\
+\mr{Re}(T^\beta\braket{\chi})
+\end{array}
+\right) \\
+&=-(\mr{Re}\braket{\chi},\ \mr{Im}\braket{\chi})\left(
+\begin{array}{cc}
+\mr{Im}T^\alpha \mr{Im}(T^\beta\braket{\chi}) -\mr{Re}T^\alpha \mr{Re}(T^\beta\braket{\chi}) \\
+-\mr{Re}T^\alpha \mr{Im}(T^\beta\braket{\chi}) -\mr{Im}T^\alpha \mr{Re}(T^\beta\braket{\chi})
+\end{array}
+\right)\\
+&=-(\mr{Re}\braket{\chi},\ \mr{Im}\braket{\chi})\left(
+\begin{array}{cc}
+-\mr{Re}(T^\alpha T^\beta \braket{\chi}) \\
+-\mr{Im}(T^\alpha T^\beta \braket{\chi})
+\end{array}
+\right)\\
+&=-(\mr{Re}\braket{\chi}^\dagger,\ -\mr{Im}\braket{\chi}^\dagger)\left(
+\begin{array}{cc}
+-\mr{Re}(T^\alpha T^\beta \braket{\chi}) \\
+-\mr{Im}(T^\alpha T^\beta \braket{\chi})
+\end{array}
+\right) \quad\because \mr{Re}(z^*)=\mr{Re}(z),\quad \mr{Im}(z^*)=-\mr{Im}(z) \\
+&=\mr{Re}\braket{\chi}^\dagger \mr{Re}(T^\alpha T^\beta \braket{\chi}) -\mr{Im}\braket{\chi}^\dagger\mr{Im}(T^\alpha T^\beta \braket{\chi}) \\
+&=\mr{Re}(\braket{\chi}^\dagger, T^\alpha T^\beta \braket{\chi}) \\
+&=\frac{1}{2}\left\{ (\braket{\chi}^\dagger, T^\alpha T^\beta \braket{\chi}) + (\braket{\chi}^\dagger, T^\alpha T^\beta \braket{\chi})^* \right\} \quad \because \mr{Re}(z)=\frac{z+z^*}{2} \\
+&=\frac{1}{2}\left\{ (\braket{\chi}^\dagger, T^\alpha T^\beta \braket{\chi}) + (\braket{\chi}^\dagger, T^\beta T^\alpha \braket{\chi}) \right\} \quad \because T^\alpha はエルミート \\
+&=\frac{1}{2} (\braket{\chi}^\dagger, \{T^\alpha , T^\beta\} \braket{\chi})
+\end{align*}
+というベクトル・ボゾンの質量行列が得られる．
+
+\vskip\baselineskip
+
+ベクトル場のプロパゲータを見る．ヤン・ミルズラグランジアンの二次の項も含めて，全ラグランジアンの$A$について二次の項は
+\begin{align*}
+-&\frac{1}{4}\sum_\alpha (\partial_\lambda A_{\alpha\nu}-\partial_\nu A_{\alpha\lambda})^2-\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A_{\alpha\lambda}A^\lambda_{\beta} \\
+&=-\frac{1}{4}\sum_\alpha (\partial_\lambda A_{\alpha\nu}\partial^\lambda A^\nu_\alpha- \partial_\lambda A_{\alpha\nu}\partial^\nu A^\lambda_\alpha + \partial_\nu A_{\alpha\lambda}\partial^\nu A^\lambda_\alpha -\partial_\nu A_{\alpha\lambda}\partial^\lambda A^\nu_\alpha) -\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A_{\alpha\lambda}A^\lambda_{\beta} \\
+&=-\frac{1}{2}\sum_\alpha(\partial_\nu A_{\alpha\lambda}\partial^\nu A^\lambda_\alpha-\partial_\nu A_{\alpha\lambda}\partial^\lambda A^\nu_\alpha) -\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A_{\alpha\lambda}A^\lambda_{\beta} \\
+&=\frac{1}{2}\sum_\alpha(A_{\alpha\lambda}\partial_\nu \partial^\nu A^\lambda_\alpha-A_{\alpha\lambda}\partial_\nu \partial^\lambda A^\nu_\alpha) -\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A_{\alpha\lambda}A^\lambda_{\beta} \\
+&\qquad -\frac{1}{2}\sum_\alpha\partial_\nu(A_{\alpha\lambda} \partial^\nu A^\lambda_\alpha-A_{\alpha\lambda} \partial^\lambda A^\nu_\alpha) \qquad \leftarrow 全微分項 \\
+&=\frac{1}{2}\sum_\alpha(A^\nu_{\alpha}\eta_{\nu\lambda} \Box A^\lambda_\alpha-A^\nu_{\alpha}\partial_\nu \partial_\lambda A^\lambda_\alpha) -\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A_{\alpha\lambda}A^\lambda_{\beta}+[全微分項] \\
+&=-\frac{1}{2}\sum_{\alpha\beta}A^\nu_\alpha \mc{D}_{\alpha\nu,\beta\lambda}(\partial)A^\lambda_\beta+[全微分項]
+\end{align*}
+ここで
+\begin{align*}
+\mc{D}_{\alpha\nu,\beta\lambda}(\partial)=-\delta_{\alpha\beta}[\eta_{\nu\lambda}\Box-\partial_\nu \partial_\lambda]+\mu^2_{\alpha\beta}\eta_{\nu\lambda}
+\end{align*}
+簡単のため全てのゲージ対称性は破れており，したがって$\mu^2_{\alpha\beta}$はゼロ固有値をもたない，とする．(9.4.15)からの議論と同様にして，運動量空間でのゲージ場のプロパゲータは
+\begin{align*}
+\Delta_{\alpha\nu,\beta\lambda}(k)&=(\mc{D}^{-1})_{\alpha\nu,\beta\lambda}(ik) \\
+&=[(k^2+\mu^2)^{-1}(\eta_{\nu\lambda}+\mu^{-2}k_\nu k_\lambda)]_{\alpha\beta}
+\end{align*}
+となる．実際
+\begin{align*}
+\sum_{\beta\nu}\mc{D}_{\alpha\mu,\beta\nu}(ik)\Delta_{\beta,\gamma}^{\nu,\lambda}(k)&=\sum_{\beta\nu}\left[\delta_{\alpha\beta}[\eta_{\mu\nu}k^2-k_\mu k_\nu]+\mu^2_{\alpha\beta}\eta_{\mu\nu}\right] [(k^2+\mu^2)^{-1}(\eta^{\nu\lambda}+\mu^{-2}k^\nu k^\lambda)]_{\beta\gamma} \\
+&=\sum_{\beta\nu}\left[\eta_{\mu\nu}[k^2+\mu^2]_{\alpha\beta} -\delta_{\alpha\beta}k_\mu k_\nu\right] [(k^2+\mu^2)^{-1}(\eta^{\nu\lambda}+\mu^{-2}k^\nu k^\lambda)]_{\beta\gamma} \\
+&=\sum_{\nu}\eta_{\mu\nu}(\eta^{\nu\lambda}-\mu^{-2}k^\nu k^\lambda)_{\alpha\gamma}+[(k^2+\mu^2)^{-1}(k_\mu k^\lambda+\mu^{-2}k_\mu k^\lambda k^2)]_{\alpha\gamma} \\
+&=(\delta^\lambda_\mu-\-\mu^{-2}k_\mu k^\lambda)_{\alpha\gamma}+[(k^2+\mu^2)^{-1}(\mu^2k_\mu k^\lambda+k_\mu k^\lambda k^2)\mu^{-2}]_{\alpha\gamma} \\
+&=(\delta^\lambda_\mu-\mu^{-2}k_\mu k^\lambda)_{\alpha\gamma}+(k_\mu k^\lambda \mu^{-2})_{\alpha\gamma} \\
+&=\delta^\lambda_\mu \delta_{\alpha\gamma}
+\end{align*}
+となって，逆行列であることがわかる．
+
+\vskip\baselineskip
+
+$A,C$がゲージ代数のある表現に属し，$B,D$が別の表現に属する場合，散乱過程$A+B\to C+D$の行列要素にはベクトルボゾン交換による，
+\begin{align*}
+S_{CD,AB}=i(2\pi)^4 \delta^4(p_A+p_B-p_C-p_D)\bra{C}J^\nu_{N\alpha}\ket{A}\Delta_{\alpha \nu ,\beta\lambda}\bra{D}J^\lambda_{N\beta}\ket{B}
+\end{align*}
+の寄与がある．ここで$k=p_A-p_C=p_D-p_B$で，$J^\nu_{N\alpha}$はゲージボゾンが結合するカレントだ．添え字$N$は，このゲージではカレントのNGボゾンの極を省略していることを意味する．(すなわち，カレントに対応する頂点が外線についていない，ということだ．3巻p236参照．よって(19.2.49)がこのカレントの行列要素の寄与となる．)このカレントは，ゲージ結合定数に比例するので((19.2.38)参照)，ゲージ結合定数がゼロの極限で残る(21.1.21)の唯一の項は，この極限で発散する$\mu^{-2}$を含む項だ．すなわち，(21.1.20)を用いて
+\begin{align*}
+S_{CD,AB}&=i(2\pi)^4 \delta^4(p_A+p_B-p_C-p_D)\bra{C}{J_N}^\nu_\alpha\ket{A}[(k^2+\mu^2)^{-1}(\eta_{\nu\lambda}+\mu^{-2}k_\nu k_\lambda)]_{\alpha\beta}\bra{D}{J_N}^\lambda_\beta\ket{B} \\
+&=i(2\pi)^4 \delta^4(p_A+p_B-p_C-p_D)\bra{C}{J_N}^\nu_{\alpha}\ket{A}[(k^2+\mu^2)^{-1}\mu^{-2}(\eta_{\nu\lambda}\mu^2+k_\nu k_\lambda)]_{\alpha\beta}\bra{D}{J_N}^\lambda_{\beta}\ket{B} \\
+&\to i(2\pi)^4 \delta^4(p_A+p_B-p_C-p_D)k_\nu k_\lambda(\mu^{-2})_{\alpha\beta}\bra{C}{J_N}^\nu_{\alpha}\ket{A}\frac{1}{k^2}\bra{D}{J_N}^\lambda_{\beta}\ket{B} 
+\end{align*}
+となる．カレントのゲージ結合定数は，行列$\mu^2_{\alpha\beta}$のゲージ結合定数と相殺する．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (b1) at (-2,2){};
+\coordinate (b2) at (-2,-2){};
+\coordinate (m1) at (0,1){};
+\coordinate (a1) at (2,2){};
+\coordinate (a2) at (2,-2){};
+\coordinate (m2) at (0,-1){};
+\draw[thick,postaction={decorate}](b1)node[left]{$e$}node[above right]{$p_A$}--(m1);
+\draw[thick,postaction={decorate}](m1)--(a1)node[right]{$e$}node[above left]{$p_C$};
+
+\draw[thick,postaction={decorate}](b2)node[left]{$\mu$}node[below right]{$p_B$}--(m2);
+\draw[thick,postaction={decorate}](m2)--(a2)node[right]{$\mu$}node[below left]{$p_D$};
+
+\begin{feynhand}
+\propag[photon,thick](m1)--(m2);
+\end{feynhand}
+
+\node(q) at (-0.3,0){$k$};
+    
+\end{tikzpicture}
+\end{figure}
+
+(21.1.3)から，ゲージ場$A_\alpha^\mu$に結合するのは$J^\mu_\alpha=i\partial_\mu \phi'_n t^\alpha_{nm}\phi'_m$の形であることがわかる．$t^\alpha$がゲージ結合定数に比例しているのだ．\par
+逆に，NGボゾンを交換する行列要素は，(19.2.49)より
+\begin{align*}
+S_{CD,AB}&=i(2\pi)^4 \delta^4(p_A+p_B-p_C-p_D)\bra{C}{J_N}^\nu_\alpha\ket{A}(iF^{-1}_{\alpha\gamma}k_\nu)\frac{1}{k^2}(-iF^{-1}_{\gamma\beta}k_\lambda)\bra{D}{J_N}^\lambda_\beta\ket{B} \\
+&=i(2\pi)^4 \delta^4(p_A+p_B-p_C-p_D)k_\nu k_\lambda F_{\alpha\gamma}^{-1}F^{-1}_{\beta\gamma}\bra{C}{J_N}^\nu_\alpha\ket{A}\frac{1}{k^2}\bra{D}{J_N}^\lambda_\beta\ket{B}
+\end{align*}
+一方
+\begin{align*}
+\mu^2_{\alpha\beta}=\sum_n F_{\alpha\gamma}Z_{\gamma n} F_{\beta\delta}Z_{\delta n}=F_{\alpha\gamma}F_{\beta\gamma}
+\end{align*}
+となり，(21.1.22)と(21.1.24)は等しくなる．すなわちゲージ結合定数がゼロにおいて$S$行列要素は連続である．
+
+\newpage
+
+\subsection{くりこみ可能な$\xi$ゲージ}
+一般のゲージでの理論のスカラー場についてのラグランジアンの運動項(21.1.3)は交差項
+\begin{align*}
+i\partial_\mu \phi'_n (t^\alpha)_{nm}A^\mu_\alpha v_m
+\end{align*}
+を含む．ユニタリーゲージではこの項はゲージ条件(21.1.2)の結果ゼロとなった．ここでは，15.5節と15.6節の方法に類似の別の方法を採用する．経路積分に汎関数$B[f]$(15.5.22)
+\begin{align*}
+B[f]=\exp \left( \frac{-i}{2\xi}\int d^4 x \sum_\alpha f_\alpha f_\alpha \right)
+\end{align*}
+を導入する．これはラグランジアンにゲージ固定項
+\begin{align*}
+\mc{L}_{gf}=-\frac{1}{2\xi}\sum_\alpha f_\alpha f_\alpha
+\end{align*}
+を付け加えるのと同等だ．15.5節では$f_\alpha=\partial_\mu A^\mu_\alpha$ととったが，ここではゲージ固定関数$f_\alpha$を
+\begin{align*}
+f_\alpha=\partial_\mu A^\mu_\alpha -i\xi(t_\alpha)_{nm}\phi'_n v_m
+\end{align*}
+にとる．これにより
+\begin{align*}
+-\frac{1}{2\xi}f_\alpha f_\alpha&=-\frac{1}{2\xi} \left[ (\partial_\mu A^\mu_\alpha)^2-2i\xi\phi'_n(t_\alpha)_{nm} v_m \partial_\mu A^\mu_\alpha -\xi^2 (\phi'_n(t_\alpha)_{nm} v_m)^2 \right] \\
+&=-\frac{1}{2\xi} (\partial_\mu A^\mu_\alpha)^2-\frac{\xi}{2} (\phi'_n(it_\alpha)_{nm} v_m)^2+\uwave{i\phi'_n(t_\alpha)_{nm}  \partial_\mu A^\mu_\alpha}v_m
+\end{align*}
+交差項が(21.2.2)の交差項と合わさって全微分項となって消える！ここではユニタリーゲージは特殊な場合となっている．すなわち，$\xi\to\infty$でゲージ固有汎関数(21.2.1)は第二項目だけ残って，ユニタリーゲージ条件(21.1.2)
+\begin{align*}
+0=\sum_{nm}\tilde{\phi}_n(x)(t_\alpha)_{nm}v_m &=\sum_{nm}v_n (t_\alpha)_{nm}v_m +\sum_{nm}\phi'_n(x)(t_\alpha)_{nm}v_m \\
+&=\sum_{nm}\phi'_n(x)(t_\alpha)_{nm}v_m \quad \because t_\alpha は反対称
+\end{align*}
+を満たす$\phi'$で無限に鋭いビークをもつ．もう一つの特殊な場合は，$\xi\to0$の極限んで，この場合はゲージ固定汎関数はランダウゲージ条件$\partial_\mu A^\mu_\alpha=0$を満たすゲージ場でビークをもつ．
+
+\vskip\baselineskip
+
+スカラー場のラグランジアンに，ゲージ不変性の条件(19.3.2)
+\begin{align*}
+\frac{\partial P(\phi)}{\partial \phi_n}(t_\alpha)_{nm}\phi_m=0
+\end{align*}
+を満たす4次の多項式項$-P(\phi)$も含める．もちろんゲージ場の項
+\begin{align*}
+\mc{L}_A=-\frac{1}{4}\sum_\alpha F^{\mu\nu}_\alpha F_{\alpha \mu\nu}
+\end{align*}
+も含める．すると，ゲージ場とスカラー場の全ラグランジアンは
+\begin{align*}
+\mc{L}_{A,\phi}=&\mc{L}_A +\mc{L}_\phi +\mc{L}_{gf} \\
+=&-\frac{1}{4}\sum_\alpha F^{\mu\nu}_\alpha F_{\alpha \mu\nu}-\frac{1}{2} \sum_n\left( \partial_\mu \phi_n - i\sum_{m,\alpha}t^\alpha_{nm}A_{\alpha\mu}\phi_m \right)^2-P(\phi) -\frac{1}{2\xi}\sum_\alpha f_\alpha f_\alpha \\
+=&-\frac{1}{4}\sum_\alpha F^{\mu\nu}_\alpha F_{\alpha \mu\nu}-\frac{1}{2}\sum_n \partial_\mu \phi'_n \partial^\mu \phi'_n +\uwave{i\sum_{\alpha n m}\partial_\mu \phi'_n (t_\alpha)_{nm}A^\mu_\alpha (\phi'_m+v_m)} \\
+&+\frac{1}{2}\sum_{n\alpha\beta}(t^\alpha \phi)_n(t^\beta \phi)_m A^\mu_\alpha A^\nu_\beta-\frac{1}{2\xi}\sum_\alpha (\partial_\mu A^\mu_\alpha )(\partial_\nu A^\nu_\alpha) -P(\phi) \\
+&+\frac{\xi}{2}\sum_{\alpha nm}(t^\alpha v)_n (t^\alpha v)_m \phi'_n \phi'_m+ \uwave{i\sum_{\alpha nm}\phi'_n(t^\alpha)_{nm}\partial_\mu A^\mu_\alpha v_m} \\
+=&-\frac{1}{4}\sum_\alpha F^{\mu\nu}_\alpha F_{\alpha \mu\nu}+\frac{1}{2}\sum_{n\alpha\beta}(t^\alpha \phi)_n(t^\beta \phi)_m A^\mu_\alpha A^\nu_\beta \\
+&-\frac{1}{2\xi}\sum_\alpha (\partial_\mu A^\mu_\alpha )(\partial_\nu A^\nu_\alpha) -\frac{1}{2}\sum_n \partial_\mu \phi'_n \partial^\mu \phi'_n \\
+&+\frac{\xi}{2}\sum_{\alpha nm}(t^\alpha v)_n (t^\alpha v)_m \phi'_n \phi'_m-P(\phi) \\
+&+i\sum_{\alpha n m}\partial_\mu \phi'_n (t_\alpha)_{nm}A^\mu_\alpha \phi'_m +[全微分項]
+\end{align*}
+となる．\par
+15.6節で見たように，ゲージ固定汎関数$B[f]$を導入すると，$f_\alpha$のゲージ変換性に依存するラグランジアンをもつゴースト場$\omega_\alpha(x)$を導入する必要がある．一般のゲージ変換
+\begin{align*}
+\delta A^\mu_\alpha=&\partial^\mu \epsilon_\alpha-\sum_{\beta \gamma}C_{\alpha\beta\gamma}\epsilon_\beta A^\mu_\gamma \quad \because(15.1.9)参照 \\
+\delta \phi_n =&\delta \phi'_n= i\sum_{\alpha m}\epsilon_\alpha (t^\alpha)_{nm}\phi_m
+\end{align*}
+のもとで$f_\alpha$は
+\begin{align*}
+f_\alpha [A_\epsilon ,\phi_\epsilon ,x]=&f_\alpha(x) +\Box \epsilon_\alpha(x) -\sum_{\beta\gamma}C_{\alpha\beta\gamma}\partial_\mu(\epsilon_\beta(x) A^\mu_\gamma(x))+\xi \sum_{n\beta}(t^\alpha v)_n \epsilon_\beta(x)(t^\beta \phi(x))_n \\
+=& f_\alpha(x)+\int \Box \delta^4(x-y)\epsilon_\alpha(y)d^4y-\int \sum_{\beta\gamma}C_{\alpha\beta\gamma}\partial_\mu(\delta^4(x-y) A^\mu_\gamma(x))\epsilon_\beta(y)d^4y \\
+&+\int \xi \sum_{n\beta}(t^\alpha v)_n \delta^4(x-y) (t^\beta \phi(x))_n \epsilon_\beta(y) d^4y
+\end{align*}
+となる．よって(15.5.3)(15.6.2)より汎関数微分は
+\begin{align*}
+\mc{F}_{\alpha x,\beta y}=&\left. \frac{\delta f_\alpha [A_\epsilon ,\phi_\epsilon ,x]}{\delta \epsilon_\beta(y)}\right|_{\epsilon=0} \\
+=&\Box \delta^4(x-y)\delta_{\alpha\beta}-\sum_{\gamma}C_{\alpha\beta\gamma}\partial_\mu(\delta^4(x-y) A^\mu_\gamma(x))+\xi \sum_{n}(t^\alpha v)_n \delta^4(x-y) (t^\beta \phi)_n \\
+I_{GH}=&\sum_{\alpha\beta}\int d^4 x d^4 y \,\omega^*_\alpha(x)\mc{F}_{\alpha x,\beta y}\omega_\beta(y) \\
+=&\sum_\alpha \int d^4x \, \omega_\alpha^*\left[ \Box\omega_\alpha -\sum_{\beta\gamma}C_{\alpha\beta\gamma}\partial_\mu(\omega_\beta A^\mu_\gamma)+\xi\sum_{n\beta}(t^\alpha v)_n \omega_\beta (t_\gamma \phi)_n \right] \\
+\mc{L}_{\omega}=& \sum_\alpha \omega_\alpha^*\left[ \Box\omega_\alpha -\sum_{\beta\gamma}C_{\alpha\beta\gamma}\partial_\mu(\omega_\beta A^\mu_\gamma)+\xi\sum_{n\beta}(t^\alpha v)_n \omega_\beta (t^\beta \phi)_n \right]
+\end{align*}
+となる．\par
+もし理論がスピン1/2のフェルミオンを含むと，一般的なくりこみ可能項
+\begin{align*}
+\mc{L}_\psi&=-\bar{\psi}(\Slash{\partial}-i\Slash{A}_\alpha t_\alpha^{(\psi)}+m_0 +\Gamma_n \phi_n)\psi \\
+&=-\bar{\psi}(\Slash{\mc{D}}+m_0+\Gamma_n \phi_n)\psi
+\end{align*}
+が存在する．ここで$t^{(\psi)}_\alpha$はフェルミオンに関するゲージ群の生成子の行列表現(結合定数の因子を含む)で，$m_0$と$\Gamma_n$はゲージ不変性条件を満たす定数行列だ．すなわち
+\begin{align*}
+\delta \mc{L}_\psi=0 
+\end{align*}
+であり，$t^{\psi}_\alpha$がエルミートであることと$\bar{\psi}=\psi^\dagger \gamma_4(\gamma_4=i\gamma_0)$であることを用いると
+\begin{align*}
+&-\delta\bar{\psi}m_0 \psi -\bar{\psi}m_0\delta\psi=0 \\
+\Rightarrow \quad &-\psi^\dagger(-it^{(\psi)}_\alpha \epsilon_\alpha)\gamma_4 m_0 \psi-\psi^\dagger \gamma_4 m_0(it_\alpha^{(\psi)}\epsilon_\alpha)\psi=0 \\
+\Rightarrow \quad &\psi^\dagger[t^{(\psi)}_\alpha , \gamma_4 m_0]i\epsilon_\alpha\psi=0 \quad \Rightarrow \quad [t^{(\psi)}_\alpha , \gamma_4 m_0]=0
+\end{align*}
+かつ
+\begin{align*}
+&-\delta\bar{\psi}\Gamma_n \phi_n \psi -\bar{\psi}\Gamma_n \phi_n \delta \psi -\bar{\psi}\Gamma_n \delta \phi_n \psi=0 \\
+\Rightarrow \quad &-\psi^\dagger(-it^{(\psi)}_\alpha \epsilon_\alpha)\gamma_4 \Gamma_n \phi_n \psi-\psi^\dagger \gamma_4 \Gamma_n \phi_n(it_\alpha^{(\psi)}\epsilon_\alpha)\psi-\sum_m\psi^\dagger \gamma_4 \Gamma_n i\epsilon_\alpha (t^\alpha)_{nm}\phi_m \psi=0 \\
+\Rightarrow \quad &\psi^\dagger i\epsilon_\alpha [t^{(\psi)}_\alpha ,\gamma_4 \Gamma_n]\phi_n \psi - \psi^\dagger i\epsilon_\alpha \sum_m \gamma_4 \Gamma_m (t^\alpha)_{mn}\phi_n \psi=0 \\
+\Rightarrow \quad & [t^{(\psi)}_\alpha ,\gamma_4 \Gamma_n]-\sum_m (t^\alpha)_{mn}\gamma_4 \Gamma_m=0
+\end{align*}
+が不変性条件となる．一般に$m_0$と$\Gamma_n$は，1あるいは$\gamma_5$に比例する項の線型結合となる．\par
+15.5節と15.6節で証明した一般定理(どちらかといえば15.7節だが)より，(21.2.6)(21.2.10)(21.2.11)の和で与えられるラグランジアンから計算される$S$行列は$\xi$に依らず，任意の$\xi$について，つまり$\xi\to\infty$でユニタリーゲージに相当する結果が得られる．任意のパラメータ$\xi$は(15.7.25)(15.7.26)よりBRST変換の核のみに存在し，物理的な計算結果には顔を出さないからだ．
+
+\vskip\baselineskip
+
+これら全ての場のプロパゲータを導くには，ラグランジアンの場について二次の部分
+\begin{align*}
+\mc{L}_{\mr{QUAD}}=&-\frac{1}{4}\sum_\alpha(\partial^\mu A_\alpha^\nu -\partial^\nu A_\alpha^\mu)(\partial^\nu A_\alpha^\mu -\partial^\mu A_\alpha^\nu) \\
+&-\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A^\mu_\alpha A_{\beta\mu} -\frac{1}{2\xi}\sum_\alpha (\partial_\mu A^\mu_\alpha )(\partial_\nu A^\nu_\alpha) \\
+&-\frac{1}{2}\sum_n (\partial_\mu \phi'_n)( \partial^\mu \phi'_n)-\frac{1}{2}\sum_{nm}M^2_{nm}\phi'_n \phi'_m \\
+&-\bar{\psi}(\Slash{\partial}+m)\psi-\partial_\mu \omega^*_\alpha \partial^\mu\omega_\alpha-\xi\sum_{\alpha\beta}\mu^2_{\alpha\beta}\omega^*_\alpha \omega_\beta +[全微分項]
+\end{align*}
+が必要だ．ここで$\mu^2_{\alpha\beta}$はベクトル・ボゾンの質量行列(21.1.7)だ．
+\begin{align*}
+\mu^2_{\alpha\beta}=-\sum_n (t^\alpha v)_n (t^\beta v)_n
+\end{align*}
+また$M^2_{nm}$と$m$は新たなスカラーとフェルミオンの質量行列だ．
+\begin{align*}
+M^2_{nm}=&\left. \frac{\partial^2 P(\phi)}{\partial \phi_n \partial\phi_m }\right|_{\phi=v}-\xi\sum_\alpha (t^\alpha v)_n(t^\alpha v)_m \\
+m=& m_0+\sum_n \Gamma_n v_n
+\end{align*}
+(21.2.14)よりゴーストの質量はゲージの選び方に依存し，それに対応するベクトル・ボゾンの質量と$\sqrt{\xi}$との積に等しい．\par
+この次数では真空期待値$v_n$はちょうど多項式ポテンシャル$P(\phi)$の最小点だ．
+\begin{align*}
+\left. \frac{\partial P(\phi)}{\partial \phi_n}\right|_{\phi=v}=0
+\end{align*}
+また，(19.2.6)
+\begin{align*}
+\sum_m \left. \frac{\partial^2 P(\phi)}{\partial \phi_n \partial \phi_m} \right|_{\phi=v}(t^\alpha v)_m=0
+\end{align*}
+が全ての$\alpha$でなりたつ．したがって，質量ゼロのNGボゾンモードの代わりに(21.2.16)のスカラー・ボゾンの質量行列$M_{nm}^2$はゼロでないベクトル・ボゾンの質量$\mu$と$\sqrt{\xi}$との積に等しい．すなわち，$\mu^2_{\alpha\beta}$が固有値$\mu^2$の固有ベクトル$c_\beta$をもてば，$\sum_\beta c_\beta t^\beta v$は$M^2$の固有値$\xi \mu^2$の固有ベクトルだ．実際
+\begin{align*}
+\sum_m M^2_{nm}\left(\sum_\beta c_\beta t^\beta v\right)_m=&\sum_m \left[ \left. \frac{\partial^2 P(\phi)}{\partial \phi_n \partial\phi_m }\right|_{\phi=v}-\xi\sum_\alpha (t^\alpha v)_n(t^\alpha v)_m \right]\sum_\beta c_\beta (t^\beta v)_m \\
+=&-\xi \sum_{m\alpha\beta}(t^\alpha v)_n \uwave{(t^\alpha v)_m(t_\beta v)_m} c_\beta \quad \because (21.2.28) \\
+=&\xi \sum_{\alpha\beta}(t^\alpha v)_n \mu^2_{\alpha\beta}c_\beta \quad \because (21.2.15) \\
+=&\xi \mu^2 \sum_\alpha c_\alpha(t^\alpha v)_n=\xi\mu^2\left( \sum_\beta c_\beta t_\beta v \right)_n
+\end{align*}
+プロパゲータを計算する．ラグランジアンの自由粒子の部分が(部分積分のあとに)複素場$\zeta$について$-\zeta^\dagger \mc{D}(\partial)\zeta$あるいは実場$\zeta$について$-\frac{1}{2}\zeta^T \mc{D}(\partial)\zeta$のとき，プロパゲータは$\mc{D}(ik)$だ．\par
+$A$についての$\mc{D}(\partial)$は(21.1.19)と同様に$A$の二次の項
+\begin{align*}
+\frac{1}{2}\sum_\alpha(A^\nu_{\alpha}\eta_{\nu\lambda} \Box A^\lambda_\alpha-A^\nu_{\alpha}\partial_\nu \partial_\lambda A^\lambda_\alpha) -\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}A_{\alpha\lambda}A^\lambda_{\beta} +\frac{1}{2\xi}\sum_\alpha A^\nu_\alpha \partial_\nu \partial_\lambda A^\lambda_\alpha+[全微分項]
+\end{align*}
+より
+\begin{align*}
+&\mc{D}_{\alpha \nu,\beta\lambda}(\partial)=-\delta_{\alpha\beta}\left[\eta_{\nu\lambda}\Box-\left(1-\frac{1}{\xi}\right)\partial_\nu\partial_\lambda\right]+\mu^2_{\alpha\beta}\eta_{\nu\lambda} \\
+&\mc{D}_{\alpha\nu,\beta\lambda}(ik)=\delta_{\alpha\beta}\left[\eta_{\nu\lambda}k^2-\left(1-\frac{1}{\xi}\right)k_\nu k_\lambda\right]+\mu^2_{\alpha\beta}\eta_{\nu\lambda}=\left[ \eta_{\nu\lambda}(k^2+\mu^2)-\left( 1-\frac{1}{\xi} \right) k_\nu k_\lambda\right]_{\alpha\beta}
+\end{align*}
+この逆行列，プロパゲータ$\Delta(k)=\mc{D}^{-1}(ik)$は
+\begin{align*}
+\Delta_{\alpha\mu,\beta\nu}(k)=\left[ \frac{1}{k^2+\mu^2}\left( \eta_{\mu\nu}-\frac{(1-\xi)k_\mu k_\nu}{k^2+\xi \mu^2} \right) \right]
+\end{align*}
+で与えられる．実際これは
+\begin{align*}
+\mc{D}_{\alpha\mu,\beta\nu}(ik)\Delta_{\beta\ ,\gamma}^{\ \nu \ \ \lambda}(k)=&\left[ \eta_{\mu\nu}(k^2+\mu^2)-\left( 1-\frac{1}{\xi} \right) k_\mu k_\nu\right]_{\alpha\beta}\left[ \frac{1}{k^2+\mu^2}\left( \eta^{\nu\lambda}-\frac{(1-\xi)k^\nu k^\lambda}{k^2+\xi \mu^2} \right) \right]_{\beta\gamma}  \\
+=&\eta_{\mu\nu}\left( \eta^{\nu\lambda}-\frac{(1-\xi)k^\nu k^\lambda}{k^2+\xi \mu^2} \right)_{\alpha\gamma} \\
+&+\left(\frac{1-\xi}{\xi}\right)\left[ \frac{1}{k^2+\mu^2}\left( \eta^{\nu\lambda}-\frac{(1-\xi)k^\nu k^\lambda}{k^2+\xi \mu^2} \right) k_\mu k_\nu\right]_{\alpha\gamma} \\
+=&\left(\delta^\lambda_\mu - \frac{(1-\xi)k_\mu k^\lambda}{k^2+\xi \mu^2} \right)_{\alpha\gamma}+\left(\frac{1-\xi}{\xi}\right)\left[ \frac{1}{k^2+\mu^2}\left( k_\mu k^\lambda-\frac{(1-\xi)k^2 k_\mu k^\lambda}{k^2+\xi \mu^2} \right) \right]_{\alpha\gamma} \\
+=&\left(\delta^\lambda_\mu - \frac{(1-\xi)k_\mu k^\lambda}{k^2+\xi \mu^2} \right)_{\alpha\gamma}+\left(\frac{1-\xi}{\xi}\right)\left[ \frac{k_\mu k^\lambda}{k^2+\mu^2}\left( 1-\frac{(1-\xi)k^2}{k^2+\xi \mu^2} \right) \right]_{\alpha\gamma} \\
+=&\left(\delta^\lambda_\mu - \frac{(1-\xi)k_\mu k^\lambda}{k^2+\xi \mu^2} \right)_{\alpha\gamma}+\left(\frac{1-\xi}{\xi}\right)\left[ \frac{k_\mu k^\lambda}{k^2+\mu^2}\left( \frac{k^2+\xi \mu^2-k^2+\xi k^2}{k^2+\xi \mu^2} \right) \right]_{\alpha\gamma} \\
+=&\left(\delta^\lambda_\mu - \frac{(1-\xi)k_\mu k^\lambda}{k^2+\xi \mu^2} \right)_{\alpha\gamma}+ \left[\frac{(1-\xi)k_\mu k^\lambda}{k^2+\xi \mu^2}\right]_{\alpha\gamma} \\
+=&\delta^\lambda_\mu \delta_{\alpha\gamma}
+\end{align*}
+となって逆だ．\par
+$\phi$については
+\begin{align*}
+&\mc{D}_{nm}(\partial)=-\delta_{nm}\Box +M^2_{nm} \\
+&\mc{D}_{nm}(ik)=\delta_{nm}k^2+M^2_{nm}=\delta_{nm}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_n \partial \phi_m }\right|_{\phi=v}-\xi\sum_\alpha (t^\alpha v)_n(t^\alpha v)_m
+\end{align*}
+となる．プロパゲータは
+\begin{align*}
+\Delta_{nm}(k)=\mc{D}_{nm}^{-1}(ik)=\left[\delta_{nm}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_n \partial\phi_m }\right|_{\phi=v}\right]^{-1}+\xi\sum_{\alpha\beta}(t^\alpha v)_n (t^\beta v)_m (k^2)^{-1}(k^2+\xi\mu^2)_{\alpha\beta}^{-1}
+\end{align*}
+で与えられる．これが実際に逆であることを確認するために
+\begin{align*}
+\sum_m (k^2+M^2)_{nm}(t^\beta v)_m=&k^2(t^\beta v)_n +\sum_m M^2_{nm}(t^\beta v)_m \\
+=&\sum_\alpha (t^\alpha v)_n k^2 \delta_{\alpha\beta}+\xi \sum_\alpha(t^\alpha v)_n \mu^2_{\alpha\beta} \\
+=&\sum_\alpha (t^\alpha v)_n (k^2+\xi\mu^2)_{\alpha\beta}
+\end{align*}
+であることと，
+\begin{align*}
+& \sum_m \left(\delta_{nm}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_n \partial\phi_m }\right|_{\phi=v}\right)(t^\alpha v)_m=k^2(t^\alpha v)_n \\
+\Rightarrow \quad & \sum_m \left(\delta_{nm}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_n \partial\phi_m }\right|_{\phi=v}\right)^{-1}(t^\alpha v)_m=(k^2)^{-1}(t^\alpha v)_n \quad (逆行列の固有値は逆数)\\
+\Rightarrow \quad & \sum_m(t^\alpha v)_m\left(\delta_{mn}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_m \partial\phi_n }\right|_{\phi=v}\right)^{-1}=(k^2)^{-1}(t^\alpha v)_n \quad(両辺転置)
+\end{align*}
+を用いると
+\begin{align*}
+&\sum_m \mc{D}_{nm}(ik)\Delta_{m\ell}(k) \\
+=&\sum_m [\delta_{nm}k^2+M^2_{nm}]\left\{ \left[\delta_{m\ell}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_m \partial\phi_\ell }\right|_{\phi=v}\right]^{-1}+\xi\sum_{\alpha\beta}(t^\alpha v)_m (t^\beta v)_\ell (k^2)^{-1}(k^2+\xi\mu^2)_{\alpha\beta}^{-1} \right\} \\
+=&\sum_m \left[\delta_{nm}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_n \partial\phi_m }\right|_{\phi=v}-\xi\sum_\alpha (t^\alpha v)_n(t^\alpha v)_m\right] \left[\delta_{m\ell}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_m \partial\phi_\ell }\right|_{\phi=v}\right]^{-1} \\
+&+\xi \sum_{m\alpha\beta}  [\delta_{nm}k^2+M^2_{nm}](t^\alpha v)_m (t^\beta v)_\ell (k^2)^{-1}(k^2+\xi\mu^2)_{\alpha\beta}^{-1} \\
+=&\delta_{n\ell} -\xi\sum_{m\alpha}(t^\alpha v)_n (t^\alpha v)_m\left(\delta_{m\ell}k^2+\left. \frac{\partial^2 P(\phi)}{\partial \phi_m \partial \phi_\ell }\right|_{\phi=v}\right)^{-1} \\
+&+\xi\sum_{\alpha\beta\gamma}(t^\gamma v)_n (t^\beta v)_\ell (k^2+\xi\mu^2)_{\gamma\alpha}(k^2+\xi\mu^2)_{\alpha\beta}^{-1}(k^2)^{-1} \\
+=&\delta_{n\ell} -\xi\sum_\alpha (t^\alpha v)_n (t^\alpha v)_\ell(k^2)^{-1}+\xi\sum_\beta (t^\beta v)_n (t^\beta v)_\ell(k^2)^{-1}=\delta_{n\ell}
+\end{align*}
+となって実際に逆であることがわかる．\par
+$\psi$については，共役場は$\psi^\dagger$ではなく$\bar{\psi}$として
+\begin{align*}
+&\mc{D}(\partial)=\Slash{\partial}+m \\
+&\mc{D}(ik)=i\Slash{k}+m
+\end{align*}
+このときプロパゲータは自明に
+\begin{align*}
+\Delta(k)=\mc{D}^{-1}(ik)=\frac{-i\Slash{k}+m}{k^2+m^2}
+\end{align*}
+となる．実際に逆であることは$\Slash{k}\Slash{k}=k^2$であることを用いればすぐにわかる．\par
+$\omega$については
+\begin{align*}
+&\mc{D}_{\alpha\beta}(\partial)=-\delta_{\alpha\beta}\Box+\xi\mu^2_{\alpha\beta} \\
+&\mc{D}_{\alpha\beta}(ik)=\delta_{\alpha\beta}k^2+\xi\mu^2_{\alpha\beta}=[k^2+\xi\mu^2]_{\alpha\beta}
+\end{align*}
+このときプロパゲータは自明に
+\begin{align*}
+\Delta_{\alpha\beta}(k)=\mc{D}^{-1}_{\alpha\beta}(ik)=[k^2+\xi\mu^2]^{-1}_{\alpha\beta}
+\end{align*}
+となる．
+
+\newpage
+
+\subsection{電弱理論}
+最初に電子型レプトン場を考える．知られている限りでは，これらは電子場$e$の左手成分と右手成分
+\begin{align*}
+e_L=\frac{1}{2}(1+\gamma_5)e,\quad e_R=\frac{1}{2}(1-\gamma_5)e
+\end{align*}
+および純粋な左手成分の電子ニュートリノ場$\nu_{eL}$
+\begin{align*}
+\gamma_5 \nu_{eL}=+\nu_{eL}
+\end{align*}
+だけからなる．ゲージ群の任意の一つの表現に属する場は，全て同じローレンツ変換性を持たねばならない．\par
+$\Rightarrow$ゲージ群の表現は，左手成分の2重項$(\nu_{eL},e_L)$と右手成分の1重項$e_R$に分かれる．\\
+よってゲージ群は$SU(2)_L$と，左手と右手のそれぞれの場についての$U(1)$による，$SU(2)_L\times U(1)_L\times U(1)_R$が最も大きいものとなる．この群のもとで場は
+\begin{align*}
+\delta\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=i\left[ \underset{SU(2)_L}{\uwave{\vec{\epsilon}\cdot \vec{t}}}+\underset{U(1)_L}{\uwave{\epsilon_L t_L}}+ \underset{U(1)_R}{\uwave{\epsilon_R t_R }}\right]\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)
+\end{align*}
+と変換される．ここで生成子$\vec{t},t_L,t_R$は
+\begin{align*}
+\vec{t}&=\frac{g}{4}(1+\gamma_5)\left\{ \left(
+\begin{array}{cc}
+0 & 1 \\
+1 & 0 
+\end{array}
+\right),\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right) , \left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)\right\} \\
+&=g\frac{1+\gamma_5}{2}\frac{\vec{\sigma}}{2} \quad (\vec{\sigma}はパウリ行列) \\
+t_L &\propto(1+\gamma_5)\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right),\quad t_R\propto (1-\gamma_5)
+\end{align*}
+で与えられる．($t_R$は$(1-\gamma_5)$によって1重項$e_R$のみに作用するので，行列は必要ない．)ここで$\vec{\sigma}/2$は$SU(2)$角運動量代数を構成することを思い出そう．ただし$g$は後に選ぶ定数だ．$t_L,t_R$の代わりに，その線型結合で与えられる新たな生成子
+\begin{align*}
+y&\equiv g' \left[ \frac{1+\gamma_5}{4}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right)+\frac{1-\gamma_5}{2} \right] \\
+n_e &\equiv g'' \left[ \frac{1+\gamma_5}{2}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right)+\frac{1-\gamma_5}{2} \right]
+\end{align*}
+を考えるのが便利だ．ここで$g'$と$g''$は$g$と同様に後で選ぶ定数だ．\par
+生成子$t_3$と$y$は，荷電$q$という形で現れる．($e$が素電荷の記号と電子場の記号とで混合しないように)
+\begin{align*}
+q\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=&\left(
+\begin{array}{cc}
+0\cdot \nu_e \\
+-e\cdot e
+\end{array}
+\right)=e\left(
+\begin{array}{cc}
+0 & 0 \\
+0 & -1
+\end{array}
+\right)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+\frac{e}{g}t_3 -\frac{e}{g'}y=& e\frac{1+\gamma_5}{4}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)-e\left[  \frac{1+\gamma_5}{4}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right)+\frac{1-\gamma_5}{2} \right] \\
+=& -e \left[  \frac{1+\gamma_5}{2}\left(
+\begin{array}{cc}
+0 & 0 \\
+0 & 1
+\end{array}
+\right)+\frac{1-\gamma_5}{2} \right] \\
+\left( \frac{e}{g}t_3 -\frac{e}{g'}y \right)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=&\left(
+\begin{array}{cc}
+0\cdot \nu_e \\
+-e\cdot e
+\end{array}
+\right)=q\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+\Rightarrow \quad q=& \frac{e}{g}t_3 -\frac{e}{g'}y
+\end{align*}
+また$n_e$は電子型レプトン数
+\begin{align*}
+\frac{n_e}{g''}\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=\left(
+\begin{array}{cc}
+1\cdot \nu_e \\
+1\cdot e
+\end{array}
+\right)
+\end{align*}
+に対応する．\par
+(21.3.9)の両辺を電荷$e$で割ると，有名な式
+\begin{align*}
+Q=T_3+Y
+\end{align*}
+が導かれる．これは電磁相互作用と弱い相互作用について(つまり$SU(2)_L\times U(1)$対称な理論で)成り立つ保存量の関係式であり，$-y/g'$の値$Y$を普通，弱超電荷と呼ぶ．($Y/2$でも良い．)たとえば$(\nu_{eL} ,e_L)$に作用すると
+\begin{align*}
+-\frac{y}{g'}\left(
+\begin{array}{cc}
+\nu_{eL} \\
+e_L
+\end{array}
+\right)=
+\left(
+\begin{array}{cc}
+-1/2\cdot \nu_e \\
+-1/2\cdot e
+\end{array}
+\right)
+\end{align*}
+となるから，$\nu_{eL}$の弱超電荷は$-1/2$，$e_L$は$-1/2$で，$e_R$は$-1$となる．$t_3/g$の値$T_3$は
+\begin{align*}
+\frac{t_3}{g}\left(
+\begin{array}{cc}
+\nu_{eL} \\
+e_L
+\end{array}
+\right)=
+\left(
+\begin{array}{cc}
++1/2\cdot \nu_e \\
+-1/2\cdot e
+\end{array}
+\right),\quad \frac{t_3}{g}e_R=0
+\end{align*}
+となって，$(\nu_{eL} , e_L)$について$(+1/2,-1/2)$で$e_R$については$0$となる．よって
+\begin{align*}
+e_L:&(Q,T_3,Y)=(-1,-1/2,-1/2) \\
+e_R:&(Q,T_3,Y)=(-1,0,-1) \\
+\nu_{eL}:&(Q,T_3,Y)=(0,+1/2,-1/2)
+\end{align*}
+というように量子数がわかる．今回は生成子$y$の形が特別にわかっているからこの関係は自明だが，スカラー場についての$y^{(\phi)}$やクォークについての$y^{(q)}$などは$SU(2)\times U(1)$対称性から，あるいは既知の電荷と角運動量から逆に保存量の関係式を用いて調べるしかない．
+
+\vskip\baselineskip
+
+ベータ崩壊のように，電荷を変える弱い相互作用と，電磁相互作用の両方を理論に入れたいので，$\vec{t}$と$y$に結合するゲージ場$\vec{A}^\mu$と$B^\mu$の存在を仮定する．さらに，残った一個の自由度に対応する，$t_L$の$t_R$の残った一個の線型結合($n_e$に選ぶことができる)に結合するゲージ場を含めたければ，そうしても良い．$n_e$に結合する質量ゼロのゲージ場によって作り出される長距離力については非常に厳しい制限がある．強さ$g''$で$n_e$に結合するゲージ場を理論に含めるためには，このゲージ対称性$n_e$は破れていると仮定しなければならない．\par
+$\Rightarrow$しかしそのようなゲージ結合によって生成される弱い相互作用の実験的証拠はないので，$n_e$をゲージ群の生成子から除外することにする．\\
+するとゲージ群は
+\begin{align*}
+G=SU(2)_L\times U(1)
+\end{align*}
+となり，生成子はそれぞれ(21.3.4)(21.3.7)で与えられる$\vec{t},y$だ．\par
+結合定数$g,g'$は，生成子$\vec{t},y$に結合するゲージ場$\vec{A}^\mu,B^\mu$が正準的に規格化されるように(つまりそれぞれのゲージ場の運動項の係数が1になるように)調整される．これらのゲージ場と，電子型レプトン$\ell=(\nu_e , e)$のみを含む$G$不変でくりこみ可能($d<4$)な最も一般的なラグランジアンは(15.1.13)を用いて
+\begin{align*}
+\mc{L}_{YM}+\mc{L}_e=&-\frac{1}{4}\sum_\alpha F^{\mu\nu}_\alpha F_{\alpha\mu\nu}-\bar{\ell}(\Slash{\partial}-i\sum_\alpha \Slash{A}_\alpha t^\alpha)\ell \\
+=&-\frac{1}{4}(\partial_\mu A_{i\nu} -\partial_\nu A_{i\mu} +g\epsilon_{ijk}A_{i\mu}A_{k\nu})^2 \quad \because (21.3.4)よりC_{ijk}=g\epsilon_{ijk}\\
+&-\frac{1}{4}(\partial_\mu B_\nu-\partial_\nu B_\mu)^2 \quad \because U(1)ではC_{ijk}=0 \\
+&-\bar{\ell}(\Slash{\partial}-i\Slash{A}_i t_i -i\Slash{B}y)\ell \\
+=&\frac{1}{4}(\partial_\mu \vec{A}_\nu-\partial_\nu \vec{A}_\mu +g\vec{A}_\mu \times \vec{A}_\nu)^2 -\frac{1}{4}(\partial_\mu B_\nu-\partial_\nu B_\mu)^2 \\
+&-\bar{\ell}(\Slash{\partial}-i\vec{\Slash{A}} \cdot\vec{t}_L -i\Slash{B}y)\ell
+\end{align*}
+で与えられる．($i$は$SU(2)$添え字．外積の定義を思い出すこと．) 
+
+\vskip\baselineskip
+
+もちろん，実際は$\vec{t}$と$y$に結合するゲージ場のうち，ただひとつの線型結合の電磁場$A^\mu$だけが質量ゼロだ．つまり，最終的に
+\begin{align*}
+-\bar{\ell}(\Slash{\partial}-i(-e)\Slash{A})\ell=-\bar{\ell}(\Slash{\partial}-i\Slash{A}q)\ell
+\end{align*}
+という項が現れた上で，このゲージ場$A^\mu$の質量項が現れてはいけない，という結果を目指す必要がある．この$q$は荷電であり，$U(1)$の生成子である．だから(21.1.11)より電荷(21.3.9)を生成子とする部分群\uwave{$U(1)_{em}$に$SU(2)_L\times U(1)$が自発的に破れている}，と仮定しなければならない！\par
+
+\vskip\baselineskip
+
+決まった質量をもつスピン1の粒子に対応する正準規格化されたベクトル場は以下の場からなることが分かる．電荷$-e$で質量$m_W$の場(電荷は保存するので(21.3.20)で各項が電荷$\pm 0$となるようになっている．例えば$\bar{e}$は陽電子に対応して$+e$で，$e$は電子に対応して$-e$．$\nu_e$は中性なので$W$の電荷を$x$とすると第一項目より$\bar{e}W\nu_e\to +e+x+0\to x=-e$とわかる．)
+\begin{align*}
+W^\mu_-=\frac{1}{\sqrt{2}}(A^\mu_1+iA^\mu_2)
+\end{align*}
+電荷$+e$で同じ質量の別の場
+\begin{align*}
+W^\mu_+=\frac{1}{\sqrt{2}}(A^\mu_1-iA^\mu_2)
+\end{align*}
+(これらは複素場である．)また，電気的に中性で質量がそれぞれ$m_Z$とゼロの，$A_3^\mu$と$B^\mu$との直交する線型結合で与えられる二つの場
+\begin{align*}
+Z^\mu=\cos \theta A^\mu_3+\sin\theta B^\mu ,\quad A^\mu=-\sin \theta A^\mu_3+\cos\theta B^\mu
+\end{align*}
+つまり
+\begin{align*}
+&\left(
+\begin{array}{cc}
+Z^\mu \\
+A^\mu
+\end{array}
+\right)=\left(
+\begin{array}{cc}
+\cos\theta & \sin \theta \\
+-\sin\theta& \cos \theta
+\end{array}
+\right)\left(
+\begin{array}{cc}
+A^\mu_3 \\
+B^\mu
+\end{array}
+\right) \quad \Rightarrow \quad  \left(
+\begin{array}{cc}
+A^\mu_3 \\
+B^\mu
+\end{array}
+\right)=\left(
+\begin{array}{cc}
+\cos\theta & -\sin \theta \\
+\sin\theta& \cos \theta
+\end{array}
+\right)\left(
+\begin{array}{cc}
+A^\mu \\
+Z^\mu
+\end{array}
+\right) \\
+\Rightarrow \quad & A^\mu_3=\cos\theta Z^\mu -\sin\theta A^\mu ,\quad B^\mu=\sin\theta Z^\mu+\cos\theta A^\mu
+\end{align*}
+となる．(わざわざ行列で書く必要はないが，これはただの回転をしただけだということを意識するため．)\par
+一般的な結果(21.1.11)$\sim$(21.1.12)によると，破れていない対称性の生成子は，生成子$\vec{t},y$の線型結合で与えられ，その係数はゲージ場を展開(21.3.12)(21.3.13)(21.3.16)(21.3.17)したときの，対応する質量ゼロの場の展開係数と同じだ．
+\begin{align*}
+A^\mu_1&=\frac{1}{\sqrt{2}}(W^\mu_- + W^\mu_+) \quad \Rightarrow c_1=0 \\
+A^\mu_2&=\frac{1}{\sqrt{2}}(W^\mu_- - W^\mu_+) \quad \Rightarrow c_2=0 \\
+A^\mu_3&=\uwave{-\sin\theta A^\mu}+\cos\theta Z^\mu  \quad \Rightarrow c_3=-\sin\theta \\
+B^\mu&=\uwave{\cos\theta A^\mu}+\sin\theta Z^\mu \quad \Rightarrow c_y=\cos\theta \\
+\Rightarrow \quad & q=\sum_\alpha c_\alpha t^\alpha =-\sin\theta t_3 +\cos\theta y
+\end{align*}
+がわかる．これと(21.3.9)が等しいという仮定より
+\begin{align*}
+&q=\frac{e}{g}t_3-\frac{e}{g'}y=-\sin\theta t_3 +\cos\theta y \\
+\Rightarrow \quad &g=-\frac{e}{\sin\theta} ,\quad g'=-\frac{e}{\cos\theta}
+\end{align*}
+が得られる．ついでに，$\sin^2\theta+\cos^2\theta=1$より
+\begin{align*}
+&\sin^2\theta+\cos^2\theta=e^2\left( \frac{1}{g'^2}+\frac{1}{g^2} \right)=1 \\
+&e=\frac{gg'}{\sqrt{g^2+g'^2}} \quad \because e>0 , \\
+&\quad \sin\theta=-\frac{e}{g}=-\frac{g'}{\sqrt{g^2+g'^2}},\quad \cos\theta=-\frac{e}{g'}=-\frac{g}{\sqrt{g^2+g'^2}}
+\end{align*}
+が得られる．\par
+(21.3.11)の第三項目に含まれる，レプトンとゲージボゾンの間の完全な結合は，結合定数$g,g'$を用いて
+\begin{align*}
+i\mc{L}'_e=&-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\left[\sum_\alpha \Slash{A}_\alpha t_\alpha  \right]\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\left[ \vec{\Slash{A}}\cdot \vec{t}+\Slash{B}y  \right]\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+=&-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\left[ \frac{g}{4}\left(
+\begin{array}{cc}
+0 & \Slash{A}_1-i\Slash{A}_2 \\
+\Slash{A}_1+i\Slash{A}_2 & 0 
+\end{array}
+\right) (1+\gamma_5) +\Slash{A}_3 t_3 +\Slash{B}y \right]\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+=&-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\biggl[ \frac{g}{2}\frac{1}{\sqrt{2}}\left\{ \frac{1}{\sqrt{2}}(\Slash{A}_1+i\Slash{A}_2) \right\}\left(
+\begin{array}{cc}
+0 & 0 \\
+1 & 0
+\end{array}
+\right)(1+\gamma_5) \\
+&\qquad\qquad  +\frac{g}{2}\frac{1}{\sqrt{2}}\left\{ \frac{1}{\sqrt{2}}(\Slash{A}_1-i\Slash{A}_2) \right\}\left(
+\begin{array}{cc}
+0 & 1 \\
+0 & 0
+\end{array}
+\right)(1+\gamma_5) \\
+&\qquad\qquad +\left( \cos\theta \Slash{Z}-\sin\theta \Slash{A} \right)t_3 +\left( \sin\theta \Slash{Z}+\cos\theta \Slash{A} \right)y \biggr]\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+=&-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\biggl[ \frac{1}{\sqrt{2}}\Slash{W}_- \frac{g}{2}(1+\gamma_5)\frac{1}{2}(\sigma_1-i\sigma_2) \\
+&\qquad\qquad +\frac{1}{\sqrt{2}}\Slash{W}_+ \frac{g}{2}(1+\gamma_5)\frac{1}{2}(\sigma_1+i\sigma_2) \\
+&\qquad\qquad +\Slash{Z}(t_3\cos\theta + y\sin\theta)+\Slash{A}(-t_3 \sin\theta +y\cos\theta) \biggr]\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+=&-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\biggl[ \frac{1}{\sqrt{2}}\Slash{W}_- (t_1-it_2) +\frac{1}{\sqrt{2}}\Slash{W}_+ (t_1+it_2) \\
+&\qquad\qquad +\Slash{Z}(t_3\cos\theta + y\sin\theta)+\Slash{A}\underset{(21.3.9)}{\uwave{(-t_3 \sin\theta +y\cos\theta)}} \biggr]\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)
+\end{align*}
+各項を分けて調べると，第一項目は
+\begin{align*}
+&-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\frac{1}{\sqrt{2}}\Slash{W}_- (t_{1L}-it_{2L})\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)} \frac{1}{\sqrt{2}}\Slash{W}_- \frac{g}{2}(1+\gamma_5)\left(
+\begin{array}{cc}
+0 & 0 \\
+1 & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+&=-(\nu_e^\dagger,e^\dagger)\gamma_4 \frac{1}{\sqrt{2}}\Slash{W}_- \frac{g}{2}(1+\gamma_5)\left(
+\begin{array}{cc}
+0 & 0 \\
+1 & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+&=-\frac{g}{\sqrt{2}}\left( \bar{e}\Slash{W}_- \left(\frac{1+\gamma_5}{2}\right)\nu_e \right)
+\end{align*}
+となる．(レプトン場の共役場はエルミート共役により行ベクトルになっていることに気を付ける．)最後の等式ではスピノル添え字と$SU(2)$添え字が別であるからガンマ行列を挟んで$2\times 2$行列を作用させることができる．同様に第二項目は
+\begin{align*}
+&-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\frac{1}{\sqrt{2}}\Slash{W}_+ (t_{1L}+it_{2L})\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)} \frac{1}{\sqrt{2}}\Slash{W}_+ \frac{g}{2}(1+\gamma_5)\left(
+\begin{array}{cc}
+0 & 1 \\
+0 & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+&=-\frac{g}{\sqrt{2}}\left( \bar{\nu}_e\Slash{W}_+ \left(\frac{1+\gamma_5}{2}\right)e \right)
+\end{align*}
+となる．第三項目は$\frac{1}{2}(1-\gamma_5)\nu_e=0$に留意すると
+\begin{align*}
+&t_{3L}\cos\theta + y\sin\theta=-\frac{e}{g'}\frac{g}{4}(1+\gamma_5) \left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)-\frac{e}{g}g'\left[ \frac{1+\gamma_5}{4}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right)+\frac{1-\gamma_5}{2} \right] \\
+&=\frac{g^2}{\sqrt{g^2+g'^2}}\frac{1}{4}(1+\gamma_5) \left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)-\frac{g'^2}{\sqrt{g^2+g'^2}}\left[ \frac{1+\gamma_5}{4}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right)+\frac{1-\gamma_5}{2} \right]
+\end{align*}
+であるから
+\begin{align*}
+-&\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)} \Slash{Z}(t_3\cos\theta + y\sin\theta)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+=& \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\Slash{Z}\frac{g^2}{\sqrt{g^2+g'^2}}\frac{1}{4}(1+\gamma_5)\left(
+\begin{array}{cc}
+\nu_e \\
+-e
+\end{array}
+\right) +\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\Slash{Z}\frac{g'^2}{\sqrt{g^2+g'^2}}\frac{1}{4}(1+\gamma_5)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+&+\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\Slash{Z}\frac{g'^2}{\sqrt{g^2+g'^2}}\frac{1}{2}(1-\gamma_5)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+=& \frac{1}{2}\frac{g^2+g'^2}{\sqrt{g^2+g'^2}}\bar{\nu}_e \Slash{Z}\left(\frac{1+\gamma_5}{2}\right)\nu_e-\frac{1}{2}\frac{g^2-g'^2}{\sqrt{g^2+g'^2}}\bar{e}\Slash{Z}\left(\frac{1+\gamma_5}{2}\right)e +\frac{g'^2}{\sqrt{g^2+g'^2}}\bar{e}\Slash{Z}\left(\frac{1-\gamma_5}{2}\right)e
+\end{align*}
+第四項目は(21.3.18)(21.3.9)より
+\begin{align*}
+-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\Slash{A}(-t_{3L}\sin\theta+y\cos\theta)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=-\overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}\Slash{A}q\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)=+e(\bar{e}\Slash{A}e)
+\end{align*}
+以上からラグランジアンは
+\begin{align*}
+i\mc{L}'_e=&-\frac{g}{\sqrt{2}}\left( \bar{e}\Slash{W}_- \left(\frac{1+\gamma_5}{2}\right)\nu_e \right)-\frac{g}{\sqrt{2}}\left( \bar{\nu}_e\Slash{W}_+ \left(\frac{1+\gamma_5}{2}\right)e \right) \\
+&+\frac{1}{2}\sqrt{g^2+g'^2}\bar{\nu}_e \Slash{Z}\left(\frac{1+\gamma_5}{2}\right)\nu_e-\frac{1}{2}\frac{g^2-g'^2}{\sqrt{g^2+g'^2}}\bar{e}\Slash{Z}\left(\frac{1+\gamma_5}{2}\right)e +\frac{g'^2}{\sqrt{g^2+g'^2}}\bar{e}\Slash{Z}\left(\frac{1-\gamma_5}{2}\right)e \\
+&+e(\bar{e}\Slash{A}e)
+\end{align*}
+となる．\par
+理論を完成させるためには，対称性の破れの機構について何らかの仮定が必要．具体的には，この機構により$W^\pm$と$Z^0$だけでなく，電子にも質量を与えたい！\par
+$\Rightarrow$くりこみ可能な弱い結合の理論でこれを可能にする唯一の方法は，$\bar{\ell}_L$と$\ell_R$(および$\bar{\ell}_R$と$\ell_L$)に微分なしで結合するスカラー場を導入することだ．(Higgs機構)すると，$SU(2)_L\times U(1)$不変性より，スカラー場は$\ell_L$と同様$SU(2)_L$2重項だが，$y$の値，つまり$q$の値はずらしたものになる．\par
+こうして「湯川」結合
+\begin{align*}
+\mc{L}_{\phi e}&=-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)e_R-G_e \bar{e}_R({\phi ^+}^\dagger ,{\phi^0}^\dagger)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+&=-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)e_R+\mr{H.c.}
+\end{align*}
+を仮定する．(ラグランジアンは全体で実であるために，エルミート項が必要．)ここで$(\phi^+,\phi^0)$は$SU(2)$2重項で，それに作用する$SU(2)\times U(1)$生成子は行列
+\begin{align*}
+\vec{t}^{(\phi)}=&\frac{g}{2}\left\{ \left(
+\begin{array}{cc}
+0 & 1 \\
+1 & 0 
+\end{array}
+\right),\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right) , \left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)\right\}=g\frac{\vec{\sigma}}{2} \\
+y^{(\phi)}=&-\frac{g'}{2}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1 
+\end{array}
+\right)
+\end{align*}
+で表され，電荷の行列は(21.3.9)より
+\begin{align*}
+q^{(\phi)}=\frac{e}{g}t_3^{(\phi)}-\frac{e}{g'}y^{(\phi)}=e\frac{1}{2}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)+e\frac{1}{2}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right)=e\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 0
+\end{array}
+\right)
+\end{align*}
+となる．(これに$SU(2)$2重項$(\phi_1,\phi_2)$に作用させると，$\phi_1$の電荷が$+e$で$\phi_2$の電荷がゼロとなることがわかる．したがって$\phi_1\to\phi^+ , \phi_2\to \phi^0$と表記している．)\par
+ラグランジアン(21.3.21)が$SU(2)\times U(1)$不変であることを要請すれば生成子は自然と(21.3.22)(21.3.23)となることを確認しておく．
+\begin{align*}
+\delta\mc{L}_{\phi e}=&-G_e \delta \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)e_R-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)\delta e_R -G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L \delta \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)e_R \\
+=&-G_e  \left[i \left\{\vec{\epsilon}\cdot \vec{t}+\alpha y\right\} \left(
+\begin{array}{cc}
+\nu_{eL} \\
+e_L
+\end{array}
+\right)\right]^\dagger \gamma_4 \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)e_R \\
+&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)\left[i\left\{ \vec{\epsilon}\cdot \vec{t}+\alpha y \right\}e_R\right] \\
+&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L\left[i\left\{ \vec{\epsilon}\cdot \vec{t}^{(\phi)}+\alpha y^{(\phi)} \right\} \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)\right] e_R \\
+=&-G_e  \left[i \left\{g\vec{\epsilon}\cdot \frac{\vec{\sigma}}{2}+\alpha \frac{g'}{2}\right\} \left(
+\begin{array}{cc}
+\nu_{eL} \\
+e_L
+\end{array}
+\right)\right]^\dagger \gamma_4 \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)e_R \\
+&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)\left[i \alpha g' e_R\right] \\
+&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L\left[i\left\{ \vec{\epsilon}\cdot \vec{t}^{(\phi)}+\alpha y^{(\phi)} \right\} \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)\right] e_R \\
+=&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L\left[-i \left\{g\vec{\epsilon}\cdot \frac{\vec{\sigma}}{2}+\alpha \frac{g'}{2}\right\}\right] \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right) e_R-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L[ +i\alpha g'] \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right) e_R \\
+&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L\left[i\left\{ \vec{\epsilon}\cdot \vec{t}^{(\phi)}+\alpha y^{(\phi)} \right\} \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)\right] e_R \\
+=&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L\left[-i g\vec{\epsilon}\cdot \frac{\vec{\sigma}}{2}+i\alpha \frac{g'}{2} \right] \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right) e_R \\
+&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L\left[i\left\{ \vec{\epsilon}\cdot \vec{t}^{(\phi)}+\alpha y^{(\phi)} \right\} \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)\right] e_R
+\end{align*}
+不変であるためにはこれがゼロである必要があるから，$t^{(\phi)},y^{(\phi)}$が(21.3.22)(21.3.23)でなければならないと結論付けることができる．
+
+\vskip\baselineskip
+
+ラグランジアンにスカラー場とゲージ場を含むゲージ不変項を加える必要がある．$SU(2)\times U(1)$ゲージ不変性，ローレンツ不変性，くりこみ可能性を全て満たす最も一般的な形は
+\begin{align*}
+\mc{L}_\phi&=-\frac{1}{2}\mc{D}_\mu \phi^\dagger \mc{D}^\mu \phi -V(\phi) \\
+&=-\frac{1}{2}\left| (\partial_\mu - i\vec{A}_\mu \cdot \vec{t}^{(\phi)} - iB_\mu y^{(\phi)}) \right|^2 -\frac{\mu^2}{2}\phi^\dagger \phi -\frac{\lambda}{4}(\phi^\dagger \phi)^2 
+\end{align*}
+ここで$\lambda>0$で
+\begin{align*}
+\phi=\left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)
+\end{align*}
+$\mu^2<0$の場合，樹木近似の真空期待値がポテンシャルの停留点
+\begin{align*}
+&\left.\frac{\partial V(\phi)}{\partial \phi} \right|_{\phi=v}=0 \\
+\Rightarrow \quad & \left[ \frac{\mu^2}{2}\phi^\dagger +\frac{\lambda}{2}\phi^\dagger (\phi^\dagger \phi) \right]_{\phi=v}=\frac{\lambda}{2}\left[\phi^\dagger\left\{\frac{\mu^2}{\lambda}+(\phi^\dagger \phi) \right\}\right]_{\phi=v}=0 \\
+\Rightarrow \quad & \braket{\phi}^\dagger \braket{\phi}=\frac{-\mu^2}{\lambda}=\frac{|\mu^2|}{\lambda}=v^2
+\end{align*}
+に存在する．($\mu^2>0$なら$\braket{\phi}=0$となる．)生成子$q^{(\phi)}$は破れていないので，
+\begin{align*}
+\sum_{m}q^{(\phi)}_{nm}v_m =e\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+\braket{\phi^+} \\
+\braket{\phi^0}
+\end{array}
+\right)=0
+\end{align*}
+が要請され，したがって真空期待値$\braket{\phi^+}$はゼロとなり，$\braket{\phi^0}=v>0$となる．($v>0$の条件は決して自明ではなく，本当は$v=R\exp(i\theta)$として計算すべきである．標準模型に限り，かつスカラー2重項が一つだけの場合に\uwave{のみ}，最終的に$\theta$依存性が消えることが分かっており，ここではそれを見越して$\theta=0$と置いている．今回以外の場合では$\theta$依存性が出てくる可能性が大きいため，何の断りもなく$\theta=0$とおくことはできない．)さて，$SU(2)\times U(1)$ゲージ変換をして常にユニタリーゲージに移ることができ，その条件式は(21.1.2)で与えらえる．今回の$\phi$は複素場であるから，3巻p286の下から2$\ell$の条件
+\begin{align*}
+\mr{Im}\left[\tilde{\phi}^\dagger t_\alpha^{(\phi)}\braket{\phi}\right]=\mr{Im}\left[ ({\phi^+}^\dagger,{\phi^0}^\dagger)t_\alpha^{(\phi)}\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right]=0
+\end{align*}
+を用いる必要がある．$t_\alpha^{(\phi)}=\vec{t}^{(\phi)},y^{(\phi)}$だから
+\begin{align*}
+t_1^{(\phi)}:\quad&\mr{Im}\left[\frac{g}{2} ({\phi^+}^\dagger,{\phi^0}^\dagger)\left(
+\begin{array}{cc}
+0 & 1 \\
+1 & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right]=\frac{gv}{2}\mr{Im}\left[ {\phi^+}^\dagger \right]=0 \quad \Rightarrow \quad \mr{Im}\phi^+ =0 \\
+t_2^{(\phi)}:\quad &\mr{Im}\left[\frac{g}{2} ({\phi^+}^\dagger,{\phi^0}^\dagger)\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right]=- \frac{gv}{2}\mr{Im}\left[{\phi^0}^\dagger \right]=0 \quad \Rightarrow \quad \mr{Im}\phi^0 =0 \\
+t_3^{(\phi)}:\quad&\mr{Im}\left[-\frac{g'}{2} ({\phi^+}^\dagger,{\phi^0}^\dagger)\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right]=-\frac{g'v}{2}\mr{Im}\left[{\phi^0}^\dagger \right]=0 \quad \Rightarrow \quad \mr{Im}\phi^0 =0 \\
+y^{(\phi)}:\quad&\mr{Im}\left[\frac{g}{2} ({\phi^+}^\dagger,{\phi^0}^\dagger)\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right]=-\frac{gv}{2}\mr{Im}\left[i{\phi^+}^\dagger \right]=0 \quad \Rightarrow \quad \mr{Re}\phi^+ =0
+\end{align*}
+よりユニタリーゲージでは$\phi^+=0$かつ$\phi^0$が実となる．\par
+するとスカラーのラグランジアン(21.3.25)から，ベクトル中間子の質量項が分かる．$\phi^0(x)=v+\sigma(x)$として($\sigma(x)$はヒッグス場と呼ばれる)ベクトル場の二次の項のみを取り出すと
+\begin{align*}
+&-\frac{1}{2}\left| \left(\vec{A}_\mu \cdot \vec{t}^{(\phi)}+B_\mu y^{(\phi)} \right)\braket{\phi} \right|^2 =-\frac{1}{2}\left| \left(\frac{g}{2}\vec{A}_\mu \cdot \vec{\sigma}-\frac{g'}{2}B_\mu I \right)\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2 \\
+=&-\frac{1}{2}\left| \left\{\frac{g}{2}\left(
+\begin{array}{cc}
+0 & A_{1\mu}-iA_{2\mu} \\
+A_{1\mu}+iA_{2\mu} & 0
+\end{array}
+\right) +\frac{g}{2}A_{3\mu} \left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)-\frac{g'}{2}B_\mu \left(
+\begin{array}{cc}
+1 & 0 \\
+0 & 1
+\end{array}
+\right) \right\}\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2 \\
+=&-\frac{1}{2}\left| \frac{g}{2}(A_{1\mu}-iA_{2\mu})\left(
+\begin{array}{cc}
+v \\
+0
+\end{array}
+\right) +\frac{g}{2}A_{3\mu}\left(
+\begin{array}{cc}
+0 \\
+-v
+\end{array}
+\right) -\frac{g'}{2}B_\mu \left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2 \\
+=&-\frac{1}{2}\left| \frac{g}{2}\sqrt{2}W_{+\mu}\left(
+\begin{array}{cc}
+v \\
+0
+\end{array}
+\right) -\frac{g}{2}(\cos\theta Z_\mu -\sin\theta A_\mu)\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) -\frac{g'}{2}(\sin\theta Z_\mu+\cos\theta A_\mu ) \left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2 \\
+=&-\frac{1}{2}\left| \frac{g}{\sqrt{2}}W_{+\mu}\left(
+\begin{array}{cc}
+v \\
+0
+\end{array}
+\right) -\left( \frac{g}{2}\cos\theta +\frac{g'}{2}\sin\theta \right)Z_{\mu}\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) +\underset{(21.3.19)よりゼロ}{\uwave{\left( \frac{g}{2}\sin\theta-\frac{g'}{2}\cos\theta \right)}}A_\mu \left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2 \\
+=&-\frac{1}{2}\left| \frac{g}{\sqrt{2}}W_{+\mu}\left(
+\begin{array}{cc}
+v \\
+0
+\end{array}
+\right) +\frac{e}{2}\frac{g^2+g'^2}{gg'}Z_{\mu}\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2 \\
+=&-\frac{1}{2}\left| \frac{g}{\sqrt{2}}W_{+\mu}\left(
+\begin{array}{cc}
+v \\
+0
+\end{array}
+\right) +\frac{1}{2}\sqrt{g^2+g'^2}Z_{\mu}\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2 \quad \because e=\frac{gg'}{\sqrt{g^2+g'^2}} \\
+=&-\frac{v^2 g^2}{4}W_{+\mu}^\dagger W^\mu_+ -\frac{v^2 (g^2+g'^2)}{8}Z_\mu Z^\mu =-\frac{v^2 g^2}{4}W_{-\mu} W^\mu_+ -\frac{v^2 (g^2+g'^2)}{8}Z_\mu Z^\mu \\
+\equiv& -m^2_W W_{-\mu}W^\mu_+ -\frac{1}{2}m^2_Z Z_\mu Z^\mu
+\end{align*}
+よって
+\begin{align*}
+m_W=\frac{v|g|}{2} ,\quad m_Z=\frac{v\sqrt{g^2+g'^2}}{2}
+\end{align*}
+となる．(ワインバーグ本文での式変形通りに計算するとこのようになるが，電荷行列$q^{(\phi)}$が破れていないので真空期待値$(0,v)$をかけるとゼロになることを用いることで$A^\mu$の質量が現れないという仕組みが根底にある．実際，$i\mc{L}'_e$を計算したときと同様の計算によって
+\begin{align*}
+-\frac{1}{2}\left| \left(\vec{A}_\mu \cdot \vec{t}^{(\phi)}+B_\mu y^{(\phi)} \right)\braket{\phi} \right|^2&=-\frac{1}{2}\left| \biggl\{ \frac{1}{\sqrt{2}}\Slash{W}_- (t_1^{(\phi)}-it_2^{(\phi)}) +\frac{1}{\sqrt{2}}\Slash{W}_+ (t_1^{(\phi)}+it_2^{(\phi)}) \right. \\
+&\left. +\Slash{Z}(t_3^{(\phi)}\cos\theta + y^{(\phi)}\sin\theta)+\Slash{A}(-t_3^{(\phi)} \sin\theta +y^{(\phi)}\cos\theta)\biggr\}\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2 \\
+&=-\frac{1}{2}\left| \biggl\{ \frac{1}{\sqrt{2}}\Slash{W}_- (t_1^{(\phi)}-it_2^{(\phi)}) +\frac{1}{\sqrt{2}}\Slash{W}_+ (t_1^{(\phi)}+it_2^{(\phi)}) \right. \\
+&\left. +\Slash{Z}(t_3^{(\phi)}\cos\theta + y^{(\phi)}\sin\theta)+\Slash{A}q^{(\phi)} \biggr\}\left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right) \right|^2
+\end{align*}
+となるからだ．あとは同じ計算で同様の結果が得られる．)実場は質量行列に係数$1/2$がつくことに注意．なぜなら質量行列はラグランジアンの場についての二階微分で与えられるが
+\begin{align*}
+&複素場: \phi^\dagger M^2 \phi \overset{\partial/\partial \phi}{\longrightarrow} \phi^\dagger M^2 \overset{\partial/\partial \phi^\dagger}{\longrightarrow} M^2 \\
+&実場 : \frac{1}{2}\phi M^2 \phi \overset{\partial/\partial \phi}{\longrightarrow} \phi M^2 \overset{\partial/\partial \phi}{\longrightarrow} M^2
+\end{align*}
+として計算されるからだ．また(21.3.21)は(21.3.28)より
+\begin{align*}
+&-G_e \overline{\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)}_L \left(
+\begin{array}{cc}
+0 \\
+v
+\end{array}
+\right)e_R-G_e \bar{e}_R(0 ,v)\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right) \\
+&=-G_e \bar{e}_L v e_R -G_e \bar {e}_R v e_L=-G_e v \bar{e} \frac{1-\gamma_5}{2}e -G_e v \bar{e} \frac{1+\gamma_5}{2}e \\
+&=-G_e v \bar{e} e \equiv -m_e \bar{e}e
+\end{align*}
+となり，電子の質量$m_e =G_e v$がわかる．
+がわかる．(誤植を訂正して)(21.3.20)と合わせると，$\bar{e}A e$項と$\bar{e}e$項は
+\begin{align*}
+-\bar{e}(\Slash{\partial}-i(-e)\Slash{A}+G_e v)e =-\bar{e}(\Slash{\mc{D}}_e+m_e )e
+\end{align*}
+となる．ここで$\mc{D}^\mu_e$はQEDにおける見慣れた共変微分だ．\par
+$\Rightarrow$期待した通り，光子の質量はゼロで，$W^\pm$と$Z^0$と電子の質量が生じる！これが欲しかった結果だ！質量発生の起源は自発的対称性の破れに伴う(ゼロでない)真空期待値自体なのだとわかる．\par
+また，(21.3.25)において$\phi=(0,v+\sigma(x))$と分解すると，ポテンシャル項において$\sigma(x)$の二次の項が
+\begin{align*}
+-\frac{\mu^2}{2}(v+\sigma)^2-\frac{\lambda}{4}(v+\sigma)^4=&-\frac{\mu^2}{2}(v^2+2v\sigma+\sigma^2)-\frac{\lambda}{4}\{v^4+4v^3\sigma+6v^2\sigma^2+4v\sigma^3+\sigma^4 \} \\
+=&-\left(\frac{\mu^2}{2}+\frac{\lambda}{4}6v^2\right)\sigma^2+\cdots  \\
+=&-\left( -\frac{\lambda}{2}v^2+\frac{3\lambda}{2}v^2 \right)\sigma^2+\cdots \quad \because v^2=-\mu^2/\lambda \\
+=&-\lambda v^2\sigma^2+\cdots\equiv -\frac{m_{H}^2}{2}\sigma^2+\cdots
+\end{align*}
+となり，ヒッグス場$\sigma(x)$の質量は$m_H=v\sqrt{2\lambda}$であることがわかる．
+
+\vskip\baselineskip
+
+(21.3.20)より$W^\pm$に結合するカレントは
+\begin{align*}
+&\frac{g}{\sqrt{2}}\left(\bar{e}\Slash{W}_-\left(\frac{1+\gamma_5}{2}\right)\nu_e \right)+\frac{g}{\sqrt{2}}\left(\bar{\nu}_e\Slash{W}_+\left(\frac{1+\gamma_5}{2}\right) e \right) \\
+&=W_{-\mu}J^\mu_e+W_{+\mu}{J^\mu_e}^\dagger
+\end{align*}
+ここで
+\begin{align*}
+J^\mu_e\equiv \frac{g}{\sqrt{2}}\left(\bar{e}\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\nu_e \right)
+\end{align*}
+となる．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (a1) at (-2,-2){};
+\coordinate (b2) at (2,3){};
+\coordinate (m1) at (-1,0){};
+\coordinate (b1) at (-2,2){};
+\coordinate (a2) at (0,3){};
+\coordinate (m2) at (0.5,1){};
+
+\draw[thick,postaction={decorate}](b1)node[left]{$\bar{\nu}_\mu$}--(m1);
+\draw[thick,postaction={decorate}](m1)--(a1)node[right]{$\mu^+$};
+
+\draw[thick,postaction={decorate}](b2)node[above=2mm]{$e^+$}--(m2);
+\draw[thick,postaction={decorate}](m2)--(a2)node[right]{$\bar{\nu}_e$};
+
+\begin{feynhand}
+\propag[photon,thick](m1)--(m2);
+\end{feynhand}
+\node(g) at (0,0){$W$};
+
+\draw[very thick , ->](-3,-2)--(-3,3)node[above]{$t$};
+\end{tikzpicture}
+\end{figure}
+
+この$J^\mu$で$\mu^+\to e^+ +\nu_e +\bar{\nu}_\mu$を考えると，$e\to \nu$という置き換えと$G_\mu=(m_\mu/m_e)G_e$で$J^\mu_\mu$が同様に得られるので，低エネルギー$(p^2\ll m^2_W)$の$e$型レプトンと$\mu$型レプトンの間での$W$交換は，
+\begin{align*}
+J^\mu_e \Delta_{\mu\nu}{J^\nu_\mu}^\dagger +\mr{H.c.}&=\left( \frac{g}{\sqrt{2}} \right)^2 \left(\bar{e}\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\nu_e \right)\frac{\eta_{\mu\nu}}{p^2+m_W^2}\left(\bar{\nu}_\mu\gamma^\nu \left(\frac{1+\gamma_5}{2}\right)\mu \right)+\mr{H.c.} \\
+&\to \left( \frac{g}{\sqrt{2}} \right)^2\frac{1}{m^2_W} \left(\bar{e}\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\nu_e \right)\left(\bar{\nu}_\mu\gamma_\mu \left(\frac{1+\gamma_5}{2}\right)\mu \right)+\mr{H.c.}
+\end{align*}
+ここで分かりやすくするためファインマンゲージ$\xi=1$を用いた．ゲージによって物理的粒子の質量は変わらないのを21.2節で見たので，これは自由に行ってよい．これは低エネルギーで$\mu$中間子崩壊を良く記述することが知られている有効$V-A$理論の相互作用
+\begin{align*}
+\frac{G_F}{\sqrt{2}} \left(\bar{e}\gamma^\mu \left(1+\gamma_5\right)\nu_e \right)\left(\bar{\nu}_\mu\gamma_\mu \left(1+\gamma_5\right)\mu \right)+\mr{H.c.}
+\end{align*}
+と比較できる．ここで$G_F$は通常のフェルミ結合定数で，$\mu$中間子崩壊率より$G_F=1.16639(2)\times 10^{-5}$GeVが知られている．これらを比較し
+\begin{align*}
+\frac{g^2}{m_W^2}=4\sqrt{2}G_F
+\end{align*}
+がわかる．これより$G_F$が既知であるから(21.3.30)より真空期待値がわかる．
+\begin{align*}
+v=\frac{2m_W}{g}=\frac{1}{2^{1/4}\sqrt{G_F}}=247\mr{GeV}
+\end{align*}
+また(21.3.31)より
+\begin{align*}
+G_e=\frac{0.511\mr{MeV}}{247\mr{GeV}}=2.07\times 10^{-6}
+\end{align*}
+がわかる．これはとても小さい値だ．また(21.3.30)より
+\begin{align*}
+&m_Z=\frac{v\sqrt{g^2+g'^2}}{2}=\frac{v|g|}{2|\cos\theta|}=\frac{m_W}{|\cos\theta|}<m_W \\
+&m_W=\frac{v|g|}{2}=\frac{ev}{2|\sin\theta|}=\frac{37.4\mr{MeV}}{|\sin\theta|} \\
+&m_Z=\frac{m_W}{|\cos\theta|}=\frac{ev}{2|\sin\theta||\cos\theta|}=\frac{74.8\mr{MeV}}{|\sin2\theta|}
+\end{align*}
+がわかる．$\theta$はワインバーグ角と呼ばれる．(たびたび$\theta_W$と表記．)
+
+\vskip\baselineskip
+
+$m_W$と$m_Z$の値は$e$については従来の電荷の定義を用いて計算された．しかし，18.2節で説明したように，これは$E\gg m_e$のエネルギーでの過程での計算に用いるには正確には適切ではない．\par
+$\Rightarrow$代わりに，対象としているエネルギースケールに匹敵する，変化するスケール$\mu$での電荷$e_\mu$を使う必要がある．\\
+90GeV程度の$\mu$では有効微細構造定数$e^2_\mu/4\pi$は約$1/129$(3巻p172参照)なので，$m_Z,m_W$は
+\begin{align*}
+e_\mu=\sqrt{\frac{4\pi}{129}}=\sqrt{\frac{137}{129}}\sqrt{\frac{4\pi}{137}}=\sqrt{\frac{137}{129}}e
+\end{align*}
+で$\sqrt{137/129}$をかけなければならず
+\begin{align*}
+m_W=\frac{38.5 \mr{GeV}}{|\sin \theta|} ,\quad  m_Z=\frac{77.1  \mr{GeV}}{|\sin 2\theta|}
+\end{align*}
+となる．
+
+\vskip\baselineskip
+
+中性カレント($Z^0$に結合するカレント)の発見以前に，すでに電弱理論はハドロン・ハドロン間およびハドロン・レプトン間の弱い相互作用と電磁相互作用に拡張されていた．1960年代中頃までには，レプトン・ハドロン間で電荷が交換される弱い相互作用の過程は，低エネルギーでは有効ラグランジアン
+\begin{align*}
+\frac{G_F}{\sqrt{2}}[\bar{e}\gamma_\lambda (1+\gamma_5)\nu_e +\bar{\mu}\gamma_\lambda(1+\gamma_5)\nu_\mu]J^\lambda+\mr{H.c.}
+\end{align*}
+で良く記述されることが分かっていた．ここで$J^\lambda$はハドロン・カレントだ．このカレントは，クォークカレント
+\begin{align*}
+J^\lambda =\bar{u}\gamma^\lambda (1+\gamma_5)d\cos\theta_c+\bar{u}\gamma^\lambda (1+\gamma_5)s\sin\theta_c
+\end{align*}
+と同定できた．$\theta_c$はキャビボ角と呼ばれる，ワインバーグ角とは別の角度だ．第一世代のみを含む相互作用を考える場合は，このカレントは
+\begin{align*}
+J^\lambda=\bar{u}\gamma^\lambda (1+\gamma_5)d
+\end{align*}
+となるが，このときの相互作用はまさに(19.4.22)だ．実際(19.4.22)は
+\begin{align*}
+& V^\lambda_+=V^\lambda_1+iV^\lambda_2=i\overline{\left(
+\begin{array}{cc}
+u \\
+d
+\end{array}
+\right)}\gamma^\lambda \left(
+\begin{array}{cc}
+0 & 1 \\
+0 & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+u \\
+d
+\end{array}
+\right)=i\bar{u}\gamma^\lambda d \\
+& A^\lambda_+=A^\lambda_1+iA^\lambda_2=i\overline{\left(
+\begin{array}{cc}
+u \\
+d
+\end{array}
+\right)}\gamma^\lambda \gamma_5 \left(
+\begin{array}{cc}
+0 & 1 \\
+0 & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+u \\
+d
+\end{array}
+\right)=i\bar{u}\gamma^\lambda \gamma_5 d \\
+\Rightarrow \quad & V^\lambda_+ + A^\lambda_+=i\bar{u}\gamma^\lambda(1+\gamma_5)d \\
+& \mc{L}_{\mr{wk}}=\frac{G_{\mr{wk}}}{\sqrt{2}}\bar{u}\gamma^\lambda (1+\gamma_5)d \sum_{\ell}\bar{\ell} \gamma_\lambda (1+\gamma_5)\nu_\ell +\mr{H.c.}
+\end{align*}
+となる．\par
+第一世代$(\nu_e,e,u,d)$だけの場合はこれでよい．これを第二世代$(\nu_\mu,\mu,c,s)$，第三世代$(\nu_\tau,\tau ,t,b)$を含んだものに拡張したい．しかし，世代が違う粒子と相互作用しないのはレプトンに関してのみであり，クォークに関してはそう単純ではない．例えば，第二世代に属するクォークは$c$クォークと$s$クォークである．これらの粒子について対応する第一世代の$u$クォーク，$d$クォークと同じ相互作用を足し合わせると，弱い相互作用の荷電を変える遷移は$s$クォークと$c$クォークの遷移として表される．
+\begin{align*}
+J^\lambda=\bar{u}\gamma^\lambda (1+\gamma_5)d+\bar{c}\gamma^\lambda (1+\gamma_5)s
+\end{align*}
+しかし，$\Lambda$粒子から陽子への崩壊はクォークレベルでは$s$クォークから$u$クォークへの遷移であり，第一世代の相互作用に第二世代を単に足し合わせるだけでは記述できない．\par
+$\Rightarrow$ここまで展開してきたゲージ理論を保持しつつ，現実を正しく記述するためには，弱い相互作用の電荷を変えるカレントについて\uwave{クォークの世代間混合}が必要だ．すなわち，フレーバーで区別されるクォークと，電弱理論の$SU(2)$2重項・1重項を構成するクォークは\uwave{同一ではない}と考える．\par
+前者を$d,s$，後者$d',s'$で表すと，このときクォークの混合は
+\begin{align*}
+\left(
+\begin{array}{cc}
+d' \\
+s'
+\end{array}
+\right)=\left(
+\begin{array}{cc}
+\cos\theta_c & \sin\theta_c \\
+-\sin\theta & \cos\theta_c
+\end{array}
+\right)\left(
+\begin{array}{cc}
+d \\
+s
+\end{array}
+\right)  \quad \Rightarrow \quad d'=d\cos\theta_c s\sin\theta_c ,\quad s'=-d\sin\theta_c+s\cos\theta_c
+\end{align*}
+と表される．もし第三世代までの混合をするなら
+\begin{align*}
+\left(
+\begin{array}{ccc}
+d' \\
+s' \\
+b'
+\end{array}
+\right)=V_{\mr{CKM}}\left(
+\begin{array}{ccc}
+d \\
+s \\
+b
+\end{array}
+\right) ,\quad V_{\mr{CKM}}=\left(
+\begin{array}{ccc}
+V_{ud} & V_{us} & V_{ub} \\
+V_{cd} & V_{cs} & V_{cb} \\
+V_{td} & V_{ts} & V_{tb} 
+\end{array}
+\right)
+\end{align*}
+となる．これはキャビボ・小林・益川行列と呼ばれるユニタリー行列だ．これは未知の行列だが，p86の行列で知られている．以上は$d,s,b$の混合を表し，$u,c,t$の間の混合はないとしているが，これは便宜的な表現であり，逆で混合させることもできる．また，電弱理論ではレプトンの質量行列は対角であり，レプトンの混合はないとしている．(理論によってはレプトンの混合も考えることがあり，Pontecorvo・牧・中川・坂田行列(PMNS行列)と呼ぶらしい．荷電レプトンは質量フレーバー固有状態とするが，ニュートリノに関してはPMNS行列により混合させることでニュートリノ振動を考えることができるらしい．)
+
+\vskip\baselineskip
+
+$u,d,s$クォークを考えたとき，混合状態$d'=d\sin\theta_c +s\sin\theta_c$は$u$と合わせて$SU(2)_+\times U(1)$左手2重項
+\begin{align*}
+&\mc{Q}_1=\left(
+\begin{array}{cc}
+u \\
+d'
+\end{array}
+\right)_L=\frac{1+\gamma_5}{2}\left(
+\begin{array}{cc}
+u \\
+d\cos\theta_c+s\sin\theta_c
+\end{array}
+\right) \\
+&\delta \left(
+\begin{array}{cc}
+u \\
+d'
+\end{array}
+\right)_L=i\left[ \vec{\epsilon}\cdot\vec{t}+\alpha y \right]\left(
+\begin{array}{cc}
+u \\
+d'
+\end{array}
+\right)_L
+\end{align*}
+および右手成分の1重項
+\begin{align*}
+&u_R=\frac{1-\gamma_5}{2}u ,\quad d'_R=\frac{1-\gamma_5}{2}d' \\
+&\delta u_R=i[\alpha y]u_R ,\quad \delta d'_R=i[\alpha y]d'_R
+\end{align*}
+を構成する．\par
+クォークの電荷を$2e/3,-e/3$と与えるようにすると，$\vec{t}=g(1+\gamma_5)\vec{\sigma}/4$と$q=\frac{e}{g}t_3-\frac{e}{g'}y$より
+\begin{align*}
+&q\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)=e\left(\begin{array}{cc}
++2/3\cdot u_L \\
+-1/3\cdot d'_L
+\end{array}
+\right) ,\quad q u_R=+\frac{2e}{3}u_R ,\quad q d'_R=-\frac{e}{3}d'_R \\
+&t_3 \left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)=\frac{g}{2}\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)=\frac{g}{2}\left(
+\begin{array}{cc}
++u_L \\
+-d'_L
+\end{array}
+\right) ,\quad t_3 u_R=0 ,\quad t_3 d'_R=0 \\
+\quad \Rightarrow \quad & \frac{e}{g'}y\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)=\left(\frac{e}{g'}t_3-q \right)\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)=\left(
+\begin{array}{cc}
+(+e/2-2e/3)u_L \\
+(-e/2+e/3)d'_L
+\end{array}
+\right)=-\frac{e}{6}\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right) \\
+&\frac{e}{g'}y u_R=-\frac{2e}{3}u_R ,\quad \frac{e}{g'}y d'_R=\frac{e}{3}d'_R
+\end{align*}
+という風にクォーク場においての$y$の値が調整される．
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{c|ccccccc}
+    & & $q$ & $\dfrac{e}{g}t_3$ & $-\dfrac{e}{g'}y$ & 第一世代 & 第二世代 & 第三世代\\\hline
+    & & & & & & & \\
+    レプトン & 2重項 & \multirow{2}{*}{$\begin{pmatrix}0\\-1\end{pmatrix}$} & \multirow{2}{*}{$\begin{pmatrix}+\frac{1}{2}\\-\frac{1}{2}\end{pmatrix}$} & \multirow{2}{*}{$\begin{pmatrix}-\frac{1}{2}\\-\frac{1}{2}\end{pmatrix}$} & \multirow{2}{*}{$\begin{pmatrix}V_e\\e\end{pmatrix}_L$} & \multirow{2}{*}{$\begin{pmatrix}V_\mu\\\mu\end{pmatrix}_L$} & \multirow{2}{*}{$\begin{pmatrix}V_\tau\\\tau\end{pmatrix}_L$}\\
+    & & & & & & & \\\vspace{-0.8cm}
+    & & & & & & & \\
+    & & & & & & & \\
+    & 1重項 & $-1$ & $0$ & $-1$ & $e_R$ & $\mu_R$ & $\tau_R$\\
+    & & & & & & & \\
+    クォーク & 2重項 & \multirow{2}{*}{$\begin{pmatrix}+\frac{2}{3}\\-\frac{1}{3}\end{pmatrix}$} & \multirow{2}{*}{$\begin{pmatrix}+\frac{1}{2}\\-\frac{1}{2}\end{pmatrix}$} & \multirow{2}{*}{$\begin{pmatrix}+\frac{1}{6}\\+\frac{1}{6}\end{pmatrix}$} & \multirow{2}{*}{$\begin{pmatrix}u\\d'\end{pmatrix}_L$} & \multirow{2}{*}{$\begin{pmatrix}c\\s'\end{pmatrix}_L$} & \multirow{2}{*}{$\begin{pmatrix}t\\b'\end{pmatrix}_L$}\\
+    & & & & & & & \\\vspace{-0.1cm}
+    & & & & & & & \\
+    & 1重項 & \multirow{2}{*}{$\begin{matrix}+\frac{2}{3}\\-\frac{1}{3}\end{matrix}$} & \multirow{2}{*}{$\begin{matrix}0\\0\end{matrix}$} & \multirow{2}{*}{$\begin{matrix}+\frac{2}{3}\\-\frac{1}{3}\end{matrix}$} &\multicolumn{3}{c}{$u_R\hspace{1.3cm}c_R\hspace{1.4cm}t_R$}\\\vspace{-0.6cm}
+    & & & & & & & \\\vspace{0.2cm}
+    & & & & & \multicolumn{3}{c}{$\tcboxmath[
+      enhanced,frame hidden,interior hidden,size=minimal,
+      overlay={
+          \draw[thick,decorate,
+              decoration={brace,         amplitude=6pt,raise=2pt}
+          ] (frame.south east) -- (frame.south west)node[midway,below=8pt] {混合状態};
+      }
+  ]{d'_R\hspace{1.3cm}s'_R\hspace{1.4cm}b'_R}$}\\
+  \multicolumn{1}{c}{}& & \multicolumn{3}{c}{$Q\hspace{0.4cm}=\hspace{0.4cm}T_3\hspace{0.4cm}+\hspace{0.4cm}\underset{弱超電荷}{Y}$} &&&
+  \end{tabular}
+\end{table}
+
+
+\vskip\baselineskip
+
+相互作用ラグランジアンは，クォーク2重項が(21.3.14)だけのとき
+\begin{align*}
+t_3\cos\theta +y \sin\theta& = t_3 \frac{1-\sin^2\theta}{\cos\theta}+y\sin\theta\\
+&=t_3\frac{1}{\cos\theta}+ (-\sin\theta t_3+\cos\theta y)\frac{\sin\theta}{\cos\theta} \\ 
+&=t_3\sec\theta +q\tan\theta \\
+&=-t_3\frac{\sqrt{g^2+g'^2}}{g}+q\frac{g'}{g}
+\end{align*}
+を用いると
+\begin{align*}
+&\overline{\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)}\left[\sum_\alpha A_\alpha t^\alpha \right]\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)+\bar{u}_R \left[\sum_\alpha A_\alpha t^\alpha \right]u_R+\bar{d}'_R \left[\sum_\alpha A_\alpha t^\alpha \right]d'_R \\
+=&\overline{\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)}\left[ \frac{1}{\sqrt{2}}\Slash{W}_- (t_1-it_2)+ \frac{1}{\sqrt{2}}\Slash{W}_+ (t_1+it_2) + \Slash{Z}(t_3\cos\theta+y\sin\theta)+\Slash{A} q \right]\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right) \\
+&+\bar{u}_R\left[ \Slash{Z}q\tan\theta +q\Slash{A} \right]u_R+\bar{d}'_R\left[ \Slash{Z}q\tan\theta +q\Slash{A} \right]d'_R \\
+=&\overline{\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)}\left[ \frac{g}{\sqrt{2}}\Slash{W}_- \frac{1+\gamma_5}{2}\left(
+\begin{array}{cc}
+0 & 1 \\
+0 & 0
+\end{array}
+\right)+\frac{g}{\sqrt{2}}\Slash{W}_+ \frac{1+\gamma_5}{2}\left(
+\begin{array}{cc}
+0 & 0 \\
+1 & 0
+\end{array}
+\right)+\Slash{Z}(t_3\sec\theta +q\tan\theta )+\Slash{A}q \right]\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right) \\
+&+\bar{u}_R\left[ \Slash{Z}q\tan\theta +q\Slash{A} \right]u_R+\bar{d}'_R\left[ \Slash{Z}q\tan\theta +q\Slash{A} \right]d'_R \\
+=&\frac{g}{\sqrt{2}}\bar{u}_L \Slash{W}_- \left(\frac{1+\gamma_5}{2}\right)d'_L+\frac{g}{\sqrt{2}}\bar{d}'_L \Slash{W}_- \left(\frac{1+\gamma_5}{2}\right)u_L \\
+&+\frac{g}{2} \bar{u}_L \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)u_L-\frac{g}{2} \bar{d}'_L \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)d'_L \\
+&+\frac{2e}{3}\bar{u}_L\Slash{Z}\tan\theta u_L-\frac{e}{3}\bar{d}'_L\Slash{Z}\tan\theta d'_L+\frac{2e}{3}\bar{u}_L\Slash{A}u_L-\frac{e}{3}\bar{d}'_L\Slash{A}d'_L \\
+&+\frac{2e}{3}\bar{u}_R\Slash{Z}\tan\theta u_R-\frac{e}{3}\bar{d}'_R\Slash{Z}\tan\theta d'_R+\frac{2e}{3}\bar{u}_R\Slash{A}u_R-\frac{e}{3}\bar{d}'_R\Slash{A}d'_R \\
+=&W_{-\mu}\left[ \frac{g}{\sqrt{2}}\bar{u} \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)d'\right] +W_{+\mu}\left[\frac{g}{\sqrt{2}}\bar{d}' \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)u\right] \\
+&+\frac{g}{2} \bar{u} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)u-\frac{g}{2} \bar{d}' \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)d' \\
+&+\frac{2e}{3}\bar{u}\Slash{Z}\tan\theta u-\frac{e}{3}\bar{d}'\Slash{Z}\tan\theta d'+\frac{2e}{3}\bar{u}\Slash{A}u-\frac{e}{3}\bar{d}'\Slash{A}d'
+\end{align*}
+$W$ボゾン交換の相互作用は，$W$に結合するカレントを用いて低エネルギーにおいて
+\begin{align*}
+&\left(\frac{g}{\sqrt{2}}\right)^2\frac{1}{m_W^2}\left[\bar{e}\gamma^\lambda\left(\frac{1+\gamma_5}{2}\right)\nu_e+\bar{\mu}\gamma^\lambda\left(\frac{1+\gamma_5}{2}\right)\nu_\mu \right]\left[ \bar{u}\gamma_\lambda \left(\frac{1+\gamma_5}{2}\right)d' \right]+\mr{H.c.} \\
+&=\frac{G_F}{\sqrt{2}}\left[\bar{e}\gamma^\lambda\left(1+\gamma_5\right)\nu_e+\bar{\mu}\gamma^\lambda\left(1+\gamma_5\right)\nu_\mu \right]\left[ \bar{u}\gamma_\lambda \left(1+\gamma_5\right)d\cos\theta_c + \bar{u}\gamma_\lambda \left(1+\gamma_5\right)s\sin\theta_c \right]+\mr{H.c.}
+\end{align*}
+となって(21.3.39)が出てくる．すなわちクォーク二重項によって相互作用が説明できた．\par
+しかしこの相互作用の$Z$と結合する項を見ると，$d'=d\cos\theta_c +s\sin\theta_c$より$\bar{d}\gamma^\lambda(1+\gamma_5)s,\bar{s}\gamma^\lambda(1+\gamma_5)d$に比例する項が存在することに気付く．
+\begin{align*}
+\frac{g}{2} \bar{d}' \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)d' =&Z_\lambda \left[\frac{g}{2} \bar{d} \gamma^\lambda \sec\theta \left(\frac{1+\gamma_5}{2}\right)d\cos^2\theta_c+\frac{g}{2} \bar{s} \gamma^\lambda \sec\theta \left(\frac{1+\gamma_5}{2}\right)s\sin^2\theta_c\right] \\
+&+Z_\lambda \uwave{ \frac{g}{4}\sec\theta\sin\theta_c\cos\theta_c\left[\bar{d} \gamma^\lambda \left(1+\gamma_5\right)s +\bar{s} \gamma^\lambda \left(1+\gamma_5\right)d \right]}
+\end{align*}
+これはフレーバーが異なる場である$s$と$d$が結合し，中性カレントであるから，フレーバーを変える中性カレント(Flavor Changing Neutral Current,FCNC)と呼ぶ．$K^0$中間子はストレンジクォークと反ダウンクォークからなる中間子であるから，$K^0\to\bar{K}^0$振動はクォークレベルで見ると，$s+\bar{d}\to d+\bar{s}$という過程に相当する．もしこのFCNCが存在すると，この反応は4フェルミオン相互作用であるからおおざっぱに
+\begin{align*}
+(\bar{d}s)\frac{1}{m_Z^2}(\bar{s}d)
+\end{align*}
+となる．
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (a1) at (-2,2){};
+\coordinate (b1) at (-2,-2){};
+\coordinate (a2) at (2,2){};
+\coordinate (b2) at (2,-2){};
+\coordinate (m1) at (0,1){};
+\coordinate (m2) at (0,-1){};
+
+\draw[thick,postaction={decorate}](a1)node[left]{$d$}--(m1);
+\draw[thick,postaction={decorate}](m2)--(b1)node[left]{$s$};
+\draw[thick,postaction={decorate}](m1)--(a2)node[right]{$s$};
+\draw[thick,postaction={decorate}](b2)node[right]{$d$}--(m2);
+
+\begin{feynhand}
+\propag[photon,thick](m1)--(m2);
+\end{feynhand}
+\draw(0,0)node[left]{$Z$};
+\draw(3,0)node{$+$};
+
+\end{tikzpicture}
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (a1) at (-2,2){};
+\coordinate (b1) at (-2,-2){};
+\coordinate (a2) at (2,2){};
+\coordinate (b2) at (2,-2){};
+\coordinate (m1) at (-1,0){};
+\coordinate (m2) at (1,0){};
+
+\draw[thick,postaction={decorate}](a1)node[left]{$d$}--(m1);
+\draw[thick,postaction={decorate}](m1)--(b1)node[left]{$s$};
+\draw[thick,postaction={decorate}](m2)--(a2)node[right]{$s$};
+\draw[thick,postaction={decorate}](b2)node[right]{$d$}--(m2);
+
+\begin{feynhand}
+\propag[photon,thick](m1)--(m2);
+\end{feynhand}
+\draw(0,0)node[above]{$Z$};
+
+\end{tikzpicture}
+\end{figure}
+
+しかし現実はこれで計算される確率では反応しない．ここで新たな二重項
+\begin{align*}
+\mc{Q}_2=\frac{1+\gamma_5}{2}\left(
+\begin{array}{cc}
+c\\
+s'
+\end{array}
+\right)=\frac{1+\gamma_5}{2}\left(
+\begin{array}{cc}
+c\\
+-d\sin\theta_c+s\cos\theta_c
+\end{array}
+\right)
+\end{align*}
+とその一重項を導入すると，そのラグランジアンは
+\begin{align*}
+&\overline{\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)}\left[\sum_\alpha A_\alpha t^\alpha \right]\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)+\bar{u}_R \left[\sum_\alpha A_\alpha t^\alpha \right]u_R+\bar{d}'_R \left[\sum_\alpha A_\alpha t^\alpha \right]d'_R \\
+&+\overline{\left(
+\begin{array}{cc}
+c_L \\
+s'_L
+\end{array}
+\right)}\left[\sum_\alpha A_\alpha t^\alpha \right]\left(
+\begin{array}{cc}
+c_L \\
+s'_L
+\end{array}
+\right)+\bar{c}_R \left[\sum_\alpha A_\alpha t^\alpha \right]c_R+\bar{s}'_R \left[\sum_\alpha A_\alpha t^\alpha \right]s'_R \\
+=&W_{-\mu}\left[ \frac{g}{\sqrt{2}}\bar{u} \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)d'\right] +W_{+\mu}\left[\frac{g}{\sqrt{2}}\bar{d}' \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)u\right] \\
+&+W_{-\mu}\left[ \frac{g}{\sqrt{2}}\bar{c} \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)s'\right] +W_{+\mu}\left[\frac{g}{\sqrt{2}}\bar{s}' \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)c\right] \\
+&+\frac{g}{2} \bar{u} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)u-\frac{g}{2} \bar{d}' \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)d' \\
+&+\frac{g}{2} \bar{c} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)c-\frac{g}{2} \bar{s}' \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)s' \\
+&+\frac{2e}{3}\bar{u}\Slash{Z}\tan\theta u-\frac{e}{3}\bar{d}'\Slash{Z}\tan\theta d' +\frac{2e}{3}\bar{c}\Slash{Z}\tan\theta c-\frac{e}{3}\bar{s}'\Slash{Z}\tan\theta s' \\
+&+\frac{2e}{3}\bar{u}\Slash{A}u-\frac{e}{3}\bar{d}'\Slash{A}d'+\frac{2e}{3}\bar{c}\Slash{A}c-\frac{e}{3}\bar{s}'\Slash{A}s' \\
+=&W_{-\mu}\left[ \frac{g}{\sqrt{2}}\left\{ \bar{u} \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)d'+\bar{c} \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)s' \right\}\right] \\
+&+W_{+\mu}\left[\frac{g}{\sqrt{2}}\left\{ \bar{d}' \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)u+\bar{s}' \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)c \right\} \right] \\
+&+\frac{g}{2} \bar{u} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)u+\frac{2e}{3}\bar{u}\Slash{Z}\tan\theta u-\frac{g}{2} \bar{d} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)d -\frac{e}{3}\bar{d}\Slash{Z}\tan\theta d \\
+&+\frac{g}{2} \bar{c} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)c+\frac{2e}{3}\bar{c}\Slash{Z}\tan\theta c-\frac{g}{2} \bar{s} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)s -\frac{e}{3}\bar{s}\Slash{Z}\tan\theta s \\
+&+\frac{2e}{3}\bar{u}\Slash{A}u-\frac{e}{3}\bar{d}\Slash{A}d+\frac{2e}{3}\bar{c}\Slash{A}c-\frac{e}{3}\bar{s}\Slash{A}s
+\end{align*}
+となり，ストレンジネスを変える項が相殺される．すぐに分かる通り，$Z$に結合するFCNCは存在しない．これにより通常の一次の大きさのフレーバーが変化するダイアグラムはなくなり，$K^0-\bar{K}^0$振動の確率は小さくなる．もちろんゼロではない．1ループの大きさでは，$W$交換による効果が存在するので，次のようなダイアグラムが存在することがわかる．これにより$K^0-\bar{K}^0$振動の反応率は実験値の大きさとなる．
+
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (a1) at (-2,2){};
+\coordinate (a2) at (0,2){};
+\coordinate (b1) at (-2,0){};
+\coordinate (b2) at (0,0){};
+\coordinate (c1) at (2,2){};
+\coordinate (c2) at (4,2){};
+\coordinate (d1) at (2,0){};
+\coordinate (d2) at (4,0){};
+
+\draw[thick,postaction={decorate}](a1)node[left]{$d$}--(a2);
+\draw[thick,postaction={decorate}](b1)node[left]{$\bar{s}$}--(b2);
+\draw[thick,postaction={decorate}](c1)--(c2)node[right]{$s$};
+\draw[thick,postaction={decorate}](d1)--(d2)node[right]{$\bar{d}$};
+\draw[thick,postaction={decorate}](a2)--(c1);
+\draw[thick,postaction={decorate}](b2)--(d1);
+
+\begin{feynhand}
+\propag[photon,thick](a2)--(b2);
+\propag[photon,thick](c1)--(d1);
+\end{feynhand}
+\draw(0,1)node[left]{$W$};
+\draw(2,1)node[left]{$W$};
+\draw(1,2)node[above]{$u,c$};
+\draw(1,0)node[below]{$u,c$};
+\draw(5,1)node{$+$};
+
+\end{tikzpicture}
+\begin{tikzpicture}[decoration={markings, 
+mark= at position -1cm with {\arrow[line width=0.5mm]{Stealth}}}]
+\coordinate (a1) at (-2,2){};
+\coordinate (a2) at (0,2){};
+\coordinate (b1) at (-2,0){};
+\coordinate (b2) at (0,0){};
+\coordinate (c1) at (2,2){};
+\coordinate (c2) at (4,2){};
+\coordinate (d1) at (2,0){};
+\coordinate (d2) at (4,0){};
+
+\draw[thick,postaction={decorate}](a1)node[left]{$d$}--(a2);
+\draw[thick,postaction={decorate}](b1)node[left]{$\bar{s}$}--(b2);
+\draw[thick,postaction={decorate}](c1)--(c2)node[right]{$s$};
+\draw[thick,postaction={decorate}](d1)--(d2)node[right]{$\bar{d}$};
+\draw[thick,postaction={decorate}](a2)--(b2);
+\draw[thick,postaction={decorate}](d1)--(c1);
+
+\begin{feynhand}
+\propag[photon,thick](a2)--(c1);
+\propag[photon,thick](b2)--(d1);
+\end{feynhand}
+\draw(0,1)node[left]{$u,c$};
+\draw(2,1)node[left]{$u,c$};
+\draw(1,2)node[above]{$W$};
+\draw(1,0)node[below]{$W$};
+
+\end{tikzpicture}
+
+三世代を含んだラグランジアンを同様に計算しておこう．これによる重要な帰結は特にここでは出さないが，ひとつの到達点として残しておくことにする．
+\begin{align*}
+&\overline{\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)}\left[\sum_\alpha A_\alpha t^\alpha \right]\left(
+\begin{array}{cc}
+u_L \\
+d'_L
+\end{array}
+\right)+\bar{u}_R \left[\sum_\alpha A_\alpha t^\alpha \right]u_R+\bar{d}'_R \left[\sum_\alpha A_\alpha t^\alpha \right]d'_R \\
+&+\overline{\left(
+\begin{array}{cc}
+c_L \\
+s'_L
+\end{array}
+\right)}\left[\sum_\alpha A_\alpha t^\alpha \right]\left(
+\begin{array}{cc}
+c_L \\
+s'_L
+\end{array}
+\right)+\bar{c}_R \left[\sum_\alpha A_\alpha t^\alpha \right]c_R+\bar{s}'_R \left[\sum_\alpha A_\alpha t^\alpha \right]s'_R \\
+&+\overline{\left(
+\begin{array}{cc}
+t_L \\
+b'_L
+\end{array}
+\right)}\left[\sum_\alpha A_\alpha t^\alpha \right]\left(
+\begin{array}{cc}
+t_L \\
+b'_L
+\end{array}
+\right)+\bar{t}_R \left[\sum_\alpha A_\alpha t^\alpha \right]t_R+\bar{b}'_R \left[\sum_\alpha A_\alpha t^\alpha \right]b'_R \\
+=&W_{-\mu}\left[ \frac{g}{\sqrt{2}}\left\{ \bar{u} \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)d'+\bar{c} \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)s' + \bar{t}\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)b' \right\}\right] \\
+&+W_{+\mu}\left[\frac{g}{\sqrt{2}}\left\{ \bar{d}' \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)u+\bar{s}' \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)c+\bar{b}'\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)t \right\} \right] \\
+&+\frac{g}{2} \bar{u} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)u+\frac{2e}{3}\bar{u}\Slash{Z}\tan\theta u-\frac{g}{2} \bar{d} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)d -\frac{e}{3}\bar{d}\Slash{Z}\tan\theta d \\
+&+\frac{g}{2} \bar{c} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)c+\frac{2e}{3}\bar{c}\Slash{Z}\tan\theta c-\frac{g}{2} \bar{s} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)s -\frac{e}{3}\bar{s}\Slash{Z}\tan\theta s \\
+&+\frac{g}{2} \bar{t} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)t+\frac{2e}{3}\bar{t}\Slash{Z}\tan\theta t-\frac{g}{2} \bar{b} \Slash{Z}\sec\theta \left(\frac{1+\gamma_5}{2}\right)b -\frac{e}{3}\bar{b}\Slash{Z}\tan\theta b \\
+&+\frac{2e}{3}\bar{u}\Slash{A}u-\frac{e}{3}\bar{d}\Slash{A}d+\frac{2e}{3}\bar{c}\Slash{A}c-\frac{e}{3}\bar{s}\Slash{A}s + \frac{2e}{3}\bar{t}\Slash{A}t-\frac{e}{3}\bar{b}\Slash{A}b
+\end{align*}
+$W$に結合するハドロン・カレントは
+\begin{align*}
+J^\lambda=&\bar{u}\gamma^\lambda (1+\gamma_5)d'+\bar{c}\gamma^\lambda (1+\gamma_5)s'+\bar{t}\gamma^\lambda (1+\gamma_5)b' \\
+=&\overline{\left[
+\begin{array}{cc}
+u \\
+c \\
+t
+\end{array}
+\right]}\gamma^\lambda (1+\gamma_5)V_{\mr{CKM}}\left[
+\begin{array}{cc}
+d \\
+s \\
+b
+\end{array}
+\right]
+\end{align*}
+と表される．ここでラグランジアンを計算するのに用いる二重項は
+\begin{align*}
+&\left(\frac{1+\gamma_5}{2}\right)\left[
+\begin{array}{cc}
+u \\
+d'
+\end{array}
+\right]=\left(\frac{1+\gamma_5}{2}\right)\left[
+\begin{array}{cc}
+u \\
+V_{ud}d+V_{us}s+V_{ub}b
+\end{array}
+\right] \\
+&\left(\frac{1+\gamma_5}{2}\right)\left[
+\begin{array}{cc}
+c \\
+s'
+\end{array}
+\right]=\left(\frac{1+\gamma_5}{2}\right)\left[
+\begin{array}{cc}
+c \\
+V_{cd}d+V_{cs}s+V_{cb}b
+\end{array}
+\right] \\
+&\left(\frac{1+\gamma_5}{2}\right)\left[
+\begin{array}{cc}
+t \\
+b'
+\end{array}
+\right]=\left(\frac{1+\gamma_5}{2}\right)\left[
+\begin{array}{cc}
+t \\
+V_{td}d+V_{ts}s+V_{tb}b
+\end{array}
+\right]
+\end{align*}
+である．
+
+\vskip\baselineskip
+
+この2重項の構成が妥当であることを見る．そのために，以前と同じようにクォーク場についての質量項を構成してやろう．単純に考えれば次のように構成できる．
+\begin{align*}
+-\sum_{ijn}G_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)D_{jR}-\sum_{ijn}H_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)U_{jR}
+\end{align*}
+ここで$U_i$と$D_i(i=1,2,3)$はそれぞれ電荷$2e/3$と$-e/3$の三個の独立なクォーク場だ．以前と同じ議論をすれば，これが$SU(2)\times U(1)$不変であるためには自然に$\phi^+_n$の真空期待値はゼロとなり，$\phi^0_n$の真空期待値が有限の値をとる．すなわち，ダウンクォークの質量項はこれから生じるが，アップクォークについての質量項はゼロとなる．もちろんアップクォークの質量は有限であるから，これは適切ではない．(この模型では後者がそもそも電荷が保存しないのだが…)スカラー2重項の上下を単に入れ替えても，$SU(2)$不変性が破れてしまう．この問題の解決法は，通常のスカラー2重項と同じ$SU(2)$変換性をもつ
+\begin{align*}
+i\sigma_2 \left(
+\begin{array}{cc}
+{\phi^+}^* \\
+{\phi^0}^*
+\end{array}
+\right)= \left(
+\begin{array}{cc}
+{\phi^0}^* \\
+-{\phi^+}^*
+\end{array}
+\right)
+\end{align*}
+を用いることだ．ここで$\sigma_\alpha$は通常のパウリ行列だ．実際この2重項は$SU(2)$変換のもとで
+\begin{align*}
+\left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)&\to \exp(i\theta_\alpha \sigma_\alpha)\left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right) \\
+i\sigma_2 \left(
+\begin{array}{cc}
+{\phi^+}^* \\
+{\phi^0}^*
+\end{array}
+\right)&\to i\sigma_2 \exp(-i\theta_\alpha \sigma^*_\alpha)\left(
+\begin{array}{cc}
+{\phi^+}^* \\
+{\phi^0}^*
+\end{array}
+\right) \\
+&=\sigma_2 \exp(-i\theta_\alpha \sigma^*_\alpha)\sigma_2 (i\sigma_2)\left(
+\begin{array}{cc}
+{\phi^+}^* \\
+{\phi^0}^*
+\end{array}
+\right) \quad \because (\sigma_2)^2=1 \\
+&=\exp(-i\theta_\alpha \sigma_2 \sigma^*_\alpha \sigma_2)i\sigma_2 \left(
+\begin{array}{cc}
+{\phi^+}^* \\
+{\phi^0}^*
+\end{array}
+\right) \\
+&=\exp(i\theta_\alpha \sigma_\alpha)i\sigma_2 \left(
+\begin{array}{cc}
+{\phi^+}^* \\
+{\phi^0}^*
+\end{array}
+\right)
+\end{align*}
+となるからだ．二つ目の等号では，expを指数行列の定義にしたがって展開して考えれば容易にわかる．最後の等号ではパウリ行列の特殊性$\sigma_2\sigma^*_\alpha \sigma_2=-\sigma_\alpha$を用いた．
+\begin{align*}
+\sigma_2\sigma^*_1\sigma_2 &=\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 & 1 \\
+1 & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)=-\left(
+\begin{array}{cc}
+0 & 1 \\
+1 & 0
+\end{array}
+\right)=-\sigma_1 \\
+\sigma_2\sigma^*_2\sigma_2 &=\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 & i \\
+-i & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)=-\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)=-\sigma_2 \\
+\sigma_2\sigma^*_3\sigma_2 &=\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)=-\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)=-\sigma_3
+\end{align*}
+これを用いることにより，クォークとスカラーの相互作用で最も一般的なものは
+\begin{align*}
+\mc{L}_\phi=-\sum_{ijn}G_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)D_{jR}-\sum_{ijn}H_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+{\phi^0_n}^* \\
+-{\phi^+_n}^*
+\end{array}
+\right)U_{jR}+\mr{H.c.}
+\end{align*}
+であるとわかる．ここではクォークのカラー添え字はあらわに書いていないが，クォークにはひとつにつき3つの自由度(カラー)が存在し，その添え字についても和をとっていることを言及しておく．カラー添え字とは，例えばアップクォーク$u$には三種類の$u^1,u^2,u^3$があり，$a=1,2,3$で$1=赤,2=緑,3=青$とすればクォークは$q^a$と書ける．これらクォークには$SU(3)$変換
+\begin{align*}
+q^a(x)\to q'^a(x)=\sum_{b=1}^3 U(x)^a_b q^b(x)
+\end{align*}
+というゲージ変換がある．一応カラー添え字も明確に書くと先ほどのラグランジアンは
+\begin{align*}
+\mc{L}_\phi=-\sum_{aijn}G_{ij}^n\overline{\left(
+\begin{array}{cc}
+U^a_{iL} \\
+D^a_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)D^a_{jR}-\sum_{aijn}H_{ij}^n\overline{\left(
+\begin{array}{cc}
+U^a_{iL} \\
+D^a_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+{\phi^0_n}^* \\
+-{\phi^+_n}^*
+\end{array}
+\right)U^a_{jR}+\mr{H.c.}
+\end{align*}
+となる．自明に，$SU(3)$変換のもとでこのラグランジアンは不変だ．$SU(2)\times U(1)$不変であることもすぐに確かめられる．(不変であるように構成したので自明であるが，第二項目のスカラーに関しての$U(1)$は複素共役の影響があることに留意すること．)実際，$SU(2)\times U(1)$変換を施すと，第一項目は
+\begin{align*}
+\delta \mc{L}_1=&-\sum_{ijn}G_{ij}^n\delta \overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)D_{jR}-\sum_{ijn}G_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)\delta D_{jR} \\
+&-\sum_{ijn}G_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\delta\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)D_{jR} \\
+=&-\sum_{ijn}G_{ij}^n \overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left[ -i\left(\vec{\epsilon}\cdot\vec{t}-\alpha\frac{g'}{6}\right) \right]\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)D_{jR}-\sum_{ijn}G_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}i\alpha\frac{g'}{3}\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)D_{jR} \\
+&-\sum_{ijn}G_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left[ i\left(\vec{\epsilon}\cdot\vec{t}-\alpha\frac{g'}{2}\right) \right]\left(
+\begin{array}{cc}
+\phi^+_n \\
+\phi^0_n
+\end{array}
+\right)D_{jR}\\
+=&0
+\end{align*}
+同様に第二項目も
+\begin{align*}
+\delta \mc{L}_2=&-\sum_{ijn}H_{ij}^n\delta \overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+{\phi^0_n}^* \\
+-{\phi^+_n}^*
+\end{array}
+\right)U_{jR}-\sum_{ijn}H_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left(
+\begin{array}{cc}
+{\phi^0_n}^* \\
+-{\phi^+_n}^*
+\end{array}
+\right)\delta U_{jR} \\
+&-\sum_{ijn}H_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\delta\left(
+\begin{array}{cc}
+{\phi^0_n}^* \\
+-{\phi^+_n}^*
+\end{array}
+\right)U_{jR} \\
+=&-\sum_{ijn}H_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left[-i\left( \vec{\epsilon}\cdot\vec{t}-\alpha\frac{g'}{6} \right)\right]\left(
+\begin{array}{cc}
+{\phi^0_n}^* \\
+-{\phi^+_n}^*
+\end{array}
+\right)U_{jR} \\
+&-\sum_{ijn}H_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}\left[-i\alpha\frac{2g'}{3}\right]\left(
+\begin{array}{cc}
+{\phi^0_n}^* \\
+-{\phi^+_n}^*
+\end{array}
+\right)U_{jR} \\
+&-\sum_{ijn}H_{ij}^n\overline{\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)}i\left( \vec{\epsilon}\cdot\vec{t}+\alpha\frac{g'}{2} \right)\left(
+\begin{array}{cc}
+{\phi^0_n}^* \\
+-{\phi^+_n}^*
+\end{array}
+\right)U_{jR} \\
+=&0
+\end{align*}
+となって不変であることが確かめられる．よってこのラグランジアンは$SU(3)\times SU(2)\times U(1)$不変だ．\par
+中性スカラー場のゼロでない真空期待値により，以前と同様に真空期待値まわりで展開すれば，クォークの質量項
+\begin{align*}
+\mc{L}_m=-\sum_{ij}\bar{D}_{iL}m^D_{ij}D_{jR}-\sum_{ij}\bar{U}_{iL}m^U_{ij}U_{jR}+\mr{H.c.}
+\end{align*}
+が生じる．ここで
+\begin{align*}
+m^D_{ij}=\sum_n G^n_{ij}\braket{\phi^0_n},\quad m^U_{ij}=\sum_n H^n_{ij}\braket{\phi^0_n}^*
+\end{align*}
+と定義している．不変性からは行列$m^D_{ij},m^U_{ij}$にはなんの制限もかからず，特に複素非対角行列であってもよい．\par
+$\Rightarrow$そのとき，パリティとフレーバーが保存しない(例えば$\bar{s}u$に比例した)項などが生じる． \\
+このとき，新しいクォーク場
+\begin{align*}
+U'_R=A^U_R U_R , \quad U'_L=A^U_L U_L , \quad D'_R=A^D_R D_R , \quad D'_L=A^D_L D_L
+\end{align*}
+を導入することができる．ここで各$A$は，運動項
+\begin{align*}
+\mc{L}=-\sum_i \bar{U}_{i}\Slash{\partial}U_{i}-\sum_i \bar{D}_{i}\Slash{\partial}D_i
+\end{align*}
+の形を保つために，ユニタリーでなければならない，という条件だけがついた$3\times 3$行列(成分添え字は$i,j$)だ．すると質量項は
+\begin{align*}
+\mc{L}_m=&-\bar{D}_{L}m^D D_{R}-\bar{U}_{L}m^U U_{R}+\mr{H.c.} \\
+=&-\bar{D}_{L}{A^D_L}^{\dagger}[A^L_R m^D {A^D_R}^\dagger] A^D_R D_{j R}-\bar{U}_{L}{A^U_L}^\dagger [A^U_L m^U {A^U_R}^\dagger] A^U_R U_{R}+\mr{H.c.} \\
+=&-\bar{D}'_{L}{m^D}' D'_{R}-\bar{U}'_{L}{m^U}' U'_{R}+\mr{H.c.}
+\end{align*}
+となって同じ形のままだが，行列$m^U,m^D$はそれぞれ
+\begin{align*}
+{m^U}'=A^U_L m^U {A^U_R}^\dagger , \quad {m^D}'=A^D_L m^D {A^D_R}^\dagger
+\end{align*}
+で置き換えられる．\par
+任意の行列$m$について，$AmB$が実対角行列になるようにユニタリー行列$A,B$を選ぶことが可能だ．極分解定理より，エルミート行列$H$とユニタリー行列$U$を用いて$m=HU$と極分解できる．$H$を対角化するユニタリー行列$S$を用いて$A=S^\dagger$,$B=U^\dagger S$ととれば，$AmB=S^\dagger HS$となり，これは対角化された上エルミートなので，成分は全て実だ．よって実対角行列となる．したがって$A^U_{L,R},A^D_{L,R}$は${m^U}',{m^D}'$が実で対角的になるように選ぶことができる．このとき
+\begin{align*}
+\mc{L}_m=&-\sum_{ij}\bar{U}'_{iL}{m^U_{ij}}'U'_{iR}-\sum_{ij}\bar{U}'_{iR}{m^U_{ij}}'U'_{jL} \quad \because {{m^U}'}^\dagger={m^U}' \\
+&-\sum_{ij}\bar{D}'_{iL}{m^D_{ij}}'D'_{iR}-\sum_{ij}\bar{D}'_{iR}{m^D_{ij}}'D'_{jL} \quad \because {{m^D}'}^\dagger={m^D}' \\
+=&-\sum_{ij}\overline{(U'_{iL}+U'_{iR})}{m^U_{ij}}'(U_{jL}+U_{jR})-\sum_{ij}\overline{(D'_{iL}+D'_{iR})}{m^D_{ij}}'(D_{jL}+D_{jR})
+\end{align*}
+となる．つまり，クォーク場$u,c,t$と$d,s,b$は，$U'_L+U'_R$と$D'_L+D'_R$の成分と同定すべきだ．\par
+弱い相互作用の2重項は
+\begin{align*}
+Q_{iL}=\left(
+\begin{array}{cc}
+U_{Li} \\
+D_{Li}
+\end{array}
+\right)=\left(
+\begin{array}{cc}
+({A^U_{L}}^{-1}U'_L)_i \\
+({A^D_{L}}^{-1}D'_L)_i
+\end{array}
+\right)
+\end{align*}
+と書かれる．ここでも新たに
+\begin{align*}
+Q'_L=A^U_L Q_L=\left(
+\begin{array}{cc}
+U'_L \\
+A^U_L {A^D_L}^{-1} D'_L
+\end{array}
+\right)
+\end{align*}
+ととることが可能だ．この上成分は決まった質量をもつ荷電$2e/3$のクォーク$U'_{Li}=u_L,c_L,t_L$なのであった．この場合，これらの2重項は(21.3.46)$\sim$(21.3.48)で
+\begin{align*}
+V_{\mr{CKM}}=A^U_L {A^D_L}^{-1}
+\end{align*}
+がキャビボ・小林・益川行列となる．
+
+\vskip\baselineskip
+
+ここで，便利のために$SU(3)\times SU(2)\times U(1)$の各表現リストを作っておく．$\lambda$はゲルマン行列に比例した$3\times 3$行列，$\sigma$はパウリ行列だ．(ゲルマン行列はカラー添え字に作用する．)$\theta^n$は$SU(n)$の生成子に結合するパラメータとする．
+\begin{align*}
+&\delta \left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right)=i\left[ \theta^3_\alpha \lambda_\alpha +\frac{g}{2}\vec{\theta^2}\cdot \vec{\sigma}-\theta^1 \frac{g'}{6} \right]\left(
+\begin{array}{cc}
+U_{iL} \\
+D_{iL}
+\end{array}
+\right) \\
+&\delta U_{iR}=i\left[\theta^3_\alpha \lambda_\alpha -\theta^1 \frac{2}{3}g' \right]U_{iR},\quad \delta D_{iR}=i\left[\theta^3_\alpha \lambda_\alpha +\theta^1 \frac{1}{3}g' \right]D_{iR} \\
+&\delta \left(
+\begin{array}{cc}
+\nu_{iL} \\
+\ell_{iL}
+\end{array}
+\right)=i\left[\frac{g}{2}\vec{\theta^2}\cdot \vec{\sigma} +\theta^1 \frac{g'}{2} \right]\left(
+\begin{array}{cc}
+\nu_{iL} \\
+\ell_{iL}
+\end{array}
+\right),\quad \delta\ell_{iR}=i[\theta^1 g'] \ell_{iR} 
+\end{align*}
+スカラー場については，
+\begin{align*}
+\delta \left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right)=i\left[ \frac{g}{2}\vec{\theta^2}\cdot \vec{\sigma} -\theta^1\frac{g'}{2} \right]\left(
+\begin{array}{cc}
+\phi^+ \\
+\phi^0
+\end{array}
+\right),\quad \delta\left(
+\begin{array}{cc}
+{\phi^0}^* \\
+-{\phi^+}^*
+\end{array}
+\right)=i\left[ \frac{g}{2}\vec{\theta^2}\cdot \vec{\sigma}+\theta^1\frac{g'}{2} \right]\left(
+\begin{array}{cc}
+{\phi^0}^* \\
+-{\phi^+}^*
+\end{array}
+\right)
+\end{align*}
+となる．これらの変換の式は，各場の弱超電荷の値などからすぐにわかることだ．すぐに参照できるようにしているだけである．\par
+一応後に使うので，スピノルのローレンツ変換についても復習しておこう．5.4節よりスピノルのローレンツ変換性は
+\begin{align*}
+&\psi\to D(\Lambda)\psi \\
+&D(\Lambda)=\exp\left[ \frac{i}{2}\omega_{\mu\nu}J^{\mu\nu} \right] ,\quad J^{\mu\nu}=\frac{-i}{4}[\gamma^\mu,\gamma^\nu] \\
+&\beta D^\dagger (\Lambda)\beta =D^{-1}(\Lambda) \quad \Rightarrow \quad \bar{\psi}\to \bar{\psi} D^{-1}(\Lambda)
+\end{align*}
+であるから，荷電共役行列$\mc{C}$と$D(\Lambda)$は
+\begin{align*}
+\mc{C}(D^{-1}(\Lambda))^T=\mc{C}\exp\left[ -\frac{i}{2}\omega_{\mu\nu}{J^{\mu\nu}}^T \right] =&\mc{C}\exp\left[ \frac{i}{2}\omega_{\mu\nu}\mc{C}J^{\mu\nu} \mc{C}^{-1}\right]\mc{C}^{-1}\mc{C} \quad \because (5.4.37) \\
+=&\exp\left[ \frac{i}{2}\omega_{\mu\nu}J^{\mu\nu} \right]\mc{C}=D(\Lambda)\mc{C} \quad \because \mc{C}=-\mc{C}^\dagger=-\mc{C}^{-1}
+\end{align*}
+よって荷電共役スピノルのローレンツ変換性は
+\begin{align*}
+\psi^c&=-\xi^* \beta \mc{C} \psi^* =\xi^* \mc{C} (\bar{\psi})^T \quad \because \mc{C}=\gamma_2 \beta \\
+{\psi^c}'&=\xi^*\mc{C}(\bar{\psi'})^T=\xi^* \mc{C}(\bar{\psi}D^{-1}(\Lambda))^T \\
+&=\xi^*\mc{C}(D^{-1}(\Lambda))^T(\bar{\psi})^T=\xi^* D(\Lambda)\mc{C}(\bar{\psi})^T \\
+&=D(\Lambda)\psi^c
+\end{align*}
+となって，通常のスピノルと同様の変換性となる．これにより(21.3.54)はローレンツ不変な相互作用とわかる．
+
+\vskip\baselineskip
+
+電弱理論の場の内容と，$SU(3)\times SU(2)\times U(1)$ゲージ対称性をもつ最も一般的な\uwave{くりこみ可能}なラグランジアンは自動的にバリオン数とレプトン数を保存する．これはゲージ相互作用と裸の質量項(今まで考えてきたような項)については明らかに正しい．なぜなら，クォーク，反クォーク，レプトン，反レプトンは全て$SU(3)\times SU(2)\times U(1)$の異なる表現に属する(変換性が違う)からだ．(反粒子は，共役場のこと．)スカラーが全て$SU(3)$に関して単位表現で，$SU(2)$の2重項であり，$U(1)$量子数$\pm 1/2$
+\begin{align*}
+\delta\left(
+\begin{array}{cc}
+\phi_1 \\
+\phi_2
+\end{array}
+\right)=i\left[\vec{\epsilon}\cdot \vec{t}\pm \alpha \frac{g'}{2} \right]\left(
+\begin{array}{cc}
+\phi_1 \\
+\phi_2
+\end{array}
+\right)
+\end{align*}
+をもつなら，スカラー・フェルミオン・反フェルミオンとのくりこみ可能な相互作用$(d\leq 4)$は，唯一，クォーク・反クォーク対(21.3.49)および，レプトン・反レプトン対(21.3.21)との相互作用である．\par
+$\Rightarrow$これはもちろん，バリオン数とレプトン数を保存する．\par
+これらの結果は標準模型が\uwave{くりこみ可能}だという過程に決定的に依っている．\par
+$\Rightarrow$しかし，標準模型のラグランジアンには，次元$d>4$をもち，ある非常に大きな質量$M$の$4-d$次のベキで抑えられている\uwave{非くりこみ可能}な項が伴っていることが期待される．\\
+くりこみ可能な標準模型の予言に対する主要な補正(例えば，ニュートリノの質量など)は，4を超える最も小さな次元をもつ項からくる．\par
+標準模型のフェルミオンと，他の場から構成できる\uwave{次元5}でローレンツ不変な項は，せいぜいフェルミオン場について双一次(次元+3)で，2個のスカラー(次元+2)か，1個のスカラー(次元+1)と1個のゲージ共変微分(次元+1)，あるいはスカラーは無しで2個のゲージ共変微分(それらの交換子(15.1.12)，すなわち場の強度テンソルも含めて)かを含む．\par
+$\Rightarrow$カラー$SU(3)$不変性より，そのような相互作用でのフェルミオン場は「クォーク・反クォーク双一次」か，「レプトン・反レプトン双一次」，「レプトン・レプトン対」，「反レプトン・反レプトン対」として表れ，そのすべての演算子はバリオン数を保存する．\par
+$\Rightarrow$レプトン数の保存を破るには，2個のレプトン場の積(または2個の反レプトン場の積)を含まねばならない！\\
+左手成分のレプトン2重項$(\nu_{iL},\ell_{iL})$は$U(1)$量子数1/2，右手成分のレプトン1重項$\ell_{iR}(i=e,\mu,\tau)$は$U(1)$量子数+1．一方，スカラー場$SU(2)$2重項(複素スカラー2重項があっても良い)の$(\phi^+,\phi^0)$は$U(1)$量子数-1/2をもつ．\par
+$\Rightarrow$2つの左手成分レプトン2重項と2つスカラー2重項から，$U(1)$不変な\uwave{次元5}の相互作用を作ることができる．\par
+スカラー2重項が$(\phi^+,\phi^0)$の1種類しかないとすると，そのような項で$SU(2)$不変性・ローレンツ不変性を満たすものは
+\begin{align*}
+\sum_{ij}f_{ij}(\overline{\ell^c_{iL}}\phi^+ -\overline{\nu^c_{iL}}\phi^0)(\ell_{jL}\phi^+ -\nu_{jL}\phi^0)
+\end{align*}
+だけだ．ここで$i,j$はレプトンのフレーバー添え字，$c$は荷電共役場を表す．\par
+これは実際にローレンツ不変かつ$SU(3)\times SU(2)\times U(1)$不変だ．ローレンツ不変なことは既に見た．$SU(3)\times SU(2)\times U(1)$不変であることを示そう．荷電共役場のディラック共役場は
+\begin{align*}
+\overline{\psi^c}&=\left\{ -\xi^* \beta \mc{C} \psi^* \right\}^\dagger \beta=-\xi \psi^T \mc{C}^\dagger \beta\beta \\
+&=\xi \psi^T \mc{C} \quad \because \mc{C}=-\mc{C}^\dagger=-\mc{C}^{-1}
+\end{align*}
+であるから，
+\begin{align*}
+(\overline{\ell^c_{iL}}\phi^+ -\overline{\nu^c_{iL}}\phi^0)&=\xi(\ell_{jL}^T \phi^+ -\nu_{jL}^T\phi^0)\mc{C} \\
+&=\xi(\ell_{jL}\phi^+ -\nu_{jL}\phi^0)^T\mc{C}
+\end{align*}
+となる．この括弧の中身は(21.3.54)の二つ目の括弧の中身と同じだ．ここで
+\begin{align*}
+\ell_{jL}\phi^+ -\nu_{jL}\phi^0=-\left(
+\begin{array}{cc}
+{\phi^0}^* \\
+-{\phi^+}^*
+\end{array}
+\right)^\dagger \left(
+\begin{array}{cc}
+\nu_{iL} \\
+\ell_{iL}
+\end{array}
+\right)
+\end{align*}
+であることに留意すると，
+\begin{align*}
+\delta(\ell_{jL}\phi^+ -\nu_{jL}\phi^0)=&-\delta \left(
+\begin{array}{cc}
+{\phi^0}^* \\
+-{\phi^+}^*
+\end{array}
+\right)^\dagger \left(
+\begin{array}{cc}
+\nu_{iL} \\
+\ell_{iL}
+\end{array}
+\right)-\left(
+\begin{array}{cc}
+{\phi^0}^* \\
+-{\phi^+}^*
+\end{array}
+\right)^\dagger \delta\left(
+\begin{array}{cc}
+\nu_{iL} \\
+\ell_{iL}
+\end{array}
+\right) \\
+=&-\left(
+\begin{array}{cc}
+{\phi^0}^* \\
+-{\phi^+}^*
+\end{array}
+\right)^\dagger\left\{ -i\left[ \frac{g}{2}\vec{\theta^2}\cdot \vec{\sigma}+\theta^1\frac{g}{2} \right] \right\}\left(
+\begin{array}{cc}
+\nu_{iL} \\
+\ell_{iL}
+\end{array}
+\right) \\
+&-\left(
+\begin{array}{cc}
+{\phi^0}^* \\
+-{\phi^+}^*
+\end{array}
+\right)^\dagger\left\{ i\left[ \frac{g}{2}\vec{\theta^2}\cdot \vec{\sigma}+\theta^1\frac{g}{2} \right] \right\}\left(
+\begin{array}{cc}
+\nu_{iL} \\
+\ell_{iL}
+\end{array}
+\right) =0
+\end{align*}
+となって，したがって(21.3.54)は全体として$SU(3)\times SU(2)\times U(1)$不変であることがわかる．\par
+電弱対称性の破れのスケールより，低いエネルギーでは，これは有効相互作用
+\begin{align*}
+\sum_{ij}f_{ij}\overline{\nu^c_{iL}}\nu_{jL}\braket{\phi^0}^2
+\end{align*}
+を生じる．次元解析より$f_{ij}$は$1/M$の次数で，多分小さな結合定数がかかっていると期待される．したがって真空期待値が(21.3.35)であるから，これはせいぜい$(300\mr{GeV})^2/M$程度の，レプトン数を保存しないニュートリノ質量を与える！今では実際に，ニュートリノ振動によってニュートリノが質量をもつことが分かっている．
+
+\newpage
+
+\subsection{動的に破れた対称性}
+ゲージ結合がゼロの極限で，理論が\uwave{大域的対称性の群$G$}のもとで不変な理論に帰着し，その対称性は部分群$H$に自発的に破れている，と仮定する．19.6節の通り，この場合の理論はNGボゾン場$\xi_a$の組と他の物質場$\tilde{\psi}$で記述され，ラグランジアンが$\tilde{\psi}$と(19.6.14)(19.6.30)等で与えられる共変微分$D_{a\mu},D_\mu \tilde{\psi}$等だけから$H$不変であるように作られていれば，ラグランジアンは$G$不変なのであった．\par
+$\Rightarrow$ここでゲージ結合の「スイッチを入れる」．ゲージ群$\mc{G}$は，理論の全対称性である群$G$の部分群だ．(局所変換はパラメータが$x$依存しなければ大域的変換となるから，ゲージ群$\mc{G}$は$G$の部分群だ．)また$G$が自発的に$H$に破れるとき，$\mc{G}$は，$\mc{G}$と$H$の共通部分に等しい部分群$\mc{H}$に自発的に破れなければならない．
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \draw[thick](0,0)circle[radius=2];
+    \draw[thick](-0.4,0.3)circle[x radius=1.1,y radius=1.4,rotate=-30];
+    \draw[thick](0.4,-0.3)circle[x radius=1.1,y radius=1.4,rotate=-30];
+    \draw[thick,dashed,rotate=-30](-0.1,-1.1)arc(233:115:1cm and 1.3cm)arc(52:-63:1cm and 1.3cm);
+    \node(G) at (2.2,1){$G$};
+    \node(H) at (-0.9,1){$H$};
+    \node(g) at (1.3,0){$\mc{G}$};
+    \node(h) at (0,0){$\mc{H}$};
+  \end{tikzpicture}
+\end{figure}
+
+ゲージ群$\mc{G}$の生成子$\mc{T}_\alpha$は全体$G$の生成子$T_A$の結合で
+\begin{align*}
+\mc{T}_\alpha=\sum_A e_{\alpha A}T_A(=\sum_i e_{\alpha i}t_i +\sum_a e_{\alpha a}x_a)
+\end{align*}
+と表せる．ここで係数$e_{\alpha A}$，すなわちゲージ結合は非常に小さくとられる．添え字$A$は破れていない対称性$H$の生成子$t_i$と，破れた対称性$G/H$の生成子$x_a$の指標$i,a$についてとる．$x_a,t_i$の構造定数は結合定数を含まない．
+
+\vskip\baselineskip
+
+基礎にある理論で$G$不変性が線型実現(非線形実現については19.5節p263を参照)している場合，ゲージ場$\mc{A}_{\alpha\mu}$と他の場$\psi$との結合を導入するには，通常の微分をゲージ共変微分
+\begin{align*}
+\left(\partial_\mu -i\sum_\alpha \mc{T}_\alpha \mc{A}_{\alpha\mu} \right)\psi=&\left(\partial_\mu -i\sum_{\alpha A} e_{\alpha A}T_A \mc{A}_{\alpha\mu} \right)\psi \\
+=&\left(\partial_\mu -i\sum_A T_A A_{A\mu} \right)\psi
+\end{align*}
+で置き換えればいい．ここで
+\begin{align*}
+A_{A\mu}=\sum_\alpha e_{\alpha A}\mc{A}_{\alpha\mu}
+\end{align*}
+と定義した．結果として得られる理論は，場が
+\begin{align*}
+\psi\to g\psi ,\quad \sum_A T_A A_{A\mu}\to g\left(\sum_A T_A A_{A\mu} \right)g^{-1}-i(\partial_\mu g)g^{-1}
+\end{align*}
+と変換する\uwave{形式的な}局所$G$変換のもとで不変だ．実際に
+\begin{align*}
+\left(\partial_\mu -i\sum_A T_A A_{A\mu} \right)\psi \to & \left(\partial_\mu -ig\sum_A T_A A_{A\mu}g^{-1}-(\partial_\mu g)g^{-1} \right)g\psi \\
+=&(\partial_\mu g)\psi +g(\partial_\mu \psi)-ig\sum_A T_A A_{A\mu}\psi - (\partial_\mu g)\psi \\
+=&g\left(\partial_\mu -i \sum_A T_A A_{A\mu}\right)\psi
+\end{align*}
+となる．\par
+この不変性は純粋に形式的な不変性だ．なぜなら，変換(21.4.5)は一般に線型結合(21.4.3)の形を保持しない．つまり$g$が$T_A$を生成子とする局所$G$変換であるとき
+\begin{align*}
+\sum_A T_A A_{A\mu}\to g\left(\sum_A T_A A_{A\mu} \right)g^{-1} -i \underset{T_A に比例する}{\uwave{(\partial_\mu g)g^{-1}}} =\sum_A T_A A'_{A\mu}
+\end{align*}
+と書けるが，$(\partial_\mu g)g^{-1}$は$e_{\alpha A}$を含まないので
+\begin{align*}
+A_{A\mu}=\sum_{\alpha}e_{\alpha A}\mc{A}_{A\mu} \overset{G}{\longrightarrow} A'_{A\mu}=\sum_{\alpha}e_{\alpha A} \mc{A}'_{\alpha \mu}+(e_{\alpha A} を含まない項)\neq \sum_\alpha e_{\alpha A}\mc{A}'_{\alpha \mu}
+\end{align*}
+となって，(21.4.3)の形を保持しない．したがって局所$G$変換のもとで
+\begin{align*}
+\left(\partial_\mu -i\sum_A T_A A_{A\mu} \right)\psi \overset{G}{\longrightarrow} \left(\partial_\mu -i\sum_A T_A A'_{A\mu} \right)\psi' =g\left(\partial_\mu -i\sum_A T_A A_{A\mu} \right)\psi
+\end{align*}
+は成り立っているが
+\begin{align*}
+\left(\partial_\mu -i\sum_\alpha \mc{T}_\alpha \mc{A}_{\alpha\mu} \right)\psi \overset{G}{\longrightarrow} \left(\partial_\mu -i\sum_\alpha \mc{T}_\alpha \mc{A}'_{\alpha\mu} \right)\psi' \neq g\left(\partial_\mu -i\sum_\alpha \mc{T}_\alpha \mc{A}_{\alpha\mu} \right)\psi 
+\end{align*}
+であるということだ．もし$g$が$\mc{T}_\alpha$を生成子とする局所$\mc{G}$変換であるならば，$\mc{T}_\alpha$は$e_{\alpha A}$を含むので
+\begin{align*}
+\sum_A T_A A_{A\mu}\to g\left(\sum_A T_A A_{A\mu} \right)g^{-1} -i \underset{\mc{T}_\alpha に比例する}{\uwave{(\partial_\mu g)g^{-1}}} =\sum_A T_A A'_{A\mu}
+\end{align*}
+と書けるが，このときは
+\begin{align*}
+A_{A\mu}=\sum_{\alpha}e_{\alpha A}\mc{A}_{A\mu} \overset{G}{\longrightarrow} A'_{A\mu}=\sum_\alpha e_{\alpha A}\mc{A}'_{\alpha \mu}
+\end{align*}
+となって線型結合は保持される．この場合は
+\begin{align*}
+\left(\partial_\mu -i\sum_\alpha \mc{T}_\alpha \mc{A}_{\alpha\mu} \right)\psi \overset{G}{\longrightarrow} \left(\partial_\mu -i\sum_\alpha \mc{T}_\alpha \mc{A}'_{\alpha\mu} \right)\psi'=g\left(\partial_\mu -i\sum_\alpha \mc{T}_\alpha \mc{A}_{\alpha\mu} \right)\psi
+\end{align*}
+が成り立ち，保存されていることがわかる．大切なのは，$A_{A\mu}\to A'_{A\mu}$という変換と$\mc{A}_{\alpha\mu}\to\mc{A}'_{\alpha\mu}$という変換が$\mc{G}$変換のとき同値であるから$\mc{G}$は保存され，局所$G$変換のとき同値でないから$G$は保存されない，ということだ．この事実からわかるように，一般にゲージ結合は$G$を破っている．\par
+$\Rightarrow$しかし，しばらくの間(21.4.3)については忘れる！！\\
+$A_A^\mu$を拘束のない，古典的な外場として取り扱い，物質場，および物質場とゲージ場の相互作用ラグランジアンの構造をラグランジアンが局所変換(21.4.4)(21.4.5)のもとで不変だと要求して解析する．このようにして，ラグランジアンが真の局所対称部分群$\mc{G}$のもとで，さらに$e_{\alpha A}\to 0$ではもっと大きな大域的対称性の群$G$のもとで不変なこと，さらにカレントが破れた大域的対称性$G$のもとで正しく変換することの両方が保証される．その後で$A_A^\mu$を(21.4.3)の形に制限し，場$\mc{A}_\alpha^\mu$を量子場として扱い，この場のラグランジアンの適切な運動項を与える．
+
+\vskip\baselineskip
+
+対称群$G$が破れて部分群$H$になることの意味を明らかにするために，19.6節と同じように議論を進める．まず$\psi,A$を新しい場$\tilde{\psi},\tilde{A}$
+\begin{align*}
+\tilde{\psi}=\gamma^{-1}(\xi)\psi ,\quad \tilde{A}^\mu_A=\sum_B D_{AB}(\gamma^{-1}(\xi))A^\mu_B
+\end{align*}
+で置き換える．ここで$D(g)$は随伴表現
+\begin{align*}
+g T_A g^{-1}=\sum_B D_{BA}(g)T_B
+\end{align*}
+である．($\tilde{\psi}$についての置き換えは以前と同様だが，$\tilde{A}$に関しては若干天下り的である．なにがしたいかは，すぐ後にわかるはずだ．)これらのNGボゾンの自由度は，時空に依存するパラメータ$\xi_a$に再度表れる．そして$\gamma(\xi)$はこのパラメータに依存する19.6節p290(19.6.18)(19.6.20)(19.6.42)と同じ計算により，局所的$G$変換と大域的$G$変換の両方の場合の変換$g$のもとで，変換則(21.4.4)は変換
+\begin{align*}
+\xi^a\overset{G}{\longrightarrow} {\xi^a}'=f^a(\xi,g),\quad \tilde{\psi}\overset{G}{\longrightarrow}\tilde{\psi}'=h(\xi,g)\tilde{\psi}
+\end{align*}
+に置き換わる．ここで$h,f$は，$h$を破れていない部分群$H$の元として
+\begin{align*}
+g\gamma(\xi)=\gamma(f(\xi,g))h(\xi,g)
+\end{align*}
+で定義される．(右剰余類)\par
+また，$\tilde{A}^\mu_A$の変換則も導出する必要がある．(21.4.5)より，これらの局所変換のもとで(21.4.2)のゲージ場の線型結合は
+\begin{align*}
+\sum_A T_A A_{A\mu}\to \sum_A T_A A'_{A\mu}=g\left[\sum_A T_A A_{A\mu}-ig^{-1}\partial_\mu g \right]g^{-1}
+\end{align*}
+と変換する．左と右からそれぞれ$\gamma^{-1}(\xi')$と$\gamma(\xi')$をかけ，(21.4.7)(21.4.8)(21.4.11)を用いると，
+\begin{align*}
+&i\gamma^{-1}(\xi')\sum_A T_A A'_{A\mu}\gamma(\xi')=\gamma^{-1}(\xi')g\left[i\sum_A T_A A_{A\mu}+g^{-1}\partial_\mu g \right]g^{-1}\gamma(\xi') \\
+\Rightarrow \quad & i\sum_{AB}D_{BA}(\gamma^{-1}(\xi'))T_B A'_{A\mu}=h(\xi,g)\gamma^{-1}(\xi)\left[i\sum_A T_A A_{A\mu}+g^{-1}\partial_\mu g \right]\gamma(\xi)h^{-1}(\xi,g) \\
+\Rightarrow \quad & i\sum_A T_A \tilde{A}'_{A\mu}=h(\xi,g)\left[ i\sum_{AB}D_{BA}(\gamma^{-1}(\xi))T_B A_{A\mu}+\gamma^{-1}(\xi)\left[g^{-1}\partial_\mu g\right]\gamma(\xi) \right]h^{-1}(\xi,g) 
+\end{align*}
+と書ける．こうして置き換えられたゲージ場の$G$変換がわかる．
+\begin{align*}
+\sum_A T_A \tilde{A}_{A\mu}=&\sum_{AB} D_{BA}(\gamma^{-1}(\xi))T_B A_{A\mu} \\
+\overset{\xi\to \xi',A\to A'}{\longrightarrow}& \sum_{AB} D_{BA}(\gamma^{-1}(\xi'))T_B A'_{A\mu} =\sum_A T_A \tilde{A}'_{A\mu}
+\end{align*}
+非斉次項$g^{-1}\partial_\mu g$を相殺する方法を見るには，(21.4.11)を用いて
+\begin{align*}
+\gamma(\xi')=&g\gamma(\xi)h^{-1}(\xi,g) \\
+\gamma^{-1}(\xi')\partial_\mu \gamma(\xi')=&h(\xi,g)\gamma^{-1}(\xi)g^{-1}\partial_\mu[g\gamma(\xi)h^{-1}(\xi,g)] \\
+=&\uwave{h(\xi,g)\gamma^{-1}(\xi)[g^{-1}\partial_\mu g]\gamma(\xi)h^{-1}(\xi,g)} +h(\xi,g)[\gamma^{-1}(\xi)\partial_\mu \gamma(\xi)]h^{-1}(\xi,g) \\
+&+h(\xi,g)\partial_\mu h^{-1}(\xi,g) \quad \Bigl(=-[\partial_\mu h(\xi,g)]h^{-1}(\xi,g) \Bigr)
+\end{align*}
+が得られることに留意する．最後の項の変形は，$1=h(\xi,g)h^{-1}(\xi,g)$を両辺微分すれば容易に得られる．これより，非斉次項を相殺するには(21.4.13)から(21.4.12)を引けば良いことに気付く．
+\begin{align*}
+&\uwave{\gamma^{-1}(\xi')\partial_\mu \gamma(\xi')-i\sum_A T_A \tilde{A}'_{A\mu}} \\
+=&\underline{h(\xi,g)\gamma^{-1}(\xi)[g^{-1}\partial_\mu g]\gamma(\xi)h^{-1}(\xi,g)} +h(\xi,g)[\gamma^{-1}(\xi)\partial_\mu \gamma(\xi)]h^{-1}(\xi,g) -[\partial_\mu h(\xi,g)]h^{-1}(\xi,g) \\
+&-h(\xi,g)i\sum_A T_A \tilde{A}_{A\mu}h^{-1}(\xi,g)-\underline{h(\xi,g)\gamma^{-1}(\xi)[g^{-1}\partial_\mu g]\gamma(\xi)h^{-1}(\xi,g)} \\
+=&h(\xi,g)\uwave{\left[\gamma^{-1}\partial_\mu \gamma(\xi)-i\sum_A T_A \tilde{A}_{A\mu}\right] }h^{-1}(\xi,g)-[\partial_\mu h(\xi,g)]h^{-1}(\xi,g) 
+\end{align*}
+この形が(19.6.25)と同じであることに気付けるから，(19.6.26)(19.6.27)のように変換する(19.14)と同じように波線部分を生成子の線型結合で
+\begin{align*}
+i\sum_a x_a \mc{D}_{a\mu}+i\sum_i t_i \mc{E}_{i\mu}=\gamma^{-1}\partial_\mu \gamma(\xi)-i\sum_A T_A \tilde{A}_{A\mu}
+\end{align*}
+と書ける．もちろん，19.6節のときと同様の議論により，(21.4.14)の両辺を$x_a$と$t_i$で分解すれば$\mc{D},\mc{E}$の$G$変換性が
+\begin{align*}
+\sum_a x_a \mc{D}'_{a\mu}&=h(\xi,g)\left( \sum_a x_a \mc{D}_{a\mu} \right)h^{-1}(\xi,g) \\
+\sum_i t_i \mc{E}'_{i\mu}&=h(\xi,g)\left(\sum_i t_i \mc{E}_{i\mu} \right)h^{-1}(\xi,g)+i [\partial_\mu h(\xi,g)]h^{-1}(\xi,g)
+\end{align*}
+であるとわかる．一応これを当てはめてみれば(21.4.14)の右辺は
+\begin{align*}
+&h(\xi,g)\left[i\sum_a x_a \mc{D}_{a\mu}+i\sum_i t_i \mc{E}_{i\mu}\right] h^{-1}(\xi,g)-[\partial_\mu h(\xi,g)]h^{-1}(\xi,g)  \\
+=&i\sum_a x_a\mc{D}'_{a\mu} +i \left\{ h(\xi,g)\left(\sum_i t_i \mc{E}_{i\mu} \right)h^{-1}(\xi,g)+i [\partial_\mu h(\xi,g)]h^{-1}(\xi,g) \right\} \\
+=&i\sum_a x_a \mc{D}'_{a\mu}+i\sum_i t_i \mc{E}'_{i\mu}=(21.4.14)左辺
+\end{align*}
+となって整合性が確認できる．\par
+$\mc{E}'$を用いて，物質場の完全に共変な微分
+\begin{align*}
+\mc{D}_\mu \tilde{\psi}\equiv \partial_\mu \tilde{\psi}+i\sum_i t_i \mc{E}_{i\mu}\tilde{\psi}
+\end{align*}
+が定義できる！実際これは$G$変換のもとで
+\begin{align*}
+\mc{D}_\mu\tilde{\psi}=&\partial_\mu \tilde{\psi}+i\sum_i t_i \mc{E}_{i\mu}\tilde{\psi}\\
+\overset{G}{\longrightarrow} \quad &\partial_\mu (h(\xi,g)\tilde{\psi})+i\sum_i t_i \mc{E}'_{i\mu}h(\xi,g)\tilde{\psi} \\
+=&[\partial_\mu h(\xi,g)]\tilde{\psi}+h(\xi,g)[\partial_\mu \tilde{\psi}] \\
+&+h(\xi,g)i\sum_i t_i \mc{E}_{i\mu}h^{-1}(\xi,g) h(\xi,g)\tilde{\psi}-[\partial_\mu h(\xi,g)]h^{-1}(\xi,g)h(\xi,g)\tilde{\psi} \\
+=&h(\xi,g)\left(\partial_\mu \tilde{\psi}+i\sum_i t_i \mc{E}_{i\mu}\tilde{\psi} \right)=h(\xi,g)\mc{D}_\mu \tilde{\psi}
+\end{align*}
+と共変に変換される．この構成から，共変微分されるものが$X\overset{G}{\longrightarrow}h(\xi,g)X$と変換されるならば，それの共変微分はまた共変であることは明らかだ．したがって共変微分の共変微分$\mc{D}_\mu\mc{D}_\nu \tilde{\psi}$などの，もっと高次の微分も構成できる．\par
+しかし，(21.4.12)の非斉次項があるため，$i\sum_A T_A \tilde{A}_{A\mu}\overset{G}{\longrightarrow}h(\xi,g)i\sum_A T_A \tilde{A}_{A\mu}$とは変換されない．したがって$\tilde{A}_{A\mu}$あるいは(21.4.19)のような$\tilde{A}_{A\mu}$の共変微分$\mc{D}_\mu \tilde{A}_{A\nu}$は共変ではない．そのため，それらはラグランジアンに自由に導入することはできない．\par
+$\Rightarrow$しかし，局所的な$\mc{G}$変換と大域的な$G$変換の両方で共変的に変換する「回転」を構成することは容易だ．それは通常の場の強さテンソルと同様
+\begin{align*}
+\tilde{F}_{A\mu\nu}\equiv \sum_B D_{AB}(\gamma^{-1}(\xi))\left(\partial_\mu A_{B\nu}-\partial_\nu A_{B\mu} + \sum_{CB}C_{BCD}A_{C\mu}A_{D\nu} \right)
+\end{align*}
+とすればよい．ここで$C_{BCD}$は
+\begin{align*}
+[T_A,T_B]=iC_{CAB}T_C
+\end{align*}
+で与えられる．これが$G$変換のもとで共変であることを一応確認する．
+\begin{align*}
+\sum_A T_A \tilde{F}_{A\mu\nu}=&\sum_{AB} D_{AB}(\gamma^{-1}(\xi))T_A \left(\partial_\mu A_{B\nu}-\partial_\nu A_{B\mu} + \sum_{CB}C_{BCD}A_{C\mu}A_{D\nu} \right) \\
+=&\sum_B \gamma^{-1}(\xi)T_B \gamma(\xi)\left(\partial_\mu A_{B\nu}-\partial_\nu A_{B\mu} + \sum_{CB}C_{BCD}A_{C\mu}A_{D\nu} \right) \\
+=&\gamma^{-1}(\xi)\left\{ \partial_\mu\left(\sum_B T_B A_{B\nu}\right)-\partial_\nu \left(\sum_B T_B A_{B\mu}\right)+\sum_{BCD}C_{BCD}T_B A_{C\mu}A_{D\nu} \right\}\gamma(\xi) \\
+=&\gamma^{-1}(\xi)\left\{ \partial_\mu\left(\sum_B T_B A_{B\nu}\right)-\partial_\nu \left(\sum_B T_B A_{B\mu}\right)-i\sum_{CD}\left[T_CA_{C\mu},T_DA_{D\nu}\right] \right\}\gamma(\xi) \\
+=&\gamma^{-1}(\xi)\left\{ \partial_\mu\left(\sum_B T_B A_{B\nu}\right)-\partial_\nu \left(\sum_B T_B A_{B\mu}\right)-i\left[\sum_CT_CA_{C\mu},\sum_DT_DA_{D\nu}\right] \right\}\gamma(\xi) \\
+\overset{G}{\longrightarrow} \sum_A T_A \tilde{F}'_{A\mu\nu}&=\gamma^{-1}(\xi')\left\{ \partial_\mu\left(\sum_B T_B A'_{B\nu}\right)-\partial_\nu \left(\sum_B T_B A'_{B\mu}\right)-i\left[\sum_CT_CA_{C\mu},\sum_DT_DA_{D\nu}\right] \right\}\gamma(\xi')
+\end{align*}
+括弧の中身を項別に計算すると
+\begin{align*}
+第一項目=&\partial_\mu\left\{ g\left( \sum_B T_B A_{B\nu} \right)g^{-1}-i(\partial_\nu g)g^{-1} \right\} \\
+=&\color{blue}{\underline{\textcolor{black}{[\partial_\mu g]\left(\sum_B T_B A_{B\nu}\right)g^{-1}}}}\color{black}+g\left[\partial_\mu \left(\sum_B T_B A_{B\nu} \right) \right]g^{-1}-\color{blue}{\uwave{\textcolor{black}{g\left(\sum_B T_B A_{B\nu} \right)g^{-1}[\partial_\mu g]g^{-1}}}}\color{black}  \\
+&-\color{red}{\underline{\textcolor{black}{i[\partial_\mu \partial_\nu g]g^{-1} }}}\color{black}+\color{green}{\uwave{\textcolor{black}{i[\partial_\nu g]g^{-1}[\partial_\mu g]g^{-1} }}}\color{black} \\
+第二項目=&-\partial_\nu\left\{ g\left( \sum_B T_B A_{B\mu} \right)g^{-1}-i(\partial_\mu g)g^{-1} \right\} \\
+=&-\color{black}{\underline{\textcolor{black}{[\partial_\nu g]\left(\sum_B T_B A_{B\mu}\right)g^{-1} }}}\color{black}-g\left[\partial_\nu \left(\sum_B T_B A_{B\mu} \right) \right]g^{-1}+\color{black}{\uwave{\textcolor{black}{g\left(\sum_B T_B A_{B\mu} \right)g^{-1}[\partial_\nu g]g^{-1} }}}\color{black} \\
+&+\color{red}{\underline{\textcolor{black}{i[\partial_\nu \partial_\mu g]g^{-1} }}}\color{black}-\color{green}{\underline{\textcolor{black}{i[\partial_\mu g]g^{-1}[\partial_\nu g]g^{-1} }}} \\
+第三項目=&-i\left[\left\{g\left(\sum_C T_C A_{C\mu}\right)g^{-1}-i[\partial_\mu g]g^{-1}\right\},\left\{g\left[\sum_D T_D A_{D\nu}\right]g^{-1}-i(\partial_\nu g)g^{-1}\right\}\right] \\
+=&-i\left[ g\left(\sum_C T_C A_{C\mu} \right)g^{-1},g\left(\sum_D T_D A_{D\nu}\right)g^{-1} \right] -i\left[g\left(\sum_{C}T_C A_{C\mu}\right)g^{-1},-i[\partial_\nu g]g^{-1}\right] \\
+&-i\left[-i[\partial_\nu g]g^{-1},g\left(\sum_D T_D A_{D\nu}\right)g^{-1}\right]-i\left[- i[\partial_\mu g]g^{-1},-i[\partial_\nu g]g^{-1}\right] \\
+=&-ig\left[\sum_C T_C A_{C\mu},\sum_D T_D A_{D\nu} \right]g^{-1} \\
+&+\underline{[\partial_\nu g]\left(\sum_C T_C A_{C\mu} \right)g^{-1}}-\uwave{g\left(\sum_C T_C A_{C\mu}\right)g^{-1}[\partial_\nu g]g^{-1}} \\
+&-\color{blue}{\underline{\textcolor{black}{[\partial_\mu g]\left( \sum_D T_D A_{D\nu} \right)g^{-1} }}}\color{black}+\color{blue}{\uwave{\textcolor{black}{g\left(\sum_D T_D A_{D\nu}\right)g^{-1}[\partial_\mu g]g^{-1} }}} \\
+&+\color{green}{\underline{\textcolor{black}{i[\partial_\mu g]g^{-1}[\partial_\nu g]g^{-1} }}}\color{black}-\color{green}{\uwave{\textcolor{black}{i[\partial_\nu g]g^{-1}[\partial_\mu g]g^{-1} }}}\color{black}
+\end{align*}
+したがって
+\begin{align*}
+\sum_A T_A \tilde{F}'_{A\mu\nu}=&\gamma^{-1}(\xi')g\left\{ \partial_\mu\left(\sum_B T_B A_{B\nu}\right)-\partial_\nu \left(\sum_B T_B A_{B\mu}\right)-i\sum_{CD}\left[T_CA_{C\mu},T_DA_{D\nu}\right] \right\}g^{-1}\gamma(\xi') \\
+=&\gamma^{-1}(\xi')g\gamma(\xi)\sum_A T_A \tilde{F}_{A\mu\nu} \gamma^{-1}(\xi)g^{-1}\gamma(\xi') \\
+=&\sum_A h(\xi,g)T_A \tilde{F}_{A\mu\nu} h^{-1}(\xi,g) \quad \because (21.4.11) \\
+=&\sum_{AB}D_{AB}(h(\xi,g))T_B \tilde{F}_{A\mu\nu}=\sum_{AB}T_A \left\{D_{AB}(h(\xi,g))\tilde{F}_{B\mu\nu} \right\} \\
+\Rightarrow \quad &\tilde{F}_{A\mu\nu} \overset{G}{\longrightarrow} \tilde{F}'_{A\mu\nu}=\sum_B D_{AB}(h(\xi,g))\tilde{F}_{B\mu\nu}
+\end{align*}
+が$\tilde{F}_{A\mu\nu}$の変換則となり，共変であることがわかる．したがって，ラグランジアンは，$\tilde{\psi},\mc{D}_{a\mu},\mc{D}_\mu\tilde{\psi},\tilde{F}_{A\mu\nu}$，およびもっと高次の共変微分の任意関数で大域的$H$不変性を満たすように構成すれば，\uwave{形式的な局所$G$変換}のもとで不変となる．\par
+ここで現実に戻って，$A_A^\mu$を制限された形(21.4.3)の量子場として扱う．前述の通り，これにより今まで取り扱ってきた$A_{A\mu}\to A'_{A\mu}$変換は$\mc{A}_{\alpha\mu}\to\mc{A}'_{\alpha\mu}$変換となる．今までの議論が成り立つためにはこれらの変換が同値でなければならないので，局所$G$不変性は破れており，ゲージ結合を保つ真の不変群は局所$\mc{G}$群となる．これまでの量を$\mc{A}$で書き換えよう．(21.4.15)(21.4.20)は
+\begin{align*}
+\sum_a ix_a \mc{D}_{a\mu}+\sum_i it_i \mc{E}_{i\mu}=&\gamma^{-1}(\xi)\partial_\mu \gamma(\xi)-i\sum_A T_A \tilde{A}_{A\mu} \\
+=&\gamma^{-1}(\xi)\partial_\mu \gamma(\xi)-i\sum_{AB}T_A D_{AB}(\gamma^{-1}(\xi))A_{B\mu} \quad \because (21.4.7)\\
+=&\gamma^{-1}(\xi)\partial_\mu \gamma(\xi)-i\sum_{AB}T_A D_{AB}(\gamma^{-1}(\xi))e_{\alpha B}\mc{A}_{\alpha\mu} \quad \because (21.4.3)
+\end{align*}
+および
+\begin{align*}
+\tilde{F}_{A\mu\nu}=&\sum_B D_{AB}(\gamma^{-1}(\xi))\left\{\partial_\mu \left( \sum_\alpha e_{\alpha B}\mc{A}_{\alpha \nu} \right)-\partial_\nu \left(\sum_\alpha e_{\alpha B}\mc{A}_{\alpha \mu} \right)+\sum_{CD\gamma\delta}C_{BCD}e_{\gamma C}e_{\delta D}\mc{A}_{\gamma\mu}\mc{A}_{\delta\nu}\right\} \\
+=&\sum_B D_{AB}(\gamma^{-1}(\xi))\left\{\partial_\mu \left( \sum_\alpha e_{\alpha B}\mc{A}_{\alpha \nu} \right)-\partial_\nu \left(\sum_\alpha e_{\alpha B}\mc{A}_{\alpha \mu} \right)+\sum_{\beta\gamma\delta}\mc{C}_{\beta\gamma\delta}e_{\beta B} \mc{A}_{\gamma\mu}\mc{A}_{\delta\nu}\right\} (21.4.25)\\
+=&\sum_{B\alpha}D_{AB}(\gamma^{-1}(\xi))e_{\alpha B}\left(\partial_\mu \mc{A}_{\alpha\nu}-\partial_\nu \mc{A}_{\alpha\mu} +\sum_{\gamma\delta}\mc{C}_{\alpha\gamma\delta}\mc{A}_{\gamma\mu}\mc{A}_{\delta\nu} \right) \\
+=&\sum_{B\alpha}D_{AB}(\gamma^{-1}(\xi))e_{\alpha B}\mc{F}_{\alpha\mu\nu}
+\end{align*}
+となる．ここで
+\begin{align*}
+\mc{F}_{\beta\mu\nu}\equiv \partial_\mu\mc{A}_{\beta\nu}-\partial_\nu\mc{A}_{\beta\mu}+\sum_{\gamma\delta}\mc{C}_{\beta\gamma\delta}\mc{A}_{\gamma\mu}\mc{A}_{\delta\nu}
+\end{align*}
+と定義した．また途中で，ゲージ群の構造定数$\mc{C}$と，$G$の構造定数$C$は
+\begin{align*}
+[T_A,T_B]=iC_{CAB}T_C ,\quad [\mc{T}_\alpha ,\mc{T}_\beta]=i\mc{C}_{\gamma\alpha\beta}\mc{T}_\gamma ,\quad \mc{T}_\alpha =\sum_A e_{\alpha A}T_A 
+\end{align*}
+より
+\begin{align*}
+[\mc{T}_\gamma,\mc{T}_\delta]=&i\sum_\beta \mc{C}_{\beta\gamma\delta}\mc{T}_\beta=i\sum_{\beta B}\mc{C}_{\beta\gamma\delta}e_{\beta B}T_B \\
+=&\left[\sum_C e_{\gamma C}T_C,\sum_D e_{\delta D}T_D\right]=i\sum_{BCD}C_{BCD}e_{\gamma C} e_{\delta D}T_B \\
+\Rightarrow \quad & \sum_{CD}C_{BCD}e_{\gamma C}e_{\delta D}=\sum_\beta \mc{C}_{\beta\gamma\delta}e_{\beta B}
+\end{align*}
+の関係があることを用いた．\par
+ラグランジアンに，この場の運動項として通常の項
+\begin{align*}
+\mc{L}_\mc{A}=&-\frac{1}{4}\mr{Tr}\left[\sum_A T_A \tilde{F}_{A\mu\nu} \sum_B T_B \tilde{F}_B^{\mu\nu} \right] \\
+=&-\frac{1}{4}\mr{Tr}\left[ \sum_{AC\alpha}D_{AC}(\gamma^{-1}(\xi))T_A e_{\alpha C} \mc{F}_{\alpha\mu\nu} \sum_{BD\beta} D_{BD}(\gamma^{-1}(\xi))T_B e_{\beta D} \mc{F}_\beta^{\mu\nu} \right] \\
+=&-\frac{1}{4}\mr{Tr}\left[ \sum_{C\alpha} \gamma^{-1}(\xi)e_{\alpha C} T_C \mc{F}_{\alpha\mu\nu}\gamma(\xi) \sum_{D\beta} \gamma^{-1}(\xi)e_{\beta D}T_D \mc{F}_\beta^{\mu\nu}\gamma(\xi) \right] \\
+=&-\frac{1}{4}\mr{Tr}\left[ \sum_{C\alpha} e_{\alpha C} T_C \mc{F}_{\alpha\mu\nu} \sum_{D\beta} e_{\beta D}T_D \mc{F}_\beta^{\mu\nu} \right] \quad \because トレースの巡回性\\
+=&-\frac{1}{4}\mr{Tr}\left[ \sum_\alpha \mc{T}_\alpha \mc{F}_{\alpha\mu\nu} \sum_\beta \mc{T}_\beta \mc{F}_\beta^{\mu\nu} \right] \\
+=&-\frac{1}{4}\sum_{\alpha\beta}\mr{Tr}[\mc{T}_\alpha \mc{T}_\beta]\mc{F}_{\alpha\mu\nu}\mc{F}_\beta^{\mu\nu} \\
+=&-\frac{1}{4}\sum_{\alpha\beta}\delta_{\alpha\beta}\mc{F}_{\alpha\mu\nu}\mc{F}_\beta^{\mu\nu} \\
+=&-\frac{1}{4}\sum_\alpha \mc{F}_{\alpha\mu\nu}\mc{F}_\alpha^{\mu\nu}
+\end{align*}
+を含める．ここで，$\mc{A}_{\alpha\mu\nu}$の線型変換に伴って$e_{\alpha A}$の線型変換をすることで，$\mr{Tr}[\mc{T}_\alpha \mc{T}_\beta]=\delta_{\alpha\beta}$となるようにしている．この項も明らかに$G$不変だ．なぜなら
+\begin{align*}
+\mc{L}'_\mc{A}=&-\frac{1}{4}\mr{Tr}\left[\sum_A T_A \tilde{F}'_{A\mu\nu} \sum_B T_B \tilde{F}_B^{\prime\mu\nu} \right] \\
+=&-\frac{1}{4}\mr{Tr}\left[\sum_A h(\xi,g)T_A \tilde{F}_{A\mu\nu} h^{-1}(\xi,g)\sum_B h(\xi,g) T_B \tilde{F}_B^{\mu\nu} h^{-1}(\xi,g)\right] \\
+=&-\frac{1}{4}\mr{Tr}\left[\sum_A T_A \tilde{F}_{A\mu\nu} \sum_B T_B \tilde{F}_B^{\mu\nu} \right] =\mc{L}_\mc{A}
+\end{align*}
+となるからだ．(くどいようだが，この不変性は局所$G$変換による$A\to A'$の変換のもとでの不変性であり，$\mc{A}$で書き換えた今，$\mc{A}\to\mc{A}'$の変換のもとでも同様に不変であるためにはやはりゲージ$\mc{G}$部分群における変換でなければならない．)$\mc{F}_{\alpha\mu\nu}$の線型項は(21.4.24)より$\partial_\mu \mc{A}_{\alpha\nu}-\partial_\nu \mc{A}_{\alpha\mu}$なので，(21.4.26)は$\mc{A}_{\alpha\mu}$を正準規格化されたベクトル場にする効果がある．以上よりラグランジアン密度は，大域的$H$変換のもとで不変なように$\tilde{\psi},\mc{D}_\mu \tilde{\psi},\mc{D}_{a\mu}$から構成された関数と，2個以上の$e_{\alpha A}$因子を持ち$\mc{G}$を保存する(が局所的$G$は保存しない)可能な項，の和で与えられる．
+
+\vskip\baselineskip
+
+次に，以上の構成要素から，どのような摂動論が構成できるかを見る．$e_{\alpha A}\to0$の極限でゲージボゾンは自発的対称性の破れを被る物質場との結合が切れる(共変微分(21.4.19)の$e_{\alpha A}\mc{A}_{\alpha\mu}$がなくなるので，$\mc{A}$と$\tilde{\psi}$の相互作用がなくなる)ので，質量ゼロとなる．\par
+$\Rightarrow$したがって，とりあえず$e_{\alpha A}$が小さいときは，ゲージボゾンらの質量は$eM$の程度だと考えておく．ここで$e$は$e_{\alpha A}$の典型的な値で，$M$は自発的対称性の破れを生じる力学に典型的なエネルギースケールだ．\par
+ここで，エネルギー(運動量)が$Q\lesssim eM$のゲージボゾンとNGボゾンを含んでいる，一般的なファインマンダイアグラムを考える．(ただし，$Q$より大きいエネルギー(運動量)を持つ全ての粒子や，$Q$より重い物質場粒子は有効場理論の結合定数への補正として埋め込まれている，とする．)ここでの摂動論は，$e$と$Q/M$についてのベキ展開だ．(12.1.6)より，$(Q/M)^{\nu_1}$と$e^{\nu_2}$のベキの総数$\nu=\nu_1+\nu_2$は
+\begin{align*}
+\nu_1&=2I_{NG}+2I_{\mc{A}}+\sum_i V_i (d_i-4)+4 \\
+&=2(L+\sum_i V_i -1)+\sum_i V_i (d_i -4)+4 \quad \because トポロジー関係式 L-\sum_f I_f +\sum_i V_i =1 \\
+&=\sum_i V_i (d_i -2)+2L+2 \\
+\nu_2&=\sum_i V_i e_i \quad \because e_i は各頂点V_i での因子eの数 \\
+\Rightarrow \quad \nu&=\nu_1+\nu_2 =\sum_i V_i(d_i+e_i -2)+2L+2
+\end{align*}
+となる．ここで$I_f$は種類$f$の粒子の内線の数，$d_i$は頂点$V_i$での微分の数だ．さてここで\\
+・(21.4.3)の拘束があると，場$A_{A\mu}$または$\tilde{A}_{A\mu}$からは$e$の因子1個の寄与がある．\\
+・(21.4.15)から，各NGボゾン共変微分$\mc{D}_{a\mu}$からは$(d_i+e_i)$に$+1$の寄与がある．\\
+・(21.4.19)(21.4.15)から，その他の共変微分$\mc{D}_\mu$の各々からは$(d_i+e_i)$に別の$+1$の寄与がある．\\
+に留意すれば，ラグランジアンの全ての可能な項は，$(d_i+e_i)\geq 2$を持つ，ということに気が付く．なぜなら全体で$G$不変であるために可能な項は，ヤン・ミルズ項(21.4.26)か，共変微分の二次以上などでなければならないからだ．そしてヤン・ミルズ項(21.4.26)は当然$d_i=2$を持つからだ．(物質場の二次の項$|\tilde{\psi}|^2$のような項は$(d_i+e_i)<2$を持つが，前述の通りこれは補正として扱うので除外される．)\par
+$\Rightarrow$主要な項は$(d_i+e_i)=2$の相互作用で構成される樹木$(L=0)$ダイアグラムから来る．\\
+唯一そのような相互作用は，NGボゾンの運動項
+\begin{align*}
+\mc{L}=-\frac{1}{2}\sum_{ab}F^2_{ab}\mc{D}_{a\mu}\mc{D}_b^\mu
+\end{align*}
+と，ヤン・ミルズ項(21.4.26)，および$e_{\alpha A}$について2次($e_i=2$)で局所$G$対称性を破る非微分($d_i=0$)項だ．
+
+\vskip\baselineskip
+
+ここで少し脱線して，$\mc{D}_{a\mu},\mc{E}_{i\mu}$の具体的な形を19.6節と同様に求めておこう．
+\begin{align*}
+\gamma^{-1}(\xi)\partial_\mu \gamma(\xi)=&\exp\left[-i\sum_b x_b \xi_b\right]\partial_\mu \exp\left[i\sum_a x_a \xi_a\right] \\
+=&\exp\left[-i\sum_b x_b \xi_b\right]i\sum_a x_a \partial_\mu \xi_a \exp \left[i\sum_c x_c \xi_c\right]
+\end{align*}
+ここでベーカー・キャンベル・ハウスドロフの公式
+\begin{align*}
+e^A B e^{-A}=B+[A,B]+\frac{1}{2!}\left[A,[A,B]\right]+\frac{1}{3!}\left[A,\left[A,[A,B]\right]\right]+\cdots
+\end{align*}
+を用いると(19.6.8)$\sim$(19.6.10)より
+\begin{align*}
+\gamma^{-1}\partial_\mu\gamma(\xi)=&i\sum_a x_a \partial_\mu \xi_a -\left[i\sum_b x_b \xi_b ,i\sum_a x_a\partial_\mu\xi_a\right]+\frac{1}{2}\left[i\sum_b x_b \xi_b \left[ i\sum_c x_c \xi_c , i\sum_a x_a \partial_\mu \xi_a \right]\right] +\cdots \\
+=&i\sum_a x_a \partial_\mu \xi_a+\sum_{ab}[x_b,x_a]\xi_b \partial_\mu \xi_a-\frac{1}{2}\sum_{abc}i\left[x_b ,[x_c,x_a]\right]\xi_b\xi_c \partial_\mu \xi_a +O(\xi^3\partial_\mu \xi) \\
+=&i\sum_a x_a \partial_\mu \xi_a+\sum_{abi} it_i C_{iba}\xi_b \partial_\mu \xi_a +\sum_{abc}ix_c C_{cba}\xi_b \partial_\mu \xi_a \\
+&-\frac{1}{2}\sum_{abc} i\left[x_b,i\sum_i t_iC_{ica}+i\sum_d x_d C_{dca} \right]\xi_b \xi_c \partial_\mu \xi_a+O(\xi^3\partial_\mu\xi) \\
+=&i\sum_a x_a \partial_\mu \xi_a+i\sum_{abi} t_i C_{iba}\xi_b \partial_\mu \xi_a +i\sum_{abc}x_c C_{cba}\xi_b \partial_\mu \xi_a \\
+&-\frac{1}{2}\sum_{abci}[t_i ,x_b]C_{ica}\xi_b\xi_c\partial_\mu \xi_a+\frac{1}{2}\sum_{abcd}[x_b,x_d]C_{dca}\xi_b \xi_c \partial_\mu \xi_a+O(\xi^3\partial_\mu\xi) \\
+=&i\sum_a x_a \partial_\mu \xi_a+i\sum_{abi} t_i C_{iba}\xi_b \partial_\mu \xi_a +i\sum_{abc}x_c C_{cba}\xi_b \partial_\mu \xi_a \\
+&-\frac{1}{2}i\sum_{abcdi}x_dC_{dib}C_{ica}\xi_b\xi_c\partial_\mu \xi_a \\
+&+\frac{1}{2}i\sum_{abcdi}t_iC_{ibd}C_{dca}\xi_b\xi_c\partial_\mu\xi_a+\frac{1}{2}\sum_{abcde}x_eC_{ebd}C_{dca}\xi_b\xi_c\partial_\mu\xi_a+O(\xi^3\partial_\mu\xi)
+\end{align*}
+ここで見やすいように添え字を入れ替えると
+\begin{align*}
+=&i\sum_a x_a \partial_\mu \xi_a+i\sum_{abi} t_i C_{iab}\xi_a \partial_\mu \xi_b +i\sum_{abc}x_a C_{abc}\xi_b \partial_\mu \xi_c \\
+&+\frac{1}{2}i\sum_{abcdi}x_a C_{abi}C_{icd}\xi_b \xi_c\partial_\mu\xi_d \\
+&+\frac{1}{2}i\sum_{abcdi}t_i C_{iab}C_{bcd}\xi_a \xi_c \partial_\mu\xi_d+\frac{1}{2}i\sum_{abcde}x_a C_{abc}C_{cde}\xi_b \xi_d \partial_\mu\xi_e+O(\xi^3\partial_\mu\xi)
+\end{align*}
+また
+\begin{align*}
+i\sum_A T_A \tilde{A}_{A\mu}=&i\sum_A \left\{\gamma^{-1}(\xi)T_A \gamma(\xi)\right\}A_{A\mu} \\
+=&i\sum_a \left\{\gamma^{-1}(\xi)x_a \gamma(\xi)\right\}A_{a\mu}+i\sum_i \left\{\gamma^{-1}(\xi)t_i \gamma(\xi)\right\}A_{i\mu}
+\end{align*}
+も調べなくてはならない．第一項目は，先ほどの計算での$\partial_\mu \xi_a$を$A_{a\mu}$に置き換えたものと等しいので
+\begin{align*}
+&i\sum_a \left\{\gamma^{-1}(\xi)x_a \gamma(\xi)\right\}A_{a\mu}\\
+=&i\sum_a x_a A_{a\mu}+i\sum_{abi} t_i C_{iab}\xi_a A_{b\mu} +i\sum_{abc}x_a C_{abc}\xi_b A_{c\mu} \\
+&+\frac{1}{2}i\sum_{abcdi}x_a C_{abi}C_{icd}\xi_b \xi_cA_{d\mu} \\
+&+\frac{1}{2}i\sum_{abcdi}t_i C_{iab}C_{bcd}\xi_a \xi_c A_{d\mu}+\frac{1}{2}i\sum_{abcde}x_a C_{abc}C_{cde}\xi_b \xi_d A_{e\mu}+O(\xi^3A)
+\end{align*}
+となる．第二項目は
+\begin{align*}
+&i\sum_i\left\{\gamma^{-1}(\xi)t_i \gamma(\xi)\right\}A_{i\mu} \\
+=&i\sum_i\left\{t_i-i\sum_a[x_a,t_i]\xi_a-\frac{1}{2}\sum_{ab}[x_b,[x_a,t_i]]\xi_a \xi_b+O(\xi^3)\right\}A_{i\mu} \\
+=&i\sum_i\left\{ t_i-\frac{1}{2}\sum_{ab}x_bC_{bia}\xi_a -\frac{1}{2}\sum_{abc}[x_b,x_c]iC_{cai}\xi_a\xi_b \right\}A_{i\mu}+O(\xi^3A) \\
+=&i\sum_i\left\{ t_i-\sum_{ab}x_aC_{abi}\xi_b+\frac{1}{2}\sum_{abcj}t_j C_{jbc}C_{cai}\xi_a\xi_b +\frac{1}{2}\sum_{abcd}x_d C_{dbc}C_{cai}\xi_a \xi_b \right\}A_{i\mu}+O(\xi^3A) 
+\end{align*}
+添え字を入れ替えて
+\begin{align*}
+=&i\sum_i\left\{ t_i+\sum_{ab}x_aC_{abi}\xi_b+\frac{1}{2}\sum_{abcj}t_j C_{jab}C_{bci}\xi_a\xi_c +\frac{1}{2}\sum_{abcd}x_a C_{abc}C_{cdi}\xi_b \xi_d \right\}A_{i\mu}+O(\xi^3A) \\
+=&i\sum_i t_iA_{i\mu}+i\sum_{ab}x_aC_{abi}\xi_bA_{i\mu}+i\frac{1}{2}\sum_{abcj}t_j C_{jab}C_{bci}\xi_a\xi_cA_{i\mu} +i\frac{1}{2}\sum_{abcd}x_a C_{abc}C_{cdi}\xi_b \xi_dA_{i\mu}+O(\xi^3A)
+\end{align*}
+となる．以上より
+\begin{align*}
+&i\sum_a x_a \mc{D}_{a\mu}+i\sum_i t_i \mc{E}_{i\mu}=\gamma^{-1}(\xi)\partial_\mu\gamma(\xi)-i\sum_A T_A \tilde{A}_{A\mu} \\
+=&\underline{i\sum_a x_a \partial_\mu \xi_a}+\uwave{i\sum_{abi} t_i C_{iab}\xi_a \partial_\mu \xi_b} +\underline{i\sum_{abc}x_a C_{abc}\xi_b \partial_\mu \xi_c} \\
+&+\underline{\frac{1}{2}i\sum_{abcdi}x_a C_{abi}C_{icd}\xi_b \xi_c\partial_\mu\xi_d} \\
+&+\uwave{\frac{1}{2}i\sum_{abcdi}t_i C_{iab}C_{bcd}\xi_a \xi_c \partial_\mu\xi_d}+\underline{\frac{1}{2}i\sum_{abcde}x_a C_{abc}C_{cde}\xi_b \xi_d \partial_\mu\xi_e} \\
+&-\underline{i\sum_a x_a A_{a\mu}}-\uwave{i\sum_{abi} t_i C_{iab}\xi_a A_{b\mu}} -\underline{i\sum_{abc}x_a C_{abc}\xi_b A_{c\mu}} \\
+&-\underline{\frac{1}{2}i\sum_{abcdi}x_a C_{abi}C_{icd}\xi_b \xi_cA_{d\mu} }\\
+&-\uwave{\frac{1}{2}i\sum_{abcdi}t_i C_{iab}C_{bcd}\xi_a \xi_c A_{d\mu}}-\underline{\frac{1}{2}i\sum_{abcde}x_a C_{abc}C_{cde}\xi_b \xi_d A_{e\mu}} \\
+&-\uwave{i\sum_i t_iA_{i\mu}}-\underline{i\sum_{ab}x_aC_{abi}\xi_bA_{i\mu}}-\uwave{i\frac{1}{2}\sum_{abcj}t_j C_{jab}C_{bci}\xi_a\xi_cA_{i\mu}} -\underline{i\frac{1}{2}\sum_{abcd}x_a C_{abc}C_{cdi}\xi_b \xi_dA_{i\mu}} \\
+&+O(\xi^3\partial_\mu\xi,\xi^3A) \\
+=&i\sum_a x_a\Biggl[(\partial_\mu\xi_a -A_{a\mu})+\sum_{bc}C_{abc}\xi_b(\partial_\mu\xi_c-A_{c\mu})-\sum_{bc}C_{abi}\xi_bA_{i\mu} \\
+&\qquad\qquad +\frac{1}{2}\sum_{bcd}\left(\sum_i C_{abi}C_{icd}+\sum_e C_{abe}C_{ecd} \right)\xi_b\xi_c(\partial_\mu\xi_d-A_{d\mu})-\frac{1}{2}\sum_{bcdi}C_{abd}C_{dci}\xi_b\xi_cA_{i\mu} \\
+&\qquad \qquad +O(\xi^3\partial_\mu\xi,\xi^3A) \Biggr] \\
+&+i\sum_i t_i\Biggl[-A_{i\mu}+\sum_{ab}C_{iab}\xi_a(\partial_\mu\xi_b-A_{b\mu}) \\
+&\qquad\qquad +\frac{1}{2}\sum_{abcd}C_{iab}C_{bcd}\xi_a\xi_c(\partial_\mu\xi_d-A_{d\mu})-\frac{1}{2}\sum_{abcj}C_{iab}C_{bcj}\xi_a\xi_cA_{j\mu} \\
+&\qquad\qquad +O(\xi^3\partial_\mu\xi,\xi^3A) \Biggr]
+\end{align*}
+したがって
+\begin{align*}
+\mc{D}_{a\mu}=&(\partial_\mu\xi_a -A_{a\mu})+\sum_{bc}C_{abc}\xi_b(\partial_\mu\xi_c-A_{c\mu})-\sum_{bc}C_{abi}\xi_bA_{i\mu} \\
+&+\frac{1}{2}\sum_{bcd}\left(\sum_i C_{abi}C_{icd}+\sum_e C_{abe}C_{ecd} \right)\xi_b\xi_c(\partial_\mu\xi_d-A_{d\mu})-\frac{1}{2}\sum_{bcdi}C_{abd}C_{dci}\xi_b\xi_cA_{i\mu} \\
+&+O(\xi^3\partial_\mu\xi,\xi^3A) \\
+\mc{E}_{i\mu}=&-A_{i\mu}+\sum_{ab}C_{iab}\xi_a(\partial_\mu\xi_b-A_{b\mu}) \\
+&+\frac{1}{2}\sum_{abcd}C_{iab}C_{bcd}\xi_a\xi_c(\partial_\mu\xi_d-A_{d\mu})-\frac{1}{2}\sum_{abcj}C_{iab}C_{bcj}\xi_a\xi_cA_{j\mu} \\
+&+O(\xi^3\partial_\mu\xi,\xi^3A)
+\end{align*}
+という結果が得られる．これは少し興味深い結果だ！$\mc{D}_{a\mu}$と$\mc{E}_{i\mu}$の非対称性は，破れていない群$H$の生成子の添え字に対応するNGボゾン場が存在しないことと，(19.6.9)で見たように$C_{iaj}$がゼロであることから来る．特別に，$\xi_i=0,C_{iaj}=0$を導入するとこれらは統一的に
+\begin{align*}
+\tilde{\mc{D}}_{A\mu}=&\left\{
+\begin{array}{ll}
+\mc{D}_{a\mu} &(Aが破れた群G/Hの生成子の添え字a)\\
+\mc{E}_{i\mu} &(Aが破れていない群Hの生成子の添え字i)
+\end{array}
+\right. \\
+=&(\partial_\mu \xi_A-A_{A\mu})+\sum_{BC}C_{ABC}\xi_B (\partial_\mu\xi_C-A_{C\mu}) \\
+&+\frac{1}{2}\sum_{BCDE}C_{ABE}C_{ECD}\xi_B\xi_C (\partial_\mu\xi_D-A_{D\mu})+O(\xi^3\partial_\mu\xi,\xi^3A)
+\end{align*}
+と書けることに気付く！ここで大文字の添え字についての和は，この節の最初から用いているように$i,a$についての和だ．ここまでの計算はベーカー・キャンベル・ハウスドロフの公式の3次までの項で打ち止めしていたが，高次の項に拡張する法則性はこの式から予想できるだろう．すなわち
+\begin{align*}
+\tilde{\mc{D}}_{A\mu}&=(\partial_\mu \xi_A-A_{A\mu})+\sum_{n=1}^\infty \frac{1}{n!}\sum_{\substack{B_1\sim B_n \\ C_1\sim C_n}}C_{AB_1C_1}\xi_{B_1}\prod^{n-1}_{i=1}\left[C_{C_i B_i C_{i+1}}\xi_{B_i}\right](\partial_\mu \xi_{C_n}-A_{C_n\mu}) \\
+&=(\partial_\mu \xi_A-\sum_{\alpha}e_{\alpha A}\mc{A}_{\alpha\mu})+\sum_{n=1}^\infty \frac{1}{n!}\sum_{\substack{B_1\sim B_n \\ C_1\sim C_n}}C_{AB_1C_1}\xi_{B_1}\prod^{n-1}_{i=1}\left[C_{C_i B_i C_{i+1}}\xi_{B_i}\right](\partial_\mu \xi_{C_n}-\sum_{\alpha}e_{\alpha C_n}\mc{A}_{\alpha\mu})
+\end{align*}
+となる．これはなかなかに綺麗だ！
+
+\vskip\baselineskip
+
+場$\xi_a$の物理的な意味を知るには，$\mc{D}_{a\mu}$の線型項が
+\begin{align*}
+(\mc{D}_{a\mu})_{\mr{LIN}}=\partial_\mu \xi_a-\sum_{\alpha}e_{\alpha a}\mc{A}_{\alpha\mu}
+\end{align*}
+であることに気付けば良い．補遺で示すように，全ての$\alpha$について
+\begin{align*}
+\sum_{ab}F^2_{ab}\xi_a e_{\alpha b}=0
+\end{align*}
+を満たし，したがって(21.4.28)の交差項がゼロになる「ユニタリー・ゲージ」をとることが常に可能だ．\par
+全ての破れた対称性がゲージ対称性$\mc{G}$である(つまり，ゲージ対称性以外の$G$は破れていない)\uwave{特別な場合}には，$\mc{G}$の生成子$\mc{T}_\alpha$と破れていない群$H$の生成子$t_i$の線型結合として
+\begin{align*}
+x_a=&\sum_\alpha c_{a\alpha}\mc{T}_\alpha +\sum_i c_{a i}t_i \\
+=& \sum_{\alpha}c_{a \alpha}\left(\sum_{b}e_{\alpha b}x_b+ \sum_i e_{\alpha i}t_i \right)+\sum_i c_{a i}t_i \\
+=& \sum_{\alpha b}c_{a\alpha}e_{\alpha b }x_b +\sum_{\alpha i}c_{a\alpha}e_{\alpha i}t_i+\sum_i c_{a i}t_i
+\end{align*}
+と書くことができ，係数比較すれば
+\begin{align*}
+&\sum_{\alpha b}c_{a\alpha}e_{\alpha b}x_b=x_a \\
+\Rightarrow \quad &\sum_{\alpha}c_{a \alpha}e_{\alpha b}=\delta_{ab}
+\end{align*}
+となる．(21.4.30)の両辺で$c_{a\alpha}$を縮約すると，$F^2_{ab}$は正定値なので
+\begin{align*}
+\sum_{\alpha ab} F^2_{ab}\xi_a c_{c\alpha}e_{\alpha b}=&\sum_{ab}F^2_{ab}\xi_a \delta_{cb} \\
+=&\sum_{a}F^2_{ac}\xi_a=0
+\end{align*}
+より$\xi_a=0$が得られる．(正定値であることと，全ての固有値は非ゼロの正であることは同値だということを思い出せば自明だ．)\par
+$\Rightarrow$ユニタリー・ゲージでは，NGボゾンが\uwave{全く存在しない}！\\
+より一般には，破れた対称性のうちゲージ対称性以外の部分は$\mc{G}$の部分集合でも$H$の部分集合でもないため，上記のように線型結合で$x_a$が記述できない．したがって$x_a$の添え字$a$がゲージ対称性以外の破れた群の生成子添え字である場合は$c_{a\alpha}$は存在せず，(21.4.30)の条件より，ゲージ対称性に\uwave{対応しない}NGボゾンだけが残る．\par
+$\Rightarrow$残ったNGボゾンのうちいくつかは，ゲージ結合について2次の質量をもち，質量のあるNGボゾンであるからそれらは擬NGボゾンだ．\par
+$\xi$がユニタリー・ゲージ条件(21.4.30)を満たすように選ぶと，ラグランジアン(21.4.28)の2次の部分は
+\begin{align*}
+(\mc{L}_{\xi})_{\mr{QUAD}}=&-\frac{1}{2}\sum_{ab}F^2_{ab}\partial_\mu \xi_a \partial^\mu \xi_b-\frac{1}{2}\sum_{ab\alpha\beta}F^2_{ab}e_{\alpha a}\mc{A}_{\alpha\mu}e_{\beta b}\mc{A}_{\beta}^\mu \\
+=&-\frac{1}{2}\sum_{ab}F^2_{ab}\partial_\mu \xi_a \partial^\mu \xi_b-\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}\mc{A}_{\alpha\mu}\mc{A}_\beta^\mu
+\end{align*}
+となる．ここで
+\begin{align*}
+\mu^2_{\alpha\beta}=\sum_{ab}F^2_{ab}e_{\alpha a}e_{\beta b}
+\end{align*}
+と定義した．\par
+ここから読み取れることとして，$\xi_a$は正準的に直交規格化された場$\pi_a$を用いて
+\begin{align*}
+\xi_a=\sum_b F^{-1}_{ab}\pi_b
+\end{align*}
+と表される．ここで$F^{-1}_{ab}$は正定値行列$F^2_{ab}$の正の平方根だ．19章の内容を思い出すと，これは$F^{-1}_{ab}$が低エネルギーのNGボゾンの放出・吸収に付随する$F^{-1}_\pi$に類似の因子だと理解できる．加えて，(21.4.26)で$\mc{A}_{\alpha\mu}$は正準規格化されたベクトル場と定義されたから，(21.4.31)より$\mu^2_{\alpha\beta}$がベクトル・ボゾンの質量行列の2乗だと理解できる．(21.4.32)はベクトル・ボゾンの質量行列の公式だ．実際，(21.1.7)に(21.4.1)を使えば，破れていない対称性の生成子$t_i$に関して$(t_i v)_n=0$であることを思い出せば
+\begin{align*}
+\mu^2_{\alpha\beta}=&-\sum_{nm\ell}(\mc{T}_\alpha)_{nm} (\mc{T}_\beta)_{n\ell} v_m v_\ell \\
+=&-\sum_{nm\ell}\left[\sum_{a}e_{\alpha a}x_a +\sum_{i}e_{\alpha i}t_i \right]_{nm}\left[\sum_{b}e_{\beta b}x_b +\sum_{j}e_{\beta j}t_j \right]_{n\ell}v_m v_\ell \\
+=&-\sum_{abnm\ell}(x_a)_{nm}(x_b)_{n\ell}v_m v_\ell e_{\alpha a}e_{\beta b} =\sum_{ab}F^2_{ab}e_{\alpha a}e_{\beta b} \\
+\Rightarrow \quad F^2_{ab}=&-\sum_{nm\ell}(x_a)_{nm}(x_b)_{n\ell}v_m v_\ell
+\end{align*}
+で，(21.4.32)の特別な場合であることが容易にわかる．
+
+\vskip\baselineskip
+
+一般に$F^2_{ab}$行列はそのままでは計算できないが，破れていない部分群$H$のもとで運動項(21.4.28)が不変，すなわち(21.4.17)より
+\begin{align*}
+h(\xi,g)x_a h^{-1}(\xi,g)=&\exp\left[i\sum_i t_i \theta_i \right]x_a \exp\left[-i\sum_j t_j \theta_j \right] \\
+=&x_a+\left[i\sum_i t_i \theta_i ,x_a \right]+\cdots \\
+\Rightarrow \quad \delta \mc{D}_{a\mu}=&i\sum_i\theta_i[iC_{iab}]\mc{D}_{b\mu} \\
+0=&\sum_{ab}\frac{\partial\mc{L}}{\partial \mc{D}_{a\mu}} i[iC_{iab}]\mc{D}_{b\mu} \quad \because (15.2.2)と同様 \\
+=&\sum_{abc}F^2_{ab}\mc{D}_{b}^\mu C_{iac}\mc{D}_{c\mu} \\
+=&\sum_{abc}\frac{1}{2}F^2_{ab}C_{iac}\mc{D}_b^\mu \mc{D}_{c\mu}+\sum_{abc}\frac{1}{2}F^2_{ac}C_{iab}\mc{D}_c^\mu \mc{D}_{b\mu} \\
+=&\frac{1}{2}\sum_{abc}\left[F^2_{ab}C_{iac}+F^2_{ac}C_{iab} \right]\mc{D}_b^\mu\mc{D}_{c\mu} \\
+\Rightarrow \quad & \sum_{a}\left[C_{ica}F^2_{ab}+C_{iba}F^2_{ac} \right] =0
+\end{align*}
+という条件から，ゲージ・ボゾンの質量(21.4.32)について有用な制限を課すことができる．\par
+例として，電弱理論のゲージ群$SU(2)\times U(1)$が自発的に電磁理論のゲージ群$U(1)_{em}$に破れる場合を考える．3つの破れた生成子$x_a$は結合定数を含まない$SU(2)_L$の3つの生成子に，また1つの破れていない生成子$t$は因子$e$を含まない電荷$q$ととることができる．すなわち$x_a$と$t$はレプトン2重項にかかるときは
+\begin{align*}
+\vec{x}&=\frac{g}{4}(1+\gamma_5)\left\{ \left(
+\begin{array}{cc}
+0 & 1 \\
+1 & 0 
+\end{array}
+\right),\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right) , \left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)\right\}=\frac{1+\gamma_5}{2}\frac{\vec{\sigma}}{2} \\
+t&=-\left(
+\begin{array}{cc}
+0 & 0 \\
+0 & 1
+\end{array}
+\right)
+\end{align*}
+で表される．するとゲージ群の生成子$\mc{T}_{\alpha}=\sum_A e_{\alpha A}T_A$は，(21.3.4)(21.3.9)より
+\begin{align*}
+&\frac{1}{e}q=\frac{1}{g}t_3-\frac{1}{g'}y\quad \Rightarrow \quad t=x_3-\frac{1}{g'}\mc{T}_y \\
+\Rightarrow \quad &\vec{\mc{T}}=g\vec{x},\quad \mc{T}_y=g'(x_3-t) 
+\end{align*}
+となる．すなわち，ゲージ生成子$\mc{T}_\alpha=\sum_a e_{\alpha a}x_a+\sum_i e_{\alpha i}t_i$の係数$e_{\alpha A}$は
+\begin{align*}
+&\vec{\mc{T}}=g\vec{x}\quad \Rightarrow \quad e_{11}=e_{22}=e_{33}=g \\
+&\mc{T}_y=g'x_3-g't \quad \Rightarrow \quad e_{y3}=g',e_{yt}=-g'
+\end{align*}
+となる．また$t$により，$\vec{x}$は$U(1)_{em}$により3元ベクトルとして3軸周りの回転を受ける．すなわち
+\begin{align*}
+h(\theta)x_a h^{-1}(\theta)=&\exp(i\theta t)x_a \exp(-i\theta t)=x_a+i\theta[t,x_a]+\cdots \\
+t\vec{x}=&-\frac{1+\gamma_5}{4}\left\{ \left(
+\begin{array}{cc}
+0 & 0 \\
+1 & 0 
+\end{array}
+\right),\left(
+\begin{array}{cc}
+0 & 0 \\
+i & 0
+\end{array}
+\right) , \left(
+\begin{array}{cc}
+0 & 0 \\
+0 & -1
+\end{array}
+\right)\right\} \\
+\vec{x}t=&-\frac{1+\gamma_5}{4}\left\{ \left(
+\begin{array}{cc}
+0 & 1 \\
+0 & 0 
+\end{array}
+\right),\left(
+\begin{array}{cc}
+0 & -i \\
+0 & 0
+\end{array}
+\right) , \left(
+\begin{array}{cc}
+0 & 0 \\
+0 & -1
+\end{array}
+\right)\right\} \\
+[t,x_a]=&-\frac{1+\gamma_5}{4}\left\{ \left(
+\begin{array}{cc}
+0 & -1 \\
+1 & 0 
+\end{array}
+\right),\left(
+\begin{array}{cc}
+0 & i \\
+i & 0
+\end{array}
+\right) , \left(
+\begin{array}{cc}
+0 & 0 \\
+0 & 0
+\end{array}
+\right)\right\}=\left\{ix_2,-ix_1,0\right\} \\
+=&iC_{tab}x_b \\
+\Rightarrow \quad &C_{t12}=1,C_{t21}=-1,C_{t3a}=0
+\end{align*}
+がわかる．ここで$F^2_{ab}$の条件式
+\begin{align*}
+\sum_d\left[C_{ibd}F^2_{dc}+C_{icd}F^2_{db}\right]=C_{tb1}F^2_{1c}+C_{tb2}F^2_{2c}+C_{tc1}F^2_{1b}+C_{tc2}F^2_{2b}=0
+\end{align*}
+を用いる．順番に調べると，$(b,c)=(1,1)$のとき
+\begin{align*}
+C_{t11}F^2_{11}+C_{t12}F^2_{21}+C_{t11}F^2_{11}+C_{t12}F^2_{21}=F^2_{21}+F^2_{21}=0\quad \Rightarrow \quad F^2_{21}=0
+\end{align*}
+$(b,c)=(2,2)$のとき
+\begin{align*}
+C_{t21}F^2_{12}+C_{t22}F^2_{22}+C_{t21}F^2_{12}+C_{t22}F^2_{22}=F^2_{12}+F^2_{12}=0\quad \Rightarrow \quad F^2_{12}=0
+\end{align*}
+$(b,c)=(3,1)$のとき
+\begin{align*}
+C_{t31}F^2_{11}+C_{t32}F^2_{21}+C_{t11}F^2_{13}+C_{t12}F^2_{23}=F^2_{23}=0 \quad \Rightarrow\quad F^2_{23}=0
+\end{align*}
+$(b,c)=(3,2)$のとき
+\begin{align*}
+C_{t31}F^2_{12}+C_{t32}F^2_{22}+C_{t21}F^2_{13}+C_{t22}F^2_{23}=F^2_{13}=0 \quad\Rightarrow\quad F^2_{13}=0
+\end{align*}
+同様にして$(b,c)=(1,3)$から$F^2_{32}=0$が，$(b,c)=(2,3)$から$F^2_{31}=0$がわかる．$(b,c)=(1,2)$のとき
+\begin{align*}
+C_{t11}F^2_{12}+C_{t12}F^2_{22}+C_{t21}F^2_{11}+C_{t22}F^2_{21}=F^2_{22}-F^2_{11}=0 \quad \Rightarrow \quad F^2_{11}=F^2_{22}=F^2_C
+\end{align*}
+がわかる．$(b,c)=(2,1)$からは同じ結果が出る．$F^2_{33}$についての関係式は出てこないが，$F^2_{ab}$は正定値であるという定義から$F^2_N$という非ゼロで正の値をとることがわかる．
+\begin{align*}
+F^2_{ab}=\left(
+\begin{array}{ccc}
+F^2_C & 0 & 0 \\
+0 & F^2_C & 0 \\
+0 & 0 & F^2_N
+\end{array}
+\right)
+\end{align*}
+(21.4.32)より，ゲージ・ボゾンの質量2乗行列はゼロでない成分
+\begin{align*}
+&\mu^2_{11}=F^2_{11}e^2_{11}=g^2F^2_C,\quad \mu^2_{22}=F^2_{22}e^2_{22}=g^2F^2_C \\
+&\mu^2_{33}=F^2_{33}e^2_{33}=g^2F^2_N ,\quad \mu^2_{3y}=F^2_{33}e_{33}e_{y3}=gg'F^2_N=\mu^2_{y3} \\
+&\mu^2_{yy}=F^2_{33}e^2_{y3}=g'^2F^2_N
+\end{align*}
+をもつ．
+\begin{align*}
+\mu^2_{\alpha\beta}=\left(
+\begin{array}{cccc}
+g^2F^2_C & 0 & 0 & 0 \\
+0 & g^2F^2_C & 0 & 0 \\
+0 & 0 & g^2F^2_N & gg'F^2_N \\
+0 & 0 & gg'F^2_N & g'^2F^2_N
+\end{array}
+\right)
+\end{align*}
+ここで，(21.3.12)(21.3.13)(21.3.16)(21.3.17)(21.3.19)より
+\begin{align*}
+&W_-^\mu +W_+^\mu =\sqrt{2}A_1^\mu,\quad W_-^\mu - W_+^\mu =\sqrt{2}iA_2^\mu \\
+&\frac{-g}{\sqrt{g^2+g'^2}}Z^\mu-\frac{-g'}{\sqrt{g^2+g'^2}}A^\mu=A_3^\mu , \quad \frac{-g}{\sqrt{g^2+g'^2}}Z^\mu+\frac{-g}{\sqrt{g^2+g'^2}}A^\mu=B^\mu
+\end{align*}
+であるから
+\begin{align*}
+\mc{A}_\alpha^\mu&=\left(
+\begin{array}{cccc}
+A_1^\mu \\
+A_2^\mu \\
+A_3^\mu \\
+B^\mu
+\end{array}
+\right) \\
+&=\frac{1}{\sqrt{2}}\left(
+\begin{array}{cccc}
+1 \\
+-i \\
+0 \\
+0
+\end{array}
+\right)W_+^\mu+\frac{1}{\sqrt{2}}\left(
+\begin{array}{cccc}
+1 \\
+i \\
+0 \\
+0
+\end{array}
+\right)W_-^\mu +\frac{-1}{\sqrt{g^2+g'^2}}\left(
+\begin{array}{cccc}
+0 \\
+0 \\
+g \\
+g'
+\end{array}
+\right)Z^\mu+\frac{-1}{\sqrt{g^2+g'^2}}\left(
+\begin{array}{cccc}
+0 \\
+0 \\
+-g \\
+g'
+\end{array}
+\right)A^\mu
+\end{align*}
+とできるが，ゲージ場に結合しているこれらのベクトルは$\mu^2_{\alpha\beta}$の固有ベクトルであることと，正規直交していることに気付けば
+\begin{align*}
+-\frac{1}{2}\sum_{\alpha\beta}\mu^2_{\alpha\beta}\mc{A}_{\alpha\mu} \mc{A}^\mu_{\beta} =&-\frac{1}{2}\left(A_{1\mu},A_{2\mu},A_{3\mu},B_\mu \right)\left(
+\begin{array}{cccc}
+g^2F^2_C & 0 & 0 & 0 \\
+0 & g^2F^2_C & 0 & 0 \\
+0 & 0 & g^2F^2_N & gg'F^2_N \\
+0 & 0 & gg'F^2_N & g'^2F^2_N
+\end{array}
+\right)\left(
+\begin{array}{cccc}
+A_1^\mu \\
+A_2^\mu \\
+A_3^\mu \\
+B^\mu
+\end{array}
+\right) \\
+=&-g^2F^2_CW_+^\mu W_{-\mu}-\frac{1}{2}(g^2+g'^2)F^2_NZ^\mu Z_\mu+0A^\mu A_\mu
+\end{align*}
+したがってそれぞれの質量が
+\begin{align*}
+m^2_W=g^2F^2_C,\quad m^2_Z=(g^2+g'^2)F_N^2 ,\quad m^2_A =0
+\end{align*}
+となる．\par
+さらに話を進めるためには$F^2_C$と$F^2_N$の関係式が必要だ．もしゲージ結合がゼロ$g=g'=0$の極限で，理論が$SU(2)\times U(1)$より\uwave{大きな大域的対称性の群$G$}のもとで不変で，その群は自発的に部分群$H$に破れているとする．(例えば19.4節のようなモデルであれば，$G=SU(2)\times SU(2),H=SU(2)$となる．)この$H$は$\vec{x}$を3元ベクトルとして回転させるとする．すなわち
+\begin{align*}
+h(\theta)x_ah^{-1}(\theta)&=\exp\left(i\sum_i \theta_i t_i\right)x_a \exp\left(-i\sum_i \theta_i t_i\right) \\
+&=x_a+i\sum_i\theta_i[t_i,x_a]+\cdots \\
+[t_i,x_a]&=iC_{iab}x_b
+\end{align*}
+であるとする．(今回は以前とは違い$C_{i3a}=0$ではない．)このとき$F^2_{ab}$の条件式より
+\begin{align*}
+&\sum_d\left[C_{ibd}F^2_{dc}+C_{icd}F^2_{db}\right]\\
+&=C_{ib1}F^2_{1c}+C_{ib2}F^2_{2c}+C_{ib3}F^2_{3c}+C_{ic1}F^2_{1b}+C_{ic2}F^2_{2b}+C_{ic3}F^2_{3b}=0
+\end{align*}
+であり，$(b,c)=(1,3)$のとき
+\begin{align*}
+&C_{i11}F^2_{13}+C_{i12}F^2_{23}+C_{i13}F^2_{33}+C_{i31}F^2_{11}+C_{i32}F^2_{21}+C_{i33}F^2_{31}=C_{i13(}F^2_{33}-F^2_{11})=0 \\
+\Rightarrow\quad&F^2_{11}=F^2_{33}
+\end{align*}
+となって，$F_{ab}$は$F^2_{ab}$の正の平方根だと定義していたので$F_N=F_C$となる．\par
+このような対称性は全て「保護的な」対称性と呼ばれる．この結果として，$m_Z/m_W$は21.3節で議論した式
+\begin{align*}
+m_Z/m_W=\sqrt{\frac{g^2+g'^2}{g^2}}=\frac{1}{|\cos\theta|} \quad \because \cos\theta =\frac{-g}{\sqrt{g^2+g'^2}}
+\end{align*}
+が得られる．\par
+例えば，ゲージ結合がゼロならば最も簡単な$SU(2)\times U(1)$電弱理論でのスカラー2重項$\phi$のラグランジアン(21.3.25)は
+\begin{align*}
+(\mc{L}_{\phi})_{g=g'=0}=-\frac{1}{2}(\partial_\mu \phi)^\dagger (\partial^\mu\phi)-\frac{\mu^2}{2}(\phi^\dagger\phi)-\frac{\lambda}{4}(\phi^\dagger\phi)^2
+\end{align*}
+となる．ここで
+\begin{align*}
+\phi^\dagger\phi=(\phi^{+*},\phi^{0*})\left(
+\begin{array}{cc}
+\phi^+\\
+\phi^0
+\end{array}
+\right)=|\phi^+|^2+|\phi^0|^2=(\mr{Re}\phi^+)^2+(\mr{Im}\phi^+)^2+(\mr{Re}\phi^0)^2+(\mr{Im}\phi^0)^2
+\end{align*}
+とできるので，$(\partial_\mu \phi)^\dagger (\partial^\mu\phi)$も同様の処置によりラグランジアンは
+\begin{align*}
+(\mc{L}_{\phi})_{g=g'=0}=-\frac{1}{2}\partial_\mu \phi_n\partial^\mu\phi_n-\frac{\mu^2}{2}\phi_n\phi_n-\frac{\lambda}{4}(\phi_n\phi_n)^2
+\end{align*}
+と書ける．ここで
+\begin{align*}
+\phi_1=\mr{Im}\phi^+,\quad \phi_2=\mr{Re}\phi^+,\quad \phi_3=\mr{Im}\phi^0,\quad \phi_4=\mr{Re}\phi^0
+\end{align*}
+と定義した．このラグランジアン$(\mc{L}_\phi)_{g=g'=0}$は「偶然の」大域的$SO(4)\equiv SU(2)\times SU(2)$対称性の群のもとで自動的に不変だ！((19.5.1)参照)そしてこの群は今回$\mr{Re}\phi^0$の真空期待値によって自発的に破れているのであって，3巻19.2節p226～p227と同様にして近似的な破れていない保護的部分群$SO(3)$となる．すなわち(19.2.11)と同様に
+\begin{align*}
+\sum^4_{n=1}\phi_n\phi_n=|\mu^2|/\lambda
+\end{align*}
+が破れを引き起こすことになる．\par
+この結果は，2個以上のスカラー2重項があっても成り立つ．なぜなら，この場合にはスカラーのラグランジアンの質量項$-(\mu^2/2)\phi_n\phi_n$と相互作用項$-(\lambda/4)(\phi_n\phi_n)^2$は一般に保護的対称性を保存しないが，上の質量の関係式を導くのに必要だったのはNGボゾンの運動項(21.4.28)だけだったからだ．この運動項は常に完全な$G=SO(4)$不変性があるのだった．大域的変換で一番大きい対称群$G$と，ゲージ結合がゼロでないときに保存されるゲージ群$\mc{G}$と破れていない群$\mc{H}$，そして保護的な対称群$H$の情報があれば，質量の関係式がNGボゾンの運動項から導かれるということだ！
+
+\vskip\baselineskip
+
+保護的対称性は他の種類の理論でも見ることができる．例えば，スカラー場は含まないがテクニカラー相互作用と呼ばれる新しい極めて強いベクトル・ゲージ相互作用をもつ理論を考える．この相互作用は「テクニクォーク」$U_r , D_r$からなる新しい$SU(2)\times U(1)$2重項$(U_r,D_r)$に作用する．ここで$r$はテクニカラー添え字だ．$U_r,D_r$の両方の右手成分と左手成分がテクニカラー・ゲージ群のもとで(カラー$SU(3)$と同様に)全て同じように変換する限り，\uwave{電弱結合がゼロの極限}でテクニクォーク2重項の右手成分と左手成分を独立に$SU(2)$変換する群$SU(2)_L\times SU(2)_R$のもとでラグランジアンは不変となる．\par
+19.9節で述べている通り，テクニクォーク2重項の右手成分と左手成分の両方の同時$SU(2)$変換$SU(2)_V$は自発的に破れることはない．一方，ちょうど19.4節でのカラー相互作用により量子色力学の($m_u=m_d=0$での)カイラル$SU(2)_L\times SU(2)_R$対称性が$SU(2)_V$に自発的に破れるように，ここでもテクニカラー相互作用により$SU(2)_L\times SU(2)_R$が$SU(2)_V$に自発的に破れる，と考えるのが自然だ．破れていない$SU(2)_V$対称性のもとで，電弱生成子$\vec{x}$あるいは$\vec{\mc{T}}$は3元ベクトルとして回転し，この場合も$F_C=F_N$の関係式が導かれる．\par
+$\Rightarrow$その結果，$W$と$Z$の質量の関係がうまく予言される．\par
+今のところ，テクニカラー理論は三度死んだと言われ，失敗した理論となっているが，一部で研究されてはいる．
+
+\newpage
+
+\subsection*{補遺}
+21.5節の前に，21.4節で用いられた「一般のユニタリーゲージ」についての命題の証明を追っておこう．\par
+証明すべき命題は「NGボゾン場が(21.4.30)
+\begin{align*}
+\sum_{ab}F^2_{ab}\xi_a e_{\alpha b}=0
+\end{align*}
+を満たす「ユニタリー・ゲージ」を採用することが常に可能である．」だ．\par
+これを示すため，まず全ての群について，指数関数によるパラメータ化を使うと，少なくとも1の有限な近傍では$G$のどの元$g$も
+\begin{align*}
+g=\exp\left( -i\sum_\alpha \theta_\alpha \mc{T}_\alpha \right)\exp\left( i\sum_\alpha \phi_a x_a \right)\exp\left( i\sum_i \mu_i t_i \right)
+\end{align*}
+と表せて，このとき$\phi_a$は全ての$\alpha$について線型の拘束条件
+\begin{align*}
+\sum_{ab}F^2_{ab}\phi_a e_{\alpha b}=0
+\end{align*}
+を満たすことを先に示そう．$g$が1に限りなく近いときは容易にわかる．そのような任意の$g$は，$\phi^0_a,\mu^0_i$を微小量として
+\begin{align*}
+g=1+i\sum_a\phi^0_ax_a+i\sum_i\mu^0_it_i
+\end{align*}
+と書ける．これは同等に
+\begin{align*}
+g=1+i\sum_a\phi_a x_a +i\sum_i\mu_i t_i -i\sum_\alpha \theta_\alpha \mc{T}_\alpha
+\end{align*}
+とも書ける．ここで$\theta_\alpha$は任意の微小量で，$\phi_a,\mu_i$は
+\begin{align*}
+\phi_a(\theta)\equiv \phi^0_a+\sum_\alpha \theta_\alpha e_{\alpha a},\quad \mu_i(\theta)\equiv \mu_i^0+\sum_\alpha \theta_\alpha e_{\alpha i}
+\end{align*}
+としている．$G$はコンパクト・リー群であるから，どのような$\phi^0_a$でも，正の量
+\begin{align*}
+\sum_{ab}F^2_{ab}\phi_a(\theta)\phi_b(\theta)
+\end{align*}
+が最小となる$\theta_\alpha$を選ぶことができる．そのような$\theta$を$\theta_0$とすると，この最小点$\theta_0$では(21.A.8)は停留するので，全ての$\alpha$について$\theta_\alpha$で微分するとゼロとなる．すなわち
+\begin{align*}
+\frac{\partial}{\partial \theta_\alpha}\left.\sum_{ab}F^2_{ab}\phi_a(\theta)\phi_b(\theta)\right|_{\theta=\theta_0}=\sum_{ab}F^2_{ab}e_{\alpha a}\phi_b(\theta_0)+\sum_{ab}F^2_{ab}\phi_a(\theta_0)e_{\alpha b}=2\sum_{ab}F^2_{ab}\phi_b(\theta_0)e_{\alpha b}=0
+\end{align*}
+となり，よってこの$\phi_a(\theta_0)$は(21.A.3)を満たすことが示せた．さて，$\phi,\mu,\theta$が微小ならば(21.A.5)と(21.A.2)は同じだとすぐ分かる．よって(21.A.2)の形の$g$の組は($\phi_a$は(21.A.3)を満たすとして)，1に無限に近い全ての元$g$を表している．すると連続性より，少なくとも1のある有限な近傍では全ての$g$について上述の議論が適用でき，1の有限な近傍では$g$を(21.A.2)と表せて(21.A.3)を満たすようにできる．\par
+次に，特定の群の要素
+\begin{align*}
+g=\gamma(\xi)=\exp\left(i\sum_a\xi_a x_a \right)
+\end{align*}
+を考え，これを(21.A.2)の形
+\begin{align*}
+\gamma(\xi)=&\exp\left(-i\sum_\alpha \theta_\alpha(\xi)\mc{T}_\alpha \right)\exp\left( i\sum_a\phi_a(\theta(\xi))x_a \right)\exp\left(i\sum_i\mu_i(\theta(\xi))t_i\right) \\
+=&\exp\left(-i\sum_\alpha \theta_\alpha(\xi)\mc{T}_\alpha \right)\gamma(\phi(\xi))\exp\left(i\sum_i\mu_i(\xi)t_i\right)
+\end{align*}
+に書いてみる．ここで$\phi_a(\xi)$は(21.A.3)を満たすとする．これを少し書き換えると
+\begin{align*}
+\exp\left(i\sum_\alpha \theta_\alpha(\xi)\mc{T}_\alpha \right)\gamma(\xi)=\gamma(\phi(\xi))\exp\left(i\sum_i\mu_i(\xi)t_i\right)
+\end{align*}
+であり，(21.4.11)
+\begin{align*}
+g\gamma(\xi)=\gamma(\xi')h(g,\xi)
+\end{align*}
+と対応させれば，$\mc{T}_\alpha$を生成子とする変換(すなわちゲージ変換)$g=\exp\left(i\sum_\alpha \theta_\alpha(\xi)\mc{T}_\alpha \right)$により$\xi_a$が
+\begin{align*}
+\xi_a \to \xi'_a=\phi_a(\xi)
+\end{align*}
+に変換されたことを意味する！そしてこの$\xi'_a=\phi_a(\xi)$は(21.A.3)を満たすのだったから，ゲージ変換により$\xi_a$が(21.A.3)を満たすゲージに移り変わった，ということになる！ここでプライムを落とせば，(21.A.3)を書き直して(21.A.1)を満たすようにできたことになる．これが示したかったことだ．
+
+
+\newpage
+
+\subsection{電弱相互作用と強い相互作用の統一}
+3巻15.2節p16で見たように，ゲージ理論はゲージ群$\mc{G}$の単純部分群あるいは$U(1)$部分群毎に独立な結合定数をもつ．\par
+$\Rightarrow$したがってゲージ群$SU(2)\times U(1)$に基づく電弱相互作用は二つの独立な結合$g$と$g'$をもつ．自由なパラメータの数を減らすために，$SU(2)\times U(1)$ゲージ群が単純な$SU(3)$ゲージ群に埋め込まれており，その結果$g'=g\sqrt{3}$となる，という提案があった．$\leftarrow$しかしこれは実験的に否定された．\par
+さらに量子色力学の出現により，理論家はゲージ群$SU(3)\times SU(2)\times U(1)$と相対するハメになった．($g_s,g,g'$の3つの定数が表れる．)このゲージを単純リー群に埋め込む理論は大統一理論(GUT)と呼ばれる．\par
+色々な模型での$SU(3)\times SU(2)\times U(1)$結合定数の比は，個々の模型の詳細には依らない．これらの類の模型の特徴は，観測されているクォークとレプトンの世代が，各模型に含まれる唯一のフェルミオンであるか，少なくとも$SU(3)\times SU(2)\times U(1)$のもとで中性ではない唯一のフェルミオンだ，という点だ．\par
+15.2節で示したように，どの単純コンパクト・リー群でも完全反対称な構造定数を持つ生成子$T_\alpha$の慣習的な選び方があり，それは各既約表現または可約表現$D$で規格化条件
+\begin{align*}
+\mr{Tr}\{T_\alpha T_\beta \}=N_D \delta_{\alpha\beta}
+\end{align*}
+を満たす，という選び方だ．\par
+全ての左手成分のフェルミオンは次のように，$n_g$個の世代を持つと過程する．(右手成分は，以前とは違いディラック共役場で定義している点に注意せよ．)
+\begin{align*}
+\begin{array}{cccc}
+\left(
+\begin{array}{cc}
+\nu_e \\
+e
+\end{array}
+\right)_L & \left(
+\begin{array}{cc}
+\nu_\mu \\
+\mu
+\end{array}
+\right)_L & \left(
+\begin{array}{cc}
+\nu_\tau \\
+\tau
+\end{array}
+\right)_L & \cdots \\
+\\
+\bar{e}_R & \bar{\mu}_R & \bar{\tau}_R & \cdots \\
+\\
+\left(
+\begin{array}{cc}
+u \\
+d
+\end{array}
+\right)_L & \left(
+\begin{array}{cc}
+c \\
+s
+\end{array}
+\right)_L & \left(
+\begin{array}{cc}
+t \\
+b
+\end{array}
+\right)_L & \cdots \\
+\\
+\bar{u}_R & \bar{c}_R & \bar{t}_R &\cdots \\
+\\
+\bar{d}_R & \bar{s}_R & \bar{b}_R &\cdots \\
+\end{array}
+\end{align*}
+通常の場が$\psi\to\exp(i\theta_\alpha T_\alpha)\psi$と変換されるとき，共役場は
+\begin{align*}
+\bar{\psi}\to\bar{\psi}\exp(-i\theta_\alpha T^\dagger_\alpha)=\bar{\psi}\exp(i\theta_\alpha (-T^\dagger_\alpha))
+\end{align*}
+と変換されるから，以下では反フェルミオン場に対する生成子は$-T_\alpha^\dagger$であることに注意すること．$SU(3)$生成子$\frac{1}{2}g_s \lambda_3$
+\begin{align*}
+\frac{1}{2}g_s\lambda_3=\frac{1}{2}g_s\left(
+\begin{array}{ccc}
+1 & 0 & 0 \\
+0 & -1 & 0 \\
+0 & 0 & 0
+\end{array}
+\right)
+\end{align*}
+の固有値は，赤色クォーク2重項と緑色反クォーク1重項(ワインバーグ場の量子論本文では昔の流儀カラー添え字として赤・白・青を用いているが，ここでは慣例に従って赤・緑・青を用いる．)
+\begin{align*}
+\left(
+\begin{array}{ccc}
+q_L \\
+0 \\
+0
+\end{array}
+\right), \left(
+\begin{array}{ccc}
+0 \\
+\bar{q}_R \\
+0
+\end{array}
+\right)
+\end{align*}
+について$+\frac{1}{2}g_s$だ．これらは一つの世代につき，例えば第一世代ならば
+\begin{align*}
+\left(
+\begin{array}{cc}
+\left(\begin{array}{cc} u_L \\ 0 \end{array}\right) \\
+0 \\
+0 
+\end{array}
+\right) , \left(
+\begin{array}{cc}
+\left(\begin{array}{cc} 0 \\ d_L \end{array}\right) \\
+0 \\
+0 
+\end{array}
+\right), \left(
+\begin{array}{cc}
+0 \\
+\bar{u}_R \\
+0 
+\end{array}
+\right), \left(
+\begin{array}{cc}
+0 \\
+\bar{d}_R \\
+0 
+\end{array}
+\right)
+\end{align*}
+で，4つの独立な固有ベクトルがあることがわかり，全世代で$4n_g$個の固有ベクトルがあることがわかる(場はそれぞれ独立であるから，これらのベクトルは互いに独立といえる)．また，白色クォーク2重項と赤色反クォーク1重項
+\begin{align*}
+\left(
+\begin{array}{ccc}
+0 \\
+q_L \\
+0
+\end{array}
+\right), \left(
+\begin{array}{ccc}
+\bar{q}_R \\
+0 \\
+0
+\end{array}
+\right)
+\end{align*}
+については$-\frac{1}{2}g_s$で，こちらも同様に4つの固有ベクトルであることがわかり，$4n_g$個の固有ベクトルが全世代にある．これら以外の全てのフェルミオンについてはゼロだから，この行列の二乗のトレースは，トレースは固有値の和と同値であることを用いれば
+\begin{align*}
+\mr{Tr}\left(\frac{1}{2}g_s\lambda_3\right)^2=4n_g\left(+\frac{1}{2}g_s\right)^2+4n_g\left(-\frac{1}{2}g_s\right)^2=2n_g g^2_s
+\end{align*}
+となる．\par
+$SU(2)$生成子
+\begin{align*}
+t_3=g\left(\frac{1+\gamma_5}{2}\right)\frac{\sigma_3}{2}=\frac{g}{2}\left(\frac{1+\gamma_5}{2}\right)\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)
+\end{align*}
+の固有値は，電荷$+\frac{2}{3}$の赤色・緑色・青色クォークとニュートリノ
+\begin{align*}
+\left(
+\begin{array}{cc}
+q_{1L} \\
+0
+\end{array}
+\right), \left(\begin{array}{cc}
+q_{2L} \\
+0
+\end{array}\right),\left(\begin{array}{cc}
+q_{3L} \\
+0
+\end{array}\right),\left(\begin{array}{cc}
+\nu_{\ell L} \\
+0
+\end{array}\right)
+\end{align*}
+については$\frac{g}{2}$，電荷$-\frac{1}{3}$の赤色・緑色・青色クォークと荷電レプトン
+\begin{align*}
+\left(
+\begin{array}{cc}
+0 \\
+q_{1L}
+\end{array}
+\right), \left(\begin{array}{cc}
+0 \\
+q_{1L}
+\end{array}\right),\left(\begin{array}{cc}
+0 \\
+q_{3L}
+\end{array}\right),\left(\begin{array}{cc}
+0 \\
+\ell_L
+\end{array}\right)
+\end{align*}
+については$-\frac{g}{2}$，他の全てのフェルミオンについてはゼロだ．(左手反フェルミオンは$SU(2)_L$変換のもとで
+\begin{align*}
+\bar{\psi}_L\to \bar{\psi}_L\exp\left( -i\frac{g}{2}\left(\frac{1-\gamma_5}{2}\right)\vec{\theta}\cdot \vec{\sigma} \right)
+\end{align*}
+であるから$SU(2)_R$表現であり$SU(2)_L$表現でなく，$t_3$の固有値にならないので除外する．)したがって二乗のトレースは
+\begin{align*}
+\mr{Tr}\left(t_3\right)^2=[3n_g+n_g]\times \left(+\frac{1}{2}g\right)^2+[3n_g+n_g]\times \left(-\frac{1}{2}g\right)^2=2n_gg^2
+\end{align*}
+となる．\par
+最後に$U(1)$生成子$y=t_3-q$の固有値は，21.3節にて作成した各弱超電荷リストを参照すれば容易にわかり，ニュートリノと荷電レプトンについて($2n_g$個)は$\frac{1}{2}g'$，荷電反レプトンについて($n_g$個)は$-g'$，クォークについて($SU(3)$3重項かつ$SU(2)$2重項だから$6n_g$個)は$-\frac{1}{6}g'$，電荷$-\frac{2}{3}$の反クォーク($3n_g$個)については$\frac{2}{3}g'$，電荷$\frac{1}{3}$の反クォーク($3n_g$個)については$-\frac{1}{3}g'$となる．したがって二乗のトレースは
+\begin{align*}
+\mr{Tr}(y)^2=&2n_g\left(\frac{1}{2}g'\right)^2+n_g\left(-g'\right)^2+6n_g\left( -\frac{1}{6}g' \right)^2+3n_g\left(\frac{2}{3}g'\right)^2+3n_g\left(-\frac{1}{3}g'\right)^2 \\
+=&\left(\frac{1}{2}+1+\frac{1}{6}+\frac{4}{3}+\frac{1}{3}\right)n_gg'^2=\frac{10}{3}n_gg'^2
+\end{align*}
+となる．\par
+さて，仮定より$SU(3)\times SU(2)\times U(1)$が一つの単純ゲージ群に埋め込まれているのであり，(21.5.1)が満たされているのだったからこれらの二乗のトレースは全て等しくなければならないのだった．したがって
+\begin{align*}
+g^2_s=g^2=\frac{5}{3}g'^2
+\end{align*}
+の関係が要請される．
+
+\vskip\baselineskip
+
+さて，この関係式は結合定数の観測値とはひどく異なっている．比$g'^2/g^2=3/5$は電弱混合角が$\sin^2\theta=g'^2/(g^2+g'^2)=\frac{3}{8}$となることを意味するが，一方実験値は$\sin^2\theta=0.231$だ．さらに，強い相互作用の結合$g_s^2$はもちろん$g^2$や$g'^2$よりはるかに大きい．\par
+これを解決するには，今回の仮定に用いられているひとつの大きな単純ゲージ群が$SU(3)\times SU(2)\times U(1)$に自発的に破れるときに質量をもつゲージ・ボゾンの典型的な質量$M$に匹敵するエネルギー・スケールで測った結合についてのみこの関係式が成り立つと考えれば良い．我々が結合を測定するエネルギー$E$が$M$よりはるかに小さければ，$\ln(M/E)$に比例する大きな輻射補正がある．この輻射補正を計算する方法を我々は既に知っている！すなわち，くりこみ群の方法だ．\par
+19章で述べたように，すぐ近くのエネルギー$\mu$と$\mu-d\mu$で測定した結合間の関係には大きな対数は存在しない．そしてこの関係を$M$から$E$まで積分することで大きな対数に出会うことなく$E\ll M$での結合を計算できるのだった．くりこみ群の方法を使うためには，結合がこのエネルギー領域全体に渡って小さく保たれさえすれば良いのだった．\par
+さて，フェルミオンの世代数が$n_g$であるのだったから，(18.7.2)を用いよう．ここで注意するべきは，(17.5.35)(18.7.3)からは(18.7.2)の第二項は$-n_f/6$となるが，この$n_f$はそれぞれの$SU(N)$ゲージ群の\uwave{基本表現}($N$重項)のフェルミオンの数だった．しかしこれはフェルミオンの右手成分と左手成分がゲージ群の同じ表現に属する，という仮定のもとで計算されたものだった．(右手成分も$N$重項で，「右手の数$+$左手の数$=n_f$」が前提だった．)\par
+$\Rightarrow$しかし今回，右手成分は$SU(2)1重項$なのであって基本表現ではない．したがって左手成分のフェルミオン
+\begin{align*}
+\left(
+\begin{array}{cc}
+\nu_{\ell L} \\
+\ell_L
+\end{array}
+\right),\left(
+\begin{array}{cc}
+U_L \\
+D_L
+\end{array}
+\right) \quad (と反フェルミオン\overline{\left(
+\begin{array}{cc}
+\nu_{\ell L} \\
+\ell_L
+\end{array}
+\right)},\overline{\left(
+\begin{array}{cc}
+U_L \\
+D_L
+\end{array}
+\right) })
+\end{align*}
+のみを数えることにすれば，今回の場合では$n_f=n_{fL}/2+n_{fR}/2\to n_{fL}/2$となって，$n_f$を$n_f/2$($n_f$は今回左手成分の基本表現の数)として扱わなければならず，(17.5.35)の$C_2$は1/2倍され$n_f/4$となり，(18.7.2)の第二項目は$-n_f/12$となる．\par
+$SU(3)$については各世代あたり，2個の左手成分クォーク3重項$U_L,D_L$と2個の左手成分反クォーク3重項$\bar{U}_L\bar{D}_L$の4個があるから，$n_f=4n_g$で，$g_s$に対する(18.7.2)では$C_1=3,C_2/2=n_f/4=n_g$となる．$SU(2)$については3個(カラー添え字の個数)の左手成分クォーク2重項$(U_L,D_L)$と，1個の左手成分のレプトン2重項$(\nu_{\ell L},\ell_L)$の4個があるので，$n_f=4n_g$だ．(例によって左手成分反フェルミオンは$SU(2)_R$表現となってしまうから数えない．)よって$g$に対する(18.7.2)では$C_1=2,C_2/2=n_g$となる．$U(1)$については$C_2$の定義に立ち返り，(17.5.35)(21.5.4)により$g'$に対する(18.7.2)では$C_1=0,C_2/2=\frac{5}{3}n_g$がわかる．以上より(17.5.37)
+\begin{align*}
+\mu\frac{d}{d\mu}g_i(\mu)=-\frac{g_i^3(\mu)}{4\pi^2}\left(\frac{11}{12}C_1-\frac{1}{3}\left(\frac{C_2}{2}\right)\right) \quad (g_i=g_s,g',g)
+\end{align*}
+はそれぞれ
+\begin{align*}
+\mu\frac{d}{d\mu}g_s(\mu)&=-\frac{g_s^3(\mu)}{4\pi^2}\left(\frac{11}{4}-\frac{n_g}{3}\right) \\
+\mu\frac{d}{d\mu}g(\mu)&=-\frac{g^3(\mu)}{4\pi^2}\left(\frac{11}{6}-\frac{n_g}{3}\right) \\
+\mu\frac{d}{d\mu}g'(\mu)&=-\frac{g'^3(\mu)}{4\pi^2}\left(-\frac{5}{9}n_g\right)
+\end{align*}
+となる．(別の考え方として，ワインバーグ場の量子論脚注のように，$U(1)$のベータ関数(すなわちQEDのベータ関数)は(18.2.38)あるいは(18.6.12)で与えられるが，これを
+\begin{align*}
+\beta(e)=\frac{e^3}{12\pi^2}=\frac{e}{24\pi^2}[(e)^2+(-e)^2]
+\end{align*}
+と分解し，$-e$が電子の荷電に対応し$+e$が反電子の荷電に対応するのだから，今回は$g'/24\pi^2$を$U(1)$荷電の二乗和にかければ良いとわかる．つまり今回の$U(1)$での荷電の二乗和は(21.5.4)なので
+\begin{align*}
+\beta(g')=\frac{g'}{24\pi^2}\cdot \frac{10}{3}n_g g'^2=-\frac{g'^3}{4\pi^2}\left(-\frac{5}{9}n_g\right)
+\end{align*}
+となる．)\par
+さて，解は(18.7.7)で与えられる．復習を兼ねてここで解いておこう．まず簡単のために$g^3(\mu)$の係数を$\alpha$とおいて
+\begin{align*}
+\mu\frac{d}{d\mu}g(\mu)=-\frac{g^3(\mu)}{4\pi^2}\left\{\frac{11}{12}C_1-\frac{1}{3}C_2\right\}=\alpha g^3(\mu)
+\end{align*}
+とする．この微分方程式は変数分離で簡単に解くことができて
+\begin{align*}
+& \int \frac{1}{g^3(\mu)}dg=\alpha\int \frac{1}{\mu}d\mu \\
+\Rightarrow & -\frac{1}{2}g^{-2}(\mu)=\alpha \ln (\mu/\Lambda) \quad (\Lambda は積分定数) \\
+&\frac{1}{g^2(\mu)}=-\alpha \ln(\mu^2/\Lambda^2)=\frac{1}{4\pi^2}\left\{\frac{11}{12}C_1-\frac{1}{3}C_2\right\}\ln(\mu^2/\Lambda^2)
+\end{align*}
+(18.7.7)はここから少し変形すれば得られた．ここでは$C_2\to C_2/2$として定積分を同様に実行すれば
+\begin{align*}
+\frac{1}{g^2(M)}-\frac{1}{g^2(\mu)}&=\frac{1}{4\pi^2}\left\{\frac{11}{12}C_1-\frac{1}{6}C_2\right\}\ln(M^2/\Lambda^2)-\frac{1}{4\pi^2}\left\{\frac{11}{12}C_1-\frac{1}{6}C_2\right\}\ln(\mu^2/\Lambda^2) \\
+\frac{1}{g^2(\mu)}&=\frac{1}{g^2(M)}-\frac{1}{2\pi^2}\left\{\frac{11}{12}C_1-\frac{1}{6}C_2\right\}\ln\left(\frac{M}{\mu}\right)
+\end{align*}
+したがって(21.5.6)～(21.5.8)の解は
+\begin{align*}
+\frac{1}{g_s^2(\mu)}&=\frac{1}{g_s^2(M)}-\frac{1}{8\pi^2}\left(11-\frac{4n_g}{3}\right)\ln\left(\frac{M}{\mu}\right) \\
+\frac{1}{g^2(\mu)}&=\frac{1}{g^2(M)}-\frac{1}{8\pi^2}\left(\frac{22}{3}-\frac{4n_g}{3}\right)\ln\left(\frac{M}{\mu}\right) \\
+\frac{1}{g'^2(\mu)}&=\frac{1}{g'^2(M)}-\frac{1}{8\pi^2}\left(-\frac{20n_g}{9}\right)\ln\left(\frac{M}{\mu}\right)
+\end{align*}
+となる．また(21.5.5)はここでは
+\begin{align*}
+g^2_s(M)=g^2(M)=\frac{5}{3}g'^(M)
+\end{align*}
+の意味だと解釈すべきだ．(21.5.9)から(21.5.10)を引けば，(21.5.12)より
+\begin{align*}
+\frac{1}{g_s^2(\mu)}-\frac{1}{g^2(\mu)}=-\frac{1}{8\pi^2}\left(11-\frac{22}{3}\right)\ln\left(\frac{M}{\mu}\right)=-\frac{11}{24\pi^2}\ln\left(\frac{M}{\mu}\right)
+\end{align*}
+となり第一項目と$n_g$に比例する項が消える．同様に(21.5.10)から(21.5.11)の3/5倍を引けば
+\begin{align*}
+\frac{1}{g^2(\mu)}-\frac{3}{5g'^2(\mu)}&=\frac{1}{g^2(M)}-\frac{1}{\frac{5}{3}g'^2(M)}-\frac{1}{8\pi^2}\left(\frac{22}{3}-\frac{4n_g}{3}\right)\ln\left(\frac{M}{\mu}\right)-\frac{1}{8\pi^2}\left(-\frac{4n_g}{3}\right)\ln\left(\frac{M}{\mu}\right) \\
+&=-\frac{11}{12\pi^2}\ln\left(\frac{M}{\mu}\right)
+\end{align*}
+が得られる．こうして結合(21.5.12)だけでなく，世代数$n_g$も消去できる．(別にラッキーなことではない．生成子の二乗のトレースがそれぞれ等しいと仮定しており，$C_2$が生成子の二乗のトレース由来のものだからこの計算結果はある意味当然だ．)\par
+これら二つの式の比をとると，$\sin^2\theta\equiv g'^2/(g^2+g'^2)$についての式が，次のように求まる．
+\begin{align*}
+&2\left(\frac{1}{g^2_s(\mu)}-\frac{1}{g^2(\mu)}\right)=\frac{1}{g^2(\mu)}-\frac{3}{5g'^2(\mu)} \\
+&2\frac{g^2(\mu)-g_s^2(\mu)}{g^2(\mu)g_s^2(\mu)}=\frac{5g'^2(\mu)-3g^2(\mu)}{5g^2(\mu)g'^2(\mu)} \\
+&10[g^2(\mu)g'^2(\mu)-g'^2(\mu)g_s^2(\mu)]=5g'^2(\mu)g_s^2(\mu)-3g^2(\mu)g_s^2(\mu) \\
+&15g'^2(\mu)g^2_s(\mu)-10g^2(\mu)g'^2(\mu)-3g^2_s(\mu)g^2(\mu)=0 \\
+&18g'^2(\mu)g^2_s(\mu)-10g^2(\mu)g'^2(\mu)-3g^2_s(\mu)[g^2(\mu)+g'^2(\mu)]=0 \\
+&6g_s^2(\mu)\left[\frac{g'^2(\mu)}{g^2(\mu)+g'^2(\mu)}\right]-\frac{10}{3}\left[\frac{g^2(\mu)g'^2(\mu)}{g^2(\mu)+g'^2(\mu)}\right]=0 \\
+&\left[\frac{g'^2(\mu)}{g^2(\mu)+g'^2(\mu)}\right]=\frac{1}{6}+\frac{5}{9g^2_s(\mu)}\left[\frac{g^2(\mu)g'^2(\mu)}{g^2(\mu)+g'^2(\mu)}\right] \\
+&\sin^2\theta=\frac{1}{6}+\frac{5e^2(\mu)}{9g^2_s(\mu)}
+\end{align*}
+少し煩雑に見えるが，やっていることは複雑ではない．ここで$\mu$は$\sin^2\theta$を測定するために使う過程の典型的なエネルギー，すなわち$\mu\approx m_Z$に等しいとすれば
+\begin{align*}
+\sin^2\theta=\frac{1}{6}+\frac{5e^2(m_Z)}{9g^2_s(m_Z)}
+\end{align*}
+が得られる．(21.5.6)～(21.5.8)は$m_Z$より大きいエネルギー領域でのみ使っており，自発的対称性の破れ$SU(2)\times U(1)\to U(1)_{em}$が起きるエネルギー領域をまたがずに使えるため，この破れによる影響を強く受けないことがこの手法を用いるメリットだ．また，(21.5.13)と(21.5.14)を組み合わせれば
+\begin{align*}
+(21.5.13)\times \frac{8}{5}&=\frac{8}{5g^2_s(\mu)}-\frac{8}{5g^2(\mu)}=-\frac{11}{15\pi^2}\ln\left(\frac{M}{\mu}\right) \\
+(21.5.13)\times \frac{8}{5}+(21.5.14)&=\frac{8}{5g^2_s(\mu)}-\frac{3}{5}\left[\frac{1}{g^2(\mu)}+\frac{1}{g'^2(\mu)}\right]=-\frac{11}{\pi^2}\left(\frac{1}{12}+\frac{1}{15}\right)\ln\left(\frac{M}{\mu}\right) \\
+\frac{8}{5g^2_s(\mu)}-\frac{3}{5e^2(\mu)}&=-\frac{33}{20\pi^2}\ln\left(\frac{M}{\mu}\right) \\
+\frac{3}{5e^2(\mu)}\left[\frac{8e^2(\mu)}{3g^2_s(\mu)}-1\right]&=-\frac{33}{20\pi^2}\ln\left(\frac{M}{\mu}\right) \\
+\ln\left(\frac{M}{\mu}\right)&=\frac{4\pi^2}{11e^2(\mu)}\left(1-\frac{8e^2(\mu)}{3g^2_s(\mu)}\right)
+\end{align*}
+再び$\mu\approx m_Z$ととれば
+\begin{align*}
+\ln\left(\frac{M}{m_Z}\right)&=\frac{4\pi^2}{11e^2(m_Z)}\left(1-\frac{8e^2(m_Z)}{3g^2_s(m_Z)}\right)
+\end{align*}
+が得られる．\par
+18.2節で見たように，$\mu\approx m_Z$での$e(\mu)$の値は$e^2(m_Z)/4\pi^2=(128.87\pm 0.12)^{-1}$だ．これは真空偏極を使った従来の定義による電荷だ．\par
+$\Rightarrow g_s,g',g$との比較に使うには，18.6節で述べられた修正された最小引き算を用いるのが良い，らしい．\\
+その値は，$e^2(m_Z)/4\pi^2=(127.9\pm 0.1)^{-1}$となる，らしい．低エネルギーのデータから外挿した$g_s$の値は$g^2_s(m_Z)/4\pi=0.118\pm 0.006$で，一方$Z^0$のハドロンへの崩壊率から直接測定された値は$g^2_s/4\pi=0.120\pm 0.0025$だ．\par
+$g^2_s(m_Z)/4\pi=0.118$と$e^2(m_Z)/4\pi=1/128$とすると，(21.5.15)(21.5.16)より
+\begin{align*}
+\sin^2\theta=\frac{1}{6}+\frac{5}{9}\times \frac{1}{0.118}\times \frac{1}{128}=\frac{3457}{16992}\approx 0.203
+\end{align*}
+と，($m_Z=91\mr{GeV}$として)
+\begin{align*}
+&\ln(M/m_Z)=\frac{128\pi}{11}\left(1-\frac{8}{3}\times \frac{1}{0.118}\times \frac{1}{128}\right) \\
+&M=91\times \exp\left[\frac{128\pi}{11}\left(1-\frac{8}{3}\times \frac{1}{0.118}\times \frac{1}{128}\right)\right]\mr{GeV}\approx 1.1\times 10^{15}\mr{GeV}
+\end{align*}
+が得られる．
+
+\vskip\baselineskip
+
+21.3節で述べた通り，通常のエネルギーでの物理を記述する有効ラグランジアンで小さく抑えられた非くりこみ可能な項がバリオン数とレプトン数を保存すると期待する理由はない．\par
+$\Rightarrow$したがって，$SU(3)\times SU(2)\times U(1)$を保存する4フェルミオン(クォーク3個とレプトン1個)相互作用の存在が期待される．その係数は次元解析から$M^{-2}$の程度だ．これに基づいて陽子の寿命が計算され，$10^{32}$年程度と見積もられた．\par
+$\Rightarrow$そのような模型は，$M$程度の質量をもつゲージ・ボゾンの交換により生成される．\\
+より一般には，バリオン数とレプトン数を保存しない過程が自然に小さく抑えられる理由が標準理論によって一度説明されてしまえば，バリオン数とレプトン数が厳密に保存するということを信じる理由はなくなった．
+
+\vskip\baselineskip
+
+(21.5.15)の予言が$\sin^2\theta$の測定値0.23に非常に近くなることを見た．しかし測定および計算の制度が良くなると両者が正確に一致しないことが明らかになった．
+
+\end{document}

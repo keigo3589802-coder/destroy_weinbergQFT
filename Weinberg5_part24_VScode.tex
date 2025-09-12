@@ -1,0 +1,971 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+\usepackage{tensor}
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+\newcommand{\mr}[1]{\mathrm{#1}}
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part24}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+
+\maketitle
+\setcounter{part}{23}
+\part{歴史的導入}
+\setcounter{section}{24}
+\subsection{型破りな対称性と禁止定理}
+コールマン・マンデューラの定理の一部分について運動学的な証明をする．\par
+4次元運動量$P_\mu$と可換な全ての対称性生成子を$B_\alpha$と書き，それらがリー代数を張るとする．すなわち
+\begin{align*}
+&B_\alpha P_\mu=P_\mu B_\alpha \\
+&[B_\alpha,B_\beta]=iC_{\alpha\beta}^\gamma B_\gamma
+\end{align*}
+が成り立っているとする．($B_\alpha$は$SU(N)$群などの生成子以外にもローレンツ群の生成子も，すなわち(2.4.14)によって$P_\mu$も含まれており，添え字$\alpha$は$\mu,\nu$などの4次元添え字も含まれている．)これらの生成子に固有ローレンツ変換$x^\mu\to \Lambda^\mu_{\,\,\, \nu} x^\nu$がどのように働くかを考える．このローレンツ変換はヒルベルト空間上でユニタリー演算子$U(\Lambda)$で表されるとする．演算子$U(\Lambda)B_\alpha U^{-1}(\Lambda)$は$\Lambda_\mu^{\,\,\, \nu}P_\nu$と可換なエルミート対称性生成子となることは簡単に分かる．なぜなら(2.4.9)より
+\begin{align*}
+&U(\Lambda)B_{\alpha}P_\mu U^{-1}(\Lambda)=U(\Lambda)B_{\alpha}U^{-1}(\Lambda)U(\Lambda)P_\mu U^{-1}(\Lambda)=U(\Lambda)B_{\alpha}U^{-1}(\Lambda)\Lambda_\mu^{\,\,\, \nu}P_\nu \\
+=&U(\Lambda)P_\mu B_{\alpha} U^{-1}(\Lambda)=\Lambda_\mu^{\,\,\, \nu}P_\nu U(\Lambda)B_{\alpha}U^{-1}(\Lambda)
+\end{align*}
+となるからだ．$\Lambda^{\,\,\, \nu}_\mu$は正則な行列であり，行列の成分はただの係数なのだから，つまり$P_\mu$の線型結合である$\Lambda_\mu^{\,\,\, \nu}P_\nu$と可換な演算子$U(\Lambda)B_\alpha U^{-1}(\Lambda)$は$P_\mu$と可換でなければならない．$P_\mu$と可換な全ての対称性生成子の集合が$B_\alpha$なのだったから，この演算子は$B_\alpha$の線型結合でなければならない．
+\begin{align*}
+U(\Lambda)B_\alpha U^{-1}(\Lambda)=\sum_\beta D^\beta_{\,\,\, \alpha}(\Lambda)B_\beta
+\end{align*}
+ただし，ここで$D^\beta_{\,\,\, \alpha}(\Lambda)$は斉次ローレンツ群の表現をなす実係数の集合であり，
+\begin{align*}
+&U(\Lambda_2)U(\Lambda_1)B_\alpha U^{-1}(\Lambda_1) U^{-1}(\Lambda_2)=\sum_{\beta\gamma}D^{\beta}_{\,\,\, \alpha}(\Lambda_1) D^{\gamma}_{\,\,\, \beta }(\Lambda_2) B_\gamma=\sum_\gamma \left[\sum_\beta D^{\gamma}_{\,\,\, \beta }(\Lambda_2) D^{\beta}_{\,\,\, \alpha}(\Lambda_1) \right] B_\gamma \\
+=&U(\Lambda_2\Lambda_1)B_\alpha U^{-1}(\Lambda_2 \Lambda_1)=\sum_{\beta}D^\gamma_{\,\,\, \alpha}(\Lambda_2 \Lambda_1)B_\gamma \\
+&\therefore \quad D(\Lambda_1)D(\Lambda_2)=D(\Lambda_1 \Lambda_2)
+\end{align*}
+を満たす．$U(\Lambda)B_\alpha U^{-1}(\Lambda)$は$B_\alpha$と同じ交換関係を満たさなければならない
+\begin{align*}
+&\left[ U(\Lambda)B_\alpha U^{-1}(\Lambda) , U(\Lambda)B_\beta U^{-1}(\Lambda)\right] \\
+=&U(\Lambda)[B_\alpha ,B_\beta ]U^{-1}(\Lambda) =iC^\gamma_{\alpha\beta}U(\Lambda)B_\gamma U^{-1}(\Lambda)
+\end{align*}
+ので，このリー代数の構造定数$C^{\gamma}_{\alpha\beta}$は
+\begin{align*}
+\sum_{\gamma}iC^\gamma_{\alpha\beta}B_\gamma &=U(\Lambda^{-1})\left[ U(\Lambda)B_\alpha U^{-1}(\Lambda) , U(\Lambda)B_\beta U^{-1}(\Lambda)\right] U(\Lambda^{-1})\\
+&=\sum_{\alpha'\beta'}D^{\alpha'}_{\,\,\, \alpha}(\Lambda) D^{\beta'}_{\,\,\, \beta}(\Lambda)U(\Lambda^{-1})[B_{\alpha'},B_{\beta'}]U^{-1}(\Lambda^{-1}) \\
+&=\sum_{\alpha'\beta'\gamma'}D^{\alpha'}_{\,\,\, \alpha}(\Lambda) D^{\beta'}_{\,\,\, \beta}(\Lambda)iC^{\gamma'}_{\alpha' \beta'}U(\Lambda^{-1})B_{\gamma'}U^{-1}(\Lambda^{-1}) \\
+&=\sum_{\alpha'\beta'\gamma'\gamma}D^{\alpha'}_{\,\,\, \alpha}(\Lambda) D^{\beta'}_{\,\,\, \beta}(\Lambda)D^\gamma_{\,\,\, \gamma'}(\Lambda^{-1})iC^{\gamma'}_{\alpha' \beta'}B_\gamma \\
+\therefore &\quad C^{\gamma}_{\alpha\beta} =\sum_{\alpha'\beta'\gamma'}D^{\alpha'}_{\,\,\, \alpha}(\Lambda) D^{\beta'}_{\,\,\, \beta}(\Lambda)D^\gamma_{\,\,\, \gamma'}(\Lambda^{-1})C^{\gamma'}_{\alpha' \beta'}
+\end{align*}
+の意味で不変テンソルだ．これを，$C^{\alpha}_{\gamma\delta}$の対応する式と縮約すると以下を得る．
+\begin{align*}
+\sum_{\alpha\gamma}C^\gamma_{\alpha\beta}C^{\alpha}_{\gamma\delta}=&\sum_{\substack{\alpha'\beta'\gamma' \\ \alpha'' \gamma''\delta' \\ \alpha\gamma}}D^{\alpha'}_{\,\,\, \alpha}(\Lambda) D^{\beta'}_{\,\,\, \beta}(\Lambda)D^\gamma_{\,\,\, \gamma'}(\Lambda^{-1})C^{\gamma'}_{\alpha' \beta'} D^{\gamma''}_{\,\,\, \gamma}(\Lambda) D^{\delta'}_{\,\,\, \delta}(\Lambda)D^{\alpha}_{\,\,\, \alpha''}(\Lambda^{-1})C^{\alpha''}_{\gamma'' \delta'} \\
+=&\sum_{\substack{\alpha'\beta'\gamma' \\ \alpha'' \gamma''\delta'}}\delta^{\alpha'}_{\alpha''}\delta^{\gamma''}_{\gamma'}D^{\beta'}_{\,\,\, \beta}(\Lambda)D^{\delta'}_{\,\,\, \delta}(\Lambda)C^{\gamma'}_{\alpha' \beta'}C^{\alpha''}_{\gamma'' \delta'} \\
+=&\sum_{\alpha' \beta'\gamma'\delta'} D^{\beta'}_{\,\,\, \beta}(\Lambda)D^{\delta'}_{\,\,\, \delta}(\Lambda)C^{\gamma'}_{\alpha' \beta'}C^{\alpha'}_{\gamma' \delta'} \\
+=&\sum_{ \beta'\delta'} D^{\beta'}_{\,\,\, \beta}(\Lambda)D^{\delta'}_{\,\,\, \delta}(\Lambda)\left[\sum_{\alpha'\gamma'}C^{\gamma'}_{\alpha' \beta'}C^{\alpha'}_{\gamma' \delta'}\right]
+\end{align*}
+ここで計量(15.A.10)
+\begin{align*}
+g_{\beta\gamma}\equiv -\sum_{\alpha\gamma}C^\gamma_{\alpha\beta}C^{\alpha}_{\gamma\delta}
+\end{align*}
+を定義すると
+\begin{align*}
+g_{\beta\gamma}=\sum_{ \beta'\delta'} D^{\beta'}_{\,\,\, \beta}(\Lambda)D^{\delta'}_{\,\,\, \delta}(\Lambda) g_{\beta'\delta'}
+\end{align*}
+となる．(すぐ使うので，これを行列表記にしておくと$g=D(\Lambda)^{\mathrm{T}}g D(\Lambda)$となる．)生成子$B_\alpha$は全て$P_\mu$と可換なのだから$C^\alpha_{\mu\beta}=-C^\alpha_{\beta\mu}=0$であり，$g_{\mu\alpha}=g_{\alpha\mu}=0$となる．\par
+$P_\mu$以外の対称性生成子の添え字には$\alpha,\beta$などの代わりに$A,B$などを使って区別することにする．$C^A_{\mu B}=-C^A_{B\mu}=0$であることを(24.1.5)に使うと$g_{AB}=-\sum_{CD}C^D_{AC}C^C_{BD}$を得る．ここで生成子$B_A$はコンパクト半単純リー代数を張ると仮定すると，コンパクト性により行列$g_{AB}$は正定値となる．理由を一応示しておくと，コンパクト性により$C^A_{BC}$は完全反対称になり，ゼロでないベクトル$u_A$の二次形式は
+\begin{align*}
+u_Ag_{AB}u_B=-\sum_{ABCD}u_AC^D_{AC}C^C_{BD}u_B=\sum (u_AC^D_{AC})^2 \geq 0
+\end{align*}
+となって正であることが分かるからだ．したがって$g^{1/2}$が定義でき，(24.1.4)(24.1.2)より，行列$g^{1/2}D(\Lambda)g^{-1/2}$は斉次ローレンツ群の実直交，したがってユニタリーな有限次元表現を与える．実際
+\begin{align*}
+\left[g^{1/2}D(\Lambda) g^{-1/2}\right]^{\mathrm{T}}g^{1/2}D(\Lambda)g^{-1/2}=&g^{-1/2}D(\Lambda)^{\mathrm{T}}gD(\Lambda)g^{-1/2} \\
+=&g^{-1/2}g g^{-1/2} =1
+\end{align*}
+となる．二番目の等号では(24.1.4)を用いた．しかし，ローレンツ群はコンパクト群ではないから，そのような表現は自明なものしか存在しない．したがって$g^{1/2}D(\Lambda)g^{-1/2}=1$，すなわち$D(\Lambda)=1$となる．(ここで相対論的な性質が効いている．ガリレイ群の半単純部分はコンパクト群$SU(2)$であり，これはもちろん無限個のユニタリーな有限次元表現を持つ．)$D(\Lambda)=1$と(24.1.1)より生成子$B_A$は全てのローレンツ変換$\Lambda^\mu_{\,\,\,\nu}$について$U(\Lambda)$と可換になる．\par
+運動量が$p^\mu$でスピンと種類が離散的な添え字$n$で表される安定な一粒子状態$\ket{p,n}$に$B_A$が作用するとき，$P_\mu$と可換な$B_A$のような演算子は$\ket{p,n}$の線型結合しか作らない．なぜなら，状態$B_A\ket{p,n}$に$P_\mu$を作用させると
+\begin{align*}
+P_\mu B_A \ket{p,n}= B_A P_\mu \ket{p,n}=p_\mu B_A\ket{p,n}
+\end{align*}
+となって，$B_A\ket{p,n}$は運動量$p^\mu$の状態の線型結合で作られていると分かるからだ．したがって
+\begin{align*}
+B_A\ket{p,n}=\sum_m \Bigl( b_A (p)\Bigr)_{mn}\ket{p,m}
+\end{align*}
+と書けるが，$B_A$が$U(\Lambda)$と可換で，ブースト(2.5.5)と可換であるから，
+\begin{align*}
+B_A \ket{p,n}=N(p) U(L(p))B_A \ket{k,n}=\sum_{m} \Bigl( b_A (k)\Bigr)_{mn}N(p)U(L(p))\ket{k,m}=\sum_m \Bigl( b_A (k)\Bigr)_{mn}\ket{p,m}
+\end{align*}
+となって，$b_A(p)$は運動量に依らないことが言える．また$B_A$が回転とも可換であるから$J_3$を作用させて同様の議論を繰り返せば，$b_A(p)$がスピンを変化させず，スピンに対して単位行列として作用することがわかるので，$B_A$は通常の内部対称性の生成子であることがわかる．これが証明したいことであった．
+
+
+\newpage
+
+\subsection{超対称性の誕生}
+コールマン・マンデューラ定理の適用範囲外が知りたい．そのために，この定理はボゾンをボゾンに変換しフェルミオンをフェルミオンに変換するために(反交換関係ではなく)交換関係を満たす演算子によって生成される変換のみを扱っている，という点に注目しよう．つまり，スピンに非自明な作用をしボゾンをフェルミオンに，あるいはフェルミオンをボゾンに変換し，交換関係ではなく反交換関係を満たすような対称性が相対論的理論で許されるかどうかが問題となる．\par
+1960年代の終わり，各種のハドロンを「弦の異なった振動モード」と解釈する描像が登場した．パラメータ$\sigma$で表される弦の上の1点はある固定された時計の時刻$\tau$において$X^\mu(\sigma,\tau)$という時空の座標をもつ．したがって，$d$次元時空での弦の運動は$d$個のボソン場をもつ2次元の場の理論で記述される．その作用は
+\begin{align*}
+I[X]=\frac{T}{2}\int d\sigma \int d\tau \eta_{\mu\nu}\left[ \frac{\partial X^\mu }{\partial \tau }\frac{\partial X^\nu }{\partial \tau }-\frac{\partial X^\mu }{\partial \sigma }\frac{\partial X^\nu }{\partial \sigma } \right]
+\end{align*}
+ここで$\mu=0,\cdots , d-1$であり，$T$は弦の張力として知られる定数．$\sigma^\pm$は2次元の「光円錐」座標．$\tau \to \sigma^-=\tau-\sigma,\sigma\to \sigma^+=\tau+\sigma$と変数変換すればヤコビアンは2なので$d\sigma d\tau=\frac{1}{2}d\sigma^+d\sigma^-$となり
+\begin{align*}
+\frac{\partial}{\partial \tau}=&\frac{\partial \sigma^+}{\partial \tau}\frac{\partial}{\partial \sigma^+}+\frac{\partial \sigma^-}{\partial \tau}\frac{\partial}{\partial \sigma^-} \\
+=&\frac{\partial}{\partial \sigma^+}+\frac{\partial}{\partial \sigma^-} \\
+\frac{\partial}{\partial \sigma}=&\frac{\partial \sigma^+}{\partial \sigma}\frac{\partial}{\partial \sigma^+}+\frac{\partial \sigma^-}{\partial \sigma}\frac{\partial}{\partial \sigma^-} \\
+=&\frac{\partial}{\partial \sigma^+}-\frac{\partial}{\partial \sigma^-}
+\end{align*}
+これにより作用は
+\begin{align*}
+I[X]=&\frac{T}{4}\int d\sigma^+ \int d\sigma^- \eta_{\mu\nu}\left[\left( \frac{\partial X^\mu}{\partial \sigma^+}+\frac{\partial X^\mu}{\partial \sigma^-} \right)\left(\frac{\partial X^\nu}{\partial \sigma^+}+\frac{\partial X^\nu}{\partial \sigma^-}\right)-\left( \frac{\partial X^\mu}{\partial \sigma^+}-\frac{\partial X^\mu}{\partial \sigma^-} \right)\left(\frac{\partial X^\nu}{\partial \sigma^+}-\frac{\partial X^\nu}{\partial \sigma^-}\right) \right] \\
+=&\frac{T}{2}\int d\sigma^+ \int d\sigma^- \eta_{\mu\nu}\left[ \frac{\partial X^\mu}{\partial \sigma^+}  \frac{\partial X^\nu}{\partial \sigma^-}+ \frac{\partial X^\mu}{\partial \sigma^-} \frac{\partial X^\nu}{\partial \sigma^+}\right] \\
+=&T\int d\sigma^+ \int d\sigma^- \eta_{\mu\nu}\frac{\partial X^\mu}{\partial \sigma^+}  \frac{\partial X^\nu}{\partial \sigma^-}
+\end{align*}
+を得る．この作用は，一対の世界面座標$\sigma^k=(\sigma,\tau)$の変換$\sigma^k\to \sigma'^k=f^k(\sigma,\tau)$のもとでの完全な不変性をもつより一般的な作用
+\begin{align*}
+I[X]=-\frac{T}{2}\int d^2\sigma \eta_{\mu\nu}\sqrt{\det \gamma} \gamma^{kl} \frac{\partial X^\mu }{\partial \sigma^k}\frac{\partial X^\nu}{\partial \sigma^l}
+\end{align*}
+から導くことができる．(不変性は明らか．相対論で$d^4x \sqrt{\det g}$が不変だったのを思い出そう．)これは，世界面の計量$\gamma^{kl}$が以下の条件を満たすような特別な座標系に移ればすぐわかる．
+\begin{align*}
+\sqrt{\det \gamma} \gamma^{kl}=\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right)
+\end{align*}
+電磁理論において時間的な光子が，作用の中で負の符号をもつという問題があるが，これは理論のゲージ不変性によって回避される．これと同様に，(24.2.1)と(24.2.2)で$\mu=\nu=0$のときの$\eta_{\mu\nu}$の負符号の問題は，作用(24.2.2)の(境界条件を適切にとったときの)世界面の一般座標変換に対する不変性によって回避される．作用が(24.2.1)の形になる特別な座標系では，世界面の一般座標変換のもとでの不変性のなごりがある．これは一対の大域的共形変換
+\begin{align*}
+\sigma^+\to f^+(\sigma^+),\sigma^-\to f^-(\sigma^-)
+\end{align*}
+のもとでの不変性だ．(不変性は明らか．)\par
+この弦理論で記述される粒子は現実の自然界でみられるものと一致しない．1971年にラモン，ヌヴォー，シュワルツが半整数スピン粒子とパイ中間子の量子数を持つ粒子を導入しようとし，$d$個のフェルミオン場2重項$\psi^\mu_1(\sigma,\tau),\psi_2^\mu(\sigma,\tau)$を加えることを提案し，ジェルベ，崎田はこの理論の作用として以下のものを提案した．
+\begin{align*}
+I[X,\psi]=\int d\sigma^+ \int d\sigma^- \left[ T\frac{\partial X^\mu}{\partial \sigma^+}\frac{\partial X_\mu}{\partial \sigma^-} +i\psi^\mu_2 \frac{\partial}{\partial \sigma^+}\psi_{2\mu}+i\psi^\mu_1\frac{\partial}{\partial \sigma^-}\psi_{1\mu} \right]
+\end{align*}
+(第一項目は(24.2.1)と同じもので，残りの項が追加した項である．)前と同じ共形変換$\sigma^\pm \to f^\pm(\sigma^\pm)$によって
+\begin{align*}
+& \int d\sigma^+ \int d\sigma^- \left[ T\frac{\partial X^\mu}{\partial \sigma^+}\frac{\partial X_\mu}{\partial \sigma^-} +i\psi^\mu_2 \frac{\partial}{\partial \sigma^+}\psi_{2\mu}+i\psi^\mu_1\frac{\partial}{\partial \sigma^-}\psi_{1\mu} \right] \\
+\to &\int d\sigma^+\frac{d f^+}{d\sigma^+ } \int d\sigma^- \frac{d f^-}{d\sigma^-} \Biggl[\left(\frac{d f^+}{d\sigma^+ }\right)^{-1} \left(\frac{d f^-}{d\sigma^-}\right)^{-1} T\frac{\partial X^\mu}{\partial \sigma^+}\frac{\partial X_\mu}{\partial \sigma^-} \\
+&\qquad \qquad \qquad +\left(\frac{d f^+}{d\sigma^+ }\right)^{-1} i\psi^\mu_2 \frac{\partial}{\partial \sigma^+}\psi_{2\mu}+\left(\frac{d f^-}{d\sigma^- }\right)^{-1} i\psi^\mu_1\frac{\partial}{\partial \sigma^-}\psi_{1\mu} \Biggr]
+\end{align*}
+となるから，さらに共形変換を一般化して(24.2.4)と同時にフェルミオン場を以下のように変換すると
+\begin{align*}
+\psi^{\mu}_1\to \left(\frac{d f^+}{d\sigma^+ }\right)^{-1/2} \psi_1^\mu,\quad \psi^{\mu}_2\to \left(\frac{d f^-}{d\sigma^- }\right)^{-1/2} \psi_2^\mu
+\end{align*}
+全体は共形不変性が保たれることがわかる．ジェルベ・崎田は，2次元共形不変性と$d$次元ローレンツ不変性を加えて適切な境界条件をとると，この理論はボゾン場$X^\mu$とフェルミオン場$\psi^\mu_r$を\uwave{交換する}以下の微小変換のもとで対称性をもつことに気付いた．
+\begin{align*}
+\delta \psi^\mu_2(\sigma^+,\sigma^-)=&iT \alpha_2(\sigma^-)\frac{\partial }{\partial \sigma^-}X^\mu (\sigma^+,\sigma^-) \\
+\delta \psi^\mu_1(\sigma^+,\sigma^-)=&iT \alpha_1(\sigma^+)\frac{\partial}{\partial \sigma^+}X^\mu (\sigma^+,\sigma^-) \\
+\delta X^\mu (\sigma^+,\sigma^-)=&\alpha_2(\sigma^-)\psi^\mu_2 (\sigma^+,\sigma^-)+\alpha_1(\sigma^+)\psi^\mu_1(\sigma^+,\sigma^-)
+\end{align*}
+ここで$\alpha_1,\alpha_2$はそれぞれ$\sigma^+,\sigma^-$のフェルミオン的微小関数であり，これらはグラスマン数のようなものだ．実際これらの変換により($\alpha_r$はグラスマン数なので$\psi_r^\mu$と交換すると符号が反転することに注意して)
+\begin{align*}
+\delta I[X,\psi]=&\delta \int d\sigma^+ \int d\sigma^- \left[ T\frac{\partial X^\mu}{\partial \sigma^+}\frac{\partial X_\mu}{\partial \sigma^-} +i\psi^\mu_2 \frac{\partial \psi_{2\mu}}{\partial \sigma^+}+i\psi^\mu_1\frac{\partial \psi_{1\mu}}{\partial \sigma^-} \right] \\
+=&\int d\sigma^+ \int d\sigma^- \biggl[ T\alpha_1\frac{\partial \psi^\mu_1 }{\partial \sigma^+}\frac{\partial X_\mu}{\partial \sigma^-} +T\frac{\partial \alpha_1}{\partial \sigma^+}\psi^\mu_1 \frac{\partial X_\mu}{\partial \sigma^-} +T\alpha_2\frac{\partial \psi^\mu_2 }{\partial \sigma^+}\frac{\partial X_\mu}{\partial \sigma^-}  \\
+&\qquad \qquad +T\alpha_1\frac{\partial X^\mu }{\partial \sigma^+}\frac{\partial \psi_{1\mu}}{\partial \sigma^-} +T\alpha_2\frac{\partial X^\mu }{\partial \sigma^+}\frac{\partial \psi_{2\mu}}{\partial \sigma^-}+T\frac{\partial X^\mu}{\partial \sigma^+}\frac{\partial \alpha_2}{\partial \sigma^-} \psi_{2\mu}\\
+&\qquad \qquad -T\alpha_2\frac{\partial X^\mu}{\partial \sigma^-} \frac{\partial \psi_{2\mu}}{\partial \sigma^+} + T\alpha_2 \psi_2^\mu \frac{\partial^2 X_\mu}{\partial \sigma^+ \partial \sigma^-} \\
+&\qquad \qquad -T\alpha_1 \frac{\partial X^\mu}{\partial \sigma^+}\frac{\partial \psi_{1\mu}}{\partial \sigma^-} +T\alpha_1\psi_1^\mu \frac{\partial^2 X_\mu}{\partial \sigma^+\partial \sigma^-} \biggr] \\
+=&\int d\sigma^+ \int d\sigma^- \biggl[T\alpha_1\frac{\partial \psi^\mu_1 }{\partial \sigma^+}\frac{\partial X_\mu}{\partial \sigma^-} +T\frac{\partial \alpha_1}{\partial \sigma^+}\psi^\mu_1\frac{\partial X_\mu}{\partial \sigma^-}   \\
+&\qquad \qquad +T\alpha_2\frac{\partial X^\mu }{\partial \sigma^+}\frac{\partial \psi_{2\mu}}{\partial \sigma^-}+T\frac{\partial X^\mu}{\partial \sigma^+}\frac{\partial \alpha_2}{\partial \sigma^-} \psi_{2\mu}\\
+&\qquad \qquad + T\alpha_2 \psi_2^\mu \frac{\partial^2 X_\mu}{\partial \sigma^+ \partial \sigma^-} \\
+&\qquad \qquad  +T\alpha_1\psi_1^\mu \frac{\partial^2 X_\mu}{\partial \sigma^+\partial \sigma^-} \biggr] \\
+=&\int d\sigma^+ \int d\sigma^- T \biggl[\frac{\partial}{\partial \sigma^+}\left( \alpha_1 \psi_1^\mu \frac{\partial X_\mu}{\partial \sigma^-} \right)+\frac{\partial}{\partial \sigma^-}\left(\alpha_2 \psi_2^\mu \frac{\partial X_\mu}{\partial \sigma^+}\right)\biggr]
+\end{align*}
+これは全微分の形であるから，境界上で消えるように境界条件を課せば作用は確かに不変となる．これはやがて超対称性と呼ばれるようになったボゾンとフェルミオンをつなぐ対称性の例になっている．しかし，ここまででは，これは2次元場の理論の対称性に過ぎず，4次元時空の物理的理論の対称性ではない．\par
+数年後，ヴェス，ズミノは超対称性模型を構成した．一番単純なものは，マヨラナ場(自己荷電共役なディラック場)$\psi$を一つ，実スカラーと実擬スカラーのボゾン場$A$と$B$の組，それと実スカラーと実擬スカラーのボゾン補助場(微分がラグランジアンに現れない場)$F$と$G$の組を含み，以下の微小変換のもとで不変なものだ．
+\begin{align*}
+\delta A=&\left(\bar{\alpha}\psi \right) ,\quad \delta B =-i(\bar{\alpha} \gamma_5 \psi) \\
+\delta \psi =&\partial_\mu (A+i\gamma_5 B)\gamma^\mu \alpha +(F-i\gamma_5 G)\alpha \\
+\delta F=&(\bar{\alpha}\gamma^\mu \partial_\mu \psi),\quad \delta G=-i(\bar{\alpha}\gamma_5 \gamma^\mu \partial_\mu \psi)
+\end{align*}
+ここで$\alpha$は任意の微小なマヨラナ・フェルミオンのc数の定数4成分パラメータだ．もしこれらの変換のもとでの不変性を作用に要求すると，これらの場$\psi,A,B,F,G$から作られる最も一般的な実・ローレンツ不変・パリティ保存・くりこみ可能なラグランジアン密度は
+\begin{align*}
+\mc{L}=&-\frac{1}{2}\partial_\mu A \partial^\mu A-\frac{1}{2}\partial _\mu B \partial^\mu B -\frac{1}{2}\bar{\psi}\gamma^\mu \partial_\mu \psi \\
+&+\frac{1}{2}(F^2+G^2)+m[FA+GB-\frac{1}{2}\bar{\psi}\psi] \\
+&+g\left[ F(A^2-B^2)+2GAB-\bar{\psi}(A+i\gamma_5 B)\psi \right]
+\end{align*}
+となる．($gFB^2$の項の符号は誤植．)\par
+実際に変化分を計算する．$A=A^*$であるから$\delta A=\delta A^*=(\bar{\alpha}\psi)^*=\bar{\psi}\alpha$であり(グラスマン数の複素共役の性質)，第一項目は
+\begin{align*}
+\delta \left(-\frac{1}{2}\partial_\mu A \partial^\mu A^*\right)=&-\frac{1}{2}\bar{\alpha}\partial_\mu \psi \partial^\mu A -\frac{1}{2}\partial_\mu A \partial^\mu \bar{\psi} \alpha 
+\end{align*}
+となる．同様に$B=B^*$より$\delta B=\delta B^*=-i(\bar{\psi}\gamma_5 \alpha)$と書けて，第二項目は
+\begin{align*}
+\delta \left(-\frac{1}{2}\partial_\mu B \partial^\mu B^*\right)=&+i\frac{1}{2}\bar{\alpha}\gamma_5 \partial_\mu \psi \partial^\mu B + i\frac{1}{2}\partial_\mu B \partial^\mu \bar{\psi} \gamma_5 \alpha
+\end{align*}
+となる．第三項目は
+\begin{align*}
+\delta\bar{\psi}=\delta \psi^\dagger \beta =&[\alpha^\dagger (\gamma^\mu)^\dagger \partial_\mu (A-i\gamma_5 B)+\alpha^\dagger(F+i\gamma_5 G)]\beta \\
+=&-\bar{\alpha}  \gamma^\mu\partial_\mu(A+i\gamma_5 B) +\bar{\alpha}(F-i\gamma_5 G) \quad \because (5.4.27)(5.4.30) \\
+\delta\left(-\frac{1}{2}\bar{\psi}\gamma^\mu \partial_\mu \psi\right)=&+\frac{1}{2}\bar{\alpha}\gamma^\nu\partial_\nu (A+i\gamma_5 B)\gamma^\mu \partial_\mu \psi -\frac{1}{2}\bar{\alpha}(F-i\gamma_5 G)\gamma^\mu \partial_\mu \psi \\
+&-\frac{1}{2}\bar{\psi}\gamma^\mu \partial_\mu \partial_\nu (A+i\gamma_5 B)\gamma^\nu \alpha-\frac{1}{2}\bar{\psi}\gamma^\mu \partial_\mu (F-i\gamma_5 G)\alpha \\
+=&+\frac{1}{2}\bar{\alpha}\gamma^\nu \partial_\nu A \gamma^\mu \partial_\mu \psi -\frac{1}{2}\bar{\psi} \gamma^\mu \partial_\mu \partial_\nu A \gamma^\nu \alpha \\
+&+i\frac{1}{2}\bar{\alpha}\gamma^\nu \gamma_5 \partial_\nu B \gamma^\mu \partial_\mu \psi - i\frac{1}{2}\bar{\psi}\gamma^\mu\partial_\mu \partial_\nu B \gamma_5 \gamma^\nu \alpha \\
+&-\frac{1}{2}\bar{\alpha} F \gamma^\mu \partial_\mu \psi -\frac{1}{2} \bar{\psi}\gamma^\mu \partial_\mu F \alpha \\
+&+i\frac{1}{2}\bar{\alpha}\gamma_5 G \gamma^\mu \partial_\mu \psi +i\frac{1}{2} \bar{\psi} \gamma^\mu \partial_\mu G \gamma_5 \alpha
+\end{align*}
+ここで一つ目の項は
+\begin{align*}
++\frac{1}{2}\bar{\alpha}\gamma^\nu \partial_\nu A \gamma^\mu \partial_\mu \psi=&-\frac{1}{2}\bar{\alpha}\gamma^\nu \partial_\mu \partial_\nu A \gamma^\mu \psi+(全微分) \\
+=&-\frac{1}{2}\bar{\alpha} \partial_\mu \partial^\mu A \psi+ (全微分) \quad \because \{\gamma^\mu ,\gamma^\nu \}=2\eta^{\mu\nu} \\
+=&\frac{1}{2}\bar{\alpha}\partial_\mu A \partial^\mu \psi +(全微分)
+\end{align*}
+と書ける．二つ目も同様の手順で
+\begin{align*}
+-\frac{1}{2}\bar{\psi} \gamma^\mu \partial_\mu \partial_\nu A \gamma^\nu \alpha=-\frac{1}{2}\partial_\mu A \partial^\mu \bar{\psi} \alpha 
+\end{align*}
+と書ける．三，四つ目も同様にして($\gamma_5$の交換による符号だけ気をつけて)
+\begin{align*}
++i\frac{1}{2}\bar{\alpha}\gamma^\nu \gamma_5 \partial_\nu B \gamma^\mu \partial_\mu \psi =&-i\frac{1}{2}\bar{\alpha}\gamma_5 \partial_\mu \psi \partial^\mu B \\
+- i\frac{1}{2}\bar{\psi}\gamma^\mu\partial_\mu \partial_\nu B \gamma_5 \gamma^\nu \alpha=&- i\frac{1}{2}\partial_\mu B \partial^\mu \bar{\psi} \gamma_5 \alpha
+\end{align*}
+となる．これらは先程の第一,二項目から生じる変化分とキャンセルする．残りの第四項目も$F=F^*,G=G^*$より$\delta F=\delta F^*=-(\partial_\mu \bar{\psi} \gamma^\mu \alpha)$と$\delta G=\delta G^*=i(\partial_\mu \bar{\psi} \gamma^\mu \gamma_5 \alpha)$
+\begin{align*}
+\delta \left(\frac{1}{2}F^2\right)=&\frac{1}{2}F\bar{\alpha}\gamma^\mu \partial_\mu \psi -\frac{1}{2}F\partial_\mu \bar{\psi} \gamma^\mu \alpha \\
+=&\frac{1}{2}F\bar{\alpha}\gamma^\mu \partial_\mu \psi +\frac{1}{2}\bar{\psi}\partial_\mu F \gamma^\mu \alpha +(全微分)\\
+\delta \left(\frac{1}{2}G^2\right)=&-i\frac{1}{2}G\bar{\alpha} \gamma_5 \gamma^\mu \partial_\mu \psi+i\frac{1}{2}G\partial_\mu \bar{\psi} \gamma^\mu \gamma_5 \alpha \\
+=&-i\frac{1}{2}G\bar{\alpha} \gamma_5 \gamma^\mu \partial_\mu \psi-i\frac{1}{2} \bar{\psi}\partial_\mu G \gamma^\mu \gamma_5 \alpha+(全微分)
+\end{align*}
+となる．これらもキャンセルする．よってラグランジアンの第一項目から第四項目までの全て変化分はキャンセルする．$m$に比例する項に関しても計算すると
+\begin{align*}
+\delta (FA)=&\delta\left(\frac{1}{2}FA +\frac{1}{2}F^* A^*\right) \\
+=&\frac{1}{2}F\bar{\alpha}\psi+\frac{1}{2}\bar{\alpha}\gamma^\mu \partial_\mu \psi A+\frac{1}{2}F\bar{\psi}\alpha -\frac{1}{2}\partial_\mu \bar{\psi}\gamma^\mu \alpha A \\
+\delta (GB)=&\delta\left(\frac{1}{2}GB+\frac{1}{2}G^*B^*\right) \\
+=&-i\frac{1}{2}G\bar{\alpha}\gamma_5 \psi -i\frac{1}{2}\bar{\alpha}\gamma_5 \gamma^\mu \partial_\mu \psi B -i\frac{1}{2}G\bar{\psi}\gamma_5 \alpha +i\frac{1}{2}\partial_\mu \bar{\psi} \gamma^\mu \gamma_5 \alpha B  \\
+\delta\left(-\frac{1}{2}\bar{\psi}\psi\right)=&-\frac{1}{2}\bar{\psi}\partial_\mu (A+i\gamma_5 B)\gamma^\mu \alpha -\frac{1}{2}\bar{\psi}(F-i\gamma_5 G)\alpha \\
+&+\frac{1}{2}\bar{\alpha}\gamma^\mu\partial_\mu (A+i\gamma_5 B)\psi-\frac{1}{2} \bar{\alpha} (F-i\gamma_5 G)\psi \\
+=&-\frac{1}{2}\bar{\psi} \partial_\mu A \gamma^\mu \alpha +\frac{1}{2}\bar{\alpha}\gamma^\mu \partial_\mu A \psi \\
+&-i\frac{1}{2}\bar{\psi}\gamma_5 \gamma^\mu \partial_\mu B \alpha+i\frac{1}{2}\bar{\alpha} \gamma^\mu \partial_\mu B \gamma_5 \psi \\
+&-\frac{1}{2}\bar{\psi}\alpha F -\frac{1}{2}\bar{\alpha}\psi F \\
+&+i\frac{1}{2}\bar{\psi}\gamma_5 \alpha G +i\frac{1}{2}\bar{\alpha}\gamma_5 \psi G
+\end{align*}
+これらも全てキャンセルする．残りの$g$に比例する項の中身も考える．第一項目は
+\begin{align*}
+\delta(FA^2)=&\delta\left( \frac{1}{2}FA^2 +\frac{1}{2}F^*A^{*2} \right) \\
+=&\frac{1}{2}\bar{\alpha} \gamma^\mu \partial_\mu \psi A^2 +\bar{\alpha}\psi FA \\
+&-\frac{1}{2}\partial_\mu \bar{\psi} \gamma^\mu \alpha A^2 +\bar{\psi}\alpha FA \\
+=&-\bar{\alpha}\gamma^\mu \partial_\mu A A+\bar{\alpha}\psi FA \\
+&+\bar{\psi} \gamma^\mu \alpha \partial_\mu AA +\bar{\psi}\alpha FA +(全微分)
+\end{align*}
+第二項目は
+\begin{align*}
+\delta(-FB^2)=&\delta\left(-\frac{1}{2}FB^2-\frac{1}{2}F^* B^{*2}\right) \\
+=&-\frac{1}{2}\bar{\alpha} \gamma^\mu \partial_\mu \psi B^2 -i\bar{\alpha} \gamma_5 \psi FB \\
+&+\frac{1}{2}\partial_\mu \bar{\psi} \gamma^\mu \alpha B^2 +i\bar{\psi}\gamma_5 \alpha FB \\
+=&\bar{\alpha} \gamma^\mu \psi \partial_\mu BB -i\bar{\alpha} \gamma_5 \psi FB \\
+&-\partial_\mu \bar{\psi} \gamma^\mu \alpha \partial_\mu B B +i\bar{\psi}\gamma_5 \alpha FB +(全微分)
+\end{align*}
+第三項目は
+\begin{align*}
+\delta(2GAB)=&\delta(GAB+G^* A^* B^*) \\
+=&-i\bar{\alpha} \gamma_5 \gamma^\mu \partial_\mu \psi AB +\bar{\alpha} \psi GB -i\bar{\alpha} \gamma_5 \psi GA \\
+&+i\partial_\mu \bar{\psi} \gamma^\mu \gamma_5 \alpha AB +\bar{\psi}\alpha GB -i\bar{\psi} \gamma_5 \alpha GA \\
+=&i\bar{\alpha} \gamma_5 \gamma^\mu \psi \partial_\mu AB+i\bar{\alpha} \gamma_5 \gamma^\mu \psi A \partial_\mu B +\bar{\alpha} \psi GB -i\bar{\alpha} \gamma_5 \psi GA \\
+&-i \bar{\psi} \gamma^\mu \gamma_5 \alpha \partial_\mu AB-i \bar{\psi} \gamma^\mu \gamma_5 \alpha A\partial_\mu B +\bar{\psi}\alpha GB -i\bar{\psi} \gamma_5 \alpha GA+(全微分)
+\end{align*}
+第四項目は
+\begin{align*}
+\delta(-\bar{\psi}(A+i\gamma_5 B)\psi)=&\bar{\alpha}\gamma^\mu [\partial_\mu (A+i\gamma_5 B)](A+i\gamma_5 B)\psi -\bar{\alpha} (F-i\gamma_5 G)(A+i\gamma_5 B)\psi \\
+&-\bar{\psi}\Bigl((\bar{\alpha}\psi)+(\bar{\alpha}\gamma_5 \psi)\gamma_5\Bigr)\psi \\
+&-\bar{\psi}(A+i\gamma_5 B)\partial_\mu (A+i\gamma_5 B) \gamma^\mu \alpha -\bar{\psi}(A+i\gamma_5 B)(F-i\gamma_5 G)\alpha \\
+=&\bar{\alpha} \gamma^\mu \psi \partial_\mu A A +i\bar{\alpha} \gamma^\mu \gamma_5 \psi A\partial_\mu B+ i\bar{\alpha} \gamma^\mu \gamma_5 \psi \partial_\mu A B-\bar{\alpha}\gamma^\mu \psi \partial_\mu BB \\
+&-\bar{\alpha}\psi FA-i\bar{\alpha}\gamma_5 \psi FB+i\bar{\alpha}\gamma_5 \psi GA-\bar{\alpha}\psi GB \\
+&-(\bar{\psi}\psi)(\bar{\alpha}\psi)-(\bar{\psi}\gamma_5 \psi)(\bar{\alpha}\gamma_5 \psi) \\
+&-\bar{\psi}\gamma^\mu \alpha \partial_\mu AA -i \bar{\psi} \gamma_5 \gamma^\mu \alpha \partial_\mu AB-i\bar{\psi}\gamma_5 \gamma^\mu \alpha A \partial_\mu B +\bar{\psi} \gamma^\mu \alpha \partial_\mu BB \\
+&-\bar{\psi}\alpha FA - i\bar{\psi}\gamma_5 \alpha FB +i\bar{\psi}\gamma_5 \alpha AG -\bar{\psi}\alpha BG
+\end{align*}
+$\gamma_5 \gamma^\mu $の順による符号に気を付けて，これらは全て打ち消しあう．ただし$(\bar{\psi}\psi)(\bar{\alpha}\psi)$と$(\bar{\psi}\gamma_5 \psi )(\bar{\alpha}\gamma_5 \psi)$の打ち消しあいは，$\psi$がマヨラナ場であることを用いてフィルツ変換(26.A.16)を用いた．以上より，ラグランジアンは変換(24.2.8)のもとで不変であることが示された．\par
+補助場$F,G$は二次で入っているから，それらを場の方程式
+\begin{align*}
+\partial_\mu \left( \frac{\partial \mc{L}}{\partial (\partial_\mu F)}\right)=\frac{\partial \mc{L}}{\partial F} \quad \Leftrightarrow& \quad F=-mA-g(A^2-B^2) \\
+\partial_\mu \left( \frac{\partial \mc{L}}{\partial (\partial_\mu G)}\right)=\frac{\partial \mc{L}}{\partial G} \quad \Leftrightarrow& \quad G=-mB -2gAB
+\end{align*}
+で置き換えても同等のラグランジアンを得る．(補助場は物理的な場ではないから．)
+\begin{align*}
+mFA=& -m^2 A^2 -gmA (A^2-B^2) \\
+mGB=& -m^2 B^2 -2gm AB^2 \\
+\frac{1}{2}F^2=&\frac{1}{2}m^2 A^2 +\frac{1}{2}g^2(A^2-B^2)^2 +gmA(A^2-B^2) \\
+\frac{1}{2}G^2=&\frac{1}{2}m^2 B^2 +2g^2 A^2 B^2 +2gm AB^2 \\
+gF(A^2-B^2)=&-gm A(A^2-B^2 )-g^2(A^2-B^2)^2 \\
+2gGAB=&-2gmAB^2 -4g^2 A^2B^2
+\end{align*}
+これらを合わせると
+\begin{align*}
+\mc{L}=&-\frac{1}{2}\partial_\mu A \partial^\mu A-\frac{1}{2}\partial _\mu B \partial^\mu B -\frac{1}{2}\bar{\psi}\gamma^\mu \partial_\mu \psi \\
+&-\frac{1}{2}m^2(A^2+B^2)-\frac{1}{2}\bar{\psi}\psi \\
+&-gmA(A^2+B^2)-\frac{1}{2}g^2(A^2+B^2)-g\bar{\psi}(A+i\gamma_5 B)\psi
+\end{align*}
+となる．(こっちは誤植なし．)このラグランジアン密度ではスカラー$A,B$とフェルミオン$\psi$の質量が等しく$m$になっており，さらに湯川相互作用とスカラー自己相互作用の関係がつく．これは超対称性理論に特徴的なことだ．ヴェス・ズミノはまた，ベクトル場を含む超対称性多重項についても，超対称性変換とラグランジアンを与えた．(26章でやる．)最後に，ヴェス・ズミノは別の論文でコールマン・マンデューラ定理を思い起こし，この定理が破られているのは，対称性生成子が交換関係ではなく反交換関係を満たすことによることを明らかにした．それから数年して初めて，グリオッツィ・シャーク・オリーブが弦理論において，ラモン・ヌヴォー・シュワルツ模型の場に適切な周期的境界条件を課すことによって世界面と時空の朗報で超対称性をもつ超弦理論を構成することが可能であることを示した．
+
+
+\newpage
+
+\subsection{コールマン・マンデューラ定理}
+この補遺ではコールマン・マンデューラ定理の証明をする．この定理によれば，唯一の可能な(超対称代数ではない)リー代数は，並進の生成子$P_\mu$と斉次ローレンツ変換の生成子$J_{\mu\nu}$，それと内部対称性の生成子からなる．内部対称性の生成子とは，$P_\mu$とも$J_{\mu\nu}$とも可換であり，物理的状態に作用したとき，スピンと運動量に依存しないエルミート行列として働くものをいう．ここで「対称性の生成子」$B_\alpha$とは，$S$行列と可換であり
+\begin{align*}
+\bra{\beta}SB_\gamma\ket{\alpha}=\bra{\beta}B_\gamma S\ket{\alpha}
+\end{align*}
+その交換子もまた対称性の生成子となり
+\begin{align*}
+[B_\alpha ,B_\beta]=i\sum_{\gamma}C_{\alpha\beta}^\gamma B_\gamma
+\end{align*}
+1粒子状態を1粒子状態に変換し
+\begin{align*}
+B_\alpha \ket{p,n}=\sum_{n'}\Bigl(b_\alpha(p)\Bigr)_{n'n} \ket{p,n'}
+\end{align*}
+多粒子状態には(24.B.1)のように1粒子状態への作用の直和として作用する
+\begin{align*}
+B_\alpha \ket{pm,qn,\cdots}=&\sum_{m'}\Bigl(b_\alpha(p)\Bigr)_{m'm} \ket{pm',qn,\cdots} \\
+&+\sum_{n'}\Bigl(b_\alpha(q)\Bigr)_{n'n}\ket{pm,qn',\cdots} + \cdots
+\end{align*}
+ような任意のエルミート演算子$B_\alpha$を意味する．他の技術的要件は必要になってから与える．2・3章で述べた相対論的量子力学の一般原理以外には，この証明に必要な仮定は以下のものだけだ．\par
+\noindent \textbf{仮定1}：任意の$M$について，$M$より軽い質量の粒子の種類は有限．\par
+\noindent \textbf{仮定2}：任意の2粒子状態はほぼ全てのエネルギー(つまり，例えば，孤立集合以外の全てのエネルギー)において何らかの反応をする．\par
+\noindent \textbf{仮定3}：弾性2体散乱の散乱振幅はほぼすべてのエネルギーと角度で，散乱角の解析関数となっている．\par
+ここで$S$行列が局所的量子場の理論から導かれることは必要ない．(つまり，(3.5.10)での相互作用項が場と場の微分で構成されていると仮定する必要はない．)\par
+4元運動量演算子$P_\mu$と可換な対称性生成子$B_\alpha$のみからなる部分代数についてこの定理を証明する．上で述べたように，そのような対称生成生成子は，多粒子状態に以下のように作用する．
+\begin{align*}
+B_\alpha \ket{pm,qn,\cdots}=&\sum_{m'}\Bigl(b_\alpha(p)\Bigr)_{m'm} \ket{pm',qn,\cdots} \\
+&+\sum_{n'}\Bigl(b_\alpha(q)\Bigr)_{n'n}\ket{pm,qn',\cdots} + \cdots
+\end{align*}
+ここで$m,n$などは質量が$m_n=\sqrt{-p^\mu p_\mu}$となっている粒子のスピンの$z$成分と種類を表す離散的な添え字．(例えば質量$m_e =\sqrt{-p^\mu p_\mu}$の粒子ならば，スピンは$\uparrow,\downarrow$であり，粒子の種類はさらに電子$e^-$と陽電子$e^+$の内部自由度がある．よってそのときの添え字$m$はその組み合わせの4種類をとる．質量ありの荷電ゲージボゾンならばスピンについて3種類と粒子反粒子で6の自由度がある．だから$b_\alpha(p)$と$b_\alpha(q)$は表記は似ているが，それぞれ$4\times 4$行列か$6\times 6$行列か，などという違いがある．)$b_\alpha(p)$は有限エルミート行列で$B_\alpha$の1粒子状態への作用を定義する．\par
+(24.B.1)を用いると，ある固定された$p$に対して$B_\alpha$を$b_\alpha(p)$へと変換する写像は，
+\begin{align*}
+[B_\alpha ,B_\beta]=i\sum_{\gamma}C_{\alpha\beta}^\gamma B_\gamma
+\end{align*}
+より
+\begin{align*}
+&B_\alpha B_\beta \ket{pm,qn,\cdots} \\
+=&B_\alpha \left\{\sum_{m'}\Bigl(b_\beta(p)\Bigr)_{m'm} \ket{pm',qn,\cdots}+\sum_{n'}\Bigl(b_\beta(q)\Bigr)_{n'n}\ket{pm,qn',\cdots} + \cdots \right\} \\
+=&\sum_{m'm''}\Bigl(b_\alpha (p)\Bigr)_{m''m'}\Bigl(b_\beta(p)\Bigr)_{m'm} \ket{pm'',qn,\cdots}+\sum_{n'm'}\Bigl(b_\alpha(p)\Bigr)_{m'm}\Bigl(b_\beta(q)\Bigr)_{n'n}\ket{pm',qn',\cdots} + \cdots \\
+&+\sum_{m'n'}\Bigl(b_\alpha (q)\Bigr)_{n'n}\Bigl(b_\beta(p)\Bigr)_{m'm} \ket{pm',qn',\cdots}+\sum_{n'n''}\Bigl(b_\alpha(q)\Bigr)_{n''n'}\Bigl(b_\beta(q)\Bigr)_{n'n}\ket{pm,qn'',\cdots} + \cdots \\
+&+\cdots
+\end{align*}
+1行目2項目と2行目1項目は$\alpha,\beta$の入れ替えで同じであることがわかる．ほかの交差項も同様であり，$[B_\alpha,B_\beta]$の作用は
+\begin{align*}
+&[B_\alpha,B_\beta] \ket{pm,qn,\cdots} \\
+=&\sum_{m'}\Bigl(b_\alpha (p) b_\beta(p)-b_\beta(p)b_\alpha(p)\Bigr)_{m'm} \ket{pm',qn,\cdots} \\
+&+\sum_{n'}\Bigl(b_\alpha (q) b_\beta(q)-b_\beta(q)b_\alpha(q)\Bigr)_{n'n} \ket{pm,qn',\cdots}+\cdots \\
+=&\sum_{m'}\Bigl(\left[b_\alpha (p), b_\beta(p)\right]\Bigr)_{m'm} \ket{pm',qn,\cdots} \\
+&+\sum_{n'}\Bigl(\left[b_\alpha (q),b_\beta(q)\right]\Bigr)_{n'n} \ket{pm,qn',\cdots}+\cdots
+\end{align*}
+一方
+\begin{align*}
+[B_\alpha,B_\beta] \ket{pm,qn,\cdots}=&i\sum_\gamma C^\gamma_{\alpha\beta} B_\gamma \ket{pm,qn,\cdots} \\
+=&i\sum_\gamma C^\gamma_{\alpha\beta}\Biggl[\sum_{m'}\Bigl(b_\gamma(p)\Bigr)_{m'm} \ket{pm',qn,\cdots} \\
+&\qquad \qquad +\sum_{n'}\Bigl(b_\gamma(q)\Bigr)_{n'n}\ket{pm,qn',\cdots} + \cdots\Biggr]
+\end{align*}
+よって線形独立性から
+\begin{align*}
+[b_\alpha(p),b_\beta(p)]=i\sum_\gamma C^\gamma_{\alpha\beta} b_\gamma(p)
+\end{align*}
+が満たされていることがわかる．よって写像$B_\alpha \to b_\alpha(p)$はリー代数の構造を保つので，リー代数の準同型写像であることがわかる．15.2節の定理によれば，$b_\alpha(p)$のような有限エルミート行列が張る任意のリー代数は，コンパクト半単純リー代数と$U(1)$代数の直和でなければならない．それを$B_\alpha$についても同じことが言いたいが，そのまま適用することはできない．なぜなら，演算子$B_\alpha$と行列$b_\alpha(p)$の間の準同型写像が同型写像であるとは限らないからだ．同型であるためには，ある係数$c^\alpha$とある運動量$p$について$\sum_\alpha c^\alpha b_\alpha(p)=0$がなりたっているならば，いつでも全ての運動量$k$について$\sum_\alpha c^\alpha b_\alpha(k)=0$でなければならない．(単射性の条件より来る．ある運動量$p$を固定したとき，$f_p:B_\alpha \mapsto b_\alpha(p) $が単射であることと$\ker f_p=0$は同値．よって$\sum_\alpha c^\alpha b_\alpha(p)=0$ならば$\sum_\alpha c^\alpha B_\alpha=0$でなければならない．$\sum_\alpha c^\alpha B_\alpha=0$ならば(24.B.1)と線形独立性より全ての$k$で$\sum_\alpha c^\alpha b_\alpha(k)=0$である(これは逆もなりたつので同値)．全射性については，像が$b_\alpha(p)$で生成されることからすでに分かっている．$b_\alpha(p)$は生成元であるから，像は全体を覆っており，全射であることは自明．よって上の条件を確かめれば同型性が確かめられる．)\par
+$B_\alpha$を1粒子状態$b_\alpha(p)$に写像する準同型写像を考える代わりに，コールマン・マンデューラは$B_\alpha$から固定された運動量$p$と$q$をもつ2粒子状態への$B_\alpha$の作用を表す以下の行列$b_\alpha(p,q)_{m'n',mn}$へ写像する準同型写像を考えた．
+\begin{align*}
+B_\alpha \ket{pm,qn}=&\sum_{m'}\Bigl(b_\alpha(p)\Bigr)_{m'm} \ket{pm',qn} +\sum_{n'}\Bigl(b_\alpha(q)\Bigr)_{n'n}\ket{pm,qn'} \\
+=&\sum_{m'n'}\left[\Bigl(b_\alpha(p)\Bigr)_{m'm}\delta_{n'n}+\Bigl(b_\alpha(q)\Bigr)_{n'n}\delta_{m'm}\right]\ket{pm',qn'} \\
+\equiv &\sum_{m'n'}b_\alpha(p,q)_{m'n',mn}\ket{pm',qn'} \\
+b_\alpha(p,q)_{m'n',mn}=&\Bigl(b_\alpha(p)\Bigr)_{m'm}\delta_{n'n}+\Bigl(b_\alpha(q)\Bigr)_{n'n}\delta_{m'm}
+\end{align*}
+4元運動慮$p$と$q$の2粒子状態から運動量$p'$と$q'$で，質量$\sqrt{-p'_\mu p'^\mu}=\sqrt{-p_\mu p^\mu}$と$\sqrt{-q'_\mu q'^\mu}=\sqrt{-q_\mu q^\mu}$の2粒子状態への弾性散乱か準弾性散乱の$S$行列の不変性(上で述べた対称性生成子の性質)から以下の条件が得られる．
+\begin{align*}
+\bra{p'm',q'n'} S B_\alpha \ket{pm,qn}=&\sum_{m''n''}\bra{p'm',q'n'} S\ket{pm'',qn''}b_\alpha(p,q)_{m''n'',mn} \\
+=&\sum_{m''n''} S(pm'',qn''\to p'm',q'n')b_\alpha(p,q)_{m''n'',mn} \\
+=&\sum_{m''n''} \delta^4(p'+q'-p-q)S(p',q';p,q)_{m'n',m''n''}b_\alpha(p,q)_{m''n'',mn} \\
+=&\delta^4(p'+q'-p-q) \Bigl( S(p',q';p,q) b_\alpha(p,q) \Bigr)_{m'n',mn} \\
+=\bra{p'm',q'n'} B_\alpha S \ket{pm,qn}=&\sum_{m''n''}b_\alpha(p',q')_{m'n',m''n''} \bra{p'm'',q'n''} S\ket{pm,qn} \\
+=&\sum_{m''n''} b_\alpha(p',q')_{m'n',m''n''} S(pm,qn\to p'm'',q'n'') \\
+=&\sum_{m''n''} b_\alpha(p',q')_{m'n',m''n''} \delta^4(p'+q'-p-q)S(p',q';p,q)_{m''n'',mn} \\
+=&\delta^4(p'+q'-p-q) \Bigl( b_\alpha(p',q')S(p',q';p,q)  \Bigr)_{m'n',mn} \\
+\therefore \quad b_\alpha(p',q')S(p',q';p,q)=&S(p',q';p,q) b_\alpha(p,q)
+\end{align*}
+ここで$S(p',q';p,q)$は連結$S$行列要素$S(pm,qn\to p'm',q'n')$を使って以下で定義される．
+\begin{align*}
+S(pm,qn\to p'm',q'n')=\delta^4(p'+q'-p-q)\Bigl( S(p',q';p,q) \Bigr)_{m'n',mn}
+\end{align*}
+(3.6.10)より前方散乱$\theta=0$で
+\begin{align*}
+\mathrm{Im} f(0)=\frac{k}{4\pi}\sigma_\alpha
+\end{align*}
+であり，$f(0)=0$ならば$\mathrm{Im}f(0)=0$より全断面積は$\sigma_\alpha=0$でなければならない．しかし仮定2より$p,q$をどのように選んでも必ず何らかの反応をするから，全散乱断面積は非ゼロである．したがって弾性散乱振幅は前方でゼロにはならないことがわかる．また仮定3より，行列$S(p',q';p,q)$は同じ質量殻上で保存則$p'+q'=p+q$を満たすほぼ全ての$p',q'$について正則(逆$S^{-1}=S^\dagger$が存在．ほぼ全てとは，ある領域でゼロとはならずに，零点が孤立している(測度ゼロ)ということ．ある領域でゼロならば正則性と一致の定理より全域でゼロになってしまう．スピンやパリティ対称性によりある散乱角やエネルギーでゼロになることはあるから「ほぼ全て」．)だから，ほぼ全てのそのような4元運動量について(24.B.5)は単に相似変換だ．\par
+これにより，もしほぼ全ての固定された4元運動量$p,q$について$\sum_\alpha c^\alpha b_\alpha(p,q)=0$ならば，同じ質量殻上で保存則$p'+q'=p+q$を満たすほぼ全ての$p',q'$について
+\begin{align*}
+\sum_\alpha c^\alpha b_\alpha(p',q')=&S(p',q';p,q)\left(\sum_\alpha c^\alpha b_\alpha(p,q) \right)S^{-1}(p',q';p,q) \\
+=&0
+\end{align*}
+となることがわかる．しかし(24.B.4)より
+\begin{align*}
+0=&\sum_\alpha c^\alpha b_\alpha(p',q') \\
+=&\left(\sum_\alpha c^\alpha b_\alpha(p')\right)_{m'm}\delta_{n'n}+\delta_{m'm}\left(\sum_\alpha c^\alpha b_\alpha(q')\right)_{n'n} \\
+\therefore \quad & \sum_\alpha c^\alpha b_\alpha(p')_{m'm}=\lambda \delta_{m'm},\quad \sum_\alpha c^\alpha b_\alpha(q')=-\lambda \delta_{n'n}
+\end{align*}
+となって，これからは$\sum_\alpha c^\alpha b_\alpha(p')$と$\sum_\alpha c^\alpha b_\alpha(q')$はゼロになるとは言えず，単位行列に(反対符号の係数で)比例しているとしか言えない．これを改善するために，$b_\alpha(p)$や$b_\alpha(p,q)$ではなく，それらのトレースレス部分を考える必要がある．
+
+\vskip\baselineskip
+
+(24.B.5)から
+\begin{align*}
+\mathrm{Tr} b_\alpha(p',q')=&\mathrm{Tr}\left(S(p',q';p,q)\left( b_\alpha(p,q) \right)S^{-1}(p',q';p,q)\right) \\
+=&\mathrm{Tr}b_\alpha(p,q) \qquad \because トレースの巡回性
+\end{align*}
+である．ここで$\mathrm{Tr}A=\sum_{mn}A_{mn,mn}$である．ここで(24.B.4)も使うと
+\begin{align*}
+\mathrm{Tr} b_\alpha(p',q')=&\mathrm{tr}b_\alpha(p') \sum_n \delta_{nn}+\mathrm{tr}b_\alpha(q')\sum_m \delta_{mm} \\
+=&N\left(\sqrt{-q'^\mu q'_\mu}\right) \mathrm{tr} b_\alpha(p')+N\left(\sqrt{-p'^\mu p'_\mu}\right)\mathrm{tr}b_\alpha(q') \\
+=&N(\sqrt{-q^\mu q_\mu}) \mathrm{tr} b_\alpha(p')+N(\sqrt{-p^\mu p_\mu})\mathrm{tr}b_\alpha(q') \\
+=\mathrm{Tr} b_\alpha(p',q')=&N(\sqrt{-q^\mu q_\mu}) \mathrm{tr} b_\alpha(p)+N(\sqrt{-p^\mu p_\mu})\mathrm{tr}b_\alpha(q)
+\end{align*}
+ここで$N(m)$は質量$m$の粒子の種類の多重度だ．($m,n$の添え字の自由度である．例えば，前の例でいう電子質量$m_e$の場合$N(m_e)=4$となる．)また弾性散乱であることを用いて，$\sqrt{-p'_\mu p'^\mu}=\sqrt{-p_\mu p^\mu}$と$\sqrt{-q'_\mu q'^\mu}=\sqrt{-q_\mu q^\mu}$を途中で用いた．$\mathrm{tr}$は$\mathrm{Tr}$とは異なり1粒子の指標について和をとり，例えば$\mathrm{tr}b_\alpha(p)=\sum_m (b_\alpha(p))_{mm}$である．両辺を$N(\sqrt{-q^\mu q_\mu})N(\sqrt{-p^\mu p_\mu})$で割れば
+\begin{align*}
+\frac{\mathrm{tr} b_\alpha(p')}{N(\sqrt{-p'^\mu p'_\mu})}+\frac{\mathrm{tr}b_\alpha(q')}{N(\sqrt{-q'^\mu q'_\mu})}=\frac{\mathrm{tr} b_\alpha(p)}{N(\sqrt{-p^\mu p_\mu})}+\frac{\mathrm{tr}b_\alpha(q)}{N(\sqrt{-q^\mu q_\mu})}
+\end{align*}
+を得る．$p'+q'=p+q$が成立するほぼ全ての質量殻上の4元運動量について，これが満たされているためには，関数$\mathrm{tr} b_\alpha(p)/N(\sqrt{-p^\mu p_\mu})$が$p$について線形でなければならない．
+\begin{align*}
+\frac{\mathrm{tr} b_\alpha(p)}{N(\sqrt{-p^\mu p_\mu})}=a^\mu_\alpha p_\mu
+\end{align*}
+ここで$a^\mu_\alpha$は$p$からも，また表示された$\mu,\alpha$指標以外の全てからも独立．(右辺に定数項が存在することは上の条件式からは禁止されない．しかしこれは$2\to 2$散乱だから(24.B.8)の両辺が2項と2項なので定数が打ち消し影響がないだけで，粒子数が変化するような過程，例えば$1\to 2,2\to 3$散乱などを考えると両辺が1項と2項や，2項と3項定数項が両辺で打ち消しあわない．どのような散乱過程でも成り立つためには定数項が禁止される．定数項を残しておいても物理的状態への内部対称性の作用に変化があるだけで本質的な問題はないらしい．)
+運動量演算子$P^\mu$の1次の項を引き去って，新しい対称性生成子を以下のように定義することができる．
+\begin{align*}
+B^\sharp_\alpha \equiv B_\alpha-a^\mu_\alpha P_\mu
+\end{align*}
+これは(24.B.9)を用いれば，1粒子状態についてトレースレスの行列$b_\alpha^\sharp (p)$
+\begin{align*}
+B^\sharp_\alpha\ket{pm} =& \left[B_\alpha-a^\mu_\alpha P_\mu\right]\ket{pm} \\
+=&\sum_{m'}\Bigl(b_\alpha (p)\Bigr)_{m'm}\ket{pm'}-a^\mu_\alpha p_\mu \ket{pm} \\
+=&\sum_{m'}\left(\Bigl(b_\alpha(p)\Bigr)_{m'm}-\frac{\mathrm{tr} b_\alpha(p)}{N(\sqrt{-p^\mu p_\mu})} \delta_{m'm}\right)\ket{pm'} \quad \because (24.\mathrm{B}.9)\\
+=&\sum_{m'm}\Bigl(b_\alpha^\sharp (p)\Bigr)_{m'm}\ket{pm'} \\
+\Bigl(b_\alpha^\sharp (p)\Bigr)_{m'm} \equiv &\Bigl(b_\alpha(p)\Bigr)_{m'm}-\frac{\mathrm{tr} b_\alpha(p)}{N(\sqrt{-p^\mu p_\mu})} \delta_{m'm} \\
+\mathrm{tr} b_\alpha^\sharp (p) =& \mathrm{tr} b_\alpha(p) -\frac{\mathrm{tr} b_\alpha(p)}{N(\sqrt{-p^\mu p_\mu})} N(\sqrt{-p^\mu p_\mu}) =0
+\end{align*}
+で表現される．最初の仮定より$P^\mu$は$B_\alpha$と可換であり，単位行列は全てと可換だから，$B^\sharp_\alpha$の交換子は$B_\alpha$の交換子と同じで，$b^\sharp_\alpha(p)$の交換子は$b_\alpha(p)$の交換子と同じだ．
+\begin{align*}
+[B_\alpha^\sharp,B_\beta^\sharp]=&[B_\alpha , B_\beta]-a^\mu_\beta [B_\alpha , P^\mu] -a^\mu_\alpha [P_\mu,B_\beta]-a^\mu_\alpha a^\nu_\beta[P^\mu ,P^\nu] \\
+=&[B_\alpha,B_\beta]=i\sum_\gamma C^\gamma_{\alpha\beta}B_\gamma=i\sum_\gamma C^\gamma_{\alpha\beta}[B^\sharp_\gamma +a^\mu_\gamma P_\mu] \\
+\left[b_\alpha^\sharp(p),b^\sharp_\beta(p)\right]=&\left[b_\alpha(p),b_\beta(p)\right] \\
+&-\frac{\mathrm{tr} b_\beta(p)}{N(\sqrt{-p^\mu p_\mu})}[b_\alpha(p),I]-\frac{\mathrm{tr} b_\alpha(p)}{N(\sqrt{-p^\mu p_\mu})}[I,b_\beta(p)]+\frac{\mathrm{tr} b_\alpha(p)}{N(\sqrt{-p^\mu p_\mu})}\frac{\mathrm{tr} b_\alpha(p)}{N(\sqrt{-p^\mu p_\mu})} [I,I] \\
+=&\left[b_\alpha(p),b_\beta(p)\right]=i\sum_\gamma C^\gamma_{\alpha\beta}b_\gamma(p)=i\sum_\gamma C^\gamma_{\alpha\beta}[b^\sharp_\gamma(p)+a^\mu_\gamma p_\mu]
+\end{align*}
+また，(24.B.13)の\uwave{交換関係}のトレースがゼロ
+\begin{align*}
+\mathrm{tr} \left[b_\alpha^\sharp(p),b^\sharp_\beta(p)\right]=&\mathrm{tr} (b_\alpha^\sharp(p)b^\sharp_\beta(p)-b_\beta^\sharp(p)b^\sharp_\alpha(p))=0 \quad \because トレースの巡回性 \\
+=&\mathrm{tr}\left(i\sum_\gamma C^\gamma_{\alpha\beta}[b^\sharp_\gamma(p)+a^\mu_\gamma p_\mu]\right)=i\sum_{\gamma}C^\gamma_{\alpha\beta}a^\mu_\gamma p_\mu N(-\sqrt{p^\mu p_\mu})
+\end{align*}
+より$C^\gamma_{\alpha\beta}a^\mu_\gamma=0$を得る．ここで仮定1より粒子の種類が有限個であり$b_\alpha(p)$が有限次元行列になることを用いた．この仮定がなければ無限次元行列であることを許してしまい，この場合トレースの巡回性$\mathrm{tr}AB=\mathrm{tr}BA$がなりたつとは限らないからだ．この結果を(24.B.12)に用いると，$B^\sharp_\alpha$が$B_\alpha$と同じ交換関係を満たすことが示せる．
+\begin{align*}
+[B_\alpha^\sharp,B_\beta^\sharp]=&i\sum_\gamma C^\gamma_{\alpha\beta}B_\gamma^\sharp \\
+[b_\alpha^\sharp(p),b_\beta^\sharp(p)]=&i\sum_\gamma C^\gamma_{\alpha\beta}b_\gamma^\sharp(p)
+\end{align*}
+を得る．$B^\sharp_\alpha$も対称性の生成子なのだから，(24.B.5)と同様再び散乱振幅は以下を満たす．
+\begin{align*}
+b^\sharp_\alpha(p',q')S(p',q';p,q)=S(p',q';p,q)b^\sharp_\alpha(p,q)
+\end{align*}
+ここで$b^\sharp_\alpha(p,q)$は$B^\sharp_\alpha$の2粒子状態への作用を表す行列だ．
+\begin{align*}
+\Bigl(b^\sharp_\alpha(p,q)\Bigr)_{m'n',mn}=\Bigl(b^\sharp_\alpha(p) \Bigr)_{m'm}\delta_{n'n}+\delta_{m'm}\Bigl(b^\sharp_\alpha(q)\Bigr)_{n'n}
+\end{align*}
+また，これは
+\begin{align*}
+b_\alpha^\sharp(p,q)b_\beta^\sharp(p,q)=&b_\alpha^\sharp(p)b_\beta^\sharp(p) \otimes I+ b_\alpha^\sharp(p)\otimes b_\beta^\sharp(q)+b_\alpha^\sharp(q)\otimes b_\beta^\sharp(p) +I\otimes b_\alpha^\sharp(q)b_\beta^\sharp(q) \\
+\left[b_\alpha^\sharp(p,q) , b_\beta^\sharp(p,q)\right]=&(b_\alpha^\sharp(p)b_\beta^\sharp(p)-b_\beta^\sharp(p)b_\alpha^\sharp(p)) \otimes I+I\otimes \left(b_\alpha^\sharp(q)b_\beta^\sharp(q)-b_\beta^\sharp(q)b_\alpha^\sharp(q)\right) \\
+=&i\sum_\gamma C^\gamma_{\alpha\beta}\left(b^\sharp_\gamma(p)\otimes I +I\otimes b^\sharp_\gamma(q)\right) \\
+=&i\sum_\gamma C^\gamma_{\alpha\beta} b_\gamma^\sharp(p,q)
+\end{align*}
+となり，$B^\sharp_\alpha$と同じ交換関係を満たす．これらの2粒子行列を扱う利点は，$S(p',q';p,q)$が正則な行列であるから，もし固定された質量殻上の4元運動量$p,q$について$\sum_\alpha c^\alpha b^\sharp(p,q)=0$ならば，同じ質量殻上で$p'+q'=p+q$を満たすほぼ全ての$p',q'$について
+\begin{align*}
+\sum_\alpha c^\alpha b^\sharp_\alpha(p',q')=&S(p',q';p,q)\left(\sum_\alpha c^\alpha b^\sharp_\alpha(p,q) \right)S^{-1}(p',q';p,q) \\
+=&0
+\end{align*}
+が示せる．ここまでは$b_\alpha(p',q')$について同様の式を導いたときと同様だが，今回はトレースがゼロの行列を扱っているから
+\begin{align*}
+0=&\sum_\alpha c^\alpha b^\sharp_\alpha(p',q') \\
+=&\left(\sum_\alpha c^\alpha b^\sharp_\alpha(p')\right)_{m'm}\delta_{n'n}+\delta_{m'm}\left(\sum_\alpha c^\alpha b_\alpha^\sharp(q')\right)_{n'n} \\
+\therefore \quad & \sum_\alpha c^\alpha b^\sharp_\alpha(p')_{m'm}=\lambda \delta_{m'm},\quad \sum_\alpha c^\alpha b^\sharp_\alpha(q')=-\lambda \delta_{n'n} \\
+\therefore \quad &\sum_\alpha c^\alpha b^\sharp_\alpha(p')_{m'm}= \sum_\alpha c^\alpha b^\sharp_\alpha(q')=0 \quad \because トレースレス条件
+\end{align*}
+これより，\uwave{全ての}質量殻上の運動量$k$について$ \sum_\alpha c^\alpha b^\sharp_\alpha(k)=0$が成立すると言いたいが，ここまででは，ほぼ全ての質量殻上の$p'$について，$q'=p+q-p'$も質量殻上にあるなら$\sum_\alpha c^\alpha b^\sharp_\alpha(p')=0$であることを示したに過ぎない($q'$についても同様)．この制限を回避するには，コールマン・マンデューラのトリックを使う．
+
+\vskip\baselineskip
+
+質量殻上の$p,q(-p^2=m_p^2,-q^2=m_q^2)$からスタートする．最初に$p,q\to p'(=p+q-q'),q'$の散乱過程を考える．これらが弾性散乱であるためには$-(p+q-q')^2=m_p^2,-q'^2=m_q^2$が要請される．もし$\sum_\alpha c^\alpha b^\sharp_\alpha(p,q)=0$ならば，(24.B.18)と(24.B.16)より
+\begin{align*}
+\sum_\alpha c^\alpha b^\sharp_\alpha(p,q)=&0 \Leftrightarrow \sum_\alpha c^\alpha b^\sharp_\alpha(p')_{m'm}= \sum_\alpha c^\alpha b^\sharp_\alpha(q')=0 \\
+\sum_\alpha c^\alpha b^\sharp_\alpha(p,q')=&\left(\sum_\alpha c^\alpha b^\sharp_\alpha(p)\right)_{m'm}\delta_{n'n}+\delta_{m'm}\left(\sum_\alpha c^\alpha b_\alpha^\sharp(q')\right)_{n'n} \\
+=&0 
+\end{align*}
+が示せる．次に$p,q'\to k,(p+q'-k)$の弾性散乱過程$(-k^2=m_p^2,-(p+q'-k)^2=m_q^2)$を考えると，(24.B.15)から
+\begin{align*}
+b^\sharp_\alpha(k,l)S(k,l;p,q')=&S(k,l;p,q')b^\sharp_\alpha(p,q') \\
+b^\sharp_\alpha(k,p+q'-k)=&S(k,l;p,q')b^\sharp_\alpha(p,q')S^{-1}(k,l;p,q') \\
+\sum_\alpha c^\alpha b_\alpha^\sharp (k,p+q'-k)=&S(k,l;p,q')\left(\sum_\alpha c^\alpha b^\sharp_\alpha(p,q')\right) S^{-1}(k,l;p,q') \\
+=&0
+\end{align*}
+が得られる．これより，$p+q'-k$もまた質量殻上にあるような，ほぼ全ての4元運動量$k$について
+\begin{align*}
+\sum_\alpha c^\alpha b^\sharp_\alpha(k)=0
+\end{align*}
+が成立する．さて，一つ目の弾性散乱過程の質量殻条件$-(p+q-q')^2=m_p^2,-q'^2=m_q^2$により$q'$の取り得る自由度が2つ削減される．二つ目の弾性散乱過程の質量殻条件$-k^2=m^2_p$により$k$の取り得る自由度が1つ削減される．しかし，条件$-(p+q'-k)^2=m_q^2)$は$k$の自由度を削減しない．なぜならば，$q'$の自由度が2つ残っており，これだけの自由度があればどのような$k$を自由に選んでもこの条件式を満たすように$q'$を調整することが十分にできるからだ．(ただし$\mathbf{p},\mathbf{q}$を十分大きくとる必要がある．$\mathbf{p,q}\approx 0$だと一つ目の条件式での$q'$の取り得る範囲が非常に狭くなってしまい，与えられた$k$に対してうまく$q'$を選ぶことができなくなってしまう．)これにより$k$には自由度3が残り，空間成分$\mathbf{k}$を自由に選ぶだけの自由度が残る．\par
+$\Rightarrow$ よって，まとめると，ある固定された質量殻上の4元運動量$p,q$について，$\sum_\alpha c^\alpha b^\sharp_\alpha(p,q)=0$ならば，\uwave{ほぼ全ての}質量殻上の4元運動量$k$について$\sum_\alpha c^\alpha b^\sharp_\alpha(k)=0$である！\par
+もしある特定の質量殻上の4元運動量$k_0$について$\sum_\alpha c^\alpha b^\sharp_\alpha(k_0)\neq 0$となると仮定する．ここで，4元運動量$k_0,k$の粒子が$k',k''$に弾性散乱する過程$k_0,k\to k',k''$を考えると，$\sum_\alpha c^\alpha B_\alpha^\sharp$によって生成される対称性により
+\begin{align*}
+\sum_{\alpha}c^\alpha b^\sharp_\alpha(k',k'')S(k',k'';k_0,k) =S(k',k'';k_0,k) \sum_\alpha c^\alpha b^\sharp_\alpha(k_0,k)
+\end{align*}
+となる．一方，ここで$p,q\to k',k''$の弾性散乱を考えると
+\begin{align*}
+\sum_{\alpha}c^\alpha b^\sharp_\alpha(k',k'')S(k',k'';p,q) =S(k',k'';p,q) \sum_\alpha c^\alpha b^\sharp_\alpha(p,q)
+\end{align*}
+初期値$p,q$が$\sum_\alpha c^\alpha b^\sharp_\alpha(p,q)=0$を満たすことより，質量殻上にあるほぼ全ての$k',k''$について，ここから$\sum_{\alpha}c^\alpha b^\sharp_\alpha(k',k'')=0$を得る．上式左辺$\sum_{\alpha}c^\alpha b^\sharp_\alpha(k',k'')S(k',k'';k_0,k)$がゼロであるから右辺$S(k',k'';k_0,k) \sum_\alpha c^\alpha b^\sharp_\alpha(k_0,k)$もゼロである必要があるが，仮定より$S(k',k'';k_0,k)=0$が要請され，このような過程$k_0,k\to k',k''$は禁止される．ほぼ全ての$k,k',k''$についてこのような過程が禁止されるということは，散乱振幅の解析性についてのここでの仮定に矛盾する．(ほぼどのような$k,k',k''$をとってきても仮定が禁止されるということは，ほぼ全てのエネルギーで反応をしないということになる．よって仮定2に反する．)\par
+$\Rightarrow$したがって，ある固定された質量殻上の4元運動量$p,q$について，$\sum_\alpha c^\alpha b^\sharp_\alpha(p,q)=0$ならば，\uwave{全ての}質量殻上の4元運動量$k$について$\sum_\alpha c^\alpha b^\sharp_\alpha(k)=0$である！\par
+したがって，$\sum_{\alpha}c^\alpha B_\alpha^\sharp=0$である．p19の議論と同様にして，$B^\sharp_\alpha$を$b^\sharp_\alpha(p)$に移す写像は同型であることがわかる．当然$B_\alpha$と$B^\sharp_\alpha$は同型であるから，$B_\alpha$を$b^\sharp_\alpha(p)$に移す写像は同型となる．\par
+これと，$b^\sharp_\alpha(p,q)$は（24.B.16）より独立成分は$N(\sqrt{-p^\mu p_\mu})^2+N(\sqrt{-q^\mu q_\mu})^2$を超えない．よって生成元$\{b_\alpha(p,q)\}$は有限個で，対称性生成子$B_\alpha$はこれと同型なので$B_\alpha$の独立な数も高々有限個だ．($N(\sqrt{-p^\mu p_\mu})N(\sqrt{-q^\mu q_\mu})$個を超えない理由はわからなかった．少なすぎる気がする．)コールマン・マンデューラの定理の証明に必要な最初の仮定の中に，対称性代数が有限次元であることを独立に入れる必要がなかった理由がこれだ．\par
+15.2節の定理に従うと，固定された$p,q$についての$b^\sharp_\alpha(p,q)$のような有限エルミート行列のリー代数は高々，コンパクトな半単純リー代数といくつかの$U(1)$代数の直和だ．このリー代数は対称性生成子$B^\sharp_\alpha$のリー代数と同型であることはすでに見たので，$B^\sharp_\alpha$もまた，高々，コンパクトな半単純リー代数といくつかの$U(1)$代数の直和を張るだけだとわかる．
+
+\vskip\baselineskip
+
+まず最初に$U(1)$リー代数の可能性を消そう．\par
+任意の一対の質量殻上の運動量$p,q$について，$p,q$を不変に保つようなローレンツ生成子$J$が存在する．もし$p,q$が光円錐上$p^2=q^2=0$にあり，平行ならば，
+\begin{align*}
+(p+q)^2=&p^2+q^2+2p\cdot q \\
+=&2(-E_pE_q +|\mathbf{p}||\mathbf{q}|)=0 \quad \because E_p=|\mathbf{p}|, E_q=|\mathbf{q}|
+\end{align*}
+である．このときは$J$を$\mathbf{p}$と$\mathbf{q}$の共通の方向の周りの回転にとる．例えば$\mathbf{p,q}$がともに$z$軸方向を向いていれば，$z$軸まわりの回転ととれば$p,q$は変化しない．このときの生成子は$J_3=J_{12}$となる．もしそうでなければ，$p+q$は時間的
+\begin{align*}
+(p+q)^2=&p^2+q^2+2p\cdot q  \\
+=&-m_p^2-m_q^2 +2(-E_pE_q +|\mathbf{p}||\mathbf{q}|\cos \theta) <0 \quad \because E_p=\sqrt{m^2+\mathbf{p}^2 }> |\mathbf{p}|
+\end{align*}
+になっているはずである．したがって連続ローレンツ変換が存在(空間的な場合は存在しないのだった)し，$\mathbf{p}=-\mathbf{q}$となる重心系に移行して，$\mathbf{p}$と$\mathbf{q}$の共通の方向の周りの回転をし，元の系に戻るようなローレンツ変換を考えればいい．このときのローレンツ変換の生成子が\par
+2粒子状態の基底を選んで$J$を対角化することができるから，
+\begin{align*}
+J\ket{pm,qn}=\sigma(m,n)\ket{pm,qn}
+\end{align*}
+とできる．さて，$P_\mu$は全ての$B^\sharp_\alpha$と可換((24.B.10)参照)で，$[J,P_\mu]$は$P_\mu$の成分の線形結合((2.4.13)参照)だから，$P_\mu$は全ての$[J,B^\sharp_\alpha]$と可換なことがわかる．
+\begin{align*}
+0=&[P_\mu[J,B^\sharp_\alpha]]+[J,[B^\sharp_\alpha,P_\mu]]+[B^\sharp_\alpha,[P_\mu,J]] \quad \because ヤコビ恒等式\\
+=&[P_\mu[J,B^\sharp_\alpha]]
+\end{align*}
+$P_\mu$と可換な対称性生成子全体を$B_\alpha$とするのだったから，対称性生成子$[J,B_\alpha^\sharp]$は$B_\alpha$の線形結合でなければならない．それは定義により，$P_\mu$と果敢な対称性生成子の完全系をなす．より詳しく述べると，対称性生成子の交換子を表現する行列は必ずトレースがゼロ
+\begin{align*}
+\mathrm{tr}[J,B^\sharp_\alpha]=&\int d^4p \sum_{m}\bra{pm}[J,B_\alpha^\sharp]\ket{pm} \\
+=&\int d^4p d^4q \sum_{mn}\left(\bra{pm}J\ket{qn}\bra{qn}B_\alpha^\sharp \ket{pm} -\bra{pm}B^\sharp_\alpha \ket{qn}\bra{qn}J \ket{pm}\right)=0
+\end{align*}
+なので，トレースレス行列$b^\sharp_\beta$で表現される生成子$B^\sharp_\beta$の線形結合でなければならない．
+\begin{align*}
+[J,B^\sharp_\alpha]=\sum_\beta c^\beta_\alpha B^\sharp_\beta
+\end{align*}
+しかし，$B^\sharp_\beta$の代数の中の任意の$U(1)$生成子$B_i^\sharp$(エルミートとする)は，可換代数であるから全ての$B^\sharp_\beta$と可換でなければならない．特に$[J,B^\sharp_i]$と可換でなければならない．
+\begin{align*}
+[B_i^\sharp,[J,B^\sharp_i]]=[B_i^\sharp,\sum_\beta c^\beta_iB_\beta^\sharp]=0
+\end{align*}
+$J$が対角的になる基底$\ket{pm,qn}$で，この2重交換子の2粒子状態での期待値をとると，任意の$m,n$について以下を得る．
+\begin{align*}
+0=&\bra{pm,qn}[B_i^\sharp,[J,B^\sharp_i]] \ket{pm,qn} \\
+=&\bra{pm,qn}(2B_i^\sharp J B_i^\sharp -J B^\sharp_i B^\sharp_i -B^\sharp_i B^\sharp_i J) \ket{pm,qn} \\
+\bra{pm,qn} B_i^\sharp J B_i^\sharp \ket{pm,qn}=&\sum_{m',n'}\bra{pm,qn} B_i^\sharp J \ket{pm',qn'}\left(b^\sharp_i(p,q)\right)_{m'n',mn} \\
+=&\sum_{m',n'}\sigma(m',n')\bra{pm,qn} B_i^\sharp \ket{pm',qn'}\left(b^\sharp_i(p,q)\right)_{m'n',mn} \\
+=&\sum_{m',n'}\sigma(m',n')\left|\left(b^\sharp_i(p,q)\right)_{m'n',mn}\right|^2 \\
+\bra{pm,qn}J B^\sharp_i B^\sharp_i\ket{pm,qn}=&\bra{pm,qn}B^\sharp_i B^\sharp_i J\ket{pm,qn} \\
+=&\sigma(m,n)\bra{pm,qn}B^\sharp_i B^\sharp_i \ket{pm,qn} \\
+=&\sigma(m,n)\sum_{m',n'}\left|\left(b^\sharp_i(p,q)\right)_{m'n',mn}\right|^2 \\
+\therefore \quad 0=&\sum_{m',n'}\Bigl(\sigma(m',n')-\sigma(m,n)\Bigr)\left|\left(b^\sharp_i(p,q)\right)_{m'n',mn}\right|^2
+\end{align*}
+(ここで$J^\dagger=J$を用いた．)本文の通りの論理展開をしようとすると，$\sigma(m',n')\neq \sigma(m,n)$でなければ$\left(b^\sharp_i(p,q)\right)_{m'n',mn}=0$である必要がある…となるが，少し考えてみれば，$\sigma(1,1)=0,\sigma(1,2)=3,\sigma(2,1)=3,\sigma(2,2)=6$と設定し，$\left(b^\sharp_i(p,q)\right)_{m'n',12}$を全て1と設定してみれば，$m=1,n=2$の要素において
+\begin{align*}
+&\sum_{m',n'}\Bigl(\sigma(m',n')-\sigma(1,2)\Bigr)\left|\left(b^\sharp_i(p,q)\right)_{m'n',12}\right|^2 \\
+=&(0-3)+(3-3)+(3-3)+(6-3)=0
+\end{align*}
+となり等式が成り立っていることがわかる．この場合$\sigma(1.1),\sigma(2,2)$が$\sigma(1,2)$と異なっているにもかかわらず全ての項で$\left(b^\sharp_i(p,q)\right)_{m'n',12}\neq 0$であるから，これは本文の主張の反例となってしまう．別の証明を考える必要がある．\par
+ある固定された軸周りの回転変換はローレンツ変換の$SO(2)$部分群である．$SO(2)$はコンパクト群であり，その表現は整数スピン(角運動量)でラベル付けされる．したがって，$U(1)$代数の生成子がローレンツ変換を受けるならば，$SO(2)$の既約表現の成分の線形結合で書くことができるはずだ．
+\begin{align*}
+B^\sharp_i =&\sum_k B^\sharp_{ik} \\
+B^\sharp_{ik} \to& e^{i\theta J} B^\sharp_{ik}e^{-i\theta J}=e^{ik\theta} B^\sharp_{ik}
+\end{align*}
+すると
+\begin{align*}
+[J,B^\sharp_{ik}]=kB^\sharp_{ik}
+\end{align*}
+を得る．(24.B.20)と合わせるとこれは昇降演算子と同じで
+\begin{align*}
+JB^\sharp_{ik}=&kB^\sharp_{ik}+B^\sharp_{ik}J \\
+J[B^\sharp_{ik}\ket{pm,qn}]=&(k+\sigma(m,n))[B^\sharp_{ik}\ket{pm,qn}]
+\end{align*}
+となる．
+\begin{align*}
+\bra{p'm',q'n'}JB^\sharp_{ik}\ket{pm,qn}=&(k+\sigma(m,n))\bra{p'm',q'n'}B^\sharp_{ik}\ket{pm,qn} \\
+=&(k+\sigma(m,n))\left(b^\sharp_{ik}(p,q)\right)_{m'n',mn}\delta^4(p-p')\delta^4(q-q') \\
+=\sigma(m',n')\bra{p'm',q'n'}B^\sharp_{ik}\ket{pm,qn}=&\sigma(m',n')\left(b^\sharp_{ik}(p,q)\right)_{m'n',mn}\delta^4(p-p')\delta^4(q-q')
+\end{align*}
+であるから，$k=\sigma(m',n')-\sigma(m,n)$でなければ$\left(b^\sharp_{ik}(p,q)\right)_{m'n',mn}=0$がわかる．(24.B.21)の導出の$B^\sharp_i$を$B^\sharp_{ik}$に置き換えてもう一度条件式を出すと
+\begin{align*}
+0=&\sum_{m',n'}\Bigl(\sigma(m',n')-\sigma(m,n)\Bigr)\left|\left(b^\sharp_{ik}(p,q)\right)_{m'n',mn}\right|^2 \\
+=&k\sum_{m',n'}\left|\left(b^\sharp_{ik}(p,q)\right)_{m'n',mn}\right|^2
+\end{align*}
+となるから，$k=0$でなければ左辺の和は正定値であり，矛盾が生じる．したがって$k=0$以外の$\left(b^\sharp_{ik}(p,q)\right)_{m'n',mn}$はゼロであり，$\left(b^\sharp_{ik}(p,q)\right)_{m'n',mn}$は$B^\sharp_{ik}$と同型だから，$k=0$以外の$B^\sharp_{ik}$は存在しない．これで$[J,B^\sharp_{i}]=[J,B^\sharp_{i0}]=0B^\sharp_{i0}=0$となり可換であることが示される．以上の議論は最初の$p,q$の選び方に任意性があり$p+q$が時間的でさえあればいいので，他の軸まわりのローレンツ変換に対しても同じ議論が適用できる．これですべてのローレンツ変換と可換であることが示される．
+\begin{align*}
+[B^\sharp_{i},J^{\mu\nu}]=0
+\end{align*}
+これらが2.5節でブーストと呼んだものと可換だという事実は，$\left(b^\sharp_i(p)\right)_{n'n}$が3元運動量と独立であることを意味し，さらにこれらが回転と可換であることは$\left(b^\sharp_i(p)\right)_{n'n}$がスピンには単位行列として作用することを意味する．
+\begin{align*}
+B^\sharp_i\ket{p\sigma n}=&\sum_{n'}\left(b^\sharp_i(p)\right)_{n'n}\delta_{\sigma'\sigma}\ket{p \sigma' n'} \\
+=&\sum_{n'} (b^\sharp_i )_{n'n}\ket{p\sigma n'}
+\end{align*}
+(スピンに対しては単位行列として作用することを陽に書くために$\sigma$だけ$n$から分離して書いた．)したがって，これらの生成子は通常の内部対称性(3.3.29)の生成子だ！
+
+\vskip\baselineskip
+
+これまでの議論で残ったのは，半単純コンパクト・リー代数$B^\sharp_\alpha$だ．しかしこれについては既に24.1節で行っており，リー代数の半単純でコンパクトな部分代数生成子はローレンツ変換と可換であり，$U(1)$生成子のときに示したように，ここからそれらも内部対称性の生成子であることが示せるのだった．(単単純コンパクト性を用いて示しているから，$U(1)$のときは例外的にこの方法は使えなかった．)\par
+以上より，$P_\mu$と可換な対称性生成子$B_\alpha$は内部対称性の生成子$B_A,B^\sharp_i$か，$P_\mu$自身の線形結合であることが示せた！
+
+\vskip\baselineskip
+
+次に，運動量演算子と可換\uwave{ではない}対称性生成子が存在する可能性を調べなければならない．一般の対称性生成子$A_\alpha$が4元運動量$p$を持つ1粒子状態$\ket{p,n}$に及ぼす作用は
+\begin{align*}
+A_\alpha \ket{p,n}=&\sum_{n'} \int d^4p' \ket{p',n'}\bra{p',n'}A_\alpha \ket{p,n} \\
+=&\sum_{n'}\int d^4p' \Bigl(\mathcal{A}_\alpha(p',p)\Bigr)_{n'n} \ket{p',n'}
+\end{align*}
+となっている．ここで，$n,n'$は以前と同様にスピンの$z$成分と粒子の種類を意味する．核$\mc{A}_\alpha(p',p)$は$p,p'$が共に質量殻上になければゼロとする．これから，まず$\mc{A}_\alpha(p',p)$が任意の$p'\neq p$についてゼロとなることを示す．\par
+この目的のために，もし$A_\alpha$が対称性生成子ならば
+\begin{align*}
+A^f_\alpha \equiv \int d^4x \exp(iP\cdot x)A_\alpha \exp(-iP\cdot x) f(x)
+\end{align*}
+も対称性生成子になることに注意する．ここで$P_\mu$は4元運動量演算子で，$f(x)$は自由に選べる関数だ．実際，1粒子状態に働くとこれは
+\begin{align*}
+A^f_\alpha \ket{p,n} =& \int d^4x \exp(iP\cdot x)A_\alpha \exp(-iP\cdot x) f(x)\ket{p,n} \\
+=& \int d^4x \exp(iP\cdot x)A_\alpha  \ket{p,n} \exp(-ip\cdot x)f(x) \\
+=&\int d^4x \exp(iP\cdot x)\sum_{n'}\int d^4p' \Bigl(\mathcal{A}_\alpha(p',p)\Bigr)_{n'n} \ket{p',n'} \exp(-ip\cdot x)f(x) \\
+=&\sum_{n'} \int d^4x \int d^4p' \Bigl(\mathcal{A}_\alpha(p',p)\Bigr)_{n'n} \ket{p',n'} \exp(ip' \cdot x)\exp(-ip\cdot x)f(x) \\
+=&\sum_{n'} \int d^4p' \int d^4x \exp(i(p'-p) \cdot x)f(x)  \Bigl(\mathcal{A}_\alpha(p',p)\Bigr)_{n'n} \ket{p',n'} \\
+=&\sum_{n'} \int d^4p' \tilde{f}(p'-p)  \Bigl(\mathcal{A}_\alpha(p',p)\Bigr)_{n'n} \ket{p',n'}
+\end{align*}
+これは(24.B.22)と同じ形になっているから，実際に対称性生成子だ．ここで$\tilde{f}$はフーリエ変換
+\begin{align*}
+\tilde{f}(k)\equiv \int d^4x \exp(ik \cdot x)f(x)
+\end{align*}
+だ．ここで，どちらもある質量殻上にある一対の4元運動量$p,p+\Delta$が$\Delta\neq0$であり，$\mc{A}_\alpha(p+\Delta ,p)\neq 0$であるとする．これに対して$p'+q'=p+q$を満たす一般の質量殻上の4元運動量$q,p',q'$を考えると，$q+\Delta,p'+\Delta ,q'+\Delta $のいずれも一般には質量殻上にない．ここで，もし$\tilde{f}(k)$が$\Delta$の近傍の十分小さい領域のみ値をとり領域外ではゼロになるような関数に選ぶと，4元運動量$p$の1粒子状態は消滅させない
+\begin{align*}
+A^f_{\alpha}\ket{p,n}=&\sum_{n'} \int d^4p' \tilde{f}(p'-p)  \Bigl(\mathcal{A}_\alpha(p',p)\Bigr)_{n'n} \ket{p',n'} \\
+\approx &\sum_{n'} \tilde{f}(\Delta)  \Bigl(\mathcal{A}_\alpha(p+\Delta ,p)\Bigr)_{n'n} \ket{p+\Delta,n'}\neq 0
+\end{align*}
+が，$q,p',q'$の1粒子状態全てを消滅させる．($\mc{A}_\alpha$の引数の4元運動量が質量殻外ならばゼロになるから)
+\begin{align*}
+A^f_{\alpha}\ket{q,n}\approx &\sum_{n'} \tilde{f}(\Delta)  \Bigl(\mathcal{A}_\alpha(q+\Delta ,q)\Bigr)_{n'n} \ket{q+\Delta,n'}=0 \\
+A^f_{\alpha}\ket{p',n}\approx &\sum_{n'} \tilde{f}(\Delta)  \Bigl(\mathcal{A}_\alpha(p'+\Delta ,p')\Bigr)_{n'n} \ket{p'+\Delta,n'}=0 \\
+A^f_{\alpha}\ket{q',n}\approx &\sum_{n'} \tilde{f}(\Delta)  \Bigl(\mathcal{A}_\alpha(q'+\Delta ,q')\Bigr)_{n'n} \ket{q'+\Delta,n'}=0
+\end{align*}
+したがって，そのような対称性により
+\begin{align*}
+\bra{p'm',q'n'}S A^f_\alpha \ket{pm,qn}=&\sum_{m''} \tilde{f}(\Delta)  \Bigl(\mathcal{A}_\alpha(p+\Delta ,p)\Bigr)_{m''m} \bra{p'm',q'n'}S \ket{(p+\Delta)m'',qn} \\
+=\bra{p'm',q'n'}A^f_\alpha S \ket{pm,qn}=& 0 \\
+\therefore \quad \bra{p'm',q'n'}S \ket{(p+\Delta)m'',qn}=&0
+\end{align*}
+となり，$(p+\Delta ),q,p',q'$の全てが質量殻上にあるにもかかわらず散乱$(p+\Delta),q \to p',q'$の振幅がゼロになる．これはほぼ全てのエネルギーと散乱角で何らかの散乱が起きることを許すという仮定2,3に矛盾する．よって$\Delta\neq0$ならば$\mathcal{A}_\alpha(p+\Delta ,p)=0$が必要となる．したがってともに質量殻上の$p',p$について$p'\neq p$ならば$\mathcal{A}_\alpha(p' ,p)$がゼロになることが示せた．\par
+もし$A_\alpha$が$P_\mu$と交換するとすれば，
+\begin{align*}
+A_\alpha^f=\left(\int d^4x f(x)\right) A_\alpha
+\end{align*}
+となり単に$A_\alpha$にc数をかけたものとなり，上の矛盾は起きない．\par
+この結果は，対称性生成子$A_\alpha$が$P_\mu$と\uwave{可換でなければならない}ということは意味しない．これは核$\mc{A}_\alpha(p',p)$が$\delta^4(p'-p)$自身に比例する項に加えて$\delta^4(p'-p)$の微分に比例する項も含むことがあるからだ．例えば
+\begin{align*}
+\Bigl(\mathcal{A}_\alpha(p' ,p)\Bigr)_{n'n}=\delta^4(p'-p)\left(a^0_\alpha(p',p) \right)_{n',n}
+\end{align*}
+という形をしているとすると
+\begin{align*}
+A_\alpha^f\ket{p,n}=&\sum_{n'} \int d^4p' \tilde{f}(p'-p)  \Bigl(\mathcal{A}_\alpha(p',p)\Bigr)_{n'n} \ket{p',n'} \\
+=&\sum_{n'} \int d^4p' \tilde{f}(p'-p)  \delta^4(p'-p)\left(a^0_\alpha(p',p) \right)_{n',n} \ket{p',n'} \\
+=&\sum_{n'} \tilde{f}(0) \left(a^0_\alpha(p) \right)_{n',n} \ket{p,n'}
+\end{align*}
+$\tilde{f}(0)$は，それが作用する状態には無関係だ．したがって$A^f_\alpha$が4元運動量$p$の状態を消滅させない場合，$q,p',q'$の状態も消滅させない．この場合，$A_\alpha$が$P_\mu$と可換でないと仮定しなくとも質量殻上のほとんど全ての運動量に対して散乱過程$p,q\to p',q'$が可能になる．1階微分までの項を入れてみると
+\begin{align*}
+\Bigl(\mathcal{A}_\alpha(p' ,p)\Bigr)_{n'n}=&\left(a^0_\alpha(p',p) \right)_{n',n}\delta^4(p'-p)+\left(a^1_\alpha(p',p)\right)^{\mu_1}_{n'n}\frac{\partial}{\partial p^{\mu_1}}\delta^4(p'-p) \\
+A^f_\alpha \ket{p,n}=&\sum_{n'} \tilde{f}(0) \left(a^0_\alpha(p) \right)_{n',n} \ket{p,n'} \\
+&+\sum_{n'} \int d^4p' \tilde{f}(p'-p)  \left(a^1_\alpha(p',p)\right)^{\mu_1}_{n'n}\frac{\partial}{\partial p^{\mu_1}}\delta^4(p'-p) \ket{p',n'} \\
+=&\sum_{n'} \tilde{f}(0) \left(a^0_\alpha(p) \right)_{n',n} \ket{p,n'} \\
+&-\sum_{n'}\frac{\partial}{\partial p^{\mu_1}} \left(\tilde{f}(p'-p)  \left(a^1_\alpha(p',p)\right)^{\mu_1}_{n'n}\ket{p',n'}\right)_{p'=p} \\
+=&\sum_{n'} \tilde{f}(0) \left(a^0_\alpha(p) \right)_{n',n} \ket{p,n'} \\
+&-\sum_{n'} \left(\frac{\partial \tilde{f}}{\partial p^{\mu_1}}\right)(0) \left(a^1_\alpha(p) \right)^{\mu_1}_{n',n} \ket{p,n'}-\sum_{n'}\tilde{f}(0)\left(a^1_\alpha(p)\right)^{\mu_1}_{n'n}\frac{\partial}{\partial p^{\mu_1}}\ket{p,n'} \\
+& - \sum_{n'}\tilde{f}(0)\left(\left(\frac{\partial a^1_\alpha}{\partial p^{\mu_1}}\right)(p,p)\right)^{\mu_1}_{n'n}\ket{p,n'}
+\end{align*}
+ここで
+\begin{align*}
+\left(a'^0_\alpha(p)\right)_{n'n}=&\tilde{f}(0) \left(a^0_\alpha(p) \right)_{n',n} -\left(\frac{\partial \tilde{f}}{\partial p^{\mu_1}}\right)(0) \left(a^1_\alpha(p) \right)^{\mu_1}_{n',n}-\tilde{f}(0)\left(\left(\frac{\partial a^1_\alpha}{\partial p^{\mu_1}}\right)(p,p)\right)^{\mu_1}_{n'n} \\
+\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}=&-\tilde{f}(0)\left(a^1_\alpha(p)\right)^{\mu_1}_{n'n}
+\end{align*}
+と定義すれば
+\begin{align*}
+A^f_\alpha \ket{p,n}=\sum_{n'}\left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}\frac{\partial}{\partial p^{\mu_1}}\right)\ket{p,n'}
+\end{align*}
+となる．$\delta^4(p'-p)$の$D_\alpha$階微分までの項が入っていたとしても，同様の手順を踏むことで
+\begin{align*}
+A^f_\alpha \ket{p,n}=\sum_{n'}\left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}\frac{\partial}{\partial p^{\mu_1}}+\cdots +\left(a'^{D_\alpha}_\alpha(p)\right)_{n'n}^{\mu_1 \mu_2\cdots \mu_{D_\alpha}} \frac{\partial^{D_\alpha}}{\partial p^{\mu_1}\cdots \partial p^{\mu_{D_\alpha}}}\right)\ket{p,n'}
+\end{align*}
+という形に書くことができる．同様に$A_\alpha$でも同じ手順を踏めば，例えば1階微分までを含んでいる場合
+\begin{align*}
+\Bigl(\mathcal{A}_\alpha(p' ,p)\Bigr)_{n'n}=&\left(a^0_\alpha(p',p) \right)_{n',n}\delta^4(p'-p)+\left(a^1_\alpha(p',p)\right)^{\mu_1}_{n'n}\frac{\partial}{\partial p^{\mu_1}}\delta^4(p'-p) \\
+A_\alpha \ket{p,n}=&\sum_{n'}\int d^4p' \Bigl(\mathcal{A}_\alpha(p',p)\Bigr)_{n'n} \ket{p',n'} \\
+=&\sum_{n'} \left(a^0_\alpha(p,p) \right)_{n',n} \ket{p',n'} \\
+&-\sum_{n'}\left(\left(\frac{\partial a^1_\alpha}{\partial p^{\mu_1}}\right)(p,p)\right)^{\mu_1}_{n'n}\ket{p,n'}-\sum_{n'}\left(a^1_\alpha(p,p)\right)^{\mu_1}_{n'n}\frac{\partial}{\partial p^{\mu_1}}\ket{p,n'}
+\end{align*}
+なので，
+\begin{align*}
+\left(a'^0_\alpha(p) \right)_{n'n}=&\left(a^0_\alpha(p,p) \right)_{n',n}-\left(\left(\frac{\partial a^1_\alpha}{\partial p^{\mu_1}}\right)(p,p)\right)^{\mu_1}_{n'n} \\
+\left(a'^1_\alpha(p)\right)^{\mu_1}_{n'n}=&-\left(a^1_\alpha(p,p)\right)^{\mu_1}_{n'n}
+\end{align*}
+と定義すれば
+\begin{align*}
+A_\alpha \ket{p,n}=\sum_{n'}\left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}\frac{\partial}{\partial p^{\mu_1}}\right)\ket{p,n'}
+\end{align*}
+となる．$D_\alpha$階微分までの項が入っていても
+\begin{align*}
+A_\alpha \ket{p,n}=\sum_{n'}\left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}\frac{\partial}{\partial p^{\mu_1}}+\cdots +\left(a'^{D_\alpha}_\alpha(p)\right)_{n'n}^{\mu_1 \mu_2\cdots \mu_{D_\alpha}} \frac{\partial^{D_\alpha}}{\partial p^{\mu_1}\cdots \partial p^{\mu_{D_\alpha}}}\right)\ket{p,n'}
+\end{align*}
+という形に書くことができる．(記号を乱用しているけど，$A^f_\alpha$での係数$a'_\alpha(p)$と今回の$A_\alpha$での係数$a'_\alpha(p)$は違う．同じ手順をしたら同じ形に書けるというだけ．)この可能性を取り扱うために，コールマン・マンデューラは核$\mc{A}_\alpha(p',p)$が\textbf{ディストリビューション}(超関数)だという「汚い技術的仮定」をした．これは，それぞれが$\delta^4(p'-p)$の高々有限な$D_\alpha$階微分までしか含まない，ということだ．上の変形を用いて言い換えると，それぞれの対称性生成子$A_\alpha$は1粒子状態に対して微分$\partial /\partial p^\mu$の$D_\alpha$次の多項式として働き，その行列係数$a'_\alpha$はこの段階では運動量とスピンに依存してよい．運動量演算子と可換な対称性生成子についての今までの結果を適用するために，コールマン・マンデューラは運動量演算子の$A_\alpha$との$D_\alpha$重交換子
+\begin{align*}
+B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha} \equiv \left[P^{\mu_1},[P^{\mu_2},\cdots ,[P^{\mu_{D_\alpha}},A_\alpha]\cdots ]\right]
+\end{align*}
+を考えた．$B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}$と$P_\mu$の交換子を運動量$p,p'$の状態で挟んだ行列要素は
+\begin{align*}
+&\bra{p',n'} [P^\mu,B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}]\ket{p,n} \\
+=&\bra{p',n'}\left(P^\mu B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}-B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}P^\mu \right)\ket{p,n} \\
+=&(p'-p)^\mu \bra{p',n'}B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}\ket{p,n} \\
+=&(p'-p)^\mu \bra{p',n'}\left[P^{\mu_1},[P^{\mu_2},\cdots ,[P^{\mu_{D_\alpha}},A_\alpha]\cdots ]\right] \ket{p,n} \\
+=&(p'-p)^{\mu} (p'-p)^{\mu_1}\cdots (p'-p)^{\mu_{D_\alpha}} \bra{p',n'}A_\alpha \ket{p,n} \\
+=&(p'-p)^{\mu} (p'-p)^{\mu_1}\cdots (p'-p)^{\mu_{D_\alpha}} \\
+&\quad \times\sum_{n''}\left(\left(a'^0_\alpha(p)\right)_{n''n} +\left(a'^1_\alpha(p)\right)_{n''n}^{\nu_1}\frac{\partial}{\partial p^{\nu_1}}+\cdots +\left(a'^{D_\alpha}_\alpha(p)\right)_{n''n}^{\nu_1 \nu_2\cdots \nu_{D_\alpha}} \frac{\partial^{D_\alpha}}{\partial p^{\nu_1}\cdots \partial p^{\nu_{D_\alpha}}}\right)\braket{p',n' |p,n''} \\
+=&(p'-p)^{\mu} (p'-p)^{\mu_1}\cdots (p'-p)^{\mu_{D_\alpha}} \\
+&\quad \times \left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\nu_1}\frac{\partial}{\partial p^{\nu_1}}+\cdots +\left(a'^{D_\alpha}_\alpha(p)\right)_{n'n}^{\nu_1 \nu_2\cdots \nu_{D_\alpha}} \frac{\partial^{D_\alpha}}{\partial p^{\nu_1}\cdots \partial p^{\nu_{D_\alpha}}}\right) \delta^3 (\mathbf{p}'-\mathbf{p})
+\end{align*}
+(4個目の等式は一つずつ交換子を外して運動量演算子を運動量に変えていけばいい．$D_\alpha=2,3$くらいで実験すればすぐ法則がわかる．最後は(2.5.19)$\braket{p',n'|p,n}=\delta_{n'n}\delta^3(\mathbf{p}'-\mathbf{p})$を用いた．)$(p'-p)$について$D_\alpha +1$次になっており，デルタ関数にかかっている微分の数が最大で$D_\alpha$次であるから，デルタ関数の微分公式に従って変形しても$(p'-p)$を微分しきることはできず必ず$(p'-p)\delta^3(p'-p)$の形が残る．$x\delta(x)=0$になるのと同じ理屈で，これはゼロになる．$p',p$は任意であったから，結局
+\begin{align*}
+ [P^\mu,B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}]=0
+\end{align*}
+が得られる．生成子$B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}$は運動量演算子$P_\mu$と可換であることがわかったから，ここまでの結果(24.B.11)を適用することができて，これは1粒子状態に以下の行列として作用する．
+\begin{align*}
+B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha} \ket{p,n}=&\sum_{n'}\Bigl(b^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}(p) \Bigr)_{n'n} \ket{p,n'} \\
+b^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}(p)=&b^{\sharp \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}+a^{\mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha} p_\mu 1
+\end{align*}
+ここで$b^{\sharp \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}(p)$は運動量に依存しないトレースレスのエルミート行列で，通常の内部対称性代数を生成する．$a^{\mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}$は運動量に依存しない数定数である．$b^{\sharp \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}(p)$と$a^{\mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}$はどちらも$\mu_1,\cdots \mu_{D_\alpha}$について対称だ．(上の変形を見れば明らか．)\par
+また$A_\alpha$は$P_\mu$と可換ではない，つまり一般の可能性の場合を考えると
+\begin{align*}
+A_\alpha P_\mu \ket{p,n}=&\sum_{n'}p_\mu \left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}\frac{\partial}{\partial p^{\mu_1}}+\cdots +\left(a'^{D_\alpha}_\alpha(p)\right)_{n'n}^{\mu_1 \mu_2\cdots \mu_{D_\alpha}} \frac{\partial^{D_\alpha}}{\partial p^{\mu_1}\cdots \partial p^{\mu_{D_\alpha}}}\right)\ket{p,n'} \\
+\neq &\sum_{n'} \left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}\frac{\partial}{\partial p^{\mu_1}}+\cdots +\left(a'^{D_\alpha}_\alpha(p)\right)_{n'n}^{\mu_1 \mu_2\cdots \mu_{D_\alpha}} \frac{\partial^{D_\alpha}}{\partial p^{\mu_1}\cdots \partial p^{\mu_{D_\alpha}}}\right)p_\mu \ket{p,n'} \\
+=&P_\mu A_\alpha \ket{p,n} \\
+\therefore \quad &[P_\mu ,A_\alpha]\neq 0
+\end{align*}
+であるが，$A_\alpha $は質量殻上から外すものではないから$-P^\mu P_\mu $とは可換である．
+\begin{align*}
+&A_\alpha (-P^\mu P_\mu)\ket{p,n} \\
+=&m^2 A_\alpha\ket{p,n} \\
+=&m^2 \sum_{n'} \left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}\frac{\partial}{\partial p^{\mu_1}}+\cdots +\left(a'^{D_\alpha}_\alpha(p)\right)_{n'n}^{\mu_1 \mu_2\cdots \mu_{D_\alpha}} \frac{\partial^{D_\alpha}}{\partial p^{\mu_1}\cdots \partial p^{\mu_{D_\alpha}}}\right)\ket{p,n'} \\
+=&\sum_{n'} \left(\left(a'^0_\alpha(p)\right)_{n'n} +\left(a'^1_\alpha(p)\right)_{n'n}^{\mu_1}\frac{\partial}{\partial p^{\mu_1}}+\cdots +\left(a'^{D_\alpha}_\alpha(p)\right)_{n'n}^{\mu_1 \mu_2\cdots \mu_{D_\alpha}} \frac{\partial^{D_\alpha}}{\partial p^{\mu_1}\cdots \partial p^{\mu_{D_\alpha}}}\right)m^2 \ket{p,n'} \\
+=&(-P^\mu P_\mu) A_\alpha \ket{p,n} \\
+\therefore \quad & [-P^\mu P_\mu ,A_\alpha]=0
+\end{align*}
+これを用いれば
+\begin{align*}
+0=&[P_{\mu_1} P^{\mu_1}, [P^{\mu_2},\cdots ,[P^{\mu_{D_\alpha}},A_\alpha]\cdots ] ] \\
+=&[P^{\mu_1} , [P^{\mu_2},\cdots ,[P^{\mu_{D_\alpha}},A_\alpha]\cdots ] ]P_{\mu_1}+P_{\mu_1} [P^{\mu_1}, [P^{\mu_2},\cdots ,[P^{\mu_{D_\alpha}},A_\alpha]\cdots ] ] \\
+=&B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha} P_{\mu_1}+P_{\mu_1}B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha} \\
+=&2P_{\mu_1}B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}
+\end{align*}
+となる．(最初の等式では，$P^\nu$も$A_\alpha$も全て$P^\mu P_\mu$と可換であることから交換子がゼロになることを用いている．$D_\alpha=2,3$などで実験してみればすぐわかる．最後の等式では$B^{\mu_1 \cdots \mu_{D_\alpha}}_{\alpha}$が$P^\mu$と可換であることを用いた．)よって
+\begin{align*}
+0=&p_{\mu_1} b_\alpha^{\mu_1 \cdots \mu_{D_\alpha}}(p) \\
+=&p_{\mu_1}b_\alpha^{\sharp \mu_1 \cdots \mu_{D_\alpha}}+ p_\mu p_{\mu_1}a^{\mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha} 1 \\
+=&p_{\mu_1}b_\alpha^{\sharp \mu_1 \cdots \mu_{D_\alpha}}+ \frac{1}{2}p_\mu p_{\mu_1}\left(a^{\mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}+a^{\mu_1 \mu \cdots \mu_{D_\alpha}}_{\alpha}\right) 1
+\end{align*}
+を得る．理論が質量をもつ粒子を含む限り，これは任意の時間的な$p$について満たされなければならない．よって$D_\alpha \geq 1$について
+\begin{align*}
+b_\alpha^{\sharp \mu_1 \cdots \mu_{D_\alpha}}=0
+\end{align*}
+と
+\begin{align*}
+a^{\mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}=-a^{\mu_1 \mu \cdots \mu_{D_\alpha}}_{\alpha}
+\end{align*}
+が満たされている必要がある．しかし$D_\alpha \geq 2$のとき
+\begin{align*}
+a^{\mu \mu_1\mu_2 \cdots \mu_{D_\alpha}}_{\alpha} =&a^{\mu \mu_2 \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}  \\
+=& -a^{\mu_2 \mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha} \\
+=&-a^{\mu_2 \mu_1 \mu \cdots \mu_{D_\alpha}}_{\alpha} \\
+=& a^{\mu_1 \mu_2 \mu \cdots \mu_{D_\alpha}}_{\alpha} \\
+=&a^{\mu_1 \mu \mu_2 \cdots \mu_{D_\alpha}}_{\alpha} \\
+=&-a^{\mu \mu_1\mu_2 \cdots \mu_{D_\alpha}}_{\alpha} \\
+\therefore \quad a^{\mu \mu_1\mu_2 \cdots \mu_{D_\alpha}}_{\alpha}=&0
+\end{align*}
+となる．ここで符号の変化のない置換では$a^{\mu \mu_1\mu_2 \cdots \mu_{D_\alpha}}_{\alpha}$の$\mu_1\cdots \mu_{D_\alpha}$について対称なことを，符号が変化するときには(24.B.30)を使っている．よって残った可能性は，$D_\alpha =0,1 $の二つだ．$D_\alpha=0$については単に
+\begin{align*}
+A_\alpha \ket{p,n}=\sum_{n'}\left(A^0_{\alpha}(p)\right)_{n'n} \ket{p,n'}
+\end{align*}
+という形で作用するから，自明に$A_\alpha$と$P_\mu$は可換だ．よって前に証明した事実から，$A_\alpha$は内部対称性か$P_\mu$のある線形結合でなければならない．$D_\alpha=1$については(24.B.27)より
+\begin{align*}
+B^{\mu_1}_\alpha = [P^{\mu_1},A_\alpha]=& a^{\mu\mu_1}_\alpha P_\mu \\
+\therefore \quad [P^\nu,A_\alpha]=&a^{\mu\nu}_\alpha P_\mu
+\end{align*}
+となる．$a^{\mu\nu}_\alpha$は(24.B.30)より$\mu,\nu$について反対称な数定数だ．一方，(2.4.13)より固有ローレンツ変換の生成子は
+\begin{align*}
+[P^\nu,J^{\rho\sigma}]=-i\eta^{\nu\rho}P^\sigma +i \eta^{\nu\sigma}P^\rho
+\end{align*}
+より
+\begin{align*}
+[P^\nu ,-\frac{1}{2}i a^{\rho\sigma}_\alpha J_{\rho\sigma}]=&-\frac{1}{2}ia^{\rho\sigma}_\alpha\left(-i\delta^\nu_\rho P_\sigma +i \delta^\nu_\sigma P_\rho\right) \\
+=&-\frac{1}{2}a_\alpha^{\nu\sigma}P_\sigma + \frac{1}{2}a_\alpha^{\rho \nu}P_\rho \\
+=&a_\alpha^{\rho \nu}P_\rho
+\end{align*}
+となり，$-\frac{1}{2}ia^{\mu\nu}_\alpha J_{\mu\nu}$は上の式を満たしている．さらに$P_\mu$と可換な演算子$B_\alpha$を付け加えても良いので
+\begin{align*}
+A_\alpha=-\frac{1}{2}ia^{\mu\nu}_\alpha J_{\mu\nu}+B_\alpha
+\end{align*}
+という形が要請される．$A_\alpha$と$J_{\mu\nu}$が対称性の生成子であるから，演算子$B_\alpha$は対称性の生成子であることがわかる．再び前に証明した事実から，$P_\mu$と可換な対称性生成子$B_\alpha$は内部対称性の生成子と$P_\mu$の線形結合でなければならない．よって$A_\alpha$は(24.B.32)より$P_\mu,J_{\mu\nu}$と内部対称性の生成子の線形結合であることがわかった．以上でコールマン・マンデューラ定理の証明が完了した！
+
+\vskip\baselineskip
+
+\uwave{質量がゼロの粒子のみ}を含む理論では，(24.B.30)を(24.B.28)から導くことは必ずしもできない．なぜなら，$p^\mu p_\mu=0$だから
+\begin{align*}
+p_\mu p_{\mu_1}\left(a^{\mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}+a^{\mu_1 \mu \cdots \mu_{D_\alpha}}_{\alpha}\right) =0
+\end{align*}
+は
+\begin{align*}
+a^{\mu \mu_1 \cdots \mu_{D_\alpha}}_{\alpha}+a^{\mu_1 \mu \cdots \mu_{D_\alpha}}_{\alpha} \propto \eta^{\mu\mu_1}
+\end{align*}
+でも満たすことができるからだ．よって$D_\alpha= 2$のときも考慮する必要がある．ただし，$D_\alpha \geq 3$のときは必ずゼロになる．(これは後で示す．)このときは共形群の代数(ポアンカレ群の$J^{\mu\nu},P^\mu$にスケール変換と特殊共形変換の生成子$D,K^\mu$を加えたもの)
+\begin{align*}
+&\left[P^\mu , D \right]=iP^\mu ,\quad \left[K^\mu, D\right]=-iK^\mu \\
+&\left[P^\mu, K^\nu \right]=2i\eta^{\mu\nu}D+2i J^{\mu\nu} ,\quad \left[K^\mu ,K^\nu\right]=0 \\
+&\left[ J^{\rho\sigma},K^\mu \right]=i\eta^{\mu\rho}K^\sigma -i\eta^{\mu\sigma}K^\rho ,\quad \left[J^{\rho\sigma},D\right]=0 \\
+&\left[J^{\mu\nu},J^{\rho\sigma}\right]=-i\eta^{\nu\rho}J^{\mu\sigma}+i\eta^{\mu\rho}J^{\nu\sigma}+i\eta^{\sigma\mu}J^{\rho\nu}-i\eta^{\sigma\nu}J^{\rho\mu} \\
+&\left[P^\mu,J^{\rho\sigma}\right]=-i\eta^{\nu\rho}P^\sigma +i \eta^{\nu\sigma}P^\rho \\
+&\left[P^\mu,P^\nu\right]=0
+\end{align*}
+を用いる．$D_\alpha=0$では前と同じで自明だ．$D_\alpha=1$では
+\begin{align*}
+[P^\nu,A_\alpha]=&a^{\mu\nu}_\alpha P_\mu
+\end{align*}
+となる．ここで比例定数を$C_\alpha$として
+\begin{align*}
+&a^{\mu\nu}_\alpha+a^{\nu\mu}_\alpha=C_\alpha \eta^{\mu\nu} \\
+&C_\alpha =\frac{1}{4}\eta_{\mu\nu}\left(a^{\mu\nu}_\alpha+a^{\nu\mu}_\alpha\right)
+\end{align*}
+とおく．質量がある場合と同様に計算すると
+\begin{align*}
+\left[P^\nu ,-\frac{1}{2}ia_\alpha^{\rho\sigma}J_{\rho\sigma}\right]=&-\frac{1}{2}a^{\nu\rho}_\alpha P_\rho +\frac{1}{2}a^{\rho\nu}_\alpha P_\rho \\
+=&a^{\rho\nu}_\alpha P_\rho -\frac{1}{2}C_\alpha P^\nu \\
+\left[P^\nu,D\right]=&iP^\nu
+\end{align*}
+となるから
+\begin{align*}
+A_\alpha=-\frac{1}{2}ia_\alpha^{\mu\nu} J_{\mu\nu}-\frac{1}{2}iC_\alpha D+B_\alpha
+\end{align*}
+となる．$B_\alpha$は$P_\mu$と可換な演算子だ．$J^{\mu\nu},D$が対称性生成子だから，$B_\alpha$は対称性生成子となる．よって$A_\alpha$は$J^{\mu\nu},P^\mu,D$と内部対称性生成子の線形結合で書けることになる．$D_\alpha=2$のとき
+\begin{align*}
+\left[P^{\mu_1},\left[P^{\mu_2},A_\alpha \right]\right]=a^{\mu\mu_1 \mu_2 }_\alpha P_\mu
+\end{align*}
+となる$A_\alpha$を見つければよい．このために比例定数を$C^{\mu_2}_\alpha$として
+\begin{align*}
+&a^{\mu\mu_1\mu_2}_\alpha+a^{\mu_1\mu\mu_2}_\alpha=\eta^{\mu\mu_1}C^{\mu_2}_\alpha \\
+&C_\alpha^{\mu}=\frac{1}{4}\eta_{\nu\sigma}\left(a_\alpha^{\nu\sigma\mu}+a_\alpha^{\sigma\nu\mu}\right)
+\end{align*}
+とおくと
+\begin{align*}
+a^{\mu \mu_1\mu_2}_{\alpha} =&a^{\mu \mu_2 \mu_1}_{\alpha} \\
+=& -a^{\mu_2 \mu \mu_1}_{\alpha}+\eta^{\mu\mu_2}C^{\mu_1}_\alpha \\
+=&-a^{\mu_2 \mu_1 \mu }_{\alpha} +\eta^{\mu\mu_2}C^{\mu_1}_\alpha \\
+=& a^{\mu_1 \mu_2 \mu }_{\alpha}- \eta^{\mu_1\mu_2}C^{\mu}_\alpha +\eta^{\mu\mu_2}C^{\mu_1}_\alpha \\
+=&a^{\mu_1 \mu \mu_2}_{\alpha}- \eta^{\mu_1\mu_2}C^{\mu}_\alpha +\eta^{\mu\mu_2}C^{\mu_1}_\alpha \\
+=&-a^{\mu \mu_1\mu_2}_{\alpha}+\eta^{\mu\mu_1}C^{\mu_2}_\alpha- \eta^{\mu_1\mu_2}C^{\mu}_\alpha +\eta^{\mu\mu_2}C^{\mu_1}_\alpha \\
+\therefore \quad a^{\mu \mu_1\mu_2}_{\alpha}=&\frac{1}{2}\eta^{\mu\mu_1}C^{\mu_2}_\alpha- \frac{1}{2}\eta^{\mu_1\mu_2}C^{\mu}_\alpha +\frac{1}{2}\eta^{\mu\mu_2}C^{\mu_1}_\alpha \\
+a^{\mu\mu_1 \mu_2 }_\alpha P_\mu=&\frac{1}{2}C^{\mu_2}_\alpha P^{\mu_1}-\frac{1}{2} \eta^{\mu_1\mu_2}C_{\alpha\mu} P^\mu+\frac{1}{2}C^{\mu_1}_\alpha P^{\mu_2}
+\end{align*}
+であることを用いる．
+\begin{align*}
+\left[P^{\mu_1},\left[P^{\mu_2},K^\rho\right]\right]=&\left[P^{\mu_1},2i\eta^{\mu_2\rho} D+2iJ^{\mu_2\rho}\right] \\
+=&2i\eta^{\mu_2\rho}iP^{\mu_1}+2i(-i\eta^{\mu_1\mu_2}P^\rho+i\eta^{\mu_1\rho}P^{\mu_2}) \\
+=&-2\eta^{\mu_2\rho}P^{\mu_1}+2\eta^{\mu_1\mu_2}P^\rho -2\eta^{\mu_1\rho}P^{\mu_2} \\
+\left[P^{\mu_1},\left[P^{\mu_2},-\frac{1}{4}C_{\alpha\rho} K^\rho\right]\right]=&\frac{1}{2}C_\alpha^{\mu_2}P^{\mu_1}-\frac{1}{2} \eta^{\mu_1\mu_2}C_{\alpha\mu} P^\mu+\frac{1}{2}C^{\mu_1}_\alpha P^{\mu_2} \\
+=&a^{\mu\mu_1 \mu_2 }_\alpha P_\mu
+\end{align*}
+他の共形群生成子は$P_\mu$との二回交換子で消えてしまうので，任意の数係数$D_{\alpha\mu\nu},E_\alpha$を用いて
+\begin{align*}
+A_\alpha=-\frac{1}{4}C^\mu_\alpha K_\mu+D_{\alpha\mu\nu}J^{\mu\nu}+E_\alpha D +B_\alpha
+\end{align*}
+となる．$B_\alpha$は$P^\mu$と可換な演算子だ．再び，$A_\alpha,J^{\mu\nu},K^\mu,D$が対称性生成子だから同様に$B_\alpha$も対称性生成子で，$A_\alpha$は$J^{\mu\nu},P^\mu,K^\mu,D$と内部対称性生成子の線形結合で書けることになる．(もしかしたら$[P^{\mu_2},A_\alpha]$がローレンツ生成子$J^{\mu\nu}$の形で現れ，その結果(24.B.35)より$[P,J]\sim P$となる可能性が存在すると考えるかもしれない．しかしこの可能性を考えると
+\begin{align*}
+\left[P^\mu,A_\alpha \right]=c_{\alpha\nu} J^{\mu\nu}
+\end{align*}
+の形になるが，この形は$c_\nu\neq 0$とすると$A_\alpha$が$-P^\mu P_\mu$と可換であるという要請と矛盾する．
+\begin{align*}
+\left[-P_\mu P^\mu ,A_\alpha \right]=&-\left[P_\mu,A_\alpha \right]P^\mu -P_\mu \left[P^\mu,A_\alpha \right] \\
+=&-c^\nu_\alpha J_{\mu\nu}P^\mu-P_\mu c_{\alpha\nu}J^{\mu\nu} \\
+=&-c^\nu (J_{\mu\nu}P^\mu+P^\mu J_{\mu\nu})\neq 0
+\end{align*}
+よって$c_\nu=0$となり，上のような可能性は存在しない．)\par
+$D_{\alpha}\geq 3$の場合は$a^{\mu\mu_1\mu_2\mu_3\cdots \mu_{D_\alpha}}_{\alpha}$はゼロになり，したがって共形代数がこの場合の最も大きい代数となる．実際，$D_\alpha \geq 3$のとき$\mu_2,\mu_3,\cdots \mu_{D_\alpha}$について対称な比例係数を$C^{\mu_2\cdots \mu_{D_\alpha}}$として
+\begin{align*}
+a^{\mu\mu_1\mu_2\mu_3\cdots \mu_{D_\alpha}}_{\alpha}+a^{\mu_1 \mu \mu_2\mu_3\cdots \mu_{D_\alpha}}_\alpha = \eta^{\mu \mu_1}C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}}
+\end{align*}
+とおくと
+\begin{align*}
+&a^{\mu\mu_1\mu_2\mu_3\cdots \mu_{D_\alpha}}_{\alpha} \\
+=&-a^{\mu_1 \mu \mu_2\mu_3\cdots \mu_{D_\alpha}}_\alpha + \eta^{\mu \mu_1}C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}} \\
+=&+a^{\mu_2 \mu \mu_1\mu_3\cdots \mu_{D_\alpha}}_\alpha -\eta^{\mu_1\mu_2}C_\alpha^{\mu \mu_3 \cdots \mu_{D_\alpha}} + \eta^{\mu \mu_1}C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}} \\
+=&-a^{\mu_3 \mu \mu_1\mu_2\cdots \mu_{D_\alpha}}_\alpha +\eta^{\mu_2\mu_3}C_{\alpha}^{\mu\mu_1\cdots \mu_{D_\alpha}}-\eta^{\mu_1\mu_2}C_\alpha^{\mu \mu_3 \cdots \mu_{D_\alpha}} + \eta^{\mu \mu_1}C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}} \\
+=&+a^{\mu \mu_1 \mu_2\mu_3\cdots \mu_{D_\alpha}}_\alpha -\eta^{\mu \mu_3}C_\alpha^{\mu_1\mu_2 \cdots \mu_{D_\alpha}} +\eta^{\mu_2\mu_3}C_{\alpha}^{\mu\mu_1\cdots \mu_{D_\alpha}}-\eta^{\mu_1\mu_2}C_\alpha^{\mu \mu_3 \cdots \mu_{D_\alpha}} + \eta^{\mu \mu_1}C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}} \\
+\therefore \quad & 0=\eta^{\mu_2\mu_3}C_{\alpha}^{\mu\mu_1\cdots \mu_{D_\alpha}}-\eta^{\mu_1\mu_2}C_\alpha^{\mu \mu_3 \cdots \mu_{D_\alpha}} + \eta^{\mu \mu_1}C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}} -\eta^{\mu_3\mu}C_\alpha^{\mu_1\mu_2 \cdots \mu_{D_\alpha}}
+\end{align*}
+に$\eta_{\mu \mu_1}$をかけて
+\begin{align*}
+0=&\eta^{\mu_2\mu_3}\eta_{\mu \mu_1} C_{\alpha}^{\mu\mu_1\cdots \mu_{D_\alpha}}-C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}} + 4C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}} -C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}} \\
+\therefore \quad C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}}=& -\frac{1}{2}\eta^{\mu_2\mu_3}\eta_{\mu \mu_1} C_{\alpha}^{\mu\mu_1\cdots \mu_{D_\alpha}}
+\end{align*}
+となる．しかし，さらに$\eta_{\mu_2\mu_3}$をかけると
+\begin{align*}
+\eta_{\mu_2\mu_3}C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}}=& -2\eta_{\mu \mu_1} C_{\alpha}^{\mu\mu_1\cdots \mu_{D_\alpha}} \\
+\therefore \quad \eta_{\mu_1\mu_2}C_\alpha^{\mu_1 \mu_2 \cdots \mu_{D_\alpha}}=&0
+\end{align*}
+が得られるから，$C_\alpha^{\mu_2 \mu_3 \cdots \mu_{D_\alpha}}= -\frac{1}{2}\eta^{\mu_2\mu_3}\eta_{\mu \mu_1} C_{\alpha}^{\mu\mu_1\cdots \mu_{D_\alpha}}=0$が得られ，この場合
+\begin{align*}
+a^{\mu\mu_1\mu_2\mu_3\cdots \mu_{D_\alpha}}_{\alpha}+a^{\mu_1 \mu \mu_2\mu_3\cdots \mu_{D_\alpha}}_\alpha =0
+\end{align*}
+となる．$D_\alpha \leq 3$であるから，$D_\alpha \leq 2$を満たし，したがってこれはポアンカレ代数のときに示した手順により再び$a^{\mu\mu_1\mu_2\mu_3\cdots \mu_{D_\alpha}}_{\alpha}=0$を示すことができる．
+
+
+
+\end{document}
