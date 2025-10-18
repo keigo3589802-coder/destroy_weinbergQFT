@@ -1022,7 +1022,7 @@ X(x,\theta)=\frac{1}{\sqrt{2}}\left[\Phi(x,\theta)+\tilde{\Phi}(x,\theta)\right]
 \Phi(x,\theta)=&\phi(x)-\sqrt{2}\Bigl(\bar{\theta}\psi_L(x)\Bigr)+\mc{F}(x)\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right) \\
 &+\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu \phi(x)-\frac{1}{\sqrt{2}}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}\Slash{\partial}\psi_L(x)\Bigr) \\
 &-\frac{1}{8}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box \phi(x) \\
-\tilde{\Phi}(x,\theta)=&\tilde{\phi}(x)-\sqrt{2}\Bigl(\bar{\theta}\psi_R(x)\Bigr)+\tilde{\mc{F}}(x)\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right) \\
+\tilde{\Phi}(x,\theta)=&\tilde{\phi}(x)-\sqrt{2}\Bigl(\bar{\theta}\psi_R(x)\Bigr)+\tilde{\mc{F}}(x)\left(\bar{\theta}\left(\frac{1-\gamma_5}{2}\right)\theta\right) \\
 &-\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu \tilde{\phi}(x)+\frac{1}{\sqrt{2}}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}\Slash{\partial}\psi_R(x)\Bigr) \\
 &-\frac{1}{8}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box \tilde{\phi}(x)
 \end{align*}
@@ -1234,15 +1234,15 @@ I=\int d^4x \Bigl[f \Bigr]_{\mc{F}}+\int d^4x \Bigl[f \Bigr]_{\mc{F}}^* +\frac{1
 $f,K$は何に依存できるだろうか？関数$f$は，基本的な左カイラル超場$\Phi_n$にのみ依存し，それらの右カイラルな複素共役$\Psi_{n}^*$には依存しなければ，左カイラルなのだった．一方，カイラル超場の超微分はカイラルではない．実際，$\Psi$を左カイラル超場として
 \begin{align*}
 \{\mc{D}_\alpha ,\mc{D}_\beta\}=&+2(\gamma^\mu\gamma_5 \epsilon)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \quad \because (26.2.30),\bar{\mc{D}}=\mc{D}^T(\gamma_5 \epsilon)\\
-\mc{D}_{R\beta}\left(\mc{D}_{\alpha}\Psi\right)=&\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}\mc{D}_{\gamma}\left(\mc{D}_{\alpha}\Psi\right) \\
-&=-\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}\mc{D}_{\alpha}\left(\mc{D}_{\gamma}\Psi\right)+2\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}(\gamma^\mu \gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial x^\mu} \Psi \\
-=&-\mc{D}_{\alpha}\left(\mc{D}_{R\beta}\Psi\right)+2\left(\frac{1+\gamma_5}{2}\right)_{\beta\gamma}(\gamma^\mu \gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial x^\mu}\Psi \\
-=&+2(\gamma^\mu \epsilon)_{\alpha\beta}\frac{\partial}{\partial x^\mu}\Psi \neq 0
+\mc{D}_{R\beta}\left(\mc{D}_{\alpha}\Psi\right)=&\left(\frac{1-\gamma_5}{2}\right)_{\beta\gamma}\mc{D}_{\gamma}\left(\mc{D}_{\alpha}\Psi\right) \\
+&=-\left(\frac{1-\gamma_5}{2}\right)_{\beta\gamma}\mc{D}_{\alpha}\left(\mc{D}_{\gamma}\Psi\right)+2\left(\frac{1-\gamma_5}{2}\right)_{\beta\gamma}(\gamma^\mu \gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial x^\mu} \Psi \\
+=&-\mc{D}_{\alpha}\left(\mc{D}_{R\beta}\Psi\right)+2\left(\frac{1-\gamma_5}{2}\right)_{\beta\gamma}(\gamma^\mu \gamma_5 \epsilon)_{\alpha\gamma}\frac{\partial}{\partial x^\mu}\Psi \\
+=&+2\left(\gamma^\mu \epsilon \frac{1-\gamma_5}{2} \right)_{\alpha\beta}\frac{\partial}{\partial x^\mu}\Psi \neq 0
 \end{align*}
 となり，左カイラル超場としての条件式を満たさない．同様に右カイラル超場の超微分は右カイラルとならない．したがって$\Phi_n$の超微分を自由に$f$に含めることはできない．しかし，左カイラルではない超場$S$(たとえば左カイラル超場の複素共役を含んでいる場合)に右超微分の対を作用させると，左カイラル超場を得る．これは
 \begin{align*}
-\{\mc{D}_{R\alpha} ,\mc{D}_{R\beta}\}=&+2\left(\left(\frac{1+\gamma_5}{2}\right)\gamma^\mu\gamma_5 \epsilon\left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
-=&+2\left(\gamma^\mu\gamma_5 \epsilon\left(\frac{1-\gamma_5}{2}\right)\left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+\{\mc{D}_{R\alpha} ,\mc{D}_{R\beta}\}=&+2\left(\left(\frac{1-\gamma_5}{2}\right)\gamma^\mu\gamma_5 \epsilon\left(\frac{1-\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+=&+2\left(\gamma^\mu\gamma_5 \epsilon\left(\frac{1+\gamma_5}{2}\right)\left(\frac{1-\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
 =&0
 \end{align*}
 となり，右超微分同士は通常のフェルミオン的c数のように反可換であり，よってp146下の議論と同様に，そのような三つの積は必ずゼロとなるから
@@ -1436,7 +1436,7 @@ e^{-iR\varphi}(\bar{\theta}\gamma_5\theta)^2 e^{iR\varphi} \propto& e^{-iR\varph
 e^{-iR\varphi}S(x,\theta) e^{iR\varphi}=&e^{iR_\Phi\varphi}S(x,\theta) \\
 =&\cdots -\frac{1}{4}e^{-iR\varphi}(\bar{\theta}\gamma_5\theta)^2 D(x) e^{iR\varphi} \\
 =&\cdots -\frac{1}{4} (\bar{\theta}\gamma_5\theta)^2e^{-iR\varphi}D(x) e^{iR\varphi} \\
-\therefore \quad e^{-iR\varphi}D(x) e^{iR\varphi}=e^{iR_\Phi \varphi}D(x)
+\therefore \quad e^{-iR\varphi}D(x) e^{iR\varphi}=&e^{iR_\Phi \varphi}D(x)
 \end{align*}
 となって，$D$はその超場と同じ$R$量子数を持つことがわかる．よって作用の$\int d^4x [K]_D$項が$R$対称性を保存するならば，$K$が$R=0$でありすれば良い．$K$が$\Phi$のみに依存する場合，$\Phi$がどのような$R$量子数を持とうとも$K$の各項が$\Phi$の因子と$\Phi^*$の因子を同じ数だけ持つようになっていればよく，逆にそのときのみ許される．\par
 もちろん，作用が$R$不変性を持たなければならない一般的な理由はないし，それが自発的に破れてはいけない理由もない．
@@ -1450,7 +1450,9 @@ S'\equiv \frac{1}{4}(\bar{\mc{D}}\mc{D})S
 とカイラル超場を作ることができることに着目する．これは
 \begin{align*}
 \frac{1}{4}(\bar{\mc{D}}\mc{D})S=&\frac{1}{4}(\overline{\mc{D}_R}\mc{D}_L)S+\frac{1}{4}(\overline{\mc{D}_L}\mc{D}_R)S \\
-=&\frac{1}{4}(\mc{D}_L^T \epsilon \mc{D}_L)S+\frac{1}{4}(\mc{D}^T_R \epsilon \mc{D}_R)S
+=&\frac{1}{4}(\bar{\mc{D}}_L \mc{D}_L)S+\frac{1}{4}(\bar{\mc{D}}_R \mc{D}_R)S \\
+=&\frac{1}{4}(\mc{D}_L^T \epsilon \gamma_5 \mc{D}_L)S+\frac{1}{4}(\mc{D}^T_R \epsilon \gamma_5 \mc{D}_R)S \\
+=&\frac{1}{4}(\mc{D}_L^T \epsilon \mc{D}_L)S-\frac{1}{4}(\mc{D}^T_R \epsilon \mc{D}_R)S
 \end{align*}
 と書けて，第一項目はp98の議論により右カイラルで，第二項目は同様に左カイラルであるから，全体として(26.3.10)の形になっており，$S'$はカイラル超場だ．さて
 \begin{align*}
@@ -2017,6 +2019,565 @@ V(x,y)=&\sum_n \left(\frac{\partial f(\phi)}{\partial \phi_n }\right)^* \frac{\p
 V(x_0,y)=&\sum_i|f_i(x_0)|^2
 \end{align*}
 もし超場$X_n$が$N_X$個，超場$Y_i$が$N_Y$個あって$N_Y > N_X$(つまり先程述べた，解を持たないための条件)ならば，自由度が足りないから$\mathbf{v}^n$は$N_Y$次元ベクトル$\mathbf{y}$の属する全体のベクトル空間を張ることができず，この直交する方向は最低でも$N_Y-N_X$個ある\footnote{$N_Y=3$の3次元ベクトルで考えれば，$N_X=1$ならば$v^1$に直交するベクトルに対して2つの独立なベクトルが存在する．$N_X=2$ならば$v^1,v^2$に直交するベクトルは最低でも1ある．(最低でも，というのは，もしかしたら$v^1,v^2$が一致していれば直交するベクトルは2つになるかもしれないからである．)}．この平らな方向のどれかにゼロでない$y_i=y_{0i}\neq 0$があれば，(ポテンシャルは最低になるのに，スカラー場$y_i$の真空期待値がゼロでないから)ラグランジアン密度の$R$対称性は自発的に破れる．
+
+
+\vskip\baselineskip
+
+この種の模型の中で最も簡単な場合は，$N_X=1,N_Y=2$の場合，すなわち，$X$の超場が1だけと，超場$Y_i$が二つある場合である．26.4節の最初の議論より，繰り込み可能性から$f(X,Y)$は超場について高々3次でなければならず，$Y_i$の係数関数$f_i(X)$は超場$X$について高々2次の二次関数にならなければならない．したがって超ポテンシャルの形は
+\begin{align*}
+f(X,Y)=&Y_1(aX^2+bX+c)+Y_2(\alpha X^2+\beta X+\gamma) \\
+=&(a Y_1 +\alpha Y_2)X^2+(bY_1+\beta Y_2)X+(cY_1+\gamma Y_2)
+\end{align*}
+の形になる．$Y'_1= a Y_1 +\alpha Y_2$ととることで
+\begin{align*}
+=Y'_1 X^2+(bY_1+\beta Y_2)X+(cY_1+\gamma Y_2)
+\end{align*}
+となり，さらに$X'=X+q$と平行移動すると($q$は後で決める定数)
+\begin{align*}
+=Y'_1 X'^2 +(-2q Y'_1 +(bY_1+\beta Y_2))X'+(q^2 Y_1'-q(bY_1+\beta Y_2)+(cY_1+\gamma Y_2))
+\end{align*}
+$Y'_2=-2q Y'_1 +(bY_1+\beta Y_2)$として
+\begin{align*}
+=Y'_1 X'^2 +Y'_2X'+(q^2 Y_1'-q(bY_1+\beta Y_2)+(cY_1+\gamma Y_2))
+\end{align*}
+となる．最後にこれが
+\begin{align*}
+=Y'_1 X'^2 +Y'_2(X'-A)
+\end{align*}
+となるように，定数$q,A$を決める．すなわち
+\begin{align*}
+&q^2 Y_1'-q(bY_1+\beta Y_2)+(cY_1+\gamma Y_2)=-AY_2' \\
+&(a(q^2+2Aq) -b(q+A)+c)Y_1+(\alpha (q^2+2Aq)-\beta(q+A)+\gamma)Y_2=0 \\
+&\left\{
+\begin{array}{ll}
+&a(q^2+2Aq) -b(q+A)+c =0 \\
+&\alpha (q^2+2Aq)-\beta(q+A)+\gamma=0
+\end{array}
+\right.
+\end{align*}
+という方程式を解けばよく，これは
+\begin{align*}
+q=&\frac{a\gamma-\alpha c \pm \sqrt{\Delta}}{a\beta -\alpha b} ,\quad A= \mp \frac{\sqrt{\Delta}}{a\beta -\alpha b} \\
+\Delta=&a^2\gamma^2 -2a\alpha c\gamma -ab\beta\gamma+a\beta^2 c+ \alpha^2 c^2 +\alpha b^2 \gamma -2\alpha b \beta c
+\end{align*}
+という解がある(らしい)．この手順を用いれば一般に
+\begin{align*}
+f(X,Y)=&Y_1 (X-a)+Y_2X^2 \\
+f_1(X)=&X-a ,\quad f_2(X)=X^2
+\end{align*}
+という形に選ぶことができる．ここで$a$は任意の定数である．これは明らかに，ポテンシャルを微細調整して$a=0$としていない限り，(26.5.3)の2つの方程式を満たす解は存在しない．($f_1(x)=0$は$x=a$でのみ満たされ，$f_2(x)=0$は$x=0$でのみ満たされる．)(26.5.5)のポテンシャルは
+\begin{align*}
+V(x,y)=&|f_1(x)|^2+|f_2(x)|^2+\left|y_1\frac{\partial f_1(x)}{\partial x}+y_2 \frac{\partial f_2(x)}{\partial x}\right|^2 \\
+=&|x|^4+|x-a|^2+|y_1+2xy_2|^2
+\end{align*}
+となる．最初の二項は，
+\begin{align*}
+x_0=\sqrt[3]{\frac{a}{4}+\sqrt{\frac{a^2}{16}+\frac{1}{216}}}+\sqrt[3]{\frac{a}{4}-\sqrt{\frac{a^2}{16}+\frac{1}{216}}}
+\end{align*}
+で唯一の大域的な最小値がある(らしい)．ここでの平らな方向は$y_1+2xy_2=0$となる$\mathbf{y}=(y_1,y_2)$である．微細調整された場合の$a=0$では$x_0=0$であり，$y_1=0$で$y_2$は任意となる線に沿ってポテンシャルは最小値$V(x_0,y_1,y_2)=V(0,0,y_2)=0$をとる．
+
+
+\vskip\baselineskip
+
+
+ポテンシャルがどのような理由で破れているにせよ，この現象は常に質量がゼロでスピンが$1/2$のゴールドスティーノの存在を意味する．この粒子は通常の大域的対称性の自発的破れに伴うゴールドストン・ボゾンに相当するものである．(唯一の例外は31.3節に述べる超重力理論らしい．この理論では超対称性は局所対称性だから，ゴールドスティーノは質量が有限のスピン$3/2$粒子であるグラヴィティーノのヘリシティ$\pm 1/2$状態となるらしい．)カイラル超場のくりこみ可能な理論では，スカラー場の真空期待値の樹木近似での値$\phi_{n0}$は(26.4.7)のポテンシャル$V(\phi)=\sum_{n}|\partial f(\phi)/\partial \phi_n|^2$を最低とする値になっていなければならない．つまり任意の変分について
+\begin{align*}
+V(\phi_0+\delta \phi)-V(\phi_0)=&\sum_{n}\left|\frac{\partial f}{\partial \phi_n}(\phi_0+\delta \phi)\right|^2-\sum_{n}\left|\frac{\partial f}{\partial \phi_n}(\phi_0)\right|^2 \\
+=&\sum_{nm}\left(\frac{\partial^2 f}{\partial \phi_n \partial \phi_m}(\phi_0)\right)\delta \phi_m \left(\frac{\partial f}{\partial \phi_n}(\phi_0)\right)^*+\sum_{nm}\frac{\partial f}{\partial \phi_n }(\phi_0) \left(\frac{\partial^2 f}{\partial \phi_n\partial \phi_m}(\phi_0)\delta \phi_m\right)^*  \\
+=&2\mathrm{Re}\left(\sum_{nm}\mc{M}_{nm}\left(\frac{\partial f}{\partial \phi_n}(\phi_0)\right)^* \delta \phi_m\right)=0
+\end{align*}
+で，したがって
+\begin{align*}
+\sum_{m}\mc{M}_{nm}\left(\frac{\partial f}{\partial \phi_m}(\phi_0)\right)^*=0
+\end{align*}
+でなければならない．ただしここで
+\begin{align*}
+\mc{M}_{nm}:=\frac{\partial^2 f}{\partial \phi_n \partial \phi_m}(\phi_0)
+\end{align*}
+である．もしポテンシャルを最低値とする$\phi_0$において(26.5.1)が満たされていなければ，(26.5.8)より，行列$\mc{M}_{nm}$は固有値ゼロのノンゼロな固有ベクトルを少なくとも一つは持っていることになる．したがって(26.4.10)にこれが現れ，さらに$\mc{U}$でユニタリー変換されると，$m_n=0$となる$n$が少なくとも一つ存在することになり，それに対応した$\psi'_n=\sum_m \mc{U}_{nm}\psi_m$で記述される質量ゼロスピン$1/2$粒子の一次結合が存在することになる．例えば，(26.5.2)と(26.5.6)で記述される模型では，行列$\mc{M}$は$\phi_{n0}=(x_0,y_{10},y_{20})$として
+\begin{align*}
+\mc{M}_{xx}=&\frac{\partial^2}{\partial x \partial x}(y_1(x-a)+y_2x^2) =2y_{20} \\
+\mc{M}_{y_1y_1}=&\frac{\partial^2}{\partial y_1 \partial y_1}(y_1(x-a)+y_2x^2)=0 \\
+\mc{M}_{y_2y_2}=&\frac{\partial^2}{\partial y_2 \partial y_2}(y_1(x-a)+y_2x^2)=0 \\
+\mc{M}_{xy_1}=&\frac{\partial^2}{\partial x \partial y_1}(y_1(x-a)+y_2x^2)=1 \\
+\mc{M}_{xy_2}=&\frac{\partial^2}{\partial x \partial y_2}(y_1(x-a)+y_2x^2)=2x_0 \\
+\mc{M}_{y_1y_2}=&\frac{\partial^2}{\partial y_1 \partial y_2}(y_1(x-a)+y_2x^2)=0 \\
+\mc{M}=&\left(
+\begin{matrix}
+\mc{M}_{xx}    & \mc{M}_{x y_1}   & \mc{M}_{xy_2} \\
+\mc{M}_{y_1 x} & \mc{M}_{y_1y_1}  & \mc{M}_{y_1 y_2} \\
+\mc{M}_{y_2 x} & \mc{M}_{y_2 y_1} & \mc{M}_{y_2 y_2}
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+2y_{20} & 1 & 2x_0 \\
+1    & 0 & 0 \\
+2x_0 & 0 & 0 
+\end{matrix}
+\right)
+\end{align*}
+となり，この行列の固有値を計算すると
+\begin{align*}
+\mathrm{det}(\mc{M}-\lambda I)=&\mathrm{det}\left(
+\begin{matrix}
+2y_{20}-\lambda & 1 & 2x_0 \\
+1    & -\lambda & 0 \\
+2x_0 & 0 & -\lambda
+\end{matrix}
+\right) \\
+=&(-\lambda)^2(2y_{20}-\lambda)-(-\lambda)-4x_{0}^2(-\lambda) \\
+=&\lambda(-\lambda^2+2y_{20}\lambda +4x_0^2+1)=0 \\
+\therefore \quad \lambda=&0,y_2 \pm \sqrt{(2x_0)^2+y_{20}^2+1}
+\end{align*}
+となる．($y_1=y_2=0$はポテンシャル$V(x,y)=0$の最低値の谷の一点であるから，その点での値を$y_0$として採用すると本文の値となる)後者の値$\lambda=0$がゴールドスティーノのモードに相当する．29章では，超対称性が自発的に破れるとゴールドスティーノが必然的に生じることを非摂動的に示し，その一般的な帰結を調べるらしい．
+
+
+\newpage
+
+\subsection{超空間積分，場の方程式，カレント超場}
+ラグランジアン密度を構成するための$\mc{F}$項と$D$項は超空間座標$\theta_\alpha$を用いて，$\theta_{L\alpha}$について2次と$\theta_\alpha$4次の項を取り出したものであり，それらはグラスマン変数であるから手で取り出さなくてもブレザン積分を使って取り出すことができる．\par
+ブレザン積分は9.5節で勉強したが，復習しておく．フェルミオン的なパラメータは二乗してゼロになるから，$N$個のフェルミオン的パラメータ$\xi_n(n=1,\cdots ,N)$に依存する任意の関数は
+\begin{align*}
+f(\xi)=\left(\prod_{n=1}^{N} \xi_n\right) c +[\xi 因子がより少ない項]
+\end{align*}
+で表され，その$\xi$についての積分は単に
+\begin{align*}
+\int d^N \xi \, f(\xi):=c
+\end{align*}
+と定義される．係数はそれ自身，積分する$\xi$と反可換な他の積分されない$c$数に依存してよい．その場合は積分を実行する前に$c$の左に全ての積分される$\xi$を動かして，$c$の定義を標準化しておく．((26.6.1)ではそうなっている)例えば
+\begin{align*}
+c(\xi_3,\xi_4)=&\alpha \xi_3 \xi_4 \\
+\int d\xi_2d\xi_1 \, f(\xi)=&\int d\xi_2 d\xi_1 (\xi_1 \xi_2 \cdot \alpha \xi_3\xi_4)=\alpha \xi_3 \xi_4=c
+\end{align*}
+という感じ．このように定義すると，フェルミオン変数についての積分が線形演算
+\begin{align*}
+f(\xi)=&\left(\prod_{n=1}^{N} \xi_n\right) c +[\xi 因子がより少ない項],g(\xi)=\left(\prod_{n=1}^{N} \xi_n\right) d +[\xi 因子がより少ない項] \\
+f(\xi)+g(\xi)=&\left(\prod_{n=1}^{N} \xi_n\right) (c+d) +[\xi 因子がより少ない項] \\
+\therefore \quad &\int d^N \xi \, (f(\xi)+g(\xi))=c+d=\int d^N \xi \, f(\xi)+\int d^N \xi \,g(\xi)
+\end{align*}
+となる．\par
+変数$\xi_n$を$\xi_n\to \xi_n+a_n$と定数$a_n$分だけずらすと積$\prod_n \xi_n$は$\xi$の因子をより少なく含む項だけ変化するので，最も$\xi$の因子を含む項の係数$c$は変化がなく，そのために積分は影響を受けない．これは
+\begin{align*}
+\int d^N\xi\, f(\xi+a)=\int d^N \xi \, f(\xi)
+\end{align*}
+となるという意味で，実変数についての積分に酷似している．(つまり$d(\xi+a)=d\xi$である．)また，(26.6.2)の特別な場合として，次数が$N$未満の多項式の，$N$子のフェルミオン的パラメータについての積分は必ずゼロになる．\par
+フェルミオン的パラメータとボゾン的パラメータの積分は変数変換のもとでの性質が非常に異なる．ボゾン的パラメータ$x_n$については
+\begin{align*}
+d^N x'=\mathrm{det}\left(\frac{\partial x'}{\partial x}\right)d^Nx
+\end{align*}
+となるが，フェルミオン的なパラメータについては
+\begin{align*}
+d^N \xi'=\mathrm{det}\left(\frac{\partial \xi'}{\partial \xi}\right)^{-1}d^N\xi
+\end{align*}
+となる．特に$d\xi$の次元は$\xi$の次元の逆となる(つまり積分は微分と同じ)．
+
+\vskip\baselineskip
+
+
+(26.2.10)によれば，一般の超場$S(x,\theta)$(この場は基本場でも複合場($S=S_1S_2$など)でもいい)の$D$項は，微分項$\Box C$を除いて$-\frac{1}{4}(\bar{\theta}\gamma_5 \theta)^2=-\frac{1}{4}(\theta^T \epsilon \theta)^2$の係数に等しい．
+\begin{align*}
+(\theta^T \epsilon \theta)=&(\theta_1,\theta_2,\theta_3,\theta_4)\left(
+\begin{matrix}
+0  & 1 & 0 & 0 \\
+-1 &0 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & -1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\theta_1 \\
+\theta_2 \\
+\theta_3 \\
+\theta_4
+\end{matrix}
+\right) \\
+=&\theta_1\theta_2 -\theta_2\theta_1+\theta_3\theta_4-\theta_4\theta_3 \\
+=&2\theta_1 \theta_2 +2\theta_3 \theta_4 \\
+(\theta^T \epsilon \theta)^2=& 4(\theta_1 \theta_2 +\theta_3 \theta_4)(\theta_1 \theta_2 +\theta_3 \theta_4) \\
+=&4(\theta_1\theta_2 \theta_3 \theta_4+\theta_3\theta_4\theta_2\theta_1) \\
+=&8\theta_1\theta_2 \theta_3 \theta_4 \\
+\therefore \quad -\frac{1}{4}(\theta^T \epsilon \theta)^2=&-2\theta_1\theta_2 \theta_3 \theta_4
+\end{align*}
+となるから，
+\begin{align*}
+&\int d\theta_4d\theta_3d\theta_2 d\theta_1\left(-\frac{1}{4}(\theta^T \epsilon \theta)^2 D(x)\right)=-2 D(x)\\
+\therefore \quad &\int d^4x [S]_D=-\frac{1}{2}\int d^4x d^4\theta S(x,\theta)
+\end{align*}
+を得る．同様に，(26.3.11)より，一般の左カイラル超場$\Phi$の$\mc{F}$項は
+\begin{align*}
+\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right)=&\left(\theta^T \epsilon \left(\frac{1+\gamma_5}{2}\right)\theta \right) \quad \because (26.A.4) \\
+=&(\theta_L,\theta_R) \left(
+\begin{matrix}
+e & 0 \\
+0 & e
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1 & 0 \\
+0 & 0
+\end{matrix}
+\right) \left(
+\begin{matrix}
+\theta_L \\
+\theta_R
+\end{matrix}
+\right) \\
+=&\theta_L^T e \theta_L \\
+=&(\theta_{L1},\theta_{L2})\left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\theta_{L1} \\
+\theta_{L2}
+\end{matrix}
+\right) \\
+=&\theta_{L1}\theta_{L2}-\theta_{L2}\theta_{L1} \\
+=&2\theta_{L1}\theta_{L2}
+\end{align*}
+であるから
+\begin{align*}
+& \int d\theta_{L2}d\theta_{L1} \mc{F}\left(\bar{\theta}\left(\frac{1+\gamma_5}{2}\right)\theta\right)=2\mc{F} \\
+\therefore\quad &\int d^4x [\Phi]_{\mc{F}}=\frac{1}{2}\int d^4x d^2\theta_{L}\Phi(x,\theta)
+\end{align*}
+と表される．($\int d^2\theta_L \Phi$自体は(26.3.11)の$\theta$についてさらに高次の第4,5,6項目が出てくるが，それらは時空全微分で書かれているため時空積分をする上では消える．)
+
+
+\vskip\baselineskip
+
+
+いまは$\theta$についての積分をしているので，任意の関数$f(\theta)$についてのデルタ関数の条件
+\begin{align*}
+\int d^4\theta' \delta(\theta'-\theta)f(\theta')=f(\theta)
+\end{align*}
+を満たすフェルミオン的パラメータについてのデルタ関数を導入しておくと便利らしい．これは(9.5.40)より
+\begin{align*}
+\delta(\theta'-\theta)=(\theta_1'-\theta_1)(\theta'_2-\theta_2)(\theta'_3-\theta_3)(\theta'_4-\theta_4)
+\end{align*}
+で満たされる．先程と同じような計算から
+\begin{align*}
+(\theta^T_L \epsilon \theta_L)=&(\theta_1,\theta_2,0,0)\left(
+\begin{matrix}
+0  & 1 & 0 & 0 \\
+-1 &0 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & -1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\theta_1 \\
+\theta_2 \\
+0 \\
+0
+\end{matrix}
+\right) \\
+=&2\theta_{1}\theta_{2} \\
+(\theta^T_R \epsilon \theta_R)=&(0,0,\theta_3,\theta_4)\left(
+\begin{matrix}
+0  & 1 & 0 & 0 \\
+-1 &0 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & -1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+0 \\
+0 \\
+\theta_3 \\
+\theta_4
+\end{matrix}
+\right) \\
+=&2\theta_3 \theta_4 \\
+\therefore\quad \theta_1\theta_2\theta_3\theta_4=&\frac{1}{4}(\theta^T_L\epsilon \theta_L)(\theta^T_R\epsilon \theta_R)
+\end{align*}
+と書けるから
+\begin{align*}
+\delta(\theta'-\theta)=&(\theta_1'-\theta_1)(\theta'_2-\theta_2)(\theta'_3-\theta_3)(\theta'_4-\theta_4) \\
+=&\frac{1}{4} \Bigl[ \Bigl(\theta'_L -\theta_L\Bigr)^T\epsilon \Bigl(\theta'_L -\theta_L\Bigr) \Bigr]\Bigl[\Bigl(\theta'_R -\theta_R\Bigr)^T\epsilon \Bigl(\theta'_R-\theta_R\Bigr)\Bigr]
+\end{align*}
+となる．
+
+
+\vskip\baselineskip
+
+
+今まで成分場の方程式を導くときは，作用を成分場で展開してから変分をとって導いていたのだった．作用は超場から構成されるのだから，もし成分場にわざわざ展開しなくても，超場のまま場の方程式が導けたら楽だろう．実際，作用を超空間積分で表すと，場の方程式を超場形式で簡単に導くことができるらしい．例として，左カイラルなスカラー超場$\Phi_n(x,\theta)$の組の作用(26.3.30)
+\begin{align*}
+I=\frac{1}{2}\int d^4x \Bigl[K(\Phi,\Phi^*)\Bigr]_D+2\mathrm{Re}\int d^4x [f(\Phi)]_{\mc{F}}
+\end{align*}
+を考える．(これは特別な場合として(26.4.1)とすればくりこみ可能な理論になっている．微分を含んでいないので，かなり一般的な場合を考えているわけではない．)ここで$K$は微分のかかっていない$\Phi_n,\Phi^*_n$の関数で，$f$は微分のかかっていない$\Phi_n$の任意の関数である．(この形の作用を考える理由と，この作用を成分場で表す表式は26.8節で．)\par
+$\Phi_n$は左カイラル超場であるから，(26.3.24)の$\mc{D}_R \Phi_n=0$という要請で拘束されている．したがって$\Phi$の任意の変化分に対してこの作用が停留と要求することはできない．(任意性より$\mc{D}_R\delta \Phi_n\neq 0$となる変分も考えなくてはならないから，拘束を保てない．)この条件が任意の変分のもとで保存されることを保証するために，あるトリックを使う．(このトリックは30章で超空間ファインマン則を導くのに役立つらしい．)\par
+$\Phi_n$をポテンシャル超場と呼ばれる超場$S_n(x,\theta)$を使って
+\begin{align*}
+\Phi_n=(\mc{D}^T_R \epsilon \mc{D}_R)S_n=(\bar{\mc{D}}_R \gamma_5 \mc{D}_R)=-(\bar{\mc{D}}_R \mc{D}_R)=:\mc{D}^2_R S_n
+\end{align*}
+と書く．(いつもながら$\bar{\mc{D}}_R=\bar{\mc{D}}(\frac{1+\gamma_5}{2})=\overline{\mc{D}_L} \neq \overline{\mc{D}_R}$に注意．$\mc{D}_R$の因子が三つあると恒等的にゼロであったのだから，これは実際に左カイラル超場を表している．)また，これより(26.A.21)を使って
+\begin{align*}
+\Phi^*_n=&-(\bar{\mc{D}}_R \mc{D}_R)^* S_n^* \\
+=&-\left(\bar{\mc{D}}\left(\frac{1-\gamma_5}{2}\right)\mc{D}\right)^* S_n^* \\
+=&-\left(\bar{\mc{D}}\left(\frac{1+\gamma_5}{2}\right)\mc{D}\right) S_n^* \quad (26.A.21)\\
+=&-\left(\bar{\mc{D}}_L\mc{D}_L\right) S_n^* =-(\mc{D}^T_L \epsilon \mc{D}_L)S_n^* :=-\mc{D}^2_L S_n^*
+\end{align*}
+となる．任意の$\Phi_n$に対して，(26.6.10)を満たす(必ずしも局所的とは限らない，つまり基本場と基本場の微分の積で書けるとは限らない)$S_n$が常に存在することを見るには，26.3節で行ったのと同様の計算で
+\begin{align*}
+\{\mc{D}_{R\alpha} ,\mc{D}_{R\beta}\}=&0,\quad \{\mc{D}_{L\alpha} ,\mc{D}_{L\beta}\}=0 \\
+\{\mc{D}_{R\alpha} ,\mc{D}_{L\beta}\}=&+2\left(\left(\frac{1-\gamma_5}{2}\right)\gamma^\mu\gamma_5 \epsilon\left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+=&+2\left(\gamma^\mu\gamma_5 \epsilon\left(\frac{1+\gamma_5}{2}\right)\left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+=&+2\left(\gamma^\mu \epsilon\left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\mu} \\
+(\mc{D}^T_R \epsilon \mc{D}_R)(\mc{D}^T_L \epsilon \mc{D}_L)\Phi_n=&(\mc{D}^T_R \epsilon )_{\alpha} \{\mc{D}_{R\alpha},\mc{D}_{L\beta}\}(\epsilon \mc{D}_{L})_{\beta}\Phi_n-(\mc{D}^T_R \epsilon )_{\alpha} (\mc{D}_{L}^T \epsilon )_{\beta} \{\mc{D}_{R\alpha},\mc{D}_{L\beta}\}\Phi_n \\
+&+(\mc{D}^T_R \epsilon )_{\alpha} (\mc{D}_{L}^T\epsilon \mc{D}_{L}) \mc{D}_{R\alpha} \Phi_n \\
+=&(\mc{D}^T_R \epsilon )_{\alpha} \{\mc{D}_{R\alpha},\mc{D}_{L\beta}\}(\epsilon \mc{D}_{L})_{\beta}\Phi_n+(\mc{D}^T_R \epsilon )_{\alpha} (\epsilon \mc{D}_{L} )_{\beta} \{\mc{D}_{R\alpha},\mc{D}_{L\beta}\}\Phi_n \quad \because \epsilon^T=-\epsilon \\
+=&4\left(\mc{D}_R^T \epsilon \gamma^\mu \epsilon \left(\frac{1+\gamma_5}{2}\right)\epsilon \mc{D}_L\right)\frac{\partial}{\partial x^\mu}\Phi_n \\
+=&-4\left(\mc{D}_R^T \epsilon \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\mc{D}_L\right)\frac{\partial }{\partial x^\mu}\Phi_n \quad \because \epsilon^2=-1 ,\gamma_5 \epsilon=\epsilon \gamma_5 \\
+=&-4\left(\epsilon \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\{\mc{D}_{R\alpha},\mc{D}_{L\beta}\}\frac{\partial}{\partial x^\mu}\Phi_n \\
+&+4\left(\epsilon \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\mc{D}_{L\beta}\mc{D}_{R\alpha}\frac{\partial}{\partial x^\mu}\Phi_n \\
+=&-4\left(\epsilon \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\{\mc{D}_{R\alpha},\mc{D}_{L\beta}\}\frac{\partial}{\partial x^\mu}\Phi_n \quad \because (26.3.24)\\
+=&-8\left(\epsilon \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta} \left(\gamma^\nu \epsilon\left(\frac{1+\gamma_5}{2}\right)\right)_{\alpha\beta}\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu}\Phi_n \\
+=&-8\mathrm{Tr}\left[\epsilon \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\left(\frac{1+\gamma_5}{2}\right)\epsilon^T (\gamma^\nu)^T \right]\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu}\Phi_n \\
+=&+8\mathrm{Tr}\left[\epsilon \gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\epsilon (\gamma^\nu)^T \right]\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu}\Phi_n \\
+=&+8\mathrm{Tr}\left[\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\epsilon (\gamma^\nu)^T \epsilon\right]\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu} \Phi_n \\
+=&+8\mathrm{Tr}\left[\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\epsilon (-\gamma_5\epsilon )\gamma^\nu (-\gamma_5 \epsilon) \epsilon\right]\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu} \Phi_n \\
+=&-8\mathrm{Tr}\left[\gamma^\mu \left(\frac{1+\gamma_5}{2}\right)\gamma^\nu \right]\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu} \Phi_n \\
+=&-4\mathrm{Tr}\left[\gamma^\mu \gamma^\nu \right]\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu} \Phi_n+4\mathrm{Tr}\left[\gamma_5 \gamma^\mu \gamma^\nu \right]\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu} \Phi_n \\
+=&-16\eta^{\mu\nu}\frac{\partial}{\partial x^\nu} \frac{\partial}{\partial x^\mu} \Phi_n \quad \because (8.A.5)(8.A.11)\\
+=&-16 \Box \Phi_n
+\end{align*}
+となる．したがって
+\begin{align*}
+\mc{D}_R^2 \mc{D}_L^2 \Phi_n =-16\Box \Phi_n=-16\mc{D}_R^2 \Box S_n
+\end{align*}
+であるから，微分方程式
+\begin{align*}
+-16\Box S_n=\mc{D}_L^2 \Phi_n
+\end{align*}
+の解$S_n$によって(26.6.10)は満たされる．実際この方程式の解はグリーン関数$\Box G(x-y)=\delta^4(x-y)$を用いて
+\begin{align*}
+S_n(x,\theta)=-\frac{1}{16}\int d^4 y G(x-y)\mc{D}_L^2 \Phi_n(y,\theta)
+\end{align*}
+と書けて
+\begin{align*}
+(\bar{\mc{D}}_L \mc{D}_L)=&-\frac{\partial}{\partial \theta_{L\alpha}} \frac{\partial}{\partial \bar{\theta}_{L\alpha}}-2\bar{\theta}_{R\alpha} \gamma^\mu_{\alpha\beta} \frac{\partial}{\partial \bar{\theta}_{L\beta}}\frac{\partial}{\partial x^\mu} -(\bar{\theta}_R \theta_{R}) \Box \\
+(\bar{\mc{D}}_R \mc{D}_R)=&-\frac{\partial}{\partial \theta_{R\alpha}} \frac{\partial}{\partial \bar{\theta}_{R\alpha}}-2\bar{\theta}_{L\alpha} \gamma^\mu_{\alpha\beta} \frac{\partial}{\partial \bar{\theta}_{R\beta}}\frac{\partial}{\partial x^\mu} -(\bar{\theta}_L \theta_{L}) \Box
+\end{align*}
+であるから(26.3節の最後の$\bar{\mc{D}}\mc{D}$の計算で，(26.3.25)(26.3.26)より$\mc{D}_L$の場合では$\partial/\partial \theta_\alpha \to \partial/\partial \theta_{L\alpha},\theta_\alpha \to \theta_{R\alpha}$とし，$\mc{D}_R$では$\partial/\partial \theta_\alpha\to \partial/\partial \theta_{R\alpha},\theta_\alpha \to \theta_{L\alpha}$と置き換えればよい．)部分積分によって
+\begin{align*}
+&\mc{D}_R^2 S_n(x,\theta)\\
+=&+\frac{1}{16}\int d^4 y (\bar{\mc{D}}_R \mc{D}_R)G(x-y)\mc{D}_L^2 \Phi_n(y,\theta) \\
+=&\frac{1}{16}\int d^4 y \left(-\frac{\partial}{\partial \theta_{R\alpha}} \frac{\partial}{\partial \bar{\theta}_{R\alpha}}-2\bar{\theta}_{L\alpha} \gamma^\mu_{\alpha\beta} \frac{\partial}{\partial \bar{\theta}_{R\beta}}\frac{\partial}{\partial x^\mu} -(\bar{\theta}_L \theta_{L}) \Box_x \right)G(x-y)\mc{D}_L^2 \Phi_n(y,\theta) \\
+=&\frac{1}{16}\int d^4 y \Bigl[-G(x-y)\frac{\partial}{\partial \theta_{R\alpha}} \frac{\partial}{\partial \bar{\theta}_{R\alpha}} \\
+&\qquad \qquad -2\bar{\theta}_{L\alpha} \gamma^\mu_{\alpha\beta} \left(\frac{\partial}{\partial x^\mu}G(x-y)\right) \frac{\partial}{\partial \bar{\theta}_{R\beta}} -(\bar{\theta}_L \theta_{L}) \Bigl(\Box_x G(x-y)\Bigr) \Bigr] \mc{D}_L^2 \Phi_n(y,\theta) \\
+=&\frac{1}{16}\int d^4 y \Bigl[-G(x-y)\frac{\partial}{\partial \theta_{R\alpha}} \frac{\partial}{\partial \bar{\theta}_{R\alpha}} \\
+&\qquad \qquad +2\bar{\theta}_{L\alpha} \gamma^\mu_{\alpha\beta} \left(\frac{\partial}{\partial y^\mu}G(x-y)\right) \frac{\partial}{\partial \bar{\theta}_{R\beta}} -(\bar{\theta}_L \theta_{L}) \Bigl(\Box_y G(x-y)\Bigr) \Bigr] \mc{D}_L^2 \Phi_n(y,\theta) \\
+=&\frac{1}{16}\int d^4 y G(x-y)\left(-\frac{\partial}{\partial \theta_{R\alpha}} \frac{\partial}{\partial \bar{\theta}_{R\alpha}}-2\bar{\theta}_{L\alpha} \gamma^\mu_{\alpha\beta} \frac{\partial}{\partial \bar{\theta}_{R\beta}}\frac{\partial}{\partial y^\mu} -(\bar{\theta}_L \theta_{L}) \Box_y \right) \mc{D}_L^2 \Phi_n(y,\theta) \\
+=&\frac{1}{16}\int d^4 y G(x-y)(\bar{\mc{D}}_R \mc{D}_R) \mc{D}_L^2 \Phi_n(y,\theta) \\
+=&-\frac{1}{16}\int d^4 y G(x-y)\mc{D}_R^2 \mc{D}_L^2 \Phi_n(y,\theta) \\
+=&+\int d^4 y G(x-y)\Box_y \Phi_n(y,\theta) \\
+=&\int d^4 y \Box_y G(x-y) \Phi_n(y,\theta) \\
+=&\int d^4 y \Box_x G(x-y) \Phi_n(y,\theta) \\
+=&\int d^4 y \delta^4(x-y) \Phi_n(y,\theta) \\
+=&\Phi_n(x,\theta)
+\end{align*}
+となる．(ここで任意の関数$f$について
+\begin{align*}
+\frac{\partial}{\partial x}f(x-y)=-\frac{\partial}{\partial y}f(x-y)
+\end{align*}
+であることを用いた．)したがって，任意の左カイラル超場$\Phi_n$に対して(26.6.10)を満たすポテンシャル超場$S_n$は存在する．
+
+\vskip\baselineskip
+
+
+$\mc{D}_R^2 S$は任意の$S$について左カイラルだから，$\mc{D}_R^2 \delta S$は左カイラルになり，今度は拘束を保つ．よって作用は$S_n$の任意の変化分について停留しなければならない．(26.6.5)を使うと，作用は$S_n,S^*_n$を使って
+\begin{align*}
+I=&\frac{1}{2}\int d^4x \Bigl[K(\Phi,\Phi^*)\Bigr]_D+2\mathrm{Re}\int d^4x [f(\Phi)]_{\mc{F}} \\
+=&-\frac{1}{4}\int d^4x \int d^4\theta K(\Phi,\Phi^*)+2\mathrm{Re}\int d^4x [f(\Phi)]_{\mc{F}} \\
+=&-\frac{1}{4}\int d^4x \int d^4\theta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)+2\mathrm{Re}\int d^4x [f(\mc{D}^2_R S)]_{\mc{F}}
+\end{align*}
+と表されることがわかる．$S_n$の微小変化分$\delta S_n$のもとでの作用の第一項目の変化分(ただし$S_n^*$の変化分は含まない．)は，超空間の部分積分を使って
+\begin{align*}
+&\delta\left(-\frac{1}{4}\int d^4x \int d^4\theta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)\right) \\
+=&-\frac{1}{4}\int d^4 x \int d^4 \theta \sum_n \frac{\delta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)}{\delta \mc{D}_R^2 S_n} \mc{D}_R^2 \delta S_n \\
+=&-\frac{1}{4}\int d^4 x \int d^4 \theta \sum_n \frac{\delta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)}{\delta \mc{D}_R^2 S_n} \left(-\frac{\partial}{\partial \theta_{R\alpha}} \frac{\partial}{\partial \bar{\theta}_{R\alpha}}-2\bar{\theta}_{L\alpha} \gamma^\mu_{\alpha\beta} \frac{\partial}{\partial \bar{\theta}_{R\beta}}\frac{\partial}{\partial x^\mu} -(\bar{\theta}_L \theta_{L}) \Box \right) \delta S_n \\
+=&-\frac{1}{4}\int d^4 x \int d^4 \theta \sum_n \left[\left(-\frac{\partial}{\partial \theta_{R\alpha}} \frac{\partial}{\partial \bar{\theta}_{R\alpha}}-2\bar{\theta}_{L\alpha} \gamma^\mu_{\alpha\beta} \frac{\partial}{\partial \bar{\theta}_{R\beta}}\frac{\partial}{\partial x^\mu} -(\bar{\theta}_L \theta_{L}) \Box \right) \frac{\delta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)}{\delta \mc{D}_R^2 S_n}\right] \delta S_n \\
+=&-\frac{1}{4}\int d^4 x \int d^4 \theta \sum_n \mc{D}_R^2 \frac{\delta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)}{\delta \mc{D}_R^2 S_n} \delta S_n
+\end{align*}
+(本当は右微分と左微分を区別すべきだが，$S_n$はボゾン的かつフェルミオン的な$\mc{D}_R$の二乗もボゾン的になるので，ここでは区別が必要ない)さらに，(26.3.31)と(26.6.5)を使うと，$S_n$の微小変化分$\delta S_n$のもとでの超ポテンシャル項の積分の変化分が以下のように表せることが分かる．
+\begin{align*}
+&\delta \int d^4x \Bigl[f(\mc{D}_R^2 S)\Bigr]_{\mc{F}} \\
+=&\sum_n \int d^4x \left[\frac{\delta f(\mc{D}_R^2 S)}{\delta \mc{D}_R^2 S_n} \mc{D}_R^2 \delta S_n\right]_{\mc{F}} \\
+=&\sum_n \int d^4x \left[\left.\frac{\partial f(\Phi)}{\partial \Phi_n}\right|_{\Phi=\mc{D}_R^2 S} \mc{D}_R^2 \delta S_n\right]_{\mc{F}} \\
+=&\sum_n \int d^4x \left[\mc{D}_R^2 \left(\left.\frac{\partial f(\Phi)}{\partial \Phi_n}\right|_{\Phi=\mc{D}_R^2 S} \delta S_n\right) \right]_{\mc{F}} \\
+=&2\sum_n \int d^4x \left[\left.\frac{\partial f(\Phi)}{\partial \Phi_n}\right|_{\Phi=\mc{D}_R^2 S} \delta S_n \right]_{D} \quad \because (26.3.31) \\
+=&-\sum_n \int d^4x \int d^4\theta \left.\frac{\partial f(\Phi)}{\partial \Phi_n}\right|_{\Phi=\mc{D}_R^2 S} \delta S_n \quad \because (26.6.5)
+\end{align*}
+ここで，三行目から四行目への変形で，$f(\Phi)$は左カイラルであるから，$\mc{D}_R^2$を作用させるとゼロになることを用いた．これより，(26.6.14)が$S_n$の任意の変分のもとで停留する条件は
+\begin{align*}
+0=&\delta I \\
+=&\delta \left(-\frac{1}{4}\int d^4x \int d^4\theta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)+\int d^4x [f(\mc{D}^2_R S)]_{\mc{F}}+\int d^4x [f(\mc{D}^2_R S)]^*_{\mc{F}}\right) \\
+=&\delta \left(-\frac{1}{4}\int d^4x \int d^4\theta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)+\int d^4x [f(\mc{D}^2_R S)]_{\mc{F}}+\int d^4x [f^*(-\mc{D}^2_L S^*)]_{\mc{F}}\right) \\
+=&\sum_n\int d^4 x \int d^4 \theta \left[-\frac{1}{4}\mc{D}_R^2 \frac{\delta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)}{\delta \mc{D}_R^2 S_n}-\left.\frac{\partial f(\Phi)}{\partial \Phi_n}\right|_{\Phi=\mc{D}_R^2 S}\right]\delta S_n \\
+\therefore \quad & \mc{D}_R^2 \frac{\delta K(\mc{D}_R^2 S,-\mc{D}_L^2 S^*)}{\delta \mc{D}_R^2 S_n}=-4\left.\frac{\partial f(\Phi)}{\partial \Phi_n}\right|_{\Phi=\mc{D}_R^2 S}
+\end{align*}
+となる．(第三項目は，$f$は$\Phi$にのみ依存する多項式関数だから$[f(\Phi)]^*=f^*(\Phi^*)$であり，$S$ではなく$S^*$にのみ依存するので$\delta S$の変分ではゼロとなる．)カイラル超場$\Phi$に戻すと
+\begin{align*}
+\mc{D}^2_R \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n}=-4\frac{\partial f(\Phi)}{\partial \Phi_n}
+\end{align*}
+となる．複素共役をとると($S^*$の方で変分をとった結果と同じ)
+\begin{align*}
+\mc{D}^2_L \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi^*_n}=4\left(\frac{\partial f(\Phi)}{\partial \Phi_n}\right)
+\end{align*}
+を得る．ここで$K$は実関数であることと，(26.6.11)と同様に複素共役で$(\mc{D}_R^2)^*=-\mc{D}_L^2$であることを用いた．26.3節で示しているように$\mc{D}_R^2 (\theta^T_R \epsilon \theta_R)=-4$であり，したがって(26.3.11)より$\mc{D}_R^2 \Phi^*$の$\theta$に依存しない項は
+\begin{align*}
+\Phi^*=&\phi^*(x)-\sqrt{2}\Bigl(\bar{\theta}_R\psi(x)\Bigr)+\mc{F}^*(x)\left(\bar{\theta}_R \theta_R\right) \\
+&-\frac{1}{2}\Bigl(\bar{\theta}\gamma_5 \gamma_\mu \theta\Bigr)\partial^\mu \phi^*(x)+\frac{1}{\sqrt{2}}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)\Bigl(\bar{\theta}_L\Slash{\partial}\psi(x)\Bigr) \\
+&-\frac{1}{8}\Bigl(\bar{\theta}\gamma_5 \theta\Bigr)^2 \Box \phi^*(x) \\
+\end{align*}
+だから$(\bar{\theta}_R \theta_R)=-(\theta^T_R \epsilon \theta_R)$より
+\begin{align*}
+&\mc{D}^2_R \left(\mc{F}^*(x)(\bar{\theta}_R \theta_R)\right)=-\mc{F}^*(x)\mc{D}_R^2\left(\theta^T_R \epsilon \theta_R\right)+(\theta に依存する項) \\
+=&+4\mc{F}^*(x)+(\theta に依存する項)
+\end{align*}
+で，一方$\partial f(\Phi)/\partial \Phi_n$の$\theta$に依存しない項は$\partial f(\phi)/\partial \phi_n$である．したがって，(26.4.1)の仮定$K=\sum_n \Phi^*_n \Phi_n$の場合に，場の方程式(26.6.15)の$\theta$に依存しない項からは
+\begin{align*}
+\mc{F}^*(x)=-\frac{\partial f(\phi)}{\partial \phi_n}
+\end{align*}
+が得られる．これは(26.4.6)と一致する．
+
+\vskip\baselineskip
+
+
+この形式の利用の一例として，保存カレントが属する超場を考える．作用(26.6.9)の超ポテンシャルとケーラーポテンシャルが，微小な大域的変換
+\begin{align*}
+\delta \Phi_n= i\epsilon \sum_m \mc{T}_{nm} \Phi_m ,\quad \delta \Phi^*_n =-i\epsilon \sum_m \mc{T}^*_{nm}\Phi_m^*=-i\epsilon \sum_m \mc{T}_{mn}\Phi_m^*
+\end{align*}
+のもとで不変だとする．ここで$\epsilon$は実の微小定数，$\mc{T}_{nm}$はエルミート行列．超ポテンシャル$f(\Phi)$は$\Phi_n$にのみ依存して，さらに時空微分や超座標微分を含まないのだったから，それは拡大された変換
+\begin{align*}
+\delta \Phi_n= i\epsilon \Lambda(x,\theta) \sum_m \mc{T}_{nm} \Phi_m ,\quad \delta \Phi^*_n =-i\epsilon \Lambda^*(x,\theta) \sum_m \mc{T}_{mn}\Phi_m^*
+\end{align*}
+のもとでも自動的に不変になっている．ここで$\delta \Phi_n$が左カイラルに拘束されているために$\Lambda(x,\theta)$は左カイラルでなければならないが，それ以外には拘束はない．一方，ケーラーポテンシャルのような他の項は，微分はないが$\Phi^*$の依存性があるせいで，$\Lambda \neq \Lambda^*$のためにこれらの拡大された変換のもとで一般的に不変ではない．(例えば，(26.4.1)の形で$g_{nm}=\delta_{nm}$の場合，(26.6.17)のもとで不変
+\begin{align*}
+\delta K=&\sum_n \delta \Phi_n^* \Phi_n +\sum_n \Phi_n^* \delta \Phi_n \\
+=&-i\epsilon \sum_{nm}\Phi_m^* \mc{T}_{mn} \Phi_n +i\epsilon \sum_{nm}\Phi_m^* \mc{T}_{mn} \Phi_n \\
+=&0
+\end{align*}
+になっているが，拡大された変換の下では
+\begin{align*}
+\delta K=&\sum_n \delta \Phi_n^* \Phi_n +\sum_n \Phi_n^* \delta \Phi_n \\
+=&-i\epsilon \Lambda^* \sum_{nm}\Phi_m^* \mc{T}_{mn} \Phi_n +i\epsilon \Lambda \sum_{nm}\Phi_m^* \mc{T}_{mn} \Phi_n \\
+=&i(\Lambda-\Lambda^*)\sum_{nm}\Phi_m^* \mc{T}_{mn} \Phi_n \neq 0
+\end{align*}
+となって不変ではない．)これは$\Lambda=\Lambda^*$の場合に元の対称性を復元するはず(微分がないから$\Lambda$の時空と超座標の依存性は問題なく，実条件のみが復元に必要)だから，一般の場について作用の変化は
+\begin{align*}
+\delta I=i\epsilon \int d^4 x \int d^4 \theta [\Lambda-\Lambda^*] \mc{J}
+\end{align*}
+という形でなければならない．ここで，$\mc{J}(x,\theta)$はある実の超場($I$が実だから全体が実であるためには実超場でなければならない)であり，\textbf{カレント超場}と呼ばれる．しかし，場の方程式が満たされているならば，作用は超場の\uwave{任意の}変分について停留しなければならない(任意の変分が停留するという条件が場の方程式なのだから当然)ので，任意の左カイラル超場$\Lambda(x,\theta)$について積分(26.6.19)はゼロとならなければならない．そのような任意の$\Lambda$は左カイラル超場だから，$\Lambda=\mc{D}_R^2 S$という形に書けるのだった．したがって部分積分により
+\begin{align*}
+0=\delta I=&i\epsilon \int d^4 x \int d^4 \theta [\Lambda-\Lambda^*] \mc{J} \\
+=&i\epsilon \int d^4 x \int d^4 \theta[\mc{D}_R^2 S +\mc{D}_L^2 S^*] \mc{J} \\
+=&i\epsilon \int d^4 x \int d^4 \theta S \mc{D}_R^2 \mc{J}+i\epsilon \int d^4 x \int d^4 \theta S^* \mc{D}_L^2 \mc{J} \\
+\therefore \quad \mc{D}_R^2 \mc{J}=&\mc{D}_L^2\mc{J}=0
+\end{align*}
+を満たさなければならない．つまり，$\mc{J}$は\uwave{線形}超場となる．(26.3節の最後を見返す．$(\bar{\mc{D}}\mc{D})=\mc{D}_R^2+\mc{D}_L^2$だったから，$(\bar{\mc{D}}\mc{D})\mc{J}=0$を満たし(26.3.44)を満たす．)これは(26.3.45)より$\mc{J}(x,\theta)$の成分場について
+\begin{align*}
+N^{\mc{J}}=M^{\mc{J}}=\partial^\mu V^{\mc{J}}_\mu=0,\quad \lambda^{\mc{J}}=-\Slash{\partial}\omega^{\mc{J}} ,\quad D^{\mc{J}}=-\Box C^{\mc{J}}
+\end{align*}
+を満たすことを意味する．これにより，$V$成分$V_\mu^{\mc{J}}$がこの対称性に伴う保存カレントになっていることがわかる．
+
+\vskip\baselineskip
+
+
+作用が(26.6.9)のとき，対称性変換(26.6.17)のもとでのカレント超場を計算する．(26.6.17)のもとでケーラーポテンシャルが対称であることより
+\begin{align*}
+0=&-\frac{1}{4}\int d^4 x d^4\theta \delta K(\Phi,\Phi^*) \\
+=&- \frac{1}{4}\int d^4 x d^4 \theta \sum_n \left[\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \delta \Phi_n+\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi^*_n} \delta \Phi^*_n\right] \\
+=& - \frac{1}{4}\int d^4 x d^4 \theta \sum_{nm} \left[i\epsilon \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \mc{T}_{nm}\Phi_m -i\epsilon \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi^*_n} \mc{T}_{mn}\Phi^*_m\right] \\
+=&- \frac{1}{4}i\epsilon \int d^4 x d^4 \theta \sum_{nm} \left[\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \mc{T}_{nm}\Phi_m -\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi^*_n} \mc{T}_{mn}\Phi^*_m\right] \\
+\therefore \quad & \sum_{nm}\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \mc{T}_{nm}\Phi_m =\sum_{nm}\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi^*_n} \mc{T}_{mn}\Phi^*_m
+\end{align*}
+であることがわかる．これを用いて，拡大された変換(26.6.18)を計算すると
+\begin{align*}
+\delta I=&-\frac{1}{4}\int d^4 x d^4\theta \delta K(\Phi,\Phi^*) \quad (f の項は(26.6.18)でも対称) \\
+=&- \frac{1}{4}\int d^4 x d^4 \theta \sum_n \left[\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \delta \Phi_n+\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi^*_n} \delta \Phi^*_n\right] \\
+=& - \frac{1}{4}\int d^4 x d^4 \theta \sum_{nm} \left[i\epsilon \Lambda\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \mc{T}_{nm}\Phi_m -i\epsilon \Lambda^* \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi^*_n} \mc{T}_{mn}\Phi^*_m\right] \\
+=&- \frac{1}{4}\int d^4 x d^4 \theta \sum_{nm} \left[i\epsilon \Lambda\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \mc{T}_{nm}\Phi_m -i\epsilon \Lambda^* \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \mc{T}_{nm}\Phi_m\right] \\
+=&- \frac{1}{2}i\epsilon \int d^4 x d^4 \theta [\Lambda-\Lambda^*]\sum_{nm} \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \mc{T}_{nm}\Phi_m
+\end{align*}
+したがってカレント超場は($-1/4$を無視して)
+\begin{align*}
+\mc{J}=\sum_{nm} \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \mc{T}_{nm}\Phi_m=\sum_{nm}\frac{\delta K(\Phi,\Phi^*)}{\delta \Phi^*_n} \mc{T}_{mn}\Phi^*_m
+\end{align*}
+という形になる．(これは明らかに実超場である．)これにより，場の方程式(26.6.15)を用いて
+\begin{align*}
+\mc{D}_R^2 \mc{J}=&\sum_{nm}\left[\mc{D}^2_R \frac{\delta K(\Phi,\Phi^*)}{\delta \Phi_n} \right]\mc{T}_{nm}\Phi_m \quad \because \mc{D}_R \Phi_m=0 \\
+=&-4\sum_{nm}\frac{\partial f(\Phi)}{\partial \Phi_n}\mc{T}_{nm}\Phi_m \quad \because (26.6.15)
+\end{align*}
+となり，これは変換(26.6.17)のもとでの超ポテンシャルの不変性の仮定により
+\begin{align*}
+0=\delta f =&\sum_{n}\frac{\partial f(\Phi)}{\partial \Phi_n}\delta \Phi_n \\
+=&i\epsilon \sum_{nm}\frac{\partial f(\Phi)}{\partial \Phi_n}\mc{T}_{nm}\Phi_m \\
+\therefore \quad 0=&\sum_{nm}\frac{\partial f(\Phi)}{\partial \Phi_n}\mc{T}_{nm}\Phi_m
+\end{align*}
+が得られるから，したがって$\mc{D}_R^2\mc{J}=0$となる．$\mc{J}$が実超場であることと$(\mc{D}_R^2)^*=-\mc{D}_L^2$より，複素共役によって(26.6.20)の二番目の保存条件$\mc{D}_L^2 \mc{J}=0$もわかる．
+
+
+\newpage
+
+
+\subsection{超カレント}
+他の大域的連続対称性と同じく，超対称性には保存カレントが存在する．超対称性カレントの保存則と交換関係は，超対称性が自発的に破れても成立する演算子則になっている．したがって，29章で非摂動論的に超対称性が自発的に破れる理論を考察するときも，これらの表式が役立つらしい．また，超対称性カレントは\textbf{超カレント}と呼ばれる超場の成分に関係しているらしい．この超場は31章で超重力を扱う際に本質的な役割をするらしい．
+
+\vskip\baselineskip
+
+
+7.3節で見たように，ラグランジアン密度が通常の大域的対称性の微小変換$\chi^\ell \to \chi^\ell +i\epsilon \mc{F}^\ell$(ここで$\chi^\ell$は一般的なボゾンかフェルミオンの正準場か補助場を表す15章と同じ統一的な記号で，$\mc{F}^\ell$は正準場か補助場の関数)のもとで不変になっているとすると，カレント
+\begin{align*}
+J^\mu(x) =-i\sum_{\ell} \frac{\partial \mc{L}(x)}{\partial (\partial \chi^\ell(x)/\partial x^\mu)}\mc{F}^\ell(x)
+\end{align*}
+が存在する．このカレントは，場が場の方程式を満たすならば保存し，正準交換関係より
+\begin{align*}
+\left[\int d^3 \mathbf{x} J^0(x),\chi^\ell(y)\right]=- \mc{F}^\ell(y)
+\end{align*}
+が満たされるという意味で対称性の生成子になっている．超対称性カレントを扱うには，二つの理由でより複雑な取り扱いが必要となる．一つは，超対称性はラグランジアンやラグランジアン密度の対称性ではなく，作用に対してのみ成立する対称性だということである．((26.2.31)の上の文章を読み直す．)実際，微小超対称性変換のもとでのラグランジアン密度の変分は，時空微分項になっていて，したがって以下のように書くことができる．
+\begin{align*}
+\delta \mc{L} =\Bigl(\bar{\alpha}\partial_\mu K^\mu\Bigr)
+\end{align*}
+ここで$K^\mu$はマヨラナスピノル添え字をもつ4元ベクトルである．その結果，超対称性カレントは通常のネーターカレントではなくなる．ネーターカレントとは，以下で定義されるマヨラナスピノル添え字をもつ4元ベクトル$N^\mu$である．
+\begin{align*}
+\sum_{\ell}\frac{\partial_R \mc{L}}{\partial(\partial_\mu \chi^\ell)}\delta \chi^\ell=:-(\bar{\alpha} N^\mu)
+\end{align*}
+このベクトルの発散を計算すると
+\begin{align*}
+(\bar{\alpha} \partial_\mu N^\mu)=&-\sum_{\ell}\partial_\mu\left( \frac{\partial_R \mc{L}}{\partial(\partial_\mu \chi^\ell)}\right)\delta \chi^\ell-\sum_{\ell}\frac{\partial_R \mc{L}}{\partial(\partial_\mu \chi^\ell)}\partial_\mu \delta \chi^\ell \\
+=&-\sum_{\ell}\frac{\partial_R \mc{L}}{\partial \chi^\ell}\delta \chi^\ell-\sum_{\ell}\frac{\partial_R \mc{L}}{\partial(\partial_\mu \chi^\ell)}\partial_\mu \delta \chi^\ell \\
+=&-\sum_{\ell}\frac{\partial_R \mc{L}}{\partial \chi^\ell}\delta \chi^\ell-\sum_{\ell}\frac{\partial_R \mc{L}}{\partial(\partial_\mu \chi^\ell)}\delta(\partial_\mu \chi^\ell) \\
+=&-\delta \mc{L}=(\bar{\alpha}\partial_\mu K^\mu)
+\end{align*}
+となり，ゼロになっていない．(ここで$\partial_R$は右微分
+\begin{align*}
+\delta F[\chi]=:\frac{\partial_R F}{\partial \chi}\delta \chi
+\end{align*}
+を表す．15.9節参照．)よって，この量の代わりに超対称性カレントを以下のように定義しなければならない．
+\begin{align*}
+S^\mu:=N^\mu+K^\mu
+\end{align*}
+これは保存
+\begin{align*}
+\partial_\mu S^\mu=\partial_\mu N^\mu +\partial_\mu K^\mu =0
+\end{align*}
+される．
+
+\vskip\baselineskip
+
+
+二番目に複雑な点は，正準場$\chi^\ell$の超対称性変換のもとでの変分$\delta \chi^\ell$は単に正準場のみの関数になっておらず，それらの正準共役も含むという点である．例えば(26.3.15)
+\begin{align*}
+\delta \psi_L=\sqrt{2} \partial_\mu \phi \gamma^\mu \alpha_R+ \sqrt{2}\mc{F} \alpha_L
+\end{align*}
+より，カイラル・スカラー超場の$\psi$成分の変分は，$\phi$成分の時間微分を含むことが分かる．(スカラー場の共役場は時間微分なのであった．(7.2.16)参照．)その結果，ネーターチャージ(7.3.17)
+\begin{align*}
+\int d^3x N^0=-i\int d^3x P_n(\mathbf{x},t)\mc{F}^n[Q(t),\mathbf{x}]
+\end{align*}
 
 
 

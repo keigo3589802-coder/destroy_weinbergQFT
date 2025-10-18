@@ -18,7 +18,17 @@
 \tcbuselibrary{theorems,skins}
 \usetikzlibrary{decorations}
 \usepackage{color}
-\usepackage{physics}
+
+\usepackage{xcolor} %ここからハイパーリンクのパッケージの設定
+\usepackage[%
+  dvipdfmx,%
+  bookmarks=true,%
+  bookmarksnumbered=true,%
+  colorlinks=true,%
+  allcolors=blue%
+]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{cite} %ここまで
 
 \usetikzlibrary{intersections, calc, arrows.meta}
  \usetikzlibrary{patterns}
@@ -32,6 +42,16 @@
 \newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
 \renewcommand{\mc}{\mathcal}
 
+\tcbset{
+  colback=blue!5!white,  % 背景色
+  colframe=blue!75!black, % 枠線の色
+  fonttitle=\bfseries,    % タイトルの太字
+  boxrule=0.8pt,          % 枠線の太さ
+  arc=2mm,                % 角の丸み
+  left=4mm, right=4mm, top=2mm, bottom=2mm, % 余白
+}
+
+\newtcolorbox{sectiongoal}[1][]{title=この節でやるべきこと,#1}
 
 % \textrm{Roman　デフォルト}
 % \textgt{Gothic　和文ゴシック体}*専門用語に
@@ -63,11 +83,25 @@
 
 \maketitle
 
+\tableofcontents
+
+\newpage
+
 \setcounter{part}{2}
 \part{散乱理論}
 \setcounter{section}{3}
 \setcounter{subsection}{0}
 \subsection{In状態とout状態}
+
+
+\begin{sectiongoal}
+\begin{itemize}
+\item 1粒子状態を用いて多粒子状態を定義する．
+\item 波束の概念を理解する．
+\item in状態，out状態を定義する．
+\end{itemize}
+\end{sectiongoal}
+
 1粒子状態$\Psi_{p,\sigma,n}$全体の張るヒルベルト空間$\mc{H}_1$
 \begin{align*}
 \mc{H}_1\ni \int d^3\mathbf{p} f_{\sigma,n}(p) \Psi_{p,\sigma,n}
@@ -589,6 +623,14 @@ C_4 =& \{(p_n)_i =iy | y \in [\delta_i,0] \}
 
 
 \subsection{$S$行列}
+
+\begin{sectiongoal}
+\begin{itemize}
+\item 前節で定義したin,out状態を用いて$S$行列を定義する．
+\item $S$行列の定義からただちに従う性質を理解する．
+\end{itemize}
+\end{sectiongoal}
+
 実験屋は一般に特定の粒子からなる状態を$t\to -\infty$で用意し，$t\to +\infty$でこの状態がどう見えるかを測定する．もし用意された状態が$t\to -\infty$で粒子の内容として$\alpha$を持つなら，それはin状態$\tensor{\Psi}{_\alpha^+}$だ．また，$t\to +\infty$で粒子の内容$\beta$を持つことが見いだされれば，それはout状態$\tensor{\Psi}{_\beta^-}$だ．したがって，遷移$\alpha \to \beta$の確率振幅はスカラー積
 \begin{align*}
 S_{\beta\alpha}=(\tensor{\Psi}{_\beta^-},\tensor{\Psi}{_\alpha^+})
@@ -880,6 +922,12 @@ T^{\pm *}_{\alpha\beta}\delta(E_\beta-E_\alpha)-T^\pm_{\beta\alpha}\delta(E_\bet
 
 \subsection{$S$行列の対称性}
 $S$行列の不変性が意味することや，どのような条件をハミルトニアンに課すとそのような不変性が保証されるかを考察する．
+
+\begin{sectiongoal}
+\begin{itemize}
+\item 理論のローレンツ対称性・内部対称性の要請を，$S$演算子と対称性演算子との交換で理解する．
+\end{itemize}
+\end{sectiongoal}
 
 \vskip\baselineskip
 
@@ -2363,6 +2411,7 @@ y \log\left(\frac{y}{x}\right) \geq y-x
 =&0
 \end{align*}
 となり，$P_\alpha$は時間に依存しなくなる．したがって上の仮定がなりたつならばエントロピー$H=-\int d\alpha P_\alpha \log \left(P_\alpha/c_\alpha\right)$も時間に依存しなくなり，この系は平衡状態に達している．
+
 
 
 

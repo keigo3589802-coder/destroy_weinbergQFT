@@ -18,7 +18,16 @@
 \tcbuselibrary{theorems,skins}
 \usetikzlibrary{decorations}
 \usepackage{color}
-\usepackage{physics}
+\usepackage{xcolor} %ここからハイパーリンクのパッケージの設定
+\usepackage[%
+  dvipdfmx,%
+  bookmarks=true,%
+  bookmarksnumbered=true,%
+  colorlinks=true,%
+  allcolors=blue%
+]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{cite} %ここまで
 
 \usetikzlibrary{intersections, calc, arrows.meta}
  \usetikzlibrary{patterns}
@@ -32,6 +41,16 @@
 \newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
 \renewcommand{\mc}{\mathcal}
 
+\tcbset{
+  colback=blue!5!white,  % 背景色
+  colframe=blue!75!black, % 枠線の色
+  fonttitle=\bfseries,    % タイトルの太字
+  boxrule=0.8pt,          % 枠線の太さ
+  arc=2mm,                % 角の丸み
+  left=4mm, right=4mm, top=2mm, bottom=2mm, % 余白
+}
+
+\newtcolorbox{sectiongoal}[1][]{title=この節でやるべきこと,#1}
 
 % \textrm{Roman　デフォルト}
 % \textgt{Gothic　和文ゴシック体}*専門用語に
@@ -62,6 +81,11 @@
 
 
 \maketitle
+
+\tableofcontents
+
+\newpage
+
 
 \part*{まえがき}
 これはWeinberg著「The Quantum Theory of Field」の日本語訳「ワインバーグ場の量子論」(以下，WeinbergQFTだったり単にWeinbergという)を読んだりゼミをする中で行った計算を全部書き留めておいて，復習にかける時間を最小限にしたり，同期や後輩たちがもしこの本を勉強に使おうと思ったときにドヤ顔で知ったかぶりをするためのノート．というのは本音で，建前としては，よく「Weinbergは初学者にはオススメできない本」と言われることが多いけど自分で読んでみたところ(少なくとも他の本に比べてそんなこと言われるほど)そうは思わなかったので，そのような悪評(？)を覆すつもりで行間を一行たりとも残さないつもりで周りに布教するためのノート．\par
@@ -518,9 +542,13 @@ T(\bar{\Lambda},\bar{a})T(\Lambda,a)=T(\bar{\Lambda}\Lambda,\bar{\Lambda}a+\bar{
 さらに両辺に$\eta^{\alpha\rho}$を左からかければ
 \begin{align*}
 \eta^{\alpha\rho}\eta_{\mu\lambda}\tensor{\Lambda}{^\mu_\rho}=&\eta^{\alpha\rho} \eta_{\rho\sigma}\tensor{(\Lambda^{-1})}{^\sigma_\lambda} \\
-\therefore \quad  \tensor{\Lambda}{_\lambda^\rho}\equiv &\eta_{\lambda\mu}\tensor{\Lambda}{^\mu_\rho}\eta^{\sigma\rho}=\tensor{(\Lambda^{-1})}{^\sigma_\lambda}
+\therefore \quad  \tensor{\Lambda}{_\lambda^\sigma}:= &\eta_{\lambda\mu}\tensor{\Lambda}{^\mu_\rho}\eta^{\sigma\rho}=\tensor{(\Lambda^{-1})}{^\sigma_\lambda}
 \end{align*}
-であるとわかる．変換$T(\Lambda,a)$の逆は，(2.3.8)より
+であるとわかる\footnote{このように$\tensor{\Lambda}{_\lambda^\rho}$をおくと
+\begin{align*}
+u^\lambda \tensor{\Lambda}{_\lambda^\sigma} v_\sigma=u^\lambda \eta_{\lambda\mu}\tensor{\Lambda}{^\mu_\rho}\eta^{\rho\sigma} v_\sigma=u_\mu \tensor{\Lambda}{^\mu_\rho} v^\rho
+\end{align*}
+とできて便利なことが多い．}．変換$T(\Lambda,a)$の逆は，(2.3.8)より
 \begin{align*}
 \bar{\Lambda}\Lambda=1 \quad \therefore &\, \bar{\Lambda}=\Lambda^{-1} \\
 \bar{\Lambda}a+\bar{a}=\Lambda^{-1} a+\bar{a}=0 \quad \therefore &\, \bar{a}=-\Lambda^{-1}a
@@ -1195,7 +1223,7 @@ U(1,a)=&\left[U\left(1,\frac{1}{N}\right)\right]^N=\left[1-i\frac{a_\mu P^\mu }{
 \begin{align*}
 U(1+\omega,0)=&1+i\frac{1}{2}\omega_{\mu\nu}J^{\mu\nu} \\
 =&1+i\frac{1}{2} \omega_{ij}J^{ij}+i\frac{1}{2}\omega_{i0}J^{i0}+i\frac{1}{2} \omega_{0i}J^{0i} \\
-=&1+i\frac{1}{2} \omega_{ij}\epsilon_{ijk}J_k -i\omega_{i0} K_i \quad \because J_i=\epsilon_{ijk}J^{jk},K_i=J_{i0}\\
+=&1+i\frac{1}{2} \omega_{ij}\epsilon_{ijk}J_k -i\omega_{i0} K_i \quad \because J_{ij}=\epsilon_{ijk}J^{k},K_i=J_{i0}\\
 =&1+i(\theta_i J_i-\beta_i K_i) =1+i(\bm{\theta} \cdot \mathbf{J}-\bm{\beta}\cdot \mathbf{K})
 \end{align*}
 となるが，
@@ -1510,7 +1538,11 @@ $p',p$はそれぞれローレンツ変換$L(p)$で$k',k$と関係していた�
 \begin{align*}
 \left(\Psi_{p',\sigma'},\Psi_{p,\sigma}\right)=|N(p)|^2\delta_{\sigma'\sigma}\frac{p^0}{k^0}\delta^3(\mathbf{p}-\mathbf{p}')
 \end{align*}
-となる．規格化定数$N(p)$はしばしば単に$N(p)=1$と選ばれる(Peskin,Srednickiなど)が，しかしそうするとスカラー積に因子$p^0/k^0$が登場する．このため，ここではよりよく用いられる定義
+となる．規格化定数$N(p)$はしばしば単に$N(p)=1$と選ばれる\footnote{Peskin,Srednickiなどでは
+\begin{align*}
+\left(\Psi_{p',\sigma'},\Psi_{p,\sigma}\right)=(2\pi)^3 2p^0\delta_{\sigma'\sigma}\delta^3(\mathbf{p}-\mathbf{p}')
+\end{align*}
+となるように$N(p)=\sqrt{(2\pi)^3 2k^0}$と選ばれる．}が，しかしそうするとスカラー積に因子$p^0/k^0$が登場する．このため，ここではよりよく用いられる定義
 \begin{align*}
 N(p)=\sqrt{k^0/p^0}
 \end{align*}
@@ -1712,6 +1744,246 @@ I & \mathbf{u}\\
 =&1
 \end{align*}
 となる．$\tensor{L(p)}{^0_0}=\gamma>+1$は明らかだから，以上から$L(p)$が$SO(3,1)$の元であることがわかる．\par
+
+
+\vskip\baselineskip
+
+
+ローレンツ変換が微小$\tensor{\Lambda}{^\mu_\nu}=\delta^\mu_\nu+\tensor{\omega}{^\mu_\nu}$としたときにウィグナー回転$W(\Lambda,p)$を微小展開し，ウィグナー回転が真に空間回転$SO(3)$の生成子$J_{ij}$のみで張られることと$\Theta$が$\omega$のどのような関数になっているかを与えよう．このためには，ウィグナー回転が$\omega$の1次で
+\begin{align*}
+L(\Lambda p)=&L(p+\omega p)=L(p)+\delta L \\
+L^{-1}(\Lambda p)=&L^{-1}(p)-L^{-1}(p)\delta L L^{-1}(p) \\
+\therefore \quad W(\Lambda,p)=&L^{-1}(\Lambda p)\Lambda L(p) \\
+=&1+L^{-1}(p)\omega L(p)-L^{-1}(p)\delta L
+\end{align*}
+となることを用いる．二項目は
+\begin{align*}
+L(p)=&\left(
+\begin{matrix}
+1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T & \mathbf{p}/M \\
+\mathbf{p}^T/M & \gamma
+\end{matrix}
+\right)=:\left(
+\begin{matrix}
+A & b \\
+b^T & \gamma
+\end{matrix}
+\right) \\
+\omega=&\left(
+\begin{matrix}
+\Omega & \kappa \\
+\kappa^T & 0
+\end{matrix}
+\right) ,\quad \{\tensor{\omega}{^i_j}\}=\{\omega_{ij}\}=:\Omega ,\quad \tensor{\omega}{^0_i}=-\omega_{0i}=+\omega_{i0}=\tensor{\omega}{^i_0}=:\kappa_i
+\end{align*}
+と書いて
+\begin{align*}
+L^{-1}(p)\omega L(p)=&\left(
+\begin{matrix}
+A & -b \\
+-b^T & \gamma
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\Omega & \kappa \\
+\kappa^T & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+A & b \\
+b^T & \gamma
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+A\Omega A+(A\kappa)b^T -b (\kappa^T A) & A\Omega b-b(\kappa^T b)+\gamma A \kappa \\
+-b^T \Omega A +\gamma \kappa^T A-(b^T \kappa) b^T & -b^T \Omega b+\gamma (\kappa^T b)-\gamma (b^T \kappa)
+\end{matrix}
+\right)
+\end{align*}
+となる．第三項目は
+\begin{align*}
+L^{-1}(p)\delta L=&\left(
+\begin{matrix}
+A & -b \\
+-b^T & \gamma
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\delta A & \delta b \\
+\delta b^T & \delta \gamma
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+A\delta A -b(\delta b)^T & A(\delta b)- b(\delta\gamma) \\
+-b^T\delta A +\gamma (\delta b)^T & -b^T (\delta b)+\gamma (\delta \gamma)
+\end{matrix}
+\right)
+\end{align*}
+となる．よって
+\begin{align*}
+&L^{-1}(p)\omega L(p)-L^{-1}(p)\delta L \\
+=&\left(
+\begin{matrix}
+A\Omega A+(A\kappa)b^T -b (\kappa^T A)-A\delta A +b(\delta b)^T & A\Omega b-b(\kappa^T b)+\gamma A \kappa-A(\delta b)+ b(\delta\gamma) \\
+-b^T \Omega A +\gamma \kappa^T A-(b^T \kappa) b^T+b^T\delta A -\gamma (\delta b)^T & -b^T \Omega b+\gamma (\kappa^T b)-\gamma (b^T \kappa) +b^T (\delta b)-\gamma (\delta \gamma)
+\end{matrix}
+\right)
+\end{align*}
+ここで$(\delta p)^\mu=\tensor{\omega}{^\mu_\nu}p^\nu$であることに注意して
+\begin{align*}
+\left(
+\begin{matrix}
+\delta \mathbf{p} \\
+\delta p^0 
+\end{matrix}
+\right)=&\left(
+\begin{matrix}
+\Omega & \kappa \\
+\kappa^T & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\mathbf{p} \\
+p^0
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+\Omega \mathbf{p} +\kappa p^0 \\
+\kappa^T \mathbf{p}
+\end{matrix}
+\right) \\
+\delta b=&\frac{\delta \mathbf{p}}{M}=\frac{\Omega \mathbf{p}+\kappa p^0}{M}=\frac{1}{M}\Omega \mathbf{p}+\gamma \kappa,\quad \delta \gamma=\frac{\delta p^0}{M}=\frac{(\kappa^T \mathbf{p})}{M}
+\end{align*}
+であることを用いると，まず簡単な右上成分は
+\begin{align*}
+&A\Omega b-b(\kappa^T b)+\gamma A \kappa-A(\delta b)+ b(\delta\gamma) \\
+=&\frac{1}{M}A\Omega\mathbf{p}-\frac{1}{M^2}\mathbf{p}(\kappa^T \mathbf{p})+\gamma A\kappa -A\left(\frac{1}{M}(\Omega \mathbf{p})+\gamma \kappa\right)+\frac{1}{M^2}\mathbf{p}(\kappa^T \mathbf{p}) \\
+=&0
+\end{align*}
+となり，ゼロになる．右下成分も
+\begin{align*}
+&-b^T \Omega b+\gamma (\kappa^T b)-\gamma (b^T \kappa) +b^T (\delta b)-\gamma (\delta \gamma) \\
+=&-\frac{1}{M^2}\mathbf{p}^T \Omega \mathbf{p} +\frac{1}{M}\gamma(\kappa^T \mathbf{p})-\frac{1}{M}\gamma(\mathbf{p}^T \kappa) +\frac{1}{M}\mathbf{p}^T\left(\frac{1}{M}\Omega \mathbf{p}+\gamma\kappa\right)-\frac{1}{M}\gamma(\kappa^T \mathbf{p}) \\
+=&0
+\end{align*}
+となりゼロになる．左上と左下成分は$\delta A$を計算しなければならないから大変だが，頑張ると
+\begin{align*}
+\delta \hat{\mathbf{p}}=&\delta \left(\frac{\mathbf{p}}{|\mathbf{p}|}\right)=\frac{1}{|\mathbf{p}|}\delta \mathbf{p}-\mathbf{p}\frac{\mathbf{p}\cdot \delta \mathbf{p}}{|\mathbf{p}|^3}=\frac{1}{|\mathbf{p}|}(1-\hat{\mathbf{p}}\hat{\mathbf{p}}^T)\delta\mathbf{p} \\
+=&\frac{1}{|\mathbf{p}|}(1-\hat{\mathbf{p}}\hat{\mathbf{p}}^T)(\Omega \mathbf{p}+M\gamma \kappa) \\
+=&\frac{1}{|\mathbf{p}|}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}}) \quad \because 反対称性 \mathbf{p}^T \Omega \mathbf{p}=0 \\
+\delta A=&\delta\left(1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\right) \\
+=&(\delta\gamma)\hat{\mathbf{p}}\hat{\mathbf{p}}^T+(\gamma-1)(\delta\hat{\mathbf{p}})\hat{\mathbf{p}}^T+(\gamma-1)\hat{\mathbf{p}}(\delta\hat{\mathbf{p}})^T \\
+=&\frac{1}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T+\frac{\gamma-1}{|\mathbf{p}|}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})\hat{\mathbf{p}}^T \\
+&\qquad +\frac{\gamma-1}{|\mathbf{p}|}\hat{\mathbf{p}}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})^T
+\end{align*}
+となるから，左下成分は
+\begin{align*}
+&-b^T \Omega A +\gamma \kappa^T A-(b^T \kappa) b^T -\gamma (\delta b)^T +b^T\delta A \\
+=&-\frac{1}{M}\mathbf{p}^T\Omega \left(1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\right)+\gamma \kappa^T\left(1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\right)-\frac{1}{M^2}(\mathbf{p}^T \kappa)\mathbf{p}^T -\frac{\gamma}{M}(\Omega \mathbf{p}+M\gamma \kappa )^T \\
+&+\frac{1}{M}\mathbf{p}^T\biggl[\frac{1}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T+\frac{\gamma-1}{|\mathbf{p}|}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})\hat{\mathbf{p}}^T \\
+&\qquad +\frac{\gamma-1}{|\mathbf{p}|}\hat{\mathbf{p}}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})^T\biggr] \\
+=&-\frac{1}{M}\mathbf{p}^T \Omega +\gamma \kappa^T +(\gamma-1)\gamma(\kappa^T \hat{\mathbf{p}})\hat{\mathbf{p}}^T -\frac{1}{M^2}(\mathbf{p}^T\kappa)\mathbf{p}^T -\frac{\gamma}{M}(\Omega\mathbf{p}+M\gamma\kappa)^T \\
+&+\frac{1}{M^2}(\kappa^T \mathbf{p})\mathbf{p}^T +\frac{1}{M}(\gamma-1)\left(\Omega \mathbf{p}+M\gamma\kappa-M\gamma(\hat{\mathbf{p}}^T\kappa)\hat{\mathbf{p}}\right)^T \\
+=&0
+\end{align*}
+となってゼロになる．最後に，左上成分は
+\begin{align*}
+A\Omega A+(A\kappa)b^T -b (\kappa^T A) +b(\delta b)^T -A\delta A
+\end{align*}
+であるが，各項を計算してみると，まず第1項目が
+\begin{align*}
+A\Omega A=&\left(1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\right)\Omega\left(1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\right) \\
+=&\Omega +(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\Omega+(\gamma-1)\Omega \hat{\mathbf{p}}\hat{\mathbf{p}}^T
+\end{align*}
+であり，第2項目から第4項目から
+\begin{align*}
+(A\kappa)b^T=&\frac{1}{M}\left(1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\right)\kappa \mathbf{p}^T =\frac{1}{M}\kappa \mathbf{p}^T +\frac{\gamma-1}{M}(\mathbf{p}^T\kappa)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+-b (\kappa^T A)=&-\frac{1}{M}\mathbf{p}\left(\kappa^T \left(1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\right)\right) =-\frac{1}{M}\mathbf{p}\kappa^T -\frac{\gamma-1}{M}(\mathbf{p}^T\kappa)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+b(\delta b)^T=&\frac{1}{M^2}\mathbf{p}(\Omega \mathbf{p}+M\gamma\kappa)^T =-\frac{1}{M^2}\mathbf{p} \mathbf{p}^T\Omega +\frac{\gamma}{M}\mathbf{p}\kappa^T \\
+(A\kappa)b^T-b (\kappa^T A)+b(\delta b)^T=&\frac{1}{M}\kappa \mathbf{p}^T + \frac{\gamma-1}{M}\mathbf{p}\kappa^T -\frac{1}{M^2}\mathbf{p} \mathbf{p}^T\Omega
+\end{align*}
+最後に第5項目
+\begin{align*}
+-A\delta A=&-\left(1+(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\right)\biggl[\frac{1}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T+\frac{\gamma-1}{|\mathbf{p}|}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})\hat{\mathbf{p}}^T \\
+&\qquad +\frac{\gamma-1}{|\mathbf{p}|}\hat{\mathbf{p}}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})^T\biggr] \\
+=&-\biggl[\frac{1}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T+\frac{\gamma-1}{|\mathbf{p}|}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})\hat{\mathbf{p}}^T \\
+&\qquad +\frac{\gamma-1}{|\mathbf{p}|}\hat{\mathbf{p}}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})^T\biggr] \\
+&-\frac{\gamma-1}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T -\frac{(\gamma-1)^2}{|\mathbf{p}|}\hat{\mathbf{p}}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})^T \\
+=&-\frac{\gamma}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+&-\frac{\gamma-1}{|\mathbf{p}|}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})\hat{\mathbf{p}}^T \\
+&-\frac{\gamma(\gamma-1)}{|\mathbf{p}|}\hat{\mathbf{p}}(\Omega \mathbf{p}+M\gamma \kappa -M\gamma(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}})^T \\
+=&-\frac{\gamma}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+&-(\gamma-1)\Omega \hat{\mathbf{p}}\hat{\mathbf{p}}^T - \frac{\gamma(\gamma-1)}{|\mathbf{p}|}M\kappa \hat{\mathbf{p}}^T+\frac{\gamma(\gamma-1)}{|\mathbf{p}|}M(\hat{\mathbf{p}}^T\kappa)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+&+\gamma(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \Omega -\frac{\gamma^2(\gamma-1)}{|\mathbf{p}|}M\hat{\mathbf{p}}\kappa^T +\frac{\gamma^2(\gamma-1)}{|\mathbf{p}|}M(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+=&-\frac{\gamma}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+&-(\gamma-1)\Omega \hat{\mathbf{p}}\hat{\mathbf{p}}^T - \frac{\gamma(\gamma-1)}{|\mathbf{p}|}M\kappa \hat{\mathbf{p}}^T + \frac{\gamma(\gamma^2-1)}{|\mathbf{p}|}M(\hat{\mathbf{p}}^T \kappa)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\\
+&+\gamma(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \Omega -\frac{\gamma^2(\gamma-1)}{|\mathbf{p}|}M\hat{\mathbf{p}}\kappa^T \\
+=&-\frac{\gamma}{M}(\kappa^T \mathbf{p})\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+&-(\gamma-1)\Omega \hat{\mathbf{p}}\hat{\mathbf{p}}^T - \frac{\gamma(\gamma-1)}{|\mathbf{p}|}M\kappa \hat{\mathbf{p}}^T +\frac{\gamma}{M}(\mathbf{p}^T \kappa)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+&+\gamma(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \Omega -\frac{\gamma-1}{|\mathbf{p}|}M\hat{\mathbf{p}}\kappa^T -\frac{\gamma-1}{M}\mathbf{p}\kappa^T \quad \because \gamma^2=1+\frac{\mathbf{p}^2}{M^2} \\
+=&-(\gamma-1)\Omega \hat{\mathbf{p}}\hat{\mathbf{p}}^T - \frac{\gamma(\gamma-1)}{|\mathbf{p}|}M\kappa \hat{\mathbf{p}}^T \\
+&+\gamma(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \Omega -\frac{\gamma-1}{|\mathbf{p}|}M\hat{\mathbf{p}}\kappa^T -\frac{\gamma-1}{M}\mathbf{p}\kappa^T
+\end{align*}
+がある．よって総合して
+\begin{align*}
+&A\Omega A+(A\kappa)b^T -b (\kappa^T A) +b(\delta b)^T -A\delta A \\
+=&\Omega +(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\Omega+(\gamma-1)\Omega \hat{\mathbf{p}}\hat{\mathbf{p}}^T \\
+&+\frac{1}{M}\kappa \mathbf{p}^T +\frac{\gamma-1}{M}\mathbf{p}\kappa^T -\frac{1}{M^2}\mathbf{p} \mathbf{p}^T \Omega \\
+&-(\gamma-1)\Omega \hat{\mathbf{p}}\hat{\mathbf{p}}^T - \frac{\gamma(\gamma-1)}{|\mathbf{p}|}M\kappa \hat{\mathbf{p}}^T \\
+&+\gamma(\gamma-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T \Omega -\frac{\gamma-1}{|\mathbf{p}|}M\hat{\mathbf{p}}\kappa^T -\frac{\gamma-1}{M}\mathbf{p}\kappa^T\\
+=&\Omega +(\gamma^2-1)\hat{\mathbf{p}}\hat{\mathbf{p}}^T\Omega \\
+&+\frac{1}{M}\kappa \mathbf{p}^T -\frac{1}{M^2}\mathbf{p} \mathbf{p}^T \Omega \\
+&- \frac{\gamma(\gamma-1)}{|\mathbf{p}|}M\kappa \hat{\mathbf{p}}^T \\
+&-\frac{\gamma-1}{|\mathbf{p}|}M\hat{\mathbf{p}}\kappa^T \\
+=&\Omega \\
+&+\frac{1}{M}\kappa \mathbf{p}^T \\
+&- \frac{\gamma(\gamma-1)}{|\mathbf{p}|}M\kappa \hat{\mathbf{p}}^T \\
+&-\frac{\gamma-1}{|\mathbf{p}|}M\hat{\mathbf{p}}\kappa^T
+\end{align*}
+となる．かなり簡単になったが，さらに$\kappa \mathbf{p}^T$の係数が
+\begin{align*}
+\frac{1}{M}-\frac{\gamma(\gamma-1)}{|\mathbf{p}|^2}M=&\frac{1}{M}-\frac{\gamma^2}{|\mathbf{p}|^2}M+\frac{\gamma}{|\mathbf{p}|^2}M \\
+=&\frac{1}{M}-\frac{M}{|\mathbf{p}|^2}+\frac{\gamma M}{|\mathbf{p}|^2}-\frac{1}{M} \\
+=&\frac{\gamma-1}{|\mathbf{p}|^2}M \\
+=&\frac{p^0-M}{(p^0)^2-M^2}=\frac{1}{p^0+M}
+\end{align*}
+となり，$\mathbf{p}\kappa^T$の係数も
+\begin{align*}
+-\frac{\gamma-1}{|\mathbf{p}|^2}M=-\frac{1}{p^0+M}
+\end{align*}
+となるから，以上より左上成分は
+\begin{align*}
+\Omega+\frac{1}{p^0+M}(\kappa \mathbf{p}^T-\mathbf{p}\kappa^T)
+\end{align*}
+となる！かなり簡単になった．よって$W(\Lambda,p)$の1次項は
+\begin{align*}
+W(\Lambda,p)=1+\left(
+\begin{matrix}
+\Omega+\frac{1}{p^0+M}(\kappa \mathbf{p}^T-\mathbf{p}\kappa^T) & 0 \\
+0 & 0
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+1+\Theta & 0 \\
+0 & 1
+\end{matrix}
+\right)
+\end{align*}
+となることがわかる．これでウィグナー回転が実際に運動量の空間成分のみを変化させるものであることがわかる．成分表示すれば
+\begin{align*}
+\tensor{\Theta}{^i_j}=\tensor{\omega}{^i_j}+\frac{1}{p^0+M}(\tensor{\omega}{^i_0}p_j-p^i\tensor{\omega}{^0_j})
+\end{align*}
+となる．添え字を下げれば
+\begin{align*}
+\Theta_{ij}=\omega_{ij}+\frac{1}{p^0+M}(\omega_{i0}p_j-p_i\omega_{j0})
+\end{align*}
+となり，実際に反対称性$\Theta_{ij}=-\Theta_{ji}$が得られ，ウィグナー回転が$SO(3)$になっていることも示される．これが有質量の場合の小群の表現(2.5.20)に現れる$\Theta_{ij}$であり，実際に$\Lambda=1+\omega$と$p$の関数になっていることがわかる．\par
+$\Theta_{ij}$の第一項目が純粋に回転パラメータ$\omega_{ij}$になっており，第二項目がブーストパラメータ$\omega_{i0}$のみに依存していることに注目しよう．ローレンツ変換$\Lambda=1+\omega$が純粋に空間回転$\Lambda=\mc{R},\omega_{i0}=0$である場合，ウィグナー回転$W$の空間回転部分$1+\Theta$は$\Theta_{ij}=\omega_{ij}$となり，$W(\mc{R},p)=\mc{R}$が得られる．この結果は上の複雑な代数計算を行うことなく，簡単に得ることもできる．以下でそれを示そう．
+
+\vskip\baselineskip
+
 $\tensor{\Lambda}{^\mu_\nu}$が任意の三次元回転$\mathcal{R}$であるとき，全ての$p$についてウィグナー回転$W(\Lambda,p)$が$\mathcal{R}$と同じであることを以下で示す．このために，ブースト(2.5.24)が以下のように表せることを使う．
 \begin{align*}
 L(p)=R(\mathbf{p})B(|\mathbf{p}|)R^{-1}(\mathbf{p})

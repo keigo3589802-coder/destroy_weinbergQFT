@@ -280,8 +280,8 @@ U^{-1}(\Lambda)Q^{AB}_{ab}U(\Lambda)=&e^{-\frac{i}{2}\omega_{\mu\nu}J^{\mu\nu}}Q
 =&\frac{1}{2}\left( \delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}+\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)}\right) \\
 =&\frac{1}{2}\Bigl( (-1)^{\sigma'-(\sigma-1)}\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)} \quad \because \sigma'=\sigma-1\\
 &+(-1)^{(\sigma'-(\sigma+1))}\delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}\Bigr) \quad \because \sigma'=\sigma+1 \\
- &=-(-1)^{\sigma'-\sigma}\left(J_1^{(j)}\right)_{-\sigma',-\sigma}^* \\
- \left(J_2^{(j)}\right)_{\sigma'\sigma}=&\frac{1}{2i}\left(\delta_{\sigma',\sigma+ 1}\sqrt{(j- \sigma)(j+ \sigma+1)}-\delta_{\sigma',\sigma-1}\sqrt{(j+ \sigma)(j- \sigma+1)}\right) \\
+&=-(-1)^{\sigma'-\sigma}\left(J_1^{(j)}\right)_{-\sigma',-\sigma}^* \\
+\left(J_2^{(j)}\right)_{\sigma'\sigma}=&\frac{1}{2i}\left(\delta_{\sigma',\sigma+ 1}\sqrt{(j- \sigma)(j+ \sigma+1)}-\delta_{\sigma',\sigma-1}\sqrt{(j+ \sigma)(j- \sigma+1)}\right) \\
 =&\frac{1}{2i}\left( \delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}-\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)}\right) \\
 =&\frac{1}{2i}\Bigl( -(-1)^{\sigma'-(\sigma-1)}\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)} \quad \because \sigma'=\sigma-1\\
 &+(-1)^{(\sigma'-(\sigma+1))}\delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}\Bigr) \\
@@ -1049,17 +1049,33 @@ e\left[\mr{Q}^* \otimes \mr{Q}^\dagger +(\mr{Q}^* \otimes \mr{Q}^\dagger)^T \rig
 \end{align*}
 とまとめられる．ここでディラック行列が5.4節で定義した
 \begin{align*}
-\gamma^0 =-i\beta =-i\left(
+\gamma^0 =&-i\beta =-i\left(
 \begin{matrix}
 0 & \sigma_0 \\
 \sigma_0 & 0
+\end{matrix}
+\right)=i\left(
+\begin{matrix}
+0 & \sigma^0 \\
+\sigma^0 & 0
 \end{matrix}
 \right),\quad \gamma^i=-i\left(
 \begin{matrix}
 0 & \sigma_i \\
 -\sigma_i & 0
 \end{matrix}
-\right)
+\right)=i\left(
+\begin{matrix}
+0 & -\sigma^i \\
+\sigma^i & 0
+\end{matrix}
+\right) \\
+\gamma^\mu =&-i\left(
+\begin{matrix}
+0 & \sigma^\mu \\
+\bar{\sigma}^\mu & 0
+\end{matrix}
+\right), \quad (\sigma_\mu =(1,\bm{\sigma}),\bar{\sigma}_\mu=(1,-\bm{\sigma}),\sigma^\mu =(-1,\bm{\sigma}),\bar{\sigma}^\mu=(-1,-\bm{\sigma}))
 \end{align*}
 を用いた．(反交換関係を行列表示にするのが若干苦戦した．原因は第二項目に現れる転置．これは，例えば$2$成分ベクトル$f=(f_1,f_2)^T,g=(g_1,g_2)^T$のテンソル積を使うと
 \begin{align*}

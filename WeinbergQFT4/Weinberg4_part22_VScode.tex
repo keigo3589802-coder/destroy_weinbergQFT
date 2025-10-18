@@ -177,7 +177,7 @@ U(x)&=1+i\gamma_5\alpha(x)t \\
 \end{align*}
 によりゼロとなる．($t$は$\gamma_5$を含まないので$\gamma_5$のみでディラック添え字のトレースがとれる．)このままでは扱えないため，これらの量に意味を持たせるために正則化因子を導入する．これは，デルタ関数の引数がゼロとなる前に微分演算子$f(-\Slash{D}^2_x/M^2)$をデルタ関数に働かせることにょりゲージ不変に実行できる．(熱核による正則化)
 \begin{align*}
-\mc{A}(x)=-2[\mr{Tr}\left\{ \gamma_5 t f(-\Slash{D}^2_x/M^2) \right\} \delta^4(x-y)]_{y\to x}
+\mc{A}(x)=-2\left[\mr{Tr}\left\{ \gamma_5 t f(-\Slash{D}^2_x/M^2) \right\} \delta^4(x-y)\right]_{y\to x}
 \end{align*}
 ここで$D_x$はゲージ場$A^\mu_\alpha(x)$があるもとでのディラック演算子だ．
 \begin{align*}
@@ -212,15 +212,15 @@ U(x)&=1+i\gamma_5\alpha(x)t \\
 \end{align*}
 となる．切断関数の変数は
 \begin{align*}
--\left[ i\Slash{k} +\frac{\Slash{D}}{M} \right]^2=&-(i\Slash{k})^2-i\Slash{k}=-(i\Slash{k})^2-i\Slash{k}\frac{\Slash{D}_x}{M}-\frac{\Slash{D}_x}{M}i\Slash{k}-\left(\frac{\Slash{D}_x}{M}\right)^2 \\
+-\left[ i\Slash{k} +\frac{\Slash{D}}{M} \right]^2=&-(i\Slash{k})^2-i\Slash{k}\frac{\Slash{D}_x}{M}-\frac{\Slash{D}_x}{M}i\Slash{k}-\left(\frac{\Slash{D}_x}{M}\right)^2 \\
 =&\frac{k^\mu k^\nu}{2} \left\{ \gamma_\mu ,\gamma_\nu \right\}-\frac{ik^\mu D_x^\nu}{M}\left\{ \gamma_\mu ,\gamma_\nu \right\}+\left(\frac{\Slash{D}_x}{M}\right)^2 \\
 =&k^2-\frac{2ik\cdot D_x}{M}-\left(\frac{\Slash{D}_x}{M}\right)^2 \quad \because \left\{ \gamma_\mu ,\gamma_\nu \right\}=2\eta_{\mu\nu}
 \end{align*}
 と書ける．$M\to \infty$の極限では，(22.2.17)は$f(-[i\Slash{k}+\Slash{D}_x/M]^2)$の展開のなかで$1/M$の因子を5個以上持たない項と，(8.A.10)(8.A.11)(8.A.12)よりディラックのガンマ行列を最低4個持つ項のみから寄与を受ける．これにより，$\Slash{D}_x^2$について2次の項のみが残る．テイラー展開すれば
 \begin{align*}
 f\left(k^2-\frac{2ik\cdot D_x}{M}-\left(\frac{\Slash{D}_x}{M}\right)^2\right)=&f(k^2)+f'(k^2)\left(-\frac{2ik\cdot D_x}{M}-\left(\frac{\Slash{D}_x}{M}\right)^2\right) \\
-&+f''(k^2)\left(-\frac{2ik\cdot D_x}{M}-\left(\frac{\Slash{D}_x}{M}\right)^2\right)^2+\cdots \\
-=&f''(k^2)\frac{\Slash{D}^2_x}{M^4} +\cdots
+&+\frac{1}{2}f''(k^2)\left(-\frac{2ik\cdot D_x}{M}-\left(\frac{\Slash{D}_x}{M}\right)^2\right)^2+\cdots \\
+=&\frac{1}{2}f''(k^2)\frac{\Slash{D}^2_x}{M^4} +\cdots
 \end{align*}
 となるから
 \begin{align*}
@@ -266,7 +266,11 @@ $k$積分を計算するには，(11.2.10)で用いた方法を再び用いれ�
 =&-\frac{1}{16\pi^2}\epsilon_{\mu\nu\rho\sigma}F^{\mu\nu}_\alpha(x) F^{\rho\sigma}_\beta(x) \mr{tr}\left\{t_\alpha t_\beta t \right\}
 \end{align*}
 が得られる！ここで$\mr{tr}$は各種フェルミオンの種類添え字についてのみトレースをとることを意味する．$t$が単位行列だという特別な場合には，量(22.2.24)はチャーン・ポントリャーギン密度として知られている．\par
-この結果はアノマリーをもつ対称性にともなうカレントを用いて表すことができる．簡単のため，定数の微小パラメータ$\alpha$の対称性変換$\psi(x)\to \psi(x)+it\gamma_5 \alpha \psi(x)$のもとで作用自身が不変だとする．その場合，(7.3.14)で示したように時空に\uwave{依存する}パラメータ$\alpha(x)$で変換を行うと，作用には$\delta I=\int d^4x J^\mu_5 (x)\partial_\mu \alpha(x)$だけの変化が生じる．(この項は作用の$\int d^4x J^\mu_\alpha (x)A_{\alpha\mu}(x)$から生じる．$\delta A_{\alpha\mu}=\partial_\mu \epsilon_\alpha+\cdots $だったのを思い出す．)ここで$J^\mu_5(x)$は，場についての任意の変化のもとで作用が停留するように場の演算子が動的な方程式を満たす時には保存されるカレントだ．すなわち，古典的作用の変化が停留する$\delta I=0$と仮定すると部分積分よりカレントは
+この結果はアノマリーをもつ対称性にともなうカレントを用いて表すことができる．簡単のため，定数の微小パラメータ$\alpha$の対称性変換$\psi(x)\to \psi(x)+it\gamma_5 \alpha \psi(x)$のもとで作用自身が不変だとする．(実際，質量ゼロのフェルミオンによるQEDラグランジアン(8.6.1)を考えると
+\begin{align*}
+\mc{L}(x)=-\frac{1}{4}F^{\mu\nu}F_{\mu\nu} -\bar{\psi}\left[\gamma^\mu (\partial_\mu+ieA_\mu)\right]\psi
+\end{align*}
+となっており，これはこの変換のもとで不変になっている．)その場合，(7.3.14)で示したように時空に\uwave{依存する}パラメータ$\alpha(x)$で変換を行うと，作用には$\delta I=\int d^4x J^\mu_5 (x)\partial_\mu \alpha(x)$だけの変化が生じる．\footnote{この項は作用の$\int d^4x J^\mu_\alpha (x)A_{\alpha\mu}(x)$から$\delta A_{\alpha\mu}=\partial_\mu \epsilon_\alpha+\cdots $で生じるものとは別である．実際，上のmasslessフェルミオンのQEDラグランジアンから(7.3.15)を用いて計算すると$J_5^\mu=-ie\bar{\psi}\gamma^\mu \gamma_5 \psi$となり，電流$J^\mu =-ie\bar{\psi}\gamma^\mu \psi$とは別物である．masslessなゲージ場$A^\mu_\alpha$と結合するゲージカレント$J^\mu_\alpha$はゲージ対称性であるから，アノマリーによって破れるわけにはいかない．でなければ5.9節で説明したようにローレンツ不変性を保つためにmasslessゲージ場と結合するカレントは保存しなければならないから，厳密になりたつべき対称性であるローレンツ不変性が破れてしまう．}．ここで$J^\mu_5(x)$は，場についての任意の変化のもとで作用が停留するように場の演算子が動的な方程式を満たす時には保存されるカレントだ．すなわち，古典的作用の変化が停留する$\delta I=0$と仮定すると部分積分よりカレントは
 \begin{align*}
 \partial_\mu J^\mu_5(x)=0
 \end{align*}
@@ -417,7 +421,7 @@ d
 \begin{align*}
 \delta \mc{L}_{eff}(x)=\alpha \mc{A}(x)=-\frac{N_ce^2}{48\pi^2}\epsilon_{\mu\nu\rho\sigma}F^{\mu\nu}(x)F^{\rho\sigma}(x)\alpha
 \end{align*}
-さて，変換(22.2.33)の対称性がアノマリーによって完全に破れることで，(19.7節参照)$\tau_3$に結合するNGボゾンである$\pi^0$場は
+さて，この生成子$\gamma_5 \tau_3$による対称性(22.2.33)$U(1)_A \subset SU(2)_A$が完全に破れる低エネルギーでの，パイオンの有効相互作用を考える(19.7節参照)．変換(22.2.33)の対称性のもとで$\tau_3$に結合するNGボゾンである$\pi^0$場は
 \begin{align*}
 g\gamma(\xi)&=\gamma(\xi')h(\xi,g) \\
 \exp[i\gamma_5\tau_3\alpha]\exp[i\gamma_5 \tau_3 \xi_3(x)]&=\exp[i\gamma_5 \tau_3 \xi'_3(x)] \\
@@ -429,7 +433,7 @@ g\gamma(\xi)&=\gamma(\xi')h(\xi,g) \\
 \begin{align*}
 \frac{\pi^0\mc{A}(x)}{F_\pi}=-\frac{N_ce^2}{48\pi^2F_\pi}\epsilon_{\mu\nu\rho\sigma}F^{\mu\nu}(x)F^{\rho\sigma}(x)\pi^0(x)
 \end{align*}
-これは変換(22.2.33)のもとで不変であることがすぐに分かる．これを$\pi^0\to2\gamma$崩壊の有効ラグランジアンの一般的な表式(22.1.1)と比較すると，(22.1.1)の定数$g$は
+この有効ラグランジアンは実際，変換(22.2.36)のもとで(22.2.35)を与える．これを$\pi^0\to2\gamma$崩壊の有効ラグランジアンの一般的な表式(22.1.1)と比較すると，(22.1.1)の定数$g$は
 \begin{align*}
 g=\frac{N_ce^2}{48\pi^2F_\pi}
 \end{align*}
@@ -571,15 +575,20 @@ i\Slash{D}\varphi_{\kappa^-}(x)&=i\Slash{D}\gamma_5\varphi_\kappa(x) \\
 \right]= \left[
 \begin{array}{cc}
 \frac{1}{2}(1+\gamma_5)\psi \\
-\frac{1}{2}(1+\gamma_5)\mc{C}\psi^*
+\frac{1}{2}(1-\gamma_5)\mc{C}\psi^*
 \end{array}
-\right] \quad\because \mc{C}^*=\mc{C},\gamma_5^*=\gamma_5, \mc{C}\gamma_5 =-\gamma_5 \mc{C}
+\right]=\left[
+\begin{array}{cc}
+\psi_L \\
+-i\sigma_2 \psi^*_R
+\end{array}
+\right] \quad\because \mc{C}^*=\mc{C},\gamma_5^*=\gamma_5, \mc{C}\gamma_5 =\gamma_5 \mc{C}
 \end{align*}
-ここで，$\mc{C}$は
+ここで，$\mc{C}$は(5.4.35)(5.4.36)
 \begin{align*}
-\mc{C}\gamma^T_\mu \mc{C}^{-1}=-\gamma_\mu ,\gamma ,\quad \mc{C}=\gamma_2\gamma_4 
+\mc{C}\gamma^T_\mu \mc{C}^{-1}=-\gamma_\mu  ,\quad \mc{C}=\gamma_2\gamma_4 
 \end{align*}
-で定義された行列だ．(すなわち，(5.5.47)より，下成分は右手フェルミオンの荷電共役場を表しており，これで全ての左手フェルミオンを統一して記すことができている．)フェルミオン数(バリオン数か，バリオン数引くレプトン数)を保存する微小ゲージ変換
+で定義された行列だ．(すなわち，下成分は$(1/2,0)$表現に属する右手フェルミオンを$(1/2,0)$表現に変換したものを表しており，これで全ての左手フェルミオン(もともと左手場のものはもちろん，右手場もこの変換により一つの左手場)を一つのフェルミオン場として統一して記すことができている．)フェルミオン数(バリオン数か，バリオン数引くレプトン数)を保存する微小ゲージ変換
 \begin{align*}
 \delta\psi=i\theta_\alpha\left[\frac{1}{2}(1+\gamma_5)t^L_\alpha +\frac{1}{2}(1-\gamma_5)t^R_\alpha \right]\psi
 \end{align*}
@@ -637,11 +646,11 @@ t^L_\alpha & 0 \\
 \begin{align*}
 \Gamma^{\mu\nu\rho}_{\alpha\beta\gamma}(x,y,z)\equiv \braket{T\left\{ j^\mu_\alpha (x),j^\nu_\beta(y),j^\rho_\gamma(z) \right\} }_{\VAC}
 \end{align*}
-だ．ここで$j^\mu_\alpha$はフェルミオン的カレントで自由場
+だ．ここで$j^\mu_\alpha$はフェルミオン的カレントで自由場$\chi$を使って
 \begin{align*}
 j^\mu_\alpha =-i\bar{\chi}T_\alpha \gamma^\mu \chi
 \end{align*}
-を使って計算される．
+で計算される．
 
 \begin{figure}[H]
 \centering
