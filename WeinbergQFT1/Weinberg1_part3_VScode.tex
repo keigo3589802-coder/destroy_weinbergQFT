@@ -2183,6 +2183,16 @@ T_{\beta\alpha}^+ \simeq (\Psi^-_{\mathrm{s}\beta},V_{\mathrm{w}}\Psi_{\mathrm{s
 となる．これは$V_{\mathrm{w}}$の1次での近似で正しいが，$V_{\mathrm{s}}$については全次数で正しい．($V_{\mathrm{s}}$についての影響は完全に取り入れたin,out状態を用いているからだ．)\par
 この近似は物理の至る所で出てくるらしい．先程の例と同様に，$V_{\mathrm{s}}$を強い相互作用として，$V_{\mathrm{w}}$をそれぞれ原子核の弱い相互作用や電磁相互作用として用いて，$\Psi_{\mathrm{s}\beta}^-$と$\Psi_{\mathrm{s}\alpha}^+$を原子核の終状態と始状態として用いることで，原子核のベータ崩壊やガンマ崩壊の$S$行列が計算できる．
 
+\vskip\baselineskip
+
+注意．$S_{\beta\alpha}=\delta(\beta-\alpha)-2\pi iM_{\beta\alpha}\delta^4(p_\beta-p_\alpha)$の$\delta(\beta-\alpha)$部分は$S$演算子のダイソン級数の最低次の単位演算子$1$から生じるものだと思うかもしれない．しかし実際には相互作用の各次数から$\delta(\beta-\alpha)$の因子に比例するものとそうでないものが現れる．すなわち
+\begin{align*}
+S_{\beta\alpha}=&\delta(\beta-\alpha)+\Bigl(\delta(\beta-\alpha)-2\pi i \delta^4(p_\beta -p_\alpha)M^{(1)}_{\beta\alpha}\Bigr)+\Bigl(\delta(\beta-\alpha)-2\pi i \delta^4(p_\beta -p_\alpha)M^{(2)}_{\beta\alpha}\Bigr) +\cdots \\
+=&\delta(\beta-\alpha)-2\pi i \delta^4(p_\beta -p_\alpha )\sum_{n}M^{(n)}_{\beta\alpha}
+\end{align*}
+という構造になっている．ここで$M^{(n)}_{\beta\alpha}$は，ダイソン級数の相互作用について$n$次の項から現れる自明でない寄与である．詳しくは4.4節で扱う．
+
+
 
 \newpage
 

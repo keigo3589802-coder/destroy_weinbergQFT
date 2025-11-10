@@ -118,7 +118,7 @@ U_0(\Lambda,a)\mc{H}_I(x) U^{-1}_0(\Lambda,a)=\mc{H}_I(\Lambda x+a)
 \psi^+_\ell(x)=\sum_{\sigma n}\int d^3 \mathbf{p} u_\ell (x;\mathbf{p},\sigma,n) a(\mathbf{p},\sigma,n) \\
 \psi^-_\ell(x)=\sum_{\sigma n}\int d^3 \mathbf{p} v_\ell (x;\mathbf{p},\sigma,n) a^\dagger(\mathbf{p},\sigma,n)
 \end{align*}
-から構成することである．ここで係数$u_\ell (x;\mathbf{p},\sigma,n),v_\ell (x;\mathbf{p},\sigma,n)$は，ローレンツ変換のもとで位置に依らない行列が各々の場に
+から構成することである\footnote{ここで「場」という言葉は，時空点に対してある集合$E$の元を当てはめる写像$\psi:M \to E,x \mapsto \psi(x)$のことを指す．例えばスカラー場とは，ミンコフスキー時空の点$x\in \mathbb{R}^{3+1}$に対して，ローレンツ変換のもとでスカラー的に変換する演算子$\phi(x)$を当てはめる写像$\phi$を指す．これ以降，誤解のない限りもっぱら$\psi(x)$のことを場と呼ぶ．数学的に厳密な定義は，幾何学的にはファイバー束の切断だとか，代数的には層の切断だとかの定義があるが，ここでは何も気にしなくてよい．}．ここで係数$u_\ell (x;\mathbf{p},\sigma,n),v_\ell (x;\mathbf{p},\sigma,n)$は，ローレンツ変換のもとで位置に依らない行列が各々の場に
 \begin{align*}
 U_0(\Lambda,a)\psi^+_\ell (x)U^{-1}_0(\Lambda,a)=&\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})\psi^+_{\bar{\ell}} (\Lambda x+a) \\
 U_0(\Lambda,a)\psi^-_\ell (x)U^{-1}_0(\Lambda,a)=&\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})\psi^-_{\bar{\ell}} (\Lambda x+a)
@@ -658,6 +658,7 @@ V=\int d^3\mathbf{x} \, :\mc{F}(\psi(\mathbf{x}),\psi^\dagger(\mathbf{x})):,\qua
 \mc{H}_I(x) \mc{H}_I(y)=&\mc{H}_I(y) \mc{H}_I(x)
 \end{align*}
 がなりたつ．
+
 
 
 \newpage
@@ -5562,14 +5563,14 @@ $[M(a)]_{ij}$は$n\times n$行列であり，基底の線形独立性より$a\in
 =&\sum_{j=1}^n(M(a)M(b)-M(b)M(a))_{ji} e_{(j)} \\
 =&\sum_{j=1}^n\Bigl([M(a),M(b)]\Bigr)_{ji} e_{(j)}
 \end{align*}
-表現とベクトル空間の基底と定めることで，抽象的なリー括弧積$[a,b]_{\mathfrak{g}}$を，行列の積に関する交換子$[M(a),M(b)]$として表現することが可能になった．\par
+表現とベクトル空間の基底を定めることで，抽象的なリー括弧積$[a,b]_{\mathfrak{g}}$を，行列の積に関する交換子$[M(a),M(b)]$として表現することが可能になった．\par
 我々が調べていた行列$\tensor{(\mc{J}^{\mu\nu})}{^\rho_\sigma},(\mc{S}^{\mu\nu})_{\ell\bar{\ell}}$は，この意味で代数そのものではなく行列による表現であり，その根底には抽象的なリー代数が存在している．
 
 
 \vskip\baselineskip
 
 以上で，リー代数の定義が完了したから，ローレンツ代数について説明する．\par
-ローレンツ代数$\mathfrak{so}(3,1)$とは，$M^{\mu\nu}=-M^{\nu\mu}$を満たす基底$\{M^{\mu\nu}\}_{0\leq \mu < \nu \leq 3}$により張られる6次元$\mathbb{R}$係数実ベクトル空間
+ローレンツ代数$\mathfrak{so}(3,1)$とは，$J^{\mu\nu}=-J^{\nu\mu}$を満たす基底$\{J^{\mu\nu}\}_{0\leq \mu < \nu \leq 3}$により張られる6次元$\mathbb{R}$係数実ベクトル空間
 \begin{align*}
 \mathfrak{so}(3,1)=\left\{ \frac{1}{2}\sum_{\mu,\nu=0}^3\omega_{\mu\nu} J^{\mu\nu} \middle|\omega_{\mu\nu}=-\omega_{\nu\mu}, \omega_{\mu\nu} \in \mathbb{R} (0\leq \mu<\nu\leq 3) \right\}
 \end{align*}
@@ -5638,7 +5639,7 @@ J_i:=\frac{1}{2}\epsilon_{ijk}J_{jk}=(J_{23},J_{31},J_{12}) ,\quad K_i:=J_{i0}=(
 
 \vskip\baselineskip
 
-我々が知りたいのはローレンツ群の実線形表現ではなく，もっと一般的な複素線形表現である．複素表現を得るためには二つの方法があり，そのうちの1つは実表現を複素表現にするという方法，もう一つはリー代数を複素化し，その複素表現をとるという方法である．この二つは可換図式をなし，したがって同型である．そこで我々はリー代数の複素化を通じて，ローレンツ代数の既約な複素表現を得ることにする．
+我々が知りたいのはローレンツ群の実線形表現ではなく，もっと一般的な複素線形表現である．複素表現を得るためには二つの方法があり，そのうちの1つは実表現を得てから複素表現にするという方法，もう一つは最初からリー代数を複素化し，その複素表現をとるという方法である．この二つは可換図式をなし，したがって同型である．そこで我々はリー代数の複素化を通じて，ローレンツ代数の既約な複素表現を得る方法を採用する．
 
 \vskip\baselineskip
 
@@ -5687,12 +5688,12 @@ J^{\mu\nu}=&\frac{1}{2}\left(J^{\mu\nu}+\frac{i}{2}\epsilon^{\mu\nu\rho\sigma}J_
 =&J_{\alpha\beta}\pm \frac{i}{2}\epsilon_{\alpha\beta\mu\nu}J^{\mu\nu} \\
 \therefore\quad J^{(\pm)\mu\nu}=&\pm \frac{i}{2}\epsilon^{\mu\nu\rho\sigma}J_{\rho\sigma}^{(\pm)}
 \end{align*}
-という意味で，$J^{(+)}$は自己双対反対称テンソル，$J^{(-)}$は反自己双対反対称テンソルである\footnote{なぜこのように分解するかというと，これら自身がそれぞれ別々のローレンツ群の既約表現として振舞うという事情があるからである．すなわち，自己双対部分が基底として張る部分空間$\mathfrak{g}$と反自己双対部分が基底として張る部分空間$\mathfrak{h}$はリー括弧積で再び戻ってくる
+という意味で，$J^{(+)}$は自己双対反対称テンソル，$J^{(-)}$は反自己双対反対称テンソルである\footnote{なぜこのように分解するかというと，これら自身がそれぞれローレンツ群の互いに異なる既約表現として振舞う，という事情があるからである．すなわち，自己双対部分が基底として張る部分空間$\mathfrak{g}$と反自己双対部分が基底として張る部分空間$\mathfrak{h}$はリー括弧積で再び戻ってくる
 \begin{align*}
 [\mathfrak{so}(3,1)'_{\mathbb{C}},\mathfrak{g}]_{\mathfrak{so}(3,1)'_{\mathbb{C}}}\subset \mathfrak{g} \\
 [\mathfrak{so}(3,1)'_{\mathbb{C}},\mathfrak{h}]_{\mathfrak{so}(3,1)'_{\mathbb{C}}}\subset \mathfrak{h}
 \end{align*}
-という意味で$\mathfrak{so}(3,1)'_{\mathbb{C}}$のイデアルをなす．(具体的に計算して確かめることはここではしない．)基底$\{J^{\mu\nu}\}$が$\{J^{(+)\mu\nu}\},\{J^{(-)\mu\nu}\}$に一意的に分解できるから，$\mathfrak{so}(3,1)'_{\mathbb{C}}$はベクトル空間として$\mathfrak{g}$と$\mathfrak{h}$の直和であることが理解でき，さらに$[\mathfrak{g},\mathfrak{h}]_{\mathfrak{so}(3,1)'_{\mathbb{C}}}\subset \mathfrak{g}\cap \mathfrak{h}=\{0\}$より$\mathfrak{so}(3,1)_{\mathbb{C}}$はリー代数として直和$\mathfrak{g}\oplus \mathfrak{h}$に同型であることが理解できる．}．ここで
+という意味で$\mathfrak{so}(3,1)'_{\mathbb{C}}$のイデアルをなす．(具体的に計算して確かめることはここではしない．後に行う(反)自己共役場についての計算が同等の計算になっている．)基底$\{J^{\mu\nu}\}$が$\{J^{(+)\mu\nu}\},\{J^{(-)\mu\nu}\}$に一意的に分解できるから，$\mathfrak{so}(3,1)'_{\mathbb{C}}$はベクトル空間として$\mathfrak{g}$と$\mathfrak{h}$の直和であることが理解でき，さらに$[\mathfrak{g},\mathfrak{h}]_{\mathfrak{so}(3,1)'_{\mathbb{C}}}\subset \mathfrak{g}\cap \mathfrak{h}=\{0\}$より$\mathfrak{so}(3,1)_{\mathbb{C}}$はリー代数として直和$\mathfrak{g}\oplus \mathfrak{h}$に同型であることが理解できる．}．ここで
 \begin{align*}
 \epsilon_{\alpha\beta\mu\nu}\epsilon^{\mu\nu\rho\sigma}=&A(\delta^\rho_\alpha \delta^\sigma_\beta -\delta^\sigma_\alpha \delta^\rho_\beta) \\
 \epsilon_{01\mu\nu}\epsilon^{01\mu\nu}=&\epsilon_{0123}\epsilon^{0123}+\epsilon_{0132}\epsilon^{0132} \\
@@ -5797,13 +5798,27 @@ b=&+B,B-1,\cdots ,-B+1,-B
 =&(\theta_i+i\omega_i)\rho_{AB}(A_i) + (\theta_i-i\omega_i)\rho_{AB}(B_i) \\
 =:&(\theta_i+i\omega_i)\rho_{A}(A_i) \otimes \bm{1}_B + (\theta_i-i\omega_i)\bm{1}\otimes \rho_B(B_i)
 \end{align*}
-と表現され，最後の式の表現行列を考えると
+と表現される．最後の式の表現行列を考えよう．$\{\bm{e}^A_{a}\}_{a=A,\cdots -A}$を$V_A$の基底，$\{\bm{e}^B_{b}\}_{b=B,\cdots ,-B}$を$V_B$の基底とすれば，$V_A \otimes V_B$の任意の元は$\{\psi_{ab}^{(AB)} \} \in \mathbb{C}$を$V_A\otimes V_B$の成分として
 \begin{align*}
-&(\theta_i+i\omega_i)(\mc{A}_i)_{aa'bb'} + (\theta_i-i\omega_i)(\mc{B_i})_{aa'bb'} \\
+\sum_{a=A,\cdots, -A} \sum_{b=B,\cdots ,-B} \psi^{(AB)}_{ab} \bm{e}^A_{a} \otimes \bm{e}^B_{b}
+\end{align*}
+と書ける．したがって$\rho\left(\frac{1}{2}\omega_{\mu\nu}J^{\mu\nu}\right) :V_A \otimes V_B \to V_A \otimes V_B$の作用をあらわに書けば
+\begin{align*}
+& \rho\left(\frac{1}{2}\omega_{\mu\nu}J^{\mu\nu}\right)\left(\sum_{a,b} \psi^{(AB)}_{ab} \bm{e}^A_{a} \otimes \bm{e}^B_{b}\right) \\
+=&\sum_{a,b} \psi^{(AB)}_{ab} \rho\left(\frac{1}{2}\omega_{\mu\nu}J^{\mu\nu}\right)\left(\bm{e}^A_{a} \otimes \bm{e}^B_{b}\right) \\
+=&\sum_{a=A,\cdots, -A} \sum_{b=B,\cdots ,-B}\psi^{(AB)}_{ab} \Bigl[(\theta_i+i\omega_i)\rho_{A}(A_i) \otimes \bm{1}_B + (\theta_i-i\omega_i)\bm{1}\otimes \rho_B(B_i)\Bigr] \left(\bm{e}^A_{a}\otimes \bm{e}^B_{b}\right) \\
+=&\sum_{a,b}\psi^{(AB)}_{ab} \left[(\theta_i+i\omega_i) \sum_{a'}\left(J_i^{(A)}\right)_{a'a}\bm{e}^A_{a'}\otimes \bm{e}^B_{b}  + (\theta_i-i\omega_i) \sum_{b'}\left(J_i^{(B)}\right)_{b'b}\bm{e}^A_{a}\otimes \bm{e}^B_{b'}\right] \\
+=&\sum_{a',b'} \left[(\theta_i+i\omega_i) \sum_{a,b}\left(J_i^{(A)}\right)_{a'a}\delta_{b'b}\psi^{(AB)}_{ab} + (\theta_i-i\omega_i) \sum_{a,b}\delta_{a'a}\left(J_i^{(B)}\right)_{b'b}\psi^{(AB)}_{ab}\right]\bm{e}^A_{a'}\otimes \bm{e}^B_{b'} \\
+=&\sum_{a,b} \left\{\sum_{a,b}\left[(\theta_i+i\omega_i) \left(J_i^{(A)}\right)_{aa'}\delta_{bb'}+ (\theta_i-i\omega_i) \delta_{aa'}\left(J_i^{(B)}\right)_{bb'}\right] \psi^{(AB)}_{a'b'}\right\}\bm{e}^A_{a}\otimes \bm{e}^B_{b} \\
+=&\sum_{a,b} \left\{\sum_{a'b'}\left[\frac{1}{2}\omega_{\mu\nu}\left(\mc{J}^{(AB)\mu\nu}\right)\right]_{aa'bb'} \psi^{(AB)}_{a'b'}\right\}\bm{e}^A_{a} \otimes \bm{e}^B_{b}
+\end{align*}
+すなわち
+\begin{align*}
+&(\theta_i+i\omega_i)(\mc{A}_i)_{aa'bb'} + (\theta_i-i\omega_i)(\mc{B}_i)_{aa'bb'} \\
 =&(\theta_i+i\omega_i)\left(J^{(A)}_i\right)_{aa'}\delta_{bb'}+(\theta_i-i\omega_i)\delta_{aa'}\left(J^{(B)}\right)_{bb'} \\
 =&\frac{1}{2}\omega_{\mu\nu}\left(\mc{J}^{(AB)\mu\nu}\right)_{aa'bb'}
 \end{align*}
-となる．すなわちこれは$\rho\left(\frac{1}{2}\omega_{\mu\nu}J^{\mu\nu}\right)$の表現行列となっている．ここで行列$\{\mc{J}^{(AB)\mu\nu}\}_{0\leq \mu <\nu \leq 3}$は，上の構成法より
+が$\rho\left(\frac{1}{2}\omega_{\mu\nu}J^{\mu\nu}\right)$の表現行列となっている．ここで行列$\{\mc{J}^{(AB)\mu\nu}\}_{0\leq \mu <\nu \leq 3}$は，上の構成法より
 \begin{align*}
 \bm{\mc{A}}=&\frac{1}{2}(\bm{\mc{J}}+i\bm{\mc{K}}),\quad \bm{\mc{B}}=\frac{1}{2}(\bm{\mc{J}}-i\bm{\mc{K}}) \\
 \left(\mc{J}^{(AB)ij}\right)_{aa'bb'}:=&\epsilon_{ijk}(\mc{J}_k)_{aa'bb'} \\
@@ -5817,7 +5832,7 @@ b=&+B,B-1,\cdots ,-B+1,-B
 \begin{align*}
 i[\mc{J}^{(AB)\mu\nu},\mc{J}^{(AB)\rho\sigma}]=\eta^{\nu\rho}\mc{J}^{(AB)\mu\sigma}-\eta^{\mu\rho}\mc{J}^{(AB)\nu\sigma}-\eta^{\sigma\mu}\mc{J}^{(AB)\rho\nu}+\eta^{\sigma\nu}\mc{J}^{(AB)\rho\mu}
 \end{align*}
-を満たす．したがって$\mathfrak{so}(3,1)$の表現をなす．
+を満たす．(構成法より明らかなので証明略．)したがって$\mathfrak{so}(3,1)$の表現をなす．
 
 
 
@@ -5843,8 +5858,8 @@ D^{(AB)}_{aa'bb'}(\Lambda)=&\left[\exp\left(\frac{i}{2}\omega_{\mu\nu}\mc{J}^{(A
 =&\left[\exp(i(\theta_i+i\omega_i)J^{(A)})\right]_{aa'}\left[\exp(i(\theta_i-i\omega_i)J^{(B)})\right]_{bb'} \\
 =&D^{A0}_{aa'}(\Lambda) D^{0B}_{bb'}(\Lambda)
 \end{align*}
-2行目から3行目にかけて，BCH公式と$[\mc{A}_i,\mc{B}_j]=[J^{(A)}_i1_B ,1_A J^{(B)}_j]=0$であることを用いた．また$D^{A0}$と$D^{0B}$はそれぞれ$D^{AB}$の$B=0$(つまり$J^{(B)}=0$)と$A=0$(つまり$J^{(A)}=0$)の場合に相当することを用いた．$(A,B)$の組を定めることによって，ローレンツ群のあらゆる表現を網羅することができる．したがって以下では，$(A,B)$の組を与えて定まったローレンツ群の既約表現のことを$(A,B)$表現と呼ぶ．\par
-この表現にしたがって変換する場$\psi^{(AB)}_{ab}(x)$は
+2行目から3行目にかけて，BCH公式と$[\mc{A}_i,\mc{B}_j]=[J^{(A)}_i1_B ,1_A J^{(B)}_j]=0$であることを用いた．また$D^{A0}$と$D^{0B}$はそれぞれ$D^{AB}$の$B=0$(つまり$J^{(B)}=0$)と$A=0$(つまり$J^{(A)}=0$)の場合に相当することを用いた．$(A,B)$の組を定めることによって，ローレンツ群のあらゆる表現を網羅することができる．したがって以下では，$(A,B)$の組を与えて定まったローレンツ群の既約表現のことを$(A,B)$表現と呼ぶ\footnote{$\{\mc{J}^{(AB)\mu\nu}\}$は$\mathfrak{so}(3,1)$の表現になっているが，$D^{(AB)}(\Lambda)$は大域的には$SO(3,1)$の表現ではなく，一般に普遍被覆群$SL(2,\mathbb{C})$の表現にしかなっていない．リー代数は単位元近傍の情報しか含んでおらず，したがって$SO(3,1)$と$SL(2,\mathbb{C})$との大域的構造の違いを反映しない．これは量子力学で回転群$SO(3)$の表現を与えたとき，スピン$j$が半整数のスピノル表現はその普遍被覆群$SU(2)$の表現であり$SO(3)$の表現ではなかったのと同様の理由である．}．\par
+この表現にしたがって変換する\footnote{$(A,B)$表現にしたがって変換する，という言葉は，ユニタリー演算子による変換が，有限次元$(A,B)$表現行列による変換に翻訳できる，という意味である．}場$\psi^{(AB)}_{ab}(x)$は
 \begin{align*}
 U_0(\Lambda)\psi^{(AB)}_{ab}(x)U^{-1}(\Lambda)=&D^{(AB)}_{aa'bb'}(\Lambda^{-1})\psi^{(AB)}_{a'b'}(\Lambda x) \\
 =&\left[\exp\left(\frac{i}{2}\omega_{\mu\nu}\mc{J}^{(AB)\mu\nu}\right)\right]_{aa'bb'}\psi^{(AB)}_{a'b'}(\Lambda x) \\
@@ -5918,7 +5933,7 @@ U_0(\Lambda)\psi^{(AB)}_{ab}(x)U^{-1}(\Lambda)=&D^{(AB)}_{aa'bb'}(\Lambda^{-1})\
 =&\exp\left(-i(\theta_i-i\omega_i)\mc{A}_i -i(\theta_i+i\omega_i)\mc{B}_i\right) \\
 \neq& \exp\left(-i(\theta_i+i\omega_i)\mc{A}_i -i(\theta_i-i\omega_i)\mc{B}_i\right)=[D^{(AB)}(\Lambda)]^{-1}
 \end{align*}
-となる．)これは，斉次ローレンツ群$SO(3,1)$が，コンパクト群である4次元回転群$SO(4)=SU(2)\times SU(2)$と同じではなく非コンパクト群であるという事実に由来する．有限次元のユニタリー表現を持てるのはコンパクト群のみである．(非コンパクト部分，つまりブースト部分が自明な表現になっている場合を除く．つまり2章で質量ゼロ粒子の小群の解析でやったように，$ISO(2)=SO(2)\times \mathbb{R}^2$群の非コンパクト部分$\mathbb{R}^2$が自明な作用するとすれば有限次元ユニタリ表現が得られる．)非ユニタリーな表現を取り扱うことに問題はない．なぜなら，ここで関与しているのは場であって波動関数ではないので，ローレンツ不変な正のノルムを持っている必要はない\footnote{相対論的量子力学で，ディラックの波動関数$\psi(x)$から得られるノルム$\psi^\dagger \psi$は正のノルムになるが$\psi^\dagger D^\dagger(\Lambda)D(\Lambda)\psi\neq \psi^\dagger \psi$よりローレンツ不変でない．したがって相対論的粒子の確率密度$\rho(x)=\psi^\dagger(x)\psi(x)$はローレンツ不変でなくなる．具体的には$j^\mu:=\bar{\psi}\gamma^\mu \psi$が4元ベクトルとして変換し，そのゼロ成分目が$\psi^\dagger \gamma^0 \psi=-i\rho$を与えることから，$j^i$成分が混ざりこむ形に変換されてしまう．ただし全確率$P(t)=\int \rho(\mathbf{x},t) d^3\mathbf{x}$はローレンツ不変$P(t')=P(t)$になる．これを見るには超曲面要素$d\Sigma_\mu=(0,0,0,d^3\mathbf{x})$を用いて$P(t)=\int j^\mu d\Sigma_\mu$と書けることを使えば理解できる．}．\par
+となる．)これは，斉次ローレンツ群$SO(3,1)$が，コンパクト群である4次元回転群$SO(4)=SU(2)\times SU(2)$と同じではなく非コンパクト群であるという事実に由来する．有限次元のユニタリー表現を持てるのはコンパクト群のみである．(非コンパクト部分，つまりブースト部分が自明な表現になっている場合を除く．つまり2章で質量ゼロ粒子の小群の解析でやったように，$ISO(2)=SO(2)\times \mathbb{R}^2$群の非コンパクト部分$\mathbb{R}^2$が自明な作用するとすれば有限次元ユニタリ表現が得られる．)非ユニタリーな表現を取り扱うことに問題はない．なぜなら，ここで関与しているのは場であって波動関数ではないので，ローレンツ不変な正のノルムを持っている必要はない\footnote{相対論的量子力学で，ディラックの波動関数$\psi(x)$から得られるノルム$\psi^\dagger \psi$は正のノルムになるが$\psi^\dagger D^\dagger(\Lambda)D(\Lambda)\psi\neq \psi^\dagger \psi$よりローレンツ不変でない．したがって相対論的粒子の確率密度$\rho(x)=\psi^\dagger(x)\psi(x)$はローレンツ不変でなくなる．具体的には$j^\mu:=\bar{\psi}\gamma^\mu \psi$が4元ベクトルとして変換し，その時間成分が$\bar{\psi} \gamma^0 \psi=i\rho$を与えることから，$j^i$成分が混ざりこむ形に変換されてしまう．ただし全確率$P(t)=\int \rho(\mathbf{x},t) d^3\mathbf{x}$はローレンツ不変$P(t')=P(t)$になる．これを見るには超曲面要素$d\Sigma_\mu=(0,0,0,d^3\mathbf{x})$を用いて$P(t)=\int j^\mu d\Sigma_\mu$と書けることを使えば理解できる．}．\par
 一方，回転部分群$SO(3)$の表現はエルミート行列
 \begin{align*}
 \bm{\mc{J}}=&\bm{\mc{A}}+\bm{\mc{B}}
@@ -5936,6 +5951,7 @@ j=A+B,A+B-1,\cdots, |A-B|
 \vskip\baselineskip
 
 以下で具体的な表現に属する場を調べてみよう．\par
+・$A=0,B=0$\par
 $(0,0)$場は明らかに$j=0$成分のみを持つスカラーである．実際
 \begin{align*}
 \bm{\mc{A}}=&0,\quad \bm{\mc{B}}=0 \\
@@ -5944,13 +5960,19 @@ U_0(\Lambda)\psi^{(0,0)}_{ab}(x) U_0^{-1}(\Lambda)=&D^{(0,0)}_{aa'bb'}(\Lambda^{
 \end{align*}
 であり，これは実際にスカラー場である．もちろん$\mc{J}^{(0,0)\mu\nu}=0$である．この場合$a,b$はともに単一の成分$a=b=0$しか持たないから省略してしまって$\phi(x)=\psi_{ab}^{(0,0)}(x)$と書きなおせば
 \begin{align*}
-U_0(\Lambda)\phi(x) U_0^{-1}=\phi(\Lambda x)
+U_0(\Lambda)\phi(x) U_0^{-1}(\Lambda)=\phi(\Lambda x)
 \end{align*}
 となる．
+\begin{tcolorbox}[title= ${(0,0)}$表現(スカラー場)]
+\begin{align*}
+D(\Lambda)=&1 \\
+U_0(\Lambda)\phi(x) U_0^{-1}(\Lambda)=&\phi(\Lambda x)
+\end{align*}
+\end{tcolorbox}
 
 \vskip\baselineskip
 
-
+・$A=\frac{1}{2},B=0$\par
 $(\frac{1}{2},0)$または$(0,\frac{1}{2})$場は$j=+\frac{1}{2}$のみを持てるから，これらはワイルスピノルの上の2成分(例えばワイル表示$\gamma_5=+1$部分空間)と下の2成分($\gamma_5=-1$)である．実際$(\frac{1}{2},0)$表現は，上の公式にしたがって表現行列を調べてみると
 \begin{align*}
 J_1^{(1/2)}+iJ_2^{(1/2)}=&\left(
@@ -5999,9 +6021,9 @@ i & 0
 \right)=\frac{1}{2}\sigma_3 \\
 \mathbf{J}^{(1/2)}=&\frac{1}{2}\bm{\sigma}
 \end{align*}
-より，$\bm{\mc{A}}=J^{\frac{1}{2}}1_B$はパウリ行列であることがわかり
+より，$\bm{\mc{A}}=J^{(\frac{1}{2})}1_B$はパウリ行列であることがわかり
 \begin{align*}
-\bm{\mc{A}}=&\frac{\bm{\sigma}}{2},\quad \bm{\mc{B}}=0 \\
+\bm{\mc{A}}=&\frac{\bm{\sigma}}{2}1_B,\quad \bm{\mc{B}}=0 \\
 D^{(\frac{1}{2}0)}(\Lambda)=&\exp\left(i(\theta_i-i\omega_i)\frac{1}{2}\sigma_i\right)1_B \\
 =&\exp\left(i\theta_i\frac{\sigma_i}{2}+i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)1_B \\
 U_0(\Lambda)\psi^{(\frac{1}{2}0)}_{ab}(x) U_0^{-1}(\Lambda)=&D^{(\frac{1}{2}0)}_{aa'bb'}(\Lambda^{-1})\psi^{(\frac{1}{2}0)}_{a'b'}(\Lambda x) \\
@@ -6011,9 +6033,20 @@ U_0(\Lambda)\psi^{(\frac{1}{2}0)}_{ab}(x) U_0^{-1}(\Lambda)=&D^{(\frac{1}{2}0)}_
 \begin{align*}
 U_0(\Lambda)\psi^{L}_{a}(x)U_0^{-1}(\Lambda)=\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)_{aa'}\psi^{L}_{a'}(\Lambda x)
 \end{align*}
-となる．一方$(0,\frac{1}{2})$表現は$\bm{\mc{B}}=1_AJ^{(\frac{1}{2})}$がパウリ行列となるから
+となる．
+\begin{tcolorbox}[title=${(\frac{1}{2},0)}$表現(左ワイルスピノル)]
 \begin{align*}
-\bm{\mc{A}}=&0,\quad \bm{\mc{B}}=\frac{\bm{\sigma}}{2} \\
+&D_{aa'}(\Lambda)=\exp\left(i\theta_i\frac{\sigma_i}{2}+i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)_{aa'} \\
+&U_0(\Lambda)\psi^L_{a}(x) U_0^{-1}(\Lambda)=D_{aa'}(\Lambda^{-1})\psi^L_{a'}(\Lambda x)
+\end{align*}
+\end{tcolorbox}
+
+\vskip\baselineskip
+
+・$A=0,B=\frac{1}{2}$\par
+一方$(0,\frac{1}{2})$表現は$\bm{\mc{B}}=1_AJ^{(\frac{1}{2})}$がパウリ行列となるから
+\begin{align*}
+\bm{\mc{A}}=&0,\quad \bm{\mc{B}}=1_A \frac{\bm{\sigma}}{2} \\
 D^{(0\frac{1}{2})}(\Lambda)=&1_A\exp\left(i(\theta_i+i\omega_i)\frac{1}{2}\sigma_i\right) \\
 =&1_A \exp\left(i\theta_i\frac{\sigma_i}{2}+i\omega_i\left(+i\frac{\sigma_i}{2}\right)\right) \\
 U_0(\Lambda)\psi^{(0\frac{1}{2})}_\ell(x) U_0^{-1}(\Lambda)=&D^{(0\frac{1}{2})}_{aa'bb'}(\Lambda^{-1})\psi^{(\frac{1}{2}0)}_{a'b'}(\Lambda x) \\
@@ -6023,7 +6056,14 @@ U_0(\Lambda)\psi^{(0\frac{1}{2})}_\ell(x) U_0^{-1}(\Lambda)=&D^{(0\frac{1}{2})}_
 \begin{align*}
 U_0(\Lambda)\psi^{R}_{b}(x)U_0^{-1}(\Lambda)=\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(+i\frac{\sigma_i}{2}\right)\right)_{bb'}\psi^{R}_{b'}(\Lambda x)
 \end{align*}
-となる．どちらも$\omega_i=0$の回転部分群では2成分スピノルとして変換することがわかる．その直和$\psi:=\psi^L\oplus \psi^R=\left(
+となる．
+\begin{tcolorbox}[title=${(0,\frac{1}{2})}$表現(右ワイルスピノル)]
+\begin{align*}
+&D_{bb'}(\Lambda)=\exp\left(i\theta_i\frac{\sigma_i}{2}+i\omega_i\left(+i\frac{\sigma_i}{2}\right)\right)_{bb'} \\
+&U_0(\Lambda)\psi^R_{b}(x) U_0^{-1}(\Lambda)=D_{bb'}(\Lambda^{-1})\psi^R_{b'}(\Lambda x)
+\end{align*}
+\end{tcolorbox}
+どちらも$\omega_i=0$の回転部分群では2成分スピノルとして変換することがわかる．その直和$\psi:=\psi^L\oplus \psi^R=\left(
 \begin{matrix}
 \psi^L \\
 \psi^R
@@ -6055,7 +6095,8 @@ U_0(\Lambda)\psi(x)U_0^{-1}(\Lambda)=&U_0(\Lambda)\psi^L(x)U_0^{-1}(\Lambda )\op
 \right) \\
 =&D(\Lambda^{-1})\psi(\Lambda x)
 \end{align*}
-と書ける．この$D(\Lambda^{-1})$はまさに前節で議論した4成分スピノル表現である．したがって4成分スピノルは可約表現であり，その既約分解は$\left(\frac{1}{2},0\right)\oplus \left(0,\frac{1}{2}\right)$であることがわかる．そして特にワイル表示では(5.4.28)の$\gamma_5=+1$の固有ベクトルである上成分が$\left(\frac{1}{2},0\right)$既約成分，$\gamma_5=-1$の固有ベクトルである下成分が$\left(0,\frac{1}{2}\right)$既約成分であることがわかる．また，$\left(\frac{1}{2},0\right)$表現に属する場を複素共役した場$\psi^{L*}_{a}(x)$の変換性を見てみると
+と書ける．この$D(\Lambda^{-1})$はまさに前節で議論した4成分スピノル表現である．したがって4成分スピノルは可約表現であり，その既約分解は$\left(\frac{1}{2},0\right)\oplus \left(0,\frac{1}{2}\right)$であることがわかる．そして特にワイル表示では(5.4.28)の$\gamma_5=+1$の固有ベクトルである上成分が$\left(\frac{1}{2},0\right)$既約成分，$\gamma_5=-1$の固有ベクトルである下成分が$\left(0,\frac{1}{2}\right)$既約成分であることがわかる．\par
+また，$\left(\frac{1}{2},0\right)$表現に属する場を複素共役した場$\psi^{L*}_{a}(x)$の変換性を見てみると
 \begin{align*}
 U_0(\Lambda)\psi^{L*}_{a}(x) U_0^{-1}(\Lambda)=&\exp\left(+i\theta_i\frac{\sigma_i^*}{2}+i\omega_i\left(+i\frac{\sigma_i^*}{2}\right)\right)_{aa'}\psi^{L*}_{a'}(\Lambda x)
 \end{align*}
@@ -6065,7 +6106,11 @@ U_0(\Lambda)\left(\sigma_2 \psi^{L*}\right)_{a}(x) U_0^{-1}(\Lambda)=&\left[\sig
 =&\left[\exp\left(-i\theta_i\frac{\sigma_i^*}{2}-i\omega_i\left(+i\frac{\sigma_i^*}{2}\right)\right)\sigma_2\right]_{aa'}\psi^{L*}_{a'}(\Lambda x) \\
 =&\exp\left(-i\theta_i\frac{\sigma_i^*}{2}-i\omega_i\left(+i\frac{\sigma_i^*}{2}\right)\right)_{aa'}\left(\sigma_2 \psi^{L*}\right)_{a'}(\Lambda x)
 \end{align*}
-となり，これはまさに$\left(0,\frac{1}{2}\right)$表現であることを示している．同様に，$(0,\frac{1}{2})$表現に属する$\psi^{R}(x)$を用いて$(\sigma_2)_{bb'}\psi^{R*}_{b'}(x)$と作った場は$(\frac{1}{2},0)$表現に属する．\par
+となり，これはまさに$\left(0,\frac{1}{2}\right)$表現であることを示している．同様に，$(0,\frac{1}{2})$表現に属する$\psi^{R}(x)$を用いて$(\sigma_2)_{bb'}\psi^{R*}_{b'}(x)$と作った場は$(\frac{1}{2},0)$表現に属する．あるいは$\epsilon=i\sigma_2$を用いて
+\begin{align*}
+\epsilon_{aa'}\psi^{L*}_{a'},\quad \epsilon_{bb'}\psi^{R*}
+\end{align*}
+はそれぞれ$(0,\frac{1}{2})$表現と$(\frac{1}{2},0)$表現となる，と書ける．\par
 最後に，$\mc{J}^{(\frac{1}{2}0)},\mc{J}^{(0\frac{1}{2})\mu\nu}$に対応する行列を求めておこう．このために，5.4節で導入したガンマ行列を
 \begin{align*}
 \gamma^0 =&-i\beta =-i\left(
@@ -6159,8 +6204,10 @@ D(\Lambda)=&\exp\left(\frac{i}{2}\omega_{\mu\nu}\mc{S}^{\mu\nu}\right) \\
 したがって，$\mc{J}^{(\frac{1}{2}0)\mu\nu}=\frac{1}{2}\sigma^{\mu\nu},\mc{J}^{(0\frac{1}{2})\mu\nu}=\frac{1}{2}\bar{\sigma}^{\mu\nu}$であることがわかる．
 
 
+
 \vskip\baselineskip
 
+・$A=\frac{1}{2},B=\frac{1}{2}$\par
 $\left(\frac{1}{2},\frac{1}{2}\right)$表現は，$j=\frac{1}{2}+\frac{1}{2}=1$部分と$j=\frac{1}{2}-\frac{1}{2}=0$成分をもつことがわかる．前者は回転のもとで通常の3元ベクトル$\mathbf{v}$として振る舞い，後者はスカラー$v^0$として振舞うから，その組み合わせは4元ベクトル$v^\mu=(\mathbf{v},v^0)$であることがわかる．$\left(\frac{1}{2},\frac{1}{2}\right)$表現は
 \begin{align*}
 \bm{\mc{A}}=&\frac{\bm{\sigma}}{2},\quad \bm{\mc{B}}=\frac{\bm{\sigma}}{2} \\
@@ -6197,13 +6244,270 @@ U_0(\Lambda)\psi^\mu(x)U^{-1}_0(\Lambda)=\tensor{(\Lambda^{-1})}{^\mu_\nu} \psi^
 \end{align*}
 であることがわかる．以上より，$\left(\frac{1}{2},\frac{1}{2}\right)$表現にしたがって変換する場$\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}$は4元ベクトル場$\psi^\mu$と
 \begin{align*}
-\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}(x)=(\sigma_2)_{bb'}(\sigma_\mu)_{ab'} \psi^\mu(x)
+\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}(x)=&-i(\sigma_2)_{bb'}(\sigma_\mu)_{ab'} \psi^\mu(x) \\
+=&i(\sigma_\mu \sigma_2)_{ab} \psi^\mu(x)
 \end{align*}
-で結ばれており，(同型を同一視するという意味で)$\left(\frac{1}{2},\frac{1}{2}\right)$場は4元ベクトル場である．
-
+で結ぶことができ，(同型を同一視するという意味で)$\left(\frac{1}{2},\frac{1}{2}\right)$場は4元ベクトル場である．$\epsilon_{\frac{1}{2},-\frac{1}{2}}=+1$となる反対称テンソル$\epsilon_{ab}=i(\sigma_2)_{ab}$を用いて，別のシンプルな表式
+\begin{align*}
+\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}(x)=(\sigma_\mu\epsilon)_{ab} \psi^\mu(x)
+\end{align*}
+で結ぶこともできる．逆に解くと
+\begin{align*}
+\psi^\mu(x)=&-\frac{1}{2}(\epsilon \sigma^\mu)_{ab}\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}(x) \\
+=&-\frac{1}{2}(\epsilon \sigma^\mu\epsilon \epsilon^T)_{ab}\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}(x) \\
+=&\frac{1}{2}((\bar{\sigma}^\mu)^T \epsilon^T)_{ab}\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}(x) \\
+=&\frac{1}{2}(\epsilon \bar{\sigma}^\mu)_{ba}\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}(x) \\
+=&\frac{1}{2}\mathrm{tr}\left[\epsilon \bar{\sigma}^\mu \psi^{(\frac{1}{2}\frac{1}{2})}(x)\right]
+\end{align*}
+となる．(ここで，
+\begin{align*}
+\sigma_2 \sigma_\mu \sigma_2 =(\sigma_2 \bm{\sigma}\sigma_2,\bm{1})=(-\bm{\sigma}^* ,1)=\bar{\sigma}_\mu^*=\bar{\sigma}_\mu^T \\
+\sigma_2 \bar{\sigma}_\mu \sigma_2 =(-\sigma_2 \bm{\sigma}\sigma_2,\bm{1})=(\bm{\sigma}^* ,1)=\sigma_\mu^*=\sigma_\mu^T
+\end{align*}
+より$\epsilon \sigma^\mu \epsilon=-(\bar{\sigma}^\mu)^T$を用いた．)実際上に代入すると
+\begin{align*}
+(\sigma_\mu\epsilon)_{ab} \psi^\mu(x)=&-\frac{1}{2} (\sigma_\mu\epsilon)_{ab} (\epsilon \sigma^\mu)_{cd}\psi_{cd}^{(\frac{1}{2}\frac{1}{2})}(x) \\
+=&-\frac{1}{2} (\sigma_\mu)_{ae}\epsilon_{eb} \epsilon_{cf} (\sigma^\mu)_{fd}\psi_{cd}^{(\frac{1}{2}\frac{1}{2})}(x) \\
+=&(\epsilon_{af}\epsilon_{ed})\epsilon_{eb} \epsilon_{cf} \psi_{cd}^{(\frac{1}{2}\frac{1}{2})}(x) \\
+=&\delta_{ac}\delta_{bd}\psi_{cd}^{(\frac{1}{2}\frac{1}{2})}(x) \\
+=&\psi_{ab}^{(\frac{1}{2}\frac{1}{2})}(x)
+\end{align*}
+となり戻る．ここでフィールツ恒等式
+\begin{align*}
+(\sigma_\mu)_{ab}(\sigma^\mu)_{cd}=-2\epsilon_{ac}\epsilon_{bd}
+\end{align*}
+を用いた．(これを証明するには
+\begin{align*}
+&(\sigma_\mu)_{ab}(\sigma^\mu)_{cd}=-\sigma_0 \otimes \sigma_0 +\sigma_1\otimes \sigma_1 +\sigma_2 \otimes \sigma_2 +\sigma_3 \otimes \sigma_3 \\
+=&-\left(
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right) \otimes \left(
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right) +\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right) \otimes \left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right) +\left(
+\begin{matrix}
+0 & -i \\
+i & 0
+\end{matrix}
+\right)\otimes \left(
+\begin{matrix}
+0 & -i \\
+i & 0
+\end{matrix}
+\right) +\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right) \otimes \left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right) \\
+=&-\left(
+\begin{matrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{matrix}
+\right) +\left(
+\begin{matrix}
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+0 & 0 & 0 & -1 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+-1 & 0 & 0 & 0
+\end{matrix}
+\right)+\left(
+\begin{matrix}
+1 & 0 & 0 & 0 \\
+0 & -1 & 0 & 0 \\
+0 & 0 & -1 & 0 \\
+0 & 0 & 0 & 1
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+0 & 0 & 0 & 0 \\
+0 & -2 & 2 & 0 \\
+0 & 2 & -2 & 0 \\
+0 & 0 & 0 & 0
+\end{matrix}
+\right)
+\end{align*}
+となり，この$4\times 4$行列を$2\times 2$ブロック行列に分割すると，それぞれ
+\begin{align*}
+\left(
+\begin{matrix}
+(a=1/2,b=1/2) & (a=1/2,b=-1/2) \\
+(a=-1/2,b=1/2) &(a=-1/2,b=-1/2) 
+\end{matrix}
+\right)
+\end{align*}
+であり，さらにその$2\times2$行列の中は
+\begin{align*}
+\left(
+\begin{matrix}
+(c=1/2,d=1/2) & (c=1/2,d=-1/2) \\
+(c=-1/2,d=1/2) &(c=-1/2,d=-1/2) 
+\end{matrix}
+\right)
+\end{align*}
+になっていることに気付けば，この行列は
+\begin{align*}
+(a,b,c,d):&\left(+\frac{1}{2},+\frac{1}{2},-\frac{1}{2},-\frac{1}{2}\right) \to -2 \\
+&\left(+\frac{1}{2},-\frac{1}{2},-\frac{1}{2},+\frac{1}{2}\right) \to 2 \\
+&\left(-\frac{1}{2},+\frac{1}{2},+\frac{1}{2},-\frac{1}{2}\right) \to 2 \\
+&\left(-\frac{1}{2},-\frac{1}{2},+\frac{1}{2},+\frac{1}{2}\right) \to -2
+\end{align*}
+でそれ以外ゼロなものであるとわかる．したがって$-2\epsilon_{ac}\epsilon_{bd}$であると書ける．)後に使うので，もう一つの種類のフィールツ恒等式
+\begin{align*}
+(\sigma_\mu)_{ab}(\sigma^\mu)_{cd}=-2\delta_{ad}\delta_{bc}
+\end{align*}
+も紹介しておく．(これを証明するには
+\begin{align*}
+&(\bar{\sigma}^\mu)_{ab}(\sigma_\mu)_{cd}=-\sigma_0 \otimes \sigma_0 -\sigma_1\otimes \sigma_1 -\sigma_2 \otimes \sigma_2 -\sigma_3 \otimes \sigma_3 \\
+=&-\left(
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right) \otimes \left(
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right) -\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right) \otimes \left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right) -\left(
+\begin{matrix}
+0 & -i \\
+i & 0
+\end{matrix}
+\right)\otimes \left(
+\begin{matrix}
+0 & -i \\
+i & 0
+\end{matrix}
+\right) -\left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right) \otimes \left(
+\begin{matrix}
+1 & 0 \\
+0 & -1
+\end{matrix}
+\right) \\
+=&-\left(
+\begin{matrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{matrix}
+\right) -\left(
+\begin{matrix}
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0
+\end{matrix}
+\right)-\left(
+\begin{matrix}
+0 & 0 & 0 & -1 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+-1 & 0 & 0 & 0
+\end{matrix}
+\right)-\left(
+\begin{matrix}
+1 & 0 & 0 & 0 \\
+0 & -1 & 0 & 0 \\
+0 & 0 & -1 & 0 \\
+0 & 0 & 0 & 1
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+-2 & 0 & 0 & 0 \\
+0 & 0 & -2 & 0 \\
+0 & -2 & 0 & 0 \\
+0 & 0 & 0 & -2
+\end{matrix}
+\right)
+\end{align*}
+となり，この$4\times 4$行列を$2\times 2$ブロック行列に分割すると，それぞれ
+\begin{align*}
+\left(
+\begin{matrix}
+(a=1/2,b=1/2) & (a=1/2,b=-1/2) \\
+(a=-1/2,b=1/2) &(a=-1/2,b=-1/2) 
+\end{matrix}
+\right)
+\end{align*}
+であり，さらにその$2\times2$行列の中は
+\begin{align*}
+\left(
+\begin{matrix}
+(c=1/2,d=1/2) & (c=1/2,d=-1/2) \\
+(c=-1/2,d=1/2) &(c=-1/2,d=-1/2) 
+\end{matrix}
+\right)
+\end{align*}
+になっていることに気付けば，この行列は
+\begin{align*}
+(a,b,c,d):&\left(+\frac{1}{2},+\frac{1}{2},+\frac{1}{2},+\frac{1}{2}\right) \to -2 \\
+&\left(+\frac{1}{2},-\frac{1}{2},-\frac{1}{2},+\frac{1}{2}\right) \to -2 \\
+&\left(-\frac{1}{2},+\frac{1}{2},+\frac{1}{2},-\frac{1}{2}\right) \to -2 \\
+&\left(-\frac{1}{2},-\frac{1}{2},-\frac{1}{2},-\frac{1}{2}\right) \to -2
+\end{align*}
+でそれ以外ゼロなものであるとわかる．したがって$-2\delta_{ad}\delta_{bc}$であると書ける．)
+\begin{tcolorbox}[title=${(\frac{1}{2},\frac{1}{2})}$表現(4元ベクトル)]
+\begin{align*}
+&D^{(\frac{1}{2}\frac{1}{2})}_{aa'bb'}(\Lambda)=\exp\left(+i\theta_i\frac{\sigma_i}{2}+\omega_i\frac{\sigma_i}{2}\right)_{aa'}\exp\left(+i\theta_i\frac{\sigma_i}{2}-\omega_i\frac{\sigma_i}{2}\right)_{bb'} \\
+&U_0(\Lambda) \psi^{(\frac{1}{2}\frac{1}{2})}_{ab}(x) U_0^{-1}(\Lambda)=D^{(\frac{1}{2}\frac{1}{2})}_{aa'bb'}(\Lambda^{-1})\psi_{a'b'}^{\left(\frac{1}{2}\frac{1}{2}\right)}(\Lambda x) \\
+&\qquad \Downarrow \psi^\mu(x):=\frac{1}{2}\mathrm{tr}\left[\epsilon \bar{\sigma}^\mu \psi^{(\frac{1}{2}\frac{1}{2})}(x)\right]  \qquad \Uparrow \psi^{(\frac{1}{2}\frac{1}{2})}_{ab}(x):=(\sigma_\mu \epsilon)_{ab} \psi^\mu(x) \\
+&\tensor{D}{^\mu_\nu}(\Lambda)=\tensor{\Lambda}{^\mu_\nu} \\
+&U_0(\Lambda)\psi^\mu(x) U_0^{-1}(\Lambda)=\tensor{D}{^\mu_\nu}(\Lambda^{-1})\psi^\nu(\Lambda x)
+\end{align*}
+\end{tcolorbox}
 
 \vskip\baselineskip
 
+・$A=1,B=0$\par
 (1,0)表現についても与えておこう．これは$j=1$のみの成分をもち，表現行列は
 \begin{align*}
 J_1^{(1)}+iJ_2^{(1)}=&\left(
@@ -6451,7 +6755,8 @@ F^{(+)\mu\nu}=&+ \frac{i}{2}\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}^{(+)}
 \end{align*}
 を満たす場$F^{(+)\mu\nu}(x)$を考える．この場は$F^{(+)ij}=+i\epsilon_{ijk}F^{(+)k0}$を満たすから，自由度は$\{F^{(+)i0}\}_{i=1,2,3}$の3成分しかない．この場は2階のテンソルであることから，変換則を調べると，その無限小変換は
 \begin{align*}
-U_0(\Lambda)F^{(+)\mu\nu}(x)U_0^{-1}(\Lambda)=F^{(+)\mu\nu}(\Lambda x)-\tensor{\omega}{^\mu_\rho}F^{(+)\rho\nu}(\Lambda x)-\tensor{\omega}{^\nu_\rho}F^{(+)\mu\rho}(\Lambda x)
+U_0(\Lambda)F^{(+)\mu\nu}(x)U_0^{-1}(\Lambda)=&\tensor{(\Lambda^{-1})}{^\mu_\rho}\tensor{(\Lambda^{-1})}{^\nu_\sigma}F^{(+)\rho\sigma}(\Lambda x) \\
+=&F^{(+)\mu\nu}(\Lambda x)-\tensor{\omega}{^\mu_\rho}F^{(+)\rho\nu}(\Lambda x)-\tensor{\omega}{^\nu_\rho}F^{(+)\mu\rho}(\Lambda x)
 \end{align*}
 となり，特に$\{F^{(+)i0}\}$の変換は
 \begin{align*}
@@ -6471,7 +6776,19 @@ U_0(\Lambda)F^{(+)i0}(x)U_0^{-1}(\Lambda)=&F^{(+)i0}(\Lambda x)-\theta_k \epsilo
 \begin{align*}
 U_0(\Lambda)F^{(+)i0}(x)U_0^{-1}(\Lambda)=&\exp\Bigl(-i(\theta_j-i\omega_j)J_j\Bigr)_{ik} F^{(+)k0}(\Lambda x)
 \end{align*}
-となる．これは明らかに自己双対な2階の反対称テンソル場$F^{(+)i0}(x)$が$(1,0)$表現にしたがって変換されることを示している．すなわち$(1,0)$表現に属する場は(同型を同一視するという意味で)自己双対2階反対称テンソル場$F^{(+)\mu\nu}$である．$(1,0)$表現は回転のもとで$j=1$の変換性を示す部分$F^{(+)j0}$のみを持ち，実際に自由度は3次元である．\par
+となる．これは明らかに自己双対な2階の反対称テンソル場$F^{(+)i0}(x)$が$(1,0)$表現にしたがって変換されることを示している．(この計算から明らかなように，自己双対性を満たす2階の反対称テンソルはローレンツ変換のもとで閉じている，すなわち実際に不変部分空間であることがわかる．)すなわち$(1,0)$表現に属する場は(同型を同一視するという意味で)自己双対2階反対称テンソル場$F^{(+)\mu\nu}$である．$(1,0)$表現は回転のもとで$j=1$の変換性を示す部分$F^{(+)j0}$のみを持ち，実際に自由度は3次元である．
+\begin{tcolorbox}[title=${(1,0)}$表現(自己双対2階反対称テンソル)]
+\begin{align*}
+&\tensor{D}{^\mu^\nu_\rho_\sigma}(\Lambda)=\tensor{\Lambda}{^\mu_\rho}\tensor{\Lambda}{^\nu_\sigma} \\
+&U_0(\Lambda)F^{(+)\mu\nu}(x) U_0^{-1}(\Lambda)=\tensor{D}{^\mu^\nu_\rho_\sigma}(\Lambda^{-1})F^{(+)\rho\sigma}(\Lambda x)
+\end{align*}
+\end{tcolorbox}
+
+
+\vskip\baselineskip
+
+
+・$A=0,B=1$\par
 同様に$(0,1)$表現に属する場も与えよう．$D^{(01)}(\Lambda)$は
 \begin{align*}
 \bm{\mc{A}}=&0,\quad \bm{\mc{B}}=1_A \mathbf{J}^{(1)} \\
@@ -6513,30 +6830,54 @@ U_0(\Lambda)F^{(-)i0}(x)U_0^{-1}(\Lambda)=&F^{(-)i0}(\Lambda x)-\theta_k \epsilo
 \begin{align*}
 U_0(\Lambda)F^{(-)i0}(x)U_0^{-1}(\Lambda)=&\exp\Bigl(-i(\theta_j+i\omega_j)J_j\Bigr)_{ik} F^{(-)k0}(\Lambda x)
 \end{align*}
-となる．これは明らかに反自己双対な2階の反対称テンソル場$F^{(-)i0}(x)$が$(0,1)$表現にしたがって変換されることを示している．すなわち$(0,1)$表現に属する場は(同型を同一視するという意味で)反自己双対2階反対称テンソル場$F^{(-)\mu\nu}$である．$(0,1)$表現は回転のもとで$j=1$の変換性を示す部分$F^{(-)j0}$のみを持ち，実際に自由度は3次元である．\par
-前に行ったように，任意の2階反対称テンソル$F^{\mu\nu}$は自己双対と反自己双対に分解できる．
+となる．これは明らかに反自己双対な2階の反対称テンソル場$F^{(-)i0}(x)$が$(0,1)$表現にしたがって変換されることを示している．すなわち$(0,1)$表現に属する場は(同型を同一視するという意味で)反自己双対2階反対称テンソル場$F^{(-)\mu\nu}$である．$(0,1)$表現は回転のもとで$j=1$の変換性を示す部分$F^{(-)j0}$のみを持ち，実際に自由度は3次元である．
+\begin{tcolorbox}[title=${(0,1)}$表現(反自己双対2階反対称テンソル)]
 \begin{align*}
-F^{\mu\nu}(x)=&\frac{1}{2}\left(F^{\mu\nu}+\frac{i}{2}\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}\right)+\frac{1}{2}\left(F^{\mu\nu}-\frac{i}{2}\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}\right) \\
+&\tensor{D}{^\mu^\nu_\rho_\sigma}(\Lambda)=\tensor{\Lambda}{^\mu_\rho}\tensor{\Lambda}{^\nu_\sigma} \\
+&U_0(\Lambda)F^{(-)\mu\nu}(x) U_0^{-1}(\Lambda)=\tensor{D}{^\mu^\nu_\rho_\sigma}(\Lambda^{-1})F^{(-)\rho\sigma}(\Lambda x)
+\end{align*}
+\end{tcolorbox}
+
+前にローレンツ代数の基底$J^{\mu\nu}$で行ったように，任意の2階反対称テンソル$F^{\mu\nu}$は自己双対と反自己双対に分解できる．
+\begin{align*}
+F^{\mu\nu}=&\frac{1}{2}\left(F^{\mu\nu}+\frac{i}{2}\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}\right)+\frac{1}{2}\left(F^{\mu\nu}-\frac{i}{2}\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}\right) \\
 =&F^{(+)\mu\nu}+F^{(-)\mu\nu}
 \end{align*}
-したがって，2階の反対称テンソル場はローレンツ群の可約表現$(1,0)\oplus (0,1)$に属している．実際に2階の反対称テンソルは自由度が6次元であり，$(1,0)\oplus (0,1)$の自由度に一致している．
+(このように分離した第一項目と第二項目がそれぞれ自己・反自己双対条件を満たすのは，既に見た．)したがって，2階の反対称テンソル場はローレンツ群の可約表現$(1,0)\oplus (0,1)$に属している．実際に2階の反対称テンソルは自由度が6次元であり，$(1,0)\oplus (0,1)$の自由度に一致している．
 
 \vskip\baselineskip
 
-一般に，$(A,B)$表現と$(A',B')$表現の直積$(A,B)\otimes (A',B')$は$(A+A',B+B'),(A+A'-1,B+B'),(A+A',B+B'-1),\cdots ,(|A-A'|,|B-B'|)$の直和に分解される．これを用いれば，既に知っている低い階数の表現から，高い階数の表現を得ることができる．\par
+$\mc{A}$と$\mc{B}$はそれぞれ独立な$SU(2)$スピン行列として表されるのだったから，直積による合成則も簡単に調べることができる．一般に，$(A,B)$表現と$(A',B')$表現の直積$(A,B)\otimes (A',B')$は$(A+A',B+B'),(A+A'-1,B+B'),(A+A',B+B'-1),\cdots ,(|A-A'|,|B-B'|)$の直和に分解される．これを用いれば，既に知っている低い階数の表現から，高い階数の表現を得ることができる．\par
 例えば，$\left(\frac{1}{2},0\right)\otimes \left(\frac{1}{2},0\right)=(1,0)\oplus (0,0)$と分解できる．これは
 \begin{align*}
-\psi_{ab}=&\frac{1}{2}(\psi_{ab}+\psi_{ba})+\frac{1}{2}(\psi_{ab}-\psi_{ba})\\
-=&\frac{1}{2}(\psi_{ab}+\psi_{ba})-\frac{1}{4}\epsilon_{ab}\epsilon_{cd}\psi_{cd}
+\psi_{aa'}=&\frac{1}{2}(\psi_{aa'}+\psi_{a'a})+\frac{1}{2}(\psi_{aa'}-\psi_{a'a})\\
+=&\frac{1}{2}(\psi_{aa'}+\psi_{a'a})+\frac{1}{2}\epsilon_{aa'}\epsilon_{cc'}\psi_{cc'}
 \end{align*}
-となる．($a,b$が記号の乱用だが，どちらも$\mc{A}_i$の変換性を示す添え字としている．)ここで，任意の$2\times 2$行列は$\sigma_\mu$で展開でき，特に反対称な$2\times 2$行列は$\epsilon_{\frac{1}{2},-\frac{1}{2}}=+1$となる反対称テンソル$\epsilon_{ab}=i(\sigma_2)_{ab}$に比例することを用いて
+となる．($a,a'$は，どちらも$\mc{A}_i$の$\left(\frac{1}{2},0\right)$変換性を示す添え字としている．)ここで，任意の$2\times 2$行列は$\sigma_\mu$で展開でき，特に反対称な$2\times 2$行列は$\epsilon_{\frac{1}{2},-\frac{1}{2}}=+1$となる反対称テンソル$\epsilon_{ab}=i(\sigma_2)_{ab}$に比例することを用いて
 \begin{align*}
 \psi_{ab}-\psi_{ba}=&C\epsilon_{ab} \\
 \epsilon_{ab}(\psi_{ab}-\psi_{ba})=&2\epsilon_{ab}\psi_{ab} \\
 =&C\epsilon_{ab}\epsilon_{ab}=2C \quad (両辺 \epsilon_{ab} 縮約)\\
-\therefore \quad \psi_{ab}-\psi_{ba}=&\frac{1}{2}\epsilon_{ab}\epsilon_{cd}\psi_{cd}
+\therefore \quad \psi_{ab}-\psi_{ba}=&\epsilon_{ab}\epsilon_{cd}\psi_{cd}
 \end{align*}
-となることを用いた．第二項目がスカラー$(0,0)$表現であることはすぐにわかる．第一項目が$(1,0)$表現に属することを見るためには，
+となることを用いた．第二項目がスカラー$(0,0)$表現であることはすぐにわかる．実際，$\epsilon=i\sigma_2$が
+\begin{align*}
+&\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)\epsilon \exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)^T \\
+=&i\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)\sigma_2\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)^T \\
+=&i\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)\sigma_2\exp\left(-i\theta_i\frac{(\sigma_i)^T}{2}-i\omega_i\left(-i\frac{(\sigma_i)^T}{2}\right)\right)\\
+=&i\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)\exp\left(+i\theta_i\frac{(\sigma_i)^\dagger}{2}+i\omega_i\left(-i\frac{(\sigma_i)^\dagger}{2}\right)\right)\sigma_2 \quad \because \sigma_2 \bm{\sigma}\sigma_2=-\bm{\sigma}^*\\
+=&i\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)\exp\left(+i\theta_i\frac{\sigma_i}{2}+i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)\sigma_2 \quad \because \bm{\sigma}^\dagger=\bm{\sigma} \\
+=&i\sigma_2=\epsilon
+\end{align*}
+の意味で不変テンソルであることから
+\begin{align*}
+&U_0(\Lambda) \epsilon_{aa'}\epsilon_{cc'}\psi_{cc'}(x) U^{-1}_0(\Lambda) \\
+=&\epsilon_{aa'}\epsilon_{cc'}U_0\psi_{cc'}(x) U_0^{-1} \\
+=&\epsilon_{aa'}\epsilon_{cc'}\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)_{cd}\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)_{c'd'}\psi_{dd'}(\Lambda x) \\
+=&\epsilon_{aa'}\left[\exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)\epsilon \exp\left(-i\theta_i\frac{\sigma_i}{2}-i\omega_i\left(-i\frac{\sigma_i}{2}\right)\right)^T\right]_{dd'}\psi_{dd'}(\Lambda x) \\
+=&\epsilon_{aa'}\epsilon_{dd'}\psi_{dd'}(\Lambda x)
+\end{align*}
+となる．第一項目が$(1,0)$表現に属することを見るためには，
 \begin{align*}
 \sigma^{\mu\nu}=&\frac{i}{2}(\sigma^\mu \bar{\sigma}^\nu-\sigma^\nu \bar{\sigma}^\mu) \\
 \bar{\sigma}^{\mu\nu}=&\frac{i}{2}(\bar{\sigma}^\mu\sigma^\nu-\bar{\sigma}^\nu\sigma^\mu)
@@ -6584,7 +6925,7 @@ F^{\mu\nu}(x)=&\frac{1}{2}\left(F^{\mu\nu}+\frac{i}{2}\epsilon^{\mu\nu\rho\sigma
 \end{align*}
 である．よって
 \begin{align*}
-F^{(+)\mu\nu}:=(\bar{\sigma}^{\mu\nu}\epsilon)_{ab} \frac{1}{2}(\psi_{ab}+\psi_{ba})
+F^{(+)\mu\nu}:=(\bar{\sigma}^{\mu\nu}\epsilon)_{aa'} \frac{1}{2}(\psi_{aa'}+\psi_{a'a})
 \end{align*}
 と縮約することによって自己双対な2階の反対称テンソル場を作ることができる．これは$(1,0)$表現に属すのだったから，対称スピノル部分は$(1,0)$場である．\par
 他の例としては$\left(\frac{1}{2},\frac{1}{2}\right)\otimes \left(\frac{1}{2},\frac{1}{2}\right)=(1,1)\oplus (1,0)\oplus (0,1) \oplus (0,0)$と分解され
@@ -6597,7 +6938,11 @@ U_0(\Lambda)\Bigl[\eta^{\mu\nu}\eta_{\rho\sigma}\psi^{\rho\sigma}(x)\Bigr]U_0^{-
 =&\eta^{\mu\nu}\eta_{\rho\sigma} \tensor{(\Lambda^{-1})}{^\rho_\alpha}\tensor{(\Lambda^{-1})}{^\sigma_\beta} \psi^{\alpha\beta}(\Lambda x) \\
 =&\eta^{\mu\nu}\eta_{\alpha\beta}\psi^{\alpha\beta}(\Lambda x) \quad \because \eta_{\rho\sigma}\tensor{\Lambda}{^\rho_\alpha}\tensor{\Lambda}{^\sigma_\beta}=\eta_{\alpha\beta}
 \end{align*}
-からわかる．第一項目が$(1,1)$表現であり，実際に2階のトレースレス\footnote{トレースレス性を要求しないと既約にならない．既約な対称テンソル$T^{\mu\nu}$が存在すると仮定すると，不変テンソルと縮約させた$\eta_{\mu\nu}T^{\mu\nu}$はスカラーとして変換する場となり，もっと既約な部分が存在していることになり既約性と矛盾する．これはもっと高階のテンソルについても同様である．}
+からわかる．第一項目が$(1,1)$表現であり，実際に2階のトレースレス\footnote{トレースレス性を要求しないと既約にならない．既約な対称テンソル$T^{\mu\nu}$が存在すると仮定すると，不変テンソルと縮約させた$\eta_{\mu\nu}T^{\mu\nu}$は(上で確かめたように)スカラーとして変換する場となり，これは$\{T^{\mu\nu}\}_{0\leq \mu,\nu \leq 3}$の線形結合で作られる不変部分空間である．したがって仮定の既約性と矛盾する．これはもっと高階のテンソルについても同様であり，$n$階の対称テンソルが既約であるためには任意の二つの添え字$\mu_i,\mu_j(i\neq j)$についてのトレースがゼロ
+\begin{align*}
+\eta_{{\mu_i}{\mu_j}}T^{{\mu_1}\cdots {\mu_i} \cdots {\mu_j}\cdots {\mu_n}}=0
+\end{align*}
+という条件を課す必要がある．そうでなければ縮約により作られた量は$n-2$階のテンソルとなり，不変部分空間をなすために既約性と矛盾することとなる．}
 \begin{align*}
 \eta_{\mu\nu}\left(\psi^{\mu\nu}+\psi^{\nu\mu}-\frac{1}{2}\eta^{\mu\nu}\eta_{\rho\sigma}\psi^{\rho\sigma}\right)=0
 \end{align*}
@@ -6608,19 +6953,1006 @@ U_0(\Lambda)\Bigl[\eta^{\mu\nu}\eta_{\rho\sigma}\psi^{\rho\sigma}(x)\Bigr]U_0^{-
 =&\tensor{\Lambda}{^\mu_\alpha}\tensor{\Lambda}{^\nu_\beta}\psi^{\alpha\beta}(\Lambda x)+\tensor{\Lambda}{^\mu_\alpha}\tensor{\Lambda}{^\nu_\beta}\psi^{\beta\alpha}(\Lambda x)-\tensor{\Lambda}{^\mu_\alpha}\tensor{\Lambda}{^\nu_\beta}\frac{1}{2}\eta^{\alpha\beta}\eta_{\rho\sigma}\psi^{\rho\sigma}(\Lambda x) \quad \because \eta_{\rho\sigma}\tensor{\Lambda}{^\rho_\alpha}\tensor{\Lambda}{^\sigma_\beta}=\eta_{\alpha\beta} \\
 =&\tensor{\Lambda}{^\mu_\alpha}\tensor{\Lambda}{^\nu_\beta}\left(\psi^{\alpha\beta}(\Lambda x)+\psi^{\beta\alpha}(\Lambda x)-\frac{1}{2}\eta^{\alpha\beta}\eta_{\rho\sigma}\psi^{\rho\sigma}(\Lambda x)\right)
 \end{align*}
-からわかる．最後の結果は実際に$\mu,\nu$について対称テンソルになっているので，ローレンツ変換のもとで閉じていることがわかる．一般に，$(A,A)$場は$j=2A,2A-1,\cdots ,0$の整数スピンのみを持つ項$T_{i_1i_2\cdots i_A},T_{i_12_i\cdots i_{A-1}0},\cdots ,T_{00\cdots 0}$を含んでおり，階数$2A$でトレースレスな対称テンソルに対応する．
+からわかる．最後の結果は実際に$\mu,\nu$について対称テンソルになっているので，ローレンツ変換のもとで閉じていることがわかる．\par
+一般に，$(A,A)$表現に属する場は，$\left(\frac{1}{2},\frac{1}{2}\right)$の$2A$個のテンソル積から適当な対称化と反対称化と適切なトレースの引き去りによって構成することができる．そのようなものは$j=2A,2A-1,\cdots ,0$の整数スピンのみを持つ項$T_{i_1i_2\cdots i_A},T_{i_12_i\cdots i_{A-1}0},\cdots ,T_{00\cdots 0}$を含んでおり，階数$2A$でトレースレスな対称テンソルに対応する．実際に次元を見てみよう．階数$2A$の対称テンソルの独立成分は\footnote{対称テンソルであるから，独立な成分は$2A$個の添え字$\mu_1,\cdots ,\mu_{2A}$の順序を区別しない(重複を許す)組の総数になる．すなわち$\mu=0,1,2,3$でラベル付けされた4つの箱があって，$2A$個の区別できない玉を箱に入れる方法は何通りかを調べる問題である．これは$\binom{(2A+4)-1}{2A}$通り存在する．}
+\begin{align*}
+\binom{(2A+4)-1}{2A}=\frac{(2A+3)!}{(2A)!(2A+3-2A)!}=\frac{(2A+3)!}{6(2A)!}=\frac{(2A+3)(2A+2)(2A+1)}{6}
+\end{align*}
+個になる．そこからトレースレス条件$\eta_{\mu_1\mu_2}T^{\mu_1\mu_2\cdots \mu_{2A}}=0$が\footnote{最初の2個の添え字についてのトレースのみを考えればいいのは，完全対称だからである．}(これは$2A-2$階の完全対称テンソルだから，その次元を上と同様に調べれば)
+\begin{align*}
+\binom{2A+1}{3}=\frac{(2A+1)!}{3!(2A-2)!}=\frac{(2A+1)!}{6(2A-2)!}=\frac{(2A+1)(2A)(2A-1)}{6}
+\end{align*}
+個ある．したがってトレースレスな完全対称テンソルの独立成分は
+\begin{align*}
+\frac{(2A+3)!}{6(2A)!}-\frac{(2A+1)!}{6(2A-2)!}=&\frac{(2A+3)(2A+2)(2A+1)-(2A+1)(2A)(2A-1)}{6} \\
+=&\frac{(2A+1)([4A^2+10A+6]-[4A^2-2A])}{6} \\
+=&(2A+1)^2
+\end{align*}
+個となる．これは$(A,A)$場の次元にぴったり合致する．\par
+以上のことをまとめれば，$N$階の一般のテンソルは$N$個の$\left(\frac{1}{2},\frac{1}{2}\right)$4元ベクトル表現の直積として変換する．したがって上で述べたように，それは
+\begin{align*}
+\left(\frac{N}{2},\frac{N}{2}\right)\oplus \left(\frac{N}{2},\frac{N}{2}-1\right)\oplus \left(\frac{N}{2}-1,\frac{N}{2}\right)\oplus \cdots (0,0)
+\end{align*}
+と既約分解される．このようにして，$A+B$が整数である任意の既約$(A,B)$表現が構成できる．$A+B$が半整数であるようなスピン表現は，同様にこれらのテンソル表現とディラック表現$\left(\frac{1}{2},0\right)\oplus \left(0,\frac{1}{2}\right)$との直積から構成できる．例えば，ベクトル$\left(\frac{1}{2},\frac{1}{2}\right)$表現とディラック表現$\left(\frac{1}{2},0\right)\oplus \left(0,\frac{1}{2}\right)$表現の直積をとることにより，可約表現
+\begin{align*}
+\left(\frac{1}{2},\frac{1}{2}\right)\otimes \left[ \left(\frac{1}{2},0\right)\oplus \left(0,\frac{1}{2}\right) \right]=\left(\frac{1}{2},1\right)\oplus \left(\frac{1}{2},0\right)\oplus \left(1,\frac{1}{2}\right)\oplus \left(0,\frac{1}{2}\right)
+\end{align*}
+に従って変換するスピノルベクトル$\psi^\mu_\alpha(x)$が得られる．実際，$\left(\frac{1}{2},\frac{1}{2}\right)\otimes (\frac{1}{2},0)$は
+\begin{align*}
+\psi_{aba'}=&\frac{1}{2}(\psi_{aba'}+\psi_{a'ba})+\frac{1}{2}(\psi_{aba'}-\psi_{a'ba}) \\
+=&\frac{1}{2}(\psi_{aba'}+\psi_{a'ba})+\frac{1}{2}\epsilon_{aa'}\epsilon_{cc'}\psi_{cbc'}
+\end{align*}
+と分解される．ここで$a,a'$は$\left(\frac{1}{2},0\right)$表現にしたがって変換する添え字であり，$b$は$\left(0,\frac{1}{2}\right)$表現にしたがって変換する添え字である．前と同様に$a,a'$について反対称な項は不変テンソル$\epsilon$に比例するようにできることを用いてた．第二項目は添え字$a,a'$についてスカラーであり，したがって$\left(0,\frac{1}{2}\right)$表現に属する場である．$\left(\frac{1}{2},\frac{1}{2}\right)$表現の添え字を$\mu$に変換するには$(\epsilon \sigma^\mu)_{ab}$を縮約すれば良いのだったから
+\begin{align*}
+\psi^{L\mu}_{a'}=&(\epsilon \sigma^\mu)_{ab}\psi_{aba'} \\
+=&(\epsilon \sigma^\mu)_{ab}\frac{1}{2}(\psi_{aba'}+\psi_{a'ba})+(\epsilon \sigma^\mu)_{ab}\frac{1}{2}\epsilon_{aa'}\epsilon_{cc'}\psi_{cbc'} \\
+=&(\epsilon \sigma^\mu)_{ab}\frac{1}{2}(\psi_{aba'}+\psi_{a'ba})+\sigma^\mu_{a'b}\frac{1}{2}\epsilon_{cc'}\psi_{cbc'}
+\end{align*}
+となる．同様に$\left(\frac{1}{2},\frac{1}{2}\right)\otimes (0,\frac{1}{2})$も$\epsilon \sigma^\mu \epsilon=-(\bar{\sigma}^\mu)^T$より
+\begin{align*}
+\psi_{abb'}=&\frac{1}{2}(\psi_{abb'}+\psi_{ab'b})+\frac{1}{2}(\psi_{abb'}-\psi_{ab'b}) \\
+=&\frac{1}{2}(\psi_{aba'}+\psi_{a'ba})+\frac{1}{2}\epsilon_{bb'}\epsilon_{cc'}\psi_{acc'} \\
+\psi^{R\mu}_{b'}=&(\epsilon \sigma^\mu)_{ab}\psi_{abb'} \\
+=&(\epsilon \sigma^\mu)_{ab}\frac{1}{2}(\psi_{abb'}+\psi_{ab'b})+(\epsilon \sigma^\mu \epsilon)_{ab'}\frac{1}{2}\epsilon_{cc'}\psi_{acc'} \\
+=&(\epsilon \sigma^\mu)_{ab}\frac{1}{2}(\psi_{abb'}+\psi_{ab'b})-\bar{\sigma}^\mu_{b'a}\frac{1}{2}\epsilon_{cc'}\psi_{acc'}
+\end{align*}
+となる．この二つを直和したもの
+\begin{align*}
+\Psi^\mu=\left(
+\begin{matrix}
+\psi^{L\mu} \\
+\psi^{R\mu}
+\end{matrix}
+\right)
+\end{align*}
+を考え，$\gamma^\mu$をかけると
+\begin{align*}
+\gamma^\mu \Psi_\mu=&-i\left(
+\begin{matrix}
+0 & \sigma^\mu \\
+\bar{\sigma}^\mu & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\psi^L_\mu \\
+\psi^R_\mu
+\end{matrix}
+\right) =-i\left(
+\begin{matrix}
+\sigma^\mu \psi^R_\mu \\
+\bar{\sigma}^\mu \psi^L_\mu
+\end{matrix}
+\right) \\
+(\sigma^\mu)_{a'b'} \psi^R_{\mu b'}=&(\sigma^\mu)_{a'b'} (\epsilon \sigma_\mu)_{ab}\frac{1}{2}(\psi_{abb'}+\psi_{ab'b})-(\sigma^\mu \bar{\sigma}_\mu)_{a'a}\frac{1}{2}\epsilon_{cc'}\psi_{acc'} \\
+=&(\sigma^\mu)_{a'b'} \epsilon_{ac} (\sigma_\mu)_{cb}\frac{1}{2}(\psi_{abb'}+\psi_{ab'b})+2\delta_{a'a}\epsilon_{cc'}\psi_{acc'} \\
+=&-2\epsilon_{a'c}\epsilon_{bb'}\epsilon_{ac}\frac{1}{2}(\psi_{abb'}+\psi_{ab'b})-2\epsilon_{cc'}\psi_{a'cc'} \\
+=&-2\epsilon_{cc'}\psi_{a'cc'} \\
+(\bar{\sigma}^\mu)_{b'a'}\psi^L_{\mu a'}=&(\bar{\sigma}^\mu)_{b'a'}(\epsilon \sigma_\mu)_{ab}\frac{1}{2}(\psi_{aba'}+\psi_{a'ba})+(\bar{\sigma}^\mu \sigma_\mu)_{b'b}\frac{1}{2}\epsilon_{cc'}\psi_{cbc'} \\
+=&(\bar{\sigma}^\mu)_{b'a'}\epsilon_{ac} (\sigma_\mu)_{cb}\frac{1}{2}(\psi_{aba'}+\psi_{a'ba})-2\delta_{b'b}\epsilon_{cc'}\psi_{cbc'} \\
+=&-2\delta_{b'b}\delta_{a'c}\epsilon_{ac} \frac{1}{2}(\psi_{aba'}+\psi_{a'ba})-2\epsilon_{cc'}\psi_{cb'c'} \\
+=&-2\delta_{b'b}\epsilon_{aa'} \frac{1}{2}(\psi_{aba'}+\psi_{a'ba})-2\epsilon_{cc'}\psi_{cb'c'} \\
+=&-2\epsilon_{cc'}\psi_{cb'c'}
+\end{align*}
+ここでフィールツ恒等式および
+\begin{align*}
+\sigma^\mu \bar{\sigma}_\mu=\bar{\sigma}^\mu \sigma_\mu=-\bm{\sigma}^2-\bm{1}=-4\cdot \bm{1}
+\end{align*}
+を用いた．それぞれの最後の行では，反対称行列と対称行列の縮約が自明にゼロになることを用いている．これらは$\psi^{L\mu},\psi^{R\mu}$のちょうど第二項目$\left(0,\frac{1}{2}\right),\left(\frac{1}{2},0\right)$部分であることがわかる．すなわち$\gamma^\mu \Psi_\mu$は$\left(\frac{1}{2},0\right)\oplus \left(0,\frac{1}{2}\right)$表現に属する．$\left(\frac{1}{2},\frac{1}{2}\right)\otimes \left[ \left(\frac{1}{2},0\right)\oplus \left(0,\frac{1}{2}\right) \right]$の元$\Psi^\mu$に$\gamma^\mu \Psi_\mu=0$を条件として与えることによって，$\left(1,\frac{1}{2}\right)\oplus \left(\frac{1}{2},1\right)$の部分を分離することができる．そのように条件を課して構成された$\left(1,\frac{1}{2}\right)\oplus \left(\frac{1}{2},1\right)$可約表現に属する場$\Psi^\mu$をラリタ・シュウィンガー場という．
+
+\vskip\baselineskip
+
+
+この節ではここまで，固有順時ローレンツ群$SO(3,1)$の表現のみを考察してきた．空間反転$\tensor{\mc{P}}{^\mu_\nu}$を含むローレンツ群$O(3,1)$の任意の表現では，奇数個の空間添え字を持つテンソルの符号を逆転させる行列$D(\mc{P})=:\beta$が存在しなければならない．(2.6.7)(2.6.8)を導くときの計算を繰り返せば
+\begin{align*}
+\beta \bm{\mc{J}}\beta^{-1}=+\bm{\mc{J}} \\
+\beta \bm{\mc{K}}\beta^{-1}=-\bm{\mc{K}}
+\end{align*}
+を得る．これはすなわち
+\begin{align*}
+\beta \bm{\mc{A}} \beta^{-1} =&\frac{1}{2}(\beta \bm{\mc{J}} \beta^{-1} +i\beta \bm{\mc{K}} \beta^{-1}) \\
+=&\frac{1}{2}(\bm{\mc{J}}-i\bm{\mc{K}}) \\
+=&\bm{\mc{B}} \\
+\beta \bm{\mc{B}} \beta^{-1} =&\frac{1}{2}(\beta \bm{\mc{J}} \beta^{-1} -i\beta \bm{\mc{K}} \beta^{-1}) \\
+=&\frac{1}{2}(\bm{\mc{J}}+i\bm{\mc{K}}) \\
+=&\bm{\mc{A}} \\
+\therefore \quad \beta D^{(AB)}(\Lambda) \beta^{-1} =&D^{(BA)}(\Lambda)
+\end{align*}
+を意味する．これにより固有順時ローレンツ群の既約$(A,B)$表現で$A\neq B$なものに対しては，空間反転を含むローレンツ群の表現を与えない．$A=B$のときはパリティを含むことができるが，それは$(0,0)$のスカラー表現，$\left(\frac{1}{2},\frac{1}{2}\right)$のベクトル表現，および$(A,A)$のトレースレスの対称テンソル表現である．$A\neq B$の場合，空間反転を含むローレンツ群の既約表現は直和$(A,B)\oplus (B,A)$であり，その次元は$2(2A+1)(2B+1)$である．$\beta$はこの二つを入れ替える表現行列をなしており，それは
+\begin{align*}
+\beta :&\left(
+\begin{matrix}
+\psi^{(AB)} \\
+\psi^{(BA)}
+\end{matrix}
+\right)\to \left(
+\begin{matrix}
+\psi^{(BA)} \\
+\psi^{(AB)}
+\end{matrix}
+\right) \\
+\therefore \quad \beta =&\left(
+\begin{matrix}
+0 & \bm{1} \\
+\bm{1} & 0
+\end{matrix}
+\right)
+\end{align*}
+というものになる．$A\neq B$の中で典型的な例の一つは$\left(\frac{1}{2},0\right)\oplus \left(0,\frac{1}{2}\right)$のディラック表現であり，その場合の$\beta$は$4\times 4$行列(5.4.29)になっている．他の例としては$(1,0)\oplus (0,1)$表現であり，それはまさに自己双対部分と反自己双対部分を含む2階の反対称テンソル$F^{\mu\nu}$である．
 
 
 
+\newpage
+
+\subsection{一般の因果律を満たす場}
+今度は，前節で述べた一般的な既約表現$(A,B)$に従って変換する因果律を満たす場の構成に進む．添え字$\ell$はここでは範囲$a=A,A-1,\cdots, -A$と$b=B,B-1,\cdots ,-B$をとる一対の添え字$a,b$で置き換えられ，よって今の場合$\kappa,\lambda$を任意定数として場を
+\begin{align*}
+\psi_{ab}(x)=\sum_{\sigma}\int \frac{d^3\mathbf{p}}{(2\pi)^{3/2}}\Bigl[\kappa a(\mathbf{p},\sigma)e^{ip\cdot x}u_{ab}(\mathbf{p},\sigma)+\lambda a^{c\dagger}(\mathbf{p},\sigma)e^{-ip\cdot x}v_{ab}(\mathbf{p},\sigma)\Bigr]
+\end{align*}
+と書いておく．ここではこの粒子が自分自身の反粒子である可能性を残しておく．その場合$a^c(\mathbf{p},\sigma)=a(\mathbf{p},\sigma)$である．
+
+\vskip\baselineskip
 
 
+まずやるべきことは，ゼロ運動量の係数関数$u_{ab}(0,\sigma),v_{ab}(0,\sigma)$を求めることなのだった．これらを求めるための基本条件(5.1.25)(5.1.26)は，ここでは
+\begin{align*}
+\sum_{\bar{\sigma}} u_{\bar{a}\bar{b}}(0,\bar{\sigma})\mathbf{J}^{(j)}_{\bar{\sigma}\sigma}=&\sum_{a,b}\bm{\mc{J}}_{\bar{a}\bar{b},ab}u_{ab}(0,\sigma) \\
+-\sum_{\bar{\sigma}} v_{\bar{a}\bar{b}}(0,\bar{\sigma})\mathbf{J}^{(j)*}_{\bar{\sigma}\sigma}=&\sum_{a,b}\bm{\mc{J}}_{\bar{a}\bar{b},ab}v_{ab}(0,\sigma)
+\end{align*}
+である．これは(5.4.14)(5.6.15)の$\bm{\mc{J}}_{\bar{a}\bar{b},ab}=\mathbf{J}^{(A)}_{\bar{a}a}\delta_{\bar{b}b}+\delta_{\bar{b}b}\mathbf{J}^{(B)}_{\bar{b}b}$を用いると
+\begin{align*}
+\sum_{\bar{\sigma}} u_{\bar{a}\bar{b}}(0,\bar{\sigma})\mathbf{J}^{(j)}_{\bar{\sigma}\sigma}=&\sum_{a}\mathbf{J}^{(A)}_{\bar{a}a}u_{a\bar{b}}(0,\sigma)+\sum_{b}\mathbf{J}^{(B)}_{\bar{b}b}u_{\bar{a}b}(0,\sigma) \\
+-\sum_{\bar{\sigma}} v_{\bar{a}\bar{b}}(0,\bar{\sigma})\mathbf{J}^{(j)*}_{\bar{\sigma}\sigma}=&\sum_{a}\mathbf{J}^{(A)}_{\bar{a}a}v_{a\bar{b}}(0,\sigma)+\sum_{b}\mathbf{J}^{(B)}_{\bar{b}b}v_{\bar{a}b}(0,\sigma)
+\end{align*}
+となる．まず上の式を見てみれば，これはまさにクレブシュゴルダン係数$C_{AB}(j\sigma;ab)$を定義する条件になってることに気付く．すなわち，もし基底ベクトル$\Psi_{ab}$(量子力学では$\ket{A,a}\otimes \ket{B,b}$と書いたもの)が微小回転$R=1+\theta$のもとで
+\begin{align*}
+\delta \Psi_{ab}=i\sum_{\bar{a}}\bm{\theta}\cdot \mathbf{J}^{(A)}_{\bar{a}a}\Psi_{\bar{a}b}+i\sum_{\bar{b}}\bm{\theta}\cdot \mathbf{J}^{(B)}_{\bar{b}b}\Psi_{a\bar{b}}
+\end{align*}
+と変換するならば，同じ回転のもとで状態
+\begin{align*}
+\tensor{\Psi}{^j_\sigma}:= \sum_{ab}C_{AB}(j\sigma;ab)\Psi_{ab}
+\end{align*}
+は，範囲$j=A+B,A+B-1,\cdots,|A-B|$のスピンをもち
+\begin{align*}
+\delta \tensor{\Psi}{^j_\sigma}=i\sum_{\bar{\sigma}} \bm{\theta}\cdot \mathbf{J}^{(j)}_{\bar{\sigma}\sigma}\tensor{\Psi}{^j_{\bar{\sigma}}}
+\end{align*}
+と変換するのだった．この両辺を係数比較すると
+\begin{align*}
+(\mathrm{LHS})=&\sum_{ab}C_{AB}(j\sigma;ab)\delta \Psi_{ab} \\
+=&i\sum_{ab}\sum_{\bar{a}}\bm{\theta}\cdot \mathbf{J}^{(A)}_{\bar{a}a}C_{AB}(j\sigma;ab)\Psi_{\bar{a}b}+i\sum_{ab}\sum_{\bar{b}}\bm{\theta}\cdot \mathbf{J}^{(B)}_{\bar{b}b}C_{AB}(j\sigma;ab)\Psi_{a\bar{b}} \\
+=&i\sum_{a}\sum_{\bar{a}\bar{b}}\bm{\theta}\cdot \mathbf{J}^{(A)}_{\bar{a}a}C_{AB}(j\sigma;a\bar{b})\Psi_{\bar{a}\bar{b}}+i\sum_{b}\sum_{\bar{a}\bar{b}}\bm{\theta}\cdot \mathbf{J}^{(B)}_{\bar{b}b}C_{AB}(j\sigma;\bar{a}b)\Psi_{\bar{a}\bar{b}} \\
+(\mathrm{RHS})=&i \sum_{\bar{\sigma}} \sum_{\bar{a}\bar{b}} \bm{\theta}\cdot \mathbf{J}^{(j)}_{\bar{\sigma}\sigma}C_{AB}(j\bar{\sigma};\bar{a}\bar{b})\Psi_{\bar{a}\bar{b}} \\
+\therefore \quad \sum_{\bar{\sigma}} C_{AB}(j\bar{\sigma};\bar{a}\bar{b})\mathbf{J}^{(j)}_{\bar{\sigma}\sigma}=&\sum_{a}\mathbf{J}^{(A)}_{\bar{a}a}C_{AB}(j\sigma;a\bar{b})+\sum_{b}\mathbf{J}^{(B)}_{\bar{b}b}C_{AB}(j\sigma;\bar{a}b)
+\end{align*}
+となる．これはちょうど(5.7.2)になっている．よって可能な比例因子を除いて$u_{ab}(0,\sigma)$はちょうど$C_{AB}(j\sigma;ab)$に等しい．この定数を慣習上
+\begin{align*}
+u_{ab}(0,\sigma)=\frac{1}{\sqrt{2m}}C_{AB}(j\sigma;ab)
+\end{align*}
+となるように選ぶ．(これがスカラー$(0,0)$表現の$u(0)=1/\sqrt{2m}$を含んでいることはすぐにわかる．スピノル表現についても，まず$(\frac{1}{2},0)$表現について($j=\frac{1}{2}$しかないので)
+\begin{align*}
+u_{\frac{1}{2}0}\left(0,\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}0}\left(\frac{1}{2}\frac{1}{2};\frac{1}{2}0\right)=\frac{1}{\sqrt{2m}} \\
+u_{-\frac{1}{2}0}\left(0,\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}0}\left(\frac{1}{2}\frac{1}{2};-\frac{1}{2}0\right)=0 \\
+u_{\frac{1}{2}0}\left(0,-\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}0}\left(\frac{1}{2}-\frac{1}{2};\frac{1}{2}0\right)=0 \\
+u_{-\frac{1}{2}0}\left(0,-\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}0}\left(\frac{1}{2}-\frac{1}{2};-\frac{1}{2}0\right)=\frac{1}{\sqrt{2m}} \\
+\therefore \quad u^{(\frac{1}{2}0)}\left(0,\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+0
+\end{matrix}
+\right), \quad u^{(\frac{1}{2}0)}\left(0,-\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 \\
+1
+\end{matrix}
+\right)
+\end{align*}
+となる．これは(5.5.35)のそれぞれ上2成分になっている．$(0,\frac{1}{2})$表現についても
+\begin{align*}
+u_{0\frac{1}{2}}\left(0,\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}C_{0\frac{1}{2}}\left(\frac{1}{2}\frac{1}{2};0\frac{1}{2}\right)=\frac{1}{\sqrt{2m}} \\
+u_{0-\frac{1}{2}}\left(0,\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}C_{0\frac{1}{2}}\left(\frac{1}{2}\frac{1}{2};0-\frac{1}{2}\right)=0 \\
+u_{\frac{1}{2}0}\left(0,-\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}0}\left(\frac{1}{2}-\frac{1}{2};0\frac{1}{2}\right)=0 \\
+u_{0-\frac{1}{2}}\left(0,-\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}C_{0\frac{1}{2}}\left(\frac{1}{2}-\frac{1}{2};0-\frac{1}{2}\right)=\frac{1}{\sqrt{2m}} \\
+\therefore \quad u^{(0\frac{1}{2})}\left(0,\frac{1}{2}\right)=&\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+0
+\end{matrix}
+\right), \quad u^{(0\frac{1}{2})}\left(0,-\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 \\
+1
+\end{matrix}
+\right)
+\end{align*}
+となる．これは(5.5.35)のそれぞれ下2成分になっている．(全体の$\sqrt{m}$の因子はスケールの任意性より一致していなくてもよい．)直和をとると
+\begin{align*}
+\therefore \quad u\left(0,\frac{1}{2}\right)=&u^{(\frac{1}{2}0)}\left(0,\frac{1}{2}\right)\oplus u^{(0\frac{1}{2})}\left(0,\frac{1}{2}\right) =\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+0 \\
+1 \\
+0
+\end{matrix}
+\right) \\
+u\left(0,-\frac{1}{2}\right)=&u^{(\frac{1}{2}0)}\left(0,-\frac{1}{2}\right)\oplus u^{(0\frac{1}{2})}\left(0,-\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 \\
+1 \\
+0 \\
+1
+\end{matrix}
+\right)
+\end{align*}
+となり，全体のスケールを除いて(5.5.35)を復元する．ベクトルについても，$j=0$で
+\begin{align*}
+u_{\frac{1}{2}\frac{1}{2}}(0,0)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(00;\frac{1}{2}\frac{1}{2})=0 \\
+u_{\frac{1}{2}-\frac{1}{2}}(0,0)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(00;\frac{1}{2}-\frac{1}{2})=\frac{1}{\sqrt{2m}}\frac{1}{\sqrt{2}} \\
+u_{-\frac{1}{2}\frac{1}{2}}(0,0)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(00;-\frac{1}{2}\frac{1}{2})=-\frac{1}{\sqrt{2m}}\frac{1}{\sqrt{2}} \\
+u_{-\frac{1}{2}-\frac{1}{2}}(0,0)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(00;-\frac{1}{2}-\frac{1}{2})=0 \\
+\therefore \quad u_{ab}(0,0)=&\frac{1}{2\sqrt{m}}\left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0
+\end{matrix}
+\right)
+\end{align*}
+で，$j=1$では$\sigma=+1,0,-1$があるので
+\begin{align*}
+u_{\frac{1}{2}\frac{1}{2}}(0,0)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(10;\frac{1}{2}\frac{1}{2})=0 \\
+u_{\frac{1}{2}-\frac{1}{2}}(0,0)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(10;\frac{1}{2}-\frac{1}{2})=\frac{1}{\sqrt{2m}}\frac{1}{\sqrt{2}} \\
+u_{-\frac{1}{2}\frac{1}{2}}(0,0)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(10;-\frac{1}{2}\frac{1}{2})=\frac{1}{\sqrt{2m}}\frac{1}{\sqrt{2}} \\
+u_{-\frac{1}{2}-\frac{1}{2}}(0,0)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(10;-\frac{1}{2}-\frac{1}{2})=0 \\
+\therefore \quad u_{ab}(0,0)=&\frac{1}{2\sqrt{m}}\left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)
+\end{align*}
+と
+\begin{align*}
+u_{\frac{1}{2}\frac{1}{2}}(0,1)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(11;\frac{1}{2}\frac{1}{2})=\frac{1}{\sqrt{2m}} \\
+u_{\frac{1}{2}-\frac{1}{2}}(0,1)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(11;\frac{1}{2}-\frac{1}{2})=0 \\
+u_{-\frac{1}{2}\frac{1}{2}}(0,1)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(11;-\frac{1}{2}\frac{1}{2})=0 \\
+u_{-\frac{1}{2}-\frac{1}{2}}(0,1)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(11;-\frac{1}{2}-\frac{1}{2})=0 \\
+\therefore \quad u_{ab}(0,1)=&\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 & 0 \\
+0 & 0
+\end{matrix}
+\right)
+\end{align*}
+と
+\begin{align*}
+u_{\frac{1}{2}\frac{1}{2}}(0,-1)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(1-1;\frac{1}{2}\frac{1}{2})=0 \\
+u_{\frac{1}{2}-\frac{1}{2}}(0,-1)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(1-1;\frac{1}{2}-\frac{1}{2})=0 \\
+u_{-\frac{1}{2}\frac{1}{2}}(0,-1)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(1-1;-\frac{1}{2}\frac{1}{2})=0 \\
+u_{-\frac{1}{2}-\frac{1}{2}}(0,-1)=&\frac{1}{\sqrt{2m}}C_{\frac{1}{2}\frac{1}{2}}(1-1;-\frac{1}{2}-\frac{1}{2})=1 \\
+\therefore \quad u_{ab}(0,-1)=&\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 & 0 \\
+0 & 1
+\end{matrix}
+\right)
+\end{align*}
+がある．これらを$\mu$添え字に直すには，前節の計算により
+\begin{align*}
+u^\mu(0,\sigma)=&\frac{1}{2}\mathrm{tr}[\epsilon \bar{\sigma}^\mu u(0,\sigma)] \\
+=&\frac{1}{2}\mathrm{tr}[\bar{\sigma}^\mu u(0,\sigma)\epsilon ]
+\end{align*}
+を計算すれば良かったのだった．したがって，$j=0$の場合
+\begin{align*}
+u^\mu(0,0)=&\frac{1}{2}\frac{1}{\sqrt{2m}}\mathrm{tr}\left[\bar{\sigma}^\mu \left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0
+\end{matrix}
+\right) \right] \\
+=&-\frac{1}{2}\frac{1}{\sqrt{2m}}\mathrm{tr}\left[\bar{\sigma}^\mu \left(
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right)\right] \\
+=&-\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+1
+\end{matrix}
+\right)
+\end{align*}
+となり(最後のベクトルは$\mu=1,2,3,0$について並べたもの)，これは5.3節の最初にスピンゼロについて考えたのと(スケールを除いて)同じになる．$j=1$については
+\begin{align*}
+u^\mu(0,0)=&\frac{1}{2}\frac{1}{2\sqrt{m}}\mathrm{tr}\left[\bar{\sigma}^\mu \left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right) \left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0
+\end{matrix}
+\right) \right] \\
+=&\frac{1}{2}\frac{1}{2\sqrt{m}}\mathrm{tr}\left[\bar{\sigma}^\mu \left(
+\begin{matrix}
+-1 & 0 \\
+0 & 1
+\end{matrix}
+\right)\right] \\
+=&\frac{1}{2\sqrt{m}}\left(
+\begin{matrix}
+0 \\
+0 \\
+1 \\
+0
+\end{matrix}
+\right)=\frac{1}{\sqrt{2}}\left[\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 \\
+0 \\
+1 \\
+0
+\end{matrix}
+\right)\right] \\
+u^\mu(0,1)=&\frac{1}{2}\frac{1}{\sqrt{2m}}\mathrm{tr}\left[\bar{\sigma}^\mu \left(
+\begin{matrix}
+1 & 0 \\
+0 & 0
+\end{matrix}
+\right) \left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0
+\end{matrix}
+\right)\right] \\
+=&\frac{1}{2}\frac{1}{\sqrt{2m}}\mathrm{tr}\left[\bar{\sigma}^\mu \left(
+\begin{matrix}
+0 & 1 \\
+0 & 0
+\end{matrix}
+\right)\right] \\
+=&\frac{1}{2}\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+-1 \\
+-i \\
+0 \\
+0
+\end{matrix}
+\right)=-\frac{1}{2}\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+i \\
+0 \\
+0
+\end{matrix}
+\right) =\frac{1}{\sqrt{2}}\left[-\frac{1}{\sqrt{2}}\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+-i \\
+0 \\
+0
+\end{matrix}
+\right)\right]\\
+u^\mu(0,-1)=&\frac{1}{2}\frac{1}{\sqrt{2m}}\mathrm{tr}\left[\bar{\sigma}^\mu \left(
+\begin{matrix}
+0 & 0 \\
+0 & 1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+0 & 1 \\
+-1 & 0
+\end{matrix}
+\right) \right] \\
+=&\frac{1}{2}\frac{1}{\sqrt{2m}}\mathrm{tr}\left[\bar{\sigma}^\mu \left(
+\begin{matrix}
+0 & 0 \\
+-1 & 0
+\end{matrix}
+\right)\right] \\
+=&\frac{1}{2}\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+-i \\
+0 \\
+0
+\end{matrix}
+\right)=\frac{1}{\sqrt{2}}\left[\frac{1}{\sqrt{2}}\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+-i \\
+0 \\
+0
+\end{matrix}
+\right)\right]
+\end{align*}
+となる．ここで，$\bar{\sigma}^\mu=(-\bm{\sigma},-1)$を用いた．これは(5.3.20)～(5.3.22)とスケール除き一致している．)5.1節で述べたように，Schurの補題よりこの$u_{ab}(0,\sigma)$は各$(A,B)$既約表現につきスケールを除いて一意的に定まる．\par
+次に$v_{ab}(0,\sigma)$を決めよう．角運動量行列の複素共役は
+\begin{align*}
+\left(J_1^{(j)}\right)_{\sigma'\sigma}=&\frac{1}{2}\left(\delta_{\sigma',\sigma+ 1}\sqrt{(j- \sigma)(j+ \sigma+1)}+\delta_{\sigma',\sigma-1}\sqrt{(j+ \sigma)(j- \sigma+1)}\right) \\
+=&\frac{1}{2}\left( \delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}+\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)}\right) \\
+=&\frac{1}{2}\Bigl( (-1)^{\sigma'-(\sigma-1)}\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)} \quad \because \sigma'=\sigma-1\\
+&+(-1)^{(\sigma'-(\sigma+1))}\delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}\Bigr) \quad \because \sigma'=\sigma+1 \\
+&=-(-1)^{\sigma'-\sigma}\left(J_1^{(j)}\right)_{-\sigma',-\sigma}^* \\
+\left(J_2^{(j)}\right)_{\sigma'\sigma}=&\frac{1}{2i}\left(\delta_{\sigma',\sigma+ 1}\sqrt{(j- \sigma)(j+ \sigma+1)}-\delta_{\sigma',\sigma-1}\sqrt{(j+ \sigma)(j- \sigma+1)}\right) \\
+=&\frac{1}{2i}\left( \delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}-\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)}\right) \\
+=&\frac{1}{2i}\Bigl( -(-1)^{\sigma'-(\sigma-1)}\delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)} \quad \because \sigma'=\sigma-1\\
+&+(-1)^{(\sigma'-(\sigma+1))}\delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}\Bigr) \\
+=&(-1)^{\sigma'-\sigma}\frac{1}{2i}\Bigl( \delta_{-\sigma',-\sigma+1}\sqrt{(j-(- \sigma))(j+(- \sigma)+1)} \\
+&-\delta_{-\sigma',-\sigma- 1}\sqrt{(j+( -\sigma))(j- (-\sigma) +1)}\Bigr) \quad \because \sigma'=\sigma+1 \\
+=&-(-1)^{\sigma'-\sigma}\left(J_2^{(j)}\right)_{-\sigma',-\sigma}^* \\
+\left(J_3^{(j)}\right)_{\sigma'\sigma}=&\delta_{\sigma'\sigma}\sigma \\
+=&-(-\sigma)\delta_{-\sigma',-\sigma}=-(-1)^{\sigma'-\sigma}(-\sigma)\delta_{-\sigma',-\sigma} \\
+=&-(-1)^{\sigma'-\sigma}\left(J_3^{(j)}\right)_{-\sigma',-\sigma}^*
+\end{align*}
+より
+\begin{align*}
+-\left(\mathbf{J}^{(j)}\right)^*_{\sigma'\sigma}=(-1)^{\sigma'-\sigma}\left(\mathbf{J}^{(j)}\right)_{-\sigma',-\sigma}
+\end{align*}
+となる．これを(5.7.3)に用いると左辺は
+\begin{align*}
+-\sum_{\bar{\sigma}} v_{\bar{a}\bar{b}}(0,\bar{\sigma})\mathbf{J}^{(j)*}_{\bar{\sigma}\sigma} =&\sum_{\bar{\sigma}} (-1)^{\bar{\sigma}-\sigma}v_{\bar{a}\bar{b}}(0,\bar{\sigma})\mathbf{J}^{(j)}_{-\bar{\sigma},-\sigma} \\
+=&(-1)^{-\sigma}\sum_{\sigma} (-1)^{-\bar{\sigma}}v_{\bar{a}\bar{b}}(0,-\bar{\sigma})\mathbf{J}^{(j)}_{\bar{\sigma},-\sigma} \quad (\bar{\sigma}\to \bar{\sigma})
+\end{align*}
+となり，したがって
+\begin{align*}
+(-1)^{-\sigma}\sum_{\sigma} (-1)^{-\bar{\sigma}}v_{\bar{a}\bar{b}}(0,-\bar{\sigma})\mathbf{J}^{(j)}_{\bar{\sigma},-\sigma}=&\sum_{a}\mathbf{J}^{(A)}_{\bar{a}a}v_{a\bar{b}}(0,-\sigma)+\sum_{b}\mathbf{J}^{(B)}_{\bar{b}b}v_{\bar{a}b}(0,-\sigma) \\
+(-1)^{\sigma}\sum_{\sigma} (-1)^{-\bar{\sigma}}v_{\bar{a}\bar{b}}(0,-\bar{\sigma})\mathbf{J}^{(j)}_{\bar{\sigma},\sigma} =&\sum_{a}\mathbf{J}^{(A)}_{\bar{a}a}v_{a\bar{b}}(0,\sigma)+\sum_{b}\mathbf{J}^{(B)}_{\bar{b}b}v_{\bar{a}b}(0,\sigma) \\
+\sum_{\sigma} (-1)^{j-\bar{\sigma}}v_{\bar{a}\bar{b}}(0,-\bar{\sigma})\mathbf{J}^{(j)}_{\bar{\sigma},\sigma} =&\sum_{a}\mathbf{J}^{(A)}_{\bar{a}a}(-1)^{j-\sigma}v_{a\bar{b}}(0,\sigma)+\sum_{b}\mathbf{J}^{(B)}_{\bar{b}b}(-1)^{j-\sigma}v_{\bar{a}b}(0,\sigma)
+\end{align*}
+となる．これは(5.7.2)そのものであることがわかる．Schurの補題による一意性から，スケールを調節すれば$(-1)^{j-\sigma}v(0,-\sigma)$は$u(0,\sigma)$に等しくすることができて，
+\begin{align*}
+(-1)^{j-\sigma}v_{ab}(0,-\sigma)=&u_{ab}(0,\sigma) \\
+\therefore \quad v_{ab}(0,\sigma)=&(-1)^{j+\sigma}u_{ab}(0,-\sigma)
+\end{align*}
+(ここで，$j,\sigma$はともに整数もしくはともに半整数であるから，$j-\sigma$は整数であり$(-1)^{2(j-\sigma)}=1$であることを用いた．)これもスカラーの場合は$v(0)=1/\sqrt{2m}$で，実際に5.2節の最初に与えたものに一致する．ディラック表現の場合，$(\frac{1}{2},0)$表現は
+\begin{align*}
+v^{(\frac{1}{2}0)}\left(0,\frac{1}{2}\right)=&(-1)^{\frac{1}{2}+\frac{1}{2}}u^{(\frac{1}{2}0)}\left(0,-\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 \\
+-1
+\end{matrix}
+\right) \\
+v^{(\frac{1}{2}0)}\left(0,-\frac{1}{2}\right)=&(-1)^{\frac{1}{2}-\frac{1}{2}}u^{(\frac{1}{2}0)}\left(0,\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+0
+\end{matrix}
+\right)
+\end{align*}
+となって(5.5.36)の上2成分に$-\sqrt{m}$のスケールを除いて一致する．$(0,\frac{1}{2})$表現についても
+\begin{align*}
+v^{(0\frac{1}{2})}\left(0,\frac{1}{2}\right)=&(-1)^{\frac{1}{2}+\frac{1}{2}}u^{(0\frac{1}{2})}\left(0,-\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 \\
+-1
+\end{matrix}
+\right) \\
+v^{(0\frac{1}{2})}\left(0,-\frac{1}{2}\right)=&(-1)^{\frac{1}{2}-\frac{1}{2}}u^{(0\frac{1}{2})}\left(0,\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+0
+\end{matrix}
+\right)
+\end{align*}
+となって，(5.5.36)の下2成分とスケール$\sqrt{m}$倍を除いて一致する．直和は
+\begin{align*}
+v\left(0,\frac{1}{2}\right)=&\left(- v^{(\frac{1}{2}0)}\left(0,\frac{1}{2}\right)\right) \oplus v^{(0\frac{1}{2})}\left(0,\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+0 \\
+1 \\
+0 \\
+-1
+\end{matrix}
+\right) \\
+v\left(0,-\frac{1}{2}\right)=&\left(-v^{(\frac{1}{2}0)}\left(0,-\frac{1}{2}\right)\right) \oplus v^{(0\frac{1}{2})}\left(0,-\frac{1}{2}\right)=\frac{1}{\sqrt{2m}}\left(
+\begin{matrix}
+1 \\
+0 \\
+-1 \\
+0
+\end{matrix}
+\right)
+\end{align*}
+となり(5.5.36)と一致する．(各表現についてそれぞれスケールだけ任意性があるので，相対的なマイナス倍は問題はない．このマイナスはパリティの下で対称性があるように要請されるのだった．既約表現同士の相対的なスケールや位相因子は何らかの対称性で制限しなければなんでもよい．)
+
+\vskip\baselineskip
 
 
+有限運動量の係数関数を計算するためにはブーストを実行しなければならない．固定した方向$\hat{\mathbf{p}}:=\mathbf{p}/|\mathbf{p}|$について，5.5節で行ったようにして
+\begin{align*}
+\cosh \theta:=\frac{\sqrt{\mathbf{p}^2+m^2}}{m} ,\quad \sinh \theta=\frac{|\mathbf{p}|}{m}
+\end{align*}
+とおくと2.5節で与えた基準ブースト$L(p)$が
+\begin{align*}
+\tensor{L}{^i_k}(p)=&\delta_{ik}+(\gamma-1)\hat{p}_i \hat{p}_k=\delta_{ik}+(\cosh\theta-1)\hat{p}_i \hat{p}_k \\
+\tensor{L}{^i_0}(p)=&\tensor{L}{^0_i}=\hat{p}_i \sqrt{\gamma^2-1}=\hat{p}_i\sinh \theta \\
+\tensor{L}{^0_0}(p)=&\gamma=\cosh\theta
+\end{align*}
+となり，これは$L(\theta)L(\bar{\theta})=L(\bar{\theta}+\theta)$を満たす意味で加法的である．これを用いると
+\begin{align*}
+D\Bigl(L(p)\Bigr)=\exp (-i\hat{\mathbf{p}}\cdot \bm{\mc{K}}\theta)
+\end{align*}
+が導ける．これは斉次ローレンツ群の任意の表現について成り立つ．既約な$(A,B)$表現については(5.6.7)(5.6.8)より
+\begin{align*}
+i\bm{\mc{K}}=\bm{\mc{A}}-\bm{\mc{B}}
+\end{align*}
+であるから，$[\mc{A}_i,\mc{B}_j]=0$であるからBCH公式より
+\begin{align*}
+D\Bigl(L(p)\Bigr)=&\exp (-\hat{\mathbf{p}}\cdot \bm{\mc{A}}\theta+\hat{\mathbf{p}}\cdot \bm{\mc{B}}\theta) \\
+=&\exp (-\hat{\mathbf{p}}\cdot \bm{\mc{A}}\theta)\exp(+\hat{\mathbf{p}}\cdot \bm{\mc{B}}\theta)
+\end{align*}
+となる．成分を明記すれば，$(\mc{A}_i)_{aa'bb'}=J^{(A)}_{aa'}\delta_{bb'},(\mc{B}_i)_{aa'bb'}=\delta_{aa'}J^{(B)}_{bb'}$であるから
+\begin{align*}
+D\Bigl(L(p)\Bigr)_{a'b',ab}=&\exp (-\hat{\mathbf{p}}\cdot \mathbf{J}^{(A)}\theta)_{a'a}\exp(+\hat{\mathbf{p}}\cdot \mathbf{J}^{(B)}\theta)_{b'b}
+\end{align*}
+と書ける．すると(5.7.4)(5.7.6)より有限運動量での係数関数は
+\begin{align*}
+u_{ab}(\mathbf{p},\sigma)=&\sqrt{\frac{m}{p^0}}\sum_{a'b'}D\Bigl(L(p)\Bigr)_{ab,a'b'}u_{a'b'}(0,\sigma) \\
+=&\frac{1}{\sqrt{2p^0}}\sum_{a'b'} \exp (-\hat{\mathbf{p}}\cdot \mathbf{J}^{(A)}\theta)_{a'a}\exp(+\hat{\mathbf{p}}\cdot \mathbf{J}^{(B)}\theta)_{b'b} C_{AB}(j\sigma ;a'b')
+\end{align*}
+および
+\begin{align*}
+v_{ab}(\mathbf{p},\sigma)=&\sqrt{\frac{m}{p^0}}\sum_{a'b'}D\Bigl(L(p)\Bigr)_{ab,a'b'}v_{a'b'}(0,\sigma) \\
+=&(-1)^{j+\sigma}\sqrt{\frac{m}{p^0}}\sum_{a'b'}D\Bigl(L(p)\Bigr)_{ab,a'b'}u_{a'b'}(0,-\sigma) \\
+=&(-1)^{j+\sigma}u_{ab}(\mathbf{p},-\sigma)
+\end{align*}
+となる．
 
 
+\vskip\baselineskip
 
 
+この形式ではローレンツスカラーな相互作用密度を構成するのは非常に簡単になる．前節で述べたように，斉次ローレンツ群の$(A,B)$表現は直積$(A,0)\otimes (0,B)$とみなせて，
+\begin{align*}
+D^{(AB)}_{aa'bb'}(\Lambda^{-1})=D^{(A0)}_{aa'}(\Lambda^{-1})D^{(0B)}_{bb'}(\Lambda^{-1})
+\end{align*}
+であるから，一般のローレンツ変換則は
+\begin{align*}
+U_0(\Lambda) \psi_{ab}(x) U^{-1}_0(\Lambda)=&\sum_{a'b'}D^{(AB)}_{aa'bb'}(\Lambda^{-1}) \psi_{a'b'}(\Lambda x) \\
+=&\sum_{a'b'}D^{(A0)}_{aa'}(\Lambda^{-1})D^{(0B)}_{bb'}(\Lambda^{-1}) \psi_{a'b'}(\Lambda x)
+\end{align*}
+となる．さらに(5.6.14)(5.6.15)より$(A,0)$および$(0,B)$表現の行列生成子はそれぞれスピン$A$とスピン$B$に対するスピン行列$\mathbf{J}^{(A)},\mathbf{J}^{(B)}$であることがわかる．このようにして
+\begin{align*}
+\sum_{a_1 a_2 \cdots a_n}g_{a_1a_2 \cdots a_n,b_1 b_2 \cdots b_n}\psi_{a_1 b_1}^{(A_1B_1)}(x)\psi_{a_2 b_2}^{(A_2B_2)}(x)\cdots \psi_{a_n b_n}^{(A_n B_n)}(x)
+\end{align*}
+の形のスカラーを，以下のやり方で構成できる．すなわち，単に係数$g_{a_1a_2 \cdots a_n,b_1 b_2 \cdots b_n}$を，スピン$A_1,A_2,\cdots ,A_n$を結合してスカラーを作るための係数とスピン$B_1,B_2,\cdots ,B_n$を結合してスカラーを作るための係数との積にとればよい\footnote{微分がかかった場は$(\frac{1}{2},\frac{1}{2})\otimes (A,B)$として振舞うから，それは再び既約分解することができるから，微分を含む相互作用の構成もこの処方で扱うことができる．}．\par
+例えば，変換の型$(A_1,B_1),(A_2,B_2),(A_3,B_3)$をもつ3個の場の積から作られる最も一般的なローレンツ・スカラーは，$g$を1個の自由パラメータとして
+\begin{align*}
+\sum_{a_1 a_2 a_3}\left(
+\begin{matrix}
+A_1 & A_2 & A_3 \\
+a_1 & a_2 & a_3
+\end{matrix}
+\right)\left(
+\begin{matrix}
+B_1 & B_2 & B_3 \\
+b_1 & b_2 & b_3
+\end{matrix}
+\right)\psi_{a_1 b_1}^{(A_1B_1)}(x)\psi_{a_2 b_2}^{(A_2B_2)}(x)\psi_{a_3 b_3}^{(A_3B_3)}(x)
+\end{align*}
+である．ここでウィグナーの$3j$記号
+\begin{align*}
+\left(
+\begin{matrix}
+j_1 & j_2 & j_3 \\
+m_1 & m_2 & m_3
+\end{matrix}
+\right):=&\sum_{m_3'}C_{j_1j_2}(j_3m_3' ;m_1 m_2)C_{j_3j_3}(00;m_3'm_3) \\
+=&\frac{(-1)^{j_3+m_3}}{\sqrt{2j_3+1}}C_{j_1j_2}(j_3-m_3;m_1,m_2)
+\end{align*}
+を用いた．これは三つのスピンから回転に関してスカラーを作るための結合を表す\footnote{表記を見ればわかる通り，$j_1,j_2$を結合させて$j_3$を作り，$j_3$同士を結合させてスピン0状態を作るものである．ここで公式
+\begin{align*}
+C_{jj}(00;m-m)=\frac{(-1)^{j-m}}{\sqrt{2j+1}}
+\end{align*}
+を用いた．Weinberg量子力学講義参照．}．\par
+例として，二つの$(\frac{1}{2},0)$を結合させてスカラーを作ろう．このためには
+\begin{align*}
+\sum_{a_1a_2}C_{\frac{1}{2}\frac{1}{2}}(00;a_1a_2)\psi^L_{a_1}(x)\psi'^L_{a_2}(x)=\sum_{a_1a_2} \frac{1}{\sqrt{2}}\epsilon_{a_1a_2}\psi^L_{a_1}(x)\psi'^L_{a_2}(x)
+\end{align*}
+としてやればよい．二つの$(0,\frac{1}{2})$を結合させる場合も同様であり
+\begin{align*}
+\sum_{b_1b_2}C_{\frac{1}{2}\frac{1}{2}}(00;b_1b_2)\psi^R_{b_1}(x)\psi'^R_{b_2}(x)=\sum_{b_1b_2} \frac{1}{\sqrt{2}}\epsilon_{b_1b_2}\psi^R_{b_1}(x)\psi'^R_{b_2}(x)
+\end{align*}
+となる．$(\frac{1}{2},0)$と$(0,\frac{1}{2})$を結合させてスカラーを作るには，前節より$(\epsilon\psi^{R*})_{b}$は$(\frac{1}{2},0)$として振舞うのだったから，上の構成を繰り返して
+\begin{align*}
+\sum_{a_1b_1}\epsilon_{a_1b_1}\epsilon_{b_1b_2}\psi^{R*}_{b_2}(x)\psi^L_{a_1}(x) =-\sum_{a}\psi^{R*}_{a}(x)\psi^L_{a}(x)
+\end{align*}
+となる．あるいは$(\epsilon\psi^{L*})_{a}$は$(0,\frac{1}{2})$として振舞うのだから
+\begin{align*}
+\sum_{a}\psi^{L*}_{a}(x)\psi^R_{a}(x)
+\end{align*}
+の形となる．これらを合わせて，
+\begin{align*}
+\bar{\psi}(x)\psi(x)=&(\psi^{L*}(x) ,\psi^{R*}(x)) \left(
+\begin{matrix}
+0 & 1 \\
+1 & 0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\psi^L(x) \\
+\psi^R(x)
+\end{matrix}
+\right) \\
+=&\sum_{a}\Bigl[\psi^{R*}_{a}(x)\psi^L_{a}(x)+\psi^{L*}_{a}(x)\psi^R_{a}(x)\Bigr]
+\end{align*}
+が4成分スピノル表示で作れるスカラーであることがわかる．
 
+\vskip\baselineskip
+
+
+$S$行列がローレンツ不変であるためには，相互作用密度$\mc{H}_I(x)$が上のようにスカラーであるだけでは十分でなく，$\mc{H}_I(x)$が$\mc{H}_I(y)$と空間的な距離$x-y$で交換することも必要である．この条件をいかに満足させるかを見るには，同じ種類の粒子の二つの場，
+
+
+\newpage
+
+
+\subsection{$\mathsf{CPT}$定理}
+有名な$\mathsf{CPT}$定理を証明する．
+
+\newpage
+
+\subsection{質量ゼロの場}
+ここまではゼロでない質量を持つ粒子の場\uwave{のみ}を取り扱ってきた．これらの場のうち，5.2節と5.5節で議論したスカラー場やディラック場のようないくつかの場については，質量ゼロの極限に移行するのに何ら特別な問題はない．しかし，5.3節で見たように，スピン1の粒子に対するベクトル場の質量ゼロ極限をとる際には，この極限で偏極ベクトルの少なくとも一つが発散するという困難が\uwave{存在する}．実際，この節で，スピン$j\geq 1$の物理的な質量ゼロ粒子の生成・消滅演算子は，有限質量の場合には構成できる既約な$(A,B)$場の全てを構成するのには使えないことを見る．この場の型に関する特別な制限により，自然にゲージ不変性の導入に導かれる．
+
+\vskip\baselineskip
+
+
+質量がゼロでない粒子と全く同様にして，質量ゼロ粒子の一般的な自由場を，運動量$\mathbf{p}$と\uwave{ヘリシティ}$\sigma$をもつ粒子の消滅演算子$a(\mathbf{p},\sigma)$および反粒子の生成演算子$a^{c\dagger}(\mathbf{p},\sigma)$を用いて
+\begin{align*}
+\psi_\ell(x)=\int d^3\mathbf{p}\sum_{\sigma}\Bigl[\kappa a(\mathbf{p})u_{\ell}(x;\mathbf{p},\sigma)+\lambda a^{c\dagger}(x;\mathbf{p},\sigma)v_{\ell}(\mathbf{p},\sigma)\Bigr]
+\end{align*}
+として構成する．ここで$p^0=|\mathbf{p}|$であり，1粒子状態のローレンツ変換性
+\begin{align*}
+U(\Lambda,\alpha)\Psi_{\mathbf{p},\sigma}=e^{-i(\Lambda p)\cdot \alpha}\sqrt{\frac{(\Lambda p)^0}{p^0}}e^{i\sigma\theta(\Lambda,p)}\Psi_{\mathbf{p}_\Lambda,\sigma}
+\end{align*}
+より
+\begin{align*}
+U(\Lambda,\alpha)a^{\dagger}(\mathbf{p},\sigma)U^{-1}(\Lambda,\alpha)=&e^{-i(\Lambda p)\cdot \alpha}\sqrt{\frac{(\Lambda p)^0}{p^0}}e^{i\sigma\theta(\Lambda,p)} a^\dagger(\mathbf{p},\sigma) \\
+U(\Lambda)a^{c\dagger}(\mathbf{p},\sigma)U^{-1}(\Lambda)=&e^{-i(\Lambda p)\cdot \alpha}\sqrt{\frac{(\Lambda p)^0}{p^0}}e^{i\sigma\theta(\Lambda,p)} a^{c\dagger}(\mathbf{p},\sigma)
+\end{align*}
+という変換性がわかる．消滅演算子に関しても
+\begin{align*}
+U(\Lambda,\alpha)a(\mathbf{p},\sigma)U^{-1}(\Lambda,\alpha)=&e^{i(\Lambda p)\cdot \alpha}\sqrt{\frac{(\Lambda p)^0}{p^0}}e^{-i\sigma\theta(\Lambda,p)} a(\mathbf{p},\sigma) \\
+U(\Lambda,\alpha)a^{c}(\mathbf{p},\sigma)U^{-1}(\Lambda,\alpha)=&e^{i(\Lambda p)\cdot \alpha}\sqrt{\frac{(\Lambda p)^0}{p^0}}e^{-i\sigma\theta(\Lambda,p)} a^{c}(\mathbf{p},\sigma)
+\end{align*}
+と変換する．ここで$p_\Lambda=\Lambda p$であり，また$\theta(p,\Lambda)$は(2.5.43)で定義された角度である．よて場が斉次ローレンツ群の表現$D(\Lambda)$に従って
+\begin{align*}
+U(\Lambda) \psi_\ell(x) U^{-1}(\Lambda) =\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})\psi_{\bar{\ell}}(\Lambda x)
+\end{align*}
+と変換するようにしたいのならば，
+\begin{align*}
+U(\Lambda,a)\psi^+_{\ell}(x) U^{-1}(\Lambda,a)=&\int d^3\mathbf{p} \sum_{\sigma} u_\ell(x;\mathbf{p},\sigma) U(\Lambda,\alpha)a(\mathbf{p},\sigma)U^{-1}(\Lambda,\alpha) \\
+=&\int d^3\mathbf{p} \sum_{\sigma} u_\ell(x;\mathbf{p},\sigma) e^{i(\Lambda p)\cdot \alpha}\sqrt{\frac{(\Lambda p)^0}{p^0}}e^{i\sigma\theta(p,\Lambda) }a(\mathbf{p}_\Lambda,\sigma) \\
+=&\int \frac{d^3\mathbf{p_\Lambda}}{(\Lambda p)^0} p^0 e^{i(\Lambda p)\cdot \alpha} \sqrt{\frac{(\Lambda p)^0}{p^0}} \sum_{\sigma} u_\ell(x;\mathbf{p},\sigma) e^{i\sigma\theta(p,\Lambda) }a(\mathbf{p}_\Lambda,\sigma) \\
+=&\int d^3\mathbf{p_\Lambda} \sum_{\sigma} \left[e^{i(\Lambda p)\cdot \alpha}\sqrt{\frac{p^0}{(\Lambda p)^0}} u_\ell(x;\mathbf{p},\sigma) e^{i\sigma\theta(p,\Lambda) }\right]a(\mathbf{p}_\Lambda,\sigma) \\
+=\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})\psi^+_{\bar{\ell}}(\Lambda x+a)=&\int d^3\mathbf{p} \sum_{\sigma} \left[\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})u_{\bar{\ell}}(\Lambda x+a;\mathbf{p},\sigma)\right]a(\mathbf{p},\sigma) \\
+=&\int d^3\mathbf{p_\Lambda} \sum_{\sigma} \left[\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})u_{\bar{\ell}}(\Lambda x+a;\mathbf{p}_\Lambda,\sigma)\right]a(\mathbf{p}_\Lambda,\sigma) \\
+\end{align*}
+より一般的な条件
+\begin{align*}
+e^{i(\Lambda p)\cdot \alpha}\sqrt{\frac{p^0}{(\Lambda p)^0}} u_\ell(x;\mathbf{p},\sigma) e^{i\sigma\theta(p,\Lambda) }=&\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})u_{\bar{\ell}}(\Lambda x+a;\mathbf{p}_\Lambda,\sigma)
+\end{align*}
+が得られる．$\Lambda=1$のとき$\theta=0,D(\Lambda)=1$であるから
+\begin{align*}
+e^{ip\cdot \alpha} u_{\ell}(x;\mathbf{p},\sigma)=&u_{\ell}(x+a;\mathbf{p},\sigma) \\
+\therefore \quad u_\ell(x;\mathbf{p},\sigma)=&e^{ip\cdot x}u_\ell(0;\mathbf{p},\sigma)=:\frac{1}{(2\pi)^{3/2}}e^{ip\cdot x} u_{\ell}(\mathbf{p},\sigma)
+\end{align*}
+という依存性になる．$v_\ell(x;\mathbf{p},\sigma)$に関しても同様にして
+\begin{align*}
+U(\Lambda,a)\psi^{c-}_{\ell}(x) U^{-1}(\Lambda,a)=&\int d^3\mathbf{p} \sum_{\sigma} v_\ell(x;\mathbf{p},\sigma) U(\Lambda,\alpha)a^{c\dagger}(\mathbf{p},\sigma)U^{-1}(\Lambda,\alpha) \\
+=&\int d^3\mathbf{p} \sum_{\sigma} v_\ell(x;\mathbf{p},\sigma) e^{-i(\Lambda p)\cdot \alpha}\sqrt{\frac{(\Lambda p)^0}{p^0}}e^{-i\sigma\theta(p,\Lambda) }a^{c\dagger}(\mathbf{p}_\Lambda,\sigma) \\
+=&\int \frac{d^3\mathbf{p_\Lambda}}{(\Lambda p)^0} p^0 e^{-i(\Lambda p)\cdot \alpha} \sqrt{\frac{(\Lambda p)^0}{p^0}} \sum_{\sigma} v_\ell(x;\mathbf{p},\sigma) e^{-i\sigma\theta(p,\Lambda) }a^{c\dagger}(\mathbf{p}_\Lambda,\sigma) \\
+=&\int d^3\mathbf{p_\Lambda} \sum_{\sigma} \left[e^{-i(\Lambda p)\cdot \alpha}\sqrt{\frac{p^0}{(\Lambda p)^0}} v_\ell(x;\mathbf{p},\sigma) e^{-i\sigma\theta(p,\Lambda) }\right]a^{c\dagger}(\mathbf{p}_\Lambda,\sigma) \\
+=\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})\psi^{c-}_{\bar{\ell}}(\Lambda x+a)=&\int d^3\mathbf{p} \sum_{\sigma} \left[\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})v_{\bar{\ell}}(\Lambda x+a;\mathbf{p},\sigma)\right]a^{c\dagger}(\mathbf{p},\sigma) \\
+=&\int d^3\mathbf{p_\Lambda} \sum_{\sigma} \left[\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})v_{\bar{\ell}}(\Lambda x+a;\mathbf{p}_\Lambda,\sigma)\right]a^{c\dagger}(\mathbf{p}_\Lambda,\sigma) \\
+\end{align*}
+より，一般的な条件
+\begin{align*}
+e^{-i(\Lambda p)\cdot \alpha}\sqrt{\frac{p^0}{(\Lambda p)^0}} v_\ell(x;\mathbf{p},\sigma) e^{-i\sigma\theta(p,\Lambda) }=&\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})v_{\bar{\ell}}(\Lambda x+a;\mathbf{p}_\Lambda,\sigma)
+\end{align*}
+が得られ，同様に
+\begin{align*}
+e^{-ip\cdot \alpha} v_{\ell}(x;\mathbf{p},\sigma)=&v_{\ell}(x+a;\mathbf{p},\sigma) \\
+\therefore \quad v_\ell(x;\mathbf{p},\sigma)=&e^{-ip\cdot x}v_\ell(0;\mathbf{p},\sigma)=:\frac{1}{(2\pi)^{3/2}}e^{-ip\cdot x} v_{\ell}(\mathbf{p},\sigma)
+\end{align*}
+という依存性になる．したがって場は
+\begin{align*}
+\psi_\ell(x)=\int \frac{d^3\mathbf{p}}{(2\pi)^{3/2}}\sum_{\sigma}\Bigl[\kappa a(\mathbf{p})u_{\ell}(\mathbf{p},\sigma)e^{ip\cdot x}+\lambda a^{c\dagger}(\mathbf{p},\sigma)v_{\ell}(\mathbf{p},\sigma)e^{-ip\cdot x}\Bigr]
+\end{align*}
+となる．また係数関数の変換性は
+\begin{align*}
+\sqrt{\frac{p^0}{(\Lambda p)^0}} u_\ell(\mathbf{p},\sigma) e^{i\sigma\theta(p,\Lambda) }=&\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})u_{\bar{\ell}}(\mathbf{p}_\Lambda,\sigma) \\
+\sqrt{\frac{p^0}{(\Lambda p)^0}} v_\ell(\mathbf{p},\sigma) e^{-i\sigma\theta(p,\Lambda) }=&\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda^{-1})v_{\bar{\ell}}(\mathbf{p}_\Lambda,\sigma
+)
+\end{align*}
+つまり
+\begin{align*}
+\therefore \quad u_\ell(\mathbf{p}_\Lambda,\sigma) e^{-i\sigma\theta(p,\Lambda)}=&\sqrt{\frac{p^0}{(\Lambda p)^0}}\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda)u_{\bar{\ell}}(\mathbf{p},\sigma) \\
+v_\ell(\mathbf{p}_\Lambda,\sigma)e^{i\sigma\theta(p,\Lambda)} =&\sqrt{\frac{p^0}{(\Lambda p)^0}}\sum_{\bar{\ell}} D_{\ell\bar{\ell}}(\Lambda)v_{\bar{\ell}}(\mathbf{p},\sigma)
+\end{align*}
+となる．基準運動量として$k=(0,0,\kappa,\kappa)$と，基準ブースト$\Lambda=L(p)$とおくと
+\begin{align*}
+u_{\ell}(\mathbf{p},\sigma)=\sqrt{\frac{|\mathbf{k}|}{p^0}} \sum_{\bar{\ell}}D_{\ell\bar{\ell}}(L(p))u_{\bar{\ell}}(\mathbf{k},\sigma) \\
+v_{\ell}(\mathbf{p},\sigma)=\sqrt{\frac{|\mathbf{k}|}{p^0}} \sum_{\bar{\ell}}D_{\ell\bar{\ell}}(L(p))v_{\bar{\ell}}(\mathbf{k},\sigma)
+\end{align*}
+となる．また，$\mathbf{p}$を基準運動量$\mathbf{k}$とし，$\Lambda$を小群の任意の元$W(\Lambda,p)=L^{-1}(\Lambda p)\Lambda L(p)$ととれば，$(Wk)^0=k^0$より
+\begin{align*}
+u_\ell(\mathbf{k},\sigma) e^{-i\sigma\theta}=&\sqrt{\frac{k^0}{(W k)^0}}\sum_{\bar{\ell}} D_{\ell\bar{\ell}}\Bigl(W(\Lambda,p)\Bigr)u_{\bar{\ell}}(\mathbf{k},\sigma) \\
+=&\sum_{\bar{\ell}} D_{\ell\bar{\ell}}\Bigl(W(\Lambda,p)\Bigr)u_{\bar{\ell}}(\mathbf{k},\sigma) \\
+v_\ell(\mathbf{k},\sigma)e^{i\sigma\theta} =&\sqrt{\frac{k^0}{(W k)^0}}\sum_{\bar{\ell}} D_{\ell\bar{\ell}}\Bigl(W(\Lambda,p)\Bigr)v_{\bar{\ell}}(\mathbf{p},\sigma) \\
+=&\sum_{\bar{\ell}} D_{\ell\bar{\ell}}\Bigl(W(\Lambda,p)\Bigr)v_{\bar{\ell}}(\mathbf{p},\sigma)
+\end{align*}
+となる．(ここで，
+\begin{align*}
+W(W(\Lambda,p),k)=&L^{-1}(W(\Lambda,p)k) W(\Lambda,p) L(k) \\
+=&L^{-1}(k) W(\Lambda,p) L(k) \\
+=&W(\Lambda,p) \quad \because L(k)=1
+\end{align*}
+より$\theta(W(\Lambda,p),k)=\theta(\Lambda,p)$を用いた．)この関係式を満たすような$u(\mathbf{k},\sigma),v(\mathbf{k},\sigma)$を見つけ，それをブーストすることにより一般運動量における係数関数が求まる．
+
+\vskip\baselineskip
+
+
+(2.5.28)の小群の2種類の元を別々に考察することにより，(5.9.10)(5.9.11)の内容を引き出せる．
+\begin{align*}
+W(\alpha,\beta,\theta)=S(\alpha,\beta)R(\theta)
+\end{align*}
+であるから，$\alpha=\beta=0$では，$W$は(2.5.27)で与えられる$z$軸周りの角度$\theta$の回転
+\begin{align*}
+\tensor{R}{^\mu_\nu}(\theta)=\left(
+\begin{matrix}
+\cos\theta & \sin\theta & 0 & 0 \\
+-\sin\theta & \cos\theta & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{matrix}
+\right)
+\end{align*}
+であり，そのとき
+\begin{align*}
+u_{\ell}(\mathbf{k},\sigma)e^{i\sigma\theta(k,W)}=&\sum_{\bar{\ell}}D_{\ell\bar{\ell}}\Bigl(R(\theta)\Bigr)u_{\bar{\ell}} (\mathbf{k},\sigma) \\
+v_{\ell}(\mathbf{k},\sigma)e^{-i\sigma\theta(k,W)}=&\sum_{\bar{\ell}}D_{\ell\bar{\ell}}\Bigl(R(\theta)\Bigr)v_{\bar{\ell}} (\mathbf{k},\sigma)
+\end{align*}
+となる．$\theta=0$の場合，(2.5.26)で与えられる$x-y$平面の回転とブーストの組み合わせ
+\begin{align*}
+\tensor{S}{^\mu_\nu}(\alpha,\beta)=\left(
+\begin{matrix}
+1 & 0 & -\alpha & \alpha \\
+0 & 1 & -\beta & \beta \\
+\alpha & \beta & 1-\gamma & \gamma \\
+\alpha & \beta &-\gamma & 1+\gamma
+\end{matrix}
+\right) ,\quad \gamma=\frac{\alpha^2+\beta^2}{2}
+\end{align*}
+に対しては
+\begin{align*}
+u_{\ell}(\mathbf{k},\sigma)=&\sum_{\bar{\ell}}D_{\ell\bar{\ell}}\Bigl(S(\alpha,\beta)\Bigr)u_{\bar{\ell}} (\mathbf{k},\sigma) \\
+v_{\ell}(\mathbf{k},\sigma)=&\sum_{\bar{\ell}}D_{\ell\bar{\ell}}\Bigl(S(\alpha,\beta)\Bigr)v_{\bar{\ell}} (\mathbf{k},\sigma)
+\end{align*}
+となる．もし$D(\Lambda)$がローレンツ群の実表現ならば，$v$についての条件(5.9.13)(5.9.15)はちょうど$u$についての方程式の複素共役になっている．したがってスケールの定数$\kappa,\lambda$を適当に調節すれば係数関数を
+\begin{align*}
+v_\ell(\mathbf{k},\sigma)=&u^*_{\ell}(\mathbf{k},\sigma) \\
+v_\ell(\mathbf{p},\sigma)=&\sqrt{\frac{|\mathbf{k}|}{p^0}} \sum_{\bar{\ell}}D_{\ell\bar{\ell}}(L(p))v_{\bar{\ell}}(\mathbf{k},\sigma) \\
+=&\sqrt{\frac{|\mathbf{k}|}{p^0}} \left[\sum_{\bar{\ell}}D_{\ell\bar{\ell}}(L(p))u_{\bar{\ell}}(\mathbf{k},\sigma)\right]^* \\
+=&u^*_{\ell}(\mathbf{p},\sigma)
+\end{align*}
+と選ぶことができる．\par
+問題は，斉次ローレンツ群の一般の表現$D(\Lambda)$に対して，(5.9.12)(5.9.14)を同時に満たす$u_\ell$を求めることができないことである．これは，$m\neq 0$の場合では可能だった表現ですら，できない．
+
+\vskip\baselineskip
+
+実際に何が問題となるのかを見るために，ヘリシティ$\sigma=+1,-1$の質量ゼロ粒子に対する4元ベクトル$(\frac{1}{2},\frac{1}{2})$場を構成してみよう．4元ベクトル表現は
+\begin{align*}
+\tensor{D}{^\mu_\nu}(\Lambda)=\tensor{\Lambda}{^\mu_\nu}
+\end{align*}
+で与えられるのだった．(これは実表現だから実際に$v$を$u^*$とできる．)ここでの係数関数$u_\mu$は，偏極ベクトル$e_\mu$を用いて
+\begin{align*}
+u_\mu(\mathbf{p},\sigma)=:\frac{1}{\sqrt{2p^0}}e_\mu(\mathbf{p},\sigma) \quad (\sigma=+1,-1)
+\end{align*}
+と書くのが慣習である．するとこの偏極ベクトル$e_\mu(\mathbf{p},\sigma)$は(5.9.8)より，基準運動量$\mathbf{k}$における偏極ベクトル$e_\mu(\mathbf{k},\sigma)$から
+\begin{align*}
+\frac{1}{\sqrt{2p^0}}e_\mu(\mathbf{p},\sigma)=&u_\mu(\mathbf{p},\sigma) \\
+=&\sqrt{\frac{|\mathbf{k}|}{p^0}}\tensor{L}{^\mu_\nu}(\mathbf{p})u^\nu(\mathbf{k},\sigma) \\
+=&\sqrt{\frac{|\mathbf{k}|}{p^0}}\tensor{L}{^\mu_\nu}(\mathbf{p})\frac{1}{\sqrt{2k^0}}e^\nu(\mathbf{k},\sigma) \\
+=&\frac{1}{\sqrt{2p^0}}e^\nu(\mathbf{k},\sigma) \quad \because k^0=|\mathbf{k}|=\kappa \\
+\therefore \quad e^\mu(\mathbf{p},\sigma)=&\tensor{L}{^\mu_\nu}(p)e^\nu(\mathbf{k},\sigma)
+\end{align*}
+として得られる．この$e^\mu(\mathbf{k},\sigma)$は条件(5.9.12)(5.9.14)より
+\begin{align*}
+e^\mu(\mathbf{k},\sigma)e^{i\sigma \theta}=&\tensor{R}{^\mu_\nu}(\theta)e^\nu(\mathbf{k},\sigma) \\
+e^{\mu}(\mathbf{k},\sigma)=&\tensor{S}{^\mu_\nu}(\alpha,\beta)e^{\nu}(\mathbf{k},\sigma)
+\end{align*}
+を解くことにより得られる．前者の式は$\sigma=+1,-1$それぞれで調べることで解ける．$\sigma=1$では
+\begin{align*}
+\left(
+\begin{matrix}
+e^1 \\
+e^2 \\
+e^3 \\
+e^0
+\end{matrix}
+\right)e^{i\theta}=&\left(
+\begin{matrix}
+\cos\theta & \sin\theta & 0 & 0 \\
+-\sin\theta & \cos\theta & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+e^1 \\
+e^2 \\
+e^3 \\
+e^0
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+e^1 \cos\theta +e^2 \sin\theta \\
+e^2 \cos\theta -e^1 \sin\theta \\
+e^3 \\
+e^0
+\end{matrix}
+\right) \\
+e^1(\cos\theta +i \sin\theta)=&e^1 \cos\theta +e^2 \sin\theta \\
+e^2(\cos\theta +i \sin\theta)=&e^2 \cos\theta -e^1 \sin\theta \\
+\therefore\quad & e^3=e^0=0 ,\quad e^1=ie^2
+\end{align*}
+定数$\kappa,\lambda$に吸収できる全体のスケールを調整して規格化をすると
+\begin{align*}
+e^\mu(\mathbf{k},+1)=\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1 \\
++i \\
+0 \\
+0
+\end{matrix}
+\right)
+\end{align*}
+となる．$\sigma=-1$についても
+\begin{align*}
+\left(
+\begin{matrix}
+e^1 \\
+e^2 \\
+e^3 \\
+e^0
+\end{matrix}
+\right)e^{-i\theta}=&\left(
+\begin{matrix}
+\cos\theta & \sin\theta & 0 & 0 \\
+-\sin\theta & \cos\theta & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+e^1 \\
+e^2 \\
+e^3 \\
+e^0
+\end{matrix}
+\right) \\
+=&\left(
+\begin{matrix}
+e^1 \cos\theta +e^2 \sin\theta \\
+e^2 \cos\theta -e^1 \sin\theta \\
+e^3 \\
+e^0
+\end{matrix}
+\right) \\
+e^1(\cos\theta -i \sin\theta)=&e^1 \cos\theta +e^2 \sin\theta \\
+e^2(\cos\theta -i \sin\theta)=&e^2 \cos\theta -e^1 \sin\theta \\
+\therefore\quad & e^3=e^0=0 ,\quad e^1=-ie^2
+\end{align*}
+より
+\begin{align*}
+e^\mu(\mathbf{k},+1)=\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1 \\
++i \\
+0 \\
+0
+\end{matrix}
+\right)
+\end{align*}
+となる．すなわち
+\begin{align*}
+e^\mu(\mathbf{k},\pm 1)=\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1 \\
+\pm i \\
+0 \\
+0
+\end{matrix}
+\right)
+\end{align*}
+が(5.9.12)より要求される．しかし，そうすると第二の条件(5.9.20)より
+\begin{align*}
+\tensor{S}{^\mu_\nu}(\alpha,\beta)e^{\nu}(\mathbf{k},\sigma)=&\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1 & 0 & -\alpha & \alpha \\
+0 & 1 & -\beta & \beta \\
+\alpha & \beta & 1-\gamma & \gamma \\
+\alpha & \beta &-\gamma & 1+\gamma
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1 \\
+\pm i \\
+0 \\
+0
+\end{matrix}
+\right) \\
+=&\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1 \\
+\pm i \\
+\alpha\pm i\beta \\
+\alpha\pm i\beta
+\end{matrix}
+\right) \\
+=e^\mu(\mathbf{k},\pm 1)=&\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1 \\
+\pm i \\
+0 \\
+0
+\end{matrix}
+\right) \\
+\therefore \quad \alpha \pm i\beta=&0
+\end{align*}
+となり，$\alpha \pm i\beta=0$を要求するが，それは明らかに一般の実数$\alpha,\beta$については不可能である．つまり，基本的な要求(5.9.14)が満たせず，したがって(5.9.10)が満たせない！その代わりに
+\begin{align*}
+\tensor{S}{^\mu_\nu}(\alpha,\beta)e^{\nu}(\mathbf{k},\sigma)=&\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1 \\
+\pm i \\
+\alpha\pm i\beta \\
+\alpha\pm i\beta
+\end{matrix}
+\right) \\
+=&\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1 \\
+\pm i \\
+0 \\
+0
+\end{matrix}
+\right)+\frac{1}{\sqrt{2}\kappa }(\alpha \pm i\beta ) \left(
+\begin{matrix}
+0 \\
+0 \\
+\kappa \\
+\kappa
+\end{matrix}
+\right) \\
+=&e^\mu(\mathbf{k},\pm 1) +\frac{\alpha \pm i\beta }{\sqrt{2}|\mathbf{k}|}k^\mu
+\end{align*}
+であるから，$W(\theta,\alpha,\beta)=S(\alpha,\beta)R(\theta)$と併用して
+\begin{align*}
+\tensor{D}{^\mu_\nu}\Bigl( W(\theta ,\alpha,\beta)\Bigr)e^\nu(\mathbf{k},\pm 1)=&\tensor{S}{^\mu_\lambda}(\alpha,\beta) \tensor{R}{^\lambda_\nu}(\theta)e^{\nu}(\mathbf{k},\pm 1) \\
+=&\tensor{S}{^\mu_\lambda}(\alpha,\beta) e^{\lambda}(\mathbf{k},\pm 1)e^{\pm i\theta } \\
+=&e^{\pm i\theta }\left\{e^\mu(\mathbf{k},\pm 1) +\frac{\alpha \pm i\beta }{\sqrt{2}|\mathbf{k}|}k^\mu\right\} \neq e^{\pm i\theta}e^\mu(\mathbf{k},\pm 1)
+\end{align*}
+が得られる．このようにして，質量ゼロでヘリシティ$\sigma=\pm 1$の粒子の消滅・生成演算子から4元ベクトル場を構成することはできないという結論に到達する！
+
+\vskip\baselineskip
+
+とりあえずこの困難は置いといて，先へ進む．(5.9.21)を(5.9.18)でブーストして，任意の運動量における偏極ベクトル$e_\mu(\mathbf{p},\sigma)$を定義し，場を
+\begin{align*}
+a_\mu(x)=\int \frac{d^3\mathbf{p}}{(2\pi)^{3/2}\sqrt{2p^0}}\sum_{\sigma=\pm 1}\Bigl[e_\mu(\mathbf{p},\sigma)e^{ip\cdot x}a(\mathbf{p},\sigma)+e_\mu(\mathbf{p},\sigma)^* e^{-ip\cdot x}a^{c\dagger}(\mathbf{p},\sigma)\Bigr]
+\end{align*}
+ととる．
 
 
 \end{document}

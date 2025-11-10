@@ -2829,6 +2829,42 @@ $\Rightarrow$電磁的，重力的な相互作用はパリティ対称性をも�
 
 \vskip\baselineskip
 
+基準ブーストが与えられたので，あらわに$\theta,\alpha,\beta$を$\Lambda=1+\omega$と$p^\mu$の関数として表すことができる．とはいえ複雑すぎて計算できないので，予想を与えておく．
+\begin{align*}
+\theta(\Lambda,p)=&\omega_{\mu\nu}e^{\mu}_1(p)e^{\nu}_2(p) \\
+\alpha(\Lambda,p)=&\omega_{\mu\nu}e^{\mu}_1(p)\frac{p^\nu}{\kappa} \\
+\beta(\Lambda,p)=&\omega_{\mu\nu}e^{\mu}_2(p)\frac{p^\nu}{\kappa}
+\end{align*}
+ここで基準運動量における基底$e^\mu_1(k)=(1,0,0,0),e^\mu_2(k)=(0,1,0,0)$から
+\begin{align*}
+e^{\mu}_1(p):=\tensor{L}{^\mu_\nu}(p)e^{\nu}_1(k)=\left(
+\begin{matrix}
+\cos\theta\cos\phi \\
+\cos\theta\sin\phi \\
+0 \\
+0
+\end{matrix}
+\right) \\
+e^{\mu}_2(p):=\tensor{L}{^\mu_\nu}(p)e^{\nu}_2(k)=\left(
+\begin{matrix}
+-\sin\phi \\
+\cos\phi \\
+0 \\
+0
+\end{matrix}
+\right)
+\end{align*}
+で与えられる．実際$p^\mu$を基準運動量$k^\mu=(0,0,\kappa,\kappa)$とすると
+\begin{align*}
+\theta(\Lambda,k)=&\omega_{\mu\nu}e^{\mu}_1(k)e^{\nu}_2(k)=\omega_{12}=\theta_3 \\
+\alpha(\Lambda,k)=&\omega_{\mu\nu}e^{\mu}_1(k)\frac{k^\nu}{\kappa}=\omega_{13}+\omega_{10}=-\theta_2+\beta_1 \\
+\beta(\Lambda,p)=&\omega_{\mu\nu}e^{\mu}_2(k)\frac{k^\nu}{\kappa}=\omega_{23}+\omega_{20}=\theta_1+\beta_2
+\end{align*}
+となり，
+
+
+\vskip\baselineskip
+
 
 質量ゼロの粒子のヘリシティはローレンツ不変だが，「状態そのもの」はそうではない．特に(2.5.42)のヘリシティに依存する位相因子$\exp(i\sigma \theta)$のせいで，反対のヘリシティをもつ1粒子状態の線形結合で作られる状態は，ローレンツ変換のもとで異なる線形結合に変換される．たとえば，一般の1光子状態は以下のように書ける．(光子はヘリシティ$\pm 1$であるから)
 \begin{align*}

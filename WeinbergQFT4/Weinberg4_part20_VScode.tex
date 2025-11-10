@@ -91,13 +91,13 @@ $A(x)B(y)$は質量次元で$d_A+d_B$で，$C(y)$が$d_C$なので，$F^{AB}_C(x
 となることだ．ここで$V_C^{AB}(k),U_C^{AB}(k)$は$k^\mu$の関数であり，級数$C(0)$の項が複雑になるにつれ，大きな$k$でより早く減少する．\par
 \vskip\baselineskip
 
-ここではより一般に，任意個数の演算子が運ぶ運度量が無限大になるというウィルソン展開を導く．この目的のために，Green関数
+ここではより一般に，任意個数の演算子が運ぶ運動量が無限大になるというウィルソン展開を導く．この目的のために，Green関数
 \begin{eqnarray*}
 &&\braket{T\left\{A_{1}\left(x_{1}\right), A_{2}\left(x_{2}\right), \cdots, B_{1}\left(y_{1}\right), B_{2}\left(y_{2}\right), \cdots \right\} }_{0} \\
 &=&\int \left[\prod_{\ell, z} d \phi_{\ell}(z)\right] a_{1}\left(x_{1}\right) a_{2}\left(x_{2}\right) \cdots b_{1}\left(y_{1}\right) b_{2}\left(y_{2}\right) \cdots \exp (i I[\phi])
 \end{eqnarray*}
 において，局所演算子$A_1(x_1),A_2(x_2)$等の引数が点$x$に近づき，他の局所演算子$B_1(y_1),B_2(y_2)$等の引数が固定された場合を考える．ここで小文字$a$と$b$は，$A$や$B$の中の場の演算子をc数の場で置き換えることを意味する．
-さて，点$x$を半径$R$の球$B(R)$で囲む．$R$は$x_1,x_2$等との間の距離よりずっと大きく，また，$y_1,y_2$等との間の距離よりはずっと小さくとる．\par
+さて，点$x$を半径$R$の球$B_x(R)$で囲む．$R$は$x_1,x_2$等との間の距離よりずっと大きく，また，$y_1,y_2$等との間の距離よりはずっと小さくとる．\par
 
 \begin{figure}[H]
 \centering
@@ -133,16 +133,37 @@ $A(x)B(y)$は質量次元で$d_A+d_B$で，$C(y)$が$d_C$なので，$F^{AB}_C(x
 \noindent
 作用は局所的だから，これを
 \begin{eqnarray*}
-I=\int_{z\in B(R)}d^4z\mathcal{L}(z)+\int_{z\notin B(R)}d^4z \mathcal{L}(z)
+I=\int_{z\in B_x(R)}d^4z\mathcal{L}(z)+\int_{z\notin B_x(R)}d^4z \mathcal{L}(z)
 \end{eqnarray*}
-と書くことができる．\par
+と書くことができる．これに伴って積分測度も
+\begin{align*}
+\left[\prod_{\ell, z} d \phi_{\ell}(z)\right]=\left[\prod_{\ell, z\in B_x(R)} d \phi_{\ell}(z)\right]\left[\prod_{\ell, z\notin B_x(R)} d \phi_{\ell}(z)\right]
+\end{align*}
+と分けることができて，したがって上の経路積分による期待値は
+\begin{align*}
+&\braket{T\left\{A_{1}\left(x_{1}\right), A_{2}\left(x_{2}\right), \cdots, B_{1}\left(y_{1}\right), B_{2}\left(y_{2}\right), \cdots \right\} }_{0} \\
+=&\int \left[\prod_{\ell, z\in B_x(R)} d \phi_{\ell}(z)\right]\left[\prod_{\ell, z\notin B_x(R)} d \phi_{\ell}(z)\right] \\
+&\qquad \times a_{1}\left(x_{1}\right) a_{2}\left(x_{2}\right) \cdots b_{1}\left(y_{1}\right) b_{2}\left(y_{2}\right) \cdots \exp \left(i \int_{z\in B(R)}d^4z\mathcal{L}(z)+\int_{z\notin B_x(R)}d^4z \mathcal{L}(z)\right) \\
+=&\int \left[\prod_{\ell, z\in B_x(R)} d \phi_{\ell}(z)\right] a_{1}\left(x_{1}\right) a_{2}\left(x_{2}\right) \cdots \exp(iI[\phi]) \\
+&\times \int \left[\prod_{\ell, z\notin B_x(R)} d \phi_{\ell}(z)\right] b_{1}\left(y_{1}\right) b_{2}\left(y_{2}\right) \cdots \exp (i I[\phi])
+\end{align*}
+となる．\par
 \vskip\baselineskip
 
-ここでは球の内部の場についての経路積分は，球の表面で場が球の外部の場と滑らかにつながるという境界条件で拘束されている．この\uwave{境界条件を除いては}，球の内部の場についての経路積分は球の外の場の振る舞いに全く影響されない．\par
-$\Rightarrow$境界条件，つまり球の表面についての振る舞いが分かれば積分は収束する．したがって球の内部の場についての積分は，\uwave{球の表面での場と場の微分の関数となる}．\par
-また，球の表面は球の中心$x$が分かれば決まる．\par
-$\Rightarrow$積分は\uwave{点$x$での場と，場の微分の関数となる}．\par
-もしこの積分を$x$におけるc数の場の積$\mathcal{O}(x)$の級数として表すと，その係数は座標の差のみの関数$U_{\mathcal{O}}(x_1-x,x_2-x,\cdots)$となる．点$y_1,y_2$等は全て球$B(R)$のはるか外部にあるから，球の外部の作用からこの球を除いても$R\to 0$の極限では何の影響もない．($x_1,x_2,\cdots$が$x$に近づくにつれ$R$もゼロに近付ける．)\par
+ここでは球の内部の場についての経路積分は，球の表面$\partial B_x(R)$で場が球の外部の場と滑らかにつながるという境界条件で拘束されている．この\uwave{境界条件を除いては}，球の内部の場についての経路積分は球の外の場の振る舞いに全く影響されない．\par
+$\Rightarrow$境界条件，つまり球の表面についての振る舞い$\phi_\ell(z)(z \in \partial B_x(R))$が分かれば積分は収束する．したがって球の内部の場についての積分は，\uwave{球の表面での場と場の微分の関数となる}．\par
+また，球の表面は球の中心$x$が分かれば決まる．半径$R$は点$x$に十分近ければ任意で良いから，$R$の情報は必要ない．\par
+$\Rightarrow$積分は\uwave{点$x$での場と，場の微分の関数となる}．これはすなわち，点$x$での局所的な(場と場の微分の積でできた)演算子$\mc{O}(x)$の，場の演算子をc数の場で置き換えた$o(x)$で積分が書けるということである．\par
+もしこの積分を$x$におけるc数の場の積$\mathcal{O}(x)$の級数として表すと，その係数は座標の差のみの関数$U_{\mathcal{O}}(x_1-x,x_2-x,\cdots)$となる．(ローラン展開などは一般に，展開する中心と中心からの距離$x_i-x$のベキで書かれるのを思い出す．)
+\begin{align*}
+\int \left[\prod_{\ell, z\in B(R)} d \phi_{\ell}(z)\right] a_{1}\left(x_{1}\right) a_{2}\left(x_{2}\right) \cdots \exp(iI[\phi])=\sum_o U_{o}^{A_1,A_2,\cdots}(x_1-x,x_2-x,\cdots )o(x)
+\end{align*}
+点$y_1,y_2$等は全て球$B(R)$のはるか外部にあるから，球の外部の作用からこの球を除いても$R\to 0$の極限では何の影響もない．($x_1,x_2,\cdots$が$x$に近づくにつれ$R$もゼロに近付ける．)すなわち
+\begin{align*}
+\left[\prod_{\ell, z\notin B(R)} d \phi_{\ell}(z)\right] \to& \left[\prod_{\ell, z} d \phi_{\ell}(z)\right] \\
+\int_{z\notin B(R)} d^4z \mc{L}(z) \to& \int d^4z \mc{L}(z)
+\end{align*}
+となる．\par
 
 \begin{figure}[H]
 \centering
@@ -193,10 +214,10 @@ $R\to 0$の極限で，$x_1,x_2,\cdots$が$x$に近づくとき(20.1.6)は
 \begin{eqnarray*}
 &&\braket{T\left\{A_{1}\left(x_{1}\right), A_{2}\left(x_{2}\right), \cdots, B_{1}\left(y_{1}\right), B_{2}\left(y_{2}\right), \cdots \right\} }_{0} \\
 &=&\int \left[\prod_{\ell, z} d \phi_{\ell}(z)\right] \sum_o U_{o}^{A_1,A_2,\cdots}(x_1-x,x_2-x,\cdots )o(x) b_{1}\left(y_{1}\right) b_{2}\left(y_{2}\right) \cdots \exp (i I[\phi]) \\
-&=&\sum_{\mathcal{O}}U^{A_1,A_2,\cdots}_\mathcal{O}(x_1-x,x_2-x,\cdots)\braket{T\left\{ \mathcal{O}(x),B_{1}\left(y_{1}\right), B_{2}\left(y_{2}\right), \cdots \right\} }_{0} \\
+&=&\sum_{\mathcal{O}}U^{A_1,A_2,\cdots}_\mathcal{O}(x_1-x,x_2-x,\cdots)\braket{T\left\{ \mathcal{O}(x),B_{1}\left(y_{1}\right), B_{2}\left(y_{2}\right), \cdots \right\} }_{0}
 \end{eqnarray*}
 ここで$\mathcal{O}(x)$は$o(x)$に対応するハイゼンベルグ表示の量子力学的演算子だ．\par
-特に，$y$変数についてフーリエ変換をして適切な係数関数をかけると
+特に，$y$変数についてフーリエ変換をして適切な係数関数をかけると(LSZ公式)
 \begin{eqnarray*}
 \bra{\beta} T\left\{A_{1}\left(x_{1}\right), A_{2}\left(x_{2}\right), \cdots \right\}\ket{\alpha} \to \sum_{\mathcal{O}}U^{A_1,A_2,\cdots}_{\mathcal{O}}(x_1-x,x_2-x,\cdots)\bra{\beta}\mathcal{O}(x)\ket{\alpha}
 \end{eqnarray*}

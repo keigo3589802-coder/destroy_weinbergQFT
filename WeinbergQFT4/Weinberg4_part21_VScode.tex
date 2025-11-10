@@ -18,6 +18,16 @@
 \tcbuselibrary{theorems,skins}
 \usetikzlibrary{decorations}
 \usepackage{color}
+\usepackage{xcolor} %ここからハイパーリンクのパッケージの設定
+\usepackage[%
+  dvipdfmx,%
+  bookmarks=true,%
+  bookmarksnumbered=true,%
+  colorlinks=true,%
+  allcolors=blue%
+]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{cite} %ここまで
 
 \usetikzlibrary{intersections, calc, arrows.meta}
  \usetikzlibrary{patterns}
@@ -62,6 +72,11 @@
 
 
 \maketitle
+
+\tableofcontents
+
+\newpage
+
 \setcounter{part}{20}
 \part{ゲージ対称性の自発的破れ}
 \setcounter{section}{21}

@@ -1,0 +1,317 @@
+\documentclass[dvipdfmx]{jsarticle}
+\let\headfont=\gtfamily
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs} % 花文字\mathscr{M}, 筆記体\mathcal{M}, 黒板文字\mathbb{M},ドイツ文字\mathfrak{M}
+\usepackage{bm} %太文字
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{tikz-feynhand}
+\usepackage{ulem}
+\usepackage{tensor}
+\usepackage{bigdelim}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{here}
+\tcbuselibrary{theorems,skins}
+\usetikzlibrary{decorations}
+\usepackage{color}
+\usepackage{xcolor} %ここからハイパーリンクのパッケージの設定
+\usepackage[%
+  dvipdfmx,%
+  bookmarks=true,%
+  bookmarksnumbered=true,%
+  colorlinks=true,%
+  allcolors=blue%
+]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{cite} %ここまで
+
+\usetikzlibrary{intersections, calc, arrows.meta}
+ \usetikzlibrary{patterns}
+
+\newfont{\bg}{cmr9 scaled\magstep4}
+\newcommand{\bigzerol}{\smash{\lower1.0ex\hbox{\bg 0}}}
+\newcommand{\bigzerou}{%
+   \smash{\hbox{\bg 0}}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\VAC}{\mathrm{VAC}}
+\newcommand{\Slash}[1]{{\ooalign{\hfil/\hfil\crcr$#1$}}} %ファインマンのスラッシュ記号
+\renewcommand{\mc}{\mathcal}
+
+\tcbset{
+  colback=blue!5!white,  % 背景色
+  colframe=blue!75!black, % 枠線の色
+  fonttitle=\bfseries,    % タイトルの太字
+  boxrule=0.8pt,          % 枠線の太さ
+  arc=2mm,                % 角の丸み
+  left=4mm, right=4mm, top=2mm, bottom=2mm, % 余白
+}
+
+\newtcolorbox{sectiongoal}[1][]{title=この節でやるべきこと,#1}
+
+% \textrm{Roman　デフォルト}
+% \textgt{Gothic　和文ゴシック体}*専門用語に
+% \textbf{Boldface　太字}*専門用語(英語)に
+% \textit{Italic　斜体}
+% \textsl{Slanted　ローマンを傾けただけ}
+% \textsf{Sans Serif　サンセリフ体}
+% \texttt{Typewriter　タイプライタ体、等幅}
+% \textsc{Small Caps　小文字が大文字に}
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{44\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.6in}
+
+\allowdisplaybreaks[4]
+
+\makeatletter
+  \renewcommand{\theequation}
+  {\arabic{section}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+ \makeatother
+
+\title{\vspace{-1cm}\Huge{WeinbergQFT Part5}}
+\author{坂井 啓悟(Sakai Keigo)}
+\date{}
+\begin{document}
+
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\setcounter{part}{5}
+\part{ファインマン図}
+\setcounter{section}{5}
+\setcounter{subsection}{0}
+\subsection{ファインマン則の導出}
+正規順序積同士の積についての便利な公式を与えておこう．\par
+再び4.2節で導入した生成・消滅演算子の省略記法
+\begin{align*}
+a(q):=a(\mathbf{p}\sigma n)
+\end{align*}
+を用いて，生成消滅演算子の生成汎関数
+\begin{align*}
+N[\eta,\xi]\equiv :\exp\left(\int dq \eta(q)a^\dagger(q)+\int dq a(q)\xi(q)\right):
+\end{align*}
+を考える．ここで$\eta(q)=\eta(\mathbf{p},\sigma,n),\xi(q)=\xi(\mathbf{p},\sigma,n)$は，$n$がボゾン的な粒子の種類であれば互いに可換なc数であり，$n$がフェルミオン的な粒子の種類であれば，ボゾン的なものとは可換だがフェルミオン的なもの同士では反可換なc数とする．任意の生成・消滅演算子からなる正規順序多項式$:F[a,a^\dagger]:$は，適当な微分作用素を用いてこの生成汎関数から得ることができる．すなわち，ある形式的な作用素$\hat{F}\left(\frac{\delta}{\delta \eta},\frac{\delta}{\delta \xi}\right)$を用いて
+\begin{align*}
+:F[a,a^\dagger]:=\left. \hat{F}\left(\frac{\overrightarrow{\delta}}{\delta \eta},\frac{\overleftarrow{\delta}}{\delta \xi}\right) N[\eta,\xi] \right|_{\eta=\xi=0}
+\end{align*}
+と書ける．例えば
+\begin{align*}
+:a(q_1)a^\dagger(q_2) a(q_3):= \pm a^\dagger(q_2) a(q_1) a(q_3)=\left. \pm \frac{\overrightarrow{\delta}}{\delta \eta(q_1)} N[\eta,\xi] \frac{\overleftarrow{\delta}}{\delta \xi(q_1)} \frac{\overleftarrow{\delta}}{\delta \xi(q_3)}\right|_{\eta=\xi=0}
+\end{align*}
+として得られる．さて，二つの生成汎関数同士の積は
+\begin{align*}
+&N[\eta_1 ,\xi_1] N[\eta_2,\xi_2] \\
+=&:\exp\left(\int dq \eta_1(q)a^\dagger(q)+\int dq \xi_1(q) a(q)\right)::\exp\left(\int dp \eta_2(q)a^\dagger(q)+\int dq a(q)\xi_2(q)\right): \\
+=&e^{\int dq \eta_1(q)a^\dagger(q)}e^{\int dq a(q)\xi_1(q)}e^{\int dq \eta_2(q)a^\dagger(q)}e^{\int dq a(q)\xi_2(q)} \\
+=&e^{\int dq \eta_1(q)a^\dagger(q)}e^{\int dq \eta_2(q)a^\dagger(q)}e^{\int dq a(q)\xi_1(q)}e^{\int dq a(q)\xi_2(q)}\exp\left(\int dq dq' \xi_1(q)[a(q),a^\dagger(q')]_{\mp}\eta_2(q')\right) \\
+=&e^{\int dq (\eta_1(q)+\eta_2(q))a^\dagger(q)}e^{\int dq a(q)(\xi_1(q)+ \xi_2(q))}\exp\left(\int dq dq' \xi_1(q)[a(q),a^\dagger(q')]_{\mp}\eta_2(q')\right) \\
+=&e^{\int dq (\eta_1(q)+\eta_2(q))a^\dagger(q)}e^{\int dq a(q)(\xi_1(q)+ \xi_2(q))}\exp\left(\int dq dq' \frac{\overleftarrow{\delta}}{\delta a_1(q)}[a(q),a^\dagger(q')]_{\mp}\frac{\overrightarrow{\delta}}{\delta a^\dagger_2 (q')}\right) \\
+=&N[\eta_1+\eta_2,\xi_1+\xi_2]\exp\left(\int dq dq' \frac{\overleftarrow{\delta}}{\delta a_1(q)}[a(q),a^\dagger(q')]_{\mp}\frac{\overrightarrow{\delta}}{\delta a^\dagger_2 (q')}\right) \\
+=&N[\eta_1+\eta_2,\xi_1+\xi_2]\exp\left(\int dq dq' \frac{\overleftarrow{\delta}}{\delta a_1(q)}[a(q),a^\dagger(q')]_{\mp}\frac{\overrightarrow{\delta}}{\delta a^\dagger_2 (q')} \right)
+\end{align*}
+となる．(ただし$\frac{\overleftarrow{\delta}}{\delta a_1(q)}$と$\frac{\overrightarrow{\delta}}{\delta a^\dagger_2 (q')}$は$\eta_1(q),\xi_2(q)$の係数にある$a(q)$と$a^\dagger(q)$にのみ微分が作用することを意味する．)ここで
+\begin{align*}
+:\exp\left(\int dq \eta(q)a^\dagger(q)+\int dq a(q)\xi(q)\right):=&e^{\int dq \eta(q)a^\dagger(q)}e^{\int dq a(q)\xi(q)}
+\end{align*}
+であることと，BCH公式より
+\begin{align*}
+&e^{\int dq a(q)\xi_1(q)}e^{\int dq \eta_2(q)a^\dagger(q)} \\
+=&e^{\int dq \eta_2(q)a^\dagger(q)}\left[e^{-\int dq \eta_2(q)a^\dagger(q)}e^{\int dq a(q)\xi_1(q)}e^{\int dq \eta_2(q)a^\dagger(q)}\right] \\
+=&e^{\int dq \eta_2(q)a^\dagger(q)}\exp\left(\int dq a(q)\xi_1(q)-\int dq dq' [\eta_2(q')a^\dagger(q'),a(q)\xi_1(q)]+\cdots\right) \\
+=&e^{\int dq \eta_2(q)a^\dagger(q)}\exp\left(\int dq a(q)\xi_1(q)+\int dq \xi_1(q)\eta_2(q) \right) \\
+=&e^{\int dq \eta_2(q)a^\dagger(q)}e^{\int dq a(q)\xi_1(q)}\exp\left(\int dq \xi_1(q)\eta_2(q) \right)
+\end{align*}
+となることを用いた．(途中で
+\begin{align*}
+[\eta_2(q')a^\dagger(q'),a(q)\xi_1(q)]=&\eta_2(q')a^\dagger(q')a(q)\xi_1(q)-a(q)\xi_1(q)\eta_2(q')a^\dagger(q') \\
+=&(-1)^{\pi(q)\pi(q')+\pi(q)+\pi(q')} \xi_1(q) a^\dagger(q')a(q)\eta_2(q') \\
+&- (-1)^{\pi(q)+\pi(q')}\xi_1(q) a(q)a^\dagger(q')\eta_2(q') \\
+=&-(-1)^{\pi(q)+\pi(q')}\xi_1(q)\Bigl(a(q)a^\dagger(q') - (-1)^{\pi(q)\pi(q')}a^\dagger(q')a(q)\Bigr) \eta_2(q') \\
+=&-(-1)^{\pi(q)+\pi(q')}\xi_1(q)[a(q),a^\dagger(q')]_{\mp} \eta_2(q') \\
+=&-(-1)^{\pi(q)+\pi(q')}\xi_1(q)\delta(q-q') \eta_2(q') \\
+=&-(-1)^{2\pi(q)}\xi_1(q)\delta(q-q') \eta_2(q') \\
+=&-\xi_1(q) \delta(q-q') \eta_2(q')
+\end{align*}
+を用いた．これはc数であるから高次の交換子はゼロである．また$\delta(q-q')=\delta^3(\mathbf{p}-\mathbf{p}')\delta_{\sigma\sigma'}\delta_{nn'}$の$\delta_{nn'}$により，$[a(q),a^\dagger(q')]_{\mp}$に現れる$a(q)$と$a^\dagger(q')$は同じ粒子の種類でありそうでなければゼロとなるから$\xi_1(q')$と$\eta_2(q)$はともにボゾン的かともにフェルミオン的である．)したがって，二つの正規順序多項式の積は
+\begin{align*}
+&:F[a,a^\dagger]::G[a,a^\dagger]: \\
+=& \left. \hat{F}\left(\frac{\overrightarrow{\delta}}{\delta \eta_1},\frac{\overleftarrow{\delta}}{\delta \xi_1}\right)\hat{G}\left(\frac{\overrightarrow{\delta}}{\delta \eta_2},\frac{\overleftarrow{\delta}}{\delta \xi_2}\right) N[\eta_1,\xi_1]N[\eta_2,\xi_2] \right|_{\eta=\xi=0} \\
+=& \hat{F}\left(\frac{\overrightarrow{\delta}}{\delta \eta_1},\frac{\overleftarrow{\delta}}{\delta \xi_1}\right)\hat{G}\left(\frac{\overrightarrow{\delta}}{\delta \eta_2},\frac{\overleftarrow{\delta}}{\delta \xi_2}\right) \\
+& \qquad \times \left.N[\eta_1+\eta_2,\xi_1+\xi_2]\exp\left(\int dq \frac{\overleftarrow{\delta}}{\delta a_1(q)}\frac{\overrightarrow{\delta}}{\delta a^\dagger_2 (q)} \right) \right|_{\eta=\xi=0} \\
+=&\left. \hat{F}\left(\frac{\overrightarrow{\delta}}{\delta \eta},\frac{\overleftarrow{\delta}}{\delta \xi}\right)\hat{G}\left(\frac{\overrightarrow{\delta}}{\delta \eta},\frac{\overleftarrow{\delta}}{\delta \xi}\right) \exp\left(\int dq \frac{\overleftarrow{\delta}}{\delta a_1(q)}\frac{\overrightarrow{\delta}}{\delta a^\dagger_2 (q)} \right) N[\eta,\xi] \right|_{\eta=\xi=0} \\
+=&\left. \exp\left(\int dq \frac{\overleftarrow{\delta}}{\delta a_1(q)}\frac{\overrightarrow{\delta}}{\delta a^\dagger_2 (q)} \right) \hat{F}\left(\frac{\overrightarrow{\delta}}{\delta \eta},\frac{\overleftarrow{\delta}}{\delta \xi}\right)\hat{G}\left(\frac{\overrightarrow{\delta}}{\delta \eta},\frac{\overleftarrow{\delta}}{\delta \xi}\right) N[\eta,\xi] \right|_{\eta=\xi=0} \\
+=&\exp\left(\int dq \frac{\overleftarrow{\delta}}{\delta a_1(q)}\frac{\overrightarrow{\delta}}{\delta a^\dagger_2 (q)} \right) :F[a,a^\dagger]G[a,a^\dagger]: \\
+=&\exp\left(\int dq \frac{\overleftarrow{\delta}}{\delta a^{(F)}(q)}\frac{\overrightarrow{\delta}}{\delta a^{(G)\dagger} (q)} \right) :F[a,a^\dagger]G[a,a^\dagger]: \\
+=&:F[a,a^\dagger]\exp\left(\sum_{\sigma n}\int d^3\mathbf{p} \frac{\overleftarrow{\delta}}{\delta a^{(F)}(\mathbf{p},\sigma,n)}\frac{\overrightarrow{\delta}}{\delta a^{(G)\dagger} (\mathbf{p},\sigma,n)} \right) G[a,a^\dagger]:
+\end{align*}
+という公式が得られる．ここで$\delta/\delta \eta_1$によって置き換えられた$a(q)$は$\eta_1(q)$のもともと係数であるものだったのだから，それはまさに$\delta/\delta a_1(q)$によって微分されるものであり，したがって$\delta/\delta a_1(q)$はそのまま$F[a,a^\dagger]$の$a(q)$を微分する$\delta/\delta a^{(F)}(q)$に置き換えられることを用いた．他の部分も同様である．この公式は，書き換えると
+\begin{align*}
+&:F[a,a^\dagger]::G[a,a^\dagger]: \\
+=&:F[a,a^\dagger]\exp\left(\sum_n \sum_{\sigma \sigma'}\int d^3\mathbf{p} d^3\mathbf{p}' \frac{\overleftarrow{\delta}}{\delta a^{(F)}(\mathbf{p},\sigma,n)}[a(\mathbf{p},\sigma,n),a^{\dagger}(\mathbf{p}',\sigma',n)]_{\mp}\frac{\overrightarrow{\delta}}{\delta a^{(G)\dagger} (\mathbf{p}',\sigma',n)} \right) G[a,a^\dagger]:
+\end{align*}
+となり，$:F[a,a^\dagger]:$の右側に並べられた消滅演算子を$:G[a,a^\dagger]$の左側に並べられた生成演算子を超えて並び替えることにより$:F[a,a^\dagger]G[a,a^\dagger]:$にするとき，「(反)交換関係$[a(\mathbf{p},\sigma,n),a^\dagger(\mathbf{p}',\sigma',n)]_{\mp}=\delta^3(\mathbf{p}-\mathbf{p}')\delta_{\sigma\sigma'}$を用いて(反)交換させていく」という描像を少し見方を変えて，「$a(\mathbf{p},\sigma,n)$と$a^\dagger(\mathbf{p}',\sigma',n)$の組を対にして消す代わりに$[a(\mathbf{p},\sigma,n),a^\dagger(\mathbf{p}',\sigma',n)]_{\mp}=\delta^3(\mathbf{p}-\mathbf{p}')\delta_{\sigma\sigma'}$を生み出す」という描像にするものである．\par
+実際に確かめると
+\begin{align*}
+:F[a,a^\dagger]:=&a(q_1)a(q_2) \\
+:G[a,a^\dagger]:=&a^\dagger(q_3)a^\dagger(q_4) \\
+:F::G:=&a(q_1)a(q_2)a^\dagger(q_3)a^\dagger(q_4) \\
+=&\delta(q_2-q_3)a(q_1)a^\dagger(q_4) +(-1)^{\pi(q_2)\pi(q_3)}a(q_1)a^\dagger(q_3)a(q_2)a^\dagger(q_4) \\
+=&\delta(q_2-q_3)a(q_1)a^\dagger(q_4) +(-1)^{\pi(q_2)\pi(q_3)}a(q_1)a^\dagger(q_3)\delta(q_2-q_4)\\
+&+(-1)^{\pi(q_2)\pi(q_3)}(-1)^{\pi(q_2)\pi(q_4)}a(q_1)a^\dagger(q_3)a^\dagger(q_4)a(q_2) \\
+=&\delta(q_2-q_3)\delta(q_1-q_4) +(-1)^{\pi(q_1)\pi(q_4)}\delta(q_2-q_3)a^\dagger(q_4)a(q_1) \\
+&+(-1)^{\pi(q_2)\pi(q_3)}\delta(q_1-q_3)\delta(q_2-q_4)+(-1)^{\pi(q_2)\pi(q_3)}(-1)^{\pi(q_1)\pi(q_3)}a^\dagger(q_3)a(q_1)\delta(q_2-q_4) \\
+&+(-1)^{\pi(q_2)\pi(q_3)}(-1)^{\pi(q_2)\pi(q_4)}\delta(q_1-q_3)a^\dagger(q_4)a(q_2) \\
+&+(-1)^{\pi(q_2)\pi(q_3)}(-1)^{\pi(q_2)\pi(q_4)}(-1)^{\pi(q_1)\pi(q_3)}a^\dagger(q_3)a(q_1)a^\dagger(q_4)a(q_2) \\
+=&\delta(q_2-q_3)\delta(q_1-q_4) +(-1)^{\pi(q_1)\pi(q_4)}\delta(q_2-q_3)a^\dagger(q_4)a(q_1) \\
+&+(-1)^{\pi(q_2)\pi(q_3)}\delta(q_1-q_3)\delta(q_2-q_4)+(-1)^{\pi(q_2)\pi(q_3)}(-1)^{\pi(q_1)\pi(q_3)}a^\dagger(q_3)a(q_1)\delta(q_2-q_4) \\
+&+(-1)^{\pi(q_2)\pi(q_3)}(-1)^{\pi(q_2)\pi(q_4)}\delta(q_1-q_3)a^\dagger(q_4)a(q_2) \\
+&+(-1)^{\pi(q_2)\pi(q_3)}(-1)^{\pi(q_2)\pi(q_4)}(-1)^{\pi(q_1)\pi(q_3)}\delta(q_1-q_4)a^\dagger(q_3)a(q_2) \\
+&+(-1)^{\pi(q_2)\pi(q_3)}(-1)^{\pi(q_2)\pi(q_4)}(-1)^{\pi(q_1)\pi(q_3)}(-1)^{\pi(q_1)\pi(q_4)}a^\dagger(q_3)a^\dagger(q_4)a(q_1)a(q_2) \\
+=&:a(q_1)a(q_2)a^\dagger(q_3)a^\dagger(q_4): \\
+&+\int dp :a(q_1)a(q_2) \frac{\overleftarrow{\delta}}{\delta a(p)}\frac{\overrightarrow{\delta}}{\delta a^\dagger(p)} a^\dagger(q_3)a^\dagger(q_4): \\
+&+\frac{1}{2!}\int dp_1 dp_2:a(q_1)a(q_2) \frac{\overleftarrow{\delta}}{\delta a(p_1)}\frac{\overrightarrow{\delta}}{\delta a^\dagger(p_1)}\frac{\overleftarrow{\delta}}{\delta a(p_2)}\frac{\overrightarrow{\delta}}{\delta a^\dagger(p_2)} a^\dagger(q_3)a^\dagger(q_4):
+\end{align*}
+となる．\par
+さて，我々は場を通じてのみ生成・消滅演算子に依存する関数を考えたいのだった．一般に粒子の種類$n$の場は
+\begin{align*}
+\psi_\ell(x)=\int \frac{d^3\mathbf{p}}{(2\pi)^{3/2}} \sum_\sigma \left[u_\ell(\mathbf{p},\sigma)e^{ip\cdot x}a(\mathbf{p},\sigma)+v_{\ell}(q)e^{-ip\cdot x}a^{c\dagger}(\mathbf{p},\sigma)\right]
+\end{align*}
+と書ける\footnote{線形結合の係数$\kappa,\lambda$はともに$1$にしている．後の節で示すように，これは常に可能である．}から，$\delta a,\delta a^\dagger$の変分に対する場の変分は
+\begin{align*}
+\delta \psi_{\ell}(x)=&\int \frac{dq}{(2\pi)^{3/2}} \left[\delta a(\mathbf{p},\sigma) u_\ell(\mathbf{p},\sigma)e^{ip\cdot x}+\delta a^{c\dagger}(\mathbf{p},\sigma) v_{\ell}(\mathbf{p},\sigma)e^{-ip\cdot x}\right] \\
+\therefore \quad & \frac{\overleftarrow{\delta}\psi_{\ell}(x)}{\delta a(\mathbf{p},\sigma)}=\frac{u_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{ip\cdot x} ,\quad \frac{\overleftarrow{\delta}\psi^\dagger_{\ell}(x)}{\delta a^{\dagger}(\mathbf{p},\sigma)}=\frac{u^\dagger_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{-ip\cdot x} \\
+& \frac{\overleftarrow{\delta}\psi^\dagger_{\ell}(x)}{\delta a^{c}(\mathbf{p},\sigma)}=\frac{v^\dagger_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{ip\cdot x} ,\quad \frac{\overleftarrow{\delta}\psi_{\ell}(x)}{\delta a^{c\dagger}(\mathbf{p},\sigma)}=\frac{v_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{-ip\cdot x}
+\end{align*}
+となるから，チェーンルールより，自分自身が反粒子でない場合$a\neq a^c$では
+\begin{align*}
+\frac{\overleftarrow{\delta}}{\delta a(\mathbf{p},\sigma)}=&\sum_{\ell}\int d^4x \frac{\overleftarrow{\delta} \psi_\ell(x)}{\delta a(\mathbf{p},\sigma)}\frac{\overleftarrow{\delta}}{\delta \psi_\ell(x)} =\sum_{\ell}\int d^4x \frac{u_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{ip\cdot x}\frac{\overleftarrow{\delta}}{\delta \psi_\ell(x)} \\
+\frac{\overrightarrow{\delta}}{\delta a^\dagger(\mathbf{p},\sigma)}=&\sum_{\ell}\int d^4x \frac{\overrightarrow{\delta} \psi^\dagger_\ell(x)}{\delta a^\dagger(\mathbf{p},\sigma)}\frac{\overrightarrow{\delta}}{\delta \psi^\dagger_\ell(x)} =\sum_{\ell}\int d^4x \frac{u^\dagger_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{-ip\cdot x}\frac{\overrightarrow{\delta}}{\delta \psi^\dagger_\ell(x)} \\
+\frac{\overleftarrow{\delta}}{\delta a^c(\mathbf{p},\sigma)}=&\sum_{\ell}\int d^4x \frac{\overleftarrow{\delta} \psi^\dagger_\ell(x)}{\delta a^c(\mathbf{p},\sigma)}\frac{\overleftarrow{\delta}}{\delta \psi^\dagger_\ell(x)} =\sum_{\ell}\int d^4x \frac{v^\dagger_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{ip\cdot x}\frac{\overleftarrow{\delta}}{\delta \psi^\dagger_\ell(x)} \\
+\frac{\overrightarrow{\delta}}{\delta a^{c\dagger}(\mathbf{p},\sigma)}=&\sum_{\ell}\int d^4x \frac{\overrightarrow{\delta} \psi_\ell(x)}{\delta a^{c\dagger}(\mathbf{p},\sigma)}\frac{\overrightarrow{\delta}}{\delta \psi_\ell(x)} =\sum_{\ell}\int d^4x \frac{v_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{-ip\cdot x}\frac{\overrightarrow{\delta}}{\delta \psi_\ell(x)}
+\end{align*}
+であり，自分自身が反粒子の場合$a=a^c$では($\psi$と$\psi^\dagger$が独立でないから)
+\begin{align*}
+\frac{\overleftarrow{\delta}}{\delta a(\mathbf{p},\sigma)}=&\sum_{\ell}\int d^4x \frac{\overleftarrow{\delta} \psi_\ell(x)}{\delta a(\mathbf{p},\sigma)}\frac{\overleftarrow{\delta}}{\delta \psi_\ell(x)} =\sum_{\ell}\int d^4x \frac{u_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{ip\cdot x}\frac{\overleftarrow{\delta}}{\delta \psi_\ell(x)} \\
+\frac{\overrightarrow{\delta}}{\delta a^\dagger(\mathbf{p},\sigma)}=&\sum_{\ell}\int d^4x \frac{\overrightarrow{\delta} \psi_\ell(x)}{\delta a^\dagger(\mathbf{p},\sigma)}\frac{\overrightarrow{\delta}}{\delta \psi_\ell(x)}=\sum_{\ell}\int d^4x \frac{v_\ell(\mathbf{p},\sigma)}{(2\pi)^{3/2}}e^{-ip\cdot x}\frac{\overrightarrow{\delta}}{\delta \psi_\ell(x)}
+\end{align*}
+となる．これを用いれば，まず反粒子が自分自身でない場合では(粒子の種類$n$に関する和の$n$と$n^c$の部分だけ取り出して)
+\begin{align*}
+&\sum_\sigma \int d^3\mathbf{p} \frac{\overleftarrow{\delta}}{\delta a^{(F)}(\mathbf{p},\sigma)}\frac{\overrightarrow{\delta}}{\delta a^{(G)\dagger} (\mathbf{p},\sigma)}+\sum_\sigma \int d^3\mathbf{p} \frac{\overleftarrow{\delta}}{\delta a^{(F)c}(\mathbf{p},\sigma)}\frac{\overrightarrow{\delta}}{\delta a^{(G)c\dagger} (\mathbf{p},\sigma)} \\
+=&\frac{1}{(2\pi)^3}\sum_{\ell m} \sum_\sigma \int d^3\mathbf{p} \int d^4x d^4y e^{ip\cdot x }e^{-ip\cdot y} u_\ell(\mathbf{p},\sigma)u^\dagger_{m}(\mathbf{p},\sigma)\frac{\overleftarrow{\delta}}{\delta \psi^{(F)}_\ell(x)} \frac{\overrightarrow{\delta}}{\delta \psi^{\dagger(G)}_{m}(y)} \\
+&+\frac{1}{(2\pi)^3}\sum_{\ell m}\sum_\sigma \int d^3\mathbf{p} \int d^4x d^4y e^{iq\cdot (x -y)} v^\dagger_\ell(\mathbf{p},\sigma)v_{m}(\mathbf{p},\sigma)\frac{\overleftarrow{\delta}}{\delta \psi^{(F)\dagger}_\ell(x)} \frac{\overrightarrow{\delta}}{\delta \psi^{(G)}_{m}(y)} \\
+=&\sum_{\ell m}\int d^4x d^4y \sum_{\sigma}\int \frac{d^3\mathbf{p}}{(2\pi)^3} u_\ell(\mathbf{p},\sigma)u^\dagger_{m}(\mathbf{p},\sigma) e^{ip\cdot (x - y)} \frac{\overleftarrow{\delta}}{\delta \psi^{(F)}_\ell(x)} \frac{\overrightarrow{\delta}}{\delta \psi^{\dagger(G)}_{m}(y)} \\
+&+\sum_{\ell m}\int d^4x d^4y \sum_{\sigma}\int \frac{d^3\mathbf{p}}{(2\pi)^3} v^\dagger_\ell(\mathbf{p},\sigma)v_{m}(\mathbf{p},\sigma) e^{ip\cdot (x - y)} \frac{\overleftarrow{\delta}}{\delta \psi^{\dagger(F)}_\ell(x)} \frac{\overrightarrow{\delta}}{\delta \psi^{(G)}_{m}(y)} \\
+=&\sum_{\ell m}\int d^4x d^4y [\psi^+_{\ell}(x),\psi^{+\dagger}_{m}(y)]_{\mp} \frac{\overleftarrow{\delta}}{\delta \psi^{(F)}_\ell(x)} \frac{\overrightarrow{\delta}}{\delta \psi^{\dagger(G)}_{m}(y)} \\
+&+\sum_{\ell m}\int d^4x d^4y [\psi^{c-\dagger}_{\ell}(x),\psi^{c-}_{m}(y)]_{\mp} \frac{\overleftarrow{\delta}}{\delta \psi^{\dagger(F)}_\ell(x)} \frac{\overrightarrow{\delta}}{\delta \psi^{(G)}_{m}(y)}
+\end{align*}
+となる．ここで
+\begin{align*}
+\psi^+_\ell(x)=&\frac{1}{(2\pi)^{3/2}}\int d^3\mathbf{p} u_\ell(\mathbf{p},\sigma) e^{ip\cdot x}a(\mathbf{p},\sigma) \\
+\psi^{c-}_\ell(x)=&\frac{1}{(2\pi)^{3/2}}\int d^3\mathbf{p} v_\ell(\mathbf{p},\sigma) e^{-ip\cdot x}a^{c\dagger}(\mathbf{p},\sigma)\\
+\psi^{+\dagger}_\ell(x)=&\frac{1}{(2\pi)^{3/2}}\int d^3\mathbf{p} u^\dagger_\ell(\mathbf{p},\sigma) e^{-ip\cdot x}a^\dagger(\mathbf{p},\sigma) \\
+\psi^{c-\dagger}_\ell(x)=&\frac{1}{(2\pi)^{3/2}}\int d^3\mathbf{p} v^\dagger_\ell(\mathbf{p},\sigma) e^{ip\cdot x}a^c(\mathbf{p},\sigma) \\
+[\psi^+_{\ell}(x),\psi^{+\dagger}_{m}(y)]_{\mp}=&\sum_{\sigma\sigma'}\int \frac{d^3\mathbf{p}d^3\mathbf{p}'}{(2\pi)^3} u_\ell(\mathbf{p},\sigma)u^\dagger_{m}(\mathbf{p}',\sigma')e^{ip\cdot x-ip'\cdot y}[a(\mathbf{p},\sigma),a^\dagger(\mathbf{p}',\sigma')]_{\mp} \\
+=&\sum_{\sigma\sigma'}\int \frac{d^3\mathbf{p}d^3\mathbf{p}'}{(2\pi)^3} u_\ell(\mathbf{p},\sigma)u^\dagger_{m}(\mathbf{p}',\sigma')e^{ip\cdot x-ip'\cdot y}\delta^3(\mathbf{p}-\mathbf{p}')\delta_{\sigma\sigma'} \\
+=&\sum_{\sigma}\int \frac{d^3\mathbf{p}}{(2\pi)^3} u_\ell(\mathbf{p},\sigma)u^\dagger_{m}(\mathbf{p},\sigma)e^{ip\cdot(x-y)} \\
+[\psi^{c-\dagger}_{\ell}(x),\psi^{c-}_{m}(y)]_{\mp}=&\sum_{\sigma\sigma'}\int \frac{d^3\mathbf{p}d^3\mathbf{p}'}{(2\pi)^3} v^\dagger_\ell(\mathbf{p},\sigma)v_{m}(\mathbf{p}',\sigma')e^{ip\cdot x-ip'\cdot y}[a^{c}(\mathbf{p},\sigma),a^{c\dagger}(\mathbf{p}',\sigma')]_{\mp} \\
+=&\sum_{\sigma\sigma'}\int \frac{d^3\mathbf{p}d^3\mathbf{p}'}{(2\pi)^3} v^\dagger_\ell(\mathbf{p},\sigma)v_{m}(\mathbf{p}',\sigma')e^{ip\cdot x-ip'\cdot y}\delta^3(\mathbf{p}-\mathbf{p}')\delta_{\sigma\sigma'} \\
+=&\sum_{\sigma}\int \frac{d^3\mathbf{p}}{(2\pi)^3} v^\dagger_\ell(\mathbf{p},\sigma)v_{m}(\mathbf{p},\sigma)e^{ip\cdot(x-y)}
+\end{align*}
+であることを用いた．自分自身が反粒子の場合は
+\begin{align*}
+&\sum_\sigma \int d^3\mathbf{p}\frac{\overleftarrow{\delta}}{\delta a^{(F)}(\mathbf{p},\sigma)}\frac{\overrightarrow{\delta}}{\delta a^{(G)\dagger} (\mathbf{p},\sigma)} \\
+=&\sum_{\ell m}\int d^4x d^4y \sum_{\sigma}\int \frac{d^3\mathbf{p}}{(2\pi)^3} u_\ell(\mathbf{p},\sigma,n)v_{\bar{\ell}}(\mathbf{p},\sigma,n) e^{ip\cdot (x - y)} \frac{\overleftarrow{\delta}}{\delta \psi^{(F)}_\ell(x)} \frac{\overrightarrow{\delta}}{\delta \psi^{(G)}_{\bar{\ell}}(y)} \\
+=&\sum_{\ell m}\int d^4x d^4y [\psi^+_{\ell}(x),\psi^{-}_{\bar{\ell}}(y)]_{\mp} \frac{\overleftarrow{\delta}}{\delta \psi^{(F)}_\ell(x)} \frac{\overrightarrow{\delta}}{\delta \psi^{(G)}_{\bar{\ell}}(y)}
+\end{align*}
+となる．したがって
+\begin{align*}
+&:F[\psi(x),\psi^\dagger(x)]::G[\psi(y),\psi^\dagger(y)]: \\
+=&:F[\psi(x),\psi^\dagger(x)]\exp\biggl(\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi^{(F)}_\ell(u)} [\psi^+_{\ell}(u),\psi^{+\dagger}_{m}(v)]_{\mp} \frac{\overrightarrow{\delta}}{\delta \psi^{\dagger(G)}_{m}(v)} \\
+&\qquad \qquad \qquad \qquad +\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi^{\dagger(F)}_\ell(u)} [\psi^{c-\dagger}_{\ell}(u),\psi^{c-}_{m}(v)]_{\mp} \frac{\overrightarrow{\delta}}{\delta \psi^{(G)}_{m}(v)}\biggr) G[\psi(y),\psi^\dagger(y)]:
+\end{align*}
+という公式が得られる．
+
+\vskip\baselineskip
+
+$S$行列に現れる時間順序積は
+\begin{align*}
+T\{\mc{H}_I(x_1),\mc{H}_I(x_2),\cdots,\mc{H}_I(x_n)\}=&\cdots \mc{H}_I(x_i)\theta(x^0_i-x^0_j)\mc{H}_I(x_j)\cdots \\
+&+\cdots \mc{H}_I(x_j)\theta(x^0_j-x^0_i)\mc{H}_I(x_i)\cdots
+\end{align*}
+という，$x_i$と$x_j$の相互作用の積と，その入れ替えをした積が足し合わされる．ここでは簡単のため，2個の時間順序積
+\begin{align*}
+T\{\mc{H}_I(x),\mc{H}_I(y)\}=\theta(x-y)\mc{H}_I(x)\mc{H}_I(y)+\theta(y-x)\mc{H}_I(y)\mc{H}_I(x)
+\end{align*}
+を考えよう．5.1節で述べたように，相互作用は場とその共役場の関数を正規順序積にしたもの$\mc{H}_I(x)\equiv :\mc{F}[\psi(x),\psi^\dagger(x)]:$で与えられ，かつ$\mc{H}_I(x)$は多項式だから単項式$\mc{H}_i(x)$の和で書くことができるはずであるから$\mc{F}[\psi,\psi^\dagger]$も同様に場と共役場の単項式で分解しよう．
+\begin{align*}
+\mc{F}[\psi(x),\psi^\dagger(x)]=&\sum_{i}g_i \mc{F}_i[\psi(x),\psi^\dagger(x)] \\
+\mc{H}_i(x)\equiv& :\mc{F}_i[\psi(x),\psi^\dagger(x)]: \\
+\therefore \quad \mc{H}_I(x)=&\sum_{i}g_i \mc{H}_i(x)
+\end{align*}
+したがって，2個の時間順序積は
+\begin{align*}
+&T\{\mc{H}_I(x),\mc{H}_I(y)\} \\
+=&\sum_{ij}g_ig_j \Bigl[\theta(x-y):\mc{F}_i[\psi(x),\psi^\dagger(x)]::\mc{F}_j[\psi(y),\psi^\dagger(y)]: \\
+&\qquad +\theta(y-x):\mc{F}_j[\psi(y),\psi^\dagger(y)]::\mc{F}_i[\psi(x),\psi^\dagger(x)]:\Bigr]
+\end{align*}
+という形になる．上で与えた公式より
+\begin{align*}
+&:\mc{F}_i[\psi(x),\psi^\dagger(x)]::\mc{F}_j[\psi(y),\psi^\dagger(y)]: \\
+=&:\mc{F}_i[\psi(x),\psi^\dagger(x)]\exp\Biggl(\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi_\ell(u)} [\psi^+_{\ell}(u),\psi^{+\dagger}_{m}(v)]_{\mp} \frac{\overrightarrow{\delta}}{\delta \psi^{\dagger}_{m}(v)} \\
+&\qquad \qquad \qquad \qquad +\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi^{\dagger}_\ell(u)} [\psi^{c-\dagger}_{\ell}(u),\psi^{c-}_{m}(v)]_{\mp} \frac{\overrightarrow{\delta}}{\delta \psi_{m}(v)}\Biggr) \mc{F}_j[\psi(y),\psi^\dagger(y)]:
+\end{align*}
+を用いれば，第一項目の$\mc{F}_i(x)[\psi(x),\psi^\dagger(x)]$の中にある$\psi_\ell(x)$と，$\mc{F}_j[\psi(y),\psi^\dagger(y)]$の中にある$\psi^\dagger_m(y)$の間から
+\begin{align*}
+\theta(x-y)[\psi^{+}_{\ell}(x),\psi^{+\dagger}_{m}(y)]_{\mp}
+\end{align*}
+が現れることがわかる．同時に時間順序積の第二項目も
+\begin{align*}
+&:\mc{F}_j[\psi(y),\psi^\dagger(y)]::\mc{F}_i[\psi(x),\psi^\dagger(x)]: \\
+=&:\mc{F}_j[\psi(y),\psi^\dagger(y)]\exp\Biggl(\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi_m(u)} [\psi^+_{m}(u),\psi^{+\dagger}_{\ell}(v)]_{\mp} \frac{\overrightarrow{\delta}}{\delta \psi^{\dagger}_{\ell}(v)} \\
+&\qquad \qquad \qquad \qquad +\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi^{\dagger}_m(u)} [\psi^{c-\dagger}_{m}(u),\psi^{c-}_{\ell}(v)]_{\mp} \frac{\overrightarrow{\delta}}{\delta \psi_{\ell}(v)}\Biggr) \mc{F}_i[\psi(x),\psi^\dagger(x)]: \\
+=&:\mc{F}_i[\psi(x),\psi^\dagger(x)]\exp\Biggl(\pm \sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi^{\dagger}_{\ell}(v)} [\psi^+_{m}(u),\psi^{+\dagger}_{\ell}(v)]_{\mp} \frac{\overrightarrow{\delta}}{\delta \psi_m(u)} \\
+&\qquad \qquad \qquad \qquad \pm\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi_{\ell}(v)} [\psi^{c-\dagger}_{m}(u),\psi^{c-}_{\ell}(v)]_{\mp}\frac{\overrightarrow{\delta}}{\delta \psi^{\dagger}_m(u)} \Biggr) \mc{F}_j[\psi(y),\psi^\dagger(y)] :
+\end{align*}
+より(ここでフェルミオン的な汎関数微分同士は反可換になることを用いた)，$\mc{F}_i(x)[\psi(x),\psi^\dagger(x)]$の中にある$\psi_\ell(x)$と$\mc{F}_j[\psi(y),\psi^\dagger(y)]$の中にある$\psi^\dagger_m(y)$との間から
+\begin{align*}
+\pm\theta(y-x)[\psi^{c-\dagger}_{m}(y),\psi^{c-}_{\ell}(x)]_{\mp}
+\end{align*}
+が現れる．これらを足し合わせれば，$\mc{H}_i(x)$に含まれる$\psi_\ell(x)$と，$\mc{H}_j(y)$に含まれる$\psi^\dagger_m(y)$との対から
+\begin{align*}
+&\theta(x-y)[\psi^{+}_{\ell}(x),\psi^{+\dagger}_{m}(y)]_{\mp} \pm \theta(y-x)[\psi^{c-\dagger}_{m}(y),\psi^{c-}_{\ell}(x)]_{\mp} \\
+=&:-i\Delta_{\ell m}(x,y)
+\end{align*}
+が生じることがわかる．この結果をまとめれば
+\begin{align*}
+&T\{:\mc{F}_i[\psi(x),\psi^\dagger(x)]:,:\mc{F}_j[\psi(y),\psi^\dagger(y)]:\} \\
+=&:\mc{F}_i[\psi(x),\psi^\dagger(x)]\exp\Biggl(\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi_\ell(u)} (-i\Delta_{\ell m}(u,v)) \frac{\overrightarrow{\delta}}{\delta \psi^{\dagger}_{m}(v)} \\
+&\qquad \qquad \qquad \qquad \pm\sum_{\ell m}\int d^4u d^4v \frac{\overleftarrow{\delta}}{\delta \psi^{\dagger}_\ell(u)} (-i\Delta_{\ell m}(v,u)) \frac{\overrightarrow{\delta}}{\delta \psi_{m}(v)}\Biggr) \mc{F}_j[\psi(y),\psi^\dagger(y)] :
+\end{align*}
+となる．($x>y$と$y<x$の場合で分ければ，プロパゲータがそれぞれ$[\psi^{+}_{\ell}(x),\psi^{+\dagger}_{m}(y)]_{\mp}$と$[\psi^{c-\dagger}_{m}(y),\psi^{c-}_{\ell}(x)]_{\mp}$になり，どちらの場合でも上の表式と一致する．)これをウィックの定理と呼ぶ．
+
+\vskip\baselineskip
+
+以上の公式を用いて$S$行列の計算を考えよう．3章で与えたように，$S$行列は次の形式で与えられる．
+\begin{align*}
+&S_{\beta\alpha} \\
+=&(\Phi_{\beta},S\Phi_{\alpha}) \\
+=&\sum_{N=0}^\infty \frac{(-1)^N}{N!} \int d^4x_1 \cdots d^x_N \\
+&\times \left(a^\dagger(\mathbf{p}'_1,\sigma'_1,n'_1)a^\dagger(\mathbf{p}'_2,\sigma'_2,n'_2)\cdots \Phi_0 ,T\{\mc{H}_I(x_1)\cdots \mc{H}_I(x_N)\}a^\dagger(\mathbf{p}_1,\sigma_1,n_1)a^\dagger(\mathbf{p}_2,\sigma_2,n_2)\cdots \Phi_0\right) \\
+=&\sum_{N=0}^\infty \frac{(-1)^N}{N!} \int d^4x_1 \cdots d^x_N \\
+&\times \left(\Phi_0 ,\cdots a(\mathbf{p}_1',\sigma_1',n_1')a(\mathbf{p}'_2,\sigma_2',n_2')T\{\mc{H}_I(x_1)\cdots \mc{H}_I(x_N)\}a^\dagger(\mathbf{p}_1,\sigma_1,n_1)a^\dagger(\mathbf{p}_2,\sigma_2,n_2)\cdots \Phi_0\right)
+\end{align*}
+
+
+
+
+\end{document}

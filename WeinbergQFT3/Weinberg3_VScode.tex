@@ -70,7 +70,7 @@
 \begin{align*}
 \delta \psi_\ell(x)=i\epsilon^\alpha(x)\tensor{(t_\alpha)}{_\ell^m}\psi_m(x)
 \end{align*}
-ここで$t_\alpha$は独立な定数行列の組であり，また$\epsilon^\alpha(x)$は実の微小パラメータであり(電磁理論のゲージ変換のように)時空の位置$x^\mu$に依存できるとする．これらの対称性変換はあるリー群の微小部分であると仮定する．2.2節で示したように，これは$t_\alpha$が以下の交換関係を満たすことを意味する．
+ここで$t_\alpha$は独立な定数行列の組であり，また$\epsilon^\alpha(x)$は実の微小パラメータであり(電磁理論のゲージ変換のように)時空の位置$x^\mu$に依存できるとする．さらに，これらの対称性変換はあるリー群の微小部分であると仮定する．2.2節で示したように，これは$t_\alpha$が以下の交換関係を満たすことを意味する．
 \begin{align*}
 [t_\alpha,t_\beta]=i\tensor{C}{^\gamma_\alpha_\beta}t_\gamma
 \end{align*}
@@ -102,7 +102,7 @@ t^A_{\,\,\,\,\alpha})^\gamma_{\,\,\, \epsilon} \\
 \therefore \quad [t^A_{\,\,\,\, \alpha},t^A_{\,\,\,\, \beta}]=&iC^\gamma_{\,\,\, \alpha\beta}t^A_{\,\,\, \gamma}
 \end{align*}
 これは構造定数$C^\gamma_{\,\,\, \alpha\beta}$をもつリー代数の随伴表現と呼ばれる．\par
-例えば，元々のヤンミルズ理論であ，物質場は陽子場$\psi_p$と中性子場$\psi_n$からなる二重項
+例えば，元々のヤンミルズ理論では，物質場は陽子場$\psi_p$と中性子場$\psi_n$からなる二重項
 \begin{align*}
 \psi=\left(
 \begin{array}{cc}
@@ -134,7 +134,7 @@ i & 0
 \begin{align*}
 [t_\alpha, t_\beta]=i\epsilon_{\gamma\alpha\beta}t_\gamma
 \end{align*}
-ここで$\epsilon_{\gamma\alpha\beta}$はエディントンのイプシロンだ．これは3次元回転群$SO(3)$のリー代数(2.4.18)と同じであり，行列$t_\alpha$はこのリー代数のスピン$1/2$表現を与えている．随伴表現の行列(15.1.6)はここでは
+ここで$\epsilon_{\gamma\alpha\beta}$はエディントンのイプシロンだ．これは3次元回転群$SO(3)$のリー代数(2.4.18)と同じであり，行列$t_\alpha$はこのリー代数の$SU(2)$スピン$1/2$表現を与えている．随伴表現の行列(15.1.6)はここでは
 \begin{align*}
 t^A_1=\left[
 \begin{array}{ccc}
@@ -208,7 +208,7 @@ i & 0 & 0 \\
 \end{align*}
 これにより
 \begin{align*}
-\tensor{F}{^\alpha_{\mu\nu}}\equiv \partial_\mu\tensor{A}{^\alpha_\nu}-\partial_\nu\tensor{A}{^\alpha_\mu}+\tensor{C}{^\alpha_{\beta\gamma}}\tensor{A}{^\beta_\mu}\tensor{A}{^\gamma_\nu}
+\tensor{F}{^\alpha_{\mu\nu}}:= \partial_\mu\tensor{A}{^\alpha_\nu}-\partial_\nu\tensor{A}{^\alpha_\mu}+\tensor{C}{^\alpha_{\beta\gamma}}\tensor{A}{^\beta_\mu}\tensor{A}{^\gamma_\nu}
 \end{align*}
 となる．(15.1.12)から，$\tensor{F}{^\alpha_{\mu\nu}}$が随伴表現に属する物質場のように変換しなければならないことは自明だ．
 \begin{align*}
@@ -224,19 +224,67 @@ i & 0 & 0 \\
 \delta\tensor{F}{^\beta_{\mu\nu}}=\epsilon^\alpha(x)\tensor{C}{^\gamma_{\beta\alpha}}\tensor{F}{^\beta_{\mu\nu}}=i\epsilon^\alpha(\tensor{t}{^A_\alpha})\indices{^\gamma_\beta}\tensor{F}{^\beta_{\mu\nu}}
 \end{align*}
 となる．\par
-目的によっては，これらの微小ゲージ変換が有限の変換に格上げして用いる．一般的な物質場$\psi_\ell(x)$に
+目的によっては，これらの微小ゲージ変換を，パラメータが有限であるような変換に格上げして用いる．これは一般的な物質場$\psi_\ell(x)$に
 \begin{align*}
 \psi_\ell(x)\to \psi_{\ell\Lambda}(x)=\Bigl[\exp\Bigl(it_\alpha \Lambda^\alpha(x)\Bigr)\Bigr]\indices{_\ell^m}\psi_m(x)=U(\Lambda(x))\indices{_\ell^m}\psi_m(x)
 \end{align*}
-のように行列として働く．共変微分も同様に
+のように行列として働く．行列表記にすれば
 \begin{align*}
-(\partial_\mu-it_\alpha \tensor{A}{^\alpha_\mu})\psi \to(\partial_\mu -it_\alpha \tensor{A}{^\alpha_{\mu\Lambda}})\psi_\Lambda=U(\Lambda)(\partial_\mu-it_\alpha \tensor{A}{^\alpha_\mu})\psi
+\psi(x) \to \psi_{\Lambda}(x)=\exp\Bigl(it_\alpha \Lambda^\alpha(x)\Bigr) \psi(x) =U(\Lambda(x)) \psi(x)
+\end{align*}
+となる．共変微分も同様に
+\begin{align*}
+D_\mu \psi \to& U(\Lambda)D_\mu \psi \\
+(\partial_\mu-it_\alpha \tensor{A}{^\alpha_\mu})\psi \to&(\partial_\mu -it_\alpha \tensor{A}{^\alpha_{\mu\Lambda}})\psi_\Lambda=U(\Lambda)(\partial_\mu-it_\alpha \tensor{A}{^\alpha_\mu})\psi
 \end{align*}
 と変換するのが望ましいので，$\tensor{A}{^\alpha_\mu}$の変換則$\tensor{A}{^\alpha_\mu}\to \tensor{A}{^\alpha_{\mu\Lambda}}$は
 \begin{align*}
-t_\alpha \tensor{A}{^\alpha_{\mu\Lambda}}=U(\Lambda)t_\alpha \tensor{A}{^\alpha_\mu} U^{-1}(\Lambda)-i[\partial_\mu U(\Lambda)]U^{-1}(\Lambda)
+t_\alpha \tensor{A}{^\alpha_{\mu\Lambda}}=&U(\Lambda)t_\alpha \tensor{A}{^\alpha_\mu} U^{-1}(\Lambda)-i[\partial_\mu U(\Lambda)]U^{-1}(\Lambda) \\
+=&U(\Lambda)t_\alpha \tensor{A}{^\alpha_\mu} U^{-1}(\Lambda)+iU(\Lambda)\partial_\mu U^{-1}(\Lambda) \\
+=&U(\Lambda)[t_\alpha \tensor{A}{^\alpha_\mu} +i\partial_\mu]U^{-1}(\Lambda)
 \end{align*}
-となることを要請する．\par
+となることを要請する．ここで
+\begin{align*}
+0=\partial_\mu 1=&\partial_\mu [U(\Lambda) U^{-1}(\Lambda)] \\
+=&[\partial_\mu U(\Lambda)]U^{-1}(\Lambda)+U(\Lambda)\partial_\mu U^{-1}(\Lambda) \\
+\therefore \quad & U(\Lambda)\partial_\mu U^{-1}(\Lambda)=-[\partial_\mu U(\Lambda)]U^{-1}(\Lambda)
+\end{align*}
+を用いた．場の強度の変換は
+\begin{align*}
+[D_\mu,D_\nu]\psi \to& [D_\mu,D_\nu] \psi_{\Lambda} \\
+=&U(\Lambda) [D_\mu,D_\nu] \psi \\
+=&-iU(\Lambda) t_\alpha F^{\alpha}_{\mu\nu} \psi \\
+-it_\alpha F^{\alpha}_{\mu\nu} \psi \to & -it_\alpha F^{\alpha}_{\Lambda\mu\nu} \psi_\Lambda \\
+=&-it_\alpha F^{\alpha}_{\Lambda\mu\nu} U(\Lambda) \psi \\
+\therefore \quad t_{\alpha} F^\alpha_{\mu\nu} \to& t_\alpha F^{\alpha}_{\Lambda\mu\nu}=U(\Lambda) t_\alpha F^{\alpha}_{\mu\nu} U^{-1}(\Lambda)
+\end{align*}
+となる\footnote{これらの表記を見れば察するかもしれないが，ゲージ場や場の強度はしばしば$t_\alpha \tensor{A}{^\alpha_{\mu}}$というようにリー代数の行列とまとめて扱った方が便利である．実際，ゲージ理論の数理的な側面を取り扱う際にはゲージ場を$A^\mu:=t_\alpha \tensor{A}{^\alpha_{\mu}} \in \mathfrak{g}$としてリー代数$\mathfrak{g}$に値を持つ場として用いることが多い．一般の多様体$M$上の接続として取り扱うなどのさらに一般的な場合，近傍$U_i$上でリー代数に値を持つ1形式の場として$\mc{A}:=\tensor{A}{^\alpha_{\mu}}t_\alpha \otimes dx^\mu \in \mathfrak{g} \otimes \Omega^1(U_i)$と書いたりもする．}．\par
+2章から6章で行った演算子形式の言葉で説明して，繋がりを明確にしよう．これはまさに対称性変換群$G$の元$T(\epsilon)$によって定まるユニタリー演算子
+\begin{align*}
+\widehat{U}\Bigl(T(\epsilon(x))\Bigr)=\exp\Bigl(i\epsilon^\alpha(x) \widehat{T}_\alpha\Bigr)
+\end{align*}
+により，場の演算子$\widehat{\psi}_\ell(x)$が
+\begin{align*}
+\widehat{U}\Bigl(T(\epsilon(x))\Bigr)^{-1} \widehat{\psi}_{\ell}(x) \widehat{U}\Bigl(T(\epsilon(x))\Bigr) =& \tensor{[U(\epsilon(x))]}{_\ell^m}\widehat{\psi}_m(x) \\
+\exp\Bigl(-i\epsilon^\alpha(x) \widehat{T}_\alpha\Bigr)\widehat{\psi}(x) \exp\Bigl(i\epsilon^\alpha(x) \widehat{T}_\alpha\Bigr)=& \exp\Bigl(i\epsilon^\alpha(x) t_\alpha\Bigr)\widehat{\psi}(x)
+\end{align*}
+と変換されることを表している．微小変換で考えることにより，エルミート演算子$\widehat{T}_\alpha$による変換が具体的に見える．
+\begin{align*}
+\widehat{U}^{-1}\Bigl(T(\epsilon(x))\Bigr)\widehat{\psi}_\ell(x) \widehat{U}\Bigl(T(\epsilon(x))\Bigr)=&(1-i\epsilon^\alpha(x)\widehat{T}_\alpha) \widehat{\psi}_\ell(x) (1+i\epsilon^\beta(x) \widehat{T}_\beta) \\
+=&\widehat{\psi}_\ell(x)-i\epsilon^\alpha(x)[\widehat{T}_\alpha,\widehat{\psi}_\ell(x)] \\
+=\tensor{(1+i\epsilon^\alpha(x)t_\alpha)}{_\ell^m}\widehat{\psi}_m(x)=& \widehat{\psi}_\ell(x)+i\epsilon^\alpha(x) \tensor{(t_\alpha)}{_\ell^m}\widehat{\psi}_m(x) \\
+\therefore \quad \Bigl[\widehat{T}_\alpha,\widehat{\psi}_\ell(x)\Bigr]=&-\tensor{(t_\alpha)}{_\ell^m}\widehat{\psi}_m(x)
+\end{align*}
+表現論の言葉で，これは$\widehat{\psi}$がテンソル演算子であるという．ゲージ場の変換も同様に
+\begin{align*}
+\widehat{U}\Bigl(T(\epsilon(x))\Bigr)^{-1}t_\alpha \tensor{\widehat{A}}{^{\alpha}_{\mu\nu}}(x) \widehat{U}\Bigl(T(\epsilon(x))\Bigr)=&U(\epsilon(x))[t_\alpha \tensor{\widehat{A}}{^\alpha_{\mu\nu}}+i\partial_\mu] U(\epsilon(x))^{-1} \\
+\exp\Bigl(-i\epsilon^\alpha(x) \widehat{T}_\alpha\Bigr)t_\alpha \tensor{\widehat{A}}{^{\alpha}_{\mu\nu}}(x) \exp\Bigl(i\epsilon^\alpha(x) \widehat{T}_\alpha\Bigr)=& \exp\Bigl(i\epsilon^\alpha(x) t_\alpha\Bigr)\left[\tensor{\widehat{A}}{^{\alpha}_{\mu\nu}}(x)+i\partial_\mu \right]\exp\Bigl(-i\epsilon^\alpha(x) t_\alpha\Bigr)
+\end{align*}
+と書ける．
+
+
+\vskip\baselineskip
+
 (15.1.17)から，$\Lambda^\beta(x)$をうまく選べば，$\tensor{A}{^\alpha_{\mu\Lambda}}(x)$を任意の「一つの点」，たとえば$x=z$でゼロになるようにできることがわかる．(これには，$x=z$で$\Lambda^\alpha(z)=0$かつ$ \partial\Lambda^\alpha(x)/\partial x^\mu |_{x=z}=-\tensor{A}{^\alpha_\mu}(z)$となるように選べばよい．)また，常に$\Lambda^\beta(x)$を選んで，$\tensor{A}{^\alpha_{\mu\Lambda}}(x)$の任意の一つの時空成分が，少なくともある与えられた点の「有限な近傍」で，全ての$\alpha$についてゼロとなるようにできる．たとえば$\tensor{A}{^\alpha_{3\Lambda}}(x)$をゼロにするには，パラメータ$\Lambda^\beta(x)$に対する以下の「常」微分方程式の組を解かなければならない．
 \begin{align*}
 \partial_3 \exp(it_\beta \Lambda^\beta)=-i\exp(it_\beta \Lambda^\beta)t_\alpha \tensor{A}{^\alpha_3}
@@ -252,18 +300,151 @@ t_\alpha \tensor{A}{^\alpha_{\mu\Lambda}}=U(\Lambda)t_\alpha \tensor{A}{^\alpha_
 
 ここではゲージ変換で単純に変換する量を構成したが，これは一般相対論での一般座標変換のもとで共変的に変換する量を構成するのと深い類似性がある．ゲージ場を使って物質場の共変微分$D_\mu \psi_\ell$を作り，それが物質場自身と同じゲージ変換性をもつようにしたのと同様に，アフィン接続$\tensor{\Gamma}{^\mu_{\nu\lambda}}(x)$を使い，テンソル$\tensor{T}{^{\rho\sigma\cdots}_{\kappa\lambda\cdots }}$の共変微分を
 \begin{align*}
-\nabla_\nu \tensor{T}{^{\rho\cdots}_{\kappa\cdots}}=\partial_\nu \tensor{T}{^{\rho\cdots}_{\kappa\cdots}}+\tensor{\Gamma}{^\rho_{\nu\lambda}}\tensor{T}{^{\lambda\cdots}_{\kappa\cdots}}+\cdots -\tensor{\Gamma}{^\mu_{\nu\kappa}}\tensor{T}{^{\rho\cdots}_{\mu\cdots}}-\cdots
+\tensor{(\nabla_\nu T)}{^{\rho\cdots}_{\kappa\cdots}}=\partial_\nu \tensor{T}{^{\rho\cdots}_{\kappa\cdots}}+\tensor{\Gamma}{^\rho_{\nu\lambda}}\tensor{T}{^{\lambda\cdots}_{\kappa\cdots}}+\cdots -\tensor{\Gamma}{^\mu_{\nu\kappa}}\tensor{T}{^{\rho\cdots}_{\mu\cdots}}-\cdots
 \end{align*}
-と構成すると，これ自身もテンソルとなる．また，ゲージ場の微分からゲージ場の強度$\tensor{F}{^\alpha_{\mu\nu}}$を作り，ゲージ群の随伴表現に属する物質場と同じゲージ変換性をもつようにできた．これに対応して，アフィン接続の微分から
+と構成すると，これ自身もテンソルとなる．ここでアフィン接続$\Gamma$はクリストッフェル記号
+\begin{align}
+\tensor{\Gamma}{^\alpha_{\beta\gamma}}=\frac{1}{2} g^{\alpha \rho}\left( \frac{\partial g_{\rho \beta}}{\partial x^\gamma}+ \frac{\partial g_{\rho \gamma}}{\partial x^\beta}- \frac{\partial g_{\beta\gamma}}{\partial x^\rho} \right)
+\end{align}
+である\footnote{厳密にいえばレヴィ・チビタ接続である．多様体$M$上に定まるアフィン接続は無数にあり，そこに対称接続だったり内積との整合性などの条件を課すと接続の形が決まる．}．また，ゲージ場の微分からゲージ場の強度$\tensor{F}{^\alpha_{\mu\nu}}$を作り，ゲージ群の随伴表現に属する物質場と同じゲージ変換性をもつようにできた．これに対応して，アフィン接続の微分から
 \begin{align*}
 \tensor{R}{^\lambda_{\mu\nu\kappa}}=\partial_\kappa \tensor{\Gamma}{^\lambda_{\mu\nu}}-\partial_\nu \tensor{\Gamma}{^\lambda_{\mu\kappa}}+\tensor{\Gamma}{^\eta_{\mu\nu}}\tensor{\Gamma}{^\lambda_{\kappa\eta}}-\tensor{\Gamma}{^\eta_{\mu\kappa}}\tensor{\Gamma}{^\lambda_{\nu\eta}}
 \end{align*}
 という量を構成すると，これはテンソルのように変換し，リーマンクリストッフェル曲率テンソルと呼ばれる．二つのゲージ共変微分$D_\mu,D_\nu$の交換子は，場の強度$\tensor{F}{^\alpha_{\mu\nu}}$を使って表せる．これと同様に，$x^\nu,x^\kappa$に関する二つの共変微分の交換子は曲率を使って，以下のように表せる．
 \begin{align*}
-[\nabla_\kappa,\nabla_\nu]\tensor{T}{^{\lambda\cdots}_{\mu\cdots}}=\tensor{R}{^\lambda_{\sigma\nu\kappa}}\tensor{T}{^{\sigma\cdots}_{\mu\cdots}}-\tensor{R}{^\sigma_{\mu\nu\kappa}}\tensor{T}{^{\lambda\cdots}_{\sigma\cdots}}
+\tensor{([\nabla_\kappa,\nabla_\nu]T)}{^{\lambda\cdots}_{\mu\cdots}}=\tensor{R}{^\lambda_{\sigma\nu\kappa}}\tensor{T}{^{\sigma\cdots}_{\mu\cdots}}+\cdots -\tensor{R}{^\sigma_{\mu\nu\kappa}}\tensor{T}{^{\lambda\cdots}_{\sigma\cdots}}-\cdots
 \end{align*}
-有限の単連結領域でゲージ場がゼロとなるようなゲージ変換が存在する必要十分条件は，場の強度テンソルがゼロとなることだった．同様に，有限の単連結領域でアフィン接続がゼロとなる座標系が存在する必要十分条件は，リーマンクリストッフェル曲率テンソルがゼロとなることだ．\par
-この二つの理論の間の類似は一つの重要な点で成り立たない．それは，一般相対論ではアフィン接続はそれ自身，計量テンソルの一階微分から構成されているのに対し，ゲージ理論ではゲージ場は他のどのようなより基本的な場でも表されてはいないことだ．
+有限の単連結領域でゲージ場がゼロとなるようなゲージ変換が存在する必要十分条件は，場の強度テンソルがゼロとなることだった．同様に，有限の単連結領域でアフィン接続がゼロとなる座標系が存在する必要十分条件は，リーマンクリストッフェル曲率テンソルがゼロとなることだ．以下でこれを証明しよう．
+
+\vskip\baselineskip
+
+証明すべきは次の命題である．すなわち「ある領域$\Omega$がflat，すなわちミンコフスキー計量であるための必要十分条件は，領域$\Omega$上いたるところでリーマン曲率テンソル$\tensor{R}{^\mu_\nu_\rho_\sigma}$がゼロとなることである．」である．\par
+必要であることはすぐわかる．なぜならば$\Omega$はミンコフスキー的であるから，$\Omega$の中のすべての点で計量テンソルが$\eta_{\mu\nu}$となるような座標系を設ければよい．このとき$\Gamma$は定義より$\Omega$のいたるところでゼロとなり，したがって$\tensor{R}{^\lambda_{\rho\mu\nu}}$もゼロである．\par
+十分であることの証明．いま逆に$\tensor{R}{^\lambda_{\rho\mu\nu}}$が$\Omega$の中のすべての点でゼロとする．まず，計量テンソル$g_{\mu\nu}$が対称行列であることから，$\Omega$内の任意の点$P$において
+\begin{align*}
+\tensor{d}{^\alpha_\mu} \tensor{d}{^\beta_\nu}g^{\mu\nu}(P)=\eta^{\alpha\beta}
+\end{align*}
+となる直交行列$d$が存在する．(直交行列$\tensor{O}{^\alpha_\mu}$で$OgO^T$が対角行列
+\begin{align*}
+\tensor{O}{^\alpha_\mu}g^{\mu\nu}\tensor{O}{^\beta_\nu}=D^{\alpha\beta} \\
+D^{\alpha\beta}=\left\{
+\begin{matrix}
+D^\alpha &\alpha=\beta\\
+0 & \alpha\neq \beta
+\end{matrix}
+\right.
+\end{align*}
+となるものが存在する．$D^\alpha$のうち三つは正の値をとり，ひとつは負の値をとる．そこで$D^0$は負，$D^i(i=1,2,3)$は正であるようにラベル付けして，$\tensor{d}{^i_\mu}=\tensor{O}{^i_\mu}/\sqrt{D^i}(i=1,2,3),\tensor{d}{^0_\mu}=\tensor{O}{^0_\mu}/\sqrt{-D^0}$とすればよい．)\par
+そこで，$\Omega$のなかで$\mu$について共変ベクトル量な$\tensor{D}{^\alpha_\mu}(x)$を次の$\alpha=0,1,2,3$の四つの微分方程式で定義する．
+\begin{align}
+\frac{\partial \tensor{D}{^\alpha_\mu}}{\partial x^\nu}=\tensor{\Gamma}{^\lambda_{\mu\nu}} \tensor{D}{^\alpha_\lambda}
+\end{align}
+初期条件として$\tensor{D}{^\alpha_\mu}(P)=\tensor{d}{^\alpha_\mu}$を満たすとする．この式は$\Omega$の中で解をもつ．なぜならば積分可能条件を満足しているからである．すなわち
+\begin{align*}
+\frac{\partial^2 \tensor{D}{^\alpha_\mu}}{\partial x^\rho \partial x^\nu}=&\frac{\partial}{\partial x^\rho}\left(\tensor{\Gamma}{^\lambda_{\mu\nu}} \tensor{D}{^\alpha_\lambda} \right) \\
+=&\frac{\partial \tensor{\Gamma}{^\lambda_{\mu\nu}}}{\partial x^\rho} \tensor{D}{^\alpha_\lambda} +\tensor{\Gamma}{^\lambda_{\mu\nu}} \frac{\partial \tensor{D}{^\alpha_\lambda} }{\partial x^\rho} \\
+=&\frac{\partial \tensor{\Gamma}{^\tau_{\mu\nu}}}{\partial x^\rho} \tensor{D}{^\alpha_\tau} +\tensor{\Gamma}{^\lambda_{\mu\nu}} \tensor{\Gamma}{^\tau_{\lambda\rho}}\tensor{D}{^\alpha_\tau} 
+\end{align*}
+よって
+\begin{align*}
+\frac{\partial^2 \tensor{D}{^\alpha_\mu}}{\partial x^\rho \partial x^\nu}-\frac{\partial^2 \tensor{D}{^\alpha_\mu}}{\partial x^\nu \partial x^\rho}=\tensor{R}{^\tau_{\mu\rho\nu}} \tensor{D}{^\alpha_\tau}
+\end{align*}
+これは仮定により，$\Omega$のいたるところでゼロとなる．したがって(2.4.2)は積分可能であり，逐次近似法を用いて解ける．($\int dD$が積分可能，すなわち始点と終点のみで値が決まるならば，互いに異なる経路を$C_1,C_2$として
+\begin{align*}
+\int_{C_1}dD =&\int_{C_2}dD \\
+\oint_C dD=&0 \\
+\int_{\partial S}dD =&\int_S d^2 D=0
+\end{align*}
+であり，二階外微分$d^2D$がゼロであるためには，偏微分は可換でなければならない．)このようにして求まる$\tensor{D}{^\alpha_\mu}$を用いると
+\begin{align}
+\frac{\partial}{\partial x^\rho}\left( g^{\mu\nu}\tensor{D}{^\alpha_\mu}\tensor{D}{^\beta_\nu} \right)=0
+\end{align}
+が満たされる．これを見るには，(2.4.2)を書き換えて
+\begin{align}
+\nabla_\nu \tensor{D}{^\alpha_\mu}=0
+\end{align}
+の形にかけばよい．$g^{\mu\nu}\tensor{D}{^\alpha_\mu}\tensor{D}{^\beta_\nu}$に$\nabla_\rho$をかければ，計量条件と(2.4.4)によりゼロとなる．しかし各$(\alpha,\beta)$について，これはスカラー量であるから，スカラー量に対する共変微分は普通の微分と等価であり(2.4.3)を得る．すなわち$g^{\mu\nu}\tensor{D}{^\alpha_\mu}\tensor{D}{^\beta_\nu}$は$\Omega$内で定数となるから，
+\begin{align}
+g^{\mu\nu}(x)\tensor{D}{^\alpha_\mu}(x)\tensor{D}{^\beta_\nu}(x)=g^{\mu\nu}(P)\tensor{d}{^\alpha_\mu}\tensor{d}{^\beta_\nu}=\eta^{\alpha\beta}
+\end{align}
+を得る．さて，(2.4.2)の右辺は$\mu,\nu$について対称であるから
+\begin{align}
+\frac{\partial \tensor{D}{^\alpha_\mu}}{\partial x^\nu}=\frac{\partial \tensor{D}{^\alpha_\nu}}{\partial x^\mu}
+\end{align}
+を満足する．したがって微分方程式
+\begin{align}
+\tensor{D}{^\alpha_\mu}=\frac{\partial\phi^{(\alpha)}}{\partial x^\mu} 
+\end{align}
+で4個のスカラー量$\phi^{(\alpha)}$を定義すれば，積分可能条件(2.4.6)より$\phi^{(\alpha)}$について解くことができる．そこでいま$\Omega$内の新しい座標系$X^\alpha (\alpha=0,1,2,3)$を
+\begin{align}
+X^\alpha=\phi^{(\alpha)}(x^0,x^1,x^2,x^3)
+\end{align}
+で定める．これを使うと線素は
+\begin{align}
+ds^2=g'_{\alpha\beta}(X)dX^\alpha dX^\beta
+\end{align}
+である．ここでテンソルの変換則から
+\begin{align*}
+g'_{\alpha\beta}(X)=\frac{\partial x^\mu}{\partial X^\alpha}\frac{\partial x^\nu}{\partial X^\beta}g_{\mu\nu}(x)
+\end{align*}
+同様に$g'^{\alpha\beta}(X)$は
+\begin{align*}
+g'^{\alpha\beta}(X)=&\frac{\partial X^\alpha}{\partial x^\mu}\frac{\partial X^\beta}{\partial x^\nu}g^{\mu\nu}(x) \\
+=&\tensor{D}{^\alpha_\mu} \tensor{D}{^\beta_\nu} g^{\mu\nu}
+\end{align*}
+ところが，この右辺は条件(2.4.5)により$\Omega$のいたるところで
+\begin{align*}
+g'^{\alpha\beta}=\eta^{\alpha\beta}
+\end{align*}
+したがって
+\begin{align*}
+g'_{\alpha\beta}(X)=\eta_{\alpha\beta}
+\end{align*}
+も$\Omega$内の全ての点で成立する．つまり$X$系はローレンツ座標系であり，$\Omega$はミンコフスキー空間である．$\tensor{R}{^\lambda_{\rho\mu\nu}}$はテンソルであるから，これがゼロであるか否かということは座標系の選択に依らず不変な性質である．
+
+\vskip\baselineskip
+
+ちなみに，重力そのものを意味しているのはリーマンテンソルではなく，クリストッフェル記号である．座標系の取り方によって重力が現れたり消えたりするのはテンソル量ではありえない．かつ重力ポテンシャルの微分が重力であったことを思い出すと，計量テンソルの一階微分で構成されているクリストッフェル記号が重力自体を意味している．実際，クリストッフェル記号はテンソル量ではなく，座標系の取り方によりいつでもゼロにすることが可能である．やや重要な定理として「ある点$P$において座標系をうまくとって$g_{\mu\nu}(P)=\eta_{\mu\nu},\partial g_{\mu\nu}/\partial x^\rho =0$(すなわち局所ローレンツ系)とできる必要十分条件は，$\tensor{\Gamma}{^\mu_\rho_\sigma}$が$\rho,\sigma$に対して対称(すなわちレヴィ・チビタ接続)であることである」というものがある．以下でこれを証明してみよう．\par
+必要性は次のようにして確かめられる．いま$x'$系を適当にとったとき，$\tensor{\Gamma}{^\lambda_{\mu\nu}}'(x')$がすべてゼロになったとする．このとき変換則から
+\begin{align*}
+\tensor{\Gamma}{^\lambda_{\mu\nu}}'(x')=0=\frac{\partial x'^\lambda}{\partial x^\rho} \frac{\partial x^\alpha}{\partial x'^\mu}\frac{\partial x^\beta}{\partial x'^\nu} \tensor{\Gamma}{^\rho_{\alpha\beta}} +\frac{\partial x'^\lambda}{\partial x^\rho}\frac{\partial x^\rho}{\partial x'^\mu \partial x'^\nu}
+\end{align*}
+両辺に$\frac{\partial x^\rho}{\partial x'^\lambda} \frac{\partial x'^\mu}{\partial x^\alpha}\frac{\partial x'^\nu}{\partial x^\beta} $をかけると
+\begin{align*}
+\tensor{\Gamma}{^\rho_{\alpha\beta}}=-\frac{\partial x'^\mu}{\partial x^\alpha}\frac{\partial x'^\nu}{\partial x^\beta }\frac{\partial x^\rho}{\partial x'^\mu \partial x'^\nu}
+\end{align*}
+右辺は$\alpha,\beta$について対称であるから，左辺もそうでなくてはならない．\par
+十分性は次のようにして確かめられる．簡単のため，問題にしている点を座標原点$x^\mu=0$にとる．いま，新旧座標の関係を
+\begin{align}
+x^\mu=x'^\mu+\frac{1}{2}\tensor{a}{^\mu_{\alpha\beta}} x'^\alpha  x'^\beta
+\end{align}
+とする．$\tensor{a}{^\mu_{\alpha\beta}}$は$x'$に無関係の未定の定数で，添え字$\alpha,\beta$に対して対称とする．この関係式を$x'^\mu$について解いた答えのうち，$x=0$では$x'=0$であるような解をとることにする．したがって$x=0$の近くでは
+\begin{align}
+x'^\mu=x^\mu-\frac{1}{2}\tensor{a}{^\mu_{\alpha\beta}} x^\alpha  x^\beta
+\end{align}
+という形の関係がなりたつ．そこで原点では
+\begin{align*}
+\left. \frac{\partial x'^\mu}{\partial x^\alpha} \right|_{x=0}=\delta^{\mu}_{\alpha} ,\quad \left. \frac{\partial x^\mu}{\partial x'^\alpha} \right|_{x'=0}=\delta^{\mu}_{\alpha}
+\end{align*}
+したがって接続係数の座標変換より
+\begin{align*}
+\tensor{\Gamma}{^\lambda_{\mu\nu}}'(x')=&\frac{\partial x'^\lambda}{\partial x^\rho} \frac{\partial x^\alpha}{\partial x'^\mu}\frac{\partial x^\beta}{\partial x'^\nu} \tensor{\Gamma}{^\rho_{\alpha\beta}} +\frac{\partial x'^\lambda}{\partial x^\rho}\frac{\partial x^\rho}{\partial x'^\mu \partial x'^\nu} \\
+=&\tensor{\Gamma}{^\lambda_{\mu\nu}}(x)+\tensor{a}{^\lambda_{\mu\nu}}
+\end{align*}
+いま，$\tensor{\Gamma}{^\lambda_{\mu\nu}}$が仮定より$\mu,\nu$について対称であるから，未定の定数$\tensor{a}{^\lambda_{\mu\nu}}$を
+\begin{align*}
+\tensor{a}{^\lambda_{\mu\nu}}=-\tensor{\Gamma}{^\lambda_{\mu\nu}}(0)
+\end{align*}
+と決めればよい．\par
+ここで
+\begin{align*}
+\frac{\partial g_{\mu\nu}}{\partial x^\rho }=g_{\mu\lambda}\tensor{\Gamma}{^\lambda_{\nu\rho}}+g_{\nu\lambda}\tensor{\Gamma}{^\lambda_{\mu\rho}}
+\end{align*}
+とクリストッフェル記号の定義より，$\Gamma=0$と$\partial g_{\mu\nu}/\partial x=0$は同値である．これにより計量は定数になるのだから，さらに一次変換をすればミンコフスキー的な計量になる．したがって定理を得る．
+
+\vskip\baselineskip
+
+この二つの理論の間の類似は一つの重要な点で成り立たない．それは，一般相対論ではアフィン接続はそれ自身，計量テンソルの一階微分から構成されているのに対し，ゲージ理論ではゲージ場は他のどのような，より基本的な場でも表されてはいないことだ．
 
 \newpage
 
@@ -279,7 +460,7 @@ t_\alpha \tensor{A}{^\alpha_{\mu\Lambda}}=U(\Lambda)t_\alpha \tensor{A}{^\alpha_
 \therefore \quad &\frac{\partial \mc{L}}{\partial \psi_\ell}i \tensor{(t_\alpha)}{_\ell^m}\psi_m +\frac{\partial \mc{L}}{\partial (D_\mu \psi)_\ell}i\tensor{(t_\alpha)}{_\ell^m}(D_\mu \psi)_m+\frac{\partial \mc{L}}{\partial (D_\nu D_\mu \psi)_\ell}i\tensor{(t_\alpha)}{_\ell^m}(D_\nu D_\mu \psi)_m+\cdots \\
 &+\frac{\partial \mc{L}}{\partial \tensor{F}{^\beta_{\mu\nu}}}\tensor{C}{^\beta_{\gamma\alpha}}\tensor{F}{^\gamma_{\mu\nu}}+\frac{\partial \mc{L}}{\partial D_\rho \tensor{F}{^\beta_{\mu\nu}}}\tensor{C}{^\beta_{\gamma\alpha}}D_\rho \tensor{F}{^\gamma_{\mu\nu}}+\cdots=0
 \end{align*}
-を満たすと仮定する．また，ラグランジアンは$\tensor{F}{^\alpha_{\mu\nu}}$やゲージ共変微分$D_\mu$を通してのみゲージ場自身に依存してはならない．特に，質量項$-\frac{1}{2}m^2_{\alpha\beta}A_{\alpha\mu}\tensor{A}{_\beta^\mu}$は許されない．\par
+を満たすと仮定する．また，ラグランジアンは$\tensor{F}{^\alpha_{\mu\nu}}$やゲージ共変微分$D_\mu$を通してのみゲージ場自身に依存しなくてはならない．特に，質量項$-\frac{1}{2}m^2_{\alpha\beta}A_{\alpha\mu}\tensor{A}{_\beta^\mu}$は許されない．\par
 ここで，ラグランジアンの$\tensor{F}{^\alpha_{\mu\nu}}$にのみ依存する項を考える．電磁理論のように，任意のスピンが1で質量がゼロの粒子について，ラグランジアンは$\partial_\mu \tensor{A}{_\alpha_\nu}-\partial_\nu \tensor{A}{_\alpha_\mu}$にちての二次の自由粒子の項を含まなければならない．ゲージ不変性より，この自由粒子項は場の強度テンソル$\tensor{F}{^\alpha_{\mu\nu}}$について二次の項の一部として現れなければならない．この項は，ローレンツ不変性とパリティ保存を仮定すると，$g_{\alpha\beta}$を定数行列として
 \begin{align*}
 \mc{L}_A=-\frac{1}{4} g_{\alpha\beta} \tensor{F}{^\alpha_{\mu\nu}}\tensor{F}{^{\beta\mu\nu}}
@@ -288,8 +469,19 @@ t_\alpha \tensor{A}{^\alpha_{\mu\Lambda}}=U(\Lambda)t_\alpha \tensor{A}{^\alpha_
 \begin{align*}
 \mc{L}'_A=-\frac{1}{2}\theta_{\alpha\beta}\epsilon^{\mu\nu\rho\sigma}\tensor{F}{^\alpha_{\mu\nu}}\tensor{F}{^\beta_{\rho\sigma}}
 \end{align*}
-という項も含めることができる．この項は22章で論じるように，実はある関数の全微分になっていて，場の方程式やファインマン則には影響しない．しかしそのような項は23章で見るように非摂動論的な量子効果を及ぼす．\par
-(15.1.13)で定義された場の強度$\tensor{F}{^\alpha_{\mu\nu}}$の二次の項からは，(15.2.3)にゲージ場について三・四次の項が現れ相互作用が生じるが，ゲージ場$\tensor{A}{^\alpha_\mu}(x)$の運動項を，この相互作用項が生じないように導入するのは不可能だ．この点でも，非可換ゲージ理論は一般相対論に似ている．一般相対論では重力場のラグランジアンの運動項部分は，アインシュタインヒルベルトのラグランジアン密度$-\sqrt{g}R/8\pi G$に含まれていて，これにはまた場の自己相互作用も含まれている．この二つの場合が似ているのには理由がある．重力場がそれ自身と相互作用するのは，それがエネルギーと運動量を持つもの全てと相互作用するからで，また，ゲージ場が自分自身と相互作用するのは，それがゲージ群の自明でない表現(この場合は随伴表現)として変換するもの全てと相互作用するからだ．これは電磁理論と対照的だ．光子は，それが相互作用する量子数である電荷を持たないので，電磁場の運動項を自己相互作用なしに$-\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$と導入することが可能だ．(エネルギー運動量や電荷は，ネーター電荷である．重力場を含む一般的なゲージ場は，それぞれのゲージ変換群のネーター電荷を持つもの全てと相互作用すると言える．)\par
+という項も含めることができる．この項が$\mathsf{P}$対称性を破ることを見るには$\epsilon^{\mu\nu\rho\sigma}$が
+\begin{align*}
+\tensor{\Lambda}{^\mu_\alpha}\tensor{\Lambda}{^\nu_\beta}\tensor{\Lambda}{^\rho_\gamma}\tensor{\Lambda}{^\sigma_\delta}\epsilon^{\alpha\beta\gamma\delta}=\mathrm{det}(\Lambda)\epsilon^{\mu\nu\rho\sigma}
+\end{align*}
+の意味で擬テンソルであることを使えばよい．実際
+\begin{align*}
+\mc{L}'_A=&-\frac{1}{2}\theta_{\alpha\beta}\epsilon^{\mu\nu\rho\sigma}\tensor{F}{^\alpha_{\mu\nu}}\tensor{F}{^\beta_{\rho\sigma}} \\
+\to &-\frac{1}{2}\theta_{\alpha\beta}\epsilon^{\mu\nu\rho\sigma}\tensor{\mc{P}}{_\mu^\tau}\tensor{\mc{P}}{_\nu^\lambda}\tensor{\mc{P}}{_\rho^\kappa}\tensor{\mc{P}}{_\sigma^\eta}\tensor{F}{^\alpha_{\tau\lambda}}\tensor{F}{^\beta_{\kappa\eta}} \\
+=&-\frac{1}{2}\mathrm{det}(\mc{P})\theta_{\alpha\beta}\epsilon^{\mu\nu\rho\sigma}\tensor{F}{^\alpha_{\mu\nu}}\tensor{F}{^\beta_{\rho\sigma}} \\
+=&+\frac{1}{2}\theta_{\alpha\beta}\epsilon^{\mu\nu\rho\sigma}\tensor{F}{^\alpha_{\mu\nu}}\tensor{F}{^\beta_{\rho\sigma}}=-\mc{L}'_A
+\end{align*}
+となり，不変でない．この項は22章で論じるように，実はある関数の全微分になっていて，場の方程式やファインマン則には影響しない．しかしそのような項は23章で見るように非摂動論的な量子効果を及ぼす．\par
+(15.1.13)で定義された場の強度$\tensor{F}{^\alpha_{\mu\nu}}$の二次の項からは，(15.2.3)にゲージ場について三・四次の項が現れ相互作用が生じるが，ゲージ場$\tensor{A}{^\alpha_\mu}(x)$の運動項を，この相互作用項が生じないように導入するのは不可能だ．この点でも，非可換ゲージ理論は一般相対論に似ている．一般相対論では重力場のラグランジアンの運動項部分は，アインシュタインヒルベルトのラグランジアン密度$-\sqrt{g}R/8\pi G$に含まれていて，これにはまた場の自己相互作用も含まれている．この二つの場合が似ているのには理由がある．重力場がそれ自身と相互作用するのは，それがエネルギーと運動量を持つもの全てと相互作用するからで，また，ゲージ場が自分自身と相互作用するのは，それがゲージ群の自明でない表現として変換するもの全てと相互作用するからである．(ゲージ場はゲージ群の随伴表現として変換することを思い出そう．)これは電磁理論と対照的だ．光子は，それが相互作用する量子数である電荷を持たないので，電磁場の運動項を自己相互作用なしに$-\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$と導入することが可能だ．(エネルギー運動量や電荷は，ネーター電荷である．重力場を含む一般的なゲージ場は，それぞれのゲージ変換群のネーター電荷を持つもの全てと相互作用すると言える．)\par
 数値行列$g_{\alpha\beta}$は対称的にとることができ，ラグランジアンが実であるためには実行列でなければならない．この項がゲージ不変性(15.2.2)を満たすためには，
 \begin{align*}
 & \frac{\partial \mc{L}_A}{\partial \tensor{F}{^\beta_{\mu\nu}}}\tensor{C}{^\beta_{\gamma\alpha}}\tensor{F}{^\gamma_{\mu\nu}}=0 \\
@@ -328,7 +520,7 @@ t_\alpha \tensor{A}{^\alpha_{\mu\Lambda}}=U(\Lambda)t_\alpha \tensor{A}{^\alpha_
 \partial_\nu \mc{J}\indices{_\alpha^\nu}=0
 \end{align*}
 と，通常の意味で保存する．これは上の場の方程式からも，不変条件(15.2.2)からも導ける．\par
-(15.3.2)と(15.3.4)の微分は通常の微分であり，ゲージ共変な微分$D_\nu$ではないから，これらの式のゲージ共変性は多少わかrにくい．それを明白にするためには，(15.3.2)を場の強度のゲージ共変微分
+(15.3.2)と(15.3.4)の微分は通常の微分であり，ゲージ共変な微分$D_\nu$ではないから，これらの式のゲージ共変性は多少わかりにくい．それを明白にするためには，(15.3.2)を場の強度のゲージ共変微分
 \begin{align*}
 D_\lambda \tensor{F}{_\alpha^{\mu\nu}} \equiv & \partial_\lambda \tensor{F}{_\alpha^{\mu\nu}}-i(\tensor{t}{^A_\beta})_{\alpha\gamma}A_{\beta\lambda}\tensor{F}{_\gamma^{\mu\nu}} \\
 =&\partial_\lambda \tensor{F}{_\alpha^{\mu\nu}}-C_{\alpha\gamma\beta}A_{\beta\lambda}\tensor{F}{_\gamma^{\mu\nu}}
@@ -341,7 +533,7 @@ D_\mu \tensor{F}{_\alpha^{\mu\nu}}=-\tensor{J}{_\alpha^\nu}
 \begin{align*}
 \tensor{J}{_\alpha^\nu} \equiv -i\frac{\partial \mc{L}_M}{\partial D_\nu \psi}t_\alpha \psi
 \end{align*}
-であり，物質場のみのカレントだ．これは，もし$\mc{L}_M$がゲージ不変ならゲージ共変だ．また(15.3.6)に$D_\nu$を施して，交換関係
+であり，物質場のみのカレントである．これは，もし$\mc{L}_M$がゲージ不変なら，この方程式はゲージ共変である．また(15.3.6)に$D_\nu$を施して，交換関係
 \begin{align*}
 [D_\nu,D_\mu]\tensor{F}{_\alpha^{\rho\sigma}}=-i(\tensor{t}{^A_\beta})\indices{_{\alpha\beta}}\tensor{F}{_{\gamma\nu\mu}}\tensor{F}{_\beta^{\rho\sigma}}=-C_{\gamma\alpha\beta}F_{\gamma\nu\mu}\tensor{F}{_\beta^{\rho\sigma}}
 \end{align*}
